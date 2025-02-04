@@ -1,0 +1,9 @@
+- USA icon: <a href="https://www.flaticon.com/free-icons/united-states" title="united states icons">United states icons created by Freepik - Flaticon</a>
+- Eng : <a href="https://www.flaticon.com/free-icons/uk-flag" title="uk flag icons">Uk flag icons created by Freepik - Flaticon</a>
+- Germany: <a href="https://www.flaticon.com/free-icons/germany" title="germany icons">Germany icons created by Freepik - Flaticon</a>
+- Italy: <a href="https://www.flaticon.com/free-icons/italy" title="italy icons">Italy icons created by Roundicons - Flaticon</a>
+- France: <a href="https://www.flaticon.com/free-icons/france" title="france icons">France icons created by Freepik - Flaticon</a>
+- Netherlands: <a href="https://www.flaticon.com/free-icons/holland" title="holland icons">Holland icons created by Roundicons - Flaticon</a>
+- Spain: <a href="https://www.flaticon.com/free-icons/spain" title="spain icons">Spain icons created by iconset.co - Flaticon</a>
+- Sweden: <a href="https://www.flaticon.com/free-icons/sweden" title="sweden icons">Sweden icons created by Freepik - Flaticon</a>
+- Russia: <a href="https://www.flaticon.com/free-icons/russia" title="russia icons">Russia icons created by GeekClick - Flaticon</a>
