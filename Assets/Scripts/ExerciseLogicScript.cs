@@ -35,10 +35,12 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
 
-        frasi_originali_e_soluzioni = new Dictionary<string, string>();
+        frasi_originali_e_soluzioni = new Dictionary<string, string>();  // ne fai 500 e poi prendi a caso?
         frasi_originali_e_soluzioni.Add("Original Phrase", "Frase Originale");
-        frasi_originali_e_soluzioni.Add("Original Phrase 2 ", "Frase Originale 2");
-        frasi_originali_e_soluzioni.Add("Original Phrase 3 ", "Frase Originale 3"); // ne fai 500 e poi prendi a caso?
+        frasi_originali_e_soluzioni.Add("Original Phrase 2", "Frase Originale 2");
+        frasi_originali_e_soluzioni.Add("Original Phrase 3", "Frase Originale 3");
+        frasi_originali_e_soluzioni.Add("Original Question", "Domanda Originale");
+        frasi_originali_e_soluzioni.Add("Original Negation", "Negazione Originale");
 
         italianHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
         italianHashMap_a1.Add(1, frasi_originali_e_soluzioni); // identifica il primo esercizio dell'A1
@@ -115,10 +117,11 @@ public class ExerciseLogicScript : MonoBehaviour
             // update Original Frase;
             switch (solution_counter)
             {
-                case 1: original_phrase.text = frasi_originali.ElementAt(solution_counter); inputfield.text = ""; correct_phrases_counter.text = correct_answers.ToString(); break;
-                case 2: original_phrase.text = frasi_originali.ElementAt(solution_counter); inputfield.text = ""; correct_phrases_counter.text = correct_answers.ToString(); break;
-                case 3: original_phrase.text = frasi_originali.ElementAt(solution_counter); inputfield.text = ""; correct_phrases_counter.text = correct_answers.ToString(); break;
-                default: original_phrase.text = "Well Done!"; break;
+                case 1: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 2: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 3: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 4: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                default: SetCorrectPhraseCounter(correct_answers.ToString()); original_phrase.text = "Well Done!"; break;
             }
         }
         catch (Exception ex)
@@ -129,6 +132,14 @@ public class ExerciseLogicScript : MonoBehaviour
         }
     }
 
+    void UpdateMainUI(int solution_counter, string correct_answers)
+    {
+        SetOriginalPhrase(solution_counter); ResetInputField(); SetCorrectPhraseCounter(correct_answers.ToString());
+    }
+    void SetOriginalPhrase(int solution_counter) { original_phrase.text = frasi_originali.ElementAt(solution_counter); }
+    void ResetInputField() { inputfield.text = ""; }
+    // 1/10, 2/10, ... 1,2 è il counter bro
+    void SetCorrectPhraseCounter(string correct_answers) { correct_phrases_counter.text = correct_answers.ToString(); }
 
     IEnumerator FadeImage(bool fadeAway)
     {
