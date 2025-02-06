@@ -13,4 +13,13 @@ public class ButtonTests : MonoBehaviour
         GameManager.Instance.userLifes--;
         GameManager.Instance.SaveData();
     }
+
+    // ok 
+    public void ChooseDifficulty(string buttonName)
+    {
+        GameManager.Instance.selectedDifficulty = buttonName;
+
+        GameManager.Instance.SaveData();
+        GameManager.Instance.GameManagerDebugLogData();
+    }
 }
