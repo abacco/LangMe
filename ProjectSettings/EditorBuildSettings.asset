@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestAds.unity
     guid: 29c4d0545e2b58a488a502e405dffc62
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/1 - Startup.unity
+    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/2 -AlertScene.unity
+    guid: a6d31486890fff34c84352d10a4b2050
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 53cc4669c02aec64fb9c63940d5c935c, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 6d4803fc2767f174abbd21041b77f458, type: 2}
