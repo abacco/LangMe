@@ -15,11 +15,28 @@ public class ChoseLanguageManager : MonoBehaviour
         Debug.Log("I'am " + gameObject.name);
         dynamicLanguagePanel.SetActive(true);
         language_selected_text.text = buttonName;
+        GameManager.Instance.GameManagerDebugLogData();
     }
 
     public void SayMyName(string name)
     {
         buttonName = name;
         SelectLanguage();
+    }
+
+    public void NoSelected() 
+    {
+        dynamicLanguagePanel.SetActive(false);
+
+        GameManager.Instance.GameManagerDebugLogData();
+    }
+
+    public void LanguageChosen() 
+    {
+        GameManager.Instance.selectedLanguage = buttonName;
+        GameManager.Instance.SaveData();
+        GameManager.Instance.GameManagerDebugLogData();
+
+        dynamicLanguagePanel.SetActive(false);
     }
 }
