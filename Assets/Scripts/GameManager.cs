@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     // Percorso del file JSON
     private string filePath;
+    public string FilePath { get; set; }
 
     private void Awake()
     {
@@ -27,16 +28,13 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        //LoadData();
-        //filePath = Path.Combine(Application.persistentDataPath, "saveData.json");
-        //Debug.Log(filePath); 
         filePath = Path.Combine(Application.persistentDataPath, "saveData.json");
+        this.FilePath = filePath;
     }
 
     private void Start()
     {
         LoadData();
-
     }
 
     // Quando vuoi salvare i progressi, chiama GameManager.Instance.SaveData();
@@ -71,8 +69,7 @@ public class GameManager : MonoBehaviour
             selectedDifficulty = gameData.selectedDifficulty;
             username = gameData.username;
 
-            Debug.Log("Data Loaded from Encrypted JSon");
-            Debug.Log("userLifes " + userLifes);
+            GameManagerDebugLogData();
         }
         else
         {
@@ -97,5 +94,19 @@ public class GameManager : MonoBehaviour
         {
             SaveData();
         }
+    }
+    public void ResetSavedData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+    public void GameManagerDebugLogData() 
+    {
+        Debug.Log("Data Loaded from Encrypted JSon ----------------");
+        Debug.Log("selectedLanguage: " + this.selectedLanguage);
+        Debug.Log("userLifes: " + this.userLifes);
+        Debug.Log("selectedDifficulty: " + this.selectedDifficulty);
+        Debug.Log("username: " + this.username);
+        Debug.Log("-----------------------------------------------");
     }
 }
