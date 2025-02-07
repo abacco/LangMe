@@ -10,18 +10,20 @@ public class ChoseLanguageManager : MonoBehaviour
     [SerializeField] Button noBtn; // are you sure? No
 
     public string buttonName;
+
+
+    public void SayMyName(string name)
+    {
+        buttonName = name;
+        SelectLanguage();
+    }
+
     public void SelectLanguage()
     {
         Debug.Log("I'am " + gameObject.name);
         dynamicLanguagePanel.SetActive(true);
         language_selected_text.text = buttonName;
         GameManager.Instance.GameManagerDebugLogData();
-    }
-
-    public void SayMyName(string name)
-    {
-        buttonName = name;
-        SelectLanguage();
     }
 
     public void NoSelected() 
@@ -37,6 +39,8 @@ public class ChoseLanguageManager : MonoBehaviour
         GameManager.Instance.SaveData();
         GameManager.Instance.GameManagerDebugLogData();
 
+        GameObject.FindObjectOfType<Navigation>().MoveToScene("5 - Choose Difficulty");
         dynamicLanguagePanel.SetActive(false);
+
     }
 }

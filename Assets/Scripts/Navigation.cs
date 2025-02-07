@@ -5,8 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class Navigation : MonoBehaviour
 {
-    public string sceneName = "5 - Difficulty Rules";
-    public void MoveToScene5()
+    // forse è inutile
+    public string[] scenesName = {
+        "1 - Startup",
+        "2 -AlertScene",
+        "3 - Select Username",
+        "4 - ChooseALang",
+        "5 - Choose Difficulty",
+        "6 - Difficulty Rules",
+        "7 - Exercise Scene"
+    }; 
+
+    public void MoveToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }

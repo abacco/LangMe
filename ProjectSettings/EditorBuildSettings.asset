@@ -17,6 +17,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealScenes/2 -AlertScene.unity
     guid: a6d31486890fff34c84352d10a4b2050
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/3 - Select Username.unity
+    guid: 2a53e3181a9d8dd4d9cd5e08e1cb71af
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/4 - ChooseALang.unity
+    guid: 54ada6b2678074b4fabc5dca86e6b553
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/5 - Choose Difficulty.unity
+    guid: c0f00db7f7e74654a9a496f6b8893b1f
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/6 - Difficulty Rules.unity
+    guid: 78386dac2fc74c9488c780fd12ce0b65
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/7 - Exercise Scene.unity
+    guid: 04df836e729a1cd4f9fe9db8a6aa997a
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 53cc4669c02aec64fb9c63940d5c935c, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 6d4803fc2767f174abbd21041b77f458, type: 2}
