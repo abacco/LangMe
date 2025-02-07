@@ -25,13 +25,15 @@ public class ExerciseLogicScript : MonoBehaviour
     Dictionary<string, string> frasi_originali_e_soluzioni;
     Dictionary<int, Dictionary<string, string>> italianHashMap_a1;
 
-    public int solution_counter = -1;
+    public int solution_counter = 0;
     int correct_answers = 0;
     #endregion
 
     #region Initialization
     void Start() // dict initialization
     {
+        correct_phrases_counter.text = "00";
+
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
 
@@ -117,7 +119,7 @@ public class ExerciseLogicScript : MonoBehaviour
             // update Original Frase;
             switch (solution_counter)
             {
-                case 0: break;
+                case 0: correct_phrases_counter.text = "00"; UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 1: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 2: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 3: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
@@ -140,7 +142,15 @@ public class ExerciseLogicScript : MonoBehaviour
     void SetOriginalPhrase(int solution_counter) { original_phrase.text = frasi_originali.ElementAt(solution_counter); }
     void ResetInputField() { inputfield.text = ""; }
     // 1/10, 2/10, ... 1,2 è il counter bro
-    void SetCorrectPhraseCounter(string correct_answers) { correct_phrases_counter.text = correct_answers.ToString(); }
+    void SetCorrectPhraseCounter(string correct_answers) {
+
+        if (solution_counter <= 10) {
+            correct_phrases_counter.text = "0" + correct_answers.ToString();
+        } else
+        {
+            correct_phrases_counter.text = correct_answers.ToString();
+        }
+    }
 
     IEnumerator FadeImage(bool fadeAway)
     {
