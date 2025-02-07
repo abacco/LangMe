@@ -25,7 +25,7 @@ public class ExerciseLogicScript : MonoBehaviour
     Dictionary<string, string> frasi_originali_e_soluzioni;
     Dictionary<int, Dictionary<string, string>> italianHashMap_a1;
 
-    public int solution_counter = 0;
+    public int solution_counter = -1;
     int correct_answers = 0;
     #endregion
 
@@ -117,6 +117,7 @@ public class ExerciseLogicScript : MonoBehaviour
             // update Original Frase;
             switch (solution_counter)
             {
+                case 0: break;
                 case 1: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 2: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 3: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
