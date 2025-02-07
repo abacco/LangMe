@@ -741,7 +741,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 313006775}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 744665659}
+        m_TargetAssemblyTypeName: ChooseDifficulty, Assembly-CSharp
+        m_MethodName: ChooseDDifficulty
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: B2
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &313006775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,7 +981,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 352507794}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 744665659}
+        m_TargetAssemblyTypeName: ChooseDifficulty, Assembly-CSharp
+        m_MethodName: ChooseDDifficulty
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: C1
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &352507794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,7 +1162,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 497219329}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 744665659}
+        m_TargetAssemblyTypeName: ChooseDifficulty, Assembly-CSharp
+        m_MethodName: ChooseDDifficulty
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: B1
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &497219329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,6 +1242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa2bc03ffd4b174cb56adee9bcebdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficultyLevel: {fileID: 0}
+  textRules: {fileID: 0}
 --- !u!4 &620340208
 Transform:
   m_ObjectHideFlags: 0
@@ -1479,6 +1517,50 @@ MonoBehaviour:
   - {fileID: 1254612938}
   orbitRadius: 400
   orbitSpeed: 30
+--- !u!1 &744665658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744665660}
+  - component: {fileID: 744665659}
+  m_Layer: 0
+  m_Name: ChooseDifficultyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &744665659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744665658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ec9e40a5a69744d8dcbe7b014404b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &744665660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744665658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 563.0211, y: 1314.1838, z: -7.5695825}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780121179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2306,7 +2388,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1254612940}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 744665659}
+        m_TargetAssemblyTypeName: ChooseDifficulty, Assembly-CSharp
+        m_MethodName: ChooseDDifficulty
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: C2
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1254612940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2885,9 +2979,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 620340207}
-        m_TargetAssemblyTypeName: ButtonTests, Assembly-CSharp
-        m_MethodName: ChooseDifficulty
+      - m_Target: {fileID: 744665659}
+        m_TargetAssemblyTypeName: ChooseDifficulty, Assembly-CSharp
+        m_MethodName: ChooseDDifficulty
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3273,9 +3367,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 620340207}
-        m_TargetAssemblyTypeName: ButtonTests, Assembly-CSharp
-        m_MethodName: ChooseDifficulty
+      - m_Target: {fileID: 744665659}
+        m_TargetAssemblyTypeName: ChooseDifficulty, Assembly-CSharp
+        m_MethodName: ChooseDDifficulty
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4058,3 +4152,4 @@ SceneRoots:
   - {fileID: 719763872}
   - {fileID: 620340208}
   - {fileID: 487514707}
+  - {fileID: 744665660}
