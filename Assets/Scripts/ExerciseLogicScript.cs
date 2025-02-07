@@ -14,6 +14,9 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] TMP_InputField inputfield;
     [SerializeField] TMP_Text original_phrase;
     [SerializeField] TMP_Text correct_phrases_counter;
+
+    int userLifes;
+    [SerializeField] TMP_Text users_lifes_txt;
     
     [SerializeField] GameObject wrong_answer_panel;
     [SerializeField] TMP_Text wrong_text;
@@ -30,6 +33,13 @@ public class ExerciseLogicScript : MonoBehaviour
     #endregion
 
     #region Initialization
+
+    private void Awake()
+    {
+        GameManager.Instance.LoadData();
+        userLifes = GameManager.Instance.userLifes;
+        users_lifes_txt.text = userLifes.ToString();
+    }
     void Start() // dict initialization
     {
         correct_phrases_counter.text = "00";
@@ -114,6 +124,9 @@ public class ExerciseLogicScript : MonoBehaviour
                     Debug.Log("Risposta Sbagliata");
                     // far Uscire un alert o un feedback che la risposta è sbagliata
                     StartCoroutine(FadeImage(true));
+                    userLifes = --GameManager.Instance.userLifes;
+                    users_lifes_txt.text = userLifes.ToString();
+                    GameManager.Instance.SaveData();
                 }
             }
             // update Original Frase;

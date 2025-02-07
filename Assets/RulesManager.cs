@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RulesManager : MonoBehaviour
 {
+    // this script is shared between the Rules Scene and the Exercise Scene (to handle the header but not LIFES!)
     [SerializeField] TMP_Text difficultyLevel;
     [SerializeField] TMP_Text textRules;
+
     [SerializeField] Image selectedLanguageRawImage;
 
     [SerializeField] Sprite[] languageIcons;
@@ -22,6 +25,8 @@ public class RulesManager : MonoBehaviour
         levelAndRules.Add("B2", "B2 Rules");
         levelAndRules.Add("C1", "C1 Rules");
         levelAndRules.Add("C2", "C2 Rules");
+
+        Debug.Log("Levels And Rules dict initialized");
     }
     private void InitializeIconsAndLanguagesDictionary()
     {
@@ -33,30 +38,35 @@ public class RulesManager : MonoBehaviour
         iconsAndLanguages.Add("sweden", languageIcons[5]);
         iconsAndLanguages.Add("uk", languageIcons[6]);
         iconsAndLanguages.Add("usa", languageIcons[7]);
+
+        Debug.Log("Icons And Languages dict initialized");
     }
 
     private void Start()
     {
-        InitializeLevelAndRulesDictionary();
-        InitializeIconsAndLanguagesDictionary();
-
-        StartCoroutine(UpdateDifficultyRules());
+        if("6 - Difficulty Rules".Equals(SceneManager.GetActiveScene().name)) {
+            InitializeLevelAndRulesDictionary();
+            InitializeIconsAndLanguagesDictionary();
+            
+            StartCoroutine(UpdateDifficultyRules());
+        }
         StartCoroutine(UpdateLanguageIcon());
     }
     public IEnumerator UpdateDifficultyRules()
     {
         yield return new WaitForEndOfFrame();
         difficultyLevel.text = GameManager.Instance.selectedDifficulty;
-
-        switch (difficultyLevel.text)
-        {
-            case "A1": textRules.text = levelAndRules["A1"]; break;
-            case "A2": textRules.text = levelAndRules["A2"]; break;
-            case "B1": textRules.text = levelAndRules["B1"]; break;
-            case "B2": textRules.text = levelAndRules["B2"]; break;
-            case "C1": textRules.text = levelAndRules["C1"]; break;
-            case "C2": textRules.text = levelAndRules["C2"]; break;
-            default: Debug.Log("Error"); break;
+        if (textRules != null) {
+            switch (difficultyLevel.text)
+            {
+                case "A1": textRules.text = levelAndRules["A1"]; break;
+                case "A2": textRules.text = levelAndRules["A2"]; break;
+                case "B1": textRules.text = levelAndRules["B1"]; break;
+                case "B2": textRules.text = levelAndRules["B2"]; break;
+                case "C1": textRules.text = levelAndRules["C1"]; break;
+                case "C2": textRules.text = levelAndRules["C2"]; break;
+                default: Debug.Log("Error"); break;
+            }
         }
     }
 
