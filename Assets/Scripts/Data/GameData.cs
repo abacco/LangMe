@@ -9,4 +9,6 @@ public class GameData
     public int userLifes;
     public string selectedDifficulty;
     public string username;
+
+    public int solutionCounter;
 }

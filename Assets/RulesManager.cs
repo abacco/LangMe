@@ -47,9 +47,8 @@ public class RulesManager : MonoBehaviour
         if("6 - Difficulty Rules".Equals(SceneManager.GetActiveScene().name)) {
             InitializeLevelAndRulesDictionary();
             InitializeIconsAndLanguagesDictionary();
-            
-            StartCoroutine(UpdateDifficultyRules());
         }
+        StartCoroutine(UpdateDifficultyRules());
         StartCoroutine(UpdateLanguageIcon());
     }
     public IEnumerator UpdateDifficultyRules()
