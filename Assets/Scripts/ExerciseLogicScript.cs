@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -67,13 +68,92 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_originali_e_soluzioni.Add("8", "8");
         frasi_originali_e_soluzioni.Add("9", "9");
 
+        frasi_originali_e_soluzioni.Add("10", "10");
+        frasi_originali_e_soluzioni.Add("11", "11");
+        frasi_originali_e_soluzioni.Add("12", "12");
+        frasi_originali_e_soluzioni.Add("13", "13");
+        frasi_originali_e_soluzioni.Add("14", "14");
+        frasi_originali_e_soluzioni.Add("15", "15");
+        frasi_originali_e_soluzioni.Add("16", "16");
+        frasi_originali_e_soluzioni.Add("17", "17");
+        frasi_originali_e_soluzioni.Add("18", "18");
+        frasi_originali_e_soluzioni.Add("19", "19");
+        frasi_originali_e_soluzioni.Add("20", "20");
+
 
         italianHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
         italianHashMap_a1.Add(1, frasi_originali_e_soluzioni); // identifica il primo esercizio dell'A1
 
-
+        UpdateVeryFirstOriginalPhrase();
     }
     #endregion
+
+    // in base al solution counter, al livello di difficoltà scelto e alla lingua scelta (?)
+    // devo far vedere la prima frase del set di esercizi da mostrare
+    //  se gli esercizi sono in divisi in blocchettini da 10 frasi ed ho 20 frasi
+    //    -> mostra la prima frase del primo blocchettino e la prima frase del secondo blocchettino
+    //  per tenere traccia del blocchettino da cui devo partire, il solution counter è a multipli di 10
+    // se GameManager.Instance.solution_counter == 0 -> sono nel PRIMO blocchettino del dizionario bla bla...
+    // se GameManager.Instance.solution_counter == 10 -> sono nel SECONDO blocchettino del dizionario bla bla...
+
+    /*
+        esempio:
+            base: devo far vedere la prima frase del 1 set A1 di lingua INGLESE
+            induzione: devo far vedere la prima frase del 2 set di A1 di lingua INGLESE     
+       NOTA BENE:
+        -  clicco Home || Chiudo L'app || viteEsaurite 
+            -> check se il solutionCounter è un multiplo di 0
+                -> se non lo è 
+                       -> devo trovare il modo di resettarlo all'ultimo multiplo 
+            Esempio
+                perdo le vite quando sono alla frase n. 8 -> il solutionCounter DEVE essere 0!
+                -> 8 è multiplo di 10? 
+
+                è sempre il multiplo di 10 precedente....
+                18 - la differenza tra 18 e 8
+                contare il numero di decine in 18
+                se è una decina -> allora il solution counter è 10
+                se sono due decine -> allora il solution counter è 20
+
+                come conto il numero di decine? 
+                es. ho 10
+                    10 / 10 = 1
+                    20 / 10 = 2
+                    25 / 10 = 3.5 -> 3
+                    
+     */
+    public void UpdateVeryFirstOriginalPhrase()
+    {
+        int decine = GameManager.Instance.solutionCounter / 10;
+        Debug.Log("Decine attuali " + decine);
+        string valore = "";
+
+        int[] indici = { 0, 10, 20 };
+        List<string> chiavi_richieste = indici
+            .Select(index => italianHashMap_a1[1].ElementAt(index).Key)
+            .ToList();
+
+        switch (GameManager.Instance.selectedLanguage)
+        {
+            case "Holland": 
+                switch (GameManager.Instance.selectedDifficulty)
+                {
+                    case "A1": 
+                        switch (decine)
+                        {
+                            // 0 decine -> mostro la frase chiave in posizione 0 della lista con solo le frasi chiave in posizione di multipli di 10
+                            // 0 = "0", 1 (decina) = frase in posizione 10 del DIZIONARIO INTERNO!!!
+                            case 0:  valore = chiavi_richieste[0]; original_phrase.text = valore; break;
+                            case 1:  valore = chiavi_richieste[1]; original_phrase.text = valore; break;
+                            default: throw new Exception("Error On solutionCounter: ");
+                        }
+                        break;
+                    default: throw new Exception("Error On selectedDifficulty: ");
+                }
+                break;
+            default: throw new Exception("Error On selectedLanguage: ");
+        }
+    }
 
     #region Logic
     private void Update()
