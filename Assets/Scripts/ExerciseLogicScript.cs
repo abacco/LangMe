@@ -51,38 +51,52 @@ public class ExerciseLogicScript : MonoBehaviour
 
     void Start() // dict initialization
     {
+        solution_counter = GameManager.Instance.solutionCounter;
+
         correct_phrases_counter.text = "00";
 
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
 
+        // trovare una soluzione che sostituisca questo
         frasi_originali_e_soluzioni = new Dictionary<string, string>();  // ne fai 500 e poi prendi a caso?
-        frasi_originali_e_soluzioni.Add("0", "0");
-        frasi_originali_e_soluzioni.Add("1", "1");
-        frasi_originali_e_soluzioni.Add("2", "2");
-        frasi_originali_e_soluzioni.Add("3", "3");
-        frasi_originali_e_soluzioni.Add("4", "4");
-        frasi_originali_e_soluzioni.Add("5", "5");
-        frasi_originali_e_soluzioni.Add("6", "6");
-        frasi_originali_e_soluzioni.Add("7", "7");
-        frasi_originali_e_soluzioni.Add("8", "8");
-        frasi_originali_e_soluzioni.Add("9", "9");
+        frasi_originali_e_soluzioni.Add("Original 0", " Solution 0");
+        frasi_originali_e_soluzioni.Add("Original 1", " Solution 1");
+        frasi_originali_e_soluzioni.Add("Original 2", " Solution 2");
+        frasi_originali_e_soluzioni.Add("Original 3", " Solution 3");
+        frasi_originali_e_soluzioni.Add("Original 4", " Solution 4");
+        frasi_originali_e_soluzioni.Add("Original 5", " Solution 5");
+        frasi_originali_e_soluzioni.Add("Original 6", " Solution 6");
+        frasi_originali_e_soluzioni.Add("Original 7", " Solution 7");
+        frasi_originali_e_soluzioni.Add("Original 8", " Solution 8");
+        frasi_originali_e_soluzioni.Add("Original 9", " Solution 9");
 
-        frasi_originali_e_soluzioni.Add("10", "10");
-        frasi_originali_e_soluzioni.Add("11", "11");
-        frasi_originali_e_soluzioni.Add("12", "12");
-        frasi_originali_e_soluzioni.Add("13", "13");
-        frasi_originali_e_soluzioni.Add("14", "14");
-        frasi_originali_e_soluzioni.Add("15", "15");
-        frasi_originali_e_soluzioni.Add("16", "16");
-        frasi_originali_e_soluzioni.Add("17", "17");
-        frasi_originali_e_soluzioni.Add("18", "18");
-        frasi_originali_e_soluzioni.Add("19", "19");
-        frasi_originali_e_soluzioni.Add("20", "20");
-
+        frasi_originali_e_soluzioni.Add("Original 10", " Solution 10");
+        frasi_originali_e_soluzioni.Add("Original 11", " Solution 11");
+        frasi_originali_e_soluzioni.Add("Original 12", " Solution 12");
+        frasi_originali_e_soluzioni.Add("Original 13", " Solution 13");
+        frasi_originali_e_soluzioni.Add("Original 14", " Solution 14");
+        frasi_originali_e_soluzioni.Add("Original 15", " Solution 15");
+        frasi_originali_e_soluzioni.Add("Original 16", " Solution 16");
+        frasi_originali_e_soluzioni.Add("Original 17", " Solution 17");
+        frasi_originali_e_soluzioni.Add("Original 18", " Solution 18");
+        frasi_originali_e_soluzioni.Add("Original 19", " Solution 19");
+        frasi_originali_e_soluzioni.Add("Original 20", " Solution 20");
 
         italianHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
         italianHashMap_a1.Add(1, frasi_originali_e_soluzioni); // identifica il primo esercizio dell'A1
+
+        //foreach (var coppia_frasi in italianHashMap_a1.Values)
+        //{
+        //    Debug.Log("------------");
+        //    foreach (var singola_frase in coppia_frasi)
+        //    {
+        //        Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
+        //        Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
+        //        frasi_originali.Add(singola_frase.Key);
+        //        frasi_soluzione.Add(singola_frase.Value);
+        //    }
+        //}
 
         UpdateVeryFirstOriginalPhrase();
     }
@@ -124,8 +138,9 @@ public class ExerciseLogicScript : MonoBehaviour
      */
     public void UpdateVeryFirstOriginalPhrase()
     {
+        
         int decine = GameManager.Instance.solutionCounter / 10;
-        Debug.Log("Decine attuali " + decine);
+        Debug.Log("Decine attuali " + decine + " & solutionCounter On Start: " + GameManager.Instance.solutionCounter);
         string valore = "";
 
         int[] indici = { 0, 10, 20 };
@@ -143,8 +158,8 @@ public class ExerciseLogicScript : MonoBehaviour
                         {
                             // 0 decine -> mostro la frase chiave in posizione 0 della lista con solo le frasi chiave in posizione di multipli di 10
                             // 0 = "0", 1 (decina) = frase in posizione 10 del DIZIONARIO INTERNO!!!
-                            case 0:  valore = chiavi_richieste[0]; original_phrase.text = valore; break;
-                            case 1:  valore = chiavi_richieste[1]; original_phrase.text = valore; break;
+                            case 0:  valore = chiavi_richieste[0]; original_phrase.text = valore; Debug.Log("VALORE: " + valore + " & " + solution_counter); break;
+                            case 1:  valore = chiavi_richieste[1]; original_phrase.text = valore; Debug.Log("VALORE: " + valore + " & " + solution_counter); break;
                             default: throw new Exception("Error On solutionCounter: ");
                         }
                         break;
@@ -156,14 +171,11 @@ public class ExerciseLogicScript : MonoBehaviour
     }
 
     #region Logic
-    private void Update()
-    {
-    }
+    
 
     void DisableSubmitButtonWhenInputVoid(string phrase_without_blanks)
     {
         if ("".Equals(phrase_without_blanks) || phrase_without_blanks == null) {
-            //StartCoroutine(ShowWarningPanel());
             ShowWarningPanel();
         }
     }
@@ -181,13 +193,14 @@ public class ExerciseLogicScript : MonoBehaviour
         // dato che è diviso in blocchi di 10...solution_counter (global)
         try
         {
+            // dovrebbe essere nell'initializer dei vari dizionari
             foreach (var coppia_frasi in italianHashMap_a1.Values)
             {
                 Debug.Log("------------");
                 foreach (var singola_frase in coppia_frasi)
                 {
-                    Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
-                    Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
+                    //Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
+                    //Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
                     frasi_originali.Add(singola_frase.Key);
                     frasi_soluzione.Add(singola_frase.Value);
                 }
@@ -195,7 +208,13 @@ public class ExerciseLogicScript : MonoBehaviour
             if (inputfield != null)
             {
                 string phrase_without_blanks = string.Join(" ", inputfield.text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries).ToList().Select(x => x.Trim()));
-                if (string.Equals(frasi_soluzione.ElementAt(solution_counter), phrase_without_blanks, StringComparison.OrdinalIgnoreCase))
+                string solution = string.Join(" ", frasi_soluzione.ElementAt(solution_counter).Split(new char[0], StringSplitOptions.RemoveEmptyEntries).ToList().Select(x => x.Trim()));
+
+                Debug.Log("phrase_without_blanks + " + phrase_without_blanks.ToLower());
+                Debug.Log("solution + " + solution.ToLower());
+                if (phrase_without_blanks.ToLower().Equals(solution.ToLower())) {  }
+
+                if (string.Equals(solution.ToLower(), phrase_without_blanks.ToLower(), StringComparison.OrdinalIgnoreCase))
                 {
                     correct_answers++;
                     Debug.Log("correct_answers:" + correct_answers);
