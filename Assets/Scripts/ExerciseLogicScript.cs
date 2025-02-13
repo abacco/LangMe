@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,112 +28,127 @@ public class ExerciseLogicScript : MonoBehaviour
     List<string> frasi_soluzione;
     List<string> frasi_originali;
 
-    Dictionary<string, string> frasi_originali_e_soluzioni;
+    Dictionary<string, string> frasi_originali_e_soluzioni_italiano_a1;
     Dictionary<int, Dictionary<string, string>> italianHashMap_a1;
 
     public int solution_counter = 0; // serve per andare avanti nel dizionario e fare l'update delle frasi soluzione
     int correct_answers = 0; // tiene conto solo delle risposte giuste date
 
     public bool set_completed;
-    
+
     #endregion
 
     #region Initialization
-
+    // Awake just being called before Start and while loading unity player where Start is called when game is loaded. source: Unity Staff
     private void Awake()
     {
+        // load previous data from JSon
         GameManager.Instance.LoadData();
+        // set UserLifes and text update
         userLifes = GameManager.Instance.userLifes;
         users_lifes_txt.text = userLifes.ToString();
-    }
-
-    void Start() // dict initialization
-    {
+        // set solutionCounter to display first Original Phrase 
         solution_counter = GameManager.Instance.solutionCounter;
-
+        // set default correct_phrase counter txt
         correct_phrases_counter.text = "00";
 
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
 
-        // trovare una soluzione che sostituisca questo
-        frasi_originali_e_soluzioni = new Dictionary<string, string>();  // ne fai 500 e poi prendi a caso?
-        frasi_originali_e_soluzioni.Add("Original 0", " Solution 0");
-        frasi_originali_e_soluzioni.Add("Original 1", " Solution 1");
-        frasi_originali_e_soluzioni.Add("Original 2", " Solution 2");
-        frasi_originali_e_soluzioni.Add("Original 3", " Solution 3");
-        frasi_originali_e_soluzioni.Add("Original 4", " Solution 4");
-        frasi_originali_e_soluzioni.Add("Original 5", " Solution 5");
-        frasi_originali_e_soluzioni.Add("Original 6", " Solution 6");
-        frasi_originali_e_soluzioni.Add("Original 7", " Solution 7");
-        frasi_originali_e_soluzioni.Add("Original 8", " Solution 8");
-        frasi_originali_e_soluzioni.Add("Original 9", " Solution 9");
-
-        frasi_originali_e_soluzioni.Add("Original 10", " Solution 10");
-        frasi_originali_e_soluzioni.Add("Original 11", " Solution 11");
-        frasi_originali_e_soluzioni.Add("Original 12", " Solution 12");
-        frasi_originali_e_soluzioni.Add("Original 13", " Solution 13");
-        frasi_originali_e_soluzioni.Add("Original 14", " Solution 14");
-        frasi_originali_e_soluzioni.Add("Original 15", " Solution 15");
-        frasi_originali_e_soluzioni.Add("Original 16", " Solution 16");
-        frasi_originali_e_soluzioni.Add("Original 17", " Solution 17");
-        frasi_originali_e_soluzioni.Add("Original 18", " Solution 18");
-        frasi_originali_e_soluzioni.Add("Original 19", " Solution 19");
-        frasi_originali_e_soluzioni.Add("Original 20", " Solution 20");
-
         italianHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
-        italianHashMap_a1.Add(1, frasi_originali_e_soluzioni); // identifica il primo esercizio dell'A1
 
-        //foreach (var coppia_frasi in italianHashMap_a1.Values)
-        //{
-        //    Debug.Log("------------");
-        //    foreach (var singola_frase in coppia_frasi)
-        //    {
-        //        Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
-        //        Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
-        //        frasi_originali.Add(singola_frase.Key);
-        //        frasi_soluzione.Add(singola_frase.Value);
-        //    }
-        //}
+        // in base alle robe salvate su JSon -> inizializzo le robe relative -> DA SPOSTARE NELLO SWITCH SOTTO!!!!!!!
+        PopulateFrasiOriginaliSoluzioni_ItalianoA1();
+        InitializeItalianHashMapA1(frasi_soluzione, frasi_originali);
+        // -------------------
 
         UpdateVeryFirstOriginalPhrase();
     }
+
+    void Start() { }
+
+    void PopulateFrasiOriginaliSoluzioni_ItalianoA1()
+    {
+        frasi_originali_e_soluzioni_italiano_a1 = new Dictionary<string, string>();
+
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 0", " Soluzione 0");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 1", " Soluzione 1");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 2", " Soluzione 2");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 3", " Soluzione 3");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 4", " Soluzione 4");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 5", " Soluzione 5");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 6", " Soluzione 6");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 7", " Soluzione 7");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 8", " Soluzione 8");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 9", " Soluzione 9");
+
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 10", " Soluzione 10");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 11", " Soluzione 11");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 12", " Soluzione 12");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 13", " Soluzione 13");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 14", " Soluzione 14");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 15", " Soluzione 15");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 16", " Soluzione 16");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 17", " Soluzione 17");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 18", " Soluzione 18");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 19", " Soluzione 19");
+        frasi_originali_e_soluzioni_italiano_a1.Add("Original 20", " Soluzione 20");
+    }
+    void InitializeItalianHashMapA1(List<string> frasi_soluzione, List<string> frasi_originale)
+    {
+        italianHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
+        italianHashMap_a1.Add(1, frasi_originali_e_soluzioni_italiano_a1);
+        
+        // inizializzazione frasi originali e soluzioni
+        foreach (var coppia_frasi in italianHashMap_a1.Values)
+        {
+            Debug.Log("------------");
+            foreach (var singola_frase in coppia_frasi)
+            {
+                Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
+                Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
+                frasi_originali.Add(singola_frase.Key);
+                frasi_soluzione.Add(singola_frase.Value);
+            }
+        }
+    }
     #endregion
-
-    // in base al solution counter, al livello di difficoltà scelto e alla lingua scelta (?)
-    // devo far vedere la prima frase del set di esercizi da mostrare
-    //  se gli esercizi sono in divisi in blocchettini da 10 frasi ed ho 20 frasi
-    //    -> mostra la prima frase del primo blocchettino e la prima frase del secondo blocchettino
-    //  per tenere traccia del blocchettino da cui devo partire, il solution counter è a multipli di 10
-    // se GameManager.Instance.solution_counter == 0 -> sono nel PRIMO blocchettino del dizionario bla bla...
-    // se GameManager.Instance.solution_counter == 10 -> sono nel SECONDO blocchettino del dizionario bla bla...
-
+    
     /*
-        esempio:
-            base: devo far vedere la prima frase del 1 set A1 di lingua INGLESE
-            induzione: devo far vedere la prima frase del 2 set di A1 di lingua INGLESE     
-       NOTA BENE:
-        -  clicco Home || Chiudo L'app || viteEsaurite 
-            -> check se il solutionCounter è un multiplo di 0
-                -> se non lo è 
-                       -> devo trovare il modo di resettarlo all'ultimo multiplo 
-            Esempio
-                perdo le vite quando sono alla frase n. 8 -> il solutionCounter DEVE essere 0!
-                -> 8 è multiplo di 10? 
+    in base al solution counter, al livello di difficoltà scelto e alla lingua scelta(?)
+    devo far vedere la prima frase del set di esercizi da mostrare
+    se gli esercizi sono in divisi in blocchettini da 10 frasi ed ho 20 frasi
+    -> mostra la prima frase del primo blocchettino e la prima frase del secondo blocchettino
+    per tenere traccia del blocchettino da cui devo partire, il solution counter è a multipli di 10
+    se GameManager.Instance.solution_counter == 0 -> sono nel PRIMO blocchettino del dizionario bla bla...
+    se GameManager.Instance.solution_counter == 10 -> sono nel SECONDO blocchettino del dizionario bla bla...
 
-                è sempre il multiplo di 10 precedente....
-                18 - la differenza tra 18 e 8
-                contare il numero di decine in 18
-                se è una decina -> allora il solution counter è 10
-                se sono due decine -> allora il solution counter è 20
 
-                come conto il numero di decine? 
-                es. ho 10
-                    10 / 10 = 1
-                    20 / 10 = 2
-                    25 / 10 = 3.5 -> 3
-                    
-     */
+    esempio:
+        base: devo far vedere la prima frase del 1 set A1 di lingua INGLESE
+        induzione: devo far vedere la prima frase del 2 set di A1 di lingua INGLESE     
+    NOTA BENE:
+    -  clicco Home || Chiudo L'app || viteEsaurite 
+        -> check se il solutionCounter è un multiplo di 0
+            -> se non lo è 
+                   -> devo trovare il modo di resettarlo all'ultimo multiplo 
+        Esempio
+            perdo le vite quando sono alla frase n. 8 -> il solutionCounter DEVE essere 0!
+            -> 8 è multiplo di 10? 
+
+            è sempre il multiplo di 10 precedente....
+            18 - la differenza tra 18 e 8
+            contare il numero di decine in 18
+            se è una decina -> allora il solution counter è 10
+            se sono due decine -> allora il solution counter è 20
+
+            come conto il numero di decine? 
+            es. ho 10
+                10 / 10 = 1
+                20 / 10 = 2
+                25 / 10 = 3.5 -> 3
+
+ */
     public void UpdateVeryFirstOriginalPhrase()
     {
         
@@ -150,10 +163,13 @@ public class ExerciseLogicScript : MonoBehaviour
 
         switch (GameManager.Instance.selectedLanguage)
         {
-            case "Holland": 
+            case "Holland":  
                 switch (GameManager.Instance.selectedDifficulty)
                 {
-                    case "A1": 
+                    case "A1":
+                        // Populate Holland A1 Dict
+                        // PopulateFrasiOriginaliSoluzioni_ItalianoA1(frasi_originali_e_soluzioni_italiano_a1);
+                        // InitializeItalianHashMapA1(italianHashMap_a1, frasi_soluzione, frasi_originali);
                         switch (decine)
                         {
                             // 0 decine -> mostro la frase chiave in posizione 0 della lista con solo le frasi chiave in posizione di multipli di 10
@@ -193,18 +209,6 @@ public class ExerciseLogicScript : MonoBehaviour
         // dato che è diviso in blocchi di 10...solution_counter (global)
         try
         {
-            // dovrebbe essere nell'initializer dei vari dizionari
-            foreach (var coppia_frasi in italianHashMap_a1.Values)
-            {
-                Debug.Log("------------");
-                foreach (var singola_frase in coppia_frasi)
-                {
-                    //Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
-                    //Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
-                    frasi_originali.Add(singola_frase.Key);
-                    frasi_soluzione.Add(singola_frase.Value);
-                }
-            }
             if (inputfield != null)
             {
                 string phrase_without_blanks = string.Join(" ", inputfield.text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries).ToList().Select(x => x.Trim()));
