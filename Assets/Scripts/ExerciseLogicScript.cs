@@ -55,13 +55,6 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
 
-        italianHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
-
-        // in base alle robe salvate su JSon -> inizializzo le robe relative -> DA SPOSTARE NELLO SWITCH SOTTO!!!!!!!
-        PopulateFrasiOriginaliSoluzioni_ItalianoA1();
-        InitializeItalianHashMapA1(frasi_soluzione, frasi_originali);
-        // -------------------
-
         UpdateVeryFirstOriginalPhrase();
     }
 
@@ -157,9 +150,6 @@ public class ExerciseLogicScript : MonoBehaviour
         string valore = "";
 
         int[] indici = { 0, 10, 20 };
-        List<string> chiavi_richieste = indici
-            .Select(index => italianHashMap_a1[1].ElementAt(index).Key)
-            .ToList();
 
         switch (GameManager.Instance.selectedLanguage)
         {
@@ -167,6 +157,11 @@ public class ExerciseLogicScript : MonoBehaviour
                 switch (GameManager.Instance.selectedDifficulty)
                 {
                     case "A1":
+                        PopulateFrasiOriginaliSoluzioni_ItalianoA1();
+                        InitializeItalianHashMapA1(frasi_soluzione, frasi_originali);
+                        List<string> chiavi_richieste = indici
+                                                        .Select(index => italianHashMap_a1[1].ElementAt(index).Key)
+                                                        .ToList();
                         // Populate Holland A1 Dict
                         // PopulateFrasiOriginaliSoluzioni_ItalianoA1(frasi_originali_e_soluzioni_italiano_a1);
                         // InitializeItalianHashMapA1(italianHashMap_a1, frasi_soluzione, frasi_originali);
