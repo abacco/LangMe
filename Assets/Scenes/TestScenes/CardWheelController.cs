@@ -170,7 +170,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler
         else if (Input.GetMouseButtonUp(0))
         {
             float dragDistance = dragStartPos.x - Input.mousePosition.x;
-            Debug.Log("dragDistance " + dragDistance);
+            
             if (dragDistance > minSwipeDistance)
                 ScrollRight();
             else if (dragDistance < -minSwipeDistance)
