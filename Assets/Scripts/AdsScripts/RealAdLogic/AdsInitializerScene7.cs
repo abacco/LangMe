@@ -38,7 +38,7 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
     {
         Debug.Log("Unity Ads initialization complete.");
         _showtip_ads_button.LoadAd();
-        _banner_ads_button.LoadBanner();
+        //_banner_ads_button.LoadBanner();
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)

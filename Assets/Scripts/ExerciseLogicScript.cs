@@ -28,8 +28,10 @@ public class ExerciseLogicScript : MonoBehaviour
     List<string> frasi_soluzione;
     List<string> frasi_originali;
 
-    Dictionary<string, string> frasi_originali_e_soluzioni_italiano_a1;
-    Dictionary<int, Dictionary<string, string>> italianHashMap_a1;
+    #region Dutch Region
+    Dictionary<string, string> frasi_originali_e_soluzioni_olandese_a1;
+    Dictionary<int, Dictionary<string, string>> dutchHashMap_a1;
+    #endregion
 
     public int solution_counter = 0; // serve per andare avanti nel dizionario e fare l'update delle frasi soluzione
     int correct_answers = 0; // tiene conto solo delle risposte giuste date
@@ -62,38 +64,38 @@ public class ExerciseLogicScript : MonoBehaviour
 
     void PopulateFrasiOriginaliSoluzioni_ItalianoA1()
     {
-        frasi_originali_e_soluzioni_italiano_a1 = new Dictionary<string, string>();
+        frasi_originali_e_soluzioni_olandese_a1 = new Dictionary<string, string>();
 
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 0", " Soluzione 0");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 1", " Soluzione 1");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 2", " Soluzione 2");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 3", " Soluzione 3");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 4", " Soluzione 4");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 5", " Soluzione 5");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 6", " Soluzione 6");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 7", " Soluzione 7");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 8", " Soluzione 8");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 9", " Soluzione 9");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 0", " Soluzione 0");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 1", " Soluzione 1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 2", " Soluzione 2");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 3", " Soluzione 3");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 4", " Soluzione 4");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 5", " Soluzione 5");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 6", " Soluzione 6");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 7", " Soluzione 7");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 8", " Soluzione 8");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 9", " Soluzione 9");
 
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 10", " Soluzione 10");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 11", " Soluzione 11");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 12", " Soluzione 12");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 13", " Soluzione 13");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 14", " Soluzione 14");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 15", " Soluzione 15");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 16", " Soluzione 16");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 17", " Soluzione 17");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 18", " Soluzione 18");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 19", " Soluzione 19");
-        frasi_originali_e_soluzioni_italiano_a1.Add("Original 20", " Soluzione 20");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 10", " Soluzione 10");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 11", " Soluzione 11");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 12", " Soluzione 12");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 13", " Soluzione 13");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 14", " Soluzione 14");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 15", " Soluzione 15");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 16", " Soluzione 16");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 17", " Soluzione 17");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 18", " Soluzione 18");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 19", " Soluzione 19");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Original 20", " Soluzione 20");
     }
-    void InitializeItalianHashMapA1(List<string> frasi_soluzione, List<string> frasi_originale)
+    void InitializeDutchHashMapA1(List<string> frasi_soluzione, List<string> frasi_originale)
     {
-        italianHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
-        italianHashMap_a1.Add(1, frasi_originali_e_soluzioni_italiano_a1);
+        dutchHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
+        dutchHashMap_a1.Add(1, frasi_originali_e_soluzioni_olandese_a1);
         
         // inizializzazione frasi originali e soluzioni
-        foreach (var coppia_frasi in italianHashMap_a1.Values)
+        foreach (var coppia_frasi in dutchHashMap_a1.Values)
         {
             Debug.Log("------------");
             foreach (var singola_frase in coppia_frasi)
@@ -140,8 +142,7 @@ public class ExerciseLogicScript : MonoBehaviour
                 10 / 10 = 1
                 20 / 10 = 2
                 25 / 10 = 3.5 -> 3
-
- */
+    */
     public void UpdateVeryFirstOriginalPhrase()
     {
         
@@ -158,9 +159,9 @@ public class ExerciseLogicScript : MonoBehaviour
                 {
                     case "A1":
                         PopulateFrasiOriginaliSoluzioni_ItalianoA1();
-                        InitializeItalianHashMapA1(frasi_soluzione, frasi_originali);
+                        InitializeDutchHashMapA1(frasi_soluzione, frasi_originali);
                         List<string> chiavi_richieste = indici
-                                                        .Select(index => italianHashMap_a1[1].ElementAt(index).Key)
+                                                        .Select(index => dutchHashMap_a1[1].ElementAt(index).Key)
                                                         .ToList();
                         // Populate Holland A1 Dict
                         // PopulateFrasiOriginaliSoluzioni_ItalianoA1(frasi_originali_e_soluzioni_italiano_a1);
@@ -246,7 +247,7 @@ public class ExerciseLogicScript : MonoBehaviour
                 case 8: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 9: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 10: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
-                default: SetCorrectPhraseCounter(correct_answers.ToString()); original_phrase.text = "Error!"; break; // not working
+                default: SetCorrectPhraseCounter(correct_answers.ToString()); original_phrase.text = "Aumenta i case nello switch!"; break; // not working
             }
         }
         catch (Exception ex)

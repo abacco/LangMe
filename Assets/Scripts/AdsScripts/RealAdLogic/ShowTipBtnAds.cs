@@ -4,11 +4,15 @@ using UnityEngine.UI;
 
 public class ShowTipBtnAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] Button _showAdButton;
-    [SerializeField] Button _showRulesPanelBtn;
+    // pulsante per sbloccare il sunto delle regole
+    [SerializeField] Button _showAdButton; // fai la stessa logica per incrementare i cuori!!!!
+
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
+
+
+    [SerializeField] Button _showRulesPanelBtn;
 
     void Awake()
     {
@@ -65,6 +69,8 @@ public class ShowTipBtnAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShow
 
             // la reward è che viene abilitato il pulsante che mostra il pannello con il sunto delle regole!!!!!!!
             _showRulesPanelBtn.interactable = true;
+
+
         }
     }
 
