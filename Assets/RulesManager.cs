@@ -88,11 +88,11 @@ public class RulesManager : MonoBehaviour
     public int page_counter = 0; // 10 pagine in totale, quindi da 0 a 9
     public void InitDutchA1Rule() { // sia all'inizio che quando cambi pagina (?) forse quando cambi pagina puoi ottimizzare oppure metti i tag sulle pagine e li filli cosi
 
-        dutch_a1_rules_titles_and_bodies.Add("Pronunciation and Special Sounds", "The \"g\" sounds like a guttural \"h\" (e.g., goed → /ɣut/).\r\n\nThe \"ui\" sounds similar to the French \"œy\" (e.g., huis → /hœys/).\r\n\nThe \"ij\" and \"ei\" are pronounced like a mix between \"ai\" and \"ei\".\r\n\nThe \"sch\" sounds like an \"s\" followed by a guttural \"ch\" (e.g., school → /sxoːl/).");
-        dutch_a1_rules_titles_and_bodies.Add("Definite and Indefinite Articles", "De → Used for most common nouns (de man = the man, de vrouw = the woman).\r\nHet → Used for neutral words and diminutives (het huis = the house, het kind = the child).\r\nEen → Indefinite article, meaning \"a\" or \"an\" (een boek = a book).");
-        dutch_a1_rules_titles_and_bodies.Add("A1 Rules 3", "A1 Body 3");
-        dutch_a1_rules_titles_and_bodies.Add("A1 Rules 4", "A1 Body 4");
-        dutch_a1_rules_titles_and_bodies.Add("A1 Rules 5", "A1 Body 5");
+        dutch_a1_rules_titles_and_bodies.Add("1. Pronunciation and Special Sounds", "The \"g\" sounds like a guttural \"h\" (e.g., goed → /ɣut/).\r\n\nThe \"ui\" sounds similar to the French \"œy\" (e.g., huis → /hœys/).\r\n\nThe \"ij\" and \"ei\" are pronounced like a mix between \"ai\" and \"ei\".\r\n\nThe \"sch\" sounds like an \"s\" followed by a guttural \"ch\" (e.g., school → /sxoːl/).");
+        dutch_a1_rules_titles_and_bodies.Add("2. Definite and Indefinite Articles", "De → Used for most common nouns (de man = the man, de vrouw = the woman).\r\n\nHet → Used for neutral words and diminutives (het huis = the house, het kind = the child).\r\n\nEen → Indefinite article, meaning \"a\" or \"an\" (een boek = a book).");
+        dutch_a1_rules_titles_and_bodies.Add("3. A1 Rules 3", "Add -en: huis → huizen (house → houses), boom → bomen (tree → trees).\r\n\nAdd -s (if the word ends in a vowel or unstressed syllable): auto → auto’s (car → cars).");
+        dutch_a1_rules_titles_and_bodies.Add("4. Personal Pronouns", "I = Ik \n\nYou = Jij / Je\n\nHe/She/It = \tHij / Zij (Ze) / Het\n\nWe = Wij (We)\n\nYou (pl.) = Jullie\n\nThey = Zij (Ze)\n\nNote: \"Jij\" and \"Zij\" are emphasized forms, while \"Je\" and \"Ze\" are neutral and used more often in conversation.");
+        dutch_a1_rules_titles_and_bodies.Add("5. Present Tense Verb Conjugation", "Dutch verbs are mostly regular. Example with werken (to work):\r\n\r\n\nIk werk (I work)\r\n\nJij werkt (You work)\r\n\nHij/Zij/Het werkt (He/She/It works)\r\n\nWij/Jullie/Zij werken (We/You/They work)Irregular Verbs (Common Examples)\r\n\nHebben (to have) → ik heb, jij hebt, hij heeft, wij hebben\r\n\nZijn (to be) → ik ben, jij bent, hij is, wij zijn");
         dutch_a1_rules_titles_and_bodies.Add("A1 Rules 6", "A1 Body 6");
         dutch_a1_rules_titles_and_bodies.Add("A1 Rules 7", "A1 Body 7");
         dutch_a1_rules_titles_and_bodies.Add("A1 Rules 8", "A1 Body 8");
