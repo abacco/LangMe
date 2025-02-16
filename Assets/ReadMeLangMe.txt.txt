@@ -10,6 +10,8 @@ Icons: https://www.flaticon.com/free-icons/flag
 - Spain: <a href="https://www.flaticon.com/free-icons/spain" title="spain icons">Spain icons created by iconset.co - Flaticon</a>
 - Sweden: <a href="https://www.flaticon.com/free-icons/sweden" title="sweden icons">Sweden icons created by Freepik - Flaticon</a>
 - Russia: <a href="https://www.flaticon.com/free-icons/russia" title="russia icons">Russia icons created by GeekClick - Flaticon</a>
+- Amsterdam Img: Image by <a href="https://pixabay.com/users/fab_photos-17517529/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5432876">Fabrice</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5432876">Pixabay</a>
+- Holland Flag: https://flaglane.com/download/dutch-flag/#downloads
 
 WelcomeScene - vedi balsamiq
 { Struttura Logica ->

@@ -154,7 +154,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
         switch (GameManager.Instance.selectedLanguage)
         {
-            case "Holland":  
+            case "Dutch":  
                 switch (GameManager.Instance.selectedDifficulty)
                 {
                     case "A1":
