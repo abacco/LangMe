@@ -5128,6 +5128,7 @@ MonoBehaviour:
   _testMode: 1
   _showtip_ads_button: {fileID: 407429421}
   _showsolution_ads_button: {fileID: 795591200}
+  _refillHearts_ads_button: {fileID: 1916169170}
   _banner_ads_button: {fileID: 0}
 --- !u!1 &1883594692
 GameObject:
@@ -5161,8 +5162,57 @@ Transform:
   - {fileID: 1873720122}
   - {fileID: 407429420}
   - {fileID: 795591199}
+  - {fileID: 1916169169}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1916169168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1916169169}
+  - component: {fileID: 1916169170}
+  m_Layer: 0
+  m_Name: RefillHeartsAdInit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1916169169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916169168}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1883594693}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1916169170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916169168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868ae313baf052f4ca45db3868330b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _refillHeartsAdButton: {fileID: 2137737783}
+  userLifesTxt: {fileID: 146274501}
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
 --- !u!1 &2007783133
 GameObject:
   m_ObjectHideFlags: 0
