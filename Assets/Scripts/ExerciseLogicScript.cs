@@ -21,6 +21,7 @@ public class ExerciseLogicScript : MonoBehaviour
     
     [SerializeField] GameObject wrong_answer_panel;
     [SerializeField] GameObject well_done_panel;
+    [SerializeField] GameObject solution_panel;
     [SerializeField] GameObject warning_panel;
     [SerializeField] TMP_Text wrong_text;
 
@@ -330,6 +331,11 @@ public class ExerciseLogicScript : MonoBehaviour
     public void CloseWellDonePanel()
     {
         well_done_panel.SetActive(false);
+    }
+
+    public void CloseSolutionPanel()
+    {
+        solution_panel.SetActive(false);
     }
 
     public string ShowSolution()

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
@@ -6,7 +7,9 @@ public class ShowSolutionAd : MonoBehaviour ,IUnityAdsLoadListener, IUnityAdsSho
 {
     // pulsante per sbloccare la soluzione alla frase corrente da tradurre
     [SerializeField] Button _showSolutionAdButton; // fai la stessa logica per incrementare i cuori!!!!
-    [SerializeField] ExerciseLogicScript exLogicScript; 
+    [SerializeField] ExerciseLogicScript exLogicScript;
+    [SerializeField] GameObject solution_panel;
+    [SerializeField] TMP_Text realSolutionText; 
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
@@ -65,6 +68,8 @@ public class ShowSolutionAd : MonoBehaviour ,IUnityAdsLoadListener, IUnityAdsSho
 
             // la reward è che viene mostrato il pannello con la frase soluzione attuale!! prendi da ExerciseLogicScript!!
             Debug.Log("Sono Lo SHOW_SOLUTION_AD e La frase soluzione è: " + exLogicScript.ShowSolution());
+            solution_panel.SetActive(true);
+            realSolutionText.text = exLogicScript.ShowSolution();
         }
     }
 

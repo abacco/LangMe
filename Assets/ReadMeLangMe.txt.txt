@@ -1,3 +1,7 @@
+COLORI DELL'APP:
+	- azzurro:			   00B4FF
+	- verde evidenziatore: 44FF00
+
 Immagini Free Copyright: https://www.freepik.com/vectors/city-collages
 Icons: https://www.flaticon.com/free-icons/flag
 
