@@ -19,7 +19,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
     private Vector2 dragStartPos;
     private float minSwipeDistance = 10f;
 
-    public float dragThreshold = 50f; // Distanza minima per considerare un drag
+    public float dragThreshold = 200f; // Distanza minima per considerare un drag
     private Vector2 pointerDownPosition;
     private bool isDragging = false;
 

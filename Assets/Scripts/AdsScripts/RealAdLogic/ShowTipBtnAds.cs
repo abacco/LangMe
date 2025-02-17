@@ -69,8 +69,6 @@ public class ShowTipBtnAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShow
 
             // la reward è che viene abilitato il pulsante che mostra il pannello con il sunto delle regole!!!!!!!
             _showRulesPanelBtn.interactable = true;
-
-
         }
     }
 
