@@ -11,6 +11,7 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
     private string _gameId;
 
     [SerializeField] ShowTipBtnAds _showtip_ads_button;
+    [SerializeField] ShowSolutionAd _showsolution_ads_button;
 
     [SerializeField] BannerAddExample _banner_ads_button;
     void Awake()
@@ -38,6 +39,7 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
     {
         Debug.Log("Unity Ads initialization complete.");
         _showtip_ads_button.LoadAd();
+        _showsolution_ads_button.LoadAd();
         //_banner_ads_button.LoadBanner();
     }
 

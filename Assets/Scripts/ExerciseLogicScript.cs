@@ -332,9 +332,10 @@ public class ExerciseLogicScript : MonoBehaviour
         well_done_panel.SetActive(false);
     }
 
-    public void ShowSolution()
+    public string ShowSolution()
     {
         Debug.Log("SOLUZIONEEE: " + frasi_soluzione[solution_counter]); // funziona!!!!! METTI l'ad
+        return frasi_soluzione[solution_counter];
     }
 
     public void ReturnHome()

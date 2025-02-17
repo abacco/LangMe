@@ -70,7 +70,7 @@ public class RulesManager : MonoBehaviour
         {
             case "france": selectedLanguageRawImage.sprite = languageIcons[0]; break;
             case "italy": selectedLanguageRawImage.sprite = languageIcons[1]; break;
-            case "Dutch": selectedLanguageRawImage.sprite = languageIcons[2]; break;
+            case "dutch": selectedLanguageRawImage.sprite = languageIcons[2]; break;
             case "russia": selectedLanguageRawImage.sprite = languageIcons[3]; break;
             case "spain": selectedLanguageRawImage.sprite = languageIcons[4]; break;
             case "sweden": selectedLanguageRawImage.sprite = languageIcons[5]; break;
