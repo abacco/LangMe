@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler
+public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public Image centerCard;
     public Image leftCard;
@@ -18,6 +18,12 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler
     private bool isAnimating = false;
     private Vector2 dragStartPos;
     private float minSwipeDistance = 10f;
+
+    public float dragThreshold = 50f; // Distanza minima per considerare un drag
+    private Vector2 pointerDownPosition;
+    private bool isDragging = false;
+
+    public GameObject panel; // Il pannello da mostrare al click
 
     private void Start()
     {
@@ -138,13 +144,16 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if (isAnimating) return;
 
-        float dragDistance = eventData.delta.x; // Controlla quanto ci siamo mossi
-        Debug.Log("dragDistance " + dragDistance);
+        float dragDistance = eventData.position.x - pointerDownPosition.x;
 
-        if (dragDistance > 0)
-            ScrollLeft(); // Se ci spostiamo a destra, vediamo la carta a sinistra
-        else if (dragDistance < 0)
-            ScrollRight(); // Se ci spostiamo a sinistra, vediamo la carta a destra
+        if (Mathf.Abs(dragDistance) > dragThreshold)
+        {
+            isDragging = true; // Segnala che è uno swipe
+            if (dragDistance > 0)
+                ScrollRight();
+            else
+                ScrollLeft();
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -175,6 +184,20 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler
                 ScrollRight();
             else if (dragDistance < -minSwipeDistance)
                 ScrollLeft();
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        pointerDownPosition = eventData.position;
+        isDragging = false; // Reset del flag
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (!isDragging) // Se non è stato uno swipe, allora è un click
+        {
+            panel.SetActive(true); // Mostra il pannello solo se è un vero click
         }
     }
 }
