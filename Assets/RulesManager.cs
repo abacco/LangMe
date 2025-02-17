@@ -93,11 +93,11 @@ public class RulesManager : MonoBehaviour
         dutch_a1_rules_titles_and_bodies.Add("3. A1 Rules 3", "Add -en: huis → huizen (house → houses), boom → bomen (tree → trees).\r\n\nAdd -s (if the word ends in a vowel or unstressed syllable): auto → auto’s (car → cars).");
         dutch_a1_rules_titles_and_bodies.Add("4. Personal Pronouns", "I = Ik \n\nYou = Jij / Je\n\nHe/She/It = \tHij / Zij (Ze) / Het\n\nWe = Wij (We)\n\nYou (pl.) = Jullie\n\nThey = Zij (Ze)\n\nNote: \"Jij\" and \"Zij\" are emphasized forms, while \"Je\" and \"Ze\" are neutral and used more often in conversation.");
         dutch_a1_rules_titles_and_bodies.Add("5. Present Tense Verb Conjugation", "Dutch verbs are mostly regular. Example with werken (to work):\r\n\r\n\nIk werk (I work)\r\n\nJij werkt (You work)\r\n\nHij/Zij/Het werkt (He/She/It works)\r\n\nWij/Jullie/Zij werken (We/You/They work)Irregular Verbs (Common Examples)\r\n\nHebben (to have) → ik heb, jij hebt, hij heeft, wij hebben\r\n\nZijn (to be) → ik ben, jij bent, hij is, wij zijn");
-        dutch_a1_rules_titles_and_bodies.Add("A1 Rules 6", "A1 Body 6");
-        dutch_a1_rules_titles_and_bodies.Add("A1 Rules 7", "A1 Body 7");
-        dutch_a1_rules_titles_and_bodies.Add("A1 Rules 8", "A1 Body 8");
-        dutch_a1_rules_titles_and_bodies.Add("A1 Rules 9", "A1 Body 9");
-        dutch_a1_rules_titles_and_bodies.Add("A1 Rules 10", "A1 Body 10");
+        dutch_a1_rules_titles_and_bodies.Add("6. Word Order (SVO and Question Inversion)", "Regular sentence: Ik werk vandaag (I work today).\r\n\nQuestion: Werk jij vandaag? (Do you work today?) → The verb moves to the beginning.\r\n\nSubordinate clause: Omdat ik vandaag werk (Because I work today) → The verb moves to the end.");
+        dutch_a1_rules_titles_and_bodies.Add("7. Negation with \"niet\" and \"geen\"", "Niet negates a verb or adjective: Ik werk niet (I do not work).\r\n\nGeen negates a noun without an article: Ik heb geen auto (I have no car).");
+        dutch_a1_rules_titles_and_bodies.Add("8. Common Prepositions", "In → in (in de kamer = in the room)\r\n\nOp → on (op tafel = on the table)\r\n\nOnder → under (onder de stoel = under the chair)\r\n\nMet → with (met vrienden = with friends)\r\n\nBij → at, near (bij de bakker = at the bakery)");
+        dutch_a1_rules_titles_and_bodies.Add("9. Adjectives and Their Placement", "Before the noun: een grote auto (a big car).\r\n\nIf the noun is \"het\" and indefinite, the adjective does not take -e: een groot huis (a big house).");
+        dutch_a1_rules_titles_and_bodies.Add("10. Useful Basic Phrases", "Hoi / Hallo → Hi / Hello\r\n\nHoe gaat het? → How are you?\r\n\nGoed, en met jou? → Good, and you?\r\n\nDank je (wel)! → Thank you!\r\n\nAlsjeblieft / Alstublieft → Please\r\n\nIk begrijp het niet → I don’t understand\r\n\nKunt u dat herhalen? → Can you repeat that?");
     }
     public void UpdateTextA1_withPages(int counter)
     {
@@ -106,8 +106,8 @@ public class RulesManager : MonoBehaviour
         {
             var elemento = dutch_a1_rules_titles_and_bodies.ElementAt(counter); // Prende l'elemento alla posizione 'counter'
 
-            rules_title_txt.text = elemento.Key;   // Chiave
-            rules_body_txt.text = elemento.Value;  // Valore
+            rules_title_txt.text = elemento.Key;   
+            rules_body_txt.text = elemento.Value;  
         }
 
     }
