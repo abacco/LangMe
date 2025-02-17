@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +11,8 @@ public class Navigation : MonoBehaviour
         "4 - ChooseALang",
         "5 - Choose Difficulty",
         "6 - Difficulty Rules",
-        "7 - Exercise Scene"
+        "7 - Exercise Scene",
+        "8 - Dictionary"
     }; 
 
     public void MoveToScene(string sceneName)

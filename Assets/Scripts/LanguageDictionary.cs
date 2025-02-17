@@ -10,6 +10,7 @@ public class LanguageDictionary : MonoBehaviour
     public List<string> frasi = new List<string>();
     [SerializeField] GameObject wordFoundPanel;
     [SerializeField] GameObject wordNotFoundPanel;
+    [SerializeField] GameObject dictionaryPanel;
     [SerializeField] TMP_Text wordList;
     [SerializeField] TMP_Text keyFound;
     [SerializeField] TMP_Text valueFound;
@@ -109,5 +110,13 @@ public class LanguageDictionary : MonoBehaviour
     public void CloseWordNotFinder()
     {
         wordNotFoundPanel.SetActive(false);
+    }
+    public void OpenDictionary()
+    {
+        dictionaryPanel.SetActive(true);
+    }
+    public void CloseDictionary()
+    {
+        dictionaryPanel.SetActive(false);
     }
 }
