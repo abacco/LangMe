@@ -1,12 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LanguageDictionary : MonoBehaviour
 {
     public List<string> frasi = new List<string>();
+    [SerializeField] GameObject wordFoundPanel;
+    [SerializeField] GameObject wordNotFoundPanel;
     [SerializeField] TMP_Text wordList;
+    [SerializeField] TMP_Text keyFound;
+    [SerializeField] TMP_Text valueFound;
+    [SerializeField] TMP_InputField word_to_be_find;
     private Dictionary<string, string> dutchDict = new Dictionary<string, string>();
 
     private void Start()
@@ -15,15 +22,8 @@ public class LanguageDictionary : MonoBehaviour
         {
             case "dutch": 
                 InitializeDutchWordList(); 
-                Debug.Log($"Caricate {frasi.Count} frasi!"); 
-                PrintDutchWords(); 
                 ConvertiListaInDizionario();
-                string parolaTest = "ronde"; // inputField.txt
-                if (dutchDict.ContainsKey(parolaTest))
-                {
-                    Debug.Log("parola test trovata"); // funziona
-                    //Debug.Log($"Traduzione di '{parolaTest}': {dizionario[parolaTest]}");
-                }
+                PrintDutchWords();
                 break;
             default: Debug.Log("error"); break;
         }
@@ -42,12 +42,11 @@ public class LanguageDictionary : MonoBehaviour
         }
     }
 
-    void PrintDutchWords() { 
-    
-        foreach (string word in frasi)
+    void PrintDutchWords() {
+        foreach (var dictionary in dutchDict)
         {
-            wordList.text += "-" + word + "\n";
-            Debug.Log(word);
+            wordList.text += "-" + dictionary.Key + ": " + dictionary.Value + "\n\n";
+            Console.WriteLine("dictionary key is {0} and value is {1}", dictionary.Key, dictionary.Value);
         }
     }
 
@@ -56,17 +55,19 @@ public class LanguageDictionary : MonoBehaviour
         foreach (string riga in frasi)
         {
             // Usa una regex per estrarre la parola e la traduzione
-            Match match = Regex.Match(riga, @"^(\w+)\s+\[\w+\]\s+\(([^)]+)\)$");
+            Match match = Regex.Match(riga, @"^(\w+)\s+\[(\w+)\]\s+\(([^)]+)\)$", RegexOptions.IgnoreCase);
 
             if (match.Success)
             {
-                string parolaOlandese = match.Groups[1].Value;
-                string traduzioneInglese = match.Groups[2].Value;
+                string parolaOlandese = CapitalizeFirstLetter(match.Groups[1].Value.Trim()); // Es: "ronde"
+                string tipoGrammaticale = CapitalizeFirstLetter(match.Groups[2].Value.Trim()); // Es: "noun"
+                string traduzioneInglese = CapitalizeFirstLetter(match.Groups[3].Value.Trim()); // Es: "round"
 
                 // Aggiungiamo al dizionario
                 if (!dutchDict.ContainsKey(parolaOlandese))
                 {
-                    dutchDict[parolaOlandese] = traduzioneInglese;
+                    //dutchDict[parolaOlandese] = traduzioneInglese;
+                    dutchDict[parolaOlandese] = $"{traduzioneInglese} ({tipoGrammaticale})";
                 }
             }
             else
@@ -76,5 +77,37 @@ public class LanguageDictionary : MonoBehaviour
         }
 
         Debug.Log($"Dizionario caricato con {dutchDict.Count} parole!");
+    }
+
+    string CapitalizeFirstLetter(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+            return input; // Evita errori con stringhe vuote o null
+
+        return char.ToUpper(input[0]) + input.Substring(1).ToLower();
+    }
+
+    public void WordFinder()
+    {
+        string parolaTest = word_to_be_find.text; // inputField.txt
+        if (dutchDict.ContainsKey(parolaTest))
+        {
+            wordFoundPanel.SetActive(true);
+            keyFound.text = parolaTest;
+            valueFound.text = dutchDict[parolaTest];
+        } else
+        {
+            wordNotFoundPanel.SetActive(true);
+        }
+    }
+
+    public void CloseWordFinder()
+    {
+        wordFoundPanel.SetActive(false);
+    }
+
+    public void CloseWordNotFinder()
+    {
+        wordNotFoundPanel.SetActive(false);
     }
 }
