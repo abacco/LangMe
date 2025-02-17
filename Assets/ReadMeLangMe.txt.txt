@@ -1,3 +1,11 @@
+IMPORTANTISSIMO:
+	SITO dove ci sono 1000 parole per ogni linguaggio 
+	https://travelwithlanguages.com/blog/most-common-dutch-words.html
+	SE VEDI BENE ... dopo alcune parole ci sono delle frasi che spiegano qualcosa riguardo la parole, quelli usali come tips!!!!
+
+	ORDINA il dizionario in ordine alfabetico, oppure in base a cosa sono (difficilissimo mi sa)
+	mettere il filtro per la parola da cercare? vedi balsamiq
+
 COLORI DELL'APP:
 	- azzurro:			   00B4FF
 	- verde evidenziatore: 44FF00
