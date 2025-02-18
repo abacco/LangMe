@@ -1,8 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Navigation : MonoBehaviour
 {
+    [SerializeField] GameObject openScenePanel;
+    [SerializeField] TMP_Text scene_selected_text;
+
     // forse è inutile
     public string[] scenesName = {
         "1 - Startup",
@@ -11,12 +15,27 @@ public class Navigation : MonoBehaviour
         "4 - ChooseALang",
         "5 - Choose Difficulty",
         "6 - Difficulty Rules",
-        "7 - Exercise Scene",
-        "8 - Dictionary"
+        "7 - Home",
+        "8 - Exercise Scene", 
+        "9 - Dictionary"
     }; 
 
     public void MoveToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void OpenMoveToScenePanel(string chosenBtnName) // used in Home Scene
+    {
+        openScenePanel.SetActive(true);
+        scene_selected_text.text = chosenBtnName;
+    }
+    public void NoSelected()
+    {
+        openScenePanel.SetActive(false);
+    }
+    public void YesSelected()
+    {
+        MoveToScene(scene_selected_text.text);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
     public Image centerCard;
     public Image leftCard;
     public Image rightCard;
+    public Image anotherCard;
+    public List<Image> cardSlots;
     public List<Sprite> cardSprites;
 
     public float animationSpeed = 10f;
@@ -27,13 +30,39 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
 
     private void Start()
     {
+        // Assicuriamoci che la lista di slot sia inizializzata
+        if (cardSlots.Count == 0)
+        {
+            cardSlots.Add(centerCard);
+            cardSlots.Add(leftCard);
+            cardSlots.Add(rightCard);
+            cardSlots.Add(anotherCard);
+        }
+
+        // Memorizziamo la posizione iniziale di ogni carta -- non funziona
+        //InitializeCardPositions();
+
+        // Aggiorna la grafica iniziale delle carte
         UpdateCardDisplay(instant: true);
+    }
+    
+    private void InitializeCardPositions()
+    {
+        int count = cardSlots.Count;
+        float spacing = 300f; // Distanza tra le carte, regolala secondo le esigenze
+
+        for (int i = 0; i < count; i++)
+        {
+            float offset = (i - count / 2) * spacing; // Posiziona le carte rispetto al centro
+            cardSlots[i].transform.position = new Vector3(transform.position.x + offset, transform.position.y, transform.position.z);
+        }
     }
 
     public void ScrollRight()
     {
         if (isAnimating) return;
         currentIndex = (currentIndex + 1) % cardSprites.Count;
+        Debug.Log("Scroll Right currentIndex:" + currentIndex);
         StartCoroutine(AnimateTransition(true));
     }
 
@@ -41,80 +70,81 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
     {
         if (isAnimating) return;
         currentIndex = (currentIndex - 1 + cardSprites.Count) % cardSprites.Count;
+        Debug.Log("Scroll Left currentIndex:" + currentIndex);
         StartCoroutine(AnimateTransition(false));
     }
     private IEnumerator AnimateTransition(bool scrollRight)
     {
         isAnimating = true;
 
-        // Salva la posizione iniziale delle carte
-        Vector3 centerStartPos = centerCard.transform.position;
-        Vector3 leftStartPos = leftCard.transform.position;
-        Vector3 rightStartPos = rightCard.transform.position;
+        int count = cardSlots.Count;
+        List<Vector3> startPositions = new List<Vector3>();
+        List<Vector3> targetPositions = new List<Vector3>();
+        List<Vector3> startScales = new List<Vector3>();
+        List<Vector3> targetScales = new List<Vector3>();
 
-        // Se lo swipe è verso destra, spostiamo la carta centrale a destra
-        Vector3 centerTargetPos = scrollRight ? leftStartPos : rightStartPos;
-        Vector3 leftTargetPos = scrollRight ? rightStartPos : centerStartPos;
-        Vector3 rightTargetPos = scrollRight ? centerStartPos : leftStartPos;
+        // Memorizziamo posizioni e scale iniziali
+        for (int i = 0; i < count; i++)
+        {
+            startPositions.Add(cardSlots[i].transform.position);
+            targetPositions.Add(cardSlots[(i + (scrollRight ? 1 : -1) + count) % count].transform.position);
 
-        // Gestiamo la scala delle carte (stessa logica)
-        Vector3 centerStartScale = centerCard.transform.localScale;
-        Vector3 leftStartScale = leftCard.transform.localScale;
-        Vector3 rightStartScale = rightCard.transform.localScale;
-
-        Vector3 centerTargetScale = scrollRight ? leftStartScale : rightStartScale;
-        Vector3 leftTargetScale = scrollRight ? rightStartScale : centerStartScale;
-        Vector3 rightTargetScale = scrollRight ? centerStartScale : leftStartScale;
+            startScales.Add(cardSlots[i].transform.localScale);
+            targetScales.Add(cardSlots[(i + (scrollRight ? 1 : -1) + count) % count].transform.localScale);
+        }
 
         float t = 0;
         while (t < 1)
         {
             t += Time.deltaTime * animationSpeed;
-            centerCard.transform.position = Vector3.Lerp(centerStartPos, centerTargetPos, t);
-            leftCard.transform.position = Vector3.Lerp(leftStartPos, leftTargetPos, t);
-            rightCard.transform.position = Vector3.Lerp(rightStartPos, rightTargetPos, t);
 
-            centerCard.transform.localScale = Vector3.Lerp(centerStartScale, centerTargetScale, t);
-            leftCard.transform.localScale = Vector3.Lerp(leftStartScale, leftTargetScale, t);
-            rightCard.transform.localScale = Vector3.Lerp(rightStartScale, rightTargetScale, t);
+            for (int i = 0; i < count; i++)
+            {
+                cardSlots[i].transform.position = Vector3.Lerp(startPositions[i], targetPositions[i], t);
+                cardSlots[i].transform.localScale = Vector3.Lerp(startScales[i], targetScales[i], t);
+            }
 
             yield return null;
         }
 
-        UpdateCardDisplay(instant: false);
+        // Aggiorna l'indice corrente in base alla direzione dello swipe
+        currentIndex = (currentIndex + (scrollRight ? 1 : -1) + count) % count;
+        UpdateCardDisplay(false);
         isAnimating = false;
     }
     private IEnumerator AnimateTransition()
     {
         isAnimating = true;
 
-        Vector3 centerStartPos = centerCard.transform.position;
-        Vector3 leftStartPos = leftCard.transform.position;
-        Vector3 rightStartPos = rightCard.transform.position;
+        // Salviamo le posizioni e le scale iniziali delle carte
+        List<Vector3> startPositions = new List<Vector3>();
+        List<Vector3> targetPositions = new List<Vector3>();
+        List<Vector3> startScales = new List<Vector3>();
+        List<Vector3> targetScales = new List<Vector3>();
 
-        Vector3 centerTargetPos = leftStartPos;
-        Vector3 leftTargetPos = rightStartPos;
-        Vector3 rightTargetPos = centerStartPos;
+        int count = cardSlots.Count;
 
-        Vector3 centerStartScale = centerCard.transform.localScale;
-        Vector3 leftStartScale = leftCard.transform.localScale;
-        Vector3 rightStartScale = rightCard.transform.localScale;
+        // Determiniamo le posizioni di partenza e di destinazione
+        for (int i = 0; i < count; i++)
+        {
+            startPositions.Add(cardSlots[i].transform.position);
+            targetPositions.Add(cardSlots[(i + 1) % count].transform.position);
 
-        Vector3 centerTargetScale = leftStartScale;
-        Vector3 leftTargetScale = rightStartScale;
-        Vector3 rightTargetScale = centerStartScale;
+            startScales.Add(cardSlots[i].transform.localScale);
+            targetScales.Add(cardSlots[(i + 1) % count].transform.localScale);
+
+        }
 
         float t = 0;
         while (t < 1)
         {
             t += Time.deltaTime * animationSpeed;
-            centerCard.transform.position = Vector3.Lerp(centerStartPos, centerTargetPos, t);
-            leftCard.transform.position = Vector3.Lerp(leftStartPos, leftTargetPos, t);
-            rightCard.transform.position = Vector3.Lerp(rightStartPos, rightTargetPos, t);
 
-            centerCard.transform.localScale = Vector3.Lerp(centerStartScale, centerTargetScale, t);
-            leftCard.transform.localScale = Vector3.Lerp(leftStartScale, leftTargetScale, t);
-            rightCard.transform.localScale = Vector3.Lerp(rightStartScale, rightTargetScale, t);
+            for (int i = 0; i < count; i++)
+            {
+                cardSlots[i].transform.position = Vector3.Lerp(startPositions[i], targetPositions[i], t);
+                cardSlots[i].transform.localScale = Vector3.Lerp(startScales[i], targetScales[i], t);
+            }
 
             yield return null;
         }
@@ -125,15 +155,22 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
 
     private void UpdateCardDisplay(bool instant)
     {
-        centerCard.sprite = cardSprites[currentIndex];
-        leftCard.sprite = cardSprites[(currentIndex - 1 + cardSprites.Count) % cardSprites.Count];
-        rightCard.sprite = cardSprites[(currentIndex + 1) % cardSprites.Count];
+        int halfSize = cardSlots.Count / 2; // Trova il centro della lista
 
-        if (instant)
+        for (int i = 0; i < cardSlots.Count; i++)
         {
-            centerCard.transform.localScale = Vector3.one * scaleFactor;
-            leftCard.transform.localScale = Vector3.one;
-            rightCard.transform.localScale = Vector3.one;
+            int spriteIndex = (currentIndex + i - halfSize + cardSprites.Count) % cardSprites.Count;
+            //cardSlots[i].sprite = cardSprites[spriteIndex];
+            if (instant)
+            {
+                if (i == halfSize) 
+                {
+                    cardSlots[i].transform.localScale = Vector3.one * scaleFactor;
+                } else
+                {
+                    cardSlots[i].transform.localScale = Vector3.zero; // nascondo la card dietro sennò esco pazzo!
+                }
+            }
         }
     }
     public void OnBeginDrag(PointerEventData eventData)

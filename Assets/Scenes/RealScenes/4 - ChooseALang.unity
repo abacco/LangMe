@@ -1359,7 +1359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &932156159
 Transform:
   m_ObjectHideFlags: 0
@@ -3215,6 +3215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0b262af05041d479f8716b4fdfcdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openScenePanel: {fileID: 0}
+  scene_selected_text: {fileID: 0}
   scenesName:
   - 1 - Startup
   - 2 -AlertScene
