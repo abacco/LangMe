@@ -1464,55 +1464,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &603068285
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 603068287}
-  - component: {fileID: 603068286}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &603068286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 603068285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2238d8344ac76574e9374873e49988db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedLanguage: Dutch
-  userLifes: 0
-  solutionCounter: 0
-  selectedDifficulty: 
-  username: 
---- !u!4 &603068287
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 603068285}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 823.7774, y: 1377.5608, z: -7.3316374}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &603966352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3598,10 +3549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2a54e6a58c7e247b500be1a5ebad46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerCard: {fileID: 739242123}
-  leftCard: {fileID: 1322591389}
-  rightCard: {fileID: 499387713}
-  anotherCard: {fileID: 0}
   cardSlots: []
   cardSprites:
   - {fileID: 21300000, guid: c1de772d9677b7c4297648a1afb163ce, type: 3}
@@ -4512,6 +4459,5 @@ SceneRoots:
   - {fileID: 1566993918}
   - {fileID: 1632001098}
   - {fileID: 460204410}
-  - {fileID: 603068287}
   - {fileID: 184003310}
   - {fileID: 1178549486}

@@ -101,8 +101,8 @@ public class ExerciseLogicScript : MonoBehaviour
             Debug.Log("------------");
             foreach (var singola_frase in coppia_frasi)
             {
-                Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
-                Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
+                //Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
+                //Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
                 frasi_originali.Add(singola_frase.Key);
                 frasi_soluzione.Add(singola_frase.Value);
             }
@@ -171,8 +171,8 @@ public class ExerciseLogicScript : MonoBehaviour
                         {
                             // 0 decine -> mostro la frase chiave in posizione 0 della lista con solo le frasi chiave in posizione di multipli di 10
                             // 0 = "0", 1 (decina) = frase in posizione 10 del DIZIONARIO INTERNO!!!
-                            case 0:  valore = chiavi_richieste[0]; original_phrase.text = valore; Debug.Log("VALORE: " + valore + " & " + solution_counter); break;
-                            case 1:  valore = chiavi_richieste[1]; original_phrase.text = valore; Debug.Log("VALORE: " + valore + " & " + solution_counter); break;
+                            case 0:  valore = chiavi_richieste[0]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
+                            case 1:  valore = chiavi_richieste[1]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
                             default: throw new Exception("Error On solutionCounter: ");
                         }
                         break;
@@ -211,22 +211,22 @@ public class ExerciseLogicScript : MonoBehaviour
                 string phrase_without_blanks = string.Join(" ", inputfield.text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries).ToList().Select(x => x.Trim()));
                 string solution = string.Join(" ", frasi_soluzione.ElementAt(solution_counter).Split(new char[0], StringSplitOptions.RemoveEmptyEntries).ToList().Select(x => x.Trim()));
 
-                Debug.Log("phrase_without_blanks + " + phrase_without_blanks.ToLower());
-                Debug.Log("solution + " + solution.ToLower());
+                //Debug.Log("phrase_without_blanks + " + phrase_without_blanks.ToLower());
+                //Debug.Log("solution + " + solution.ToLower());
                 if (phrase_without_blanks.ToLower().Equals(solution.ToLower())) {  }
 
                 if (string.Equals(solution.ToLower(), phrase_without_blanks.ToLower(), StringComparison.OrdinalIgnoreCase))
                 {
                     correct_answers++;
-                    Debug.Log("correct_answers:" + correct_answers);
-                    Debug.Log("soluzione ok - aumento il counter globale");
+                    //Debug.Log("correct_answers:" + correct_answers);
+                    //Debug.Log("soluzione ok - aumento il counter globale");
                     solution_counter++; // se fai l'esercizio correttamente aumenta il counter
-                    Debug.Log("counter globale ora è:" + solution_counter);
+                    //Debug.Log("counter globale ora è:" + solution_counter);
                 }
                 else
                 {
                     DisableSubmitButtonWhenInputVoid(phrase_without_blanks); // se è vuoto lancio il warning 
-                    Debug.Log("Risposta Sbagliata");
+                    //Debug.Log("Risposta Sbagliata");
                     // far Uscire un alert o un feedback che la risposta è sbagliata
                     StartCoroutine(FadeImage(true));
                     userLifes = --GameManager.Instance.userLifes;

@@ -20,9 +20,19 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
 #elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
 #endif
-
-        if (GameManager.Instance.userLifes >= 10) userLifesTxt.text = 10.ToString();
-        if (GameManager.Instance.userLifes < 0) userLifesTxt.text = 0.ToString();
+        // fai refactor magari
+        if (GameManager.Instance.userLifes >= 10)
+        {
+            GameManager.Instance.userLifes = 10;
+            GameManager.Instance.SaveData();
+            userLifesTxt.text = 10.ToString();
+        }
+        if (GameManager.Instance.userLifes < 0)
+        {
+            GameManager.Instance.userLifes = 0;
+            GameManager.Instance.SaveData();
+            userLifesTxt.text = 0.ToString();
+        }
         // Disable the button until the ad is ready to show:
         _refillHeartsAdButton.interactable = false;
     }
@@ -32,6 +42,10 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
         Debug.Log("Loading Ad: " + _adUnitId);
+#if UNITY_EDITOR             
+        _adUnitId = "Rewarded_Android"; //Only for testing the functionality in the Editor
+#endif
+        //if (_adUnitId == null) { _adUnitId = "Rewarded_Android";  }
         Advertisement.Load(_adUnitId, this);
     }
 
@@ -68,9 +82,9 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
 
             // la reward è + 3 cuori!! Fai l'animazione che fa capire che te pigliat 3 cuori
             if (GameManager.Instance.userLifes >= 10) userLifesTxt.text = 10.ToString();
-            
-            if (GameManager.Instance.userLifes < 0) userLifesTxt.text = 0.ToString(); 
-            
+
+            if (GameManager.Instance.userLifes < 0) userLifesTxt.text = 0.ToString();
+
             if (GameManager.Instance.userLifes < 10)
             {
                 GameManager.Instance.userLifes += 3;

@@ -5589,55 +5589,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160790663}
   m_CullTransparentMesh: 1
---- !u!1 &1239497705
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1239497707}
-  - component: {fileID: 1239497706}
-  m_Layer: 0
-  m_Name: GameManager - toRemove
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1239497706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239497705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2238d8344ac76574e9374873e49988db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedLanguage: Holland
-  userLifes: 10
-  solutionCounter: 20
-  selectedDifficulty: A2
-  username: cazzone
---- !u!4 &1239497707
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239497705}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 535.14014, y: 1446.7833, z: -0.023035288}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1241801823
 GameObject:
   m_ObjectHideFlags: 0
@@ -9448,6 +9399,5 @@ SceneRoots:
   - {fileID: 1395864351}
   - {fileID: 1348788681}
   - {fileID: 309477419}
-  - {fileID: 1239497707}
   - {fileID: 1883594693}
   - {fileID: 2142483828}

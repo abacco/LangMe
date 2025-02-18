@@ -871,10 +871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2a54e6a58c7e247b500be1a5ebad46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerCard: {fileID: 892711384}
-  leftCard: {fileID: 1445250348}
-  rightCard: {fileID: 1979612896}
-  anotherCard: {fileID: 875411424}
   cardSlots:
   - {fileID: 892711384}
   - {fileID: 1445250348}
@@ -1439,55 +1435,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663018697}
   m_CullTransparentMesh: 1
---- !u!1 &752752190
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 752752192}
-  - component: {fileID: 752752191}
-  m_Layer: 0
-  m_Name: GameManager - to remove
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &752752191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752752190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2238d8344ac76574e9374873e49988db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedLanguage: English
-  userLifes: 0
-  solutionCounter: 0
-  selectedDifficulty: 
-  username: 
---- !u!4 &752752192
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752752190}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 540, y: 1277, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &859517219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3284,4 +3231,3 @@ SceneRoots:
   - {fileID: 379037841}
   - {fileID: 1098128132}
   - {fileID: 214066647}
-  - {fileID: 752752192}

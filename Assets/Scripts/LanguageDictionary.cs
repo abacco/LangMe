@@ -47,7 +47,7 @@ public class LanguageDictionary : MonoBehaviour
         foreach (var dictionary in dutchDict)
         {
             wordList.text += "-" + dictionary.Key + ": " + dictionary.Value + "\n\n";
-            Console.WriteLine("dictionary key is {0} and value is {1}", dictionary.Key, dictionary.Value);
+            //Console.WriteLine("dictionary key is {0} and value is {1}", dictionary.Key, dictionary.Value);
         }
     }
 
@@ -73,7 +73,7 @@ public class LanguageDictionary : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Formato non riconosciuto: {riga}");
+                //Debug.LogWarning($"Formato non riconosciuto: {riga}");
             }
         }
 

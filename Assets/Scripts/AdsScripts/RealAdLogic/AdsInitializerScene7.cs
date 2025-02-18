@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -18,6 +16,20 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
     void Awake()
     {
         InitializeAds();
+    }
+
+    void OnEnable()
+    {
+        //if (Advertisement.isInitialized)
+        //{
+        //    Debug.Log("Reloading ads on scene re-entry...");
+        //    _showtip_ads_button.LoadAd();
+        //    _showsolution_ads_button.LoadAd();
+        //    _refillHearts_ads_button.LoadAd();
+        //}
+        _showtip_ads_button.LoadAd();
+        _showsolution_ads_button.LoadAd();
+        _refillHearts_ads_button.LoadAd();
     }
 
     public void InitializeAds()
