@@ -36,6 +36,16 @@ public class Navigation : MonoBehaviour
     }
     public void YesSelected()
     {
-        MoveToScene(scene_selected_text.text);
+        string s = scene_selected_text.text;
+        
+        foreach (string s2 in scenesName)
+        {
+            if (s2.ToLower().Contains(s.ToLower()))
+            {
+                MoveToScene(s2);
+                //SceneManager.LoadScene(s2);
+            }
+        }
+        //MoveToScene(scene_selected_text.text);
     }
 }

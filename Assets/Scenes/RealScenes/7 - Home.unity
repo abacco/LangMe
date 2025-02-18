@@ -3257,7 +3257,9 @@ MonoBehaviour:
   - 4 - ChooseALang
   - 5 - Choose Difficulty
   - 6 - Difficulty Rules
-  - 7 - Exercise Scene
+  - 7 - Home
+  - 8 - Exercise Scene
+  - 9 - Dictionary
 --- !u!4 &2093953369
 Transform:
   m_ObjectHideFlags: 0

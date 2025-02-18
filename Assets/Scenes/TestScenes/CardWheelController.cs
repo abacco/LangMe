@@ -1,16 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public Image centerCard;
-    public Image leftCard;
-    public Image rightCard;
-    public Image anotherCard;
     public List<Image> cardSlots;
     public List<Sprite> cardSprites;
 
@@ -30,18 +25,6 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
 
     private void Start()
     {
-        // Assicuriamoci che la lista di slot sia inizializzata
-        if (cardSlots.Count == 0)
-        {
-            cardSlots.Add(centerCard);
-            cardSlots.Add(leftCard);
-            cardSlots.Add(rightCard);
-            cardSlots.Add(anotherCard);
-        }
-
-        // Memorizziamo la posizione iniziale di ogni carta -- non funziona
-        //InitializeCardPositions();
-
         // Aggiorna la grafica iniziale delle carte
         UpdateCardDisplay(instant: true);
     }
@@ -160,7 +143,6 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         for (int i = 0; i < cardSlots.Count; i++)
         {
             int spriteIndex = (currentIndex + i - halfSize + cardSprites.Count) % cardSprites.Count;
-            //cardSlots[i].sprite = cardSprites[spriteIndex];
             if (instant)
             {
                 if (i == halfSize) 

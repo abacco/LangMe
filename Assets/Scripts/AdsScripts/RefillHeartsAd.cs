@@ -21,6 +21,8 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
         _adUnitId = _androidAdUnitId;
 #endif
 
+        if (GameManager.Instance.userLifes >= 10) userLifesTxt.text = 10.ToString();
+        if (GameManager.Instance.userLifes < 0) userLifesTxt.text = 0.ToString();
         // Disable the button until the ad is ready to show:
         _refillHeartsAdButton.interactable = false;
     }
@@ -65,9 +67,20 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
             // Grant a reward.
 
             // la reward è + 3 cuori!! Fai l'animazione che fa capire che te pigliat 3 cuori
-            GameManager.Instance.userLifes += 3;
-            userLifesTxt.text = GameManager.Instance.userLifes.ToString();
-            GameManager.Instance.SaveData();
+            if (GameManager.Instance.userLifes >= 10) userLifesTxt.text = 10.ToString();
+            
+            if (GameManager.Instance.userLifes < 0) userLifesTxt.text = 0.ToString(); 
+            
+            if (GameManager.Instance.userLifes < 10)
+            {
+                GameManager.Instance.userLifes += 3;
+                userLifesTxt.text = GameManager.Instance.userLifes.ToString();
+                GameManager.Instance.SaveData();
+            }
+            else
+            {
+                Debug.Log("Life at max!!!!!!!");
+            }
         }
     }
 

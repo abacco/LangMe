@@ -1093,7 +1093,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 7 - Exercise Scene
+          m_StringArgument: 8 - Exercise Scene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &761421906
@@ -3147,6 +3147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0b262af05041d479f8716b4fdfcdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openScenePanel: {fileID: 0}
+  scene_selected_text: {fileID: 0}
   scenesName:
   - 1 - Startup
   - 2 -AlertScene

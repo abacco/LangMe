@@ -30,9 +30,12 @@ EditorBuildSettings:
     path: Assets/Scenes/RealScenes/6 - Difficulty Rules.unity
     guid: 78386dac2fc74c9488c780fd12ce0b65
   - enabled: 1
+    path: Assets/Scenes/RealScenes/7 - Home.unity
+    guid: 1f1a564901445a04d9f00426f54a2a7f
+  - enabled: 1
     path: Assets/Scenes/RealScenes/8 - Exercise Scene.unity
     guid: 04df836e729a1cd4f9fe9db8a6aa997a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/RealScenes/9 - Dictionary.unity
     guid: 1b13f15ea4004df4e90f1d776c1b1f0c
   - enabled: 0
