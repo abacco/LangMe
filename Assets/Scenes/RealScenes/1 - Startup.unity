@@ -1568,6 +1568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0b262af05041d479f8716b4fdfcdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openScenePanel: {fileID: 0}
+  scene_selected_text: {fileID: 0}
   scenesName:
   - 1 - Startup
   - 2 -AlertScene
@@ -1860,7 +1862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2113505543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1919,6 +1921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedLanguage: English
   userLifes: 10
+  solutionCounter: 0
   selectedDifficulty: A1
   username: FonzoChionzo
 --- !u!4 &2115415495
@@ -1944,5 +1947,5 @@ SceneRoots:
   - {fileID: 1163633156}
   - {fileID: 757909429}
   - {fileID: 1802692132}
-  - {fileID: 2115415495}
   - {fileID: 2113505544}
+  - {fileID: 2115415495}

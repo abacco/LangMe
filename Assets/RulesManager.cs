@@ -36,7 +36,7 @@ public class RulesManager : MonoBehaviour
 
     private void Start()
     {
-        if ("6 - Difficulty Rules".Equals(SceneManager.GetActiveScene().name)) {
+        if (   "6 - Difficulty Rules".Equals(SceneManager.GetActiveScene().name) ) { 
             // InitDutchA1Rule();
             InitializeIconsAndLanguagesDictionary();
 

@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("IN LOAD DATA" + filePath);
         if (File.Exists(filePath)) {
-            
+            Debug.Log("IN LOAD DATA" + filePath);
             string encryptedJson = File.ReadAllText(filePath);
             string json = EncryptionHelper.Decrypt(encryptedJson); // Decripta il JSON
             GameData gameData = JsonUtility.FromJson<GameData>(json);
