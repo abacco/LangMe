@@ -68,7 +68,7 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_originali_e_soluzioni_olandese_a1 = new Dictionary<string, string>();
 
         frasi_originali_e_soluzioni_olandese_a1.Add("Hallo, hoe heet je?", "Hello, what is your name?");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik heet " + GameManager.Instance.username, "My name is" + GameManager.Instance.username);
+        frasi_originali_e_soluzioni_olandese_a1.Add("Ik heet " + GameManager.Instance.username, "My name is " + GameManager.Instance.username);
         frasi_originali_e_soluzioni_olandese_a1.Add("Waar kom je vandaan?", "Where are you from?");
         frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit Italië", "I come from Italy.");
         frasi_originali_e_soluzioni_olandese_a1.Add("Hoe gaat het met je? ", "How are you?");
@@ -222,6 +222,7 @@ public class ExerciseLogicScript : MonoBehaviour
                     //Debug.Log("soluzione ok - aumento il counter globale");
                     solution_counter++; // se fai l'esercizio correttamente aumenta il counter
                     //Debug.Log("counter globale ora è:" + solution_counter);
+                    GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>().LoadAd(); // se la soluzione è corretta, ricarichi l'ad (caso in cui ho premuto ShowSoluzione)
                 }
                 else
                 {
@@ -232,6 +233,7 @@ public class ExerciseLogicScript : MonoBehaviour
                     userLifes = --GameManager.Instance.userLifes;
                     users_lifes_txt.text = userLifes.ToString();
                     GameManager.Instance.SaveData();
+                    GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>().LoadAd();
                 }
             }
             // update Original Frase;

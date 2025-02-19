@@ -81,19 +81,37 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
             // Grant a reward.
 
             // la reward è + 3 cuori!! Fai l'animazione che fa capire che te pigliat 3 cuori
-            if (GameManager.Instance.userLifes >= 10) userLifesTxt.text = 10.ToString();
-
-            if (GameManager.Instance.userLifes < 0) userLifesTxt.text = 0.ToString();
-
-            if (GameManager.Instance.userLifes < 10)
+            if (GameManager.Instance.userLifes >= 10) {
+                
+                GameManager.Instance.userLifes = 10;
+                userLifesTxt.text = 10.ToString();
+                GameManager.Instance.SaveData();
+            }
+            if (GameManager.Instance.userLifes < 0) { 
+                GameManager.Instance.userLifes = 0;
+                userLifesTxt.text = 0.ToString();
+                GameManager.Instance.SaveData();
+            }
+            if (GameManager.Instance.userLifes >= 0 && GameManager.Instance.userLifes < 10)
             {
                 GameManager.Instance.userLifes += 3;
-                userLifesTxt.text = GameManager.Instance.userLifes.ToString();
-                GameManager.Instance.SaveData();
+                if (GameManager.Instance.userLifes >= 10)
+                {
+
+                    GameManager.Instance.userLifes = 10;
+                    userLifesTxt.text = 10.ToString();
+                    GameManager.Instance.SaveData();
+                }
+                else {
+                    userLifesTxt.text = GameManager.Instance.userLifes.ToString();
+                    GameManager.Instance.SaveData();
+                }
+                Advertisement.Load(_adUnitId, this);
             }
             else
             {
                 Debug.Log("Life at max!!!!!!!");
+                Advertisement.Load(_adUnitId, this);
             }
         }
     }
