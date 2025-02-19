@@ -1,20 +1,24 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class ExerciseLogicScript : MonoBehaviour
 {
     #region Instances
+    string s;
     [SerializeField] Button submit_answer_btn;
     [SerializeField] Button next_exercise_btn;
     
     [SerializeField] TMP_InputField inputfield;
     [SerializeField] TMP_Text original_phrase;
     [SerializeField] TMP_Text correct_phrases_counter;
+    [SerializeField] TMP_Text diffString; // for levenshteinPanel
 
     int userLifes;
     [SerializeField] TMP_Text users_lifes_txt;
@@ -23,6 +27,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] GameObject well_done_panel;
     [SerializeField] GameObject solution_panel;
     [SerializeField] GameObject warning_panel;
+    [SerializeField] GameObject levenshteinPanel;
     [SerializeField] TMP_Text wrong_text;
 
 
@@ -70,7 +75,7 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_originali_e_soluzioni_olandese_a1.Add("Hallo, hoe heet je?", "Hello, what is your name?");
         frasi_originali_e_soluzioni_olandese_a1.Add("Ik heet " + GameManager.Instance.username, "My name is " + GameManager.Instance.username);
         frasi_originali_e_soluzioni_olandese_a1.Add("Waar kom je vandaan?", "Where are you from?");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit Italië", "I come from Italy.");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit ItaliÃ«", "I come from Italy.");
         frasi_originali_e_soluzioni_olandese_a1.Add("Hoe gaat het met je? ", "How are you?");
         frasi_originali_e_soluzioni_olandese_a1.Add("Goed, dank je!", "Good, thank you!");
         frasi_originali_e_soluzioni_olandese_a1.Add("Ik woon in Nederland", "I live in the Netherlands.");
@@ -86,8 +91,8 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_originali_e_soluzioni_olandese_a1.Add("Jij leest een boek", "You are reading a book");
         frasi_originali_e_soluzioni_olandese_a1.Add("Hij slaapt om tien uur", "He sleeps at ten o'clock");
         frasi_originali_e_soluzioni_olandese_a1.Add("Wij gaan morgen naar Amsterdam", "We are going to Amsterdam tomorrow");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik begrijp het niet", "I don’t understand it");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb geen geld", "I don’t have money");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Ik begrijp het niet", "I donâ€™t understand it");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb geen geld", "I donâ€™t have money");
         frasi_originali_e_soluzioni_olandese_a1.Add("Original 20", " Soluzione 20");
     }
     void InitializeDutchHashMapA1(List<string> frasi_soluzione, List<string> frasi_originale)
@@ -111,11 +116,11 @@ public class ExerciseLogicScript : MonoBehaviour
     #endregion
     
     /*
-    in base al solution counter, al livello di difficoltà scelto e alla lingua scelta(?)
+    in base al solution counter, al livello di difficoltÃ  scelto e alla lingua scelta(?)
     devo far vedere la prima frase del set di esercizi da mostrare
     se gli esercizi sono in divisi in blocchettini da 10 frasi ed ho 20 frasi
     -> mostra la prima frase del primo blocchettino e la prima frase del secondo blocchettino
-    per tenere traccia del blocchettino da cui devo partire, il solution counter è a multipli di 10
+    per tenere traccia del blocchettino da cui devo partire, il solution counter Ã¨ a multipli di 10
     se GameManager.Instance.solution_counter == 0 -> sono nel PRIMO blocchettino del dizionario bla bla...
     se GameManager.Instance.solution_counter == 10 -> sono nel SECONDO blocchettino del dizionario bla bla...
 
@@ -125,18 +130,18 @@ public class ExerciseLogicScript : MonoBehaviour
         induzione: devo far vedere la prima frase del 2 set di A1 di lingua INGLESE     
     NOTA BENE:
     -  clicco Home || Chiudo L'app || viteEsaurite 
-        -> check se il solutionCounter è un multiplo di 0
-            -> se non lo è 
+        -> check se il solutionCounter Ã¨ un multiplo di 0
+            -> se non lo Ã¨ 
                    -> devo trovare il modo di resettarlo all'ultimo multiplo 
         Esempio
             perdo le vite quando sono alla frase n. 8 -> il solutionCounter DEVE essere 0!
-            -> 8 è multiplo di 10? 
+            -> 8 Ã¨ multiplo di 10? 
 
-            è sempre il multiplo di 10 precedente....
+            Ã¨ sempre il multiplo di 10 precedente....
             18 - la differenza tra 18 e 8
             contare il numero di decine in 18
-            se è una decina -> allora il solution counter è 10
-            se sono due decine -> allora il solution counter è 20
+            se Ã¨ una decina -> allora il solution counter Ã¨ 10
+            se sono due decine -> allora il solution counter Ã¨ 20
 
             come conto il numero di decine? 
             es. ho 10
@@ -203,7 +208,7 @@ public class ExerciseLogicScript : MonoBehaviour
             set_completed = true;
             ShowWellDonePanel();
         }
-        // dato che è diviso in blocchi di 10...solution_counter (global)
+        // dato che Ã¨ diviso in blocchi di 10...solution_counter (global)
         try
         {
             if (inputfield != null)
@@ -213,22 +218,31 @@ public class ExerciseLogicScript : MonoBehaviour
 
                 //Debug.Log("phrase_without_blanks + " + phrase_without_blanks.ToLower());
                 //Debug.Log("solution + " + solution.ToLower());
-                if (phrase_without_blanks.ToLower().Equals(solution.ToLower())) {  }
 
-                if (string.Equals(solution.ToLower(), phrase_without_blanks.ToLower(), StringComparison.OrdinalIgnoreCase))
+
+                bool isCorrect = CompareStrings(phrase_without_blanks, solution, out int errorCount, out string diffOutput);
+                string s = diffOutput;
+
+                if (isCorrect/*string.Equals(solution.ToLower(), phrase_without_blanks.ToLower(), StringComparison.OrdinalIgnoreCase)*/)
                 {
                     correct_answers++;
                     //Debug.Log("correct_answers:" + correct_answers);
                     //Debug.Log("soluzione ok - aumento il counter globale");
-                    solution_counter++; // se fai l'esercizio correttamente aumenta il counter
-                    //Debug.Log("counter globale ora è:" + solution_counter);
-                    GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>().LoadAd(); // se la soluzione è corretta, ricarichi l'ad (caso in cui ho premuto ShowSoluzione)
+                    solution_counter++; 
+                    // se fai l'esercizio correttamente aumenta il counter
+                    //Debug.Log("counter globale ora Ã¨:" + solution_counter);
+                    if(!"".Equals(s) || s != null)
+                    {
+                        OpenLevenshteinPanel();
+                        diffString.text = s;
+                    }
+                    GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>().LoadAd(); // se la soluzione Ã¨ corretta, ricarichi l'ad (caso in cui ho premuto ShowSoluzione)
                 }
                 else
                 {
-                    DisableSubmitButtonWhenInputVoid(phrase_without_blanks); // se è vuoto lancio il warning 
+                    DisableSubmitButtonWhenInputVoid(phrase_without_blanks); // se Ã¨ vuoto lancio il warning 
                     //Debug.Log("Risposta Sbagliata");
-                    // far Uscire un alert o un feedback che la risposta è sbagliata
+                    // far Uscire un alert o un feedback che la risposta Ã¨ sbagliata
                     StartCoroutine(FadeImage(true));
                     userLifes = --GameManager.Instance.userLifes;
                     users_lifes_txt.text = userLifes.ToString();
@@ -263,12 +277,100 @@ public class ExerciseLogicScript : MonoBehaviour
     public void NextExercise()
     {
         // resetta tutto tranne solution counter ->
-        // solution Counter deve essere salvato nei data!!! Sennò ogni volte parte tutto da zero!!!!
+        // solution Counter deve essere salvato nei data!!! SennÃ² ogni volte parte tutto da zero!!!!
         correct_answers = 0;
         inputfield.text = string.Empty;
         GameManager.Instance.solutionCounter = solution_counter;
         GameManager.Instance.SaveData();
         UpdateMainUI(solution_counter, correct_answers.ToString());
+    }
+
+    static bool CompareStrings(string input, string solution, out int errorCount, out string diffOutput)
+    {
+        // 1. Normalizziamo le stringhe
+        string normalizedInput = NormalizeString(input);
+        string normalizedSolution = NormalizeString(solution);
+
+        // 2. Calcoliamo la distanza di Levenshtein e le differenze
+        errorCount = LevenshteinDistanceWithDiff(normalizedInput, normalizedSolution, out diffOutput);
+       
+
+        // 3. Decisione basata sugli errori
+        if (errorCount == 0)
+        {
+            return true; // Perfetto match
+        }
+        else if (errorCount <= 2) // Permettiamo massimo 2 errori
+        {
+            Debug.Log($"âš ï¸ Piccoli errori rilevati: {errorCount}");
+            Debug.Log("WHAAAAAAAAAAAAAT " + diffOutput);
+            return true; // Accettiamo comunque
+        }
+        else
+        {
+            return false; // Troppi errori
+        }
+    }
+
+    static string NormalizeString(string str)
+    {
+        str = str.ToLower(); // Ignoriamo maiuscole/minuscole
+        str = Regex.Replace(str, @"[^\w\s]", ""); // Rimuoviamo punteggiatura
+        str = Regex.Replace(str, @"\s+", " ").Trim(); // Rimuoviamo spazi extra
+        return str;
+    }
+
+    static int LevenshteinDistanceWithDiff(string s1, string s2, out string diffOutput)
+    {
+        int len1 = s1.Length;
+        int len2 = s2.Length;
+        int[,] dp = new int[len1 + 1, len2 + 1];
+
+        for (int i = 0; i <= len1; i++) dp[i, 0] = i;
+        for (int j = 0; j <= len2; j++) dp[0, j] = j;
+
+        for (int i = 1; i <= len1; i++)
+        {
+            for (int j = 1; j <= len2; j++)
+            {
+                int cost = (s1[i - 1] == s2[j - 1]) ? 0 : 1;
+                dp[i, j] = Math.Min(
+                    Math.Min(dp[i - 1, j] + 1, dp[i, j - 1] + 1),
+                    dp[i - 1, j - 1] + cost
+                );
+            }
+        }
+
+        // Ricostruzione delle differenze
+        int x = len1, y = len2;
+        string highlightedInput = "";
+        string highlightedSolution = "";
+
+        while (x > 0 || y > 0)
+        {
+            if (x > 0 && dp[x, y] == dp[x - 1, y] + 1) // Cancellazione
+            {
+                highlightedInput = $"[{s1[x - 1]}]" + highlightedInput;
+                highlightedSolution = " " + highlightedSolution;
+                x--;
+            }
+            else if (y > 0 && dp[x, y] == dp[x, y - 1] + 1) // Inserimento
+            {
+                highlightedSolution = $"[{s2[y - 1]}]" + highlightedSolution;
+                highlightedInput = " " + highlightedInput;
+                y--;
+            }
+            else
+            {
+                highlightedInput = s1[x - 1] + highlightedInput;
+                highlightedSolution = s2[y - 1] + highlightedSolution;
+                x--;
+                y--;
+            }
+        }
+
+        diffOutput = $"Input: {highlightedInput}\nSolution: {highlightedSolution}";
+        return dp[len1, len2];
     }
 
     void UpdateMainUI(int solution_counter, string correct_answers)
@@ -277,7 +379,7 @@ public class ExerciseLogicScript : MonoBehaviour
     }
     void SetOriginalPhrase(int solution_counter) { original_phrase.text = frasi_originali.ElementAt(solution_counter); }
     void ResetInputField() { inputfield.text = ""; }
-    // 1/10, 2/10, ... 1,2 è il counter bro
+    // 1/10, 2/10, ... 1,2 Ã¨ il counter bro
     void SetCorrectPhraseCounter(string correct_answers_text) {
 
         if (correct_answers < 10) {
@@ -340,6 +442,16 @@ public class ExerciseLogicScript : MonoBehaviour
         solution_panel.SetActive(false);
     }
 
+    public void OpenLevenshteinPanel()
+    {
+        levenshteinPanel.SetActive(true);
+    }
+
+    public void CloseLevenshteinPanel()
+    {
+        levenshteinPanel.SetActive(false);
+    }
+
     public string ShowSolution()
     {
         Debug.Log("SOLUZIONEEE: " + frasi_soluzione[solution_counter]); // funziona!!!!! METTI l'ad
@@ -354,7 +466,7 @@ public class ExerciseLogicScript : MonoBehaviour
         // esempio: ho completato il primo esercizio fatto da 10 frasi 
         // sono alla 13esima frase
         // torno alla home
-        // solution counter al load della exercise scene è = 10
+        // solution counter al load della exercise scene Ã¨ = 10
     }
     #endregion
 
