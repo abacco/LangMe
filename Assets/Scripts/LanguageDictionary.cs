@@ -1,12 +1,24 @@
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Web;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
+
 
 public class LanguageDictionary : MonoBehaviour
 {
+    // IMPORTANTISSIMO: https://it.libretranslate.com/?utm_source=chatgpt.com&source=auto&target=it&q=hallo
+    //private const string API_URL = "https://it.libretranslate.com/translate";
+    private const string API_URL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}"; 
+    private static readonly HttpClient client = new HttpClient();
+
     public List<string> frasi = new List<string>();
     [SerializeField] GameObject wordFoundPanel;
     [SerializeField] GameObject wordNotFoundPanel;
@@ -98,9 +110,25 @@ public class LanguageDictionary : MonoBehaviour
             valueFound.text = dutchDict[parolaTest];
         } else
         {
-            wordNotFoundPanel.SetActive(true);
+            switch (GameManager.Instance.selectedLanguage.ToLower())
+            {
+                case "dutch":
+                    wordNotFoundPanel.SetActive(true);
+                    StartCoroutine(TranslateText(parolaTest, "nl", "en"));
+                    break;
+            }
         }
     }
+
+    /*
+            // chiamata all'api!!
+            switch (GameManager.Instance.selectedLanguage.ToLower()) {
+                case "dutch":
+                    wordNotFoundPanel.SetActive(true);
+                    StartCoroutine(TranslateText(parolaTest, "nl", "en"));
+                    Debug.Log("new Word successully ADDED!"); // ok
+                break;
+     */
 
     public void CloseWordFinder()
     {
@@ -119,4 +147,69 @@ public class LanguageDictionary : MonoBehaviour
     {
         dictionaryPanel.SetActive(false);
     }
+
+
+    IEnumerator TranslateText(string text, string sourceLang, string targetLang)
+    {
+        string url = string.Format(API_URL, sourceLang, targetLang, HttpUtility.UrlEncode(text));
+
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("❌ Errore: " + request.error);
+            }
+            else
+            {
+                string responseText = request.downloadHandler.text;
+                string translatedText = ParseTranslation(responseText); // aggiungere al dizionario!!
+                dutchDict.Add(text, translatedText);
+                Debug.Log($"🌍 Traduzione: {translatedText}");
+                Debug.Log("Dizionario Aggiornato!!");
+            }
+        }
+    }
+
+    string ParseTranslation(string json)
+    {
+        try
+        {
+            int start = json.IndexOf("[[[") + 3;
+            int end = json.IndexOf("\",\"", start);
+            string translation = json.Substring(start, end - start);
+
+            // Se il primo carattere è una doppia virgoletta (") la rimuove
+            if (translation.StartsWith("\""))
+            {
+                translation = translation.Substring(1);
+            }
+
+            return translation.Trim();
+        }
+        catch
+        {
+            Debug.LogError("❌ Errore nel parsing della traduzione!");
+            return "Errore nella traduzione";
+        }
+    }
+    //string ParseTranslation(string json)
+    //{
+    //    // Il formato della risposta è simile a: [[["Ciao","hello",null,null,1]],null,"en"]
+    //    try
+    //    {
+    //        int start = json.IndexOf("[[[") + 3;
+    //        int end = json.IndexOf("\",\"", start);
+    //        string translation = json.Substring(start, end - start);
+
+    //        // Rimuove eventuali spazi iniziali/finali
+    //        return translation.Trim();
+    //    }
+    //    catch
+    //    {
+    //        Debug.LogError("❌ Errore nel parsing della traduzione!");
+    //        return "Errore nella traduzione";
+    //    }
+    //}
 }
