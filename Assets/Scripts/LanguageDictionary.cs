@@ -15,7 +15,7 @@ public class LanguageDictionary : MonoBehaviour
     [SerializeField] TMP_Text keyFound;
     [SerializeField] TMP_Text valueFound;
     [SerializeField] TMP_InputField word_to_be_find;
-    private Dictionary<string, string> dutchDict = new Dictionary<string, string>();
+    private Dictionary<string, string> dutchDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
     private void Start()
     {
