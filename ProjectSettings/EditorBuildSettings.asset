@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/RealScenes/3 - Select Username.unity
     guid: 2a53e3181a9d8dd4d9cd5e08e1cb71af
   - enabled: 1
-    path: Assets/Scenes/RealScenes/4 - ChooseALang.unity
+    path: Assets/Scenes/RealScenes/4 - Choose A Language.unity
     guid: 54ada6b2678074b4fabc5dca86e6b553
   - enabled: 1
     path: Assets/Scenes/RealScenes/5 - Choose Difficulty.unity

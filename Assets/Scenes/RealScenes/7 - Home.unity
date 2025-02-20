@@ -2652,7 +2652,7 @@ GameObject:
   - component: {fileID: 1204349131}
   - component: {fileID: 1204349130}
   m_Layer: 5
-  m_Name: ChangeDifficultyBtn
+  m_Name: ChooseDifficultyBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2731,7 +2731,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Change Difficulty
+          m_StringArgument: Choose Difficulty
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1204349131
@@ -3531,7 +3531,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Change Language
+          m_StringArgument: Choose A Language
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2007164444
@@ -3741,7 +3741,7 @@ MonoBehaviour:
   - 1 - Startup
   - 2 -AlertScene
   - 3 - Select Username
-  - 4 - ChooseALang
+  - 4 - Choose A Language
   - 5 - Choose Difficulty
   - 6 - Difficulty Rules
   - 7 - Home

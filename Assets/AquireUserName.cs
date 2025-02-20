@@ -38,7 +38,7 @@ public class AquireUserName : MonoBehaviour
 
         GameManager.Instance.username = inputfield.text;
         GameManager.Instance.SaveData();
-        SceneManager.LoadScene("4 - ChooseALang");
+        SceneManager.LoadScene("4 - Choose A Language");
     }
 
     public void NO()

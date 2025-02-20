@@ -12,7 +12,7 @@ public class Navigation : MonoBehaviour
         "1 - Startup",
         "2 -AlertScene",
         "3 - Select Username",
-        "4 - ChooseALang",
+        "4 - Choose A Language",
         "5 - Choose Difficulty",
         "6 - Difficulty Rules",
         "7 - Home",
