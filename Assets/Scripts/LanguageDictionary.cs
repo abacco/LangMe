@@ -32,17 +32,17 @@ public class LanguageDictionary : MonoBehaviour
         switch (GameManager.Instance.selectedLanguage.ToLower())
         {
             case "dutch": 
-                InitializeDutchWordList(); 
-                ConvertiListaInDizionario();
-                PrintDutchWords();
+                InitializeDutchWordList("dutchDict"); 
+                ConvertiListaInDizionario(dutchDict);
+                PrintDutchWords(dutchDict);
                 break;
             default: Debug.Log("error"); break;
         }
     }
 
-    void InitializeDutchWordList()
+    void InitializeDutchWordList(string dictFileName)
     {
-        TextAsset file = Resources.Load<TextAsset>("dutchDict"); // Senza .txt
+        TextAsset file = Resources.Load<TextAsset>(dictFileName); // Senza .txt
         if (file != null)
         {
             frasi = new List<string>(file.text.Split(new[] { "\r\n", "\n" }, System.StringSplitOptions.RemoveEmptyEntries));
@@ -53,16 +53,16 @@ public class LanguageDictionary : MonoBehaviour
         }
         // C:/Users/bacco/AppData/LocalLow/DefaultCompany/LangMe/dutchDict_custom.txt
         // Carica le parole salvate nel file modificabile - questo perchè le robe in resources sono in sola lettura!!
-        string filePath = UnityEngine.Application.persistentDataPath + "/dutchDict_custom.txt"; // contiene le nuove parole aggiunte che sono state trovate tramite google translate
+        string filePath = UnityEngine.Application.persistentDataPath + "/" + dictFileName + "_custom.txt"; // contiene le nuove parole aggiunte che sono state trovate tramite google translate
         if (System.IO.File.Exists(filePath))
         {
             string[] savedWords = System.IO.File.ReadAllLines(filePath);
             frasi.AddRange(savedWords);
         }
 
-        Debug.Log("✅ Dizionario caricato con " + frasi.Count + " parole.");
+        //Debug.Log("✅ Dizionario caricato con " + frasi.Count + " parole.");
     }
-    void ConvertiListaInDizionario() // metti anche qui lo switch sulla lingua per dividere i dizionari!!!!
+    void ConvertiListaInDizionario(Dictionary<string, string> genericDict) // metti anche qui lo switch sulla lingua per dividere i dizionari!!!!
     {
         foreach (string riga in frasi)
         {
@@ -72,28 +72,26 @@ public class LanguageDictionary : MonoBehaviour
             
             if (match_for_google_words.Success)
             {
-                string s = match_for_google_words.Groups[1].Value.Trim();
-                string s2 = match_for_google_words.Groups[2].Value.Trim();
-                string s3 = match_for_google_words.Groups[3].Value.Trim();
+                string parolaDaTradurre = match_for_google_words.Groups[1].Value.Trim();
+                string undefined = match_for_google_words.Groups[2].Value.Trim();
+                string traduzioneInglese = match_for_google_words.Groups[3].Value.Trim();
 
-                if (!dutchDict.ContainsKey(s))
+                if (!genericDict.ContainsKey(parolaDaTradurre))
                 {
-                    //dutchDict[parolaOlandese] = traduzioneInglese;
-                    dutchDict[s] = $"{s2} ({s3})";
-                    Debug.Log("AIOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+                    genericDict[parolaDaTradurre] = $"{undefined} ({traduzioneInglese})";
                 }
             }
             if (match.Success)
             {
-                string parolaOlandese = CapitalizeFirstLetter(match.Groups[1].Value.Trim()); // Es: "ronde"
-                string tipoGrammaticale = CapitalizeFirstLetter(match.Groups[2].Value.Trim()); // Es: "noun"
-                string traduzioneInglese = CapitalizeFirstLetter(match.Groups[3].Value.Trim()); // Es: "round"
+                string parolaDaTradurre = CapitalizeFirstLetter(match.Groups[1].Value.Trim()); // Es: "ronde" // parolaDaTradurre
+                string tipoGrammaticale = CapitalizeFirstLetter(match.Groups[2].Value.Trim()); // Es: "noun" // grammar
+                string traduzioneInglese = CapitalizeFirstLetter(match.Groups[3].Value.Trim()); // Es: "round" // traduzione
 
                 // Aggiungiamo al dizionario
-                if (!dutchDict.ContainsKey(parolaOlandese))
+                if (!genericDict.ContainsKey(parolaDaTradurre))
                 {
                     //dutchDict[parolaOlandese] = traduzioneInglese;
-                    dutchDict[parolaOlandese] = $"{traduzioneInglese} ({tipoGrammaticale})";
+                    genericDict[parolaDaTradurre] = $"{traduzioneInglese} ({tipoGrammaticale})";
                 }
             }
             else
@@ -102,12 +100,12 @@ public class LanguageDictionary : MonoBehaviour
             }
         }
 
-        Debug.Log($"Dizionario caricato con {dutchDict.Count} parole!");
+        Debug.Log($"Dizionario caricato con {genericDict.Count} parole!");
     }
 
-    void PrintDutchWords()
+    void PrintDutchWords(Dictionary<string, string> genericDict)
     {
-        foreach (var dictionary in dutchDict)
+        foreach (var dictionary in genericDict)
         {
             wordList.text += "-" + dictionary.Key + ": " + dictionary.Value + "\n\n";
             //Debug.Log("DICT ENTRY: " + dictionary.Key + dictionary.Value);
@@ -122,24 +120,39 @@ public class LanguageDictionary : MonoBehaviour
         return char.ToUpper(input[0]) + input.Substring(1).ToLower();
     }
 
-    public void WordFinder()
+    public void WordFinderWrapper() // ok
+    {
+        switch (GameManager.Instance.selectedLanguage.ToLower())
+        {
+            case "dutch":
+                WordFinder(dutchDict);
+                break;
+            case "french":
+                //WordFinder(frenchDict);
+                break;
+            default:
+                Debug.LogError("❌ Dizionario non supportato!");
+                break;
+        }
+    }
+
+    public void WordFinder(Dictionary<string, string> generiDict)
     {
         string parolaTest = word_to_be_find.text; // inputField.txt
-        if (dutchDict.ContainsKey(parolaTest))
+        if (generiDict.ContainsKey(parolaTest))
         {
             wordFoundPanel.SetActive(true);
             keyFound.text = parolaTest;
-            valueFound.text = dutchDict[parolaTest];
-        } else
+            valueFound.text = generiDict[parolaTest];
+        }
+        else
         {
             switch (GameManager.Instance.selectedLanguage.ToLower())
             {
                 case "dutch":
                     newDictfilePath = UnityEngine.Application.persistentDataPath + "/dutchDict_custom.txt";
                     wordNotFoundPanel.SetActive(true);
-                    //StartCoroutine(TranslateText(parolaTest, "nl", "en", dutchDict)); // dutchDict perchè qui aggiorno il dutch dict se non trovo la parola
-                    //AddNewWord(newDictfilePath, parolaTest, dutchDict[parolaTest]);
-                    StartCoroutine(TranslateAndAdd(parolaTest, "nl", "en"));
+                    StartCoroutine(TranslateAndAdd(parolaTest, "nl", "en")); // chiama l'api
                     break;
             }
         }

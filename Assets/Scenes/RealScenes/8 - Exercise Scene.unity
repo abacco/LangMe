@@ -8804,7 +8804,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 309477420}
         m_TargetAssemblyTypeName: LanguageDictionary, Assembly-CSharp
-        m_MethodName: WordFinder
+        m_MethodName: WordFinderWrapper
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
