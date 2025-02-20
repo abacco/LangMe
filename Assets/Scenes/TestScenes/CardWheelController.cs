@@ -93,6 +93,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         // Aggiorna l'indice corrente in base alla direzione dello swipe
         currentIndex = (currentIndex + (scrollRight ? 1 : -1) + count) % count;
         UpdateCardDisplay(false);
+        if(isAnimating) { panel.SetActive(false); }
         isAnimating = false;
     }
     private IEnumerator AnimateTransition()
@@ -133,6 +134,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         }
 
         UpdateCardDisplay(instant: false);
+        if (isAnimating) { panel.SetActive(false); }
         isAnimating = false;
     }
 
