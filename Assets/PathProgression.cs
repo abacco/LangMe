@@ -16,10 +16,10 @@ public class PathProgression : MonoBehaviour
     int currentSolutionCounter; 
     private void Awake()
     {
-        currentSolutionCounter = GameManager.Instance.solutionCounter;
     }
     void Start()
     {
+        currentSolutionCounter = GameManager.Instance.solutionCounter;
         UpdateCounter(currentSolutionCounter);
     }
 
