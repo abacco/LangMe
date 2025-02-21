@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int solutionCounter;
     public string selectedDifficulty;
     public string username;
+    public string userNationality;
 
     // Percorso del file JSON
     private string filePath;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
             selectedDifficulty = selectedDifficulty,
             username = username,
             solutionCounter = solutionCounter,
+            userNationality = userNationality
         };
 
         string json = JsonUtility.ToJson(gameData, true); // `true` per formattare bene il JSON
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
             selectedDifficulty = gameData.selectedDifficulty;
             username = gameData.username;
             solutionCounter = gameData.solutionCounter;
+            userNationality = gameData.userNationality;
             GameManagerDebugLogData();
         }
         else
@@ -81,6 +84,7 @@ public class GameManager : MonoBehaviour
             selectedDifficulty = "A1";  
             username = "default username";
             solutionCounter = 0;
+            userNationality = "English";
             //SaveData();  // Salva subito i dati di default, così il file verrà creato
         }
     }
@@ -109,6 +113,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("userLifes: " + this.userLifes);
         Debug.Log("selectedDifficulty: " + this.selectedDifficulty);
         Debug.Log("username: " + this.username);
+        Debug.Log("-----------------------------------------------");
+        Debug.Log("userNationality: " + this.userNationality);
         Debug.Log("-----------------------------------------------");
     }
 }

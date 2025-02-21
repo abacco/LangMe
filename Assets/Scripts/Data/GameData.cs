@@ -5,6 +5,7 @@ public class GameData
     public int userLifes;
     public string selectedDifficulty;
     public string username;
+    public string userNationality;
 
     public int solutionCounter;
 }

@@ -10,7 +10,7 @@ public class Navigation : MonoBehaviour
     // forse è inutile
     public string[] scenesName = {
         "1 - Startup",
-        "2 -AlertScene",
+        "2 - AlertScene",
         "3 - Select Username",
         "4 - Choose A Language",
         "5 - Choose Difficulty",
@@ -48,4 +48,6 @@ public class Navigation : MonoBehaviour
         }
         //MoveToScene(scene_selected_text.text);
     }
+
+    
 }
