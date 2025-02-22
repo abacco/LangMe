@@ -9,6 +9,8 @@ public class ChooseDifficulty : MonoBehaviour
 {
 
     [SerializeField] GameObject areYouSurePanel;
+    [SerializeField] GameObject proficiencyPanel;
+
     [SerializeField] TMP_Text selectedDifficulty_txt;
     private string buttonName;
 
@@ -36,5 +38,15 @@ public class ChooseDifficulty : MonoBehaviour
     public void NO()
     {
         areYouSurePanel.SetActive(false);
+    }
+
+    public void ShowProficiencyPanel()
+    {
+        proficiencyPanel.SetActive(true);
+    }
+
+    public void HideProficiencyPanel()
+    {
+        proficiencyPanel.SetActive(false);
     }
 }
