@@ -17,7 +17,8 @@ public class Navigation : MonoBehaviour
         "6 - Difficulty Rules",
         "7 - Home",
         "8 - Exercise Scene", 
-        "9 - Dictionary"
+        "9 - Dictionary",
+        "10 - Progress"
     }; 
 
     public void MoveToScene(string sceneName)

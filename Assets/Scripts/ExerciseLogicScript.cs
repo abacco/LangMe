@@ -29,6 +29,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] GameObject solution_panel;
     [SerializeField] GameObject warning_panel;
     [SerializeField] GameObject levenshteinPanel;
+    [SerializeField] GameObject refillHeartsPanel;
     [SerializeField] TMP_Text wrong_text;
 
 
@@ -64,6 +65,10 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
 
+        if(userLifes <= 1)
+        {
+            ShowRefillHeartsPanel();
+        }
         UpdateVeryFirstOriginalPhrase();
     }
 
@@ -225,6 +230,12 @@ public class ExerciseLogicScript : MonoBehaviour
 
     public void CheckSolution()
     {
+        if (userLifes <= 1) // non so perchè ma vedo 1 ed userLifes è 2, vedi più in là
+        {
+            Debug.Log("Game Over! Refill Hearts Here!");
+            ShowRefillHeartsPanel();
+        }
+        Debug.Log("user lifes: " + userLifes);
         if (correct_answers == 9) // si conta da 0
         {
             // pannello di wellDone
@@ -460,6 +471,11 @@ public class ExerciseLogicScript : MonoBehaviour
     private void ShowWellDonePanel()
     {
         well_done_panel.SetActive(true);
+    }
+
+    public void ShowRefillHeartsPanel()
+    {
+        refillHeartsPanel.SetActive(true);
     }
 
     public void CloseWellDonePanel()

@@ -2176,7 +2176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedLanguage: English
-  userLifes: 10
+  userLifes: -1
   solutionCounter: 0
   selectedDifficulty: A1
   username: FonzoChionzo
