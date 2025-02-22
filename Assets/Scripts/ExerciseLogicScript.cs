@@ -478,6 +478,11 @@ public class ExerciseLogicScript : MonoBehaviour
         refillHeartsPanel.SetActive(true);
     }
 
+    public void CloseRefillHeartsPanel()
+    {
+        refillHeartsPanel.SetActive(false);
+    }
+
     public void CloseWellDonePanel()
     {
         well_done_panel.SetActive(false);

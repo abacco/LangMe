@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 39519317}
   - component: {fileID: 39519319}
   - component: {fileID: 39519318}
+  - component: {fileID: 39519320}
   m_Layer: 5
   m_Name: arrow_image_bouncing
   m_TagString: Untagged
@@ -281,16 +282,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39519316}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 567063736}
+  m_Father: {fileID: 1264318712}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 358, y: 689}
+  m_AnchoredPosition: {x: 350, y: 650}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &39519318
@@ -331,6 +332,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39519316}
   m_CullTransparentMesh: 1
+--- !u!114 &39519320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39519316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b280502c4105a144a8449909a70be8d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceHeight: 50
+  bounceTime: 0.5
+  bounces: 3
 --- !u!1 &59148358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,8 +2579,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 39519317}
+  m_Children: []
   m_Father: {fileID: 1264318712}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7397,6 +7412,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 39519317}
   - {fileID: 567063736}
   - {fileID: 2007050501}
   m_Father: {fileID: 180684907}
@@ -11086,7 +11102,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1395864350}
         m_TargetAssemblyTypeName: ExerciseLogicScript, Assembly-CSharp
-        m_MethodName: ShowRefillHeartsPanel
+        m_MethodName: CloseRefillHeartsPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
