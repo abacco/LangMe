@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ExerciseLogicScript : MonoBehaviour
@@ -71,28 +73,52 @@ public class ExerciseLogicScript : MonoBehaviour
     {
         frasi_originali_e_soluzioni_olandese_a1 = new Dictionary<string, string>();
 
-        frasi_originali_e_soluzioni_olandese_a1.Add("Hallo, hoe heet je?", "Hello, what is your name?");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik heet " + GameManager.Instance.username, "My name is " + GameManager.Instance.username);
-        frasi_originali_e_soluzioni_olandese_a1.Add("Waar kom je vandaan?", "Where are you from?");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit Italië", "I come from Italy");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Hoe gaat het met je? ", "How are you?");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Goed, dank je!", "Good, thank you!");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik woon in Nederland", "I live in the Netherlands");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik werk als softwareontwikkelaar", "I work as a software developer");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb een kleine auto", "I have a small car");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Hij woont in een groot huis", "He lives in a big house");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Hallo, hoe heet je?", "Hello, what is your name?");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heet " + GameManager.Instance.username, "My name is " + GameManager.Instance.username);
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Waar kom je vandaan?", "Where are you from?");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit Italië", "I come from Italy");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Hoe gaat het met je? ", "How are you?");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Goed, dank je!", "Good, thank you!");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik woon in Nederland", "I live in the Netherlands");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik werk als softwareontwikkelaar", "I work as a software developer");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb een kleine auto", "I have a small car");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Hij woont in een groot huis", "He lives in a big house");
 
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik ga naar de supermarkt", "I am going to the supermarket");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Zij drinkt koffie in de ochtend", "She drinks coffee in the morning");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik spreek een beetje Nederlands", "I speak a little Dutch");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Kun je dat herhalen, alsjeblieft?", "Can you repeat that, please?");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Wij eten pizza vanavond", "We are eating pizza tonight");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Jij leest een boek", "You are reading a book");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Hij slaapt om tien uur", "He sleeps at ten o'clock");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Wij gaan morgen naar Amsterdam", "We are going to Amsterdam tomorrow");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik begrijp het niet", "I don’t understand it");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb geen geld", "I don’t have money");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Original 20", " Soluzione 20");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik ga naar de supermarkt", "I am going to the supermarket");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Zij drinkt koffie in de ochtend", "She drinks coffee in the morning");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik spreek een beetje Nederlands", "I speak a little Dutch");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Kun je dat herhalen, alsjeblieft?", "Can you repeat that, please?");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Wij eten pizza vanavond", "We are eating pizza tonight");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Jij leest een boek", "You are reading a book");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Hij slaapt om tien uur", "He sleeps at ten o'clock");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Wij gaan morgen naar Amsterdam", "We are going to Amsterdam tomorrow");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik begrijp het niet", "I don’t understand it");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb geen geld", "I don’t have money");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Original 20", " Soluzione 20");
+
+        frasi_originali_e_soluzioni_olandese_a1.Add("1", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("2", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("3", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("4", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("5", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("6", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("7", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("8", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("9", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("10", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("11", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("12", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("13", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("14", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("15", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("16", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("17", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("18", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("19", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("20", "1");
+        frasi_originali_e_soluzioni_olandese_a1.Add("21", "1");
+
+
     }
     void InitializeDutchHashMapA1(List<string> frasi_soluzione, List<string> frasi_originale)
     {
@@ -439,6 +465,9 @@ public class ExerciseLogicScript : MonoBehaviour
     public void CloseWellDonePanel()
     {
         well_done_panel.SetActive(false);
+        GameManager.Instance.solutionCounter = solution_counter;
+        GameManager.Instance.SaveData(); // ?
+        SceneManager.LoadScene("10 - Progress");
     }
 
     public void CloseSolutionPanel()
