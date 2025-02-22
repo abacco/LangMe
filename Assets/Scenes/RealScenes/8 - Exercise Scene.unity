@@ -2590,6 +2590,7 @@ MonoBehaviour:
   solutionCounter: 0
   selectedDifficulty: A1
   username: asd
+  userNationality: 
 --- !u!1 &583987271
 GameObject:
   m_ObjectHideFlags: 0

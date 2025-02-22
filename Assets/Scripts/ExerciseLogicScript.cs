@@ -74,11 +74,11 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_originali_e_soluzioni_olandese_a1.Add("Hallo, hoe heet je?", "Hello, what is your name?");
         frasi_originali_e_soluzioni_olandese_a1.Add("Ik heet " + GameManager.Instance.username, "My name is " + GameManager.Instance.username);
         frasi_originali_e_soluzioni_olandese_a1.Add("Waar kom je vandaan?", "Where are you from?");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit Italië", "I come from Italy.");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit Italië", "I come from Italy");
         frasi_originali_e_soluzioni_olandese_a1.Add("Hoe gaat het met je? ", "How are you?");
         frasi_originali_e_soluzioni_olandese_a1.Add("Goed, dank je!", "Good, thank you!");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik woon in Nederland", "I live in the Netherlands.");
-        frasi_originali_e_soluzioni_olandese_a1.Add("Ik werk als softwareontwikkelaar. ", "I work as a software developer.");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Ik woon in Nederland", "I live in the Netherlands");
+        frasi_originali_e_soluzioni_olandese_a1.Add("Ik werk als softwareontwikkelaar", "I work as a software developer");
         frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb een kleine auto", "I have a small car");
         frasi_originali_e_soluzioni_olandese_a1.Add("Hij woont in een groot huis", "He lives in a big house");
 
@@ -231,10 +231,14 @@ public class ExerciseLogicScript : MonoBehaviour
                     solution_counter++; 
                     // se fai l'esercizio correttamente aumenta il counter
                     //Debug.Log("counter globale ora è:" + solution_counter);
-                    if(!"".Equals(s) || s != null)
+                    if(s != null && s.Length > 0)
                     {
-                        OpenLevenshteinPanel();
-                        diffString.text = s[0] + "\n" + solution;
+                        if (!s[0].ToLower().Equals(solution.ToLower()))
+                        {
+                            OpenLevenshteinPanel();
+                            diffString.text = s[0] + "\n" + solution;
+                        }
+                        //diffString.text = s[0] + "\n" + solution;
                     }
                     GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>().LoadAd(); // se la soluzione è corretta, ricarichi l'ad (caso in cui ho premuto ShowSoluzione)
                 }
@@ -288,8 +292,8 @@ public class ExerciseLogicScript : MonoBehaviour
     static bool CompareStrings(string input, string solution, out int errorCount, out string diffOutput)
     {
         // 1. Normalizziamo le stringhe
-        string normalizedInput = NormalizeString(input);
-        string normalizedSolution = NormalizeString(solution);
+        string normalizedInput = input;//NormalizeString(input);
+        string normalizedSolution = solution;//NormalizeString(solution);
 
         // 2. Calcoliamo la distanza di Levenshtein e le differenze
         errorCount = LevenshteinDistanceWithDiff(normalizedInput, normalizedSolution, out diffOutput);
@@ -369,7 +373,7 @@ public class ExerciseLogicScript : MonoBehaviour
             }
         }
 
-        diffOutput = $"Input: {highlightedInput}\nSolution: {highlightedSolution}";
+        diffOutput = $"{highlightedInput}\n{highlightedSolution}";
         return dp[len1, len2];
     }
 
