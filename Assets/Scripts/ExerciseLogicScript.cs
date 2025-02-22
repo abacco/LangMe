@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class ExerciseLogicScript : MonoBehaviour
 {
@@ -221,7 +220,8 @@ public class ExerciseLogicScript : MonoBehaviour
 
 
                 bool isCorrect = CompareStrings(phrase_without_blanks, solution, out int errorCount, out string diffOutput);
-                string s = diffOutput;
+                string[] s = diffOutput.Split("\n"); ;
+
 
                 if (isCorrect/*string.Equals(solution.ToLower(), phrase_without_blanks.ToLower(), StringComparison.OrdinalIgnoreCase)*/)
                 {
@@ -234,7 +234,7 @@ public class ExerciseLogicScript : MonoBehaviour
                     if(!"".Equals(s) || s != null)
                     {
                         OpenLevenshteinPanel();
-                        diffString.text = s;
+                        diffString.text = s[0] + "\n" + solution;
                     }
                     GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>().LoadAd(); // se la soluzione è corretta, ricarichi l'ad (caso in cui ho premuto ShowSoluzione)
                 }

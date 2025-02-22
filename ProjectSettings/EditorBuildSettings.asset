@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealScenes/9 - Dictionary.unity
     guid: 1b13f15ea4004df4e90f1d776c1b1f0c
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/10 - Progress.unity
+    guid: 3df2e77bb2c695246950c056d0436198
   - enabled: 0
     path: Assets/Scenes/TestScenes/TestScroll.unity
     guid: f3628997e71e9a045bcde308df5d36bd
