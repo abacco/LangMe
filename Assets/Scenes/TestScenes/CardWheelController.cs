@@ -25,6 +25,11 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
 
     private void Start()
     {
+        if (panel == null)
+        {
+            Debug.LogWarning("current scene does not need this panel or it is handled by another script");
+            panel = new GameObject();
+        }
         // Aggiorna la grafica iniziale delle carte
         UpdateCardDisplay(instant: true);
     }
