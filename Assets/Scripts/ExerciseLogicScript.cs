@@ -67,6 +67,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
         if(userLifes <= 1)
         {
+            users_lifes_txt.text = 0.ToString();
             ShowRefillHeartsPanel();
         }
         UpdateVeryFirstOriginalPhrase();
@@ -233,9 +234,16 @@ public class ExerciseLogicScript : MonoBehaviour
         if (userLifes <= 1) // non so perchè ma vedo 1 ed userLifes è 2, vedi più in là
         {
             Debug.Log("Game Over! Refill Hearts Here!");
+            users_lifes_txt.text = 0.ToString();
+            //submit_answer_btn.interactable = false;
             ShowRefillHeartsPanel();
         }
-        Debug.Log("user lifes: " + userLifes);
+        else { 
+            submit_answer_btn.interactable = true;
+            CloseRefillHeartsPanel();
+        }
+
+
         if (correct_answers == 9) // si conta da 0
         {
             // pannello di wellDone
@@ -286,7 +294,12 @@ public class ExerciseLogicScript : MonoBehaviour
                     // far Uscire un alert o un feedback che la risposta è sbagliata
                     StartCoroutine(FadeImage(true));
                     userLifes = --GameManager.Instance.userLifes;
-                    users_lifes_txt.text = userLifes.ToString();
+                    if(userLifes <= 0) {
+                        users_lifes_txt.text = 0.ToString();
+                    } else
+                    {
+                        users_lifes_txt.text = userLifes.ToString();
+                    }
                     GameManager.Instance.SaveData();
                     GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>().LoadAd();
                 }

@@ -2533,10 +2533,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardSlots:
-  - {fileID: 371959881}
-  - {fileID: 178097351}
-  - {fileID: 444118788}
   - {fileID: 644079513}
+  - {fileID: 178097351}
+  - {fileID: 371959881}
+  - {fileID: 444118788}
   cardSprites:
   - {fileID: 21300000, guid: 35b5dd5a98ef768479014924eca492fe, type: 3}
   - {fileID: 21300000, guid: c1de772d9677b7c4297648a1afb163ce, type: 3}

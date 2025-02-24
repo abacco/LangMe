@@ -2575,11 +2575,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardSlots:
-  - {fileID: 422435457}
   - {fileID: 1759802777}
+  - {fileID: 422435457}
   cardSprites:
-  - {fileID: 21300000, guid: 35b5dd5a98ef768479014924eca492fe, type: 3}
   - {fileID: 21300000, guid: 0f357034daa3ba540a1f2d79a141cb70, type: 3}
+  - {fileID: 21300000, guid: 35b5dd5a98ef768479014924eca492fe, type: 3}
   animationSpeed: 5
   scaleFactor: 10
   dragThreshold: 50

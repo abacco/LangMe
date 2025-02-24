@@ -1323,11 +1323,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardSlots:
-  - {fileID: 892711384}
   - {fileID: 1445250348}
   - {fileID: 1979612896}
   - {fileID: 875411424}
   - {fileID: 2007164444}
+  - {fileID: 892711384}
   - {fileID: 1204349131}
   - {fileID: 1132354493}
   - {fileID: 284050767}
