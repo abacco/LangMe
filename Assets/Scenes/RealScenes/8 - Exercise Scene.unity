@@ -1125,6 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frasi: []
+  findWordBtn: {fileID: 1575727941}
   wordFoundPanel: {fileID: 522240857}
   wordNotFoundPanel: {fileID: 1858178705}
   dictionaryPanel: {fileID: 576587071}

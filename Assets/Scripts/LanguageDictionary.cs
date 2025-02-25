@@ -7,7 +7,6 @@ using System.Web;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.Windows;
 
 
 public class LanguageDictionary : MonoBehaviour
@@ -139,22 +138,28 @@ public class LanguageDictionary : MonoBehaviour
     public void WordFinder(Dictionary<string, string> generiDict)
     {
         string parolaTest = word_to_be_find.text; // inputField.txt
-        if (generiDict.ContainsKey(parolaTest))
+        if (!"".Equals(parolaTest) && parolaTest != null )
         {
-            wordFoundPanel.SetActive(true);
-            keyFound.text = parolaTest;
-            valueFound.text = generiDict[parolaTest];
-        }
-        else
-        {
-            switch (GameManager.Instance.selectedLanguage.ToLower())
+            if (generiDict.ContainsKey(parolaTest))
             {
-                case "dutch":
-                    newDictfilePath = UnityEngine.Application.persistentDataPath + "/dutchDict_custom.txt";
-                    wordNotFoundPanel.SetActive(true);
-                    StartCoroutine(TranslateAndAdd(parolaTest, "nl", "en")); // chiama l'api
-                    break;
+                wordFoundPanel.SetActive(true);
+                keyFound.text = parolaTest;
+                valueFound.text = generiDict[parolaTest];
             }
+            else
+            {
+                switch (GameManager.Instance.selectedLanguage.ToLower())
+                {
+                    case "dutch":
+                        newDictfilePath = UnityEngine.Application.persistentDataPath + "/dutchDict_custom.txt";
+                        wordNotFoundPanel.SetActive(true);
+                        StartCoroutine(TranslateAndAdd(parolaTest, "nl", "en")); // chiama l'api
+                        break;
+                }
+            }
+        }else
+        {
+            Debug.Log("Input Field Is Empty");
         }
     }
 

@@ -546,6 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frasi: []
+  findWordBtn: {fileID: 174634842}
   wordFoundPanel: {fileID: 1842491157}
   wordNotFoundPanel: {fileID: 1048478919}
   dictionaryPanel: {fileID: 1066932309}
@@ -1118,6 +1119,7 @@ MonoBehaviour:
   solutionCounter: 0
   selectedDifficulty: A1
   username: albicocca
+  userNationality: 
 --- !u!1 &689447349
 GameObject:
   m_ObjectHideFlags: 0
