@@ -38,6 +38,9 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
         }
         // Disable the button until the ad is ready to show:
         _refillHeartsAdButton.interactable = false;
+        //userLifesTxt.text = GameManager.Instance.userLifes.ToString();
+
+        GameManager.Instance.GameManagerDebugLogData();
         
     }
 
@@ -119,8 +122,18 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
                 //Advertisement.Load(_adUnitId, this);
             }
             GameManager.Instance.userLifes = exLogicScript.userLifes;
-            _refillHeartsAdButton.onClick.RemoveAllListeners();
+            _refillHeartsAdButton.onClick.RemoveAllListeners(); // else viene richiamato 2 volte la seconda volta che clicchi refill
             LoadAd();
+            if (exLogicScript.userLifes >= 10)
+            {
+
+                GameManager.Instance.userLifes = 10;
+                exLogicScript.userLifes = 10;
+                userLifesTxt.text = 10.ToString();
+                GameManager.Instance.SaveData();
+                Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
+
+            }
         }
     }
 

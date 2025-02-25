@@ -29,7 +29,7 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
         //}
         _showtip_ads_button.LoadAd();
         _showsolution_ads_button.LoadAd();
-        //_refillHearts_ads_button.LoadAd();
+        _refillHearts_ads_button.LoadAd();
     }
 
     public void InitializeAds()

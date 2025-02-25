@@ -54,6 +54,7 @@ public class ExerciseLogicScript : MonoBehaviour
     {
         // load previous data from JSon
         GameManager.Instance.LoadData();
+        
         // set UserLifes and text update
         userLifes = GameManager.Instance.userLifes;
         users_lifes_txt.text = userLifes.ToString();
@@ -72,6 +73,15 @@ public class ExerciseLogicScript : MonoBehaviour
             users_lifes_txt.text = 0.ToString();
             ShowRefillHeartsPanel();
         }
+
+        //// set UserLifes and text update
+        //userLifes = GameManager.Instance.userLifes;
+        //users_lifes_txt.text = userLifes.ToString();
+        //// set solutionCounter to display first Original Phrase 
+        //solution_counter = GameManager.Instance.solutionCounter;
+        //// set default correct_phrase counter txt
+        //correct_phrases_counter.text = "00";
+
         UpdateVeryFirstOriginalPhrase();
     }
 
