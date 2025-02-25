@@ -67,6 +67,8 @@ public class ExerciseLogicScript : MonoBehaviour
 
         if(userLifes <= 1)
         {
+            userLifes = 0;
+            GameManager.Instance.userLifes = 0;
             users_lifes_txt.text = 0.ToString();
             ShowRefillHeartsPanel();
         }
@@ -234,6 +236,8 @@ public class ExerciseLogicScript : MonoBehaviour
         if (userLifes <= 1) // non so perchè ma vedo 1 ed userLifes è 2, vedi più in là
         {
             Debug.Log("Game Over! Refill Hearts Here!");
+            userLifes = 0;
+            GameManager.Instance.userLifes = 0;
             users_lifes_txt.text = 0.ToString();
             //submit_answer_btn.interactable = false;
             ShowRefillHeartsPanel();
@@ -295,6 +299,8 @@ public class ExerciseLogicScript : MonoBehaviour
                     StartCoroutine(FadeImage(true));
                     userLifes = --GameManager.Instance.userLifes;
                     if(userLifes <= 0) {
+                        userLifes = 0;
+                        GameManager.Instance.userLifes = 0;
                         users_lifes_txt.text = 0.ToString();
                     } else
                     {
