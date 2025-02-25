@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SceneBanner : MonoBehaviour
 {
-    [SerializeField] Button _hideBannerButton;
+    //[SerializeField] Button _hideBannerButton;
 
     [SerializeField] BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
 
@@ -61,7 +61,7 @@ public class SceneBanner : MonoBehaviour
 
         // Show the loaded Banner Ad Unit:
         Advertisement.Banner.Show(_adUnitId, options);
-        _hideBannerButton.onClick.AddListener(HideBannerAd);
+        //_hideBannerButton.onClick.AddListener(HideBannerAd);
     }
 
     // Implement code to execute when the load errorCallback event triggers:
@@ -92,7 +92,7 @@ public class SceneBanner : MonoBehaviour
     {
         // Hide the banner:
         Advertisement.Banner.Hide();
-        _hideBannerButton.gameObject.SetActive(false);
+        //_hideBannerButton.gameObject.SetActive(false);
         StartCoroutine(ReShowAd()); // ok
     }
 
@@ -106,7 +106,7 @@ public class SceneBanner : MonoBehaviour
             showCallback = OnBannerShown
         };
         Advertisement.Banner.Show(_adUnitId, options);
-        _hideBannerButton.gameObject.SetActive(true);
+        //_hideBannerButton.gameObject.SetActive(true);
     }
 
     void OnBannerClicked() { }
@@ -116,6 +116,6 @@ public class SceneBanner : MonoBehaviour
     void OnDestroy()
     {
         // Clean up the listeners:
-        _hideBannerButton.onClick.RemoveAllListeners();
+        //_hideBannerButton.onClick.RemoveAllListeners();
     }
 }
