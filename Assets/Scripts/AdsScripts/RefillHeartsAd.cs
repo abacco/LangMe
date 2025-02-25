@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
+    [SerializeField] ExerciseLogicScript exLogicScript; // to handle userLifes;
     [SerializeField] Button _refillHeartsAdButton;
     [SerializeField] TMP_Text userLifesTxt;
 
@@ -24,17 +25,20 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
         if (GameManager.Instance.userLifes >= 10)
         {
             GameManager.Instance.userLifes = 10;
+            exLogicScript.userLifes = 10;
             GameManager.Instance.SaveData();
             userLifesTxt.text = 10.ToString();
         }
         if (GameManager.Instance.userLifes < 0)
         {
             GameManager.Instance.userLifes = 0;
+            exLogicScript.userLifes = 0;
             GameManager.Instance.SaveData();
             userLifesTxt.text = 0.ToString();
         }
         // Disable the button until the ad is ready to show:
         _refillHeartsAdButton.interactable = false;
+        
     }
 
     // Call this public method when you want to get an ad ready to show.
@@ -77,42 +81,46 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
     {
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed");
+            Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" +"exLogic.userLifes="+ exLogicScript.userLifes + "\n" +"GameManager.userLifes=" + GameManager.Instance.userLifes);
             // Grant a reward.
 
             // la reward è + 3 cuori!! Fai l'animazione che fa capire che te pigliat 3 cuori
-            if (GameManager.Instance.userLifes >= 10) {
+            if (exLogicScript.userLifes >= 10) {
                 
                 GameManager.Instance.userLifes = 10;
+                exLogicScript.userLifes = 10;
                 userLifesTxt.text = 10.ToString();
                 GameManager.Instance.SaveData();
+                Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
+
             }
-            if (GameManager.Instance.userLifes < 0) { 
-                GameManager.Instance.userLifes = 0;
-                userLifesTxt.text = 0.ToString();
-                GameManager.Instance.SaveData();
-            }
-            if (GameManager.Instance.userLifes >= 0 && GameManager.Instance.userLifes < 10)
+            if (exLogicScript.userLifes >= 0 && exLogicScript.userLifes < 10)
             {
-                GameManager.Instance.userLifes += 3;
+                //GameManager.Instance.userLifes += 3;
                 if (GameManager.Instance.userLifes >= 10)
                 {
-
                     GameManager.Instance.userLifes = 10;
+                    exLogicScript.userLifes = 10;
                     userLifesTxt.text = 10.ToString();
                     GameManager.Instance.SaveData();
+                    Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
                 }
                 else {
-                    userLifesTxt.text = GameManager.Instance.userLifes.ToString();
+                    exLogicScript.userLifes += 3;
+                    userLifesTxt.text = exLogicScript.userLifes.ToString();
                     GameManager.Instance.SaveData();
+                    Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
                 }
-                Advertisement.Load(_adUnitId, this);
+                //Advertisement.Load(_adUnitId, this);
             }
             else
             {
                 Debug.Log("Life at max!!!!!!!");
-                Advertisement.Load(_adUnitId, this);
+                //Advertisement.Load(_adUnitId, this);
             }
+            GameManager.Instance.userLifes = exLogicScript.userLifes;
+            _refillHeartsAdButton.onClick.RemoveAllListeners();
+            LoadAd();
         }
     }
 

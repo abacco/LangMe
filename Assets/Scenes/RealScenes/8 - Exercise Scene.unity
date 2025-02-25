@@ -7863,6 +7863,7 @@ MonoBehaviour:
   original_phrase: {fileID: 1160790665}
   correct_phrases_counter: {fileID: 915025734}
   diffString: {fileID: 776267233}
+  userLifes: 0
   users_lifes_txt: {fileID: 146274501}
   wrong_answer_panel: {fileID: 433709386}
   well_done_panel: {fileID: 1731368236}
@@ -10809,6 +10810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868ae313baf052f4ca45db3868330b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exLogicScript: {fileID: 1395864350}
   _refillHeartsAdButton: {fileID: 2137737783}
   userLifesTxt: {fileID: 146274501}
   _androidAdUnitId: Rewarded_Android

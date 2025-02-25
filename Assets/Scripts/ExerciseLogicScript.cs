@@ -21,7 +21,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] TMP_Text correct_phrases_counter;
     [SerializeField] TMP_Text diffString; // for levenshteinPanel
 
-    int userLifes;
+    public int userLifes;
     [SerializeField] TMP_Text users_lifes_txt;
     
     [SerializeField] GameObject wrong_answer_panel;
@@ -184,7 +184,6 @@ public class ExerciseLogicScript : MonoBehaviour
     */
     public void UpdateVeryFirstOriginalPhrase()
     {
-        
         int decine = GameManager.Instance.solutionCounter / 10;
         Debug.Log("Decine attuali " + decine + " & solutionCounter On Start: " + GameManager.Instance.solutionCounter);
         string valore = "";
