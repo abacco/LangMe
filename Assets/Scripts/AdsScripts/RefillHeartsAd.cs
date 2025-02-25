@@ -132,8 +132,8 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
                 userLifesTxt.text = 10.ToString();
                 GameManager.Instance.SaveData();
                 Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
-
             }
+            GameManager.Instance.SaveData();
         }
     }
 
