@@ -260,8 +260,6 @@ public class ExerciseLogicScript : MonoBehaviour
             submit_answer_btn.interactable = true;
             CloseRefillHeartsPanel();
         }
-
-
         if (correct_answers == 9) // si conta da 0
         {
             // pannello di wellDone

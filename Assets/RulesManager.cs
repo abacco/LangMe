@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Icons;
 
 public class RulesManager : MonoBehaviour
 {
@@ -17,9 +18,15 @@ public class RulesManager : MonoBehaviour
 
     [SerializeField] Sprite[] languageIcons;
 
-    Dictionary<string, Sprite> iconsAndLanguages = new Dictionary<string, Sprite>(); 
-    
+    Dictionary<string, Sprite> iconsAndLanguages = new Dictionary<string, Sprite>();
 
+    public TMP_Text rules_title_txt;
+    public TMP_Text rules_body_txt;
+    Dictionary<string, string> dutch_a1_rules_titles_and_bodies = new Dictionary<string, string>();
+    Dictionary<string, string> dutch_a2_rules_titles_and_bodies = new Dictionary<string, string>(); // non usato ancora atm
+    Dictionary<string, Dictionary<string, string>> dutch_levels_and_rules = new Dictionary<string, Dictionary<string, string>>();
+    public int page_counter = 0; // 10 pagine in totale, quindi da 0 a 9
+    
     private void InitializeIconsAndLanguagesDictionary()
     {
         iconsAndLanguages.Add("france", languageIcons[0]);
@@ -45,7 +52,8 @@ public class RulesManager : MonoBehaviour
                 case "Dutch":
                     switch (GameManager.Instance.selectedDifficulty)
                     {
-                        case "A1": InitDutchA1Rule(); UpdateTextA1_withPages(page_counter); break;
+                        case "A1": InitDutchA1Rule(); UpdateTextWithPagesGeneric(page_counter, dutch_a1_rules_titles_and_bodies); break;
+                        case "A2": InitDutchA2Rule(); UpdateTextWithPagesGeneric(page_counter, dutch_a2_rules_titles_and_bodies); break;
                         default: throw new Exception("Error On selectedDifficulty: ");
                     }
                     break;
@@ -80,12 +88,7 @@ public class RulesManager : MonoBehaviour
         }
     }
 
-    public TMP_Text rules_title_txt;
-    public TMP_Text rules_body_txt;
-    Dictionary<string, string> dutch_a1_rules_titles_and_bodies = new Dictionary<string, string>();
-    Dictionary<string, string> dutch_a2_rules_titles_and_bodies = new Dictionary<string, string>(); // non usato ancora atm
-    Dictionary<string, Dictionary<string, string>> dutch_levels_and_rules = new Dictionary<string, Dictionary<string, string>>();
-    public int page_counter = 0; // 10 pagine in totale, quindi da 0 a 9
+    #region InitDutchRules
     public void InitDutchA1Rule() { // sia all'inizio che quando cambi pagina (?) forse quando cambi pagina puoi ottimizzare oppure metti i tag sulle pagine e li filli cosi
 
         dutch_a1_rules_titles_and_bodies.Add("1. Pronunciation and Special Sounds", "The \"g\" sounds like a guttural \"h\" (e.g., goed → /ɣut/).\r\n\nThe \"ui\" sounds similar to the French \"œy\" (e.g., huis → /hœys/).\r\n\nThe \"ij\" and \"ei\" are pronounced like a mix between \"ai\" and \"ei\".\r\n\nThe \"sch\" sounds like an \"s\" followed by a guttural \"ch\" (e.g., school → /sxoːl/).");
@@ -99,24 +102,46 @@ public class RulesManager : MonoBehaviour
         dutch_a1_rules_titles_and_bodies.Add("9. Adjectives and Their Placement", "Before the noun: een grote auto (a big car).\r\n\nIf the noun is \"het\" and indefinite, the adjective does not take -e: een groot huis (a big house).");
         dutch_a1_rules_titles_and_bodies.Add("10. Useful Basic Phrases", "Hoi / Hallo → Hi / Hello\r\n\nHoe gaat het? → How are you?\r\n\nGoed, en met jou? → Good, and you?\r\n\nDank je (wel)! → Thank you!\r\n\nAlsjeblieft / Alstublieft → Please\r\n\nIk begrijp het niet → I don’t understand\r\n\nKunt u dat herhalen? → Can you repeat that?");
     }
-    public void UpdateTextA1_withPages(int counter)
+    public void InitDutchA2Rule()
+    { 
+        // sia all'inizio che quando cambi pagina (?) forse quando cambi pagina puoi ottimizzare oppure metti i tag sulle pagine e li filli cosi
+        dutch_a2_rules_titles_and_bodies.Add("1. Placeholder Title", "PlaceHolder Body");
+        dutch_a2_rules_titles_and_bodies.Add("2. Placeholder Title 2", "PlaceHolder Body 2");
+        dutch_a2_rules_titles_and_bodies.Add("3. Placeholder Title 2", "PlaceHolder Body 3");
+        dutch_a2_rules_titles_and_bodies.Add("4. Placeholder Title 2", "PlaceHolder Body 4");
+        dutch_a2_rules_titles_and_bodies.Add("5. Placeholder Title 2", "PlaceHolder Body 5");
+    }
+    #endregion
+
+    public void UpdateTextWithPagesGeneric(int counter, Dictionary<string, string> genericDict)
     {
         // Supponiamo che `counter` sia già definito e rappresenti l'indice attuale
-        if (counter >= 0 && counter < dutch_a1_rules_titles_and_bodies.Count)
+        if (counter >= 0 && counter < genericDict.Count)
         {
-            var elemento = dutch_a1_rules_titles_and_bodies.ElementAt(counter); // Prende l'elemento alla posizione 'counter'
+            var elemento = genericDict.ElementAt(counter); // Prende l'elemento alla posizione 'counter'
 
-            rules_title_txt.text = elemento.Key;   
-            rules_body_txt.text = elemento.Value;  
+            rules_title_txt.text = elemento.Key;
+            rules_body_txt.text = elemento.Value;
         }
-
     }
+
     public void SwitchPageForward()
     {
         page_counter++;
         if(page_counter <= 9)
         {
-            UpdateTextA1_withPages(page_counter);
+            switch (GameManager.Instance.selectedLanguage)
+            {
+                case "Dutch":
+                    switch (GameManager.Instance.selectedDifficulty)
+                    {
+                        case "A1": UpdateTextWithPagesGeneric(page_counter, dutch_a1_rules_titles_and_bodies); break;
+                        case "A2": UpdateTextWithPagesGeneric(page_counter, dutch_a2_rules_titles_and_bodies); break;
+                        default: throw new Exception("Error On selectedDifficulty: ");
+                    }
+                    break;
+                default: throw new Exception("Error On selectedLanguage: ");
+            }
         }
     }
     public void SwitchPageBackward()
@@ -124,7 +149,18 @@ public class RulesManager : MonoBehaviour
         page_counter--;
         if (page_counter >= 0)
         {
-            UpdateTextA1_withPages(page_counter);
+            switch (GameManager.Instance.selectedLanguage)
+            {
+                case "Dutch":
+                    switch (GameManager.Instance.selectedDifficulty)
+                    {
+                        case "A1": UpdateTextWithPagesGeneric(page_counter, dutch_a1_rules_titles_and_bodies); break;
+                        case "A2": UpdateTextWithPagesGeneric(page_counter, dutch_a2_rules_titles_and_bodies); break;
+                        default: throw new Exception("Error On selectedDifficulty: ");
+                    }
+                    break;
+                default: throw new Exception("Error On selectedLanguage: ");
+            }
         }
     }
 }

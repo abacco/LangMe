@@ -10,6 +10,7 @@ public class ShowRulesPanelLogic : MonoBehaviour
     [SerializeField] GameObject rulesPanel;
 
     Dictionary<string, string> dutch_a1_rules_titles_and_bodies = new Dictionary<string, string>();
+    Dictionary<string, string> dutch_a2_rules_titles_and_bodies = new Dictionary<string, string>();
 
     private void Start()
     {
@@ -18,7 +19,8 @@ public class ShowRulesPanelLogic : MonoBehaviour
             case "Dutch":
                 switch (GameManager.Instance.selectedDifficulty)
                 {
-                    case "A1": InitDutchA1Rule(); UpdateRulesList(dutch_a1_rules_titles_and_bodies);  break;
+                    case "A1": InitDutchA1Rule(); UpdateRulesListGeneric(dutch_a1_rules_titles_and_bodies);  break;
+                    case "A2": InitDutchA2Rule(); UpdateRulesListGeneric(dutch_a2_rules_titles_and_bodies);  break;
                     default: throw new Exception("Error On selectedDifficulty: ");
                 }
                 break;
@@ -37,13 +39,18 @@ public class ShowRulesPanelLogic : MonoBehaviour
         dutch_a1_rules_titles_and_bodies.Add("8. Common Prepositions", "In → in (in de kamer = in the room)\r\n\nOp → on (op tafel = on the table)\r\n\nOnder → under (onder de stoel = under the chair)\r\n\nMet → with (met vrienden = with friends)\r\n\nBij → at, near (bij de bakker = at the bakery)");
         dutch_a1_rules_titles_and_bodies.Add("9. Adjectives and Their Placement", "Before the noun: een grote auto (a big car).\r\n\nIf the noun is \"het\" and indefinite, the adjective does not take -e: een groot huis (a big house).");
         dutch_a1_rules_titles_and_bodies.Add("10. Useful Basic Phrases", "Hoi / Hallo → Hi / Hello\r\n\nHoe gaat het? → How are you?\r\n\nGoed, en met jou? → Good, and you?\r\n\nDank je (wel)! → Thank you!\r\n\nAlsjeblieft / Alstublieft → Please\r\n\nIk begrijp het niet → I don’t understand\r\n\nKunt u dat herhalen? → Can you repeat that?");
-        
     }
-    void UpdateRulesList(Dictionary<string, string> dutch_a1_rules_titles_and_bodies)
+
+    public void InitDutchA2Rule()
     {
-        if (dutch_a1_rules_titles_and_bodies.Count > 0)
+        dutch_a2_rules_titles_and_bodies.Add("1. PlaceHolder Title", "PlaceHolder Body");
+    }
+
+    void UpdateRulesListGeneric(Dictionary<string, string> rules_titles_and_bodies_dict)
+    {
+        if (rules_titles_and_bodies_dict.Count > 0)
         {
-            foreach (KeyValuePair<string, string> entry in dutch_a1_rules_titles_and_bodies)
+            foreach (KeyValuePair<string, string> entry in rules_titles_and_bodies_dict)
             {
                 // do something with entry.Value or entry.Key
                 rulesList.text += entry.Key + entry.Value;
@@ -52,6 +59,20 @@ public class ShowRulesPanelLogic : MonoBehaviour
         }
         else { rulesList.text += "Error On Dutch_a1_rules dict - ShowRulesPanelLogic"; }
     }
+
+    //void UpdateRulesList(Dictionary<string, string> dutch_a1_rules_titles_and_bodies)
+    //{
+    //    if (dutch_a1_rules_titles_and_bodies.Count > 0)
+    //    {
+    //        foreach (KeyValuePair<string, string> entry in dutch_a1_rules_titles_and_bodies)
+    //        {
+    //            // do something with entry.Value or entry.Key
+    //            rulesList.text += entry.Key + entry.Value;
+    //            rulesList.text += "\n-----------------------------------";
+    //        }
+    //    }
+    //    else { rulesList.text += "Error On Dutch_a1_rules dict - ShowRulesPanelLogic"; }
+    //}
 
     public void ShowRulesPanel()
     {
