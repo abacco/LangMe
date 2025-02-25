@@ -333,6 +333,16 @@ public class ExerciseLogicScript : MonoBehaviour
                 case 8: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 9: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 case 10: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 11: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 12: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 13: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 14: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 15: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 16: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 17: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 18: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 19: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
+                case 20: UpdateMainUI(solution_counter, correct_answers.ToString()); break;
                 default: SetCorrectPhraseCounter(correct_answers.ToString()); original_phrase.text = "Aumenta i case nello switch!"; break;
             }
         }
