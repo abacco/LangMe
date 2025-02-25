@@ -198,7 +198,7 @@ public class ExerciseLogicScript : MonoBehaviour
         Debug.Log("Decine attuali " + decine + " & solutionCounter On Start: " + GameManager.Instance.solutionCounter);
         string valore = "";
 
-        int[] indici = { 0, 10, 20 };
+        int[] indici = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
 
         switch (GameManager.Instance.selectedLanguage)
         {
@@ -208,20 +208,8 @@ public class ExerciseLogicScript : MonoBehaviour
                     case "A1":
                         PopulateFrasiOriginaliSoluzioni_OlandeseA1();
                         InitializeDutchHashMapA1(frasi_soluzione, frasi_originali);
-                        List<string> chiavi_richieste = indici
-                                                        .Select(index => dutchHashMap_a1[1].ElementAt(index).Key)
-                                                        .ToList();
-                        // Populate Holland A1 Dict
-                        // PopulateFrasiOriginaliSoluzioni_ItalianoA1(frasi_originali_e_soluzioni_italiano_a1);
-                        // InitializeItalianHashMapA1(italianHashMap_a1, frasi_soluzione, frasi_originali);
-                        switch (decine)
-                        {
-                            // 0 decine -> mostro la frase chiave in posizione 0 della lista con solo le frasi chiave in posizione di multipli di 10
-                            // 0 = "0", 1 (decina) = frase in posizione 10 del DIZIONARIO INTERNO!!!
-                            case 0:  valore = chiavi_richieste[0]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
-                            case 1:  valore = chiavi_richieste[1]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
-                            default: throw new Exception("Error On solutionCounter: ");
-                        }
+                        List<string> chiavi_richieste = indici.Select(index => dutchHashMap_a1[1].ElementAt(index).Key).ToList();
+                        AdjustSolutionCounter(decine, valore, chiavi_richieste);
                         break;
                     default: throw new Exception("Error On selectedDifficulty: ");
                 }
@@ -232,7 +220,24 @@ public class ExerciseLogicScript : MonoBehaviour
 
     #region Logic
     
-
+    public void AdjustSolutionCounter(int decine, string valore, List<string> chiavi_richieste)
+    {
+        // questa è la logica del solution_counter < milestone
+        // es. faccio 8 frasi su 10 e NON HO completato un set da 10
+        // devo ripartire da 0
+        // es. faccio 8 frasi su 10 e HO completato UN set da 10
+        // devo ripartire da 10 ---- SE CAPIII ?!?!
+        // QUINDI SE PREVEDO 10 SET DA 10, DEVO METTERE CASE FINO A 10 PERCHè HO 10 DECINE, SE CAPIIII ?!?!
+        switch (decine)
+        {
+            // 0 decine -> mostro la frase chiave in posizione 0 della lista con solo le frasi chiave in posizione di multipli di 10
+            // 0 = "0", 1 (decina) = frase in posizione 10 del DIZIONARIO INTERNO!!!
+            case 0: valore = chiavi_richieste[0]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
+            case 1: valore = chiavi_richieste[1]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
+            //case 2: valore = chiavi_richieste[2]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
+            default: throw new Exception("Error On solutionCounter: ");
+        }
+    }
     void DisableSubmitButtonWhenInputVoid(string phrase_without_blanks)
     {
         if ("".Equals(phrase_without_blanks) || phrase_without_blanks == null) {
