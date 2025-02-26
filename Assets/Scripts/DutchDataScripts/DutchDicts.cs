@@ -1,0 +1,120 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using UnityEngine;
+
+public class DutchDicts : MonoBehaviour
+{
+    #region initializations
+    // A1
+    private static readonly Dictionary<string, string> frasi_originali_e_soluzioni_olandese_a1 = new Dictionary<string, string>
+    {
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Hallo, hoe heet je?", "Hello, what is your name?");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heet " + GameManager.Instance.username, "My name is " + GameManager.Instance.username);
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Waar kom je vandaan?", "Where are you from?");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit Italië", "I come from Italy");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Hoe gaat het met je? ", "How are you?");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Goed, dank je!", "Good, thank you!");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik woon in Nederland", "I live in the Netherlands");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik werk als softwareontwikkelaar", "I work as a software developer");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb een kleine auto", "I have a small car");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Hij woont in een groot huis", "He lives in a big house");
+
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik ga naar de supermarkt", "I am going to the supermarket");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Zij drinkt koffie in de ochtend", "She drinks coffee in the morning");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik spreek een beetje Nederlands", "I speak a little Dutch");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Kun je dat herhalen, alsjeblieft?", "Can you repeat that, please?");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Wij eten pizza vanavond", "We are eating pizza tonight");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Jij leest een boek", "You are reading a book");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Hij slaapt om tien uur", "He sleeps at ten o'clock");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Wij gaan morgen naar Amsterdam", "We are going to Amsterdam tomorrow");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik begrijp het niet", "I don’t understand it");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb geen geld", "I don’t have money");
+        //frasi_originali_e_soluzioni_olandese_a1.Add("Original 20", " Soluzione 20");
+        { "dutchA1_0", "1"},
+        { "dutchA1_1", "1"},
+        { "dutchA1_2", "1"},
+        { "dutchA1_3", "1"},
+        { "dutchA1_4", "1"},
+        { "dutchA1_5", "1"},
+        { "dutchA1_6", "1"},
+        { "dutchA1_7", "1"},
+        { "dutchA1_8", "1"},
+        { "dutchA1_9", "1"},
+        { "dutchA1_10", "1"},
+        { "dutchA1_11", "1"},
+        { "dutchA1_12", "1"},
+        { "dutchA1_13", "1"},
+        { "dutchA1_14", "1"},
+        { "dutchA1_15", "1"},
+        { "dutchA1_16", "1"},
+        { "dutchA1_17", "1"},
+        { "dutchA1_18", "1"},
+        { "dutchA1_19", "1"},
+        { "dutchA1_20", "1"}
+    };
+    private static readonly Dictionary<string, string> dutch_a1_rules_titles_and_bodies = new Dictionary<string, string>
+    {
+        {"1. Pronunciation and Special Sounds ", "The \"g\" sounds like a guttural \"h\" (e.g., goed → /ɣut/).\r\n\nThe \"ui\" sounds similar to the French \"œy\" (e.g., huis → /hœys/).\r\n\nThe \"ij\" and \"ei\" are pronounced like a mix between \"ai\" and \"ei\".\r\n\nThe \"sch\" sounds like an \"s\" followed by a guttural \"ch\" (e.g., school → /sxoːl/)." },
+        {"2. Definite and Indefinite Articles ", "De → Used for most common nouns (de man = the man, de vrouw = the woman).\r\n\nHet → Used for neutral words and diminutives (het huis = the house, het kind = the child).\r\n\nEen → Indefinite article, meaning \"a\" or \"an\" (een boek = a book)." },
+        {"3. Plural Forms of Nouns ", "Add -en: huis → huizen (house → houses), boom → bomen (tree → trees).\r\n\nAdd -s (if the word ends in a vowel or unstressed syllable): auto → auto’s (car → cars)."},
+        {"4. Personal Pronouns ", "I = Ik \n\nYou = Jij / Je\n\nHe/She/It = \tHij / Zij (Ze) / Het\n\nWe = Wij (We)\n\nYou (pl.) = Jullie\n\nThey = Zij (Ze)\n\nNote: \"Jij\" and \"Zij\" are emphasized forms, while \"Je\" and \"Ze\" are neutral and used more often in conversation."},
+        {"5. Present Tense Verb Conjugation ", "Dutch verbs are mostly regular. Example with werken (to work):\r\n\r\n\nIk werk (I work)\r\n\nJij werkt (You work)\r\n\nHij/Zij/Het werkt (He/She/It works)\r\n\nWij/Jullie/Zij werken (We/You/They work)Irregular Verbs (Common Examples)\r\n\nHebben (to have) → ik heb, jij hebt, hij heeft, wij hebben\r\n\nZijn (to be) → ik ben, jij bent, hij is, wij zijn"},
+        {"6. Word Order (SVO and Question Inversion) ", "Regular sentence: Ik werk vandaag (I work today).\r\n\nQuestion: Werk jij vandaag? (Do you work today?) → The verb moves to the beginning.\r\n\nSubordinate clause: Omdat ik vandaag werk (Because I work today) → The verb moves to the end."},
+        {"7. Negation with \"niet\" and \"geen\" ", "Niet negates a verb or adjective: Ik werk niet (I do not work).\r\n\nGeen negates a noun without an article: Ik heb geen auto (I have no car)."},
+        {"8. Common Prepositions ", "In → in (in de kamer = in the room)\r\n\nOp → on (op tafel = on the table)\r\n\nOnder → under (onder de stoel = under the chair)\r\n\nMet → with (met vrienden = with friends)\r\n\nBij → at, near (bij de bakker = at the bakery)"},
+        {"9. Adjectives and Their Placement ", "Before the noun: een grote auto (a big car).\r\n\nIf the noun is \"het\" and indefinite, the adjective does not take -e: een groot huis (a big house)."},
+        {"10. Useful Basic Phrases ", "Hoi / Hallo → Hi / Hello\r\n\nHoe gaat het? → How are you?\r\n\nGoed, en met jou? → Good, and you?\r\n\nDank je (wel)! → Thank you!\r\n\nAlsjeblieft / Alstublieft → Please\r\n\nIk begrijp het niet → I don’t understand\r\n\nKunt u dat herhalen? → Can you repeat that?"},
+    };
+    private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_a1 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_a1 } };
+   
+    // A2
+    private static readonly Dictionary<string, string> frasi_originali_e_soluzioni_olandese_a2 = new Dictionary<string, string>
+    {
+        { "dutchA2_0", "1"},
+        { "dutchA2_1", "1"},
+        { "dutchA2_2", "1"},
+        { "dutchA2_3", "1"},
+        { "dutchA2_4", "1"},
+        { "dutchA2_5", "1"},
+        { "dutchA2_6", "1"},
+        { "dutchA2_7", "1"},
+        { "dutchA2_8", "1"},
+        { "dutchA2_9", "1"},
+        { "dutchA2_10", "1"},
+        { "dutchA2_11", "1"},
+        { "dutchA2_12", "1"},
+        { "dutchA2_13", "1"},
+        { "dutchA2_14", "1"},
+        { "dutchA2_15", "1"},
+        { "dutchA2_16", "1"},
+        { "dutchA2_17", "1"},
+        { "dutchA2_18", "1"},
+        { "dutchA2_19", "1"},
+        { "dutchA2_20", "1"}
+    };
+    private static readonly Dictionary<string, string> dutch_a2_rules_titles_and_bodies = new Dictionary<string, string>
+    {
+        {"1. A2 Rule n.1", "A2 Body Rule n.1" },
+        {"2. A2 Rule n.2", "A2 Body Rule n.2" },
+        {"3. A2 Rule n.3", "A2 Body Rule n.3" },
+        {"4. A2 Rule n.4", "A2 Body Rule n.4" },
+        {"5. A2 Rule n.5", "A2 Body Rule n.5" },
+    };
+    private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_a2 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_a2 } };
+    
+    #endregion
+
+    #region get method
+    // A1
+    public static Dictionary<int, Dictionary<string, string>> DutchHashMap_a1 => dutchHashMap_a1; // dutchHasMap_a2 is the prop to get the entire dict
+    public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_a1 => frasi_originali_e_soluzioni_olandese_a1;
+    public static Dictionary<string, string> Dutch_a1_rules_titles_and_bodies => dutch_a1_rules_titles_and_bodies;
+
+    // A2
+    public static Dictionary<int, Dictionary<string, string>> DutchHashMap_a2 => dutchHashMap_a2; // dutchHasMap_a2 is the prop to get the entire dict
+    public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_a2 => frasi_originali_e_soluzioni_olandese_a2;
+    public static Dictionary<string, string> Dutch_a2_rules_titles_and_bodies => dutch_a2_rules_titles_and_bodies;
+    
+    #endregion
+}

@@ -38,7 +38,9 @@ public class ExerciseLogicScript : MonoBehaviour
 
     #region Dutch Region
     Dictionary<string, string> frasi_originali_e_soluzioni_olandese_a1;
+    Dictionary<string, string> frasi_originali_e_soluzioni_olandese_a2;
     Dictionary<int, Dictionary<string, string>> dutchHashMap_a1;
+    Dictionary<int, Dictionary<string, string>> dutchHashMap_a2;
     #endregion
 
     public int solution_counter = 0; // serve per andare avanti nel dizionario e fare l'update delle frasi soluzione
@@ -74,77 +76,14 @@ public class ExerciseLogicScript : MonoBehaviour
             ShowRefillHeartsPanel();
         }
 
-        //// set UserLifes and text update
-        //userLifes = GameManager.Instance.userLifes;
-        //users_lifes_txt.text = userLifes.ToString();
-        //// set solutionCounter to display first Original Phrase 
-        //solution_counter = GameManager.Instance.solutionCounter;
-        //// set default correct_phrase counter txt
-        //correct_phrases_counter.text = "00";
-
         UpdateVeryFirstOriginalPhrase();
     }
 
-    void Start() { }
-
-    void PopulateFrasiOriginaliSoluzioni_OlandeseA1()
+    void InitializeDutchHashMap(List<string> frasi_soluzione, List<string> frasi_originale, Dictionary<int, Dictionary<string, string>> geenricHashMap, Dictionary<string, string> genericDict)
     {
-        frasi_originali_e_soluzioni_olandese_a1 = new Dictionary<string, string>();
 
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Hallo, hoe heet je?", "Hello, what is your name?");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heet " + GameManager.Instance.username, "My name is " + GameManager.Instance.username);
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Waar kom je vandaan?", "Where are you from?");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik kom uit Italië", "I come from Italy");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Hoe gaat het met je? ", "How are you?");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Goed, dank je!", "Good, thank you!");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik woon in Nederland", "I live in the Netherlands");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik werk als softwareontwikkelaar", "I work as a software developer");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb een kleine auto", "I have a small car");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Hij woont in een groot huis", "He lives in a big house");
-
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik ga naar de supermarkt", "I am going to the supermarket");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Zij drinkt koffie in de ochtend", "She drinks coffee in the morning");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik spreek een beetje Nederlands", "I speak a little Dutch");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Kun je dat herhalen, alsjeblieft?", "Can you repeat that, please?");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Wij eten pizza vanavond", "We are eating pizza tonight");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Jij leest een boek", "You are reading a book");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Hij slaapt om tien uur", "He sleeps at ten o'clock");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Wij gaan morgen naar Amsterdam", "We are going to Amsterdam tomorrow");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik begrijp het niet", "I don’t understand it");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb geen geld", "I don’t have money");
-        //frasi_originali_e_soluzioni_olandese_a1.Add("Original 20", " Soluzione 20");
-
-        frasi_originali_e_soluzioni_olandese_a1.Add("1", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("2", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("3", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("4", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("5", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("6", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("7", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("8", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("9", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("10", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("11", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("12", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("13", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("14", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("15", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("16", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("17", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("18", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("19", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("20", "1");
-        frasi_originali_e_soluzioni_olandese_a1.Add("21", "1");
-
-
-    }
-    void InitializeDutchHashMapA1(List<string> frasi_soluzione, List<string> frasi_originale)
-    {
-        dutchHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
-        dutchHashMap_a1.Add(1, frasi_originali_e_soluzioni_olandese_a1);
-        
         // inizializzazione frasi originali e soluzioni
-        foreach (var coppia_frasi in dutchHashMap_a1.Values)
+        foreach (var coppia_frasi in geenricHashMap.Values)
         {
             Debug.Log("------------");
             foreach (var singola_frase in coppia_frasi)
@@ -157,7 +96,7 @@ public class ExerciseLogicScript : MonoBehaviour
         }
     }
     #endregion
-    
+
     /*
     in base al solution counter, al livello di difficoltà scelto e alla lingua scelta(?)
     devo far vedere la prima frase del set di esercizi da mostrare
@@ -198,7 +137,7 @@ public class ExerciseLogicScript : MonoBehaviour
         Debug.Log("Decine attuali " + decine + " & solutionCounter On Start: " + GameManager.Instance.solutionCounter);
         string valore = "";
 
-        int[] indici = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+        int[] indici = { 0, 10, 20 };
 
         switch (GameManager.Instance.selectedLanguage)
         {
@@ -206,10 +145,14 @@ public class ExerciseLogicScript : MonoBehaviour
                 switch (GameManager.Instance.selectedDifficulty)
                 {
                     case "A1":
-                        PopulateFrasiOriginaliSoluzioni_OlandeseA1();
-                        InitializeDutchHashMapA1(frasi_soluzione, frasi_originali);
-                        List<string> chiavi_richieste = indici.Select(index => dutchHashMap_a1[1].ElementAt(index).Key).ToList();
+                        InitializeDutchHashMap(frasi_soluzione, frasi_originali, DutchDicts.DutchHashMap_a1, DutchDicts.Frasi_originali_e_soluzioni_olandese_a1);
+                        List<string> chiavi_richieste = indici.Select(index => DutchDicts.DutchHashMap_a1[1].ElementAt(index).Key).ToList();
                         AdjustSolutionCounter(decine, valore, chiavi_richieste);
+                        break;
+                    case "A2":
+                        InitializeDutchHashMap(frasi_soluzione, frasi_originali, DutchDicts.DutchHashMap_a2 ,DutchDicts.Frasi_originali_e_soluzioni_olandese_a2);
+                        List<string> chiavi_richieste2 = indici.Select(index => DutchDicts.DutchHashMap_a2[1].ElementAt(index).Key).ToList();
+                        AdjustSolutionCounter(decine, valore, chiavi_richieste2);
                         break;
                     default: throw new Exception("Error On selectedDifficulty: ");
                 }
