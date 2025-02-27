@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class DutchDicts : MonoBehaviour
@@ -31,7 +29,8 @@ public class DutchDicts : MonoBehaviour
         //frasi_originali_e_soluzioni_olandese_a1.Add("Ik begrijp het niet", "I don’t understand it");
         //frasi_originali_e_soluzioni_olandese_a1.Add("Ik heb geen geld", "I don’t have money");
         //frasi_originali_e_soluzioni_olandese_a1.Add("Original 20", " Soluzione 20");
-        { "dutchA1_0", "1"},
+
+        { "dutchA1_0", "1"}, // reset
         { "dutchA1_1", "1"},
         { "dutchA1_2", "1"},
         { "dutchA1_3", "1"},
@@ -41,7 +40,8 @@ public class DutchDicts : MonoBehaviour
         { "dutchA1_7", "1"},
         { "dutchA1_8", "1"},
         { "dutchA1_9", "1"},
-        { "dutchA1_10", "1"},
+
+        { "dutchA1_10", "1"}, // reset
         { "dutchA1_11", "1"},
         { "dutchA1_12", "1"},
         { "dutchA1_13", "1"},
@@ -51,7 +51,95 @@ public class DutchDicts : MonoBehaviour
         { "dutchA1_17", "1"},
         { "dutchA1_18", "1"},
         { "dutchA1_19", "1"},
-        { "dutchA1_20", "1"}
+
+        { "dutchA1_20", "1"} // reset
+        //{ "dutchA1_21", "1"},
+        //{ "dutchA1_22", "1"},
+        //{ "dutchA1_23", "1"},
+        //{ "dutchA1_24", "1"},
+        //{ "dutchA1_25", "1"},
+        //{ "dutchA1_26", "1"},
+        //{ "dutchA1_27", "1"},
+        //{ "dutchA1_28", "1"},
+        //{ "dutchA1_29", "1"},
+
+        //{ "dutchA1_30", "1"}, // reset
+        //{ "dutchA1_31", "1"},
+        //{ "dutchA1_32", "1"},
+        //{ "dutchA1_33", "1"},
+        //{ "dutchA1_34", "1"},
+        //{ "dutchA1_35", "1"},
+        //{ "dutchA1_36", "1"},
+        //{ "dutchA1_37", "1"},
+        //{ "dutchA1_38", "1"},
+        //{ "dutchA1_39", "1"},
+
+        //{ "dutchA1_40", "1"}, // reset
+        //{ "dutchA1_41", "1"},
+        //{ "dutchA1_42", "1"},
+        //{ "dutchA1_43", "1"},
+        //{ "dutchA1_44", "1"},
+        //{ "dutchA1_45", "1"},
+        //{ "dutchA1_46", "1"},
+        //{ "dutchA1_47", "1"},
+        //{ "dutchA1_48", "1"},
+        //{ "dutchA1_49", "1"},
+
+
+        //{ "dutchA1_50", "1"}, // reset
+        //{ "dutchA1_51", "1"},
+        //{ "dutchA1_52", "1"},
+        //{ "dutchA1_53", "1"},
+        //{ "dutchA1_54", "1"},
+        //{ "dutchA1_55", "1"},
+        //{ "dutchA1_56", "1"},
+        //{ "dutchA1_57", "1"},
+        //{ "dutchA1_58", "1"},
+        //{ "dutchA1_59", "1"},
+
+        //{ "dutchA1_60", "1"}, // reset
+        //{ "dutchA1_61", "1"},
+        //{ "dutchA1_62", "1"},
+        //{ "dutchA1_63", "1"},
+        //{ "dutchA1_64", "1"},
+        //{ "dutchA1_65", "1"},
+        //{ "dutchA1_66", "1"},
+        //{ "dutchA1_67", "1"},
+        //{ "dutchA1_68", "1"},
+        //{ "dutchA1_69", "1"},
+
+        //{ "dutchA1_70", "1"}, // reset
+        //{ "dutchA1_71", "1"},
+        //{ "dutchA1_72", "1"},
+        //{ "dutchA1_73", "1"},
+        //{ "dutchA1_74", "1"},
+        //{ "dutchA1_75", "1"},
+        //{ "dutchA1_76", "1"},
+        //{ "dutchA1_77", "1"},
+        //{ "dutchA1_78", "1"},
+        //{ "dutchA1_79", "1"},
+
+        //{ "dutchA1_80", "1"}, // reset
+        //{ "dutchA1_81", "1"},
+        //{ "dutchA1_82", "1"},
+        //{ "dutchA1_83", "1"},
+        //{ "dutchA1_84", "1"},
+        //{ "dutchA1_85", "1"},
+        //{ "dutchA1_86", "1"},
+        //{ "dutchA1_87", "1"},
+        //{ "dutchA1_88", "1"},
+        //{ "dutchA1_89", "1"},
+
+        //{ "dutchA1_90", "1"}, // reset
+        //{ "dutchA1_91", "1"},
+        //{ "dutchA1_92", "1"},
+        //{ "dutchA1_93", "1"},
+        //{ "dutchA1_94", "1"},
+        //{ "dutchA1_95", "1"},
+        //{ "dutchA1_96", "1"},
+        //{ "dutchA1_97", "1"},
+        //{ "dutchA1_98", "1"},
+        //{ "dutchA1_99", "1"},
     };
     private static readonly Dictionary<string, string> dutch_a1_rules_titles_and_bodies = new Dictionary<string, string>
     {
@@ -81,6 +169,7 @@ public class DutchDicts : MonoBehaviour
         { "dutchA2_7", "1"},
         { "dutchA2_8", "1"},
         { "dutchA2_9", "1"},
+
         { "dutchA2_10", "1"},
         { "dutchA2_11", "1"},
         { "dutchA2_12", "1"},
@@ -91,6 +180,7 @@ public class DutchDicts : MonoBehaviour
         { "dutchA2_17", "1"},
         { "dutchA2_18", "1"},
         { "dutchA2_19", "1"},
+
         { "dutchA2_20", "1"}
     };
     private static readonly Dictionary<string, string> dutch_a2_rules_titles_and_bodies = new Dictionary<string, string>
@@ -102,7 +192,6 @@ public class DutchDicts : MonoBehaviour
         {"5. A2 Rule n.5", "A2 Body Rule n.5" },
     };
     private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_a2 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_a2 } };
-    
     #endregion
 
     #region get method

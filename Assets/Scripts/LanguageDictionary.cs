@@ -18,6 +18,7 @@ public class LanguageDictionary : MonoBehaviour
     [SerializeField] GameObject wordFoundPanel;
     [SerializeField] GameObject wordNotFoundPanel;
     [SerializeField] GameObject dictionaryPanel;
+    [SerializeField] GameObject inputVoidPanel;
     [SerializeField] TMP_Text wordList;
     [SerializeField] TMP_Text keyFound;
     [SerializeField] TMP_Text valueFound;
@@ -159,6 +160,7 @@ public class LanguageDictionary : MonoBehaviour
             }
         }else
         {
+            ShowInputVoidPanel();
             Debug.Log("Input Field Is Empty");
         }
     }
@@ -204,7 +206,6 @@ public class LanguageDictionary : MonoBehaviour
     {
         wordFoundPanel.SetActive(false);
     }
-
     public void CloseWordNotFinder()
     {
         wordNotFoundPanel.SetActive(false);
@@ -216,6 +217,14 @@ public class LanguageDictionary : MonoBehaviour
     public void CloseDictionary()
     {
         dictionaryPanel.SetActive(false);
+    }
+    public void CloseInputVoidPanel() // on find
+    {
+        inputVoidPanel.SetActive(false);
+    }
+    public void ShowInputVoidPanel() // on find
+    {
+        inputVoidPanel.SetActive(true);
     }
 
 

@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 public class Navigation : MonoBehaviour
 {
     [SerializeField] GameObject openScenePanel;
+    [SerializeField] GameObject warningOfLostProgressPanel;
     [SerializeField] TMP_Text scene_selected_text;
-
+    bool warningPanelYesClick = false;
     // forse è inutile
     public string[] scenesName = {
         "1 - Startup",
@@ -35,15 +36,41 @@ public class Navigation : MonoBehaviour
     {
         openScenePanel.SetActive(false);
     }
+
+    public void CloseWarningProgressLostPanel()
+    {
+        warningOfLostProgressPanel.SetActive(false);
+    }
+    public void OpenWarningProgressLostPanel()
+    {
+        warningOfLostProgressPanel.SetActive(true);
+    }
+
     public void YesSelected()
     {
         string s = scene_selected_text.text;
-        
+
         foreach (string s2 in scenesName)
         {
             if (s2.ToLower().Contains(s.ToLower()))
             {
-                MoveToScene(s2);
+                if (s2.Contains("Difficulty") && "7 - Home".Equals(SceneManager.GetActiveScene().name))
+                {
+                    GameManager.Instance.solutionCounter = 0;
+                    GameManager.Instance.SaveData();
+                    warningOfLostProgressPanel.SetActive(true);
+                    if (warningPanelYesClick)
+                    {
+                        MoveToScene(s2);
+                    } else
+                    {
+                        warningPanelYesClick = true;
+                    }
+                }
+                else
+                {
+                    MoveToScene(s2);
+                }
                 //SceneManager.LoadScene(s2);
             }
         }
