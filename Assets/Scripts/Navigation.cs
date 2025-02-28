@@ -54,7 +54,7 @@ public class Navigation : MonoBehaviour
         {
             if (s2.ToLower().Contains(s.ToLower()))
             {
-                if (s2.Contains("Difficulty") && "7 - Home".Equals(SceneManager.GetActiveScene().name))
+                if (s.Contains("Difficulty") && "7 - Home".Equals(SceneManager.GetActiveScene().name))
                 {
                     GameManager.Instance.solutionCounter = 0;
                     GameManager.Instance.SaveData();
