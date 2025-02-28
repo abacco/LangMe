@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -108,12 +109,12 @@ public class GameManager : MonoBehaviour
 
     public void GameManagerDebugLogData() 
     {
+        Debug.Log("GAME MANAGER: I AM IN THE -> " + SceneManager.GetActiveScene().name + "<-------------------------");
         Debug.Log("Data Loaded from Encrypted JSon ----------------");
         Debug.Log("selectedLanguage: " + this.selectedLanguage);
         Debug.Log("userLifes: " + this.userLifes);
         Debug.Log("selectedDifficulty: " + this.selectedDifficulty);
         Debug.Log("username: " + this.username);
-        Debug.Log("-----------------------------------------------");
         Debug.Log("userNationality: " + this.userNationality);
         Debug.Log("-----------------------------------------------");
     }

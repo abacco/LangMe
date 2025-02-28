@@ -68,7 +68,7 @@ public class ExerciseLogicScript : MonoBehaviour
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
 
-        if(userLifes <= 1)
+        if(userLifes <= 0)
         {
             userLifes = 0;
             GameManager.Instance.userLifes = 0;
