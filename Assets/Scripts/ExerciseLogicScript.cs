@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEditor;
@@ -50,8 +51,11 @@ public class ExerciseLogicScript : MonoBehaviour
 
     int how_many_times_solution_clicked = 0;
     int lostStar = 0;
-    int earnedStar = 0;
+    int earnedStar = 3;
 
+    [SerializeField] Image star1_img;
+    [SerializeField] Image star2_img;
+    [SerializeField] Image star3_img;
     #endregion
 
     #region Initialization
@@ -466,6 +470,30 @@ public class ExerciseLogicScript : MonoBehaviour
     private void ShowWellDonePanel()
     {
         well_done_panel.SetActive(true);
+        Debug.Log("earnedStar: " + earnedStar);
+        switch (earnedStar) // nella versione con UI seria, al posto di cambiare colore, appaiono semplicemente (tipo scale from 0 to 1)
+        {
+            case 0:
+                star1_img.color = Color.white;
+                star2_img.color = Color.white;
+                star3_img.color = Color.white;
+                break;
+            case 1:
+                star1_img.color = Color.yellow;
+                star2_img.color = Color.white;
+                star3_img.color = Color.white;
+                break;
+            case 2:
+                star1_img.color = Color.yellow;
+                star2_img.color = Color.yellow;
+                star3_img.color = Color.white;
+                break;
+            case 3:
+                star1_img.color = Color.yellow;
+                star2_img.color = Color.yellow;
+                star3_img.color = Color.yellow;
+                break;
+        }
     }
 
     public void ShowRefillHeartsPanel()
@@ -518,12 +546,11 @@ public class ExerciseLogicScript : MonoBehaviour
             lostStar++;
             Debug.Log("Star System - lostStar: " + lostStar);
 
-            if (lostStar == 1)
+            if (lostStar == 1 || lostStar == 2 || lostStar == 3)
             {
                 earnedStar = 3 - lostStar;
                 Debug.Log("Star System - earnedStar: " + earnedStar);
             }
-
         }
     }
     public void ReturnHome()
