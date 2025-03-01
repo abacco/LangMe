@@ -45,8 +45,12 @@ public class ExerciseLogicScript : MonoBehaviour
 
     public int solution_counter = 0; // serve per andare avanti nel dizionario e fare l'update delle frasi soluzione
     int correct_answers = 0; // tiene conto solo delle risposte giuste date
-
     public bool set_completed;
+
+
+    int how_many_times_solution_clicked = 0;
+    int lostStar = 0;
+    int earnedStar = 0;
 
     #endregion
 
@@ -230,6 +234,13 @@ public class ExerciseLogicScript : MonoBehaviour
                 if (isCorrect/*string.Equals(solution.ToLower(), phrase_without_blanks.ToLower(), StringComparison.OrdinalIgnoreCase)*/)
                 {
                     correct_answers++;
+                    if (correct_answers == 3) {
+                        if (how_many_times_solution_clicked == 3)
+                        {
+                            earnedStar = 3 - lostStar;
+                            Debug.Log("earnedStar: " + earnedStar);
+                        }
+                    }
                     //Debug.Log("correct_answers:" + correct_answers);
                     //Debug.Log("soluzione ok - aumento il counter globale");
                     solution_counter++; 
@@ -477,6 +488,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
     public void CloseSolutionPanel()
     {
+        StarSystemLogic(); // nello script dell'ad era un casino perchè ad esempio la seconda volta che clicco andava diretto a 3 comunque roba di ciclo di vita che non ho capito bene ancora
         solution_panel.SetActive(false);
     }
 
@@ -496,6 +508,24 @@ public class ExerciseLogicScript : MonoBehaviour
         return frasi_soluzione[solution_counter];
     }
 
+    public void StarSystemLogic()
+    {
+        how_many_times_solution_clicked++;
+        Debug.Log("Star System - how_many_times_solution_clicked: " + how_many_times_solution_clicked);
+        if (how_many_times_solution_clicked == 3) // conti da 0 bro
+        {
+            how_many_times_solution_clicked = 0;
+            lostStar++;
+            Debug.Log("Star System - lostStar: " + lostStar);
+
+            if (lostStar == 1)
+            {
+                earnedStar = 3 - lostStar;
+                Debug.Log("Star System - earnedStar: " + earnedStar);
+            }
+
+        }
+    }
     public void ReturnHome()
     {
         // quando clicco su home

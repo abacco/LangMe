@@ -2785,7 +2785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &581636248
 Transform:
   m_ObjectHideFlags: 0
@@ -4411,6 +4411,9 @@ MonoBehaviour:
   realSolutionText: {fileID: 692585522}
   _androidAdUnitId: Rewarded_Android
   _iOSAdUnitId: Rewarded_iOS
+  how_many_times_solution_clicked: 0
+  maxStarNumber: 3
+  lostStar: 0
 --- !u!1 &823990176
 GameObject:
   m_ObjectHideFlags: 0
@@ -8144,6 +8147,7 @@ MonoBehaviour:
   wrong_text: {fileID: 501361433}
   solution_counter: 0
   set_completed: 0
+  solutionAdGameObject: {fileID: 795591198}
 --- !u!4 &1395864351
 Transform:
   m_ObjectHideFlags: 0
@@ -12454,6 +12458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openScenePanel: {fileID: 0}
+  warningOfLostProgressPanel: {fileID: 0}
   scene_selected_text: {fileID: 0}
   scenesName:
   - 1 - Startup

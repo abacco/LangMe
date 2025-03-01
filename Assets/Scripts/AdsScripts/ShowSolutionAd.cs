@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class ShowSolutionAd : MonoBehaviour ,IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -31,7 +32,8 @@ public class ShowSolutionAd : MonoBehaviour ,IUnityAdsLoadListener, IUnityAdsSho
     public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Debug.Log("Loading Ad: " + _adUnitId);
+        Debug.Log("Loading SOLUTION Ad: " + _adUnitId);
+
         Advertisement.Load(_adUnitId, this);
     }
 
