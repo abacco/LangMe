@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,9 +9,12 @@ public class GameManager : MonoBehaviour
     public string selectedLanguage;
     public int userLifes;
     public int solutionCounter;
+    public int decine; // per lo star system
     public string selectedDifficulty;
     public string username;
     public string userNationality;
+
+    public GameData.LanguageData LanguageDataStars;
 
     // Percorso del file JSON
     private string filePath;
@@ -50,11 +50,20 @@ public class GameManager : MonoBehaviour
             selectedDifficulty = selectedDifficulty,
             username = username,
             solutionCounter = solutionCounter,
-            userNationality = userNationality
+            userNationality = userNationality,
+            decine = decine,
+
+            LanguageDataStars = LanguageDataStars,
         };
 
         string json = JsonUtility.ToJson(gameData, true); // `true` per formattare bene il JSON
+
+        //string json = Unity.Plastic.Newtonsoft.Json.JsonConvert.SerializeObject(gameData, Unity.Plastic.Newtonsoft.Json.Formatting.Indented);
+        Debug.Log("JSON da salvare: -----------" + json);
+
         string encryptedJson = EncryptionHelper.Encrypt(json); // Cripta il JSON
+
+
         File.WriteAllText(filePath, encryptedJson);
      
         Debug.Log("Dati salvati in JSON criptato." + filePath);
@@ -75,6 +84,9 @@ public class GameManager : MonoBehaviour
             username = gameData.username;
             solutionCounter = gameData.solutionCounter;
             userNationality = gameData.userNationality;
+            decine = gameData.decine;
+            
+            LanguageDataStars = gameData.LanguageDataStars;
             GameManagerDebugLogData();
         }
         else
@@ -86,7 +98,11 @@ public class GameManager : MonoBehaviour
             username = "default username";
             solutionCounter = 0;
             userNationality = "English";
-            //SaveData();  // Salva subito i dati di default, così il file verrà creato
+            decine = 0;
+
+            LanguageDataStars = new GameData.LanguageData(
+                    "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
+            GameManagerDebugLogData();
         }
     }
 
@@ -116,6 +132,56 @@ public class GameManager : MonoBehaviour
         Debug.Log("selectedDifficulty: " + this.selectedDifficulty);
         Debug.Log("username: " + this.username);
         Debug.Log("userNationality: " + this.userNationality);
+        Debug.Log("decine: " + this.decine); // per lo star system
+        Debug.Log("LanguageDataStars: " + this.LanguageDataStars.ToString()); // per lo star system
         Debug.Log("-----------------------------------------------");
     }
+
+    // prova logica -> LanguageProgressionScript
+    // dutch, a1
+    // a1, node_1
+    // a1, node_2
+    // a1, node_3
+    // a1, .....
+    // a1, node_10
+    // dutch, a2
+    // a1, node_1
+    // a1, node_2
+    // a1, node_3
+    // a1, .....
+    // a1, node_10
+    /*
+        {
+            "dutch", 
+                    {"A1", 
+                        {
+                        "Node1", 1    
+                        },
+                        {
+                        "Node2", 3    
+                        },
+                    },
+                    {
+                    "A2",
+                        {
+                        "Node1", 1    
+                        },
+                        {
+                        "Node2", 3    
+                        },
+                    },
+                    {....},
+                    {
+                    "C2",
+                        {
+                        "Node1", 1    
+                        },
+                        {
+                        "Node2", 3    
+                        },
+                    },   
+        }  
+    */
+
+    // node1, earnedStar
 }

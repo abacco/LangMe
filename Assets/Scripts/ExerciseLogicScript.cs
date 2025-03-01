@@ -6,9 +6,12 @@ using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static GameData;
+using static Unity.VisualScripting.Icons;
 
 public class ExerciseLogicScript : MonoBehaviour
 {
@@ -56,6 +59,10 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] Image star1_img;
     [SerializeField] Image star2_img;
     [SerializeField] Image star3_img;
+
+    int decine;
+    GameData gameData;
+    private LanguageData languageData;
     #endregion
 
     #region Initialization
@@ -83,6 +90,21 @@ public class ExerciseLogicScript : MonoBehaviour
             users_lifes_txt.text = 0.ToString();
             ShowRefillHeartsPanel();
         }
+
+        gameData = new GameData();
+
+        //GameData.NodeData nodeData = new GameData.NodeData();
+        //nodeData.Stars = -1;
+        //nodeData.NodeName = "Prova";
+
+        //GameData.DifficultyData difficultyData = new GameData.DifficultyData();
+
+
+        //GameData.LanguageData languageData = 
+        //    new GameData.LanguageData("ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
+
+
+        GameManager.Instance.SaveData();
 
         UpdateVeryFirstOriginalPhrase();
     }
@@ -141,7 +163,7 @@ public class ExerciseLogicScript : MonoBehaviour
     */
     public void UpdateVeryFirstOriginalPhrase()
     {
-        int decine = GameManager.Instance.solutionCounter / 10;
+        /*int */decine = GameManager.Instance.solutionCounter / 10;
         Debug.Log("Decine attuali " + decine + " & solutionCounter On Start: " + GameManager.Instance.solutionCounter);
         string valore = "";
 
@@ -155,7 +177,11 @@ public class ExerciseLogicScript : MonoBehaviour
                     case "A1":
                         InitializeDutchHashMap(frasi_soluzione, frasi_originali, DutchDicts.DutchHashMap_a1, DutchDicts.Frasi_originali_e_soluzioni_olandese_a1);
                         List<string> chiavi_richieste = indici.Select(index => DutchDicts.DutchHashMap_a1[1].ElementAt(index).Key).ToList();
+
+
+
                         AdjustSolutionCounter(decine, valore, chiavi_richieste);
+                       
                         break;
                     case "A2":
                         InitializeDutchHashMap(frasi_soluzione, frasi_originali, DutchDicts.DutchHashMap_a2 ,DutchDicts.Frasi_originali_e_soluzioni_olandese_a2);
@@ -185,7 +211,7 @@ public class ExerciseLogicScript : MonoBehaviour
             // 0 = "0", 1 (decina) = frase in posizione 10 del DIZIONARIO INTERNO!!!
             case 0: valore = chiavi_richieste[0]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
             case 1: valore = chiavi_richieste[1]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
-            //case 2: valore = chiavi_richieste[2]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
+            case 2: valore = chiavi_richieste[2]; original_phrase.text = valore; /*Debug.Log("VALORE: " + valore + " & " + solution_counter);*/ break;
             default: throw new Exception("Error On solutionCounter: ");
         }
     }
@@ -467,31 +493,54 @@ public class ExerciseLogicScript : MonoBehaviour
         warning_panel.SetActive(false);
     }
 
+
+
     private void ShowWellDonePanel()
     {
         well_done_panel.SetActive(true);
         Debug.Log("earnedStar: " + earnedStar);
+        // trova il modo di dire che stavi facendo il primo set da 10 dell'a1, o il 3rzo dell'a2 etc...
+        // provo in base alle decine, decine 0, nessuno
+        // decine = 1, al primo nodo del linguaggio detectato e difficoltà detectata devo mettere le earnedStar
+
         switch (earnedStar) // nella versione con UI seria, al posto di cambiare colore, appaiono semplicemente (tipo scale from 0 to 1)
         {
             case 0:
                 star1_img.color = Color.white;
                 star2_img.color = Color.white;
                 star3_img.color = Color.white;
+                // qua devo salvare il fatto che 
+                // per selectedLanguage
+                // per selectedDifficulty
+                // per n. decine
+                // tengo 0 star
+                // dutch,
+                // a1
+                // nodi
+                // dizionario<lingua, dizionario<difficoltà, dizionario<nodo, earnedStar>>>
+
                 break;
             case 1:
                 star1_img.color = Color.yellow;
                 star2_img.color = Color.white;
                 star3_img.color = Color.white;
+
                 break;
             case 2:
                 star1_img.color = Color.yellow;
                 star2_img.color = Color.yellow;
                 star3_img.color = Color.white;
+
                 break;
             case 3:
                 star1_img.color = Color.yellow;
                 star2_img.color = Color.yellow;
                 star3_img.color = Color.yellow;
+
+                languageData = new GameData.LanguageData(
+                    "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
+                gameData.LanguageDataStars = languageData;
+                GameManager.Instance.SaveData();
                 break;
         }
     }
