@@ -1,134 +1,402 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static GameData;
 
 public class ExerciseLogicScript : MonoBehaviour
 {
     #region Instances
+    string s;
     [SerializeField] Button submit_answer_btn;
+    [SerializeField] Button next_exercise_btn;
     
     [SerializeField] TMP_InputField inputfield;
     [SerializeField] TMP_Text original_phrase;
     [SerializeField] TMP_Text correct_phrases_counter;
+    [SerializeField] TMP_Text diffString; // for levenshteinPanel
+
+    public int userLifes;
+    [SerializeField] TMP_Text users_lifes_txt;
     
     [SerializeField] GameObject wrong_answer_panel;
+    [SerializeField] GameObject well_done_panel;
+    [SerializeField] GameObject solution_panel;
+    [SerializeField] GameObject warning_panel;
+    [SerializeField] GameObject levenshteinPanel;
+    [SerializeField] GameObject refillHeartsPanel;
     [SerializeField] TMP_Text wrong_text;
 
 
     List<string> frasi_soluzione;
     List<string> frasi_originali;
 
-    Dictionary<string, string> frasi_originali_e_soluzioni;
-    Dictionary<int, Dictionary<string, string>> italianHashMap_a1;
+    public int solution_counter = 0; // serve per andare avanti nel dizionario e fare l'update delle frasi soluzione
+    int correct_answers = 0; // tiene conto solo delle risposte giuste date
+    public bool set_completed;
 
-    public int solution_counter = 0;
-    int correct_answers = 0;
+
+    int how_many_times_solution_clicked = 0;
+    int lostStar = 0;
+    int earnedStar = 3;
+
+    [SerializeField] Image star1_img; // refactor
+    [SerializeField] Image star2_img;
+    [SerializeField] Image star3_img;
+
+    int decine;
+    GameData gameData;
+    ShowSolutionAd showSolutionAd;
+    private LanguageData languageData;
     #endregion
 
     #region Initialization
-    void Start() // dict initialization
+    // Awake just being called before Start and while loading unity player where Start is called when game is loaded. source: Unity Staff
+    private void Awake()
     {
+        // load previous data from JSon
+        GameManager.Instance.LoadData();
+        
+        // set UserLifes and text update
+        userLifes = GameManager.Instance.userLifes;
+        users_lifes_txt.text = userLifes.ToString();
+        // set solutionCounter to display first Original Phrase 
+        solution_counter = GameManager.Instance.solutionCounter;
+        // set default correct_phrase counter txt
+        correct_phrases_counter.text = "00";
+
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
 
-        frasi_originali_e_soluzioni = new Dictionary<string, string>();
-        frasi_originali_e_soluzioni.Add("Original Phrase", "Frase Originale");
-        frasi_originali_e_soluzioni.Add("Original Phrase 2 ", "Frase Originale 2");
-        frasi_originali_e_soluzioni.Add("Original Phrase 3 ", "Frase Originale 3"); // ne fai 500 e poi prendi a caso?
+        if(userLifes <= 0)
+        {
+            userLifes = 0;
+            GameManager.Instance.userLifes = 0;
+            users_lifes_txt.text = 0.ToString();
+            ShowRefillHeartsPanel();
+        }
 
-        italianHashMap_a1 = new Dictionary<int, Dictionary<string, string>>();
-        italianHashMap_a1.Add(1, frasi_originali_e_soluzioni); // identifica il primo esercizio dell'A1
-
-        //string frase_soluzione = "";
-
-        //foreach (var coppia_frasi in italianHashMap_a1.Values)
-        //{
-        //    Debug.Log("------------");
-        //    foreach (var singola_frase in coppia_frasi)
-        //    {
-        //        Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
-        //        Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
-        //        frase_soluzione = singola_frase.Value;
-        //    }
-        //}
-        // mostro la frase da tradurre
-        // input immesso deve essere uguale alla soluzione
-        //string input = "Frase Originale";
-        //if (input.Equals(frase_soluzione))
-        //{
-        //    Debug.Log("Esercizio Ok");
-        //}
-        //else { Debug.Log("numVite--"); }
+        gameData = new GameData();
+        GameManager.Instance.SaveData();
+        showSolutionAd = GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>();
+        UpdateVeryFirstOriginalPhrase();
+    }
+    void InitializeLanguageHashMap(List<string> frasiSoluzione, List<string> frasiOriginale,
+                               Dictionary<int, Dictionary<string, string>> genericHashMap,
+                               Dictionary<string, string> genericDict)
+    {
+        foreach (var coppiaFrasi in genericHashMap.Values)
+        {
+            Debug.Log("------------");
+            foreach (var singolaFrase in coppiaFrasi)
+            {
+                frasiOriginale.Add(singolaFrase.Key);
+                frasiSoluzione.Add(singolaFrase.Value);
+            }
+        }
     }
     #endregion
 
-    #region Logic
-    private void Update()
-    {
-        DisableSubmitButtonWhenInputVoid();
-    }
+    /*
+    in base al solution counter, al livello di difficoltà scelto e alla lingua scelta(?)
+    devo far vedere la prima frase del set di esercizi da mostrare
+    se gli esercizi sono in divisi in blocchettini da 10 frasi ed ho 20 frasi
+    -> mostra la prima frase del primo blocchettino e la prima frase del secondo blocchettino
+    per tenere traccia del blocchettino da cui devo partire, il solution counter è a multipli di 10
+    se GameManager.Instance.solution_counter == 0 -> sono nel PRIMO blocchettino del dizionario bla bla...
+    se GameManager.Instance.solution_counter == 10 -> sono nel SECONDO blocchettino del dizionario bla bla...
 
-    void DisableSubmitButtonWhenInputVoid()
+
+    esempio:
+        base: devo far vedere la prima frase del 1 set A1 di lingua INGLESE
+        induzione: devo far vedere la prima frase del 2 set di A1 di lingua INGLESE     
+    NOTA BENE:
+    -  clicco Home || Chiudo L'app || viteEsaurite 
+        -> check se il solutionCounter è un multiplo di 0
+            -> se non lo è 
+                   -> devo trovare il modo di resettarlo all'ultimo multiplo 
+        Esempio
+            perdo le vite quando sono alla frase n. 8 -> il solutionCounter DEVE essere 0!
+            -> 8 è multiplo di 10? 
+
+            è sempre il multiplo di 10 precedente....
+            18 - la differenza tra 18 e 8
+            contare il numero di decine in 18
+            se è una decina -> allora il solution counter è 10
+            se sono due decine -> allora il solution counter è 20
+
+            come conto il numero di decine? 
+            es. ho 10
+                10 / 10 = 1
+                20 / 10 = 2
+                25 / 10 = 3.5 -> 3
+    */
+
+    public void UpdateVeryFirstOriginalPhrase()
     {
-        if (inputfield.text.Equals("")) { submit_answer_btn.enabled = false; }
-        else { submit_answer_btn.enabled = true; }
+        int decine = GameManager.Instance.solutionCounter / 10;
+        Debug.Log($"Decine attuali {decine} & solutionCounter On Start: {GameManager.Instance.solutionCounter}");
+
+        Dictionary<string, (Dictionary<int, Dictionary<string, string>> hashMap, Dictionary<string, string> dict)> languageDictionaries =
+            new Dictionary<string, (Dictionary<int, Dictionary<string, string>>, Dictionary<string, string>)>
+            {
+            { "Dutch_A1", (DutchDicts.DutchHashMap_a1, DutchDicts.Frasi_originali_e_soluzioni_olandese_a1) },
+            { "Dutch_A2", (DutchDicts.DutchHashMap_a2, DutchDicts.Frasi_originali_e_soluzioni_olandese_a2) },
+            { "Dutch_B1", (DutchDicts.DutchHashMap_b1, DutchDicts.Frasi_originali_e_soluzioni_olandese_b1) },
+            { "Dutch_B2", (DutchDicts.DutchHashMap_b2, DutchDicts.Frasi_originali_e_soluzioni_olandese_b2) },
+            { "Dutch_C1", (DutchDicts.DutchHashMap_c1, DutchDicts.Frasi_originali_e_soluzioni_olandese_c1) },
+            { "Dutch_C2", (DutchDicts.DutchHashMap_c2, DutchDicts.Frasi_originali_e_soluzioni_olandese_c2) },
+            };
+
+        string key = $"{GameManager.Instance.selectedLanguage}_{GameManager.Instance.selectedDifficulty}";
+
+        if (!languageDictionaries.TryGetValue(key, out var selectedDicts))
+            throw new Exception("Error On selectedLanguage or selectedDifficulty");
+
+        InitializeLanguageHashMap(frasi_soluzione, frasi_originali, selectedDicts.hashMap, selectedDicts.dict);
+
+        List<int> indices = new List<int> { 0, 10, 20 };
+        List<string> chiaviRichieste = indices
+            .Select(index => selectedDicts.hashMap[1].ElementAt(index).Key)
+            .ToList();
+
+        AdjustSolutionCounter(decine, chiaviRichieste);
+    }
+    #region Logic
+
+
+    public void AdjustSolutionCounter(int decine, List<string> chiaviRichieste)
+    {
+        if (decine < 0 || decine >= chiaviRichieste.Count)
+            throw new Exception("Error On solutionCounter");
+
+        original_phrase.text = chiaviRichieste[decine];
+    }
+    void DisableSubmitButtonWhenInputVoid(string phrase_without_blanks)
+    {
+        if ("".Equals(phrase_without_blanks) || phrase_without_blanks == null) {
+            ShowWarningPanel();
+        }
     }
 
     public void CheckSolution()
     {
-        // dato che � diviso in blocchi di 10...solution_counter (global)
-        try
+        HandleLives();
+        HandleCorrectAnswers();
+
+        if (inputfield == null) return;
+
+        string phraseWithoutBlanks = NormalizeString(inputfield.text);
+        string solution = NormalizeString(frasi_soluzione.ElementAt(solution_counter));
+
+        bool isCorrect = CompareStrings(phraseWithoutBlanks, solution, out int errorCount, out string diffOutput);
+
+        if (isCorrect)
         {
-            foreach (var coppia_frasi in italianHashMap_a1.Values)
-            {
-                Debug.Log("------------");
-                foreach (var singola_frase in coppia_frasi)
-                {
-                    Debug.Log("Sono la Frase da tradurre: " + singola_frase.Key);
-                    Debug.Log("Sono la Frase soluzione: " + singola_frase.Value);
-                    frasi_originali.Add(singola_frase.Key);
-                    frasi_soluzione.Add(singola_frase.Value);
-                }
-            }
-            if (inputfield != null)
-            {
-                string phrase_without_blanks = string.Join(" ", inputfield.text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries).ToList().Select(x => x.Trim()));
-                if (string.Equals(frasi_soluzione.ElementAt(solution_counter), phrase_without_blanks, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct_answers++;
-                    Debug.Log("correct_answers:" + correct_answers);
-                    Debug.Log("soluzione ok - aumento il counter globale");
-                    solution_counter++; // se fai l'esercizio correttamente aumenta il counter
-                    Debug.Log("counter globale ora �:" + solution_counter);
-                }
-                else
-                {
-                    Debug.Log("Risposta Sbagliata");
-                    // far Uscire un alert o un feedback che la risposta � sbagliata
-                    StartCoroutine(FadeImage(true));
-                }
-            }
-            // update Original Frase;
-            switch (solution_counter)
-            {
-                case 1: original_phrase.text = frasi_originali.ElementAt(solution_counter); inputfield.text = ""; correct_phrases_counter.text = correct_answers.ToString(); break;
-                case 2: original_phrase.text = frasi_originali.ElementAt(solution_counter); inputfield.text = ""; correct_phrases_counter.text = correct_answers.ToString(); break;
-                case 3: original_phrase.text = frasi_originali.ElementAt(solution_counter); inputfield.text = ""; correct_phrases_counter.text = correct_answers.ToString(); break;
-                default: original_phrase.text = "Well Done!"; break;
-            }
+            HandleCorrectResponse(diffOutput, solution);
         }
-        catch (Exception ex)
+        else
         {
-            Debug.Log("Eccezione: " + ex.ToString());
-            Debug.Log("Catched!? - diminuito counter globale per gestire l'eccezione");
-            solution_counter--; // yesssss
+            HandleIncorrectResponse(phraseWithoutBlanks);
+        }
+
+        UpdateMainUI(solution_counter, correct_answers.ToString());
+    }
+
+    private void HandleLives()
+    {
+        if (userLifes <= 1)
+        {
+            Debug.Log("Game Over! Refill Hearts Here!");
+            userLifes = GameManager.Instance.userLifes = 0;
+            users_lifes_txt.text = "0";
+            ShowRefillHeartsPanel();
+            return;
+        }
+        submit_answer_btn.interactable = true;
+        CloseRefillHeartsPanel();
+    }
+
+    private void HandleCorrectAnswers()
+    {
+        if (correct_answers == 9)
+        {
+            next_exercise_btn.interactable = true;
+            set_completed = true;
+            ShowWellDonePanel();
         }
     }
 
+    private string NormalizeString(string input)
+    {
+        return string.Join(" ", input.Split(new char[0], StringSplitOptions.RemoveEmptyEntries)
+                                     .Select(x => x.Trim()));
+    }
+
+    private void HandleCorrectResponse(string diffOutput, string solution)
+    {
+        correct_answers++;
+
+        if (correct_answers == 3 && how_many_times_solution_clicked == 3)
+        {
+            earnedStar = 3 - lostStar;
+            Debug.Log("earnedStar: " + earnedStar);
+        }
+
+        solution_counter++;
+
+        if (!string.IsNullOrEmpty(diffOutput))
+        {
+            string[] differences = diffOutput.Split("\n");
+            if (differences.Length > 0 && !differences[0].ToLower().Equals(solution.ToLower()))
+            {
+                OpenLevenshteinPanel();
+                diffString.text = differences[0] + "\n" + solution;
+            }
+        }
+
+        ShowSolutionAd();
+    }
+
+    private void HandleIncorrectResponse(string phraseWithoutBlanks)
+    {
+        DisableSubmitButtonWhenInputVoid(phraseWithoutBlanks);
+
+        StartCoroutine(FadeImage(true));
+        userLifes = --GameManager.Instance.userLifes;
+
+        if (userLifes <= 0)
+        {
+            userLifes = GameManager.Instance.userLifes = 0;
+            users_lifes_txt.text = "0";
+        }
+        else
+        {
+            users_lifes_txt.text = userLifes.ToString();
+        }
+
+        GameManager.Instance.SaveData();
+        ShowSolutionAd();
+    }
+
+    private void ShowSolutionAd()
+    {
+        showSolutionAd?.LoadAd();
+    }
+    private void UpdateMainUI(int solution_counter, string correct_answers)
+    {
+        SetOriginalPhrase(solution_counter);
+        ResetInputField();
+        SetCorrectPhraseCounter(correct_answers);
+    }
+    private void SetOriginalPhrase(int solution_counter)
+    {
+        original_phrase.text = frasi_originali.ElementAt(solution_counter);
+    }
+    private void ResetInputField()
+    {
+        inputfield.text = "";
+    }
+
+    private void SetCorrectPhraseCounter(string correct_answers_text)
+    {
+        correct_phrases_counter.text = correct_answers < 10 ? "0" + correct_answers_text : correct_answers_text;
+    }
+    public void NextExercise()
+    {
+        // resetta tutto tranne solution counter ->
+        // solution Counter deve essere salvato nei data!!! Sennò ogni volte parte tutto da zero!!!!
+        correct_answers = 0;
+        inputfield.text = string.Empty;
+        GameManager.Instance.solutionCounter = solution_counter;
+        GameManager.Instance.SaveData();
+        UpdateMainUI(solution_counter, correct_answers.ToString());
+    }
+
+    static bool CompareStrings(string input, string solution, out int errorCount, out string diffOutput)
+    {
+        // 1. Normalizziamo le stringhe
+        string normalizedInput = input;
+        string normalizedSolution = solution;
+
+        // 2. Calcoliamo la distanza di Levenshtein e le differenze
+        errorCount = LevenshteinDistanceWithDiff(normalizedInput, normalizedSolution, out diffOutput);
+       
+
+        // 3. Decisione basata sugli errori
+        if (errorCount == 0)
+        {
+            return true; // Perfetto match
+        }
+        else if (errorCount <= 2) // Permettiamo massimo 2 errori
+        {
+            Debug.Log($"⚠️ Piccoli errori rilevati: {errorCount}");
+            Debug.Log("WHAAAAAAAAAAAAAT " + diffOutput);
+            return true; // Accettiamo comunque
+        }
+        else
+        {
+            return false; // Troppi errori
+        }
+    }
+
+    static int LevenshteinDistanceWithDiff(string s1, string s2, out string diffOutput)
+    {
+        int len1 = s1.Length;
+        int len2 = s2.Length;
+        int[,] dp = new int[len1 + 1, len2 + 1];
+
+        for (int i = 0; i <= len1; i++) dp[i, 0] = i;
+        for (int j = 0; j <= len2; j++) dp[0, j] = j;
+
+        for (int i = 1; i <= len1; i++)
+        {
+            for (int j = 1; j <= len2; j++)
+            {
+                int cost = (s1[i - 1] == s2[j - 1]) ? 0 : 1;
+                dp[i, j] = Math.Min(
+                    Math.Min(dp[i - 1, j] + 1, dp[i, j - 1] + 1),
+                    dp[i - 1, j - 1] + cost
+                );
+            }
+        }
+
+        // Ricostruzione delle differenze
+        int x = len1, y = len2;
+        string highlightedInput = "";
+        string highlightedSolution = "";
+
+        while (x > 0 || y > 0)
+        {
+            if (x > 0 && dp[x, y] == dp[x - 1, y] + 1) // Cancellazione
+            {
+                highlightedInput = $"[{s1[x - 1]}]" + highlightedInput;
+                highlightedSolution = " " + highlightedSolution;
+                x--;
+            }
+            else if (y > 0 && dp[x, y] == dp[x, y - 1] + 1) // Inserimento
+            {
+                highlightedSolution = $"[{s2[y - 1]}]" + highlightedSolution;
+                highlightedInput = " " + highlightedInput;
+                y--;
+            }
+            else
+            {
+                highlightedInput = s1[x - 1] + highlightedInput;
+                highlightedSolution = s2[y - 1] + highlightedSolution;
+                x--;
+                y--;
+            }
+        }
+
+        diffOutput = $"{highlightedInput}\n{highlightedSolution}";
+        return dp[len1, len2];
+    }
 
     IEnumerator FadeImage(bool fadeAway)
     {
@@ -157,26 +425,131 @@ public class ExerciseLogicScript : MonoBehaviour
             }
         }
     }
-    #endregion
 
-    #region Utils
-    // dict example
-    public void DictTutorial()
+    private void ShowWarningPanel()
     {
-        // Creating a HashMap with keys of type string and values of type int
-        Dictionary<string, int> ageMap = new Dictionary<string, int>();
-        ageMap.Add("Alice", 25);
-        ageMap.Add("Bob", 30);
-        int aliceAge = ageMap["Alice"]; // Retrieves the value associated with the key "Alice"
-        if (ageMap.ContainsKey("Bob"))
+        warning_panel.SetActive(true);
+    }
+    public void CloseWarningPanel()
+    {
+        warning_panel.SetActive(false);
+    }
+    private void ShowWellDonePanel()
+    {
+        well_done_panel.SetActive(true);
+        Debug.Log("earnedStar: " + earnedStar);
+
+        switch (earnedStar) // nella versione con UI seria, al posto di cambiare colore, appaiono semplicemente (tipo scale from 0 to 1)
         {
-            // Perform operations when "Bob" exists in the HashMap
+            case 0:
+                star1_img.color = Color.white;
+                star2_img.color = Color.white;
+                star3_img.color = Color.white;
+
+                SaveStarSystemInfo(0);
+                break;
+            case 1:
+                star1_img.color = Color.yellow;
+                star2_img.color = Color.white;
+                star3_img.color = Color.white;
+
+                SaveStarSystemInfo(1);
+                break;
+            case 2:
+                star1_img.color = Color.yellow;
+                star2_img.color = Color.yellow;
+                star3_img.color = Color.white;
+
+                SaveStarSystemInfo(2);
+                break;
+            case 3:
+                star1_img.color = Color.yellow;
+                star2_img.color = Color.yellow;
+                star3_img.color = Color.yellow;
+
+                SaveStarSystemInfo(3);
+                break;
         }
-        ageMap.Remove("Alice"); // Removes the entry with the key "Alice"
-        foreach (var pair in ageMap)
+    }
+
+    public void SaveStarSystemInfo(int earnedStars)
+    {
+
+        languageData =
+        new GameData.LanguageData(GameManager.Instance.selectedLanguage,
+        new GameData.DifficultyData(GameManager.Instance.selectedDifficulty,
+        new GameData.NodeData("", earnedStars)));
+
+        GameManager.Instance.LanguageDataStars = languageData;
+        GameManager.Instance.SaveData();
+    }
+
+    public void ShowRefillHeartsPanel()
+    {
+        refillHeartsPanel.SetActive(true);
+    }
+
+    public void CloseRefillHeartsPanel()
+    {
+        refillHeartsPanel.SetActive(false);
+    }
+
+    public void CloseWellDonePanel()
+    {
+        well_done_panel.SetActive(false);
+        GameManager.Instance.solutionCounter = solution_counter;
+        GameManager.Instance.SaveData(); // ?
+        SceneManager.LoadScene("10 - Progress");
+    }
+
+    public void CloseSolutionPanel()
+    {
+        StarSystemLogic(); // nello script dell'ad era un casino perchè ad esempio la seconda volta che clicco andava diretto a 3 comunque roba di ciclo di vita che non ho capito bene ancora
+        solution_panel.SetActive(false);
+    }
+
+    public void OpenLevenshteinPanel()
+    {
+        levenshteinPanel.SetActive(true);
+    }
+
+    public void CloseLevenshteinPanel()
+    {
+        levenshteinPanel.SetActive(false);
+    }
+
+    public string ShowSolution()
+    {
+        Debug.Log("SOLUZIONEEE: " + frasi_soluzione[solution_counter]); // funziona!!!!! METTI l'ad
+        return frasi_soluzione[solution_counter];
+    }
+
+    public void StarSystemLogic()
+    {
+        how_many_times_solution_clicked++;
+        Debug.Log("Star System - how_many_times_solution_clicked: " + how_many_times_solution_clicked);
+        if (how_many_times_solution_clicked == 3) // conti da 0 bro
         {
-            Console.WriteLine($"Key: {pair.Key}, Value: {pair.Value}");
+            how_many_times_solution_clicked = 0;
+            lostStar++;
+            Debug.Log("Star System - lostStar: " + lostStar);
+
+            if (lostStar == 1 || lostStar == 2 || lostStar == 3)
+            {
+                earnedStar = 3 - lostStar;
+                Debug.Log("Star System - earnedStar: " + earnedStar);
+            }
         }
+    }
+    public void ReturnHome()
+    {
+        // quando clicco su home
+        // a parte il tornare nella home
+        // devo resettare il solution_counter con il valore che sta salvato nel GameData
+        // esempio: ho completato il primo esercizio fatto da 10 frasi 
+        // sono alla 13esima frase
+        // torno alla home
+        // solution counter al load della exercise scene è = 10
     }
     #endregion
 }

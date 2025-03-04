@@ -8,9 +8,42 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/TestAds.unity
+  - enabled: 0
+    path: Assets/Scenes/TestScenes/TestAds.unity
     guid: 29c4d0545e2b58a488a502e405dffc62
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/1 - Startup.unity
+    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/2 - AlertScene.unity
+    guid: a6d31486890fff34c84352d10a4b2050
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/3 - Select Username.unity
+    guid: 2a53e3181a9d8dd4d9cd5e08e1cb71af
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/4 - Choose A Language.unity
+    guid: 54ada6b2678074b4fabc5dca86e6b553
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/5 - Choose Difficulty.unity
+    guid: c0f00db7f7e74654a9a496f6b8893b1f
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/6 - Difficulty Rules.unity
+    guid: 78386dac2fc74c9488c780fd12ce0b65
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/7 - Home.unity
+    guid: 1f1a564901445a04d9f00426f54a2a7f
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/8 - Exercise Scene.unity
+    guid: 04df836e729a1cd4f9fe9db8a6aa997a
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/9 - Dictionary.unity
+    guid: 1b13f15ea4004df4e90f1d776c1b1f0c
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/10 - Progress.unity
+    guid: 3df2e77bb2c695246950c056d0436198
+  - enabled: 0
+    path: Assets/Scenes/TestScenes/TestScroll.unity
+    guid: f3628997e71e9a045bcde308df5d36bd
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 53cc4669c02aec64fb9c63940d5c935c, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 6d4803fc2767f174abbd21041b77f458, type: 2}

@@ -1,3 +1,15 @@
+IMPORTANTISSIMO:
+	SITO dove ci sono 1000 parole per ogni linguaggio 
+	https://travelwithlanguages.com/blog/most-common-dutch-words.html
+	SE VEDI BENE ... dopo alcune parole ci sono delle frasi che spiegano qualcosa riguardo la parole, quelli usali come tips!!!!
+
+	ORDINA il dizionario in ordine alfabetico, oppure in base a cosa sono (difficilissimo mi sa)
+	mettere il filtro per la parola da cercare? vedi balsamiq
+
+COLORI DELL'APP:
+	- azzurro:			   00B4FF
+	- verde evidenziatore: 44FF00
+
 Immagini Free Copyright: https://www.freepik.com/vectors/city-collages
 Icons: https://www.flaticon.com/free-icons/flag
 
@@ -10,6 +22,8 @@ Icons: https://www.flaticon.com/free-icons/flag
 - Spain: <a href="https://www.flaticon.com/free-icons/spain" title="spain icons">Spain icons created by iconset.co - Flaticon</a>
 - Sweden: <a href="https://www.flaticon.com/free-icons/sweden" title="sweden icons">Sweden icons created by Freepik - Flaticon</a>
 - Russia: <a href="https://www.flaticon.com/free-icons/russia" title="russia icons">Russia icons created by GeekClick - Flaticon</a>
+- Amsterdam Img: Image by <a href="https://pixabay.com/users/fab_photos-17517529/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5432876">Fabrice</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5432876">Pixabay</a>
+- Holland Flag: https://flaglane.com/download/dutch-flag/#downloads
 
 WelcomeScene - vedi balsamiq
 { Struttura Logica ->

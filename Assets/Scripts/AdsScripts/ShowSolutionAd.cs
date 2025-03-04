@@ -1,12 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
-public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+public class ShowSolutionAd : MonoBehaviour ,IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] Button _showAdButton;
+    // pulsante per sbloccare la soluzione alla frase corrente da tradurre
+    [SerializeField] Button _showSolutionAdButton; // fai la stessa logica per incrementare i cuori!!!!
+    [SerializeField] ExerciseLogicScript exLogicScript;
+    [SerializeField] GameObject solution_panel;
+    [SerializeField] TMP_Text realSolutionText; 
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
@@ -21,14 +25,15 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 #endif
 
         // Disable the button until the ad is ready to show:
-        _showAdButton.interactable = false;
+        _showSolutionAdButton.interactable = false;
     }
 
     // Call this public method when you want to get an ad ready to show.
     public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Debug.Log("Loading Ad: " + _adUnitId);
+        Debug.Log("Loading SOLUTION Ad: " + _adUnitId);
+
         Advertisement.Load(_adUnitId, this);
     }
 
@@ -40,9 +45,9 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         if (adUnitId.Equals(_adUnitId))
         {
             // Configure the button to call the ShowAd() method when clicked:
-            _showAdButton.onClick.AddListener(ShowAd);
+            _showSolutionAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
-            _showAdButton.interactable = true;
+            _showSolutionAdButton.interactable = true;
         }
     }
 
@@ -50,7 +55,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     public void ShowAd()
     {
         // Disable the button:
-        _showAdButton.interactable = false;
+        _showSolutionAdButton.interactable = false;
         // Then show the ad:
         Advertisement.Show(_adUnitId, this);
     }
@@ -62,6 +67,11 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
+
+            // la reward è che viene mostrato il pannello con la frase soluzione attuale!! prendi da ExerciseLogicScript!!
+            Debug.Log("Sono Lo SHOW_SOLUTION_AD e La frase soluzione è: " + exLogicScript.ShowSolution());
+            solution_panel.SetActive(true);
+            realSolutionText.text = exLogicScript.ShowSolution();
         }
     }
 
@@ -84,6 +94,6 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     void OnDestroy()
     {
         // Clean up the button listeners:
-        _showAdButton.onClick.RemoveAllListeners();
+        _showSolutionAdButton.onClick.RemoveAllListeners();
     }
 }
