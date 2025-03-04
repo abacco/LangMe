@@ -56,7 +56,7 @@ public class ExerciseLogicScript : MonoBehaviour
     int lostStar = 0;
     int earnedStar = 3;
 
-    [SerializeField] Image star1_img;
+    [SerializeField] Image star1_img; // refactor
     [SerializeField] Image star2_img;
     [SerializeField] Image star3_img;
 
@@ -519,33 +519,48 @@ public class ExerciseLogicScript : MonoBehaviour
                 // nodi
                 // dizionario<lingua, dizionario<difficoltà, dizionario<nodo, earnedStar>>>
 
+                SaveStarSystemInfo(0);
                 break;
             case 1:
                 star1_img.color = Color.yellow;
                 star2_img.color = Color.white;
                 star3_img.color = Color.white;
 
+                SaveStarSystemInfo(1);
                 break;
             case 2:
                 star1_img.color = Color.yellow;
                 star2_img.color = Color.yellow;
                 star3_img.color = Color.white;
 
+                SaveStarSystemInfo(2);
                 break;
             case 3:
                 star1_img.color = Color.yellow;
                 star2_img.color = Color.yellow;
                 star3_img.color = Color.yellow;
 
-                languageData = 
-                    new GameData.LanguageData(GameManager.Instance.selectedLanguage, 
-                    new GameData.DifficultyData(GameManager.Instance.selectedDifficulty, 
-                    new GameData.NodeData("", 3)));
-                
-                GameManager.Instance.LanguageDataStars = languageData;
-                GameManager.Instance.SaveData();
+                SaveStarSystemInfo(3);
+                //languageData = 
+                //    new GameData.LanguageData(GameManager.Instance.selectedLanguage, 
+                //    new GameData.DifficultyData(GameManager.Instance.selectedDifficulty, 
+                //    new GameData.NodeData("", 3)));
+
+                //GameManager.Instance.LanguageDataStars = languageData;
+                //GameManager.Instance.SaveData();
                 break;
         }
+    }
+
+    public void SaveStarSystemInfo(int earnedStars)
+    {
+        languageData =
+        new GameData.LanguageData(GameManager.Instance.selectedLanguage,
+        new GameData.DifficultyData(GameManager.Instance.selectedDifficulty,
+        new GameData.NodeData("", earnedStars)));
+
+        GameManager.Instance.LanguageDataStars = languageData;
+        GameManager.Instance.SaveData();
     }
 
     public void ShowRefillHeartsPanel()

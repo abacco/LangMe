@@ -29,6 +29,11 @@ public class GameData
             this.NodeName = NodeName;
             this.Stars = Stars;
         }
+
+        public override string ToString()
+        {
+            return "TOSTRING NodeData " + this.NodeName + "\n" + this.Stars.ToString();
+        }
     }
 
     [System.Serializable]
@@ -41,6 +46,12 @@ public class GameData
         {
             this.DifficultyName = DifficultyName;
             this.node = node; 
+        }
+
+
+        public override string ToString()
+        {
+            return "TOSTRING DifficultyData " + this.DifficultyName + "\n" + this.node.ToString();
         }
     }
 
@@ -55,5 +66,27 @@ public class GameData
             this.LanguageName = LanguageName;
             this.Difficulty = Difficulty;  
         }
+
+        public override string ToString()
+        {
+            return "TOSTRING LanguageData " + this.LanguageName + "\n" +this.Difficulty.ToString();
+        }
     }
+
+
+    public override string ToString()
+    {
+        return $"GameData: [\n" +
+               $"  Selected Language: {selectedLanguage}\n" +
+               $"  User Lifes: {userLifes}\n" +
+               $"  Decine (Stars System): {decine}\n" +
+               $"  Selected Difficulty: {selectedDifficulty}\n" +
+               $"  Username: {username}\n" +
+               $"  User Nationality: {userNationality}\n" +
+               $"  Solution Counter: {solutionCounter}\n" +
+               "]";
+    }
+
+
+
 }
