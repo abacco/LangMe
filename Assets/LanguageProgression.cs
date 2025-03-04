@@ -7,9 +7,12 @@ public class LanguageProgression : MonoBehaviour
 {
     private void Start()
     {
+        GameManager.Instance.LoadData();
+        Debug.Log("In LanguageProgression: ---------");
+        GameManager.Instance.GameManagerDebugLogData();
         int decine = GameManager.Instance.solutionCounter / 10;
         GameManager.Instance.decine = decine;
-        GameManager.Instance.SaveData();
+        //GameManager.Instance.SaveData();
 
         switch (GameManager.Instance.selectedLanguage)
         {
@@ -22,31 +25,51 @@ public class LanguageProgression : MonoBehaviour
                             case 0:
                                 break;
                             case 1:
-                                switch (GameManager.Instance.LanguageDataStars.Difficulty.node.Stars) // -1 perchè conti da 0 bro
+                                switch (GameManager.Instance.LanguageDataStars.Difficulty.node.Stars) 
                                 {
                                     case 0:
-                                        //for (int i = 0; i < 3; i++)
-                                        //{
-                                        //    GameObject.Find("Node_" + decine + "_star_" + i).GetComponent<Image>().color = Color.white;
-                                        //}
-                                        GameObject.Find("Node_1_star_1").GetComponent<Image>().color = Color.white;
-                                        GameObject.Find("Node_1_star_2").GetComponent<Image>().color = Color.white;
-                                        GameObject.Find("Node_1_star_3").GetComponent<Image>().color = Color.white;
+                                        for (int i = 1; i <= 3; i++)
+                                        {
+                                            GameObject.Find("Node_" + decine + "_star_" + i).GetComponent<Image>().color = Color.white;
+                                        }
+                                        //GameObject.Find("Node_1_star_1").GetComponent<Image>().color = Color.white;
+                                        //GameObject.Find("Node_1_star_2").GetComponent<Image>().color = Color.white;
+                                        //GameObject.Find("Node_1_star_3").GetComponent<Image>().color = Color.white;
                                         break;
                                     case 1:
-                                        GameObject.Find("Node_1_star_1").GetComponent<Image>().color = Color.yellow;
-                                        GameObject.Find("Node_1_star_2").GetComponent<Image>().color = Color.white;
-                                        GameObject.Find("Node_1_star_3").GetComponent<Image>().color = Color.white;
+                                        for (int i = 1; i <= 3; i++)
+                                        {
+                                            if (i == 1)
+                                            {
+                                                GameObject.Find("Node_" + decine + "_star_" + i).GetComponent<Image>().color = Color.yellow;
+                                            }
+                                            GameObject.Find("Node_" + decine + "_star_" + i).GetComponent<Image>().color = Color.white;
+                                        }
+                                        //GameObject.Find("Node_1_star_1").GetComponent<Image>().color = Color.yellow;
+                                        //GameObject.Find("Node_1_star_2").GetComponent<Image>().color = Color.white;
+                                        //GameObject.Find("Node_1_star_3").GetComponent<Image>().color = Color.white;
                                         break;
                                     case 2:
-                                        GameObject.Find("Node_1_star_1").GetComponent<Image>().color = Color.yellow;
-                                        GameObject.Find("Node_1_star_2").GetComponent<Image>().color = Color.yellow;
-                                        GameObject.Find("Node_1_star_3").GetComponent<Image>().color = Color.white;
+                                        for (int i = 1; i <= 3; i++)
+                                        {
+                                            if(i == 1 || i == 2)
+                                            {
+                                                GameObject.Find("Node_" + decine + "_star_" + i).GetComponent<Image>().color = Color.yellow;
+                                            }
+                                            GameObject.Find("Node_" + decine + "_star_" + i).GetComponent<Image>().color = Color.white;
+                                        }
+                                        //GameObject.Find("Node_1_star_1").GetComponent<Image>().color = Color.yellow;
+                                        //GameObject.Find("Node_1_star_2").GetComponent<Image>().color = Color.yellow;
+                                        //GameObject.Find("Node_1_star_3").GetComponent<Image>().color = Color.white;
                                         break;
                                     case 3:
-                                        GameObject.Find("Node_1_star_1").GetComponent<Image>().color = Color.yellow;
-                                        GameObject.Find("Node_1_star_2").GetComponent<Image>().color = Color.yellow;
-                                        GameObject.Find("Node_1_star_3").GetComponent<Image>().color = Color.yellow;
+                                        for (int i = 1; i <= 3; i++)
+                                        {
+                                            GameObject.Find("Node_" + decine + "_star_" + i).GetComponent<Image>().color = Color.yellow;
+                                        }
+                                        //GameObject.Find("Node_1_star_1").GetComponent<Image>().color = Color.yellow;
+                                        //GameObject.Find("Node_1_star_2").GetComponent<Image>().color = Color.yellow;
+                                        //GameObject.Find("Node_1_star_3").GetComponent<Image>().color = Color.yellow;
                                         break;
                                 }
                                 break;
@@ -69,6 +92,4 @@ public class LanguageProgression : MonoBehaviour
             default: throw new Exception("Error On selectedLanguage: ");
         }
     }
-
-
 }

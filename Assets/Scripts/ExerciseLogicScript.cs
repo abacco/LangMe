@@ -539,7 +539,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
                 languageData = 
                     new GameData.LanguageData(GameManager.Instance.selectedLanguage, 
-                    new GameData.DifficultyData(GameManager.Instance.selectedLanguage, 
+                    new GameData.DifficultyData(GameManager.Instance.selectedDifficulty, 
                     new GameData.NodeData("", 3)));
                 
                 GameManager.Instance.LanguageDataStars = languageData;
