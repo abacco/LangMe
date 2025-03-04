@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -149,6 +148,9 @@ public class ExerciseLogicScript : MonoBehaviour
             { "Dutch_A1", (DutchDicts.DutchHashMap_a1, DutchDicts.Frasi_originali_e_soluzioni_olandese_a1) },
             { "Dutch_A2", (DutchDicts.DutchHashMap_a2, DutchDicts.Frasi_originali_e_soluzioni_olandese_a2) },
             { "Dutch_B1", (DutchDicts.DutchHashMap_b1, DutchDicts.Frasi_originali_e_soluzioni_olandese_b1) },
+            { "Dutch_B2", (DutchDicts.DutchHashMap_b2, DutchDicts.Frasi_originali_e_soluzioni_olandese_b2) },
+            { "Dutch_C1", (DutchDicts.DutchHashMap_c1, DutchDicts.Frasi_originali_e_soluzioni_olandese_c1) },
+            { "Dutch_C2", (DutchDicts.DutchHashMap_c2, DutchDicts.Frasi_originali_e_soluzioni_olandese_c2) },
             };
 
         string key = $"{GameManager.Instance.selectedLanguage}_{GameManager.Instance.selectedDifficulty}";

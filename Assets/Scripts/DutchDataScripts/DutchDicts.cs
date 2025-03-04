@@ -229,6 +229,118 @@ public class DutchDicts : MonoBehaviour
         {"5. B1 Rule n.5", "B1 Body Rule n.5" },
     };
     private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_b1 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_b1 } };
+
+    // B2
+    private static readonly Dictionary<string, string> frasi_originali_e_soluzioni_olandese_b2 = new Dictionary<string, string>
+    {
+        { "dutchB2_0", "1"},
+        { "dutchB2_1", "1"},
+        { "dutchB2_2", "1"},
+        { "dutchB2_3", "1"},
+        { "dutchB2_4", "1"},
+        { "dutchB2_5", "1"},
+        { "dutchB2_6", "1"},
+        { "dutchB2_7", "1"},
+        { "dutchB2_8", "1"},
+        { "dutchB2_9", "1"},
+
+        { "dutchB2_10", "1"},
+        { "dutchB2_11", "1"},
+        { "dutchB2_12", "1"},
+        { "dutchB2_13", "1"},
+        { "dutchB2_14", "1"},
+        { "dutchB2_15", "1"},
+        { "dutchB2_16", "1"},
+        { "dutchB2_17", "1"},
+        { "dutchB2_18", "1"},
+        { "dutchB2_19", "1"},
+
+        { "dutchB2_20", "1"}
+    };
+    private static readonly Dictionary<string, string> dutch_b2_rules_titles_and_bodies = new Dictionary<string, string>
+    {
+        {"1. B2 Rule n.1", "B2 Body Rule n.1" },
+        {"2. B2 Rule n.2", "B2 Body Rule n.2" },
+        {"3. B2 Rule n.3", "B2 Body Rule n.3" },
+        {"4. B2 Rule n.4", "B2 Body Rule n.4" },
+        {"5. B2 Rule n.5", "B2 Body Rule n.5" },
+    };
+    private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_b2 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_b2 } };
+
+    // C1
+    private static readonly Dictionary<string, string> frasi_originali_e_soluzioni_olandese_c1 = new Dictionary<string, string>
+    {
+        { "dutchC1_0", "1"},
+        { "dutchC1_1", "1"},
+        { "dutchC1_2", "1"},
+        { "dutchC1_3", "1"},
+        { "dutchC1_4", "1"},
+        { "dutchC1_5", "1"},
+        { "dutchC1_6", "1"},
+        { "dutchC1_7", "1"},
+        { "dutchC1_8", "1"},
+        { "dutchC1_9", "1"},
+
+        { "dutchC1_10", "1"},
+        { "dutchC1_11", "1"},
+        { "dutchC1_12", "1"},
+        { "dutchC1_13", "1"},
+        { "dutchC1_14", "1"},
+        { "dutchC1_15", "1"},
+        { "dutchC1_16", "1"},
+        { "dutchC1_17", "1"},
+        { "dutchC1_18", "1"},
+        { "dutchC1_19", "1"},
+
+        { "dutchC1_20", "1"}
+    };
+    private static readonly Dictionary<string, string> dutch_c1_rules_titles_and_bodies = new Dictionary<string, string>
+    {
+        {"1. C1 Rule n.1", "C1 Body Rule n.1" },
+        {"2. C1 Rule n.2", "C1 Body Rule n.2" },
+        {"3. C1 Rule n.3", "C1 Body Rule n.3" },
+        {"4. C1 Rule n.4", "C1 Body Rule n.4" },
+        {"5. C1 Rule n.5", "C1 Body Rule n.5" },
+    };
+    private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_c1 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_c1 } };
+
+    // C2
+    private static readonly Dictionary<string, string> frasi_originali_e_soluzioni_olandese_c2 = new Dictionary<string, string>
+    {
+        { "dutchC2_0", "1"},
+        { "dutchC2_1", "1"},
+        { "dutchC2_2", "1"},
+        { "dutchC2_3", "1"},
+        { "dutchC2_4", "1"},
+        { "dutchC2_5", "1"},
+        { "dutchC2_6", "1"},
+        { "dutchC2_7", "1"},
+        { "dutchC2_8", "1"},
+        { "dutchC2_9", "1"},
+
+        { "dutchC2_10", "1"},
+        { "dutchC2_11", "1"},
+        { "dutchC2_12", "1"},
+        { "dutchC2_13", "1"},
+        { "dutchC2_14", "1"},
+        { "dutchC2_15", "1"},
+        { "dutchC2_16", "1"},
+        { "dutchC2_17", "1"},
+        { "dutchC2_18", "1"},
+        { "dutchC2_19", "1"},
+
+        { "dutchC2_20", "1"}
+    };
+    private static readonly Dictionary<string, string> dutch_c2_rules_titles_and_bodies = new Dictionary<string, string>
+    {
+        {"1. C2 Rule n.1", "C2 Body Rule n.1" },
+        {"2. C2 Rule n.2", "C2 Body Rule n.2" },
+        {"3. C2 Rule n.3", "C2 Body Rule n.3" },
+        {"4. C2 Rule n.4", "C2 Body Rule n.4" },
+        {"5. C2 Rule n.5", "C2 Body Rule n.5" },
+    };
+    private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_c2 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_c2 } };
+
     #endregion
 
     #region get method
@@ -247,5 +359,19 @@ public class DutchDicts : MonoBehaviour
     public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_b1 => frasi_originali_e_soluzioni_olandese_b1;
     public static Dictionary<string, string> Dutch_b1_rules_titles_and_bodies => dutch_b1_rules_titles_and_bodies;
 
+    // B2
+    public static Dictionary<int, Dictionary<string, string>> DutchHashMap_b2 => dutchHashMap_b2; // dutchHasMap_a2 is the prop to get the entire dict
+    public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_b2 => frasi_originali_e_soluzioni_olandese_b2;
+    public static Dictionary<string, string> Dutch_b2_rules_titles_and_bodies => dutch_b2_rules_titles_and_bodies;
+
+    // C1
+    public static Dictionary<int, Dictionary<string, string>> DutchHashMap_c1 => dutchHashMap_c1; // dutchHasMap_a2 is the prop to get the entire dict
+    public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_c1 => frasi_originali_e_soluzioni_olandese_c1;
+    public static Dictionary<string, string> Dutch_c1_rules_titles_and_bodies => dutch_c1_rules_titles_and_bodies;
+
+    // C2
+    public static Dictionary<int, Dictionary<string, string>> DutchHashMap_c2 => dutchHashMap_c2; // dutchHasMap_a2 is the prop to get the entire dict
+    public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_c2 => frasi_originali_e_soluzioni_olandese_c2;
+    public static Dictionary<string, string> Dutch_c2_rules_titles_and_bodies => dutch_c2_rules_titles_and_bodies;
     #endregion
 }
