@@ -552,12 +552,16 @@ public class ExerciseLogicScript : MonoBehaviour
         }
     }
 
+    public int nodeToFillStarsCounter;
     public void SaveStarSystemInfo(int earnedStars)
     {
+        nodeToFillStarsCounter++;
+        nodeToFillStarsCounter = GameManager.Instance.nodeToFillStarsCounter;
+
         languageData =
         new GameData.LanguageData(GameManager.Instance.selectedLanguage,
         new GameData.DifficultyData(GameManager.Instance.selectedDifficulty,
-        new GameData.NodeData("", earnedStars)));
+        new GameData.NodeData("Node_" + nodeToFillStarsCounter, earnedStars)));
 
         GameManager.Instance.LanguageDataStars = languageData;
         GameManager.Instance.SaveData();
