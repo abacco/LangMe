@@ -192,6 +192,43 @@ public class DutchDicts : MonoBehaviour
         {"5. A2 Rule n.5", "A2 Body Rule n.5" },
     };
     private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_a2 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_a2 } };
+
+    // B1
+    private static readonly Dictionary<string, string> frasi_originali_e_soluzioni_olandese_b1 = new Dictionary<string, string>
+    {
+        { "dutchB1_0", "1"},
+        { "dutchB1_1", "1"},
+        { "dutchB1_2", "1"},
+        { "dutchB1_3", "1"},
+        { "dutchB1_4", "1"},
+        { "dutchB1_5", "1"},
+        { "dutchB1_6", "1"},
+        { "dutchB1_7", "1"},
+        { "dutchB1_8", "1"},
+        { "dutchB1_9", "1"},
+
+        { "dutchB1_10", "1"},
+        { "dutchB1_11", "1"},
+        { "dutchB1_12", "1"},
+        { "dutchB1_13", "1"},
+        { "dutchB1_14", "1"},
+        { "dutchB1_15", "1"},
+        { "dutchB1_16", "1"},
+        { "dutchB1_17", "1"},
+        { "dutchB1_18", "1"},
+        { "dutchB1_19", "1"},
+
+        { "dutchB1_20", "1"}
+    };
+    private static readonly Dictionary<string, string> dutch_b1_rules_titles_and_bodies = new Dictionary<string, string>
+    {
+        {"1. B1 Rule n.1", "B1 Body Rule n.1" },
+        {"2. B1 Rule n.2", "B1 Body Rule n.2" },
+        {"3. B1 Rule n.3", "B1 Body Rule n.3" },
+        {"4. B1 Rule n.4", "B1 Body Rule n.4" },
+        {"5. B1 Rule n.5", "B1 Body Rule n.5" },
+    };
+    private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_b1 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_b1 } };
     #endregion
 
     #region get method
@@ -204,6 +241,11 @@ public class DutchDicts : MonoBehaviour
     public static Dictionary<int, Dictionary<string, string>> DutchHashMap_a2 => dutchHashMap_a2; // dutchHasMap_a2 is the prop to get the entire dict
     public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_a2 => frasi_originali_e_soluzioni_olandese_a2;
     public static Dictionary<string, string> Dutch_a2_rules_titles_and_bodies => dutch_a2_rules_titles_and_bodies;
-    
+
+    //B1
+    public static Dictionary<int, Dictionary<string, string>> DutchHashMap_b1 => dutchHashMap_b1; // dutchHasMap_a2 is the prop to get the entire dict
+    public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_b1 => frasi_originali_e_soluzioni_olandese_b1;
+    public static Dictionary<string, string> Dutch_b1_rules_titles_and_bodies => dutch_b1_rules_titles_and_bodies;
+
     #endregion
 }

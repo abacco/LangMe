@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -30,6 +31,10 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
             Debug.LogWarning("current scene does not need this panel or it is handled by another script");
             panel = new GameObject();
         }
+
+        // ORDINA LE CARTE NELL'ORDINE CORRETTO (da A1 a C2) parte da B2 per il drag
+        cardSlots = cardSlots.OrderBy(slot => slot.name).ToList();
+
         // Aggiorna la grafica iniziale delle carte
         UpdateCardDisplay(instant: true);
     }
@@ -149,15 +154,19 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
 
         for (int i = 0; i < cardSlots.Count; i++)
         {
-            int spriteIndex = (currentIndex + i - halfSize + cardSprites.Count) % cardSprites.Count;
+            // Assicura che la prima carta sia A1 e segua l'ordine giusto
+            int spriteIndex = (currentIndex + i) % cardSprites.Count;
+            cardSlots[i].sprite = cardSprites[spriteIndex];
+
             if (instant)
             {
-                if (i == halfSize) 
+                if (i == halfSize)
                 {
                     cardSlots[i].transform.localScale = Vector3.one * scaleFactor;
-                } else
+                }
+                else
                 {
-                    cardSlots[i].transform.localScale = Vector3.zero; // nascondo la card dietro sennò esco pazzo!
+                    cardSlots[i].transform.localScale = Vector3.zero; // Nasconde le carte dietro
                 }
             }
         }
