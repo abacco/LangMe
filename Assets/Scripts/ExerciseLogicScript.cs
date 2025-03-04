@@ -2,16 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameData;
-using static Unity.VisualScripting.Icons;
 
 public class ExerciseLogicScript : MonoBehaviour
 {
@@ -541,27 +538,17 @@ public class ExerciseLogicScript : MonoBehaviour
                 star3_img.color = Color.yellow;
 
                 SaveStarSystemInfo(3);
-                //languageData = 
-                //    new GameData.LanguageData(GameManager.Instance.selectedLanguage, 
-                //    new GameData.DifficultyData(GameManager.Instance.selectedDifficulty, 
-                //    new GameData.NodeData("", 3)));
-
-                //GameManager.Instance.LanguageDataStars = languageData;
-                //GameManager.Instance.SaveData();
                 break;
         }
     }
 
-    public int nodeToFillStarsCounter;
     public void SaveStarSystemInfo(int earnedStars)
     {
-        nodeToFillStarsCounter++;
-        nodeToFillStarsCounter = GameManager.Instance.nodeToFillStarsCounter;
 
         languageData =
         new GameData.LanguageData(GameManager.Instance.selectedLanguage,
         new GameData.DifficultyData(GameManager.Instance.selectedDifficulty,
-        new GameData.NodeData("Node_" + nodeToFillStarsCounter, earnedStars)));
+        new GameData.NodeData("", earnedStars)));
 
         GameManager.Instance.LanguageDataStars = languageData;
         GameManager.Instance.SaveData();
