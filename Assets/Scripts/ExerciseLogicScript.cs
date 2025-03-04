@@ -537,9 +537,12 @@ public class ExerciseLogicScript : MonoBehaviour
                 star2_img.color = Color.yellow;
                 star3_img.color = Color.yellow;
 
-                languageData = new GameData.LanguageData(
-                    "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
-                gameData.LanguageDataStars = languageData;
+                languageData = 
+                    new GameData.LanguageData(GameManager.Instance.selectedLanguage, 
+                    new GameData.DifficultyData(GameManager.Instance.selectedLanguage, 
+                    new GameData.NodeData("", 3)));
+                
+                GameManager.Instance.LanguageDataStars = languageData;
                 GameManager.Instance.SaveData();
                 break;
         }
