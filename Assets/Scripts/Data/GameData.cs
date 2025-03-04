@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 [System.Serializable]
 public class GameData
 {
@@ -12,11 +10,6 @@ public class GameData
 
     public int solutionCounter;
     public LanguageData LanguageDataStars;
-    // star system
-    // Dizionario di dizionari annidati per tenere traccia dei punteggi
-    //public Dictionary<string, Dictionary<string, Dictionary<string, int>>> LanguageDataStars;
-    //public Dictionary<string, Dictionary<string, int>> DifficultyDataStars;
-    //public Dictionary<string, int> NodeDataStars;
 
     [System.Serializable]
     public class NodeData

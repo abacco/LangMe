@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
-using static Unity.Burst.Intrinsics.X86.Avx;
+
 
 public class ShowSolutionAd : MonoBehaviour ,IUnityAdsLoadListener, IUnityAdsShowListener
 {

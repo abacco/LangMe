@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
 using System.Collections;
-using UnityEngine.UI;
 
 public class BannerManager : MonoBehaviour
 {
