@@ -77,13 +77,19 @@ public class LanguageProgression : MonoBehaviour
                         }
                         break;
                     case "A2":
-                        switch (decine)
+                        while (decine > 0)
                         {
-                            case 0:
-                                // sono nel primo nodo dell'A2
-                                // devo fare la get delle earned star del primo nodo del dutch a1
-                                break;
+                            int stars = GameManager.Instance.LanguageDataStars?.Difficulty.node.Stars ?? 0;
+                            ApplyStars(decine, stars);
+                            decine--;
                         }
+                        //switch (decine)
+                        //{
+                        //    case 0:
+                        //        // sono nel primo nodo dell'A2
+                        //        // devo fare la get delle earned star del primo nodo del dutch a1
+                        //        break;
+                        //}
                         break;
                     default: throw new Exception("Error On selectedDifficulty: ");
                 }
