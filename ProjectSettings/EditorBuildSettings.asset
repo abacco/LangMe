@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealScenes/10 - Progress.unity
     guid: 3df2e77bb2c695246950c056d0436198
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/11 - Fake Leaderboard.unity
+    guid: e6dae7787a68d4745bdf09fb7fb4a29c
   - enabled: 0
     path: Assets/Scenes/TestScenes/TestScroll.unity
     guid: f3628997e71e9a045bcde308df5d36bd

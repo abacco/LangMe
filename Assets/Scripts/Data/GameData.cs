@@ -7,6 +7,7 @@ public class GameData
     public string selectedDifficulty;
     public string username;
     public string userNationality;
+    public int totalStarsEarned;
 
     public int solutionCounter;
     public LanguageData LanguageDataStars;
@@ -77,6 +78,7 @@ public class GameData
                $"  Username: {username}\n" +
                $"  User Nationality: {userNationality}\n" +
                $"  Solution Counter: {solutionCounter}\n" +
+               $"  Total Stars Earned: {totalStarsEarned}\n" +
                "]";
     }
 

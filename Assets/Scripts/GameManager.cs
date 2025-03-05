@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public string selectedDifficulty;
     public string username;
     public string userNationality;
+    public int totalStarsEarned;
 
     public GameData.LanguageData LanguageDataStars;
 
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
             solutionCounter = solutionCounter,
             userNationality = userNationality,
             decine = decine,
+            totalStarsEarned = totalStarsEarned,
 
             LanguageDataStars = LanguageDataStars,
         };
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
             solutionCounter = gameData.solutionCounter;
             userNationality = gameData.userNationality;
             decine = gameData.decine;
+            totalStarsEarned = gameData.totalStarsEarned;
             
             LanguageDataStars = gameData.LanguageDataStars;
             GameManagerDebugLogData();
@@ -99,6 +102,7 @@ public class GameManager : MonoBehaviour
             solutionCounter = 0;
             userNationality = "English";
             decine = 0;
+            totalStarsEarned = 666;
 
             LanguageDataStars = new GameData.LanguageData(
                     "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
@@ -133,6 +137,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("username: " + this.username);
         Debug.Log("userNationality: " + this.userNationality);
         Debug.Log("decine: " + this.decine); // per lo star system
+        Debug.Log("decine: " + this.totalStarsEarned); // per lo star system
         Debug.Log("LanguageDataStars: " + this.LanguageDataStars.ToString()); // per lo star system
         Debug.Log("-----------------------------------------------");
     }

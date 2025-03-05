@@ -474,7 +474,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
     public void SaveStarSystemInfo(int earnedStars)
     {
-
+        // save here max star for user
         languageData =
         new GameData.LanguageData(GameManager.Instance.selectedLanguage,
         new GameData.DifficultyData(GameManager.Instance.selectedDifficulty,
