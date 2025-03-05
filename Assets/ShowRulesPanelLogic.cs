@@ -17,6 +17,10 @@ public class ShowRulesPanelLogic : MonoBehaviour
                 {
                     case "A1": UpdateRulesListGeneric(DutchDicts.Dutch_a1_rules_titles_and_bodies);  break;
                     case "A2": UpdateRulesListGeneric(DutchDicts.Dutch_a2_rules_titles_and_bodies);  break;
+                    case "B1": UpdateRulesListGeneric(DutchDicts.Dutch_b1_rules_titles_and_bodies); break;
+                    case "B2": UpdateRulesListGeneric(DutchDicts.Dutch_b2_rules_titles_and_bodies); break;
+                    case "C1": UpdateRulesListGeneric(DutchDicts.Dutch_c1_rules_titles_and_bodies); break;
+                    case "C2": UpdateRulesListGeneric(DutchDicts.Dutch_c2_rules_titles_and_bodies); break;
                     default: throw new Exception("Error On selectedDifficulty: ");
                 }
                 break;

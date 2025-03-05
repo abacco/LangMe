@@ -160,7 +160,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
         InitializeLanguageHashMap(frasi_soluzione, frasi_originali, selectedDicts.hashMap, selectedDicts.dict);
 
-        List<int> indices = new List<int> { 0, 10, 20 };
+        List<int> indices = new List<int> { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
         List<string> chiaviRichieste = indices
             .Select(index => selectedDicts.hashMap[1].ElementAt(index).Key)
             .ToList();
@@ -244,6 +244,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
         if (correct_answers == 3 && how_many_times_solution_clicked == 3)
         {
+            // mostrare pannello con piccola animazione che dà feedback di una star in meno
             earnedStar = 3 - lostStar;
             Debug.Log("earnedStar: " + earnedStar);
         }
@@ -311,6 +312,7 @@ public class ExerciseLogicScript : MonoBehaviour
     {
         // resetta tutto tranne solution counter ->
         // solution Counter deve essere salvato nei data!!! Sennò ogni volte parte tutto da zero!!!!
+        well_done_panel.SetActive(false);
         correct_answers = 0;
         inputfield.text = string.Empty;
         GameManager.Instance.solutionCounter = solution_counter;

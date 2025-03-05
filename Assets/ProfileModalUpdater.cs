@@ -14,7 +14,10 @@ public class ProfileModalUpdater : MonoBehaviour
     {
         StartCoroutine(UpdateLanguageIcon());
         difficulty_txt.text = GameManager.Instance.selectedDifficulty;
-        hearts_txt.text = GameManager.Instance.userLifes.ToString();
+        if(hearts_txt != null)
+        {
+            hearts_txt.text = GameManager.Instance.userLifes.ToString();
+        }
     }
 
     public IEnumerator UpdateLanguageIcon()

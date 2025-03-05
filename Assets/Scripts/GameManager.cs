@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
             solutionCounter = 0;
             userNationality = "English";
             decine = 0;
-            totalStarsEarned = 666;
+            totalStarsEarned = 0;
 
             LanguageDataStars = new GameData.LanguageData(
                     "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("username: " + this.username);
         Debug.Log("userNationality: " + this.userNationality);
         Debug.Log("decine: " + this.decine); // per lo star system
-        Debug.Log("decine: " + this.totalStarsEarned); // per lo star system
+        Debug.Log("Total Stars Earned: " + this.totalStarsEarned); // per lo star system
         Debug.Log("LanguageDataStars: " + this.LanguageDataStars.ToString()); // per lo star system
         Debug.Log("-----------------------------------------------");
     }
