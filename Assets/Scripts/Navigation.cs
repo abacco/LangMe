@@ -71,10 +71,8 @@ public class Navigation : MonoBehaviour
                 {
                     MoveToScene(s2);
                 }
-                //SceneManager.LoadScene(s2);
             }
         }
-        //MoveToScene(scene_selected_text.text);
     }
 
     

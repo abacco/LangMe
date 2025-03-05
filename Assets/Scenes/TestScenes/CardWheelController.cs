@@ -22,7 +22,8 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
     private Vector2 pointerDownPosition;
     private bool isDragging = false;
 
-    public GameObject panel; // Il pannello da mostrare al click
+    public GameObject panel; // Il pannello da mostrare al click - areyousurepanel
+    public GameObject alternativeViewPanel;
 
     private void Start()
     {
@@ -233,6 +234,17 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         if (!isDragging) // Se non è stato uno swipe, allora è un click
         {
             panel.SetActive(true); // Mostra il pannello solo se è un vero click
+        }
+    }
+
+    public void ShowAlternativeView()
+    {
+        if(alternativeViewPanel.activeInHierarchy)
+        {
+            alternativeViewPanel.SetActive(false);
+        } else
+        {
+            alternativeViewPanel.SetActive(true);
         }
     }
 }
