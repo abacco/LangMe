@@ -250,6 +250,10 @@ public class ExerciseLogicScript : MonoBehaviour
         }
 
         solution_counter++;
+        if(solution_counter == 100) {
+            GameManager.Instance.singleProficiencyTracker.key = GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty;
+            GameManager.Instance.singleProficiencyTracker.isCompleted = true;
+        }
 
         if (!string.IsNullOrEmpty(diffOutput))
         {
@@ -319,6 +323,7 @@ public class ExerciseLogicScript : MonoBehaviour
     {
         // resetta tutto tranne solution counter ->
         // solution Counter deve essere salvato nei data!!! Sennò ogni volte parte tutto da zero!!!!
+        // devi disabilitare il pulsante di next
         well_done_panel.SetActive(false);
         correct_answers = 0;
         inputfield.text = string.Empty;

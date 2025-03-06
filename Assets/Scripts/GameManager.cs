@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public int totalStarsEarned;
 
     public GameData.LanguageData LanguageDataStars;
+    public GameData.ProficiencyTracker[] proficiencyTracker;
+    public GameData.ProficiencyTracker singleProficiencyTracker;
 
     // Percorso del file JSON
     private string filePath;
@@ -55,6 +57,9 @@ public class GameManager : MonoBehaviour
             decine = decine,
             totalStarsEarned = totalStarsEarned,
 
+            singleProficiencyTracker = singleProficiencyTracker,
+            proficiencyTracker = proficiencyTracker,
+
             LanguageDataStars = LanguageDataStars,
         };
 
@@ -85,9 +90,15 @@ public class GameManager : MonoBehaviour
             selectedDifficulty = gameData.selectedDifficulty;
             username = gameData.username;
             solutionCounter = gameData.solutionCounter;
+            solutionCounter = (solutionCounter / 10)*10;
+
             userNationality = gameData.userNationality;
             decine = gameData.decine;
             totalStarsEarned = gameData.totalStarsEarned;
+
+
+            proficiencyTracker = gameData.proficiencyTracker;
+            singleProficiencyTracker = gameData.singleProficiencyTracker;
             
             LanguageDataStars = gameData.LanguageDataStars;
             GameManagerDebugLogData();
@@ -106,6 +117,14 @@ public class GameManager : MonoBehaviour
 
             LanguageDataStars = new GameData.LanguageData(
                     "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
+
+            proficiencyTracker = new GameData.ProficiencyTracker[6];
+            proficiencyTracker[0] = new GameData.ProficiencyTracker("LangX_DiffA1", false);
+            proficiencyTracker[1] = new GameData.ProficiencyTracker("LangX_DiffA2", false);
+            proficiencyTracker[2] = new GameData.ProficiencyTracker("LangX_DiffB1", false);
+            proficiencyTracker[3] = new GameData.ProficiencyTracker("LangX_DiffB2", false);
+            proficiencyTracker[4] = new GameData.ProficiencyTracker("LangX_DiffC1", false);
+            proficiencyTracker[5] = new GameData.ProficiencyTracker("LangX_DiffC2", false);
             GameManagerDebugLogData();
         }
     }

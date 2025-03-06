@@ -26,14 +26,6 @@ public class RulesManager : MonoBehaviour
     private void InitializeIconsAndLanguagesDictionary()
     {
         iconsAndLanguages.Add("dutch", languageIcons[0]);
-        //iconsAndLanguages.Add("italy", languageIcons[1]);
-        //iconsAndLanguages.Add("holland", languageIcons[2]);
-        //iconsAndLanguages.Add("russia", languageIcons[3]);
-        //iconsAndLanguages.Add("spain", languageIcons[4]);
-        //iconsAndLanguages.Add("sweden", languageIcons[5]);
-        //iconsAndLanguages.Add("uk", languageIcons[6]);
-        //iconsAndLanguages.Add("usa", languageIcons[7]);
-
         Debug.Log("Icons And Languages dict initialized");
     }
 

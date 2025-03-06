@@ -11,6 +11,8 @@ public class GameData
 
     public int solutionCounter;
     public LanguageData LanguageDataStars;
+    public ProficiencyTracker[] proficiencyTracker;
+    public ProficiencyTracker singleProficiencyTracker;
 
     [System.Serializable]
     public class NodeData
@@ -67,6 +69,24 @@ public class GameData
         }
     }
 
+    [System.Serializable]
+    public class ProficiencyTracker
+    {
+        public string key;
+        public bool isCompleted;
+
+        public ProficiencyTracker(string key, bool isCompleted)
+        {
+            this.key = key;
+            this.isCompleted = isCompleted;
+        }
+
+        public override string ToString()
+        {
+            return "TOSTRING ProficiencyTracker " + this.key + "\n" + this.isCompleted.ToString();
+        }
+    }
+
 
     public override string ToString()
     {
@@ -78,10 +98,8 @@ public class GameData
                $"  Username: {username}\n" +
                $"  User Nationality: {userNationality}\n" +
                $"  Solution Counter: {solutionCounter}\n" +
-               $"  Total Stars Earned: {totalStarsEarned}\n" +
+               $"  Total Stars Earned: {proficiencyTracker.Length}\n" +
+               $"  Proficiency Tracker: {singleProficiencyTracker}\n" +
                "]";
     }
-
-
-
 }

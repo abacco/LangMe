@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,28 +16,59 @@ public class LanguageProficiencyCompleted : MonoBehaviour
     [SerializeField] Image b2_img;
     [SerializeField] Image c1_img;
     [SerializeField] Image c2_img;
-
+    
     // devi salvare questa info nel gameManager
-    Dictionary<string, bool> proficiencyCompletedDictionary = new Dictionary<string, bool>();
+    //Dictionary<string, bool> proficiencyCompletedDictionary = new Dictionary<string, bool>();
     void Start()
     {
         StartCoroutine(UpdateLanguageIcon());
-        proficiencyCompletedDictionary.Add("Dutch_B2", true);
+        GameData.ProficiencyTracker[] pr = (GameData.ProficiencyTracker[])GameManager.Instance.proficiencyTracker.Clone();
+
+        if (pr == null) {
+            throw new Exception();
+        }
+        //proficiencyCompletedDictionary.Add("Dutch_B2", true);
         string key = GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty;
-        if (GameManager.Instance.solutionCounter == 100)
+        if (GameManager.Instance.solutionCounter >= 100)
         {
-            if (!proficiencyCompletedDictionary.ContainsKey(key))
+            //if (!proficiencyCompletedDictionary.ContainsKey(key))
+            //{
+            //    proficiencyCompletedDictionary.Add(key, true);
+            //    ChangeColor();
+            //} else
+            //{
+            //    Debug.Log("Proficency Completed for: " + GameManager.Instance.selectedLanguage + GameManager.Instance.selectedDifficulty);
+            //    ChangeColor();
+            //}
+            for (int i = 0; i < pr.Length; i++)
             {
-                proficiencyCompletedDictionary.Add(key, true);
-                ChangeColor();
-            } else
-            {
-                Debug.Log("Proficency Completed for: " + GameManager.Instance.selectedLanguage + GameManager.Instance.selectedDifficulty);
-                ChangeColor();
+                if(!pr[i].key.ToLower().Equals(key.ToLower()))
+                {
+                    GameData.ProficiencyTracker singleProf = new GameData.ProficiencyTracker(key, true);
+                    //pr[i].key = key;
+                    //pr[i].isCompleted = true;
+                    GameManager.Instance.proficiencyTracker[i] = singleProf;
+                    GameManager.Instance.SaveData();
+                    ChangeColor();
+                }
+                else
+                {
+                    Debug.Log("Proficency Completed for: " + GameManager.Instance.selectedLanguage + GameManager.Instance.selectedDifficulty);
+                    GameManager.Instance.SaveData();
+                    ChangeColor();
+                }
             }
         }
         else {
             Debug.Log(GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty + " Not yet completed");
+            // devo colorare quelli che sono a true
+            for (int i = 0; i < pr.Length; i++)
+            {
+                if (pr[i].isCompleted)
+                {
+                    ChangeColor(pr[i].key);
+                }
+            }
         }
     }
 
@@ -57,6 +89,34 @@ public class LanguageProficiencyCompleted : MonoBehaviour
             case "C2":
                 c2_img.color = Color.yellow; break;
                 default: throw new Exception("Error on LanguageProficiencyCompleted");
+        }
+    }
+
+    void ChangeColor(string key)
+    {
+        if(key.Contains("A1"))
+        {
+            a1_img.color = Color.yellow;
+        }
+        if (key.Contains("A2"))
+        {
+            a2_img.color = Color.yellow;
+        }
+        if (key.Contains("B1"))
+        {
+            b1_img.color = Color.yellow;
+        }
+        if (key.Contains("B2"))
+        {
+            b2_img.color = Color.yellow;
+        }
+        if (key.Contains("C1"))
+        {
+            c1_img.color = Color.yellow;
+        }
+        if (key.Contains("C2"))
+        {
+            c2_img.color = Color.yellow;
         }
     }
 

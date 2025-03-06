@@ -6455,12 +6455,6 @@ MonoBehaviour:
   hearts_txt: {fileID: 0}
   difficulty_txt: {fileID: 1328498071}
   languageIcons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 21300000, guid: 0f357034daa3ba540a1f2d79a141cb70, type: 3}
-  - {fileID: 21300000, guid: 0f357034daa3ba540a1f2d79a141cb70, type: 3}
-  - {fileID: 21300000, guid: 0f357034daa3ba540a1f2d79a141cb70, type: 3}
-  - {fileID: 21300000, guid: 0f357034daa3ba540a1f2d79a141cb70, type: 3}
   - {fileID: 21300000, guid: 0f357034daa3ba540a1f2d79a141cb70, type: 3}
 --- !u!1 &1865905214
 GameObject:
