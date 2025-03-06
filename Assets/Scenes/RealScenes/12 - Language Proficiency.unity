@@ -1047,6 +1047,7 @@ MonoBehaviour:
   username: asd
   userNationality: asd
   totalStarsEarned: 30
+  proficiencyTrackerIndex: 0
   LanguageDataStars:
     Difficulty:
       node:
@@ -1054,6 +1055,10 @@ MonoBehaviour:
         NodeName: asd
       DifficultyName: B2
     LanguageName: Dutch
+  proficiencyTracker: []
+  singleProficiencyTracker:
+    key: 
+    isCompleted: 0
 --- !u!4 &1044695941
 Transform:
   m_ObjectHideFlags: 0
@@ -2249,8 +2254,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1718165471}
-  - {fileID: 1044695941}
   - {fileID: 105044970}
   - {fileID: 1963757484}
   - {fileID: 889481732}
   - {fileID: 504287912}
+  - {fileID: 1044695941}

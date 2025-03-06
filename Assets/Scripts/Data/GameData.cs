@@ -8,6 +8,7 @@ public class GameData
     public string username;
     public string userNationality;
     public int totalStarsEarned;
+    public int proficiencyTrackerIndex;
 
     public int solutionCounter;
     public LanguageData LanguageDataStars;

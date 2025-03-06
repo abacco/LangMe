@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public string username;
     public string userNationality;
     public int totalStarsEarned;
+    public int proficiencyTrackerIndex;
 
     public GameData.LanguageData LanguageDataStars;
     public GameData.ProficiencyTracker[] proficiencyTracker;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
             userNationality = userNationality,
             decine = decine,
             totalStarsEarned = totalStarsEarned,
+            proficiencyTrackerIndex = proficiencyTrackerIndex,
 
             singleProficiencyTracker = singleProficiencyTracker,
             proficiencyTracker = proficiencyTracker,
@@ -92,6 +94,7 @@ public class GameManager : MonoBehaviour
             solutionCounter = gameData.solutionCounter;
             solutionCounter = (solutionCounter / 10)*10;
 
+            proficiencyTrackerIndex = gameData.proficiencyTrackerIndex;
             userNationality = gameData.userNationality;
             decine = gameData.decine;
             totalStarsEarned = gameData.totalStarsEarned;
@@ -114,7 +117,7 @@ public class GameManager : MonoBehaviour
             userNationality = "English";
             decine = 0;
             totalStarsEarned = 0;
-
+            proficiencyTrackerIndex = 0;
             LanguageDataStars = new GameData.LanguageData(
                     "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
 
@@ -158,6 +161,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("decine: " + this.decine); // per lo star system
         Debug.Log("Total Stars Earned: " + this.totalStarsEarned); // per lo star system
         Debug.Log("LanguageDataStars: " + this.LanguageDataStars.ToString()); // per lo star system
+        Debug.Log("proficiencyTrackerIndex: " + this.proficiencyTrackerIndex.ToString()); // per il proficiency tracker index
+
+        for(int i = 0; i < 6; i++)
+        {
+            Debug.Log(proficiencyTracker[i].key + " " + proficiencyTracker[i].isCompleted);
+        }
         Debug.Log("-----------------------------------------------");
     }
 

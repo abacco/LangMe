@@ -3491,6 +3491,10 @@ MonoBehaviour:
         NodeName: 
       DifficultyName: 
     LanguageName: 
+  proficiencyTracker: []
+  singleProficiencyTracker:
+    key: 
+    isCompleted: 0
 --- !u!4 &660940286
 Transform:
   m_ObjectHideFlags: 0
@@ -5368,11 +5372,11 @@ RectTransform:
   - {fileID: 1047645805}
   - {fileID: 191511612}
   - {fileID: 1931522496}
-  - {fileID: 1369756698}
   - {fileID: 540746618}
   - {fileID: 620610848}
   - {fileID: 1622426233}
   - {fileID: 364735524}
+  - {fileID: 1369756698}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
