@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class FakeLeaderBoardManager : MonoBehaviour
 {
@@ -53,7 +52,7 @@ public class FakeLeaderBoardManager : MonoBehaviour
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardContainer);
             
             newEntry.GetComponent<PlayerEntryUI>().SetUsername(entry.playerName);
-            if (newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text.ToLower().Equals(GameManager.Instance.username))
+            if (newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text.ToLower().Equals(GameManager.Instance.username.ToLower()))
             {
                 newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text = GameManager.Instance.username;
                 newEntry.transform.Find("PlayerStars").GetComponent<TMP_Text>().text = GameManager.Instance.totalStarsEarned.ToString();

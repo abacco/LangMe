@@ -44,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealScenes/11 - Fake Leaderboard.unity
     guid: e6dae7787a68d4745bdf09fb7fb4a29c
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/12 - Language Proficiency.unity
+    guid: 75f925c975997074788bacf730aa62ad
   - enabled: 0
     path: Assets/Scenes/TestScenes/TestScroll.unity
     guid: f3628997e71e9a045bcde308df5d36bd

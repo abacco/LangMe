@@ -297,7 +297,14 @@ public class ExerciseLogicScript : MonoBehaviour
     }
     private void SetOriginalPhrase(int solution_counter)
     {
-        original_phrase.text = frasi_originali.ElementAt(solution_counter);
+        try
+        {
+            original_phrase.text = frasi_originali.ElementAt(solution_counter);
+        } catch (Exception e){ 
+            // Mostra un pannello che inviti a cambiare difficoltà
+            Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
+        } 
+
     }
     private void ResetInputField()
     {
@@ -477,6 +484,7 @@ public class ExerciseLogicScript : MonoBehaviour
     public void SaveStarSystemInfo(int earnedStars)
     {
         // save here max star for user
+        GameManager.Instance.totalStarsEarned += earnedStar;
         languageData =
         new GameData.LanguageData(GameManager.Instance.selectedLanguage,
         new GameData.DifficultyData(GameManager.Instance.selectedDifficulty,
