@@ -1753,14 +1753,7 @@ MonoBehaviour:
   textRules: {fileID: 570021338}
   selectedLanguageRawImage: {fileID: 1564870259}
   languageIcons:
-  - {fileID: 21300000, guid: 170b9e51b036db04da3269b8b570e3ca, type: 3}
-  - {fileID: 21300000, guid: 53c0b03373f6611488e390814e5d5769, type: 3}
-  - {fileID: 21300000, guid: 5b4d3365851eeae4285ead5496e3c7fa, type: 3}
-  - {fileID: 21300000, guid: 21615351a9dab7f4699602cd246c5913, type: 3}
-  - {fileID: 21300000, guid: 83f298336a0ec034ea64d798fdc09273, type: 3}
-  - {fileID: 21300000, guid: 8b59bce887a9172408ab85d8090b9066, type: 3}
-  - {fileID: 21300000, guid: e38a95f100ed4834585e8d7040e5a92f, type: 3}
-  - {fileID: 21300000, guid: 4c9ec7dba9029a943ac9a8c971479b83, type: 3}
+  - {fileID: 21300000, guid: 0f357034daa3ba540a1f2d79a141cb70, type: 3}
   rules_title_txt: {fileID: 1238350166}
   rules_body_txt: {fileID: 570021338}
   page_counter: 0
@@ -3099,6 +3092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openScenePanel: {fileID: 0}
+  warningOfLostProgressPanel: {fileID: 0}
   scene_selected_text: {fileID: 0}
   scenesName:
   - 1 - Startup

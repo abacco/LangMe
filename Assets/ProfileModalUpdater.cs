@@ -27,14 +27,7 @@ public class ProfileModalUpdater : MonoBehaviour
 
         switch (language.ToLower())
         {
-            case "france": languageIcon.sprite = languageIcons[0]; break;
-            case "italy": languageIcon.sprite = languageIcons[1]; break;
-            case "dutch": languageIcon.sprite = languageIcons[2]; break;
-            case "russia": languageIcon.sprite = languageIcons[3]; break;
-            case "spain": languageIcon.sprite = languageIcons[4]; break;
-            case "sweden": languageIcon.sprite = languageIcons[5]; break;
-            case "uk": languageIcon.sprite = languageIcons[6]; break;
-            case "usa": languageIcon.sprite = languageIcons[7]; break;
+            case "dutch": languageIcon.sprite = languageIcons[0]; break;
             default: Debug.Log("Error on language " + language); break;
         }
     }

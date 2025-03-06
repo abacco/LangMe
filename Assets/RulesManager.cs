@@ -25,14 +25,14 @@ public class RulesManager : MonoBehaviour
     
     private void InitializeIconsAndLanguagesDictionary()
     {
-        iconsAndLanguages.Add("france", languageIcons[0]);
-        iconsAndLanguages.Add("italy", languageIcons[1]);
-        iconsAndLanguages.Add("holland", languageIcons[2]);
-        iconsAndLanguages.Add("russia", languageIcons[3]);
-        iconsAndLanguages.Add("spain", languageIcons[4]);
-        iconsAndLanguages.Add("sweden", languageIcons[5]);
-        iconsAndLanguages.Add("uk", languageIcons[6]);
-        iconsAndLanguages.Add("usa", languageIcons[7]);
+        iconsAndLanguages.Add("dutch", languageIcons[0]);
+        //iconsAndLanguages.Add("italy", languageIcons[1]);
+        //iconsAndLanguages.Add("holland", languageIcons[2]);
+        //iconsAndLanguages.Add("russia", languageIcons[3]);
+        //iconsAndLanguages.Add("spain", languageIcons[4]);
+        //iconsAndLanguages.Add("sweden", languageIcons[5]);
+        //iconsAndLanguages.Add("uk", languageIcons[6]);
+        //iconsAndLanguages.Add("usa", languageIcons[7]);
 
         Debug.Log("Icons And Languages dict initialized");
     }
@@ -75,14 +75,7 @@ public class RulesManager : MonoBehaviour
 
         switch (language.ToLower())
         {
-            case "france": selectedLanguageRawImage.sprite = languageIcons[0]; break;
-            case "italy": selectedLanguageRawImage.sprite = languageIcons[1]; break;
-            case "dutch": selectedLanguageRawImage.sprite = languageIcons[2]; break;
-            case "russia": selectedLanguageRawImage.sprite = languageIcons[3]; break;
-            case "spain": selectedLanguageRawImage.sprite = languageIcons[4]; break;
-            case "sweden": selectedLanguageRawImage.sprite = languageIcons[5]; break;
-            case "uk": selectedLanguageRawImage.sprite = languageIcons[6]; break;
-            case "usa": selectedLanguageRawImage.sprite = languageIcons[7]; break;
+            case "dutch": selectedLanguageRawImage.sprite = languageIcons[0]; break;
             default: Debug.Log("Error on language " + language); break;
         }
     }
