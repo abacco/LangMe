@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,10 +73,11 @@ public class LanguageProgression : MonoBehaviour
     //    }
     //}
 
+    [SerializeField] GameObject congratsPanel;
+    [SerializeField] TMP_Text congrats_text;
     private void Start()
     {
         GameManager.Instance.LoadData();
-        Debug.Log("In LanguageProgression: ---------");
         GameManager.Instance.GameManagerDebugLogData();
 
         int decine = GameManager.Instance.solutionCounter / 10;

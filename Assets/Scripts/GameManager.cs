@@ -122,12 +122,13 @@ public class GameManager : MonoBehaviour
                     "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
 
             proficiencyTracker = new GameData.ProficiencyTracker[6];
-            proficiencyTracker[0] = new GameData.ProficiencyTracker("LangX_DiffA1", false);
-            proficiencyTracker[1] = new GameData.ProficiencyTracker("LangX_DiffA2", false);
-            proficiencyTracker[2] = new GameData.ProficiencyTracker("LangX_DiffB1", false);
-            proficiencyTracker[3] = new GameData.ProficiencyTracker("LangX_DiffB2", false);
-            proficiencyTracker[4] = new GameData.ProficiencyTracker("LangX_DiffC1", false);
-            proficiencyTracker[5] = new GameData.ProficiencyTracker("LangX_DiffC2", false);
+            // only for test purpose
+            //proficiencyTracker[0] = new GameData.ProficiencyTracker("Dutch_A1", true);
+            //proficiencyTracker[1] = new GameData.ProficiencyTracker("Dutch_A2", true);
+            //proficiencyTracker[2] = new GameData.ProficiencyTracker("Dutch_B1", true);
+            //proficiencyTracker[3] = new GameData.ProficiencyTracker("Dutch_B2", true); // per fa prima coi click
+            //proficiencyTracker[4] = new GameData.ProficiencyTracker("Dutch_C1", true);
+            //proficiencyTracker[5] = new GameData.ProficiencyTracker("Dutch_C2", true);
             GameManagerDebugLogData();
         }
     }
@@ -162,11 +163,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Total Stars Earned: " + this.totalStarsEarned); // per lo star system
         Debug.Log("LanguageDataStars: " + this.LanguageDataStars.ToString()); // per lo star system
         Debug.Log("proficiencyTrackerIndex: " + this.proficiencyTrackerIndex.ToString()); // per il proficiency tracker index
-
-        for(int i = 0; i < 6; i++)
-        {
-            Debug.Log(proficiencyTracker[i].key + " " + proficiencyTracker[i].isCompleted);
-        }
+        Debug.Log("proficiencyTracker: " + this.proficiencyTracker.ToString()); // per il proficiency tracker index
         Debug.Log("-----------------------------------------------");
     }
 

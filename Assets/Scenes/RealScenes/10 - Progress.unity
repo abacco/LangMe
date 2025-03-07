@@ -1541,6 +1541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf036dd925a04d42a2ad3b15d4be79d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  congratsPanel: {fileID: 0}
+  congrats_text: {fileID: 0}
 --- !u!1 &368130625
 GameObject:
   m_ObjectHideFlags: 0
