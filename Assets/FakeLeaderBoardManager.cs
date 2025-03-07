@@ -18,9 +18,11 @@ public class FakeLeaderBoardManager : MonoBehaviour
 
     void Start()
     {
+        GameManager.Instance.LoadData();
         GenerateFakeLeaderboard();
         PopulateLeaderboardUI();
     }
+
 
     void GenerateFakeLeaderboard()
     {
