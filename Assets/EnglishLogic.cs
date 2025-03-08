@@ -8,14 +8,13 @@ using UnityEngine.UI;
 public class EnglishLogic : MonoBehaviour
 {
     public TMP_Dropdown tenseDropdown; 
+    public TMP_Dropdown phraseTypeDropdown; 
 
     public TMP_InputField userInputField;
     public Button checkButton;
     public TMP_Text feedbackText;
     public TMP_Text rule_dynamic_text;
     public string selectedTense = "Present Simple"; // Cambia a seconda dell'esercizio
-
-    bool withAdverb;
 
     private Dictionary<string, List<string>> questionTemplates = new Dictionary<string, List<string>>()
     {
@@ -26,8 +25,26 @@ public class EnglishLogic : MonoBehaviour
         { "Future Simple", new List<string> { "Will {subject} {verb} {object}?" } },
         { "Present Perfect", new List<string> { "Have {subject} {verb-past} {object}?", "Has {subject} {verb-past} {object}?" } }
     };
-    // piuttosto che creare un dizionario infinito, mostra la lista di parole disponibili magari
+    private Dictionary<string, string> affirmativeTenseRules = new Dictionary<string, string>()
+    {
+        { "Present Simple", "{subject} {verb} {object}." },
+        { "Past Simple", "{subject} {verb-past} {object}." },
+        { "Present Continuous", "{subject} is/are {verb-ing} {object}." },
+        { "Past Continuous", "{subject} was/were {verb-ing} {object}." },
+        { "Future Simple", "{subject} will {verb} {object}." },
+        { "Present Perfect", "{subject} have/has {verb-past} {object}." }
+    };
+    private Dictionary<string, string> negativeTenseRules = new Dictionary<string, string>()
+    {
+        { "Present Simple", "{subject} do/does not {verb} {object}." },
+        { "Past Simple", "{subject} did not {verb} {object}." },
+        { "Present Continuous", "{subject} is/are not {verb-ing} {object}." },
+        { "Past Continuous", "{subject} was/were not {verb-ing} {object}." },
+        { "Future Simple", "{subject} will not {verb} {object}." },
+        { "Present Perfect", "{subject} have/has not {verb-past} {object}." }
+    };
 
+    // piuttosto che creare un dizionario infinito, mostra la lista di parole disponibili magari
     private HashSet<string> singularPersons = new HashSet<string>() { "he", "she", "it" };
     private HashSet<string> pluralPersons = new HashSet<string>() { "i","you", "we", "they" };
 
@@ -41,14 +58,17 @@ public class EnglishLogic : MonoBehaviour
 
     void Start()
     {
-        UpdateRule();
+        // in base al primo dropdown fai gli update
+
+        //UpdateQuestionRule();
+        HandlePhraseType();
         checkButton.onClick.AddListener(() => CheckUserInput(userInputField.text, selectedTense));
     }
     public void UpdateSelectedTense()
     {
         checkButton.onClick.RemoveAllListeners();
         checkButton.onClick.AddListener(() => CheckUserInput(userInputField.text, tenseDropdown.options[tenseDropdown.value].text));
-        UpdateRule();
+        UpdateQuestionRule();
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
     public void CheckUserInput(string userInput, string tense)
@@ -99,7 +119,7 @@ public class EnglishLogic : MonoBehaviour
         return false;
     }
 
-    public void UpdateRule()
+    public void UpdateQuestionRule()
     {
         switch (tenseDropdown.options[tenseDropdown.value].text)
         {
@@ -109,8 +129,52 @@ public class EnglishLogic : MonoBehaviour
             case "Past Continuous": rule_dynamic_text.text = "Was {subject} {verb-ing} {object}?" + "\n" + "Were {subject} {verb-ing} {object}?"; break;
             case "Future Simple": rule_dynamic_text.text = "Will {subject} {verb} {object}?"; break;
             case "Present Perfect": rule_dynamic_text.text = "Have {subject} {verb-past} {object}?" + "\n" + "Has {subject} {verb-past} {object}?"; break;
-            default : rule_dynamic_text.text = "Do {subject} {verb} {object}?" + "\n" + "Does {subject} {verb} {object}?"; break;
+            default: Debug.Log("error on UpdateQuestionRule"); break;
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
+    }
+
+    public void UpdateAffirmationRule()
+    {
+        switch (tenseDropdown.options[tenseDropdown.value].text)
+        {
+            case "Present Simple": rule_dynamic_text.text = "{subject} {verb} {object}."; break;
+            case "Past Simple": rule_dynamic_text.text = "{subject} {verb-past} {object}."; break;
+            case "Present Continuous": rule_dynamic_text.text = "{subject} is/are {verb-ing} {object}."; break;
+            case "Past Continuous": rule_dynamic_text.text = "{subject} was/were {verb-ing} {object}."; break;
+            case "Future Simple": rule_dynamic_text.text = "{subject} will {verb} {object}."; break;
+            case "Present Perfect": rule_dynamic_text.text = "{subject} have/has {verb-past} {object}."; break;
+            default: Debug.Log("error on UpdateAffirmationRule"); break;
+        }
+        Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
+    }
+    public void UpdateNegationRule()
+    {
+        switch (tenseDropdown.options[tenseDropdown.value].text)
+        {
+            case "Present Simple": rule_dynamic_text.text = "{subject} do/does not {verb} {object}."; break;
+            case "Past Simple": rule_dynamic_text.text = "{subject} did not {verb} {object}."; break;
+            case "Present Continuous": rule_dynamic_text.text = "{subject} is/are not {verb-ing} {object}."; break;
+            case "Past Continuous": rule_dynamic_text.text = "{subject} was/were not {verb-ing} {object}."; break;
+            case "Future Simple": rule_dynamic_text.text = "{subject} will not {verb} {object}."; break;
+            case "Present Perfect": rule_dynamic_text.text = "{subject} have/has not {verb-past} {object}."; break;
+            default: Debug.Log("error on UpdateNegationRule"); break;
+        }
+        Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
+    }
+
+    public void HandlePhraseType()
+    {
+        switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
+        {
+            case "Questions":
+                UpdateQuestionRule(); break;
+            case "Affirmations":
+                UpdateAffirmationRule(); break;
+            case "Negations":
+                UpdateNegationRule(); break;
+                default : Debug.Log("error on HandlePhraseType"); break;
+        }
+        Debug.Log("Selected Phrase Type: " + phraseTypeDropdown.options[phraseTypeDropdown.value].text);
     }
 }
