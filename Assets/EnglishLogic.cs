@@ -8,13 +8,15 @@ using UnityEngine.UI;
 public class EnglishLogic : MonoBehaviour
 {
     public TMP_Dropdown tenseDropdown; 
-    public TMP_Dropdown phraseTypeDropdown; 
+    public TMP_Dropdown phraseTypeDropdown;
+
+    [SerializeField] GameObject rememberPanel;
 
     public TMP_InputField userInputField;
     public Button checkButton;
     public TMP_Text feedbackText;
     public TMP_Text rule_dynamic_text;
-    public string selectedTense = "Present Simple"; // Cambia a seconda dell'esercizio
+    public string selectedTense = ""; // Cambia a seconda dell'esercizio
 
     private Dictionary<string, List<string>> questionTemplates = new Dictionary<string, List<string>>()
     {
@@ -25,7 +27,7 @@ public class EnglishLogic : MonoBehaviour
         { "Future Simple", new List<string> { "Will {subject} {verb} {object}?" } },
         { "Present Perfect", new List<string> { "Have {subject} {verb-past} {object}?", "Has {subject} {verb-past} {object}?" } }
     };
-    private Dictionary<string, string> affirmativeTenseRules = new Dictionary<string, string>()
+    private Dictionary<string, string> affirmativeTemplate = new Dictionary<string, string>()
     {
         { "Present Simple", "{subject} {verb} {object}." },
         { "Past Simple", "{subject} {verb-past} {object}." },
@@ -34,7 +36,7 @@ public class EnglishLogic : MonoBehaviour
         { "Future Simple", "{subject} will {verb} {object}." },
         { "Present Perfect", "{subject} have/has {verb-past} {object}." }
     };
-    private Dictionary<string, string> negativeTenseRules = new Dictionary<string, string>()
+    private Dictionary<string, string> negativeTemplate = new Dictionary<string, string>()
     {
         { "Present Simple", "{subject} do/does not {verb} {object}." },
         { "Past Simple", "{subject} did not {verb} {object}." },
@@ -78,11 +80,35 @@ public class EnglishLogic : MonoBehaviour
             feedbackText.text = "Tense not recognized.";
             return;
         }
-
-        List<string> validStructures = questionTemplates[tense];
-        bool isValid = validStructures.Any(template => MatchesPresentSimpleQuestionsStructure(userInput, template));
-
-        feedbackText.text = isValid ? "Correct!" : "Incorrect structure.";
+        if (!affirmativeTemplate.ContainsKey(tense))
+        {
+            feedbackText.text = "Tense not recognized.";
+            return;
+        }
+        if (!negativeTemplate.ContainsKey(tense))
+        {
+            feedbackText.text = "Tense not recognized.";
+            return;
+        }
+        switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
+        {
+            case "Questions":
+                List<string> validStructures = questionTemplates[tense];
+                bool isValid = validStructures.Any(template => MatchesPresentSimpleQuestionsStructure(userInput, template));
+                feedbackText.text = isValid ? "Correct!" : "Incorrect structure.";
+                break;
+            case "Affirmations":
+                string validStructures_affirmation = affirmativeTemplate[tense];
+                bool isValid2 = validStructures_affirmation.Any(template => MatchesPresentSimpleQuestionsStructure(userInput, template.ToString()));
+                feedbackText.text = isValid2 ? "Correct!" : "Incorrect structure.";
+                break;
+            case "Negations":
+                string validStructures_negations = affirmativeTemplate[tense];
+                bool isValid3 = validStructures_negations.Any(template => MatchesPresentSimpleQuestionsStructure(userInput, template.ToString()));
+                feedbackText.text = isValid3 ? "Correct!" : "Incorrect structure.";
+                break;
+            default: Debug.Log("error on HandlePhraseType"); break;
+        }
     }
 
     // present simple questions struct STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT
@@ -97,22 +123,42 @@ public class EnglishLogic : MonoBehaviour
         if (inputWords.Length != 4)
             return false; // Deve avere esattamente 4 parole: (Do/Does) (subject) (verb) (object)?
 
-        // question logic
-        if (inputWords[0] == "do")
+
+        switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
-            if (pluralPersons.Contains(inputWords[1]) && singleVerbsforQuestion.Contains(inputWords[2]) && nouns.Contains(inputWords[3]))
-            {
-                Debug.Log("The phrase is grammatically correct.");
-                return true;
-            }
-        }
-        else if (inputWords[0] == "does")
-        {
-            if (singularPersons.Contains(inputWords[1]) && singleVerbsforQuestion.Contains(inputWords[2]) && nouns.Contains(inputWords[3]))
-            {
-                Debug.Log("The phrase is grammatically correct.");
-                return true;
-            }
+            case "Questions":
+                // question logic
+                if (input.Contains("?"))
+                {
+                    if (inputWords[0] == "do")
+                    {
+                        if (pluralPersons.Contains(inputWords[1]) && singleVerbsforQuestion.Contains(inputWords[2]) && nouns.Contains(inputWords[3]))
+                        {
+                            Debug.Log("The phrase is grammatically correct.");
+                            return true;
+                        }
+                    }
+                    else if (inputWords[0] == "does")
+                    {
+                        if (singularPersons.Contains(inputWords[1]) && singleVerbsforQuestion.Contains(inputWords[2]) && nouns.Contains(inputWords[3]))
+                        {
+                            Debug.Log("The phrase is grammatically correct.");
+                            return true;
+                        }
+                    }
+                } else
+                {
+                    rememberPanel.SetActive(true);
+                    Debug.Log("Remember the '?'");
+                }
+                break;
+            case "Affirmations":
+
+                break;
+            case "Negations":
+
+                break;
+            default: Debug.Log("error on HandlePhraseType"); break;
         }
 
         Debug.Log("The phrase is incorrect.");
@@ -176,5 +222,10 @@ public class EnglishLogic : MonoBehaviour
                 default : Debug.Log("error on HandlePhraseType"); break;
         }
         Debug.Log("Selected Phrase Type: " + phraseTypeDropdown.options[phraseTypeDropdown.value].text);
+    }
+
+    public void CloseRememberPanel()
+    {
+        rememberPanel.SetActive(false);
     }
 }
