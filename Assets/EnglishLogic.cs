@@ -18,225 +18,185 @@ public class EnglishLogic : MonoBehaviour
     public TMP_Text rule_dynamic_text;
     public string selectedTense = ""; // Cambia a seconda dell'esercizio
 
-    // time = adverb ? tonight or tomorrow or ... 
-    private Dictionary<string, List<string>> questionTemplates = new Dictionary<string, List<string>>()
+    List<string> possibleSimpleQuestions = new List<string>
     {
-        { "Present Simple", new List<string>
-            {
-                "Does {subject} {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}?",
-                "Does {subject} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?",
-                "Does {subject} {verb} {object} {preposition} {place} {preposition} {time}?",
-                "Does {subject} {verb} {object}?",
-                "Is {subject} {adjective/noun}?"
-            }
-        },
-        { "Past Simple", new List<string>
-            {
-                "Did {subject} {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}?",
-                "Did {subject} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?",
-                "Did {subject} {verb} {object} {preposition} {place} {preposition} {time}?",
-                "Did {subject} {verb} {object}?",
-                "Was {subject} {adjective/noun}?"
-            }
-        },
-        { "Present Continuous", new List<string>
-            {
-                "Is {subject} {continuous verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}?",
-                "Is {subject} {continuous verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?",
-                "Is {subject} {continuous verb} {object} {preposition} {place} {preposition} {time}?",
-                "Is {subject} {continuous verb} {object}?",
-                "Is {subject} being {adjective/noun}?"
-            }
-        },
-        { "Past Continuous", new List<string>
-            {
-                "Was {subject} {continuous verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}?",
-                "Was {subject} {continuous verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?",
-                "Was {subject} {continuous verb} {object} {preposition} {place} {preposition} {time}?",
-                "Was {subject} {continuous verb} {object}?",
-                "Was {subject} being {adjective/noun}?"
-            }
-        },
-        { "Future Simple", new List<string>
-            {
-                "Will {subject} {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}?",
-                "Will {subject} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?",
-                "Will {subject} {verb} {object} {preposition} {place} {preposition} {time}?",
-                "Will {subject} {verb} {object}?",
-                "Will {subject} be {adjective/noun}?"
-            }
-        },
-        { "Present Perfect", new List<string>
-            {
-                "Has {subject} {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}?",
-                "Has {subject} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?",
-                "Has {subject} {verb} {object} {preposition} {place} {preposition} {time}?",
-                "Has {subject} {verb} {object}?",
-                "Has {subject} been {adjective/noun}?"
-            }
-        }
+        "does she drink coffee?",
+        "do they visit their grandparents?",
+        "does he drive a car?",
+        "do you enjoy music?",
+        "does it rain often?",
+        "do we arrive on time?",
+        "does john play the piano?",
+        "do the students listen to the teacher?",
+        "does her brother work in an office?",
+        "do my parents call me every day?",
+        "does sarah write emails?",
+        "do they like ice cream?",
+        "does he walk to work?",
+        "do you cook dinner?",
+        "does it cost a lot?",
+        "do we watch movies?",
+        "does david travel often?",
+        "do the kids do their homework?",
+        "does your cat sleep a lot?",
+        "do my neighbors have a car?",
+        "does she clean the house?",
+        "do they visit the museum?",
+        "does he buy new clothes?",
+        "do you sell books?",
+        "does it work correctly?",
+        "do we exercise daily?",
+        "does emma dance well?",
+        "do the birds sing in the morning?",
+        "does his father fix cars?",
+        "do my friends like sushi?",
+        "does alice bake cakes?",
+        "do they enjoy swimming?",
+        "does he watch youtube?",
+        "do you play chess?",
+        "does it smell bad?",
+        "do we take the bus?",
+        "does tom paint pictures?",
+        "do the workers arrive early?",
+        "does her mother call her every day?",
+        "do my cousins live in france?",
+        "does she eat vegetables?",
+        "do they study hard?",
+        "does he read newspapers?",
+        "do you prefer tea?",
+        "does it sound good?",
+        "do we sleep well?",
+        "does jack help his brother?",
+        "do the dogs bark at night?",
+        "does his uncle work in a shop?",
+        "do my classmates like math?",
+        "does lily go to the gym?",
+        "do they ride bicycles?",
+        "does he repair computers?",
+        "do you send emails?",
+        "does it taste sweet?",
+        "do we finish work at six?",
+        "does sam play soccer?",
+        "do the tourists visit london?",
+        "does her boyfriend buy gifts?",
+        "do my teachers give homework?",
+        "does she open the windows?",
+        "do they order food online?",
+        "does he watch the news?",
+        "do you wear a hat?",
+        "does it rain in winter?",
+        "do we dance at parties?",
+        "does mike play video games?",
+        "do the engineers build bridges?",
+        "does his cousin study medicine?",
+        "do my parents wake up early?",
+        "does she brush her teeth?",
+        "do they visit the zoo?",
+        "does he love pizza?",
+        "do you drink water?",
+        "does it shine in summer?",
+        "do we work together?",
+        "does lisa wear glasses?",
+        "do the children play outside?",
+        "does her sister drive fast?",
+        "do my grandparents travel a lot?",
+        "does she listen to the radio?",
+        "do they cook breakfast?",
+        "does he teach english?",
+        "do you like rock music?",
+        "does it freeze in winter?",
+        "do we meet on fridays?",
+        "does james fix bikes?",
+        "do the nurses take care of patients?",
+        "does his boss arrive late?"
     };
-    private Dictionary<string, List<string>> affirmativeTemplate = new Dictionary<string, List<string>>()
+    List<string> possibleComplexQuestions = new List<string>
     {
-        { "Present Simple", new List<string>
-            {
-                "{subject} {adverb} {verb (base form)} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} {verb (base form)} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {verb (base form)} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {verb (base form)} {object}."
-            }
-        },
-        { "Past Simple", new List<string>
-            {
-                "{subject} {adverb} {verb (past simple)} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} {verb (past simple)} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {verb (past simple)} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {verb (past simple)} {object}."
-            }
-        },
-        { "Present Continuous", new List<string>
-            {
-                "{subject} {adverb} {to be} {verb-ing} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} {to be} {verb-ing} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {to be} {verb-ing} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {to be} {verb-ing} {object}."
-            }
-        },
-        { "Past Continuous", new List<string>
-            {
-                "{subject} {adverb} {was/were} {verb-ing} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} {was/were} {verb-ing} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {was/were} {verb-ing} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {was/were} {verb-ing} {object}."
-            }
-        },
-        { "Future Simple", new List<string>
-            {
-                "{subject} {adverb} {will} {verb (base form)} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} {will} {verb (base form)} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {will} {verb (base form)} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {will} {verb (base form)} {object}."
-            }
-        },
-        { "Present Perfect", new List<string>
-            {
-                "{subject} {adverb} {have/has} {verb (past participle)} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} {have/has} {verb (past participle)} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {have/has} {verb (past participle)} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} {have/has} {verb (past participle)} {object}."
-            }
-        }
+        "Why does she always drink coffee in the morning?",
+        "When do they usually visit their grandparents on weekends?",
+        "Where does he drive his car every evening?",
+        "How often do you enjoy live music at the concert hall?",
+        "Why does it rain so much in this city?",
+        "What time do we normally arrive at the office?",
+        "Which instrument does John play at the music academy?",
+        "How do the students listen carefully to the teacher's explanations?",
+        "Where does her brother work as an accountant in the city?",
+        "Why do my parents always call me before dinner?",
+        "When does Sarah write emails to her colleagues?",
+        "Why do they love eating ice cream in winter?",
+        "How far does he walk to work every morning?",
+        "What dish do you usually cook for dinner?",
+        "How much does it cost to park here for an hour?",
+        "Why do we always watch horror movies at night?",
+        "How frequently does David travel abroad for business?",
+        "When do the kids do their homework after school?",
+        "Where does your cat sleep during the day?",
+        "Why do my neighbors always complain about the noise?",
+        "How does she clean the house so quickly?",
+        "Why do they visit the museum every Sunday?",
+        "How often does he buy new clothes for special occasions?",
+        "What kind of books do you usually sell at the store?",
+        "Why does it work better with a new battery?",
+        "How many hours do we exercise every week?",
+        "Why does Emma dance so well at competitions?",
+        "When do the birds start singing in the morning?",
+        "How does his father fix cars so efficiently?",
+        "Why do my friends love eating sushi at that restaurant?",
+        "What type of cakes does Alice bake for birthdays?",
+        "How much do they enjoy swimming in the lake?",
+        "When does he watch YouTube after work?",
+        "Why do you always play chess with your grandfather?",
+        "How bad does it smell in the garbage room?",
+        "What bus do we take to get to the museum?",
+        "How does Tom paint such realistic pictures?",
+        "When do the workers usually arrive at the factory?",
+        "Why does her mother call her three times a day?",
+        "How often do my cousins visit France for vacations?",
+        "What vegetables does she eat for lunch?",
+        "How long do they study for their exams?",
+        "When does he read newspapers in the morning?",
+        "Why do you prefer tea over coffee?",
+        "How well does it sound with the new speakers?",
+        "What time do we usually sleep on weekends?",
+        "How often does Jack help his brother with homework?",
+        "Why do the dogs bark at night so loudly?",
+        "Where does his uncle work as a shop assistant?",
+        "How much do my classmates like studying math?",
+        "Why does Lily go to the gym so early?",
+        "When do they ride bicycles in the park?",
+        "How does he repair computers so quickly?",
+        "Why do you send emails instead of calling?",
+        "How sweet does it taste with honey?",
+        "What time do we finish work on Fridays?",
+        "How well does Sam play soccer?",
+        "When do the tourists visit London the most?",
+        "Why does her boyfriend buy expensive gifts?",
+        "How much homework do my teachers give every day?",
+        "How many windows does she open in the house?",
+        "Why do they order food online instead of cooking?",
+        "When does he watch the news on TV?",
+        "Why do you wear a hat in summer?",
+        "How much does it rain in winter?",
+        "What kind of music do we dance to at parties?",
+        "How often does Mike play video games?",
+        "When do the engineers build new bridges?",
+        "Why does his cousin study medicine abroad?",
+        "How early do my parents wake up in the morning?"
     };
-    private Dictionary<string, List<string>> negativeTemplate = new Dictionary<string, List<string>>()
+    private Dictionary<string, List<string>> wordCategories = new Dictionary<string, List<string>>()
     {
-        { "Present Simple", new List<string>
-            {
-                "{subject} {adverb} do/does not {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} do/does not {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} do/does not {verb} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} do/does not {verb} {object}.",
-                "{subject} {to be} not {adjective/noun}."
-            }
-        },
-        { "Past Simple", new List<string>
-            {
-                "{subject} {adverb} did not {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} did not {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} did not {verb} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} did not {verb} {object}.",
-                "{subject} {to be} not {adjective/noun}."
-            }
-        },
-        { "Present Continuous", new List<string>
-            {
-                "{subject} {adverb} is/are not {continuous verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} is/are not {continuous verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} is/are not {continuous verb} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} is/are not {continuous verb} {object}.",
-                "{subject} is/are not being {adjective/noun}."
-            }
-        },
-        { "Past Continuous", new List<string>
-            {
-                "{subject} {adverb} was/were not {continuous verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} was/were not {continuous verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} was/were not {continuous verb} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} was/were not {continuous verb} {object}.",
-                "{subject} was/were not being {adjective/noun}."
-            }
-        },
-        { "Future Simple", new List<string>
-            {
-                "{subject} {adverb} will not {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} will not {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} will not {verb} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} will not {verb} {object}.",
-                "{subject} will not be {adjective/noun}."
-            }
-        },
-        { "Present Perfect", new List<string>
-            {
-                "{subject} {adverb} has/have not {past participle} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.",
-                "{subject} {adverb} has/have not {past participle} {object} {preposition} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} has/have not {past participle} {object} {preposition} {place} {preposition} {time}.",
-                "{subject} has/have not {past participle} {object}.",
-                "{subject} has/have not been {adjective/noun}."
-            }
-        }
+        { "wh-word", new List<string> { "why", "when", "where", "how", "what", "which" } },
+        { "auxiliary", new List<string> { "does", "do" } },
+        { "subject", new List<string> { "she", "he", "it", "we", "they", "you", "john", "sarah", "david", "emma", "jack" } },
+        { "verb", new List<string> { "drink", "visit", "drive", "enjoy", "rain", "arrive", "play", "listen", "work", "call", "write", "like", "walk", "cook", "cost", "watch", "travel", "sleep", "have", "clean", "buy", "sell", "exercise", "dance", "sing", "fix", "bake", "swim", "teach", "eat", "study", "read", "prefer", "sound", "help", "bark", "go", "ride", "repair", "send", "taste", "finish", "build", "wake" } },
+        { "object", new List<string> { "coffee", "car", "music", "emails", "ice cream", "movies", "homework", "office", "cat", "sushi", "cakes", "pictures", "glasses", "water", "bicycles", "computers", "tourists", "windows", "news", "bridges", "medicine" } },
+        { "preposition", new List<string> { "in", "on", "at", "to", "with", "for", "before", "after", "during", "as" } },
+        { "time", new List<string> { "morning", "weekends", "evening", "night", "winter", "Fridays" } }
     };
 
-
-    // piuttosto che creare un dizionario infinito, mostra la lista di parole disponibili magari
-    private HashSet<string> singularSubjects = new HashSet<string>() { "he", "she", "it" };
-    private HashSet<string> pluralSubjects = new HashSet<string>() { "i","you", "we", "they" };
-
-    private HashSet<string> singleVerbsforQuestion = new HashSet<string>() { "eat", "like", "play", "read", "write", "run", "speak", "swim" };
-    private HashSet<string> singleVerbsforAffirmationsAndNegations = new HashSet<string>() { "eats", "likes", "plays", "reads", "writes", "runs", "speaks", "swims" };
-    private HashSet<string> continuousVerbs = new HashSet<string>() { "eating", "liking", "playing", "reading", "writing", "running", "speaking", "swimming" };
-    private HashSet<string> pastVerbs = new HashSet<string>() { "ate", "liked", "played", "read", "wrote", "ran", "spoke", "swam" };
-    private HashSet<string> futureVerbs = new HashSet<string>() { "eat", "like", "play", "read", "write", "run", "speak", "swim" };
-
-    private HashSet<string> objects_and_subjects = new HashSet<string>() { "apples", "football", "books", "letters", "games", "music", "movies", "languages" };
-    private HashSet<string> prepositions = new HashSet<string>
-    {
-        "aboard", "about", "above", "across", "after", "against", "along", "amid", "among", "anti", "around", "as", "at", "before", "behind", "below", "beneath", "beside", 
-        "besides", "between", "beyond", "but", "by", "concerning", "considering", "despite", "down", "during", "except", "excepting", "excluding", "following", "for", "from", "in", 
-        "inside", "into", "like", "minus", "near", "of", "off", "on", "onto", "opposite", "outside", "over", "past", "per", "plus", "regarding", "round", "save", "since", "than", 
-        "through", "to", "toward", "towards", "under", "underneath", "unlike", "until", "up", "upon", "versus", "via", "with", "within", "without", "in the"
-    };
-    private HashSet<string> adverbs = new HashSet<string>
-        {
-            "abnormally", "accidentally", "acidly", "actually", "adventurously", "afterwards", "almost", "always", "angrily", "annually", "anxiously", "arrogantly", "awkwardly", "badly", 
-            "bashfully", "beautifully", "bitterly", "bleakly", "blindly", "blissfully", "boastfully", "boldly", "bravely", "briefly", "brightly", "briskly", "broadly", "busily", "calmly", 
-            "carefully", "carelessly", "cautiously", "certainly", "cheerfully", "clearly", "cleverly", "closely", "coaxingly", "commonly", "continually", "coolly", "correctly", 
-            "courageously", "crossly", "cruelly", "curiously", "daily", "daintily", "dearly", "deceivingly", "deeply", "defiantly", "deliberately", "delightfully", "diligently", "dimly", 
-            "doubtfully", "dreamily", "easily", "elegantly", "energetically", "enormously", "enthusiastically", "equally", "especially", "evenly", "eventually", "exactly", "excitedly", 
-            "extremely", "fairly", "faithfully", "famously", "fatally", "ferociously", "fervently", "fiercely", "fondly", "foolishly", "fortunately", "frankly", "frantically", "freely", 
-            "frenetically", "frightfully", "fully", "furiously", "generally", "generously", "gently", "gladly", "gleefully", "gracefully", "gratefully", "greatly", "greedily", "happily", 
-            "hastily", "healthily", "heavily", "helpfully", "helplessly", "highly", "honestly", "hopelessly", "hungrily", "immediately", "innocently", "inquisitively", "instantly", 
-            "intensely", "intently", "interestingly", "inwardly", "irritably", "jaggedly", "jealously", "jovially", "joyfully", "joyously", "jubilantly", "judgementally", "justly", 
-            "keenly", "kiddingly", "kindheartedly", "kindly", "knavishly", "knowingly", "knowledgeably", "lazily", "lightly", "likely", "limply", "lively", "loftily", "longingly", 
-            "loosely", "loudly", "lovingly", "loyally", "madly", "majestically", "meaningfully", "mechanically", "merrily", "miserably", "mockingly", "monthly", "mortally", "mostly", 
-            "mysteriously", "naturally", "nearly", "neatly", "needily", "nervously", "never", "nicely", "noisily", "now", "nowhere", "obediently", "obnoxiously", "oddly", "offensively", 
-            "officially", "often", "only", "openly", "optimistically", "overconfidently", "owlishly", "painfully", "partially", "patiently", "perfectly", "physically", "playfully", 
-            "politely", "poorly", "positively", "potentially", "powerfully", "promptly", "properly", "punctually", "quaintly", "quarrelsomely", "queasily", "queerly", "questionably", 
-            "questioningly", "quicker", "quickly", "quietly", "quirkily", "quizzically", "rapidly", "rarely", "readily", "really", "reassuringly", "recklessly", "regularly", "reluctantly", 
-            "repeatedly", "reproachfully", "restfully", "righteously", "rightfully", "rigidly", "roughly", "rudely", "sadly", "safely", "scarcely", "scarily", "searchingly", "sedately", 
-            "seemingly", "seldom", "selfishly", "separately", "seriously", "shakily", "sharply", "sheepishly", "shrilly", "shyly", "silently", "sleepily", "slowly", "smoothly", "softly", 
-            "solemnly", "solidly", "sometimes", "soon", "speedily", "stealthily", "sternly", "strictly", "successfully", "suddenly", "surprisingly", "suspiciously", "sweetly", "swiftly", 
-            "sympathetically", "tenderly", "tensely", "terribly", "thankfully", "there", "thoroughly", "thoughtfully", "tightly", "tomorrow", "too", "tremendously", "triumphantly", "truly",
-            "truthfully", "ultimately", "unabashedly", "unaccountably", "unbearably", "unethically", "unexpectedly", "unfortunately", "unimpressively", "unnaturally", "unnecessarily", 
-            "upliftingly", "upwardly", "urgently", "usefully", "uselessly", "usually", "utterly", "vacantly", "vaguely", "vainly", "valiantly", "vastly", "verbally", "very", "viciously", 
-            "victoriously", "violently", "vivaciously", "voluntarily", "warmly", "weakly", "wearily", "wetly", "wholly", "wildly", "willfully", "wilfully", "wisely", "woefully", 
-            "wonderfully", "worriedly", "wrongly", "yawningly", "yearly", "yearningly", "yesterday", "yieldingly", "youthfully", "zealously", "zestfully", "zestily"
-        };
-    private HashSet<string> wh_words = new HashSet<string>() { "when", "why", "where", "what", "how", "who" };
-    private HashSet<string> nouns = new HashSet<string>() { "a teacher", "a student", "teacher", "student" };
     void Start()
     {
         // in base al primo dropdown fai gli update
-
-        //UpdateQuestionRule();
         HandlePhraseType();
         checkButton.onClick.AddListener(() => CheckUserInput(userInputField.text, selectedTense));
     }
@@ -249,143 +209,24 @@ public class EnglishLogic : MonoBehaviour
     }
     public void CheckUserInput(string userInput, string tense)
     {
-        if (!questionTemplates.ContainsKey(tense))
-        {
-            feedbackText.text = "Tense not recognized.";
-            return;
-        }
-        if (!affirmativeTemplate.ContainsKey(tense))
-        {
-            feedbackText.text = "Tense not recognized.";
-            return;
-        }
-        if (!negativeTemplate.ContainsKey(tense))
-        {
-            feedbackText.text = "Tense not recognized.";
-            return;
-        }
-
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
             case "Questions":
-                //List<string> validStructures = questionTemplates[tense];
-                //bool isValid = validStructures.Any(template => MatchesPresentSimpleQuestionsStructure(userInput, template));
-                bool isValid2 = MatchesPresentSimpleQuestionsStructure(userInput);
-                feedbackText.text = isValid2 ? "Correct!" : "Incorrect structure. Try To Remove Blank Char before '?'";
+                bool isValid = MatchesPresentSimpleQuestionsStructure(userInput);
+                feedbackText.text = isValid ? "Correct!" : "Incorrect structure. See the rules";
                 break;
             case "Affirmations":
-                //List<string> validStructures_affirmation = affirmativeTemplate[tense];
-                //bool isValid2 = validStructures_affirmation.Any(template => MatchesPresentSimpleQuestionsStructure(userInput, template));
-                //feedbackText.text = isValid2 ? "Correct!" : "Incorrect structure.";
                 break;
             case "Negations":
-                //List<string> validStructures_negations = affirmativeTemplate[tense];
-                //bool isValid3 = validStructures_negations.Any(template => MatchesPresentSimpleQuestionsStructure(userInput, template));
-                //feedbackText.text = isValid3 ? "Correct!" : "Incorrect structure.";
                 break;
             default: Debug.Log("error on HandlePhraseType"); break;
         }
     }
-
-    // present simple questions struct STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT STRUCT
-    private bool MatchesPresentSimpleQuestionsStructure(string input, string template)
-    {
-        string[] inputWords = input.ToLower().Split(' '); // Does he play football?
-        string[] templateParts = template.Split(' '); // Does {subject} {verb} {object}?
-
-        if (inputWords.Length != templateParts.Length)
-            return false;
-
-        if (inputWords.Length != 4)
-            return false; // Deve avere esattamente 4 parole: (Do/Does) (subject) (verb) (object)?
-
-
-        switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
-        {
-            case "Questions":
-                // question logic - COMPLEMENT IS AN OBJECT
-                /*
-                 * Templates
-                 {wh-word} {auxiliary} {subject} {adverb} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?
-                 {wh-word} {auxiliary} {subject} {verb} {object} {preposition} {place} {preposition} {time}?
-                 {wh-word} {auxiliary} {subject} {verb} {object}?
-                 {auxiliary} {subject} {verb} {object}?
-                 {verb} {subject} {adjective} {noun}? Is She Tired? Is she A teacher
-                 */
-
-                IsValidSentence(input);
-
-
-                //if (input.Contains("?"))
-                //{
-                //    //if (inputWords[0] == "do")
-                //    //{
-                //    //    if (pluralSubjects.Contains(inputWords[1]) && 
-                //    //        ( singleVerbsforQuestion.Contains(inputWords[2]) || continuousVerbs.Contains(inputWords[2])) && 
-                //    //        objects_and_subjects.Contains(inputWords[3]) &&
-                //    //        prepositions.Contains(inputWords[4]) && 
-                //    //        adverbs.Contains(inputWords[5]))
-                //    //    {
-                //    //        Debug.Log("The phrase is grammatically correct.");
-                //    //        return true;
-                //    //    }
-                //    //}
-                //    //else if (inputWords[0] == "does")
-                //    //{
-                //    //    if (singularSubjects.Contains(inputWords[1]) && singleVerbsforQuestion.Contains(inputWords[2]) && objects.Contains(inputWords[3]))
-                //    //    {
-                //    //        Debug.Log("The phrase is grammatically correct.");
-                //    //        return true;
-                //    //    }
-                //    //}
-                //    //IsValidSentence(input);
-                //} else
-                //{
-                //    rememberPanel.SetActive(true);
-                //    Debug.Log("Remember the '?'");
-                //}
-                break;
-            case "Affirmations":
-                // top-down in or - re organize it
-                 /*
-                 {subject} {adverb} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}
-                 {subject} {adverb} {verb} {object} {preposition} {place} {preposition} {time}.
-                 {subject} {verb} {object} {preposition} {place} {preposition} {time}. etc...
-                 {subject} {verb} {object} {preposition} {place}.
-                 {subject} {verb} {object}.
-                 {subject} {verb}.
-                 */
-                string subject_tmp  = inputWords[0].ToLower();
-                string adverb_tmp   = inputWords[1].ToLower();
-                string verb_tmp     = inputWords[2].ToLower();
-                string object_1_tmp = inputWords[3].ToLower();
-                string prep_1_tmp   = inputWords[4].ToLower();
-                string place_tmp    = inputWords[5].ToLower();
-                string prep_2_tmp   = inputWords[6].ToLower();
-                string time_tmp     = inputWords[7].ToLower();
-                
-                break;
-            case "Negations":
-                /*
-                 {subject} {adverb} {auxiliary} not {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.
-                 {subject} {adverb} {auxiliary} not {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}.
-                 {subject} {auxiliary} not {verb} {object} {preposition} {place} {preposition} {time}.
-                 {subject} {auxiliary} not {verb} {object}.
-                 {subject} {to be} not {adjective/noun}.
-                 */
-                break;
-            default: Debug.Log("error on HandlePhraseType"); break;
-        }
-
-        Debug.Log("The phrase is incorrect.");
-        return false;
-    }
-
     public void UpdateQuestionRule()
     {
         switch (tenseDropdown.options[tenseDropdown.value].text)
         {
-            case "Present Simple": rule_dynamic_text.text = "TEST"; break;//Return_PresentSimple_Question_Rules(); break; // spostare nel panel
+            case "Present Simple": rule_dynamic_text.text = Return_PresentSimple_Question_Rules(); break; // spostare nel panel
             case "Past Simple": rule_dynamic_text.text = "Did {subject} {verb} {object}?";  break;
             case "Present Continuous": rule_dynamic_text.text = "Is {subject} {verb-ing} {object}?" + "\n" + "Are {subject} {verb-ing} {object}?"; break;
             case "Past Continuous": rule_dynamic_text.text = "Was {subject} {verb-ing} {object}?" + "\n" + "Were {subject} {verb-ing} {object}?"; break;
@@ -395,7 +236,6 @@ public class EnglishLogic : MonoBehaviour
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
-
     public void UpdateAffirmationRule()
     {
         switch (tenseDropdown.options[tenseDropdown.value].text)
@@ -424,7 +264,6 @@ public class EnglishLogic : MonoBehaviour
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
-
     public void HandlePhraseType()
     {
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
@@ -440,227 +279,44 @@ public class EnglishLogic : MonoBehaviour
         Debug.Log("Selected Phrase Type: " + phraseTypeDropdown.options[phraseTypeDropdown.value].text);
     }
 
-    public void CloseRememberPanel()
-    {
-        rememberPanel.SetActive(false);
-    }
+
 
     private string Return_PresentSimple_Question_Rules()
     {
-        return "Does {subject} {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}?" +
-                "Does {subject} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?" +
-                "Does {subject} {verb} {object} {preposition} {place} {preposition} {time}?" +
-                "Does {subject} {verb} {object}?" +
-                "Is {subject} {adjective/noun}?";
+        return "{auxiliary} {subject} {verb} {object}?" + "\nEx.Does she like pizza?"; // aggiungere quello delle complex
     }
 
 
-    private static Dictionary<string, List<string>> wordCategories = new Dictionary<string, List<string>>()
+    static bool IsAValidSimpleQuestion(string input, List<string> possibleSimpleQuestions)
     {
-        { "wh-word", new List<string> { "who", "what", "where", "when", "why", "how", "which" } },
-        { "article", new List<string> { "a", "the" } },
-        { "auxiliary", new List<string> { "do", "does", "did", "is", "are", "was", "were", "will", "have", "has" } },
-        { "subject", new List<string> { "I", "you", "he", "she", "it", "we", "they", "John", "Alice", "the dog" } },
-        { "adverb", new List<string> { "always", "never", "sometimes", "often", "rarely", "usually", "hardly ever" } },
-        { "verb", new List<string> { "eat", "drink", "go", "see", "play", "work", "study", "run", "write", "sleep", "read" } },
-        { "object", new List<string> { "pizza", "water", "park", "book", "music", "football", "English", "letter", "early", "books" } },
-        { "preposition", new List<string> { "in", "on", "at", "to", "with", "for", "about", "by", "under", "between" } },
-        { "place", new List<string> { "home", "the office", "the park", "school", "the beach", "the restaurant" } },
-        { "time", new List<string> { "yesterday", "today", "tomorrow", "next week", "last year", "this morning", "at night" } },
-        { "adjective", new List<string> { "happy", "sad", "tired", "hungry", "angry", "excited", "bored", "nervous", "confident" } },
-        
-        { "noun", new List<string> 
-            { "teacher", "student", "doctor", "engineer", "musician", "artist", "driver", "chef",
-              "a teacher", "a student", "a doctor", "a engineer", "a musician", "a artist", "a driver", "a chef",
-              "the teacher", "the student", "the doctor", "the engineer", "the musician", "the artist", "the driver", "the chef"
-            } 
-        }
-    };
-
-
-    static bool IsValidSentence(string input)
+        return possibleSimpleQuestions.Contains(input) ? true : false;
+    }
+    static bool IsAValidComplexQuestion(string input, List<string> possibleSimpleQuestions)
     {
-        string[] words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        List<string> result = new List<string>();
-        for (int i = 0; i < words.Length - 1; i++)
-        {
-            if (words[i] != "") {
-                result.Add(words[i]);
-            }
-        }
-        bool question_mark_is_present = words[words.Length - 1].Contains("?");
-
-        // Se l'ultima parola termina con '?', rimuoviamolo e aggiungiamolo separatamente
-        if (question_mark_is_present)
-        {
-            words[words.Length - 1] = words[words.Length - 1].TrimEnd('?');
-            words = words.Append("?").ToArray();
-            Debug.Log("");
-        }
-
-        // Template 5 (Regola base)
-        if (words.Length == 3 + 1 && question_mark_is_present) // + 1 = "?"
-        {
-            if (wordCategories["auxiliary"].Contains(words[0]) &&
-                wordCategories["subject"].Contains(words[1]) &&
-                (wordCategories["adjective"].Contains(words[2]) || wordCategories["noun"].Contains(words[2])))
-            {
-                return true;
-            }
-        }
-
-        // Template 4: {auxiliary} {article} {subject} {verb} {article} {object}? Does she read a book?
-        //                                                      0   1   2   3   4
-        //if(words.Length == 4 + 1) // 5 (article included) + 1 = "?" Does she read a book?
-        //{
-        //    bool aux_is_present = wordCategories["auxiliary"].Contains(words[0]); // does
-        //    bool subj_is_present = wordCategories["subject"].Contains(words[1]); // she
-        //    bool verb_is_present = wordCategories["verb"].Contains(words[2]); // read
-        //    bool object_is_present = wordCategories["object"].Contains(words[3]); // books
-        //    if (aux_is_present && subj_is_present && verb_is_present && object_is_present)
-        //    {
-        //        return true;
-        //    }
-        //}
-        //if(words.Length == 5 + 1) // 4 (article not included) +1 == "?" Does she read books?
-        //{
-        //    bool aux_is_present = wordCategories["auxiliary"].Contains(words[0]); // does
-        //    bool subj_is_present = wordCategories["subject"].Contains(words[1]); // she
-        //    bool verb_is_present = wordCategories["verb"].Contains(words[2]); // read
-        //    bool article_is_present = wordCategories["article"].Contains(words[3]); // a
-        //    bool object_is_present = wordCategories["object"].Contains(words[4]); // book
-        //    if (aux_is_present && subj_is_present && verb_is_present && article_is_present && object_is_present)
-        //    {
-        //        return true;
-        //    }
-        //}
-        if (words.Length == 5 || words.Length == 6) // 4+1 ("?") o 5+1 ("?")
-        {
-            bool aux_is_present = wordCategories["auxiliary"].Contains(words[0]); // does
-            bool subj_is_present = wordCategories["subject"].Contains(words[1]); // she
-            bool verb_is_present = wordCategories["verb"].Contains(words[2]); // read
-            bool object_is_present = wordCategories["object"].Contains(words[words.Length == 5 ? 3 : 4]); // books o book
-            bool article_is_present = words.Length == 6 && wordCategories["article"].Contains(words[3]); // "a" se presente
-
-            if (aux_is_present && subj_is_present && verb_is_present && object_is_present && (words.Length == 5 || article_is_present))
-            {
-                return true;
-            }
-        }
-        //              Where       does                   she    read             books?
-        // Template 3: {wh-word} {auxiliary} {article} {subject} {verb} {article} {object}? 
-        if (words.Length == 5 + 1 || words.Length == 5 + 1 || words.Length == 6 + 1) // articles included
-        {
-            bool article_is_present = ( words.Length == 6 && wordCategories["article"].Contains(words[2]) ) || (words.Length == 7 && wordCategories["article"].Contains(words[5]));
-            bool wh_is_present = wordCategories["wh-word"].Contains(words[0]);
-            bool aux_is_present = wordCategories["auxiliary"].Contains(words[1]);
-            bool object_is_present = wordCategories["object"].Contains(words[words.Length-2]); // l'oggetto, qualsiasi sia l'input, sarà sempre in posizione finale -2, devi contare il "?"
-            bool verb_is_present;
-            if (words.Length == 5)
-            {
-                verb_is_present = wordCategories["verb"].Contains(words[2]);
-            }
-            else if(words.Length == 6) // se in input ricevo 6 parole vuol dire che 
-            {
-                if (wordCategories["article"].Contains(words[2])) // se l'articolo è in posizione 2, allora il verbo è in posizione 4
-                {
-                    verb_is_present = wordCategories["verb"].Contains(words[4]); 
-                } else
-                {
-                    verb_is_present = wordCategories["verb"].Contains(words[3]); // altrimenti l'articolo non è presente  e quindi il verbo è in posizione 3
-                }
-            }
-            //bool verb_is_present = (wordCategories["verb"].Contains(words[words.Length == 5 ? 3 : 4])  || wordCategories["verb"].Contains(words[words.Length == 5 ? 3 : 4]));
-        }
-
-        // Template 2: {wh-word} {auxiliary} {article} {subject} {verb} {article} {object} {preposition} {place} {preposition} {time}?
-        if (words.Length == 7 && wordCategories["wh-word"].Contains(words[0]) && wordCategories["auxiliary"].Contains(words[1]) && wordCategories["subject"].Contains(words[2]) && wordCategories["verb"].Contains(words[3]))
-        {
-            return true;
-        }
-
-        // Template 1: {wh-word} {auxiliary} {subject} {adverb} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?
-        if (words.Length == 8 && wordCategories["wh-word"].Contains(words[0]) && wordCategories["auxiliary"].Contains(words[1]) && wordCategories["subject"].Contains(words[2]) && wordCategories["verb"].Contains(words[4]))
-        {
-            return true;
-        }
-
-        return false;
+        return possibleSimpleQuestions.Contains(input) ? true : false;
     }
 
     private bool MatchesPresentSimpleQuestionsStructure(string input)
     {
-        string[] inputWords = input.ToLower().Split(' '); // Does he play football?
-        //string[] templateParts = template.Split(' '); // Does {subject} {verb} {object}?
-
-        //if (inputWords.Length != templateParts.Length)
-        //    return false;
-
-        //if (inputWords.Length != 4)
-        //    return false; // Deve avere esattamente 4 parole: (Do/Does) (subject) (verb) (object)?
-
-
-        switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
+        if ("Questions".Equals(phraseTypeDropdown.options[phraseTypeDropdown.value].text))
         {
-            case "Questions":
-                // question logic - COMPLEMENT IS AN OBJECT
-                if (input.Contains("?")) 
-                { 
-                    return IsValidSentence(input);
-                }
-                else
-                {
-                    rememberPanel.SetActive(true);
-                    return false;
-                }
-            //break;
-            case "Affirmations":
-                // top-down in or - re organize it
-                /*
-                {subject} {adverb} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}
-                {subject} {adverb} {verb} {object} {preposition} {place} {preposition} {time}.
-                {subject} {verb} {object} {preposition} {place} {preposition} {time}. etc...
-                {subject} {verb} {object} {preposition} {place}.
-                {subject} {verb} {object}.
-                {subject} {verb}.
-                */
-                string subject_tmp = inputWords[0].ToLower();
-                string adverb_tmp = inputWords[1].ToLower();
-                string verb_tmp = inputWords[2].ToLower();
-                string object_1_tmp = inputWords[3].ToLower();
-                string prep_1_tmp = inputWords[4].ToLower();
-                string place_tmp = inputWords[5].ToLower();
-                string prep_2_tmp = inputWords[6].ToLower();
-                string time_tmp = inputWords[7].ToLower();
-
-                break;
-            case "Negations":
-                /*
-                 {subject} {adverb} {auxiliary} not {verb} {object} {preposition} {object} {preposition} {object} {preposition} {place} {preposition} {time} {adverb}.
-                 {subject} {adverb} {auxiliary} not {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}.
-                 {subject} {auxiliary} not {verb} {object} {preposition} {place} {preposition} {time}.
-                 {subject} {auxiliary} not {verb} {object}.
-                 {subject} {to be} not {adjective/noun}.
-                 */
-                break;
-            default: Debug.Log("error on HandlePhraseType"); break;
+            return IsAValidSimpleQuestion(input, possibleSimpleQuestions) || IsAValidComplexQuestion(input, possibleComplexQuestions);
+        }
+        else if ("Affirmations".Equals(phraseTypeDropdown.options[phraseTypeDropdown.value].text))
+        {
+            return false;
+        }
+        else if ("Negations".Equals(phraseTypeDropdown.options[phraseTypeDropdown.value].text))
+        {
+            return true;
         }
 
         Debug.Log("The phrase is incorrect.");
         return false;
     }
 
-
-    public void aa()
+    public void CloseRememberPanel()
     {
-        string rule_to_be_show = "{auxiliary} {subject} {verb} {object}?";
-        List<string> auxiliary_to_be_show = new List<string>{ "do", "does"};
-
-        string subjects_to_show = "I/you/he/she/it/we/they"; // you only 1 time
-        string verb_to_be_show = "read/put/eat/use";
-        string object_1_to_be_show = "pizza/book/books/pencil/pencils";
-
-        string user_input = "Does she like pizza?";
-
+        rememberPanel.SetActive(false);
     }
 }
