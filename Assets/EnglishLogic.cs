@@ -458,11 +458,12 @@ public class EnglishLogic : MonoBehaviour
     private static Dictionary<string, List<string>> wordCategories = new Dictionary<string, List<string>>()
     {
         { "wh-word", new List<string> { "who", "what", "where", "when", "why", "how", "which" } },
+        { "article", new List<string> { "a", "the" } },
         { "auxiliary", new List<string> { "do", "does", "did", "is", "are", "was", "were", "will", "have", "has" } },
         { "subject", new List<string> { "I", "you", "he", "she", "it", "we", "they", "John", "Alice", "the dog" } },
         { "adverb", new List<string> { "always", "never", "sometimes", "often", "rarely", "usually", "hardly ever" } },
-        { "verb", new List<string> { "eat", "drink", "go", "see", "play", "work", "study", "run", "write", "sleep" } },
-        { "object", new List<string> { "pizza", "water", "the park", "a book", "music", "football", "English", "a letter", "early" } },
+        { "verb", new List<string> { "eat", "drink", "go", "see", "play", "work", "study", "run", "write", "sleep", "read" } },
+        { "object", new List<string> { "pizza", "water", "park", "book", "music", "football", "English", "letter", "early", "books" } },
         { "preposition", new List<string> { "in", "on", "at", "to", "with", "for", "about", "by", "under", "between" } },
         { "place", new List<string> { "home", "the office", "the park", "school", "the beach", "the restaurant" } },
         { "time", new List<string> { "yesterday", "today", "tomorrow", "next week", "last year", "this morning", "at night" } },
@@ -488,9 +489,6 @@ public class EnglishLogic : MonoBehaviour
             }
         }
         bool question_mark_is_present = words[words.Length - 1].Contains("?");
-        bool a = wordCategories["auxiliary"].Contains(words[0]);
-        bool a1 = wordCategories["subject"].Contains(words[1]);
-        bool a2 = wordCategories["adjective"].Contains(words[2]);
 
         // Se l'ultima parola termina con '?', rimuoviamolo e aggiungiamolo separatamente
         if (question_mark_is_present)
@@ -501,7 +499,7 @@ public class EnglishLogic : MonoBehaviour
         }
 
         // Template 5 (Regola base)
-        if (words.Length == 4 )
+        if (words.Length == 3 + 1 && question_mark_is_present) // + 1 = "?"
         {
             if (wordCategories["auxiliary"].Contains(words[0]) &&
                 wordCategories["subject"].Contains(words[1]) &&
@@ -511,26 +509,78 @@ public class EnglishLogic : MonoBehaviour
             }
         }
 
-        // Template 4: {auxiliary} {subject} {verb} {object}?
-        if (words.Length >= 4 && wordCategories["auxiliary"].Contains(words[0]) && wordCategories["subject"].Contains(words[1]) && wordCategories["verb"].Contains(words[2]))
+        // Template 4: {auxiliary} {article} {subject} {verb} {article} {object}? Does she read a book?
+        //                                                      0   1   2   3   4
+        //if(words.Length == 4 + 1) // 5 (article included) + 1 = "?" Does she read a book?
+        //{
+        //    bool aux_is_present = wordCategories["auxiliary"].Contains(words[0]); // does
+        //    bool subj_is_present = wordCategories["subject"].Contains(words[1]); // she
+        //    bool verb_is_present = wordCategories["verb"].Contains(words[2]); // read
+        //    bool object_is_present = wordCategories["object"].Contains(words[3]); // books
+        //    if (aux_is_present && subj_is_present && verb_is_present && object_is_present)
+        //    {
+        //        return true;
+        //    }
+        //}
+        //if(words.Length == 5 + 1) // 4 (article not included) +1 == "?" Does she read books?
+        //{
+        //    bool aux_is_present = wordCategories["auxiliary"].Contains(words[0]); // does
+        //    bool subj_is_present = wordCategories["subject"].Contains(words[1]); // she
+        //    bool verb_is_present = wordCategories["verb"].Contains(words[2]); // read
+        //    bool article_is_present = wordCategories["article"].Contains(words[3]); // a
+        //    bool object_is_present = wordCategories["object"].Contains(words[4]); // book
+        //    if (aux_is_present && subj_is_present && verb_is_present && article_is_present && object_is_present)
+        //    {
+        //        return true;
+        //    }
+        //}
+        if (words.Length == 5 || words.Length == 6) // 4+1 ("?") o 5+1 ("?")
         {
-            return true;
+            bool aux_is_present = wordCategories["auxiliary"].Contains(words[0]); // does
+            bool subj_is_present = wordCategories["subject"].Contains(words[1]); // she
+            bool verb_is_present = wordCategories["verb"].Contains(words[2]); // read
+            bool object_is_present = wordCategories["object"].Contains(words[words.Length == 5 ? 3 : 4]); // books o book
+            bool article_is_present = words.Length == 6 && wordCategories["article"].Contains(words[3]); // "a" se presente
+
+            if (aux_is_present && subj_is_present && verb_is_present && object_is_present && (words.Length == 5 || article_is_present))
+            {
+                return true;
+            }
+        }
+        //              Where       does                   she    read             books?
+        // Template 3: {wh-word} {auxiliary} {article} {subject} {verb} {article} {object}? 
+        if (words.Length == 5 + 1 || words.Length == 5 + 1 || words.Length == 6 + 1) // articles included
+        {
+            bool article_is_present = ( words.Length == 6 && wordCategories["article"].Contains(words[2]) ) || (words.Length == 7 && wordCategories["article"].Contains(words[5]));
+            bool wh_is_present = wordCategories["wh-word"].Contains(words[0]);
+            bool aux_is_present = wordCategories["auxiliary"].Contains(words[1]);
+            bool object_is_present = wordCategories["object"].Contains(words[words.Length-2]); // l'oggetto, qualsiasi sia l'input, sarà sempre in posizione finale -2, devi contare il "?"
+            bool verb_is_present;
+            if (words.Length == 5)
+            {
+                verb_is_present = wordCategories["verb"].Contains(words[2]);
+            }
+            else if(words.Length == 6) // se in input ricevo 6 parole vuol dire che 
+            {
+                if (wordCategories["article"].Contains(words[2])) // se l'articolo è in posizione 2, allora il verbo è in posizione 4
+                {
+                    verb_is_present = wordCategories["verb"].Contains(words[4]); 
+                } else
+                {
+                    verb_is_present = wordCategories["verb"].Contains(words[3]); // altrimenti l'articolo non è presente  e quindi il verbo è in posizione 3
+                }
+            }
+            //bool verb_is_present = (wordCategories["verb"].Contains(words[words.Length == 5 ? 3 : 4])  || wordCategories["verb"].Contains(words[words.Length == 5 ? 3 : 4]));
         }
 
-        // Template 3: {wh-word} {auxiliary} {subject} {verb} {object}?
-        if (words.Length >= 5 && wordCategories["wh-word"].Contains(words[0]) && wordCategories["auxiliary"].Contains(words[1]) && wordCategories["subject"].Contains(words[2]) && wordCategories["verb"].Contains(words[3]))
-        {
-            return true;
-        }
-
-        // Template 2: {wh-word} {auxiliary} {subject} {verb} {object} {preposition} {place} {preposition} {time}?
-        if (words.Length >= 7 && wordCategories["wh-word"].Contains(words[0]) && wordCategories["auxiliary"].Contains(words[1]) && wordCategories["subject"].Contains(words[2]) && wordCategories["verb"].Contains(words[3]))
+        // Template 2: {wh-word} {auxiliary} {article} {subject} {verb} {article} {object} {preposition} {place} {preposition} {time}?
+        if (words.Length == 7 && wordCategories["wh-word"].Contains(words[0]) && wordCategories["auxiliary"].Contains(words[1]) && wordCategories["subject"].Contains(words[2]) && wordCategories["verb"].Contains(words[3]))
         {
             return true;
         }
 
         // Template 1: {wh-word} {auxiliary} {subject} {adverb} {verb} {object} {preposition} {object} {preposition} {place} {preposition} {time}?
-        if (words.Length >= 8 && wordCategories["wh-word"].Contains(words[0]) && wordCategories["auxiliary"].Contains(words[1]) && wordCategories["subject"].Contains(words[2]) && wordCategories["verb"].Contains(words[4]))
+        if (words.Length == 8 && wordCategories["wh-word"].Contains(words[0]) && wordCategories["auxiliary"].Contains(words[1]) && wordCategories["subject"].Contains(words[2]) && wordCategories["verb"].Contains(words[4]))
         {
             return true;
         }
@@ -598,5 +648,19 @@ public class EnglishLogic : MonoBehaviour
 
         Debug.Log("The phrase is incorrect.");
         return false;
+    }
+
+
+    public void aa()
+    {
+        string rule_to_be_show = "{auxiliary} {subject} {verb} {object}?";
+        List<string> auxiliary_to_be_show = new List<string>{ "do", "does"};
+
+        string subjects_to_show = "I/you/he/she/it/we/they"; // you only 1 time
+        string verb_to_be_show = "read/put/eat/use";
+        string object_1_to_be_show = "pizza/book/books/pencil/pencils";
+
+        string user_input = "Does she like pizza?";
+
     }
 }
