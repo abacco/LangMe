@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
-
+using UnityEngine.Windows;
 
 public class EnglishLogic : MonoBehaviour
 {
@@ -60,8 +59,9 @@ public class EnglishLogic : MonoBehaviour
         "They are quietly sitting in the library at the moment",
         "We are regularly exercising to stay fit"
     };
-    
-    HashSet<string> present_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+
+    #region QUESTIONS INITIALIZATION
+    public HashSet<string> present_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
         "What have you done today?",
         "Will she come to the meeting?",
@@ -265,7 +265,7 @@ public class EnglishLogic : MonoBehaviour
         "Where do they practice basketball?",
         "What time does she usually wake up?"
     };
-    HashSet<string> present_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    public HashSet<string> present_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
         "What are you doing?", "Is she working today?", "Are they coming to the meeting?",
         "Why is he laughing?", "Are we going to the cinema tonight?", "What are you thinking about?",
@@ -421,7 +421,109 @@ public class EnglishLogic : MonoBehaviour
         "Are they quietly sitting in the living room right now?",
         "Are we regularly exercising to stay in shape?"
 };
-    HashSet<string> past_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+    public HashSet<string> present_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+        "Have you ever traveled abroad?",
+        "Has she already finished her homework?",
+        "Have they always lived in this house?",
+        "Have we just completed the project?",
+        "Has he ever played the piano?",
+        "Have you often visited your grandparents?",
+        "Has she finally solved the problem?",
+        "Have they frequently gone hiking in the mountains?",
+        "Have you already eaten lunch?",
+        "Has he recently joined the team?",
+        "Have we always worked together?",
+        "Has she ever written a novel?",
+        "Have they already started the meeting?",
+        "Have you never missed a deadline?",
+        "Has he often helped his classmates?",
+        "Have we recently spoken to the manager?",
+        "Have you ever sung in public?",
+        "Has she just arrived at the office?",
+        "Have they always enjoyed classical music?",
+        "Have you often practiced yoga?",
+        "Has he already completed the assignment?",
+        "Have we recently cleaned the house?",
+        "Have you ever driven a sports car?",
+        "Has she frequently visited the art gallery?",
+        "Have they just left the building?",
+        "Have you always believed in yourself?",
+        "Has he already called his parents?",
+        "Have we recently discussed this topic?",
+        "Have you ever participated in a marathon?",
+        "Has she often read historical novels?",
+        "Have they just submitted their application?",
+        "Have you already prepared your speech?",
+        "Has he always admired his teacher?",
+        "Have we ever worked late at night?",
+        "Have you ever forgotten something important?",
+        "Has she recently moved to a new city?",
+        "Have they always been supportive?",
+        "Have you just checked your emails?",
+        "Has he ever painted a portrait?",
+        "Have we frequently visited this museum?",
+        "Have you already finished your breakfast?",
+        "Has she ever been to Paris?",
+        "Have they often argued about politics?",
+        "Have you recently met with the director?",
+        "Has he always been an early riser?",
+        "Have we just booked the tickets?",
+        "Have you ever climbed a mountain?",
+        "Has she often traveled for work?",
+        "Have they already cleaned their rooms?",
+        "Have you recently completed the report?",
+        "Has he ever repaired a bicycle?",
+        "Have we often organized team events?",
+        "Have you already called the restaurant?",
+        "Has she just posted the announcement?",
+        "Have they ever volunteered at a shelter?",
+        "Have you frequently attended these meetings?",
+        "Has he recently updated his profile?",
+        "Have we always tried to improve ourselves?",
+        "Have you ever forgotten your passport?",
+        "Has she already started writing the book?",
+        "Have they always been interested in science?",
+        "Have you just received the package?",
+        "Has he ever performed on stage?",
+        "Have we recently celebrated a big achievement?",
+        "Have you ever cooked an exotic dish?",
+        "Has she often given presentations at work?",
+        "Have they already had lunch?",
+        "Have you recently visited the doctor?",
+        "Has he ever won a competition?",
+        "Have we frequently gone on picnics together?",
+        "Have you already completed your tasks?",
+        "Has she ever painted a masterpiece?",
+        "Have they just arrived at the party?",
+        "Have you always loved traveling?",
+        "Has he often told interesting stories?",
+        "Have we recently met new clients?",
+        "Have you ever planted a tree?",
+        "Has she already prepared dinner?",
+        "Have they frequently watched movies at the theater?",
+        "Have you just returned from the trip?",
+        "Has he ever written a poem?",
+        "Have we always enjoyed working here?",
+        "Have you often helped your siblings?",
+        "Has she ever tried a new sport?",
+        "Have they just organized the event?",
+        "Have you already booked your vacation?",
+        "Has he often shared his knowledge?",
+        "Have we recently cleaned the garden?",
+        "Have you ever designed your own clothes?",
+        "Has she recently adopted a pet?",
+        "Have they always supported each other?",
+        "Have you just updated the database?",
+        "Has he ever taught a class?",
+        "Have we frequently had dinner together?",
+        "Have you already finished reading the book?",
+        "Has she ever played chess professionally?",
+        "Have they recently attended a concert"
+    };
+    // TODO
+    public HashSet<string> present_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+
+    public HashSet<string> past_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
         "Did she always arrive on time?",
         "Did they often play soccer after school?",
         "Did he usually walk to work?",
@@ -588,7 +690,7 @@ public class EnglishLogic : MonoBehaviour
         "Did we celebrate the anniversary together?"
 
     };
-    HashSet<string> past_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+    public HashSet<string> past_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
         "Was she always helping her friends with their homework?",
         "Were they often playing soccer after school?",
         "Was he usually walking to the park?",
@@ -739,7 +841,12 @@ public class EnglishLogic : MonoBehaviour
         "Were they whispering secrets to each other?",
         "Was he calculating the expenses in the morning?"
     };
-    HashSet<string> future_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    // TODO
+    public HashSet<string> past_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    // TODO
+    public HashSet<string> past_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+
+    public HashSet<string> future_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
         "Will she always help her friends with their homework?",
         "Will they often play soccer after school?",
@@ -891,105 +998,14 @@ public class EnglishLogic : MonoBehaviour
         "Will he calculate the budget for the trip?"
 
     };
-    HashSet<string> present_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
-        "Have you ever traveled abroad?",
-        "Has she already finished her homework?",
-        "Have they always lived in this house?",
-        "Have we just completed the project?",
-        "Has he ever played the piano?",
-        "Have you often visited your grandparents?",
-        "Has she finally solved the problem?",
-        "Have they frequently gone hiking in the mountains?",
-        "Have you already eaten lunch?",
-        "Has he recently joined the team?",
-        "Have we always worked together?",
-        "Has she ever written a novel?",
-        "Have they already started the meeting?",
-        "Have you never missed a deadline?",
-        "Has he often helped his classmates?",
-        "Have we recently spoken to the manager?",
-        "Have you ever sung in public?",
-        "Has she just arrived at the office?",
-        "Have they always enjoyed classical music?",
-        "Have you often practiced yoga?",
-        "Has he already completed the assignment?",
-        "Have we recently cleaned the house?",
-        "Have you ever driven a sports car?",
-        "Has she frequently visited the art gallery?",
-        "Have they just left the building?",
-        "Have you always believed in yourself?",
-        "Has he already called his parents?",
-        "Have we recently discussed this topic?",
-        "Have you ever participated in a marathon?",
-        "Has she often read historical novels?",
-        "Have they just submitted their application?",
-        "Have you already prepared your speech?",
-        "Has he always admired his teacher?",
-        "Have we ever worked late at night?",
-        "Have you ever forgotten something important?",
-        "Has she recently moved to a new city?",
-        "Have they always been supportive?",
-        "Have you just checked your emails?",
-        "Has he ever painted a portrait?",
-        "Have we frequently visited this museum?",
-        "Have you already finished your breakfast?",
-        "Has she ever been to Paris?",
-        "Have they often argued about politics?",
-        "Have you recently met with the director?",
-        "Has he always been an early riser?",
-        "Have we just booked the tickets?",
-        "Have you ever climbed a mountain?",
-        "Has she often traveled for work?",
-        "Have they already cleaned their rooms?",
-        "Have you recently completed the report?",
-        "Has he ever repaired a bicycle?",
-        "Have we often organized team events?",
-        "Have you already called the restaurant?",
-        "Has she just posted the announcement?",
-        "Have they ever volunteered at a shelter?",
-        "Have you frequently attended these meetings?",
-        "Has he recently updated his profile?",
-        "Have we always tried to improve ourselves?",
-        "Have you ever forgotten your passport?",
-        "Has she already started writing the book?",
-        "Have they always been interested in science?",
-        "Have you just received the package?",
-        "Has he ever performed on stage?",
-        "Have we recently celebrated a big achievement?",
-        "Have you ever cooked an exotic dish?",
-        "Has she often given presentations at work?",
-        "Have they already had lunch?",
-        "Have you recently visited the doctor?",
-        "Has he ever won a competition?",
-        "Have we frequently gone on picnics together?",
-        "Have you already completed your tasks?",
-        "Has she ever painted a masterpiece?",
-        "Have they just arrived at the party?",
-        "Have you always loved traveling?",
-        "Has he often told interesting stories?",
-        "Have we recently met new clients?",
-        "Have you ever planted a tree?",
-        "Has she already prepared dinner?",
-        "Have they frequently watched movies at the theater?",
-        "Have you just returned from the trip?",
-        "Has he ever written a poem?",
-        "Have we always enjoyed working here?",
-        "Have you often helped your siblings?",
-        "Has she ever tried a new sport?",
-        "Have they just organized the event?",
-        "Have you already booked your vacation?",
-        "Has he often shared his knowledge?",
-        "Have we recently cleaned the garden?",
-        "Have you ever designed your own clothes?",
-        "Has she recently adopted a pet?",
-        "Have they always supported each other?",
-        "Have you just updated the database?",
-        "Has he ever taught a class?",
-        "Have we frequently had dinner together?",
-        "Have you already finished reading the book?",
-        "Has she ever played chess professionally?",
-        "Have they recently attended a concert"
-    };
+    // TODO
+    public HashSet<string> future_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    // TODO
+    public HashSet<string> future_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    // TODO
+    public HashSet<string> future_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    #endregion
+    
     
     private Dictionary<string, HashSet<string>> wordCategories = new Dictionary<string, HashSet<string>>()
     {
@@ -1068,14 +1084,23 @@ public class EnglishLogic : MonoBehaviour
     }
     public void UpdateQuestionRule()
     {
+        // spostare in un panel
         switch (tenseDropdown.options[tenseDropdown.value].text)
         {
-            case "Present Simple": rule_dynamic_text.text = Return_PresentSimple_Question_Rules(); break; // spostare in un panel
-            case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Question_Rules();  break;
+            case "Present Simple": rule_dynamic_text.text = Return_PresentSimple_Question_Rules(); break;
             case "Present Continuous": rule_dynamic_text.text = Return_PresentContinuous_Question_Rules(); break;
-            case "Past Continuous": rule_dynamic_text.text = Return_Past_Continuous_Question_Rule(); break;
-            case "Future Simple": rule_dynamic_text.text = Return_Future_Simple_Question_Rule(); break;
             case "Present Perfect": rule_dynamic_text.text = Return_Present_Perfect_Question_Rule(); break;
+            case "Present Perfect Continous": rule_dynamic_text.text = Return_Present_Perfect_Continuous_Question_Rule(); break;
+
+            case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Question_Rules();  break;
+            case "Past Continuous": rule_dynamic_text.text = Return_Past_Continuous_Question_Rule(); break;
+            case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Question_Rule(); break;
+            case "Past Perfect Continuous": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Question_Rule(); break;
+
+            case "Future Simple": rule_dynamic_text.text = Return_Future_Simple_Question_Rule(); break;
+            case "Future Continuous": rule_dynamic_text.text = Return_Future_Continuous_Question_Rule(); break;
+            case "Future Perfect": rule_dynamic_text.text = Return_Future_Perfect_Question_Rule(); break;
+            case "Future Perfect Continuous": rule_dynamic_text.text = Return_Future_Perfect_Continuous_Question_Rule(); break;
             default: Debug.Log("error on UpdateQuestionRule"); break;
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
@@ -1149,11 +1174,20 @@ public class EnglishLogic : MonoBehaviour
         switch (tenseDropdown.options[tenseDropdown.value].text)
         {
             case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_questions);
-            case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_questions);
             case "Present Continuous": return IsAValidSimpleQuestion(input, present_continuous_questions);
-            case "Past Continuous": return IsAValidSimpleQuestion(input, past_continuous_questions);
-            case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_questions);
             case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_questions);
+            case "Present Perfect Continous": return IsAValidSimpleQuestion(input, present_perfect_continuous_questions);
+            
+
+            case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_questions);
+            case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_questions);
+            case "Past Continuous": return IsAValidSimpleQuestion(input, past_continuous_questions);
+            case "Past Perfect Continuous": return IsAValidSimpleQuestion(input, past_perfect_continuous_questions);
+            
+            case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_questions);
+            case "Future Continuous": return IsAValidSimpleQuestion(input, future_continuous_questions);
+            case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_questions);
+            case "Future Perfect Continuous": return IsAValidSimpleQuestion(input, future_perfect_continuous_questions);
             default: Debug.Log("error on UpdateNegationRule"); return false;
         }
     }
@@ -1165,6 +1199,7 @@ public class EnglishLogic : MonoBehaviour
 
 
     #region FILL QUESTIONS RULES
+    // PRESENT TENSE
     private string Return_PresentSimple_Question_Rules()
     {
         return "1.(auxiliary) + (subject) + (frequency adverb) + (base verb) + (object) + (other adverbs)?" + "\nEx.Does she often visit her grandparents?\n\n" +
@@ -1175,6 +1210,15 @@ public class EnglishLogic : MonoBehaviour
         return "1.(Wh- word}/(How) + (auxiliary verb (am/are/is)} + (subject} + (frequency adverb) + (base verb + -ing) + (other adverbs)" + "\nEx.What are you doing?\n\n" +
                "2.How (auxiliary) + (subject) + (verb) + (complement)." + "\nHow is she working today?"; 
     }
+    private string Return_Present_Perfect_Question_Rule()
+    {
+        return "1.(Wh- word/How) + (have/has) + (subject) + (past participle) + (object/complement)?" + "\nWhat have you done today?\n\n";
+    }
+    private string Return_Present_Perfect_Continuous_Question_Rule()
+    {
+        return "1.?" + "\n?\n\n";
+    }
+    //  PAST TENSE
     private string Return_Past_Simple_Question_Rules()
     {
         return "1.(Wh- word/How) + (did) + (subject) + (base verb) + (object/complement)?" + "\nWhat did you do yesterday?\n\n" +
@@ -1185,14 +1229,34 @@ public class EnglishLogic : MonoBehaviour
         return "1.(Wh- word/How) + (was/were} + {subject} + {base verb + -ing} + {object/complement}?" + "\nWhat were you doing yesterday evening?\n\n" +
                "2.(auxiliary) + (subject) + (base verb + -ing) + (complement)" + "\nWas he sleeping at that time?";
     }
+    private string Return_Past_Perfect_Question_Rule()
+    {
+        return "1.?" + "\n?\n\n" +
+               "2." + "\n?";
+    }
+    private string Return_Past_Perfect_Continuous_Question_Rule()
+    {
+        return "1.?" + "\n?\n\n" +
+               "2." + "\n?";
+    }
+    // FUTURE TENSE
     private string Return_Future_Simple_Question_Rule()
     {
         return "1.(Wh- word/How) + (will) + (subject) + (base verb) + (object/complement)?" + "\nWhat will you do tomorrow?\n\n" +
                "2.Will + (subject) + (base verb) + (complement)." + "\nWill she come to the meeting?";
     }
-    private string Return_Present_Perfect_Question_Rule()
+    private string Return_Future_Continuous_Question_Rule()
     {
-        return "1.(Wh- word/How) + (have/has) + (subject) + (past participle) + (object/complement)?" + "\nWhat have you done today?\n\n";
+        return "1.?" + "\n?\n\n" +
+               "2." + "\n?";
+    }
+    private string Return_Future_Perfect_Question_Rule()
+    {
+        return "1.?" + "\n?\n\n";
+    }
+    private string Return_Future_Perfect_Continuous_Question_Rule()
+    {
+        return "1.?" + "\n?\n\n";
     }
     #endregion
 }
