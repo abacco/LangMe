@@ -20,46 +20,6 @@ public class EnglishLogic : MonoBehaviour
 
     // Fare HelpMe Button che mostra una delle frasi dopo la pubblicità
 
-    HashSet<string> present_simple_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase){
-         "She always eats breakfast in the morning",
-        "They sometimes play football on Sundays",
-        "He often studies late at night",
-        "We rarely watch TV during the week",
-        "You never forget your keys",
-        "It usually rains in November",
-        "I hardly ever drink coffee",
-        "She occasionally goes to the gym after work",
-        "He quickly finishes his homework",
-        "We quietly enter the room to avoid disturbing others",
-        "They eagerly wait for the holidays every year",
-        "You easily solve math problems",
-        "She regularly checks her email in the morning",
-        "He slowly walks to school when he feels tired",
-        "They happily help their neighbors with gardening",
-        "We frequently visit the library on weekends",
-        "I seldom eat fast food",
-        "He boldly speaks in front of large audiences",
-        "She carefully drives on icy roads",
-        "You always arrive on time",
-        "She is always helping her friends with homework.",
-        "They are often playing outside in the garden",
-        "He is usually talking to his friends after school",
-        "We are constantly working on improving our skills",
-        "She is rarely cooking dinner for herself",
-        "They are happily discussing the upcoming event",
-        "He is slowly learning how to play the guitar",
-        "She is completely understanding the lesson now",
-        "We are frequently meeting at the cafe to talk",
-        "He is hardly ever missing his appointments",
-        "They are currently preparing for the big match",
-        "She is quickly finishing her presentation",
-        "We are patiently waiting for the train to arrive",
-        "He is rarely arguing with his brother these days",
-        "She is never forgetting to bring her umbrella",
-        "They are quietly sitting in the library at the moment",
-        "We are regularly exercising to stay fit"
-    };
-
     #region QUESTIONS INITIALIZATION
     public HashSet<string> present_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
@@ -1001,10 +961,328 @@ public class EnglishLogic : MonoBehaviour
         "Were they whispering secrets to each other?",
         "Was he calculating the expenses in the morning?"
     };
-    // TODO
-    public HashSet<string> past_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
-    // TODO
-    public HashSet<string> past_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> past_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+        "Had she finished her homework before dinner?",
+        "Had they traveled to Rome before the pandemic?",
+        "Had he seen that movie before last week?",
+        "Had we completed the project before the deadline?",
+        "Had you eaten lunch before the meeting?",
+        "Had I read the book before starting the course?",
+        "Had she visited her grandmother before the trip?",
+        "Had it stopped raining before you arrived?",
+        "Had the kids cleaned their room before the guests came?",
+        "Had the team won a match before the finals?",
+        "Had he solved the problem before the deadline?",
+        "Had we packed everything before the movers arrived?",
+        "Had they heard the news before watching the TV broadcast?",
+        "Had she prepared dinner before the family got home?",
+        "Had the teacher checked all the assignments before leaving?",
+        "Had he finished his workout before taking a shower?",
+        "Had the passengers boarded the plane before the announcement?",
+        "Had the workers fixed the issue before the inspector came?",
+        "Had you written the email before calling him?",
+        "Had the children gone to bed before their parents got home?",
+        "Had she already finished her homework before dinner?",
+        "Had they ever traveled to Rome before the pandemic?",
+        "Had he just seen that movie before last week?",
+        "Had we almost completed the project before the deadline?",
+        "Had you already eaten lunch before the meeting?",
+        "Had I never read that book before starting the course?",
+        "Had she often visited her grandmother before the trip?",
+        "Had it still stopped raining before you arrived?",
+        "Had the kids already cleaned their room before the guests came?",
+        "Had the team always won matches before the finals?",
+        "Had he really solved the problem before the deadline?",
+        "Had we barely packed everything before the movers arrived?",
+        "Had they fully heard the news before watching the TV broadcast?",
+        "Had she carefully prepared dinner before the family got home?",
+        "Had the teacher thoroughly checked all the assignments before leaving?",
+        "Had he recently finished his workout before taking a shower?",
+        "Had the passengers already boarded the plane before the announcement?",
+        "Had the workers finally fixed the issue before the inspector came?",
+        "Had you just written the email before calling him?",
+        "Had the children already gone to bed before their parents got home?",
+        "Had she successfully completed her project before the meeting?",
+        "Had he truly mastered the skill before the competition?",
+        "Had the company ever expanded to international markets before last year?",
+        "Had the artist already painted the portrait before the exhibition?",
+        "Had we never seen such a performance before that day?",
+        "Had they scarcely believed the truth before it was proven?",
+        "Had the neighbors frequently argued before the fence was built?",
+        "Had you barely recognized her before she introduced herself?",
+        "Had the team hardly rested before the big game?",
+        "Had the students reviewed their notes before the exam?",
+        "Had the chef cooked the meal before the guests arrived?",
+        "Had we rehearsed enough before the show started?",
+        "Had they told you the truth before you discovered it?",
+        "Had she improved her skills before the competition?",
+        "Had you finished writing the article before the editor called?",
+        "Had the dog eaten before going to sleep?",
+        "Had the players warmed up before the match began?",
+        "Had the teacher given clear instructions before the exam?",
+        "Had the children learned the song before the performance?",
+        "Had the workers completed the repairs before the storm?",
+        "Had he apologized before the argument ended?",
+        "Had they visited Paris before the trip to London?",
+        "Had we discussed the issue before the final decision?",
+        "Had you ever dreamed of traveling the world before last year?",
+        "Had the company launched the product before the competitors?",
+        "Had the couple celebrated their anniversary before moving abroad?",
+        "Had she learned to drive before getting her license?",
+        "Had the scientists discovered the solution before publishing the paper?",
+        "Had the team developed a strategy before the project began?",
+        "Had the climbers reached the summit before the storm?",
+        "Had the passengers taken their seats before the flight was delayed?",
+        "Had the writer completed the manuscript before the deadline?",
+        "Had you practiced enough before the audition?",
+        "Had the neighbors called the police before the noise stopped?",
+        "Had the manager addressed the issue before the meeting?",
+        "Had we achieved our goals before the end of the year?",
+        "Had the students submitted their assignments before the class started?",
+        "Had the singer recorded the album before the tour?",
+        "Had the mechanic repaired the car before the customer arrived?",
+        "Had they prepared for the worst before the crisis?",
+        "Had the doctor examined the patient before the surgery?",
+        "Had the engineer designed the plan before the construction started?",
+        "Had the artist displayed their work before the gallery opened?",
+        "Had you solved the puzzle before asking for help?",
+        "Had the family moved into the house before the winter?",
+        "Had the athlete won any awards before joining the team?",
+        "Had the dog barked before someone opened the door?",
+        "Had we experienced such a challenge before that day?",
+        "Had the explorers mapped the area before starting their expedition?",
+        "Had the students memorized the formulas before the exam?",
+        "Had the team tested the software before its release?",
+        "Had the politician delivered the speech before the event?",
+        "Had the kids built the sandcastle before the tide came in?",
+        "Had the volunteers organized the event before the festival?",
+        "Had the gardeners planted the seeds before the rain?",
+        "Had she written a letter before sending an email?",
+        "Had the actors learned their lines before the rehearsal?",
+        "Had they saved enough money before the trip?",
+        "Had she ever heard about the event before attending?",
+        "Had we already decided on the theme before the meeting?",
+        "Had he locked the door before leaving the house?",
+        "Had the children behaved well before their parents arrived?",
+        "Had you finished your homework before going out?",
+        "Had it snowed in the village before this year?",
+        "Had the musician composed that piece before the concert?",
+        "Had we encountered such a problem before working on this project?",
+        "Had they returned the books to the library before the due date?",
+        "Had the neighbors painted their house before the inspection?",
+        "Had she apologized to her friend before the party?",
+        "Had the manager organized the files before the audit?",
+        "Had the scientist collected all the data before publishing the paper?",
+        "Had the students reviewed the material before the exam?",
+        "Had they met the new teacher before the semester started?",
+        "Had he explained the rules before the game began?",
+        "Had you seen her performance before last week?",
+        "Had the animals found shelter before the storm hit?",
+        "Had the explorers discovered the cave before recording it?",
+        "Had the company resolved the issue before the product launch?",
+        "Had the athletes practiced together before the championship?",
+        "Had the painter finished the portrait before the exhibition?",
+        "Had she cleaned the kitchen before starting to cook?",
+        "Had you visited the museum before it closed?",
+        "Had they lived in the city for a long time before moving to the countryside?",
+        "Had the engineers finalized the design before the construction began?",
+        "Had we analyzed the data before writing the report?",
+        "Had he apologized sincerely before the situation escalated?",
+        "Had the tourists bought souvenirs before leaving the country?",
+        "Had the students submitted their assignments before the deadline?",
+        "Had you booked the tickets before the event sold out?",
+        "Had the author edited the book before sending it to the publisher?",
+        "Had the mechanic checked the car before giving it back?",
+        "Had they celebrated the holiday before traveling abroad?",
+        "Had we visited that historical site before it became popular?",
+        "Had the chef perfected the recipe before opening the restaurant?",
+        "Had you informed her about the change before she found out elsewhere?",
+        "Had the team discussed the strategy before presenting it to the boss?",
+        "Had the children drawn on the walls before their parents arrived?",
+        "Had the dog found its way home before nightfall?",
+        "Had the architect completed the blueprints before the approval meeting?",
+        "Had the researcher tested the hypothesis before the conference?",
+        "Had the gardener planted all the flowers before the storm?",
+        "Had the teacher distributed the materials before the class?",
+        "Had they delivered the package before the recipient left?",
+        "Had we prepared everything for the party before the guests arrived?",
+        "Had the students packed their bags before the trip?",
+        "Had the artist created the sculpture before the museum acquired it?",
+        "Had she applied for the job before the deadline?",
+        "Had they traveled to any exotic places before settling down?",
+        "Had he completed his degree before starting the new job?",
+        "Had we tried that restaurant before it became famous?",
+        "Had the scientist made a breakthrough before retiring?",
+        "Had the singer released any albums before becoming a star?",
+        "Had they decorated the house before the festival?",
+        "Had you taken the exam before enrolling in the course?",
+        "Had the volunteers sorted the donations before distributing them?",
+        "Had the workers repaired the road before the traffic increased?",
+        "Had the parents spoken with the principal before the meeting?",
+        "Had the athletes set new records before their retirement?",
+        "Had the engineer tested the machine before delivering it?",
+        "Had the children learned about the planets before the astronomy class?",
+        "Had the artist exhibited her work before receiving awards?",
+        "Had the manager implemented the plan before presenting it to the board?",
+        "Had we noticed the error before printing the materials?",
+        "Had they planted trees in the park before opening it to the public?",
+        "Had the tourists explored the city before their departure?",
+        "Had the chef cooked that dish before putting it on the menu?",
+        "Had the student received feedback before revising the essay?",
+        "Had the team celebrated their success before leaving the venue?",
+        "Had the professor graded the papers before the next class?",
+        "Had the doctor diagnosed the illness before prescribing medication?",
+        "Had the friends watched that movie together before discussing it?",
+        "Had you read the instructions before assembling the furniture?",
+        "Had the hikers prepared their gear before starting the journey?",
+        "Had the dancers practiced the routine before the performance?",
+        "Had the family adopted a pet before moving to a new home?",
+        "Had the musicians played together before forming a band?",
+        "Had the mechanic identified the issue before ordering the parts?",
+        "Had the writer completed a story before publishing it online?",
+        "Had the children learned to swim before joining the team?",
+        "Had the company issued a statement before the news spread?",
+        "Had you planned the surprise party before telling anyone?",
+        "Had the photographer edited the pictures before sharing them?",
+        "Had they visited that island before choosing it for their honeymoon?",
+        "Had the lawyer reviewed the case before presenting it in court?",
+        "Had the architect revised the plans before sending them for approval?",
+        "Had the family cleaned the house before hosting guests?",
+        "Had the farmer harvested the crops before the rain?",
+        "Had the students discussed the project before starting?",
+        "Had the neighbors introduced themselves before the gathering?",
+        "Had the athlete trained for years before winning the medal?",
+        "Had the author signed copies of the book before the event?",
+        "Had the scientist collected enough evidence before publishing the paper?",
+        "Had the tourists tried the local cuisine before returning home?",
+        "Had the workers painted the walls before the office opened?",
+        "Had the singer rehearsed enough before performing live?",
+        "Had the team analyzed their mistakes before planning the next game?",
+        "Had the employees attended the workshop before implementing new skills?"
+    };
+    public HashSet<string> past_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+        "Had she been working on the project before the deadline?",
+        "Had they been practicing regularly before the competition?",
+        "Had he been reading that book since last summer?",
+        "Had we been planning the trip for weeks before it was canceled?",
+        "Had you been studying hard before the test?",
+        "Had I been exercising consistently before my injury?",
+        "Had she really been trying her best before the evaluation?",
+        "Had it been raining all day before the sun appeared?",
+        "Had the kids been playing outside before dinner?",
+        "Had the dog been barking loudly before the delivery arrived?",
+        "Had the team been training for months before the championship?",
+        "Had they been living in the same house for years before they moved?",
+        "Had she been singing beautifully before losing her voice?",
+        "Had we been discussing the issue since the beginning of the meeting?",
+        "Had he been working overtime to meet the deadline?",
+        "Had you been learning French before traveling to Paris?",
+        "Had the students been preparing for the presentation all week?",
+        "Had they already been searching for a solution before asking for help?",
+        "Had she been cooking for hours before the guests arrived?",
+        "Had the neighbors been complaining about the noise before the party ended?",
+        "Had the teacher been explaining the topic clearly before the interruption?",
+        "Had the company been growing steadily before the crisis hit?",
+        "Had you been writing the report when the computer crashed?",
+        "Had they been building the house for a year before completing it?",
+        "Had she been helping her parents on the farm before moving to the city?",
+        "Had the workers been striking for better conditions before negotiations started?",
+        "Had he been thinking about the problem all day before finding a solution?",
+        "Had the musicians been rehearsing for hours before the concert?",
+        "Had I been saving money for months before buying the car?",
+        "Had the children been drawing pictures before the lesson ended?",
+        "Had the artist been working on the painting for weeks before selling it?",
+        "Had the scientists been testing the theory before publishing the results?",
+        "Had the author been writing the book for years before it was released?",
+        "Had the players been training hard before the tournament?",
+        "Had the students been studying chemistry for a semester before the exam?",
+        "Had the team been analyzing data before presenting their findings?",
+        "Had the chef been preparing the dish for hours before serving it?",
+        "Had the mechanic been fixing the car all morning before finishing?",
+        "Had the volunteers been organizing the event before the guests arrived?",
+        "Had she been working in the garden before the rain started?",
+        "Had we been thinking about the plan for weeks before presenting it?",
+        "Had the researchers been collecting data for months before their study was completed?",
+        "Had you been practicing that song before the performance?",
+        "Had the children been learning a new language before moving abroad?",
+        "Had I been designing the website for days before launching it?",
+        "Had the project team been collaborating on the report before the deadline?",
+        "Had the journalist been investigating the story before publishing the article?",
+        "Had they been traveling together before deciding to separate?",
+        "Had the baby been crying all night before finally falling asleep?",
+        "Had the teacher been preparing lessons for hours before the class started?",
+        "Had the students been researching the topic before the debate?",
+        "Had the employees been attending workshops before the project launch?",
+        "Had the athletes been training in the gym before the competition?",
+        "Had we been cleaning the house all morning before the guests arrived?",
+        "Had the driver been fixing the car before the journey?",
+        "Had the builders been constructing the bridge for years before it was completed?",
+        "Had the travelers been exploring the city before the rain started?",
+        "Had the children been reading quietly before the bell rang?",
+        "Had the scientist been analyzing the samples before making the discovery?",
+        "Had the team been discussing the strategy before the big game?",
+        "Had she been shopping online for hours before buying anything?",
+        "Had the company been expanding its business before the market crash?",
+        "Had the couple been dating for a long time before getting married?",
+        "Had they been walking through the park before it got dark?",
+        "Had we been considering the offer before making our decision?",
+        "Had the artist been sketching ideas before painting the masterpiece?",
+        "Had he been practicing his speech for days before the presentation?",
+        "Had the programmer been debugging the code before submitting the project?",
+        "Had the students been solving math problems before the test?",
+        "Had the chef been preparing desserts before the guests arrived?",
+        "Had she been arranging the flowers before the event started?",
+        "Had the dog been digging holes in the garden before being scolded?",
+        "Had he been fixing the roof before the storm came?",
+        "Had we been drinking coffee before starting the discussion?",
+        "Had you been working late every night before the deadline?",
+        "Had they been staying at the hotel for a week before moving out?",
+        "Had the singer been rehearsing backstage before the performance?",
+        "Had the children been drawing pictures before the parents came home?",
+        "Had she been trying new recipes before opening her restaurant?",
+        "Had the farmers been planting crops before the rainy season?",
+        "Had we been saving money for months before the trip?",
+        "Had the teacher been explaining the concept before the power outage?",
+        "Had the author been writing the novel for years before publishing it?",
+        "Had the football team been playing well before their star player was injured?",
+        "Had you been wearing glasses before deciding to switch to contact lenses?",
+        "Had she been designing clothes before becoming a famous fashion designer?",
+        "Had the students been discussing the topic before the professor arrived?",
+        "Had we been preparing for the presentation before the projector broke?",
+        "Had the climbers been scaling the mountain before the weather turned bad?",
+        "Had he been repairing the bicycle before his friend came to help?",
+        "Had you been watering the plants every day before going on vacation?",
+        "Had the workers been finishing the building before the deadline?",
+        "Had the explorers been mapping the area before publishing their findings?",
+        "Had the dogs been barking all night before the neighbors complained?",
+        "Had the passengers been waiting at the station before the train arrived?",
+        "Had the neighbors been arguing about the fence before the fight broke out?",
+        "Had the chef been experimenting with recipes before creating the special dish?",
+        "Had the kids been learning the piano before switching to the violin?",
+        "Had the runners been warming up before the marathon began?",
+        "Had we been hosting parties every weekend before moving to a new house?",
+        "Had she been reading novels before starting to write her own?",
+        "Had the employees been finishing the report before presenting it to the manager?",
+        "Had the artists been painting murals before the art festival began?",
+        "Had the volunteers been distributing food before the event concluded?",
+        "Had the athletes been stretching before starting the race?",
+        "Had the scientists been conducting experiments before reporting their findings?",
+        "Had he been working on his invention for years before it was patented?",
+        "Had the musicians been recording songs before releasing the album?",
+        "Had the dancers been rehearsing before their final performance?",
+        "Had the lecturer been reviewing notes before starting the class?",
+        "Had she been knitting sweaters before deciding to sell them?",
+        "Had the child been crying before falling asleep?",
+        "Had they been repairing the old house before it was sold?",
+        "Had the actors been memorizing lines before the play started?",
+        "Had you been planning the trip before buying the tickets?",
+        "Had the farmers been preparing for the harvest before the storm hit?",
+        "Had the developers been testing the software before its release?",
+        "Had the engineers been designing the bridge before construction began?",
+        "Had the bloggers been creating content before launching their website?",
+        "Had the painters been decorating the hall before the wedding?",
+        "Had the family been arguing about the vacation destination before deciding?"
+    };
 
     public HashSet<string> future_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
@@ -1158,56 +1436,627 @@ public class EnglishLogic : MonoBehaviour
         "Will he calculate the budget for the trip?"
 
     };
-    // TODO
-    public HashSet<string> future_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
-    // TODO
-    public HashSet<string> future_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
-    // TODO
-    public HashSet<string> future_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> future_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+        "Will she be working on the project tomorrow?",
+        "Will they be traveling to Rome next summer?",
+        "Will he be watching that movie tonight?",
+        "Will we be attending the meeting this afternoon?",
+        "Will you be studying for the test this weekend?",
+        "Will I be reading that book tomorrow morning?",
+        "Will she be visiting her grandmother next month?",
+        "Will it be raining in the evening?",
+        "Will the kids be playing outside later?",
+        "Will the team be training in the gym next week?",
+        "Will he be fixing his car this evening?",
+        "Will we be planning the event for the next few days?",
+        "Will they be preparing for the presentation next Friday?",
+        "Will the chef be cooking dinner for the guests tonight?",
+        "Will the teacher be explaining the new topic tomorrow?",
+        "Will the students be writing essays in the next class?",
+        "Will the workers be repairing the road next week?",
+        "Will the neighbors be arguing again tomorrow morning?",
+        "Will the passengers be boarding the plane at this time tomorrow?",
+        "Will the children be drawing pictures during the lesson?",
+        "Will she already be working on the project tomorrow?",
+        "Will they still be traveling to Rome next summer?",
+        "Will he ever be watching that movie tonight?",
+        "Will we definitely be attending the meeting this afternoon?",
+        "Will you just be studying for the test this weekend?",
+        "Will I be simply reading that book tomorrow morning?",
+        "Will she possibly be visiting her grandmother next month?",
+        "Will it still be raining in the evening?",
+        "Will the kids already be playing outside later?",
+        "Will the team always be training in the gym next week?",
+        "Will he also be fixing his car this evening?",
+        "Will we really be planning the event for the next few days?",
+        "Will they surely be preparing for the presentation next Friday?",
+        "Will the chef truly be cooking dinner for the guests tonight?",
+        "Will the teacher patiently be explaining the new topic tomorrow?",
+        "Will the students carefully be writing essays in the next class?",
+        "Will the workers finally be repairing the road next week?",
+        "Will the neighbors frequently be arguing again tomorrow morning?",
+        "Will the passengers already be boarding the plane at this time tomorrow?",
+        "Will the children just be drawing pictures during the lesson?",
+        "Will we be organizing the documents tomorrow?",
+        "Will he be working on his speech this week?",
+        "Will the team be practicing before the match?",
+        "Will you be arranging the decorations later?",
+        "Will they be celebrating their anniversary tomorrow night?",
+        "Will the students be participating in the workshop?",
+        "Will the scientist be conducting experiments all week?",
+        "Will we be meeting with the manager later?",
+        "Will she be writing her report by tomorrow?",
+        "Will the kids be cleaning their rooms this evening?",
+        "Will the team be organizing the event tomorrow afternoon?",
+        "Will he be calling his clients later this evening?",
+        "Will she be preparing the documents before the meeting starts?",
+        "Will the children be playing in the park this time next week?",
+        "Will they be celebrating their success tonight?",
+        "Will we be discussing the plans during lunch?",
+        "Will you be finishing your assignment by midnight?",
+        "Will the chef be baking the cake when the guests arrive?",
+        "Will the manager be reviewing the report in the morning?",
+        "Will the passengers be boarding the bus at the station soon?",
+        "Will she be designing the new layout by Friday?",
+        "Will the workers be painting the house tomorrow morning?",
+        "Will the students be presenting their projects in class?",
+        "Will the neighbors be renovating their garden next month?",
+        "Will the athlete be training for the next championship?",
+        "Will the doctor be checking the patients after lunch?",
+        "Will the scientist be conducting the experiment this evening?",
+        "Will we be organizing a party next Saturday?",
+        "Will the tourists be exploring the city during their visit?",
+        "Will he be learning a new skill in the coming months?",
+        "Will she be shopping online during the sale?",
+        "Will the team be practicing for the tournament next week?",
+        "Will the writer be working on her new book next year?",
+        "Will the kids be studying for their exams tomorrow evening?",
+        "Will the dog be barking all night again?",
+        "Will the explorers be mapping the area by next month?",
+        "Will you be traveling to another city next week?",
+        "Will they be cleaning the beach on Sunday morning?",
+        "Will he be repairing the car before leaving for work?",
+        "Will the actors be rehearsing their lines this evening?",
+        "Will she be watering the plants in the garden tomorrow?",
+        "Will we be having dinner at the restaurant tomorrow night?",
+        "Will you be attending the wedding next weekend?",
+        "Will they be visiting the museum during their trip?",
+        "Will the artist be painting a mural for the exhibition?",
+        "Will the volunteers be distributing food to the community?",
+        "Will the children be drawing pictures during the art class?",
+        "Will the company be launching a new product next quarter?",
+        "Will the musicians be performing live at the concert?",
+        "Will the employees be working overtime next week?",
+        "Will he be studying for the final exam all day tomorrow?",
+        "Will we be hosting the event at the new venue next month?",
+        "Will the gardener be planting flowers in the backyard?",
+        "Will she be riding her bicycle to school this morning?",
+        "Will the team be brainstorming ideas for the presentation?",
+        "Will they be waiting at the station when the train arrives?",
+        "Will the hikers be climbing the mountain all day long?",
+        "Will the family be preparing for their move next week?",
+        "Will the lecturer be giving a talk on environmental issues?",
+        "Will the students be participating in the competition next semester?",
+        "Will the children be practicing their musical instruments this evening?",
+        "Will he be fixing the computer before the deadline?",
+        "Will they be enjoying their vacation by the beach?",
+        "Will we be discussing the changes in the policy during the meeting?",
+        "Will the tourists be visiting the historic landmarks tomorrow?",
+        "Will she be baking cookies for her friends in the afternoon?",
+        "Will the team be finalizing their strategy before the match?",
+        "Will you be flying to another country next month?",
+        "Will the animals be wandering in the forest at sunset?",
+        "Will the researchers be analyzing the data next week?",
+        "Will he be preparing his speech for the conference?",
+        "Will we be evaluating the progress of the project tomorrow?",
+        "Will the designers be creating prototypes for the new product?",
+        "Will the staff be cleaning the office in the morning?",
+        "Will the photographers be taking pictures at the event?",
+        "Will the parents be helping their children with homework?",
+        "Will the students be enrolling in the new course next term?",
+        "Will the couple be hosting a party for their friends?",
+        "Will he be practicing his guitar skills later this evening?",
+        "Will the engineers be testing the machinery tomorrow?",
+        "Will the volunteers be helping at the shelter this weekend?",
+        "Will she be attending her friend's birthday party tonight?",
+        "Will the guests be arriving at the venue by 6 PM?",
+        "Will the children be learning about science in the workshop?",
+        "Will they be organizing a fundraiser next month?",
+        "Will the driver be delivering packages this afternoon?",
+        "Will the chef be preparing a special dish for the event?",
+        "Will the company be advertising their new services next year?",
+        "Will the audience be applauding during the performance?",
+        "Will the programmers be coding the new application this week?",
+        "Will the kids be playing video games this evening?",
+        "Will the artist be sketching portraits at the festival?",
+        "Will the team be testing the product for quality assurance?",
+        "Will you be jogging in the park tomorrow morning?",
+        "Will the family be traveling to the countryside next weekend?",
+        "Will she be relaxing at the spa during her holiday?",
+        "Will the author be proofreading the book before publishing it?",
+        "Will the customers be shopping at the mall during the sale?",
+        "Will the students be revising for their exams tonight?",
+        "Will the mechanics be fixing the vehicles at the workshop?",
+        "Will the researchers be discussing their findings tomorrow?",
+        "Will the employees be attending a training session next week?",
+        "Will the gardeners be trimming the hedges in the morning?",
+        "Will he be ironing his clothes before the meeting?",
+        "Will the team be decorating the office for the celebration?",
+        "Will she be reviewing the report before submitting it?",
+        "Will they be building a new house in the suburbs?",
+        "Will we be celebrating our anniversary this Friday?",
+        "Will the dog be chasing the ball in the garden tomorrow?",
+        "Will the travelers be taking pictures during the journey?",
+        "Will the organizers be planning the event for the whole day?"
+
+    };
+    public HashSet<string> future_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+    "Will she have completed the project by next week?",
+    "Will they have traveled to Italy before the end of the year?",
+    "Will he have finished his homework by the time you arrive?",
+    "Will we have saved enough money before the wedding?",
+    "Will you have read that book by tomorrow?",
+    "Will I have cleaned my room before dinner?",
+    "Will the team have won the tournament by next month?",
+    "Will she have written the report before the deadline?",
+    "Will he have cooked dinner before the guests arrive?",
+    "Will the students have learned this chapter before the test?",
+    "Will the workers have repaired the road by the weekend?",
+    "Will we have moved into our new house by Christmas?",
+    "Will they have completed the renovation before summer starts?",
+    "Will the scientist have discovered the cure by next year?",
+    "Will the kids have cleaned their rooms before their friends visit?",
+    "Will you have visited all the museums before leaving the city?",
+    "Will we have finished all our tasks by 5 PM?",
+    "Will she have prepared dinner before everyone gets home?",
+    "Will the doctor have seen all the patients by the afternoon?",
+    "Will the team have scored enough points to win the match?",
+    "Will the chef have prepared the special dish by the time we arrive?",
+    "Will the manager have reviewed the files before the meeting?",
+    "Will you have completed the registration process by next month?",
+    "Will they have built the bridge by the end of the year?",
+    "Will the passengers have boarded the plane before the announcement?",
+    "Will she have cleaned the kitchen before starting to cook?",
+    "Will the volunteers have organized everything before the event?",
+    "Will the tourists have taken all the pictures they need by sunset?",
+    "Will the athlete have broken any records by the end of the championship?",
+    "Will the students have submitted their assignments by tomorrow?",
+    "Will the team have reached the summit before nightfall?",
+    "Will he have repaired his car before the weekend?",
+    "Will we have planned everything for the trip before the holidays?",
+    "Will the kids have finished their homework before bedtime?",
+    "Will they have learned to swim before the competition?",
+    "Will the author have finished the book by the release date?",
+    "Will you have sent the email before the meeting starts?",
+    "Will the family have moved out before the landlord comes?",
+    "Will the professor have reviewed all the papers by the deadline?",
+    "Will the painter have completed the portrait by the exhibition?",
+    "Will they have raised enough money for the fundraiser by next week?",
+    "Will she have delivered the package before the customer calls?",
+    "Will the engineers have finished testing the device before its launch?",
+    "Will we have improved our skills by the end of the course?",
+    "Will the actor have memorized all his lines before the performance?",
+    "Will the students have passed the exam by the end of the semester?",
+    "Will the company have achieved its goals by the end of the fiscal year?",
+    "Will the neighbors have painted their fence before the party?",
+    "Will the project team have met the deadline before the conference?",
+    "Will you have written the script before the rehearsal?",
+    "Will the dog have learned new tricks by the end of the training?",
+    "Will the students have completed their projects before the deadline?",
+    "Will the employees have submitted their reports by tomorrow morning?",
+    "Will she have cooked dinner before we get home?",
+    "Will the scientists have published their research by next year?",
+    "Will the kids have finished their chores by lunchtime?",
+    "Will he have saved enough money for his trip by summer?",
+    "Will you have bought a new car before the sale ends?",
+    "Will they have cleaned the house before the guests arrive?",
+    "Will the manager have prepared the agenda before the meeting starts?",
+    "Will we have watched the movie by the time it gets late?",
+    "Will the athletes have improved their performance before the match?",
+    "Will the parents have planned the birthday party before next weekend?",
+    "Will the teacher have graded all the papers by tomorrow?",
+    "Will she have designed the new brochure by next month?",
+    "Will the neighbors have fixed their fence by the end of the week?",
+    "Will the company have reached its sales target before the quarter ends?",
+    "Will the artist have painted the mural before the exhibition?",
+    "Will the volunteers have arranged the donations by the afternoon?",
+    "Will you have signed the contract before the deadline?",
+    "Will the team have repaired the equipment before starting the project?",
+    "Will the travelers have reached their destination by nightfall?",
+    "Will she have practiced enough to perform at the concert?",
+    "Will the chef have prepared the dishes before the guests arrive?",
+    "Will we have completed our tasks before the holidays?",
+    "Will the scientists have found a solution to the problem by then?",
+    "Will the engineer have built the prototype before the presentation?",
+    "Will the children have learned the song before the recital?",
+    "Will he have written the speech before the conference?",
+    "Will they have visited all the tourist spots before leaving the city?",
+    "Will the researchers have collected all the data before the study ends?",
+    "Will the family have moved into their new house by summer?",
+    "Will the farmers have harvested their crops before winter?",
+    "Will the doctors have treated all the patients by the end of the day?",
+    "Will the guests have arrived at the venue before the ceremony starts?",
+    "Will the students have memorized the formulas before the test?",
+    "Will the athletes have trained enough before the competition?",
+    "Will the company have launched the new product before the event?",
+    "Will the writers have edited their articles before the deadline?",
+    "Will the passengers have boarded the train by the time it departs?",
+    "Will she have completed her course before applying for a job?",
+    "Will the developers have tested the software by its release date?",
+    "Will we have organized all the files before the audit?",
+    "Will the dog have stopped barking by morning?",
+    "Will the professor have reviewed all the assignments by the end of the week?",
+    "Will the kids have gone to bed before their parents return?",
+    "Will the teachers have prepared all the materials by the workshop date?",
+    "Will the tourists have explored the city by the end of their trip?",
+    "Will the painter have finished the masterpiece before the exhibition?",
+    "Will the neighbors have settled their argument before the evening?",
+    "Will he have fixed the car before the weekend?",
+    "Will we have planned the vacation before spring?",
+    "Will you have registered for the course by next week?",
+    "Will the volunteers have distributed the aid before nightfall?",
+    "Will the architect have drawn the blueprints by the review?",
+    "Will the students have researched their projects by the class?",
+    "Will the team have completed the survey before the meeting?",
+    "Will the professor have explained the concepts before the exam?",
+    "Will the researchers have analyzed the results before the conference?",
+    "Will the kids have cleaned their toys before bedtime?",
+    "Will the manager have announced the changes by next week?",
+    "Will the employees have arranged the documents before the presentation?",
+    "Will the farmers have plowed the field before the rain?",
+    "Will the musicians have rehearsed their performance before the show?",
+    "Will the explorers have mapped the region before starting their expedition?",
+    "Will the tourists have taken enough pictures by the end of the day?",
+    "Will the authors have submitted their manuscripts by the deadline?",
+    "Will the chefs have prepared the menu before the event?",
+    "Will we have visited all the exhibits before leaving the museum?",
+    "Will she have studied for the test by next week?",
+    "Will he have paid the bills by the end of the month?",
+    "Will they have redecorated their living room before Christmas?",
+    "Will you have bought groceries before the store closes?",
+    "Will the athlete have recovered from his injury by the championship?",
+    "Will the family have hosted the reunion by next summer?",
+    "Will the engineer have tested the machine before the launch?",
+    "Will the tourists have returned their rental car before the due time?",
+    "Will the parents have enrolled their children in the new school by September?",
+    "Will the directors have finalized their decisions before the press release?",
+    "Will the volunteers have helped all the participants by the end of the event?",
+    "Will the city have completed the new park by the end of the year?",
+    "Will the lecturer have delivered the speech before the workshop ends?",
+    "Will the students have passed the course by the end of the semester?",
+    "Will the authors have received feedback for their books before publishing?",
+    "Will the actors have memorized their dialogues by opening night?",
+    "Will the doctor have performed the surgery by the end of the day?",
+    "Will the community have reached its funding goal before the campaign ends?",
+    "Will the hikers have completed their journey by nightfall?",
+    "Will the scientists have announced their findings before the meeting?",
+    "Will the cleaners have finished their work before the office opens?",
+    "Will the musicians have finished their tour by the end of the season?",
+    "Will the farmer have prepared the land before the planting season?",
+    "Will you have completed your project by the deadline?",
+    "Will the volunteers have cleaned the area before the festival?",
+    "Will she have decorated the venue before the party?",
+    "Will the team have evaluated all options before making a decision?",
+    "Will the students have packed their bags before the field trip?",
+    "Will the photographer have captured the sunrise by morning?",
+    "Will they have arrived at their destination before dark?",
+    "Will the shop have closed by the time you reach it?",
+    "Will the climbers have reached the peak before sunrise?",
+    "Will the organizers have finalized the plans before the conference?",
+    "Will the chef have tried all the recipes before designing the menu?",
+    "Will the animals have been fed before the visitors arrive?"
+    };
+    public HashSet<string> future_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+    "Will she have been working on the project for six months by December?",
+    "Will they have been traveling through Europe for a year by the time we see them?",
+    "Will he have been studying for the exam for weeks before it starts?",
+    "Will we have been waiting in line for hours by the time the store opens?",
+    "Will you have been reading that book for long by the time you finish it?",
+    "Will I have been exercising every day for a month by the end of the challenge?",
+    "Will the kids have been playing outside for two hours before dinner?",
+    "Will the team have been training hard for weeks before the big game?",
+    "Will she have been cooking all day before the dinner party?",
+    "Will he have been fixing the car for hours before it works again?",
+    "Will the workers have been repairing the bridge for months by the time it reopens?",
+    "Will we have been preparing for the event for weeks before it starts?",
+    "Will the chef have been creating recipes for weeks before the menu is finalized?",
+    "Will the teacher have been teaching this subject for years before retiring?",
+    "Will the students have been practicing for the performance all semester?",
+    "Will they have been saving money for months before buying a new house?",
+    "Will she have been learning French for five years by the time she moves to France?",
+    "Will he have been working at this company for a decade by next year?",
+    "Will the tourists have been exploring the city all day before heading back to the hotel?",
+    "Will the volunteers have been distributing food for hours by the end of the drive?",
+    "Will you have been running every morning for a year by next spring?",
+    "Will they have been building the house for years before it’s complete?",
+    "Will we have been writing the book for ages by the time it’s published?",
+    "Will she have been solving problems like this for decades by the time she retires?",
+    "Will he have been practicing his guitar for months before the concert?",
+    "Will the neighbors have been arguing all night before they settle down?",
+    "Will the dog have been barking for hours by the time the owners return?",
+    "Will the students have been studying chemistry for years before graduating?",
+    "Will the team have been brainstorming ideas for days before the final pitch?",
+    "Will the developers have been debugging the software for weeks before the release?",
+    "Will you have been cleaning the house for hours before the guests arrive?",
+    "Will we have been planning this trip for years by the time we leave?",
+    "Will the company have been growing steadily for decades by the anniversary?",
+    "Will she have been managing the team for years before the promotion?",
+    "Will the artist have been working on the painting for months before it’s displayed?",
+    "Will they have been preparing for the festival all week before it starts?",
+    "Will the athlete have been training every day for years by the time of the Olympics?",
+    "Will we have been living in this neighborhood for ten years by next summer?",
+    "Will the researchers have been working on the study for months before presenting their findings?",
+    "Will the children have been playing video games for hours by the time they’re told to stop?",
+    "Will he have been jogging every morning for years by the next race?",
+    "Will the employees have been attending workshops for weeks before the seminar?",
+    "Will the scientists have been conducting experiments for decades before the breakthrough?",
+    "Will we have been rehearsing for the play for weeks by the opening night?",
+    "Will the author have been writing the novel for years before it’s completed?",
+    "Will you have been preparing your speech for months before the event?",
+    "Will the couple have been saving for years before their wedding?",
+    "Will the dog have been chasing squirrels all afternoon before it rests?",
+    "Will the farmers have been planting crops for weeks before the harvest?",
+    "Will the students have been revising their notes for hours before the test?",
+    "Will the parents have been helping their children with homework all evening?",
+    "Will the musician have been practicing the piano every day before the recital?",
+    "Will the athletes have been training for months before the championship?",
+    "Will the scientists have been researching this topic for years before publishing?",
+    "Will the tourists have been sightseeing all morning before stopping for lunch?",
+    "Will the children have been playing in the park for hours before sunset?",
+    "Will the artist have been sketching designs for months before starting the final piece?",
+    "Will the workers have been building the skyscraper for years before it’s finished?",
+    "Will the chef have been experimenting with recipes for weeks before creating the menu?",
+    "Will the engineer have been working on the project for months before the presentation?",
+    "Will we have been cleaning the house all day before the guests arrive?",
+    "Will they have been organizing the festival for months before it begins?",
+    "Will she have been preparing for the exam for weeks by the time of the test?",
+    "Will the manager have been managing the team for years before the promotion?",
+    "Will you have been studying that subject for months before the certification exam?",
+    "Will the farmer have been tending to the fields for weeks before the harvest?",
+    "Will the software developers have been debugging the code for days before the launch?",
+    "Will the team have been analyzing data for weeks before submitting the report?",
+    "Will the volunteers have been working at the shelter for years by next summer?",
+    "Will the lecturer have been giving talks on this topic for decades by retirement?",
+    "Will the students have been revising for the exam for days before taking it?",
+    "Will the kids have been running around the playground for hours before dinner?",
+    "Will the company have been producing this product for decades before introducing a new version?",
+    "Will the author have been drafting the novel for years by its publication date?",
+    "Will the athletes have been preparing for the competition for months before the big day?",
+    "Will the neighbors have been decorating their house for days before the holiday?",
+    "Will the doctor have been treating patients for hours by the time the shift ends?",
+    "Will you have been waiting in the queue for long by the time they let you in?",
+    "Will the couple have been renovating their home for months before moving in?",
+    "Will the scientist have been experimenting with new methods for years before the discovery?",
+    "Will we have been brainstorming ideas for days before finalizing the project?",
+    "Will she have been teaching the same course for years by next semester?",
+    "Will the workers have been repairing the building for months before it reopens?",
+    "Will the musician have been composing melodies for years by the time of the concert?",
+    "Will the hikers have been exploring the forest all day by the time they return?",
+    "Will the photographer have been capturing images all afternoon by the exhibition date?",
+    "Will the volunteers have been assisting in the community for months by the end of the campaign?",
+    "Will the dog have been chasing its tail all morning before getting tired?",
+    "Will the family have been traveling across the country for years by the time they settle?",
+    "Will the neighbors have been arguing about the fence for weeks before resolving the issue?",
+    "Will the students have been learning about history for months by the final exam?",
+    "Will the chef have been training apprentices for years by the time of retirement?",
+    "Will the tourists have been hiking for days before reaching the peak?",
+    "Will you have been attending these classes for months by the time you graduate?",
+    "Will the researchers have been developing the vaccine for years before its approval?",
+    "Will the children have been building sandcastles for hours by the time the tide comes in?",
+    "Will the team have been organizing the charity event for months before it happens?",
+    "Will the director have been working on the movie for years by the premiere?",
+    "Will the athlete have been recovering from the injury for months by the championship?",
+    "Will the scientist have been analyzing samples for years by the time of the publication?",
+    "Will the students have been practicing the song for weeks before the performance?",
+    "Will the staff have been preparing the venue for days by the time of the event?",
+    "Will the writer have been drafting the script for months by the time filming begins?",
+    "Will the project team have been collaborating on the presentation for weeks?",
+    "Will the professor have been mentoring students for decades by the time of retirement?",
+    "Will the artist have been perfecting their technique for years before the exhibition?",
+    "Will the parents have been planning the trip for months by the time of departure?",
+    "Will the kids have been practicing sports for weeks before the school competition?",
+    "Will the travelers have been driving for hours by the time they reach the hotel?",
+    "Will the researchers have been collecting data for months by the time of the conference?",
+    "Will the engineer have been refining the design for years before the launch?",
+    "Will the singer have been rehearsing for months by the time of the performance?",
+    "Will we have been working on this project for years before it is complete?",
+    "Will they have been waiting for the results for weeks by the time of announcement?",
+    "Will the group have been organizing the event for months by the opening day?",
+    "Will the factory have been producing goods for decades by the anniversary?",
+    "Will she have been managing this department for years by the time of her promotion?",
+    "Will the gamers have been playing that game for months by the time it is updated?",
+    "Will the cyclists have been practicing for years by the time of the tour?",
+    "Will the company have been developing the software for years by its release?",
+    "Will the chef have been preparing dishes for decades by the time of retirement?",
+    "Will the volunteers have been raising funds for months by the time of the event?",
+    "Will the gardeners have been planting flowers for days by the time the festival begins?",
+    "Will the kids have been reading books for hours by the time the library closes?",
+    "Will the tourists have been visiting landmarks for days by the time of departure?",
+    "Will the student have been improving their skills for years before getting certified?",
+    "Will the actor have been practicing their lines for weeks by the time of the premiere?",
+    "Will the explorer have been charting unknown territories for months by the end of the expedition?",
+    "Will the designers have been working on the new collection for months before the fashion show?",
+    "Will the author have been revising the manuscript for years before sending it for review?",
+    "Will the neighbors have been fixing their roof for weeks by the end of summer?",
+    "Will the hikers have been climbing the mountains for days by the time they reach the top?",
+    "Will the family have been living abroad for years by the time they return home?",
+    "Will the students have been preparing for exams for weeks by the time of the test?",
+    "Will the parents have been supporting their children’s education for decades by the time they graduate?",
+    "Will the professors have been teaching online courses for years by the time they switch platforms?",
+    "Will the developers have been creating updates for months by the time of release?",
+    "Will the researchers have been testing hypotheses for years by the time of their breakthrough?",
+    "Will the participants have been debating for hours by the time of the conclusion?",
+    "Will the government have been investing in green energy for decades by the time of transition?",
+    "Will the musicians have been composing music for months by the time of the concert?",
+    "Will the hikers have been following the trail for hours by the time they return?",
+    "Will the team have been brainstorming ideas for days by the time of the presentation?",
+    "Will the chef have been cooking meals for years by the time of their recognition?",
+    "Will the audience have been watching performances for hours by the time the festival ends?",
+    "Will the students have been studying English for years by the time they travel abroad?",
+    "Will the team have been collaborating on the new design for months before presenting it?",
+    "Will the athlete have been recovering from the injury for a long time by the next competition?",
+    "Will the volunteers have been helping at the shelter for months by the time of the anniversary?",
+    "Will the gardener have been tending the garden for weeks by the time of the festival?",
+    "Will the company have been creating innovations for decades by the time they dominate the market?",
+    "Will the students have been participating in extracurricular activities for months by graduation?",
+    "Will the developer have been coding the software for weeks by the time of its release?",
+    "Will the actors have been rehearsing for weeks by the premiere of the play?",
+    "Will the children have been playing outside for hours before coming home?",
+    "Will the family have been traveling together for years before settling in one place?",
+    "Will the artist have been refining the sculpture for months by the time it is showcased?",
+    "Will the managers have been discussing the merger for years by the time it is finalized?",
+    "Will the lecturer have been speaking about climate change for decades by retirement?",
+    "Will the engineers have been improving the blueprint for years before construction begins?",
+    "Will the tourists have been visiting the country for weeks by the end of their trip?",
+    "Will the researchers have been conducting tests for decades before discovering a breakthrough?",
+    "Will the hikers have been trekking through the mountains for weeks before reaching the summit?",
+    "Will the neighbors have been debating the new regulations for weeks by the next council meeting?",
+    "Will the author have been rewriting the manuscript for years before publishing?",
+    "Will the farmers have been working on the fields for months by the time of harvest?",
+    "Will the parents have been saving money for decades by the time their children go to college?",
+    "Will the entrepreneurs have been building their startup for years by the time of its success?",
+    "Will the volunteers have been participating in the charity marathon for hours by the end of the day?",
+    "Will the journalists have been covering the event for days by the time it concludes?",
+    "Will the students have been taking online classes for months by the time of the semester exams?",
+    "Will the chef have been training new staff members for years by the time of his retirement?",
+    "Will the team have been strategizing for months by the final stage of the competition?",
+    "Will the scientists have been working on renewable energy solutions for years by the breakthrough?",
+    "Will the family have been living in their new home for years by the time they renovate?",
+    "Will the actors have been filming scenes for months by the time of the movie's release?",
+    "Will the tourists have been exploring landmarks for weeks by the end of their vacation?",
+    "Will the volunteers have been raising awareness for years by the time of the campaign's success?",
+    "Will the teachers have been mentoring students for decades by the time they retire?",
+    "Will the engineers have been testing the equipment for years before the final approval?",
+    "Will the company have been operating in the market for decades by the next milestone anniversary?",
+    "Will the writers have been drafting stories for years by the time their anthology is published?",
+    "Will the children have been participating in workshops for months by the time of their performance?",
+    "Will the hikers have been traveling across regions for months before returning home?",
+    "Will the audience have been enjoying performances for hours by the time the festival ends?",
+    "Will the photographer have been capturing moments for months by the time of the exhibition?",
+    "Will the dog have been barking all evening before the neighbors complain?",
+    "Will the team have been rehearsing for weeks by the time they perform on stage?",
+    "Will the family have been hosting events for months by the time of the reunion?",
+    "Will the musician have been playing the violin for years before their solo concert?",
+    "Will the project team have been refining the presentation for weeks before the deadline?",
+    "Will the researchers have been testing hypotheses for years before achieving results?",
+    "Will the participants have been working together for months by the time of the final event?",
+    "Will the lecturer have been presenting their findings for hours by the conclusion of the conference?",
+    "Will the children have been creating artwork for weeks by the time of the exhibition?"
+    };
     #endregion
-    
-    
+
+    #region AFFIRMATIONS INITIALIZATION
+    public HashSet<string> present_simple_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> present_continuous_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> present_perfect_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> present_perfect_continuous_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+
+    public HashSet<string> past_simple_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> past_continuous_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> past_perfect_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> past_perfect_continuous_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+
+    public HashSet<string> future_simple_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> future_continuous_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> future_perfect_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    public HashSet<string> future_perfect_continuous_affirmations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { };
+    #endregion
+
     private Dictionary<string, HashSet<string>> wordCategories = new Dictionary<string, HashSet<string>>()
     {
         { "wh-word", new HashSet<string> { "why", "when", "where", "how", "what", "which" } },
         { "auxiliary", new HashSet<string> { "does", "do", "is", "are" } },
-        { "subject", new HashSet<string> 
-            { "she", "he", "it", "we", "they", "you", "john", "sarah", "david", "emma", "jack", "i",
-            "John", "Sarah", "David", "Emma", "Tom", "Mike", "Lily", "Alice", "James", "Jack", "my parents", "the students",
-            "her brother", "his father", "my friends", "the kids", "the birds", "the engineers", "the tourists", "my cousins",
-            "my classmates", "my neighbors", "his cousin", "her sister", "the dogs", "his boss", "my grandparents", "the nurses",
-            "the cat", "the baby", "who", "coffee", "car", "music", "emails", "ice cream", "movies", "homework", "office", "cat", "sushi", "cakes", "pictures", "glasses", "water", "bicycles", "computers", "tourists", "windows", "news", "bridges", "medicine",
-            "she", "they", "he", "you", "it", "we", "John", "the students", "her brother", "my parents", "Sarah", "the kids", "your cat", "my neighbors", "his father", "my friends", "Emma", "the birds", "Alice", "Tom", "the workers", "her mother", "my cousins", "Jack", "the dogs", "his uncle", "my classmates", "Lily", "the tourists", "her boyfriend", "my teachers", "Mike", "the engineers", "his cousin",
-            "she", "they", "he", "we", "you", "it", "John", "the students", "her brother", "my parents", "Sarah", "the kids", "your cat", "my neighbors", "his father", "my friends", "Emma", "the birds", "Alice", "Tom", "the workers", "her mother", "my cousins", "Jack", "the dogs", "his uncle", "my classmates", "Lily", "the tourists", "her boyfriend", "my teachers", "Mike", "the engineers", "his cousin",
-            "she", "they", "he", "we", "you", "I", "her friends", "the guests", "their neighbors", "his desk", "her dog", "their room", "his house", "the train", "his bike", "the students", "the teacher", "their friends", "the birds", "the cats", "the furniture", "the jokes", "his scarf", "the jokes", "the hill",
-            "she", "they", "he", "we", "you", "I", "her friends", "their neighbors", "his bike", "her desk", "their room", "the guests", "his house", "the cats", "the birds", "the teacher", "his client", "the students", "the car", "their friends", "the silverware", "the piano", "the couch", "her mother", "the manager", "the garden", "the meeting", "her book", "his scarf", "the hill", "their plans", "his partner", "her grandmother", "their project", "the package", "the new room", "the beach", "her dress", "the furniture", "his pencils", "the decorations", "the lost items", "the heavy boxes", "their dance routine", "the vase", "her favorite song", "her website", "the soup", "the trip", "the budget", "her future", "secrets",
-            "you", "she", "they", "we", "he", "his parents", "your grandparents", "her friends", "the team", "the manager", "the director", "the guests", "the cats", "her siblings", "their neighbors", "the art gallery", "the application", "his teacher", "the house", "their relatives", "the doctor", "the party", "the museum", "the concert", "the office", "the birds", "his classmates", "the client", "the workshop", "her novel", "the marathon", "the garden", "the rules", "the report", "the package", "the professor", "the database", "the kitchen", "the library", "her book", "the house", "the furniture", "the living room", "the dishes", "their house", "the chair", "your passport", "your room", "his workspace", "the silverware", "the emails", "her pet", "her flight", "the software", "the piano", "the surprise party", "her portfolio", "the podcast", "the batteries",
-            "you", "she", "they", "we", "he", "her dog", "the family", "their wedding", "the community", "the garage", "clients", "her house", "their neighbors", "the walls", "his presentation", "her career goals", "dance classes", "flowers", "groceries", "puzzles", "the pool", "artwork", "English", "the play", "the lake", "your language skills", "the countryside", "business strategies", "the furniture", "video games", "a sandcastle", "dinner", "documentaries", "the city", "cakes", "plants", "your friend", "music", "a new apartment", "recipes", "exercises", "clothes", "basketball skills", "mountains", "a job", "your siblings", "math skills", "portraits", "notes", "the silverware", "sketches", "tickets", "a scarf", "their speech", "our house", "Italian dishes", "yoga classes", "her resume", "a treehouse", "time outdoors", "the choir", "chess", "the laundry", "solutions", "his room", "packages", "her lines", "the contract", "the cafe", "money", "the sunrise", "her science project", "a new car", "a travel itinerary", "courses", "their favorite team", "ideas", "lectures", "a scrapbook", "camera settings", "meals", "the data", "new programming languages", "your parents", "her younger siblings", "the fence", "vegetables", "books", "new hobbies", "poems", "their limits", "errors", "photography", "her stories", "the beach", "riddles", "climate change", "your nails", "surprises", "sports events", "screen time", "past decisions", "to ski", "her car's engine", "the beauty of nature", "the garage", "the community center", "your bedroom layout", "her environment", "advice", "the river", "workshops", "your lines", "skills", "furniture", "loved ones", "art pieces", "the championship", "her future", "community cleanups", "dreams", "a different country", "your future studies", "videos", "pictures", "one another", "ideas", "work and studies", "memes", "podcasts", "solutions to global issues"
-
+        { "subject", new HashSet<string>
+            {    "she", "he", "it", "we", "they", "you", "I", "John", "Sarah", "David", "Emma", "Tom", "Mike",
+                "Lily", "Alice", "James", "Jack", "my parents", "the students", "her brother", "his father",
+                "my friends", "the kids", "the birds", "the engineers", "the tourists", "my cousins",
+                "my classmates", "my neighbors", "his cousin", "her sister", "the dogs", "his boss",
+                "my grandparents", "the nurses", "the cat", "the baby", "who", "coffee", "car", "music",
+                "emails", "ice cream", "movies", "homework", "office", "sushi", "cakes", "pictures", "glasses",
+                "water", "bicycles", "computers", "windows", "news", "bridges", "medicine", "your cat",
+                "the workers", "her mother", "his uncle", "her boyfriend", "my teachers", "her friends",
+                "the guests", "their neighbors", "his desk", "her dog", "their room", "his house", "the train",
+                "his bike", "the teacher", "their friends", "the cats", "the furniture", "the jokes", "his scarf",
+                "the hill", "his client", "the car", "the silverware", "the piano", "the couch", "the manager",
+                "the garden", "the meeting", "her book", "his partner", "her grandmother", "their project",
+                "the package", "the new room", "the beach", "her dress", "his pencils", "the decorations",
+                "the lost items", "the heavy boxes", "their dance routine", "the vase", "her favorite song",
+                "her website", "the soup", "the trip", "the budget", "her future", "secrets", "his parents",
+                "your grandparents", "the team", "the director", "her siblings", "the art gallery",
+                "the application", "his teacher", "the house", "their relatives", "the doctor", "the party",
+                "the museum", "the concert", "the office", "the client", "the workshop", "her novel",
+                "the marathon", "the rules", "the report", "the professor", "the database", "the kitchen",
+                "the library", "the living room", "the dishes", "their house", "the chair", "your passport",
+                "your room", "his workspace", "her pet", "her flight", "the software", "the surprise party",
+                "her portfolio", "the podcast", "the batteries", "the family", "their wedding", "the community",
+                "the garage", "clients", "the walls", "his presentation", "her career goals", "dance classes",
+                "flowers", "groceries", "puzzles", "the pool", "artwork", "English", "the play", "the lake",
+                "your language skills", "the countryside", "business strategies", "video games", "a sandcastle",
+                "dinner", "documentaries", "the city", "plants", "your friend", "a new apartment", "recipes",
+                "exercises", "clothes", "basketball skills", "mountains", "a job", "your siblings", "math skills",
+                "portraits", "notes", "sketches", "tickets", "a scarf", "their speech", "our house",
+                "Italian dishes", "yoga classes", "her resume", "a treehouse", "time outdoors", "the choir",
+                "chess", "the laundry", "solutions", "his room", "packages", "her lines", "the contract",
+                "the cafe", "money", "the sunrise", "her science project", "a new car", "a travel itinerary",
+                "courses", "their favorite team", "ideas", "lectures", "a scrapbook", "camera settings",
+                "meals", "the data", "new programming languages", "her younger siblings", "the fence",
+                "vegetables", "books", "new hobbies", "poems", "their limits", "errors", "photography",
+                "her stories", "riddles", "climate change", "your nails", "surprises", "sports events",
+                "screen time", "past decisions", "to ski", "her car's engine", "the beauty of nature",
+                "the community center", "your bedroom layout", "her environment", "advice", "the river",
+                "workshops", "your lines", "skills", "furniture", "loved ones", "art pieces", "the championship",
+                "community cleanups", "dreams", "a different country", "your future studies", "videos",
+                "one another", "work and studies", "memes", "podcasts", "solutions to global issues",
+                "the animals", "the explorers", "the company", "the athletes", "the painter", "the writers",
+                "the authors", "the singers", "the doctors", "the hiker", "the friends", "the musicians",
+                "the mechanics", "the actors", "the architect", "the volunteers", "the programmers",
+                "the bloggers", "the farmers", "the employees", "the chefs", "the project team",
+                "the gardeners", "the professors", "the professionals", "the companies", "the politicians",
+                "the managers", "the passengers", "the scientists", "the audience", "the designers",
+                "the drivers", "the organizers", "the hikers", "the dancers", "the staff", "the gamers",
+                "the entrepreneurs", "the government", "the journalists",
         } },
-        
-        { "verb", new HashSet<string> 
-            { "drink", "visit", "drive", "enjoy", "rain", "arrive", "play", "listen", "work", "call", "write", "like", "walk", "cook", "cost", "watch", "travel", "sleep", "have", "clean", "buy", "sell", 
-            "exercise", "dance", "sing", "fix", "bake", "swim", "teach", "eat", "study", "read", "prefer", "sound", "help", "bark", "go", "ride", "repair", "send", "taste", "finish", "build", "wake",
-            "is", "are", "am", "doing", "working", "thinking", "coming", "raining", "studying", "calling",
-             "staying", "cooking", "going", "playing", "shouting", "waiting", "reading", "discussing",
-             "having", "running", "barking", "arguing", "singing", "eating", "painting", "traveling",
-             "meeting", "talking", "shopping", "helping", "learning", "swimming", "feeling", "crying",
-             "watching", "walking", "sitting", "doing", "writing", "enjoying", "planning", "fixing",
-             "taking", "practicing", "moving", "joining", "dancing", "cleaning", "becoming", "waiting",
-             "designing", "searching", "washing", "speaking", "learning", "organizing", "starting",
-             "visiting", "checking", "preparing", "standing", "trying", "building", "exploring",
-             "enjoying", "feeding", "repairing", "making", "smiling", "forgetting", "opening",
-             "calling", "driving", "recording", "solving", "sitting", "improving", "fixing", "holding",
-             "delivering", "organizing", "working", "heading", "celebrating", "talking", "parking",
-             "buying", "leaving", "discussing",
-             "are", "is", "working", "coming", "laughing", "going", "thinking", "raining", "studying", "calling", "staying", "cooking", "playing", "shouting", "waiting", "reading", "watching", "discussing", "having", "running", "barking", "arguing", "singing", "eating", "painting", "traveling", "meeting", "snowing", "talking", "shopping", "helping", "learning", "swimming", "feeling", "crying", "planning", "fixing", "taking", "practicing", "moving", "joining", "dancing", "cleaning", "becoming", "waiting", "designing", "searching", "washing", "speaking", "learning", "organizing", "starting", "visiting", "checking", "preparing", "standing", "trying", "building", "exploring", "enjoying", "feeding", "repairing", "getting", "making", "smiling", "forgetting", "opening", "driving", "recording", "solving", "sitting", "improving", "playing", "fixing", "holding", "delivering", "organizing", "working", "heading", "celebrating", "talking", "parking", "buying", "leaving",
-              "does", "drink", "do", "visit", "drive", "enjoy", "rain", "arrive", "play", "listen", "work", "call", "write", "love", "walk", "cook", "cost", "watch", "travel", "do", "sleep", "complain", "clean", "buy", "sell", "work", "exercise", "dance", "start", "fix", "love", "bake", "enjoy", "swim", "watch", "play", "smell", "take", "paint", "arrive", "call", "visit", "eat", "study", "read", "prefer", "sound", "sleep", "help", "bark", "work", "like", "go", "ride", "repair", "send", "taste", "finish", "play", "visit", "buy", "give", "open", "order", "watch", "wear", "rain", "dance", "play", "build", "study", "wake", "do", "visit", "drink", "go", "play", "forget", "sing", "write", "speak", "read", "work", "call", "visit", "study", "arrive", "meet", "live", "work", "play", "stay", "go", "like", "understand", "agree", "finish", "miss", "exercise", "arrive", "practice", "wake",
-             "does", "did", "drink", "arrive", "play", "visit", "walk", "forget", "call", "help", "study", "travel", "work", "love", "clean", "sell", "cook", "rain", "cost", "watch", "dance", "fix", "exercise", "write", "speak", "buy", "bake", "learn", "listen", "paint", "meet", "sleep", "smell", "take", "sound", "read", "prefer", "agree", "give", "order", "open", "wear", "finish", "build", "wake", "prepare", "repair", "find", "lose", "return", "organize", "accept", "explain", "recommend", "celebrate", "answer", "complete", "borrow", "miss", "solve", "check", "teach", "prepare",
-            "was", "were", "helping", "playing", "walking", "working", "cooking", "traveling", "trying", "reading", "planning", "speaking", "analyzing", "solving", "attending", "speaking", "completing", "waiting", "dancing", "thinking", "studying", "calling", "driving", "cleaning", "preparing", "checking", "organizing", "cooking", "watching", "explaining", "listening", "painting", "running", "behaving", "waiting", "playing", "eating", "fixing", "smiling", "enjoying", "taking", "singing", "shopping", "drawing", "helping", "making", "studying", "performing", "feeding", "repairing", "decorating", "reviewing", "solving", "discussing", "delivering", "teaching", "visiting", "sitting", "swimming", "preparing", "baking", "exploring", "decorating", "dusting", "solving", "climbing", "answering", "searching", "learning", "carrying", "planting", "arranging", "calculating",
-            "will", "help", "play", "walk", "work", "cook", "travel", "try", "read", "plan", "speak", "analyze", "solve", "attend", "complete", "wait", "dance", "write", "improve", "think", "study", "call", "drive", "clean", "prepare", "check", "organize", "paint", "run", "behave", "fix", "smile", "enjoy", "take", "sing", "shop", "draw", "help", "make", "perform", "feed", "repair", "decorate", "review", "explore", "finish", "look", "discuss", "deliver", "teach", "sit", "swim", "prepare", "bake", "search", "listen", "watch", "talk", "ride", "cry", "head", "exercise", "paint", "hold", "iron", "sweep", "read", "design", "plant", "solve", "brush", "carry", "practice", "arrange", "learn", "try", "wait", "edit", "taste", "answer", "attend", "write", "whisper", "relax", "dust", "laugh", "wipe", "sew", "dream", "knit", "polish", "calculate", "climb",
-            "have", "has", "traveled", "finished", "lived", "completed", "played", "visited", "solved", "gone", "eaten", "joined", "worked", "written", "started", "missed", "helped", "spoken", "sung", "arrived", "enjoyed", "practiced", "prepared", "admired", "moved", "been", "checked", "painted", "believed", "called", "discussed", "participated", "read", "submitted", "forgotten", "received", "performed", "celebrated", "cooked", "given", "met", "won", "watched", "cleaned", "planted", "told", "shared", "designed", "adopted", "tried", "booked", "organized", "explored", "reviewed", "returned", "tried", "uploaded", "respected", "aimed", "taken", "launched", "learned", "thought", "borrowed", "decorated", "recorded", "replaced", "appreciated", "installed", "grown", "competed", "removed",
-            "have", "has", "been", "studying", "running", "working", "living", "playing", "watching", "practicing", "eating", "organizing", "reading", "learning", "walking", "traveling", "fixing", "waiting", "cooking", "volunteering", "planning", "exercising", "cleaning", "writing", "decorating", "helping", "painting", "preparing", "focusing", "attending", "planting", "shopping", "solving", "swimming", "creating", "studying", "rehearsing", "fishing", "improving", "cycling", "discussing", "arranging", "building", "doing", "watering", "teaching", "listening", "searching", "trying", "sewing", "practicing", "climbing", "looking", "taking", "brushing", "revising", "polishing", "drawing", "booking", "knitting", "learning", "renovating", "spending", "singing", "folding", "finding", "laughing", "tidying", "delivering", "memorizing", "reviewing", "hanging", "saving", "celebrating", "waiting", "preparing", "hiking", "carrying", "cheering", "brainstorming", "giving", "making", "adjusting", "skipping", "analyzing", "helping", "babysitting", "growing", "discovering", "reciting", "pushing", "staying", "proofreading", "experimenting", "sharing", "spreading", "painting", "planning", "competing", "reflecting", "learning", "fixing", "appreciating", "volunteering", "redesigning", "noticing", "asking", "cycling", "hosting", "rehearsing", "polishing", "moving", "spending", "training", "wondering", "organizing", "encouraging", "imagining", "editing", "hanging", "balancing", "laughing", "recording", "discussing"
+        { "verb", new HashSet<string>
+            {  "drink", "visit", "drive", "enjoy", "rain", "arrive", "play", "listen", "work", "call",
+                "write", "like", "walk", "cook", "cost", "watch", "travel", "sleep", "have", "clean",
+                "buy", "sell", "exercise", "dance", "sing", "fix", "bake", "swim", "teach", "eat",
+                "study", "read", "prefer", "sound", "help", "bark", "go", "ride", "repair", "send",
+                "taste", "finish", "build", "wake", "is", "are", "am", "doing", "thinking", "coming",
+                "raining", "staying", "shouting", "waiting", "discussing", "having", "running", "arguing",
+                "painting", "traveling", "meeting", "talking", "shopping", "learning", "feeling", "crying",
+                "sitting", "enjoying", "planning", "moving", "joining", "becoming", "designing", "searching",
+                "washing", "speaking", "organizing", "starting", "checking", "preparing", "standing", "trying",
+                "exploring", "feeding", "getting", "making", "smiling", "forgetting", "opening", "driving",
+                "recording", "solving", "holding", "delivering", "heading", "celebrating", "parking", "leaving",
+                "does", "do", "love", "complain", "start", "smell", "take", "paint", "give", "open", "order",
+                "wear", "miss", "practice", "meet", "live", "understand", "agree", "find", "lose", "return",
+                "accept", "explain", "recommend", "answer", "complete", "borrow", "check", "teach", "prepare",
+                "was", "were", "helping", "behaving", "snowing", "performing", "decorating", "reviewing",
+                "dusting", "climbing", "answering", "carrying", "planting", "arranging", "calculating", "will",
+                "analyze", "attend", "improve", "look", "talk", "cry", "head", "iron", "sweep", "brush", "edit",
+                "taste", "whisper", "relax", "dust", "laugh", "wipe", "sew", "dream", "knit", "polish",
+                "calculate", "spend", "admire", "submit", "receive", "perform", "celebrate", "adopt", "book",
+                "upload", "respect", "aim", "launch", "thought", "replace", "install", "grow", "compete",
+                "remove", "volunteer", "focus", "fishing", "cycling", "arrange", "water", "rehearse", "fold",
+                "tidy", "memorize", "hang", "cheer", "brainstorm", "adjust", "skip", "babysit", "discover",
+                "recite", "push", "proofread", "experiment", "share", "spread", "reflect", "appreciate",
+                "redesign", "notice", "ask", "host", "wonder", "encourage", "imagine", "balance", "been",
+                "finished", "traveled", "seen", "completed", "eaten", "stopped", "won", "packed", "heard",
+                "prepared", "boarded", "saved", "decided", "locked", "behaved", "composed", "encountered",
+                "returned", "apologized", "organized", "collected", "met", "found", "discovered", "resolved",
+                "practiced", "created", "informed", "reached", "summarized", "finalized", "analyzed",
+                "celebrated", "submitted", "booked", "edited", "adopted", "issued", "planned", "announced",
+                "harvested", "planted", "diagnosed", "achieved", "examined", "graded", "assembled",
+                "implemented", "tested", "memorized", "exhibited", "designed", "shared", "approved", "signed",
+                "investigated", "mastered", "trained", "communicated", "be", "attending", "fixing",
+                "explaining", "writing", "arguing", "drawing", "calling", "baking", "renovating",
+                "conducting", "shopping", "mapping", "watering", "decorating", "evaluating", "creating",
+                "advertising", "performing", "proofreading", "revising", "relaxing", "chasing", "rehearsing",
+                "enrolling", "scored", "raised", "improved", "arranged", "treated", "passed", "enrolled",
+                "redecorated", "registered", "researched", "retired", "captured", "performed", "published",
+                "distributing", "brainstorming", "debugging", "managing", "jogging", "tending", "treating",
+                "charting", "drafting", "rewriting", "supporting", "mentoring", "expanding", "experimenting",
+                "debating", "developing", "editing", "producing", "operating", "perfecting", "filming",
 
         } },
         { "preposition", new HashSet<string> { "in", "on", "at", "to", "with", "for", "before", "after", "during", "as" } },
@@ -1267,17 +2116,26 @@ public class EnglishLogic : MonoBehaviour
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
-    public void UpdateAffirmationRule()
+    public void UpdateAffirmationsRule()
     {
+        // spostare in un panel
         switch (tenseDropdown.options[tenseDropdown.value].text)
         {
-            case "Present Simple": rule_dynamic_text.text = "{subject} {verb} {object}."; break;
-            case "Past Simple": rule_dynamic_text.text = "{subject} {verb-past} {object}."; break;
-            case "Present Continuous": rule_dynamic_text.text = "{subject} is/are {verb-ing} {object}."; break;
-            case "Past Continuous": rule_dynamic_text.text = "{subject} was/were {verb-ing} {object}."; break;
-            case "Future Simple": rule_dynamic_text.text = "{subject} will {verb} {object}."; break;
-            case "Present Perfect": rule_dynamic_text.text = "{subject} have/has {verb-past} {object}."; break;
-            default: Debug.Log("error on UpdateAffirmationRule"); break;
+            case "Present Simple": rule_dynamic_text.text = Return_PresentSimple_Affirmations_Rules(); break;
+            case "Present Continuous": rule_dynamic_text.text = Return_PresentContinuous_Affirmations_Rules(); break;
+            case "Present Perfect": rule_dynamic_text.text = Return_Present_Perfect_Affirmations_Rule(); break;
+            case "Present Perfect Continous": rule_dynamic_text.text = Return_Present_Perfect_Continuous_Affirmations_Rule(); break;
+
+            case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Affirmations_Rules(); break;
+            case "Past Continuous": rule_dynamic_text.text = Return_Past_Continuous_Affirmations_Rule(); break;
+            case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Affirmations_Rule(); break;
+            case "Past Perfect Continuous": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Affirmations_Rule(); break;
+
+            case "Future Simple": rule_dynamic_text.text = Return_Future_Simple_Affirmations_Rule(); break;
+            case "Future Continuous": rule_dynamic_text.text = Return_Future_Continuous_Affirmations_Rule(); break;
+            case "Future Perfect": rule_dynamic_text.text = Return_Future_Perfect_Affirmations_Rule(); break;
+            case "Future Perfect Continuous": rule_dynamic_text.text = Return_Future_Perfect_Continuous_Affirmations_Rule(); break;
+            default: Debug.Log("error on UpdateQuestionRule"); break;
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
@@ -1340,12 +2198,33 @@ public class EnglishLogic : MonoBehaviour
             case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_questions);
             case "Present Perfect Continous": return IsAValidSimpleQuestion(input, present_perfect_continuous_questions);
             
-
             case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_questions);
             case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_questions);
             case "Past Continuous": return IsAValidSimpleQuestion(input, past_continuous_questions);
             case "Past Perfect Continuous": return IsAValidSimpleQuestion(input, past_perfect_continuous_questions);
             
+            case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_questions);
+            case "Future Continuous": return IsAValidSimpleQuestion(input, future_continuous_questions);
+            case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_questions);
+            case "Future Perfect Continuous": return IsAValidSimpleQuestion(input, future_perfect_continuous_questions);
+            default: Debug.Log("error on UpdateNegationRule"); return false;
+        }
+    }
+
+    public bool ReturnAffirmationsBasedOntense(string input)
+    {
+        switch (tenseDropdown.options[tenseDropdown.value].text)
+        {
+            case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_questions);
+            case "Present Continuous": return IsAValidSimpleQuestion(input, present_continuous_questions);
+            case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_questions);
+            case "Present Perfect Continous": return IsAValidSimpleQuestion(input, present_perfect_continuous_questions);
+
+            case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_questions);
+            case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_questions);
+            case "Past Continuous": return IsAValidSimpleQuestion(input, past_continuous_questions);
+            case "Past Perfect Continuous": return IsAValidSimpleQuestion(input, past_perfect_continuous_questions);
+
             case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_questions);
             case "Future Continuous": return IsAValidSimpleQuestion(input, future_continuous_questions);
             case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_questions);
@@ -1369,37 +2248,37 @@ public class EnglishLogic : MonoBehaviour
     }
     private string Return_PresentContinuous_Question_Rules()
     {
-        return "1.(Wh- word}/(How) + (auxiliary verb (am/are/is)} + (subject} + (frequency adverb) + (base verb + -ing) + (other adverbs)" + "\nEx.What are you doing?\n\n" +
-               "2.How (auxiliary) + (subject) + (verb) + (complement)." + "\nHow is she working today?"; 
+        return "1.(Wh- word}/(How) + (auxiliary verb (am/are/is)} + (subject} + (frequency adverb) + (base verb + -ing) + (other adverbs)" + "\nEx:What are you doing?\n\n" +
+               "2.How (auxiliary) + (subject) + (verb) + (complement)." + "\nEx:How is she working today?"; 
     }
     private string Return_Present_Perfect_Question_Rule()
     {
-        return "1.(Wh- word/How) + (have/has) + (subject) + (past participle) + (object/complement)?" + "\nWhat have you done today?\n\n";
+        return "1.(Wh- word/How) + (have/has) + (subject) + (past participle) + (object/complement)?" + "\nEx:What have you done today?\n\n";
     }
     private string Return_Present_Perfect_Continuous_Question_Rule()
     {
-        return "1.Have/Has + (subject) +(frequency/quantity adverb) + been + (base verb + -ing) + (complement) + (other adverbs)?\r\n?" + "\nHave you always been practicing your piano consistently in the living room recently?\n\n";
+        return "1.Have/Has + (subject) + (frequency/quantity adverb) + been + (base verb + -ing) + (complement) + (other adverbs)?\r\n?" + "\nEx:Have you always been practicing your piano consistently in the living room recently?\n\n";
     }
+
     //  PAST TENSE
     private string Return_Past_Simple_Question_Rules()
     {
-        return "1.(Wh- word/How) + (did) + (subject) + (base verb) + (object/complement)?" + "\nWhat did you do yesterday?\n\n" +
-               "2.(Wh- word) + (auxiliary) + (subject) + (base verb) + (complement)?" + "\nWhy did he leave early?";
+        return "1.(Wh- word/How) + (did) + (subject) + (base verb) + (object/complement)?" + "\nEx:What did you do yesterday?\n\n" +
+               "2.(Wh- word) + (auxiliary) + (subject) + (base verb) + (complement)?" + "\nEx:Why did he leave early?";
     }
     private string Return_Past_Continuous_Question_Rule()
     {
-        return "1.(Wh- word/How) + (was/were} + {subject} + {base verb + -ing} + {object/complement}?" + "\nWhat were you doing yesterday evening?\n\n" +
-               "2.(auxiliary) + (subject) + (base verb + -ing) + (complement)" + "\nWas he sleeping at that time?";
+        return "1.(Wh- word/How) + (was/were} + {subject} + {base verb + -ing} + {object/complement}?" + "\nEx:What were you doing yesterday evening?\n\n" +
+               "2.(auxiliary) + (subject) + (base verb + -ing) + (complement)" + "\nEx:Was he sleeping at that time?";
     }
     private string Return_Past_Perfect_Question_Rule()
     {
-        return "1.?" + "\n?\n\n" +
-               "2." + "\n?";
+        return "1. (Wh- word/How) + (had) + (subject) + (optional adverb) + (past participle) + (object/complement)?" +
+                   "\nEx: Had she already finished her homework before dinner?\n\n";
     }
     private string Return_Past_Perfect_Continuous_Question_Rule()
     {
-        return "1.?" + "\n?\n\n" +
-               "2." + "\n?";
+        return "1.(Wh- word/How) + (had) + (optional adverb) + (subject) + (been) + (verb-ing) + (object/complement)?" + "\nHad she been studying for hours before the exam?\n\n";
     }
     // FUTURE TENSE
     private string Return_Future_Simple_Question_Rule()
@@ -1409,16 +2288,72 @@ public class EnglishLogic : MonoBehaviour
     }
     private string Return_Future_Continuous_Question_Rule()
     {
-        return "1.?" + "\n?\n\n" +
-               "2." + "\n?";
+        return "1. (Wh- word/How) + (will) + (subject) + (be) + (verb-ing) + (object/complement)?" +
+                   "\nEx: What will you be doing tomorrow?\n\n";
     }
     private string Return_Future_Perfect_Question_Rule()
     {
-        return "1.?" + "\n?\n\n";
+        return "1. (Wh- word/How) + (will) + (subject) + (have) + (past participle) + (object/complement)?" +
+          "\nEx: Will she have finished her work by tomorrow?\n\n";
     }
     private string Return_Future_Perfect_Continuous_Question_Rule()
     {
-        return "1.?" + "\n?\n\n";
+        return "1. (Wh- word/How) + (will) + (subject) + (have been) + (verb-ing) + (object/complement)?" +
+           "\nEx: How long will you have been working on this project by the end of the month?\n\n";
+    }
+    #endregion
+
+    #region FILL AFFIRMATION RULES
+    private string Return_PresentSimple_Affirmations_Rules()
+    {
+        return "";
+    }
+    private string Return_PresentContinuous_Affirmations_Rules()
+    {
+        return "";
+    }
+    private string Return_Present_Perfect_Affirmations_Rule()
+    {
+        return "";
+    }
+    private string Return_Present_Perfect_Continuous_Affirmations_Rule()
+    {
+        return "";
+    }
+
+    //  PAST TENSE
+    private string Return_Past_Simple_Affirmations_Rules()
+    {
+        return "";
+    }
+    private string Return_Past_Continuous_Affirmations_Rule()
+    {
+        return "";
+    }
+    private string Return_Past_Perfect_Affirmations_Rule()
+    {
+        return "";
+    }
+    private string Return_Past_Perfect_Continuous_Affirmations_Rule()
+    {
+        return "";
+    }
+    // FUTURE TENSE
+    private string Return_Future_Simple_Affirmations_Rule()
+    {
+        return "";
+    }
+    private string Return_Future_Continuous_Affirmations_Rule()
+    {
+        return "";
+    }
+    private string Return_Future_Perfect_Affirmations_Rule()
+    {
+        return "";
+    }
+    private string Return_Future_Perfect_Continuous_Affirmations_Rule()
+    {
+        return "";
     }
     #endregion
 }
