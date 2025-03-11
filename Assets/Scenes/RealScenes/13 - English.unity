@@ -265,8 +265,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 3.1161}
+  m_SizeDelta: {x: 0, y: -6.2322}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &74773974
 MonoBehaviour:
@@ -1472,7 +1472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75ed772e1bb2fc468e737b017aca2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScript: {fileID: 1118821849}
 --- !u!1 &540715084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,8 +1739,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5, y: -0.5}
-  m_SizeDelta: {x: -35, y: -13}
+  m_AnchoredPosition: {x: -7.7222, y: 1}
+  m_SizeDelta: {x: -34.556, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &568812058
 MonoBehaviour:
@@ -3017,8 +3016,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_AnchoredPosition: {x: 0, y: -6.2322}
+  m_SizeDelta: {x: 0, y: 32.4644}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201265367
 MonoBehaviour:
@@ -3555,11 +3554,11 @@ MonoBehaviour:
     m_Options:
     - m_Text: Present Simple
       m_Image: {fileID: 0}
-    - m_Text: Present Continuous
+    - m_Text: Present Cont.
       m_Image: {fileID: 0}
     - m_Text: Present Perfect
       m_Image: {fileID: 0}
-    - m_Text: Present Perfect Continous
+    - m_Text: Present Perfect Cont.
       m_Image: {fileID: 0}
     - m_Text: Past Simple
       m_Image: {fileID: 0}
@@ -3567,15 +3566,15 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Past Perfect
       m_Image: {fileID: 0}
-    - m_Text: Past Perfect Continuous
+    - m_Text: Past Perfect Cont.
       m_Image: {fileID: 0}
     - m_Text: Future Simple
       m_Image: {fileID: 0}
-    - m_Text: Future Continuous
+    - m_Text: Future Cont.
       m_Image: {fileID: 0}
     - m_Text: Future Perfect
       m_Image: {fileID: 0}
-    - m_Text: Future Perfect Continuous
+    - m_Text: Future Perfect Cont.
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
