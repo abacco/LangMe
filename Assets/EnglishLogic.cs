@@ -2206,23 +2206,23 @@ public class EnglishLogic : MonoBehaviour
         { "wh-word", new HashSet<string> { "why", "when", "where", "how", "what", "which" } },
         { "auxiliary", new HashSet<string> { "does", "do", "is", "are" } },
         { "subject", new HashSet<string>
-            {   "she", "he", "it", "we", "they", "you", "I", "John", "Sarah", "David", "Emma", "Tom", "Mike", "Lily", "Alice", "James", "Jack", "my parents", 
-            "the students", "her brother", "his father", "my friends", "the kids", "the birds", "the engineers", "the tourists", "my cousins", "my classmates", 
-            "my neighbors", "his cousin", "her sister", "the dogs", "his boss", "my grandparents", "the nurses", "the cat", "the baby", "who", "coffee", "car", 
-            "music", "emails", "ice cream", "movies", "homework", "office", "sushi", "cakes", "pictures", "glasses", "water", "bicycles", "computers", "windows", 
-            "news", "bridges", "medicine", "your cat", "the workers", "her mother", "his uncle", "her boyfriend", "my teachers", "her friends", "the guests", 
-            "their neighbors", "his desk", "her dog", "their room", "his house", "the train", "his bike", "the teacher", "their friends", "the cats", "the furniture", 
-            "the jokes", "his scarf", "the hill", "his client", "the car", "the silverware", "the piano", "the couch", "the manager", "the garden", "the meeting", 
-            "her book", "his partner", "her grandmother", "their project", "the package", "the new room", "the beach", "her dress", "his pencils", "the decorations", 
-            "the lost items", "the heavy boxes", "their dance routine", "the vase", "her favorite song", "her website", "the soup", "the trip", "the budget", 
-            "her future", "secrets", "his parents", "your grandparents", "the team", "the director", "her siblings", "the art gallery", "the application", 
-            "his teacher", "the house", "their relatives", "the doctor", "the party", "the museum", "the concert", "the office", "the client", "the workshop", 
-            "her novel", "the marathon", "the rules", "the report", "the professor", "the database", "the kitchen", "the library", "the living room", "the dishes", 
-            "their house", "the chair", "your passport", "your room", "his workspace", "her pet", "her flight", "the software", "the surprise party", "her portfolio", 
+            {   "she", "he", "it", "we", "they", "you", "I", "John", "Sarah", "David", "Emma", "Tom", "Mike", "Lily", "Alice", "James", "Jack", "my parents",
+            "the students", "her brother", "his father", "my friends", "the kids", "the birds", "the engineers", "the tourists", "my cousins", "my classmates",
+            "my neighbors", "his cousin", "her sister", "the dogs", "his boss", "my grandparents", "the nurses", "the cat", "the baby", "who", "coffee", "car",
+            "music", "emails", "ice cream", "movies", "homework", "office", "sushi", "cakes", "pictures", "glasses", "water", "bicycles", "computers", "windows",
+            "news", "bridges", "medicine", "your cat", "the workers", "her mother", "his uncle", "her boyfriend", "my teachers", "her friends", "the guests",
+            "their neighbors", "his desk", "her dog", "their room", "his house", "the train", "his bike", "the teacher", "their friends", "the cats", "the furniture",
+            "the jokes", "his scarf", "the hill", "his client", "the car", "the silverware", "the piano", "the couch", "the manager", "the garden", "the meeting",
+            "her book", "his partner", "her grandmother", "their project", "the package", "the new room", "the beach", "her dress", "his pencils", "the decorations",
+            "the lost items", "the heavy boxes", "their dance routine", "the vase", "her favorite song", "her website", "the soup", "the trip", "the budget",
+            "her future", "secrets", "his parents", "your grandparents", "the team", "the director", "her siblings", "the art gallery", "the application",
+            "his teacher", "the house", "their relatives", "the doctor", "the party", "the museum", "the concert", "the office", "the client", "the workshop",
+            "her novel", "the marathon", "the rules", "the report", "the professor", "the database", "the kitchen", "the library", "the living room", "the dishes",
+            "their house", "the chair", "your passport", "your room", "his workspace", "her pet", "her flight", "the software", "the surprise party", "her portfolio",
             "the podcast", "the batteries", "the family", "their wedding", "the community", "the garage", "clients", "the walls", "his presentation", "her career goals",
-            "dance classes", "flowers", "groceries", "puzzles", "the pool", "artwork", "English", "the play", "the lake", "your language skills", "the countryside", 
-            "business strategies", "video games", "a sandcastle", "dinner", "documentaries", "the city", "plants", "your friend", "a new apartment", "recipes", 
-            "exercises", "clothes", "basketball skills", "mountains", "a job", "your siblings", "math skills", "portraits", "notes", "sketches", "tickets", "a scarf", 
+            "dance classes", "flowers", "groceries", "puzzles", "the pool", "artwork", "English", "the play", "the lake", "your language skills", "the countryside",
+            "business strategies", "video games", "a sandcastle", "dinner", "documentaries", "the city", "plants", "your friend", "a new apartment", "recipes",
+            "exercises", "clothes", "basketball skills", "mountains", "a job", "your siblings", "math skills", "portraits", "notes", "sketches", "tickets", "a scarf",
             "their speech", "our house"
 
         } },
@@ -2299,7 +2299,7 @@ public class EnglishLogic : MonoBehaviour
             case "Present Perfect": rule_dynamic_text.text = Return_Present_Perfect_Question_Rule(); break;
             case "Present Perfect Cont.": rule_dynamic_text.text = Return_Present_Perfect_Continuous_Question_Rule(); break;
 
-            case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Question_Rules();  break;
+            case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Question_Rules(); break;
             case "Past Cont.": rule_dynamic_text.text = Return_Past_Continuous_Question_Rule(); break;
             case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Question_Rule(); break;
             case "Past Perfect Cont.": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Question_Rule(); break;
@@ -2346,7 +2346,7 @@ public class EnglishLogic : MonoBehaviour
 
             case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Negations_Rules(); break;
             case "Past Cont.": rule_dynamic_text.text = Return_Past_Continuous_Negations_Rule(); break;
-            case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Negations_Rule(); break; 
+            case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Negations_Rule(); break;
             case "Past Perfect Cont.": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Negations_Rule(); break;
 
             case "Future Simple": rule_dynamic_text.text = Return_Future_Simple_Negations_Rule(); break;
@@ -2367,7 +2367,7 @@ public class EnglishLogic : MonoBehaviour
                 UpdateAffirmationsRule(); break;
             case "Negations":
                 UpdateNegationRule(); break;
-                default : Debug.Log("error on HandlePhraseType"); break;
+            default: Debug.Log("error on HandlePhraseType"); break;
         }
         Debug.Log("Selected Phrase Type: " + phraseTypeDropdown.options[phraseTypeDropdown.value].text);
     }
@@ -2401,12 +2401,12 @@ public class EnglishLogic : MonoBehaviour
             case "Present Cont.": return IsAValidSimpleQuestion(input, present_continuous_questions);
             case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_questions);
             case "Present Perfect Cont.": return IsAValidSimpleQuestion(input, present_perfect_continuous_questions);
-            
+
             case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_questions);
             case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_questions);
             case "Past Cont.": return IsAValidSimpleQuestion(input, past_continuous_questions);
             case "Past Perfect Cont.": return IsAValidSimpleQuestion(input, past_perfect_continuous_questions);
-            
+
             case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_questions);
             case "Future Cont.": return IsAValidSimpleQuestion(input, future_continuous_questions);
             case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_questions);
@@ -2435,7 +2435,6 @@ public class EnglishLogic : MonoBehaviour
             default: Debug.Log("error on UpdateNegationRule"); return false;
         }
     }
-    // TODO
     public bool ReturnNegationsBasedOntense(string input)
     {
         switch (tenseDropdown.options[tenseDropdown.value].text)
@@ -2474,15 +2473,19 @@ public class EnglishLogic : MonoBehaviour
     private string Return_PresentContinuous_Question_Rules()
     {
         return "1.(Wh- word}/(How) + (auxiliary verb (am/are/is)} + (subject} + (frequency adverb) + (base verb + -ing) + (other adverbs)" + "\nEx:What are you doing?\n\n" +
-               "2.How (auxiliary) + (subject) + (verb) + (complement)." + "\nEx:How is she working today?"; 
+               "2.How (auxiliary) + (subject) + (verb) + (complement)." + "\nEx:How is she working today?";
     }
     private string Return_Present_Perfect_Question_Rule()
     {
-        return "1.(Wh- word/How) + (have/has) + (subject) + (past participle) + (object/complement)?" + "\nEx:What have you done today?\n\n";
+        return "1. (Wh- word/How) + (have/has) + (subject) + (past participle) + (object/complement)?" + "\nEx: What have you done today?\n\n" +
+                   "2. (Have/Has) + (subject) + (past participle) + (object/complement)?" + "\nEx: Have you finished your homework?";
     }
     private string Return_Present_Perfect_Continuous_Question_Rule()
     {
-        return "1.Have/Has + (subject) + (frequency/quantity adverb) + been + (base verb + -ing) + (complement) + (other adverbs)?\r\n?" + "\nEx:Have you always been practicing your piano consistently in the living room recently?\n\n";
+        return "1. Have/Has + (subject) + (frequency/quantity adverb) + been + (base verb + -ing) + (complement) + (other adverbs)?" +
+       "\nEx: Have you always been practicing your piano consistently in the living room recently?\n\n" +
+       "2. (Wh- word/How) + (have/has) + (subject) + (frequency/quantity adverb) + been + (base verb + -ing) + (complement) + (other adverbs)?" +
+       "\nEx: How long have they been working on this project?";    
     }
 
     //  PAST TENSE
@@ -2499,7 +2502,9 @@ public class EnglishLogic : MonoBehaviour
     private string Return_Past_Perfect_Question_Rule()
     {
         return "1. (Wh- word/How) + (had) + (subject) + (optional adverb) + (past participle) + (object/complement)?" +
-                   "\nEx: Had she already finished her homework before dinner?\n\n";
+                   "\nEx: Had she already finished her homework before dinner?\n\n" +
+                   "2. (Had) + (subject) + (optional adverb) + (past participle) + (object/complement)?" +
+                   "\nEx: Had they completed the task before the manager arrived?";
     }
     private string Return_Past_Perfect_Continuous_Question_Rule()
     {
@@ -2527,7 +2532,6 @@ public class EnglishLogic : MonoBehaviour
            "\nEx: How long will you have been working on this project by the end of the month?\n\n";
     }
     #endregion
-    // TODO
     #region FILL AFFIRMATION RULES
     private string Return_PresentSimple_Affirmation_Rules()
     {
@@ -2600,59 +2604,79 @@ public class EnglishLogic : MonoBehaviour
         return "1.(subject) + (will have been) + (verb+ing) + (object) + (other adverbs)." + "\nEx.They will have been working on the project for three months by then.\n\n" +
                "2.(subject) + (frequency adverb) + (will have been) + (verb+ing) + (object) + (other adverbs)." + "\nEx.She will always have been practicing her piano before the recital.";
     }
-        #endregion
-    // TODO
+    #endregion
     #region FILL NEGATIONS RULES
     private string Return_PresentSimple_Negations_Rules()
     {
-        return "";
-    }
-    private string Return_PresentContinuous_Negations_Rules()
-    {
-        return "";
-    }
-    private string Return_Present_Perfect_Negations_Rule()
-    {
-        return "";
-    }
-    private string Return_Present_Perfect_Continuous_Negations_Rule()
-    {
-        return "";
+        return "1. (subject) + (auxiliary 'do/does' + 'not') + (base verb) + (object) + (other adverbs)." + "\nEx. She does not like ice cream.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'do/does' + 'not') + (subject) + (base verb) + (object) + (other adverbs)." + "\nEx. Why do they not play football?";
     }
 
+    private string Return_PresentContinuous_Negations_Rules()
+    {
+        return "1. (subject) + (verb 'to be' + 'not') + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. She is not reading the book.\n\n" +
+               "2. (wh- word/How) + (verb 'to be') + (subject) + (not) + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. Why is he not studying?";
+    }
+
+    private string Return_Present_Perfect_Negations_Rule()
+    {
+        return "1. (subject) + (auxiliary 'have/has' + 'not') + (past participle) + (object) + (other adverbs)." + "\nEx. I have not finished the report.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'have/has') + (subject) + (not) + (past participle) + (object) + (other adverbs)." + "\nEx. Why has she not called?";
+    }
+
+    private string Return_Present_Perfect_Continuous_Negations_Rule()
+    {
+        return "1. (subject) + (auxiliary 'have/has' + 'not') + 'been' + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. I have not been waiting for hours.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'have/has') + (subject) + (not) + 'been' + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. Why have they not been studying?";
+    }
     //  PAST TENSE
     private string Return_Past_Simple_Negations_Rules()
     {
-        return "";
+        return "1. (subject) + (auxiliary 'did' + 'not') + (base verb) + (object) + (other adverbs)." + "\nEx. They did not go to the park.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'did') + (subject) + (not) + (base verb) + (object) + (other adverbs)." + "\nEx. Why did she not attend the meeting?";
     }
+
     private string Return_Past_Continuous_Negations_Rule()
     {
-        return "";
+        return "1. (subject) + (verb 'to be' in past + 'not') + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. She was not reading the book.\n\n" +
+               "2. (wh- word/How) + (verb 'to be' in past) + (subject) + (not) + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. Why were they not playing football?";
     }
+
     private string Return_Past_Perfect_Negations_Rule()
     {
-        return "";
+        return "1. (subject) + (auxiliary 'had' + 'not') + (past participle) + (object) + (other adverbs)." + "\nEx. She had not visited the museum.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'had') + (subject) + (not) + (past participle) + (object) + (other adverbs)." + "\nEx. Why had he not finished his homework?";
     }
+
     private string Return_Past_Perfect_Continuous_Negations_Rule()
     {
-        return "";
+        return "1. (subject) + (auxiliary 'had' + 'not') + 'been' + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. I had not been waiting for long.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'had') + (subject) + (not) + 'been' + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. Why had they not been studying?";
     }
     // FUTURE TENSE
     private string Return_Future_Simple_Negations_Rule()
     {
-        return "";
+        return "1. (subject) + (auxiliary 'will' + 'not') + (base verb) + (object) + (other adverbs)." + "\nEx. She will not attend the meeting.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'will') + (subject) + (not) + (base verb) + (object) + (other adverbs)." + "\nEx. Why will you not join us?";
     }
+
     private string Return_Future_Continuous_Negations_Rule()
     {
-        return "";
+        return "1. (subject) + (auxiliary 'will' + 'not') + 'be' + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. He will not be traveling tomorrow.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'will') + (subject) + (not) + 'be' + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. Why will she not be working?";
     }
+
     private string Return_Future_Perfect_Negations_Rule()
     {
-        return "";
+        return "1. (subject) + (auxiliary 'will' + 'not') + 'have' + (past participle) + (object) + (other adverbs)." + "\nEx. They will not have completed the project.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'will') + (subject) + (not) + 'have' + (past participle) + (object) + (other adverbs)." + "\nEx. Why will she not have finished the task?";
     }
+
     private string Return_Future_Perfect_Continuous_Negations_Rule()
     {
-        return "";
+        return "1. (subject) + (auxiliary 'will' + 'not') + 'have been' + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. I will not have been waiting for an hour.\n\n" +
+               "2. (wh- word/How) + (auxiliary 'will') + (subject) + (not) + 'have been' + (verb in -ing form) + (object) + (other adverbs)." + "\nEx. Why will they not have been studying?";
     }
     #endregion
+
 }
