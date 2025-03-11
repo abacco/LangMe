@@ -353,7 +353,7 @@ public class EnglishLogic : MonoBehaviour
     "Is the librarian stacking the books?"
     };
     public HashSet<string> present_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
-           "Have you completed your homework?",
+    "Have you completed your homework?",
     "Has she read that book?",
     "Have they visited the museum?",
     "Has he ever played football?",
@@ -2295,20 +2295,20 @@ public class EnglishLogic : MonoBehaviour
         switch (tenseDropdown.options[tenseDropdown.value].text)
         {
             case "Present Simple": rule_dynamic_text.text = Return_PresentSimple_Question_Rules(); break;
-            case "Present Continuous": rule_dynamic_text.text = Return_PresentContinuous_Question_Rules(); break;
+            case "Present Cont.": rule_dynamic_text.text = Return_PresentContinuous_Question_Rules(); break;
             case "Present Perfect": rule_dynamic_text.text = Return_Present_Perfect_Question_Rule(); break;
-            case "Present Perfect Continous": rule_dynamic_text.text = Return_Present_Perfect_Continuous_Question_Rule(); break;
+            case "Present Perfect Cont.": rule_dynamic_text.text = Return_Present_Perfect_Continuous_Question_Rule(); break;
 
             case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Question_Rules();  break;
-            case "Past Continuous": rule_dynamic_text.text = Return_Past_Continuous_Question_Rule(); break;
+            case "Past Cont.": rule_dynamic_text.text = Return_Past_Continuous_Question_Rule(); break;
             case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Question_Rule(); break;
-            case "Past Perfect Continuous": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Question_Rule(); break;
+            case "Past Perfect Cont.": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Question_Rule(); break;
 
             case "Future Simple": rule_dynamic_text.text = Return_Future_Simple_Question_Rule(); break;
-            case "Future Continuous": rule_dynamic_text.text = Return_Future_Continuous_Question_Rule(); break;
+            case "Future Cont.": rule_dynamic_text.text = Return_Future_Continuous_Question_Rule(); break;
             case "Future Perfect": rule_dynamic_text.text = Return_Future_Perfect_Question_Rule(); break;
-            case "Future Perfect Continuous": rule_dynamic_text.text = Return_Future_Perfect_Continuous_Question_Rule(); break;
-            default: Debug.Log("error on UpdateQuestionRule"); break;
+            case "Future Perfect Cont.": rule_dynamic_text.text = Return_Future_Perfect_Continuous_Question_Rule(); break;
+            default: Debug.LogError("error on UpdateQuestionRule"); break;
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
@@ -2331,7 +2331,7 @@ public class EnglishLogic : MonoBehaviour
             case "Future Cont.": rule_dynamic_text.text = Return_FutureContinuous_Affirmation_Rules(); break;
             case "Future Perfect": rule_dynamic_text.text = Return_FuturePerfect_Affirmation_Rules(); break;
             case "Future Perfect Cont.": rule_dynamic_text.text = Return_FuturePerfectContinuous_Affirmation_Rules(); break;
-            default: Debug.Log("error on UpdateQuestionRule"); break;
+            default: Debug.LogError("error on UpdateQuestionRule"); break;
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
@@ -2339,13 +2339,21 @@ public class EnglishLogic : MonoBehaviour
     {
         switch (tenseDropdown.options[tenseDropdown.value].text)
         {
-            case "Present Simple": rule_dynamic_text.text = "{subject} do/does not {verb} {object}."; break;
-            case "Past Simple": rule_dynamic_text.text = "{subject} did not {verb} {object}."; break;
-            case "Present Continuous": rule_dynamic_text.text = "{subject} is/are not {verb-ing} {object}."; break;
-            case "Past Continuous": rule_dynamic_text.text = "{subject} was/were not {verb-ing} {object}."; break;
-            case "Future Simple": rule_dynamic_text.text = "{subject} will not {verb} {object}."; break;
-            case "Present Perfect": rule_dynamic_text.text = "{subject} have/has not {verb-past} {object}."; break;
-            default: Debug.Log("error on UpdateNegationRule"); break;
+            case "Present Simple": rule_dynamic_text.text = Return_PresentSimple_Negations_Rules(); break;
+            case "Present Cont.": rule_dynamic_text.text = Return_PresentContinuous_Negations_Rules(); break;
+            case "Present Perfect": rule_dynamic_text.text = Return_Present_Perfect_Negations_Rule(); break;
+            case "Present Perfect Cont.": rule_dynamic_text.text = Return_Present_Perfect_Continuous_Negations_Rule(); break;
+
+            case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Negations_Rules(); break;
+            case "Past Cont.": rule_dynamic_text.text = Return_Past_Continuous_Negations_Rule(); break;
+            case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Negations_Rule(); break; 
+            case "Past Perfect Cont.": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Negations_Rule(); break;
+
+            case "Future Simple": rule_dynamic_text.text = Return_Future_Simple_Negations_Rule(); break;
+            case "Future Cont.": rule_dynamic_text.text = Return_Future_Continuous_Negations_Rule(); break;
+            case "Future Perfect": rule_dynamic_text.text = Return_Future_Perfect_Negations_Rule(); break;
+            case "Future Perfect Cont.": rule_dynamic_text.text = Return_Future_Perfect_Continuous_Negations_Rule(); break;
+            default: Debug.LogError("error on UpdateNegationRule"); break;
         }
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
@@ -2390,23 +2398,22 @@ public class EnglishLogic : MonoBehaviour
         switch (tenseDropdown.options[tenseDropdown.value].text)
         {
             case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_questions);
-            case "Present Continuous": return IsAValidSimpleQuestion(input, present_continuous_questions);
+            case "Present Cont.": return IsAValidSimpleQuestion(input, present_continuous_questions);
             case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_questions);
-            case "Present Perfect Continous": return IsAValidSimpleQuestion(input, present_perfect_continuous_questions);
+            case "Present Perfect Cont.": return IsAValidSimpleQuestion(input, present_perfect_continuous_questions);
             
             case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_questions);
             case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_questions);
-            case "Past Continuous": return IsAValidSimpleQuestion(input, past_continuous_questions);
-            case "Past Perfect Continuous": return IsAValidSimpleQuestion(input, past_perfect_continuous_questions);
+            case "Past Cont.": return IsAValidSimpleQuestion(input, past_continuous_questions);
+            case "Past Perfect Cont.": return IsAValidSimpleQuestion(input, past_perfect_continuous_questions);
             
             case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_questions);
-            case "Future Continuous": return IsAValidSimpleQuestion(input, future_continuous_questions);
+            case "Future Cont.": return IsAValidSimpleQuestion(input, future_continuous_questions);
             case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_questions);
-            case "Future Perfect Continuous": return IsAValidSimpleQuestion(input, future_perfect_continuous_questions);
+            case "Future Perfect Cont.": return IsAValidSimpleQuestion(input, future_perfect_continuous_questions);
             default: Debug.Log("error on UpdateNegationRule"); return false;
         }
     }
-
     public bool ReturnAffirmationsBasedOntense(string input)
     {
         switch (tenseDropdown.options[tenseDropdown.value].text)
@@ -2428,7 +2435,6 @@ public class EnglishLogic : MonoBehaviour
             default: Debug.Log("error on UpdateNegationRule"); return false;
         }
     }
-
     // TODO
     public bool ReturnNegationsBasedOntense(string input)
     {
@@ -2595,9 +2601,9 @@ public class EnglishLogic : MonoBehaviour
                "2.(subject) + (frequency adverb) + (will have been) + (verb+ing) + (object) + (other adverbs)." + "\nEx.She will always have been practicing her piano before the recital.";
     }
         #endregion
-        // TODO
-        #region FILL NEGATIONS RULES
-        private string Return_PresentSimple_Negations_Rules()
+    // TODO
+    #region FILL NEGATIONS RULES
+    private string Return_PresentSimple_Negations_Rules()
     {
         return "";
     }
