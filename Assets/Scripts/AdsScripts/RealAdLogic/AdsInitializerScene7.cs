@@ -13,6 +13,7 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
     [SerializeField] RefillHeartsAd _refillHearts_ads_button;
 
     [SerializeField] BannerAddExample _banner_ads_button;
+    [SerializeField] InterstitialAdExample interstitialAdExample;
     void Awake()
     {
         InitializeAds();
@@ -54,6 +55,7 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
         _showtip_ads_button.LoadAd();
         _showsolution_ads_button.LoadAd();
         _refillHearts_ads_button.LoadAd();
+        interstitialAdExample.LoadAd();
         //_banner_ads_button.LoadBanner();
     }
 

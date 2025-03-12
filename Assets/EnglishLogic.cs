@@ -22,6 +22,9 @@ public class EnglishLogic : MonoBehaviour
     public TMP_Text how_many_correct_english_phrases_text;
     // Fare HelpMe Button che mostra una delle frasi dopo la pubblicità
 
+
+    [SerializeField] ShowAdOnStart ad;
+
     #region QUESTIONS INITIALIZATION
     public HashSet<string> present_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
@@ -6232,6 +6235,7 @@ public class EnglishLogic : MonoBehaviour
     }
     public void CheckUserInput(string userInput, string tense)
     {
+        if(how_many_correct_english_phrases % 10 == 0) { StartCoroutine(ad.ShowAdOnStartCoroutine()); }
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
             case "Questions":

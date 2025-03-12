@@ -179,7 +179,7 @@ public class CheckEnglishLogic : MonoBehaviour
             // Rimuove la punteggiatura e divide la frase in parole
             var words = RemovePunctuation(sentence.TrimEnd('.', '?', '!')).Split(' ', StringSplitOptions.RemoveEmptyEntries); ;//sentence.TrimEnd('.', '?', '!').Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            Debug.Log($"Validating sentence: \"{sentence}\"");
+            //Debug.Log($"Validating sentence: \"{sentence}\"");
 
             foreach (var word in words)
             {
@@ -194,10 +194,10 @@ public class CheckEnglishLogic : MonoBehaviour
                 }
                 if (!isWordValid)
                 {
-                    Debug.LogWarning($"Word \"{word}\" is NOT valid or not found in dictionary.");
+                    //Debug.LogWarning($"Word \"{word}\" is NOT valid or not found in dictionary.");
                     wordCategories["bonusWords"].Add(word.ToLower());
                     bonusWordsCopy.Add(word.ToLower());
-                    Debug.LogWarning($"Word \"{word}\" added");
+                    //Debug.LogWarning($"Word \"{word}\" added");
 
                 }
             }
@@ -264,7 +264,7 @@ public class CheckEnglishLogic : MonoBehaviour
         }
         else
         {
-            Debug.Log("No words found for category: " + key);
+            //Debug.Log("No words found for category: " + key);
         }
     }
 

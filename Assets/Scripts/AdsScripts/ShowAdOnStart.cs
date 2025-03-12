@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class ShowAdOnStart : MonoBehaviour
 {
@@ -8,12 +9,14 @@ public class ShowAdOnStart : MonoBehaviour
     void Start()
     {
         // funziona
+        interstitialAdExample.LoadAd();
         StartCoroutine(ShowAdOnStartCoroutine());
     }
 
-    IEnumerator ShowAdOnStartCoroutine()
+    public IEnumerator ShowAdOnStartCoroutine()
     {
         yield return new WaitForEndOfFrame();
+        interstitialAdExample.LoadAd();
         interstitialAdExample.ShowAd();
     }
 }
