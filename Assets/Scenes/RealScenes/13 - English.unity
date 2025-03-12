@@ -2941,6 +2941,7 @@ MonoBehaviour:
   _showsolution_ads_button: {fileID: 0}
   _refillHearts_ads_button: {fileID: 0}
   _banner_ads_button: {fileID: 0}
+  interstitialAdExample: {fileID: 1522760931}
 --- !u!4 &521864765
 Transform:
   m_ObjectHideFlags: 0

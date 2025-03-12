@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 
 public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListener
 {
@@ -28,9 +30,18 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
         //    _showsolution_ads_button.LoadAd();
         //    _refillHearts_ads_button.LoadAd();
         //}
-        _showtip_ads_button.LoadAd();
-        _showsolution_ads_button.LoadAd();
-        _refillHearts_ads_button.LoadAd();
+        try
+        {
+            _showtip_ads_button.LoadAd();
+            _showsolution_ads_button.LoadAd();
+            _refillHearts_ads_button.LoadAd();
+            interstitialAdExample.LoadAd();
+            _banner_ads_button.LoadBanner();
+        } 
+        catch(Exception e)
+        {
+            Debug.LogWarning("In AdsInitializerScene7 on " + SceneManager.GetActiveScene().name + " some ads are not used");
+        }
     }
 
     public void InitializeAds()
@@ -51,12 +62,19 @@ public class AdsInitializerScene7 : MonoBehaviour, IUnityAdsInitializationListen
 
     public void OnInitializationComplete()
     {
-        Debug.Log("Unity Ads initialization complete.");
-        _showtip_ads_button.LoadAd();
-        _showsolution_ads_button.LoadAd();
-        _refillHearts_ads_button.LoadAd();
-        interstitialAdExample.LoadAd();
-        //_banner_ads_button.LoadBanner();
+        try
+        {
+            _showtip_ads_button.LoadAd();
+            _showsolution_ads_button.LoadAd();
+            _refillHearts_ads_button.LoadAd();
+            interstitialAdExample.LoadAd();
+            _banner_ads_button.LoadBanner();
+            Debug.Log("Unity Ads initialization complete.");
+        } catch(Exception e)
+        {
+            Debug.LogWarning("In AdsInitializerScene7 on " + SceneManager.GetActiveScene().name + " some ads are not used");
+        }
+
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)

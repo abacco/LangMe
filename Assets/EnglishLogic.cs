@@ -6235,7 +6235,7 @@ public class EnglishLogic : MonoBehaviour
     }
     public void CheckUserInput(string userInput, string tense)
     {
-        if(how_many_correct_english_phrases % 5 == 0) { StartCoroutine(ad.ShowAdOnStartCoroutine()); }
+        if(how_many_correct_english_phrases % 5 == 0 && how_many_correct_english_phrases >= 1) { StartCoroutine(ad.ShowAdOnStartCoroutine()); }
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
             case "Questions":
