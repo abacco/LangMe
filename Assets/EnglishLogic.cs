@@ -6241,16 +6241,19 @@ public class EnglishLogic : MonoBehaviour
             case "Questions":
                 bool isAValidQuestion = MatchesBasedOnType(userInput);
                 feedbackText.text = isAValidQuestion ? "Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '?', Please Retry.";
+                userInputField.text = "";
                 if (isAValidQuestion) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             case "Affirmations":
                 bool isAValidAffirmation = MatchesBasedOnType(userInput);
                 feedbackText.text = isAValidAffirmation ? "Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '.'? Please Retry.";
+                userInputField.text = "";
                 if (isAValidAffirmation) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             case "Negations":
                 bool isAValidNegations = MatchesBasedOnType(userInput);
                 feedbackText.text = isAValidNegations ? "Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '.'? Please Retry.";
+                userInputField.text = "";
                 if (isAValidNegations) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             default: Debug.Log("error on HandlePhraseType"); break;
