@@ -9,6 +9,7 @@ public class EnglishLogic : MonoBehaviour
 {
     public TMP_Dropdown tenseDropdown;
     public TMP_Dropdown phraseTypeDropdown;
+    public TMP_Dropdown wordTypeDropdown;
 
     [SerializeField] GameObject rememberPanel;
 
@@ -6420,7 +6421,6 @@ public class EnglishLogic : MonoBehaviour
         return possibleQuestions.Contains(input) ? true : false;
     }
 
-
     #region FILL QUESTIONS RULES
     // PRESENT TENSE
     private string Return_PresentSimple_Question_Rules()
@@ -6637,4 +6637,43 @@ public class EnglishLogic : MonoBehaviour
     }
     #endregion
 
+    public string selectedWordType = "Wh-Words";
+    public void HandleWordType()
+    {
+        selectedWordType = wordTypeDropdown.options[wordTypeDropdown.value].text;
+        // si deve aprire un pannello tipo dizionario dove vengono mostrate le parole di quel tipo
+    }
+
+    public void ShowWordTypeList()
+    {
+        switch (selectedWordType)
+        {
+            case "Wh-Words": aa("wh-word"); break;
+            case "Auxiliaries": aa("auxiliary"); break;
+            case "Sub/Objects": aa("subject"); break;
+            case "Verbs": aa("verb"); break;
+            case "Prepositions": aa("preposition"); break;
+            case "Adverbs": aa("averbs"); break;
+            case "Time": aa("time"); break;
+            case "Bonus Words": aa("bonusWords"); break;
+            default: Debug.Log("error on HandleWordType"); break;
+        }
+        Debug.Log("Selected Phrase Type: " + phraseTypeDropdown.options[phraseTypeDropdown.value].text);
+    }
+    public void aa(string key)
+    {
+        if (wordCategories.ContainsKey(key.ToLower()))
+        {
+            var words = wordCategories[key.ToLower()];
+            Debug.Log("Words for category '" + key + "':");
+            foreach (var word in words)
+            {
+                Debug.Log(word);
+            }
+        }
+        else
+        {
+            Debug.Log("No words found for category: " + key);
+        }
+    }
 }
