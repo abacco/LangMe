@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class CheckEnglishLogic : MonoBehaviour
 {
+    // This Scene MUST BE LOADED ASYNC WITH A LOADING BAR
     public EnglishLogic englishLogic;
 
     Dictionary<string, HashSet<string>> wordCategories;
@@ -21,10 +24,37 @@ public class CheckEnglishLogic : MonoBehaviour
     HashSet<string> future_perfect_questions;
     HashSet<string> future_perfect_continuous_questions;
 
+    HashSet<string> present_simple_affirmations;
+    HashSet<string> present_continuous_affirmations;
+    HashSet<string> present_perfect_affirmations;
+    HashSet<string> present_perfect_continuous_affirmations;
+    HashSet<string> past_simple_affirmations;
+    HashSet<string> past_continuous_affirmations;
+    HashSet<string> past_perfect_affirmations;
+    HashSet<string> past_perfect_continuous_affirmations;
+    HashSet<string> future_simple_affirmations;
+    HashSet<string> future_continuous_affirmations;
+    HashSet<string> future_perfect_affirmations;
+    HashSet<string> future_perfect_continuous_affirmations;
+
+    HashSet<string> present_simple_negations;
+    HashSet<string> present_continuous_negations;
+    HashSet<string> present_perfect_negations;
+    HashSet<string> present_perfect_continuous_negations;
+    HashSet<string> past_simple_negations;
+    HashSet<string> past_continuous_negations;
+    HashSet<string> past_perfect_negations;
+    HashSet<string> past_perfect_continuous_negations;
+    HashSet<string> future_simple_negations;
+    HashSet<string> future_continuous_negations;
+    HashSet<string> future_perfect_negations;
+    HashSet<string> future_perfect_continuous_negations;
+
     private void Start()
     {
         wordCategories = englishLogic.wordCategories;
 
+        // questions
         present_simple_questions = englishLogic.present_simple_questions;
         present_continuous_questions = englishLogic.present_continuous_questions;
         present_perfect_questions = englishLogic.present_perfect_questions;
@@ -44,18 +74,77 @@ public class CheckEnglishLogic : MonoBehaviour
         // per ogni parola della frase
         // vedo se è contenuta nel dizionario
 
-        ValidateFuturePerfectContinuousQuestions(present_simple_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(present_continuous_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(present_perfect_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(present_perfect_continuous_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(past_simple_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(past_continuous_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(past_perfect_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(past_perfect_continuous_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(future_simple_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(future_continuous_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(future_perfect_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(future_perfect_continuous_questions, wordCategories);
+        ValidatePhrase(present_simple_questions, wordCategories);
+        ValidatePhrase(present_continuous_questions, wordCategories);
+        ValidatePhrase(present_perfect_questions, wordCategories);
+        ValidatePhrase(present_perfect_continuous_questions, wordCategories);
+        ValidatePhrase(past_simple_questions, wordCategories);
+        ValidatePhrase(past_continuous_questions, wordCategories);
+        ValidatePhrase(past_perfect_questions, wordCategories);
+        ValidatePhrase(past_perfect_continuous_questions, wordCategories);
+        ValidatePhrase(future_simple_questions, wordCategories);
+        ValidatePhrase(future_continuous_questions, wordCategories);
+        ValidatePhrase(future_perfect_questions, wordCategories);
+        ValidatePhrase(future_perfect_continuous_questions, wordCategories);
+
+        // ---------------------------
+
+        // Affirmations
+        present_simple_affirmations = englishLogic.present_simple_affirmations;
+        present_continuous_affirmations = englishLogic.present_continuous_affirmations;
+        present_perfect_affirmations = englishLogic.present_perfect_affirmations;
+        present_perfect_continuous_affirmations = englishLogic.present_perfect_continuous_affirmations;
+        past_simple_affirmations = englishLogic.past_simple_affirmations;
+        past_continuous_affirmations = englishLogic.past_continuous_affirmations;
+        past_perfect_affirmations = englishLogic.past_perfect_affirmations;
+        past_perfect_continuous_affirmations = englishLogic.past_perfect_continuous_affirmations;
+        future_simple_affirmations = englishLogic.future_simple_affirmations;
+        future_continuous_affirmations = englishLogic.future_continuous_affirmations;
+        future_perfect_affirmations = englishLogic.future_perfect_affirmations;
+        future_perfect_continuous_affirmations = englishLogic.future_perfect_continuous_affirmations;
+
+        ValidatePhrase(present_simple_affirmations, wordCategories);
+        ValidatePhrase(present_continuous_affirmations, wordCategories);
+        ValidatePhrase(present_perfect_affirmations, wordCategories);
+        ValidatePhrase(present_perfect_continuous_affirmations, wordCategories);
+        ValidatePhrase(past_simple_affirmations, wordCategories);
+        ValidatePhrase(past_continuous_affirmations, wordCategories);
+        ValidatePhrase(past_perfect_affirmations, wordCategories);
+        ValidatePhrase(past_perfect_continuous_affirmations, wordCategories);
+        ValidatePhrase(future_simple_affirmations, wordCategories);
+        ValidatePhrase(future_continuous_affirmations, wordCategories);
+        ValidatePhrase(future_perfect_affirmations, wordCategories);
+        ValidatePhrase(future_perfect_continuous_affirmations, wordCategories);
+
+        // ---------------------------
+
+        // Negations
+        present_simple_negations = englishLogic.present_simple_negations;
+        present_continuous_negations = englishLogic.present_continuous_negations;
+        present_perfect_negations = englishLogic.present_perfect_negations;
+        present_perfect_continuous_negations = englishLogic.present_perfect_continuous_negations;
+        past_simple_negations = englishLogic.past_simple_negations;
+        past_continuous_negations = englishLogic.past_continuous_negations;
+        past_perfect_negations = englishLogic.past_perfect_negations;
+        past_perfect_continuous_negations = englishLogic.past_perfect_continuous_negations;
+        future_simple_negations = englishLogic.future_simple_negations;
+        future_continuous_negations = englishLogic.future_continuous_negations;
+        future_perfect_negations = englishLogic.future_perfect_negations;
+        future_perfect_continuous_negations = englishLogic.future_perfect_continuous_negations;
+
+        ValidatePhrase(present_simple_negations, wordCategories);
+        ValidatePhrase(present_continuous_negations, wordCategories);
+        ValidatePhrase(present_perfect_negations, wordCategories);
+        ValidatePhrase(present_perfect_continuous_negations, wordCategories);
+        ValidatePhrase(past_simple_negations, wordCategories);
+        ValidatePhrase(past_continuous_negations, wordCategories);
+        ValidatePhrase(past_perfect_negations, wordCategories);
+        ValidatePhrase(past_perfect_continuous_negations, wordCategories);
+        ValidatePhrase(future_simple_negations, wordCategories);
+        ValidatePhrase(future_continuous_negations, wordCategories);
+        ValidatePhrase(future_perfect_negations, wordCategories);
+        ValidatePhrase(future_perfect_continuous_negations, wordCategories);
+
         //RepeatTests(); //Only for test purpose
     }
 
@@ -66,34 +155,32 @@ public class CheckEnglishLogic : MonoBehaviour
         var clearMethod = logEntries.GetMethod("Clear", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
         clearMethod.Invoke(null, null);
 
-        //ValidateFuturePerfectContinuousQuestions(present_simple_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(present_continuous_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(present_perfect_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(present_perfect_continuous_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(past_simple_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(past_continuous_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(past_perfect_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(past_perfect_continuous_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(future_simple_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(future_continuous_questions, wordCategories);
-        //ValidateFuturePerfectContinuousQuestions(future_perfect_questions, wordCategories);
-        ValidateFuturePerfectContinuousQuestions(future_perfect_continuous_questions, wordCategories);
+        ValidatePhrase(present_simple_questions, wordCategories);
+        ValidatePhrase(present_continuous_questions, wordCategories);
+        ValidatePhrase(present_perfect_questions, wordCategories);
+        ValidatePhrase(present_perfect_continuous_questions, wordCategories);
+        ValidatePhrase(past_simple_questions, wordCategories);
+        ValidatePhrase(past_continuous_questions, wordCategories);
+        ValidatePhrase(past_perfect_questions, wordCategories);
+        ValidatePhrase(past_perfect_continuous_questions, wordCategories);
+        ValidatePhrase(future_simple_questions, wordCategories);
+        ValidatePhrase(future_continuous_questions, wordCategories);
+        ValidatePhrase(future_perfect_questions, wordCategories);
+        ValidatePhrase(future_perfect_continuous_questions, wordCategories);
         // other...............
     }
-    public void ValidateFuturePerfectContinuousQuestions(HashSet<string> sentences, Dictionary<string, HashSet<string>> wordCategories)
+    public void ValidatePhrase(HashSet<string> sentences, Dictionary<string, HashSet<string>> wordCategories)
     {
         foreach (var sentence in sentences)
         {
             // Rimuove la punteggiatura e divide la frase in parole
-            var words = sentence.TrimEnd('.', '?', '!').Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var words = RemovePunctuation(sentence.TrimEnd('.', '?', '!')).Split(' ', StringSplitOptions.RemoveEmptyEntries); ;//sentence.TrimEnd('.', '?', '!').Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             Debug.Log($"Validating sentence: \"{sentence}\"");
 
             foreach (var word in words)
             {
                 bool isWordValid = false;
-
-                // Controlla se la parola è presente in una delle categorie del dizionario
                 foreach (var category in wordCategories.Values)
                 {
                     if (category.Contains(word.ToLower())) // Case-insensitive check
@@ -102,44 +189,20 @@ public class CheckEnglishLogic : MonoBehaviour
                         break;
                     }
                 }
-
-                // Stampa il risultato per ciascuna parola
-                // Logga il risultato per ciascuna parola
                 if (!isWordValid)
                 {
                     Debug.LogWarning($"Word \"{word}\" is NOT valid or not found in dictionary.");
-                    wordCategories["otherWords"].Add(word.ToLower());
+                    wordCategories["bonusWords"].Add(word.ToLower());
                 }
             }
         }
     }
-    public bool ValidateSentence(string sentence, Dictionary<string, HashSet<string>> wordCategories)
+
+    string RemovePunctuation(string input)
     {
-        // Rimuovi il punto finale dalla frase e dividi le parole
-        var words = sentence.TrimEnd('.').Split(' ');
-
-        foreach (var word in words)
-        {
-            bool isWordValid = false;
-
-            // Controlla se la parola appartiene a una delle categorie
-            foreach (var category in wordCategories.Values)
-            {
-                if (category.Contains(word.ToLower())) // Confronto case-insensitive
-                {
-                    isWordValid = true;
-                    break;
-                }
-            }
-
-            // Se la parola non appartiene a nessuna categoria, la frase non è valida
-            if (!isWordValid)
-            {
-                return false;
-            }
-        }
-
-        // Se tutte le parole sono valide, la frase è valida
-        return true;
+        // Regex per trovare tutti i caratteri di punteggiatura
+        string pattern = @"[^\w\s]";
+        // Sostituisce i caratteri di punteggiatura con una stringa vuota
+        return Regex.Replace(input, pattern, "");
     }
 }
