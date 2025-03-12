@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class EnglishLogic : MonoBehaviour
 {
     public TMP_Dropdown tenseDropdown;
     public TMP_Dropdown phraseTypeDropdown;
-    //public TMP_Dropdown wordTypeDropdown;
 
     [SerializeField] GameObject rememberPanel;
 
@@ -6637,55 +6637,91 @@ public class EnglishLogic : MonoBehaviour
     }
     #endregion
 
-    //public string selectedWordType = "Wh-Words";
-    //public TMP_Text wordList;
-    //public TMP_Text wordTypeTitle;
-    //public GameObject wordListPanel;
-    //public void HandleWordType()
-    //{
-    //    selectedWordType = wordTypeDropdown.options[wordTypeDropdown.value].text;
-    //    wordTypeTitle.text = selectedWordType;
-    //    // si deve aprire un pannello tipo dizionario dove vengono mostrate le parole di quel tipo
-    //}
+    public GameObject HelpMePanel;
+    public TMP_Text help_solution_text;
+    public void HelpMeLogic()
+    {
+        HelpMePanel.SetActive(true);
+        switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
+        {
+            case "Questions":
+                HelpWithQuestions(); break;
+            case "Affirmations":
+                HelpWithAffirmations(); break;
+            case "Negations":
+                HelpWithNegations(); break;
+            default: Debug.Log("error on HandlePhraseType"); break;
+        }
+    }
 
-    //public void ShowWordTypeList()
-    //{
-    //    switch (selectedWordType)
-    //    {
-    //        case "Wh-Words": ShowListForType("wh-word"); break;
-    //        case "Auxiliaries": ShowListForType("auxiliary"); break;
-    //        case "Sub/Objects": ShowListForType("subject"); break;
-    //        case "Verbs": ShowListForType("verb"); break;
-    //        case "Prepositions": ShowListForType("preposition"); break;
-    //        case "Adverbs": ShowListForType("averbs"); break;
-    //        case "Time": ShowListForType("time"); break;
-    //        case "Bonus Words": ShowListForType("bonusWords"); break;
-    //        default: Debug.Log("error on HandleWordType"); break;
-    //    }
-    //    Debug.Log("Selected Phrase Type: " + phraseTypeDropdown.options[phraseTypeDropdown.value].text);
-    //}
-    //public void ShowListForType(string key)
-    //{
-    //    wordListPanel.SetActive(true);
-    //    wordList.text = "\n";
-    //    if (wordCategories.ContainsKey(key.ToLower()))
-    //    {
-    //        var words = wordCategories[key.ToLower()];
-    //        //Debug.Log("Words for category '" + key + "':");
-    //        foreach (var word in words)
-    //        {
-    //            //Debug.Log(word);
-    //            wordList.text += word + "\n";
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("No words found for category: " + key);
-    //    }
-    //}
+    public void HelpWithQuestions()
+    {
+        System.Random random = new System.Random();
+        switch (tenseDropdown.options[tenseDropdown.value].text)
+        {
+            case "Present Simple": help_solution_text.text = present_simple_questions.ElementAt(random.Next(present_simple_questions.Count)); break;
+            case "Present Cont.": help_solution_text.text = present_continuous_questions.ElementAt(random.Next(present_continuous_questions.Count)); break;
+            case "Present Perfect": help_solution_text.text = present_perfect_questions.ElementAt(random.Next(present_perfect_questions.Count)); break;
+            case "Present Perfect Cont.": help_solution_text.text = present_perfect_continuous_questions.ElementAt(random.Next(present_perfect_continuous_questions.Count)); break;
 
-    //public void CloseWordListPanel()
-    //{
-    //    wordListPanel.SetActive(false);
-    //}
+            case "Past Simple": help_solution_text.text = past_simple_questions.ElementAt(random.Next(present_simple_questions.Count)); break;
+            case "Past Cont.": help_solution_text.text = past_continuous_questions.ElementAt(random.Next(past_continuous_questions.Count)); break;
+            case "Past Perfect": help_solution_text.text = past_perfect_questions.ElementAt(random.Next(past_perfect_questions.Count)); break;
+            case "Past Perfect Cont.": help_solution_text.text = past_perfect_continuous_questions.ElementAt(random.Next(past_perfect_continuous_questions.Count)); break;
+
+            case "Future Simple": help_solution_text.text = future_simple_questions.ElementAt(random.Next(future_simple_questions.Count)); break;
+            case "Future Cont.": help_solution_text.text = future_continuous_questions.ElementAt(random.Next(future_continuous_questions.Count)); break;
+            case "Future Perfect": help_solution_text.text = future_perfect_questions.ElementAt(random.Next(future_perfect_questions.Count)); break;
+            case "Future Perfect Cont.": help_solution_text.text = future_perfect_continuous_questions.ElementAt(random.Next(future_perfect_continuous_questions.Count)); break;
+            default: Debug.LogError("error on UpdateQuestionRule"); break;
+        }
+    }
+    public void HelpWithAffirmations()
+    {
+        System.Random random = new System.Random();
+        switch (tenseDropdown.options[tenseDropdown.value].text)
+        {
+            case "Present Simple": help_solution_text.text = present_simple_affirmations.ElementAt(random.Next(present_simple_affirmations.Count)); break;
+            case "Present Cont.": help_solution_text.text = present_continuous_affirmations.ElementAt(random.Next(present_continuous_affirmations.Count)); break;
+            case "Present Perfect": help_solution_text.text = present_perfect_affirmations.ElementAt(random.Next(present_perfect_affirmations.Count)); break;
+            case "Present Perfect Cont.": help_solution_text.text = present_perfect_continuous_affirmations.ElementAt(random.Next(present_perfect_continuous_affirmations.Count)); break;
+
+            case "Past Simple": help_solution_text.text = past_simple_affirmations.ElementAt(random.Next(present_simple_affirmations.Count)); break;
+            case "Past Cont.": help_solution_text.text = past_continuous_affirmations.ElementAt(random.Next(past_continuous_affirmations.Count)); break;
+            case "Past Perfect": help_solution_text.text = past_perfect_affirmations.ElementAt(random.Next(past_perfect_affirmations.Count)); break;
+            case "Past Perfect Cont.": help_solution_text.text = past_perfect_continuous_affirmations.ElementAt(random.Next(past_perfect_continuous_affirmations.Count)); break;
+
+            case "Future Simple": help_solution_text.text = future_simple_affirmations.ElementAt(random.Next(future_simple_affirmations.Count)); break;
+            case "Future Cont.": help_solution_text.text = future_continuous_affirmations.ElementAt(random.Next(future_continuous_affirmations.Count)); break;
+            case "Future Perfect": help_solution_text.text = future_perfect_affirmations.ElementAt(random.Next(future_perfect_affirmations.Count)); break;
+            case "Future Perfect Cont.": help_solution_text.text = future_perfect_continuous_affirmations.ElementAt(random.Next(future_perfect_continuous_affirmations.Count)); break;
+            default: Debug.LogError("error on UpdateQuestionRule"); break;
+        }
+    }
+    public void HelpWithNegations()
+    {
+        System.Random random = new System.Random();
+        switch (tenseDropdown.options[tenseDropdown.value].text)
+        {
+            case "Present Simple": help_solution_text.text = present_simple_negations.ElementAt(random.Next(present_simple_negations.Count)); break;
+            case "Present Cont.": help_solution_text.text = present_continuous_negations.ElementAt(random.Next(present_continuous_negations.Count)); break;
+            case "Present Perfect": help_solution_text.text = present_perfect_negations.ElementAt(random.Next(present_perfect_negations.Count)); break;
+            case "Present Perfect Cont.": help_solution_text.text = present_perfect_continuous_negations.ElementAt(random.Next(present_perfect_continuous_negations.Count)); break;
+
+            case "Past Simple": help_solution_text.text = past_simple_negations.ElementAt(random.Next(present_simple_negations.Count)); break;
+            case "Past Cont.": help_solution_text.text = past_continuous_negations.ElementAt(random.Next(past_continuous_negations.Count)); break;
+            case "Past Perfect": help_solution_text.text = past_perfect_negations.ElementAt(random.Next(past_perfect_negations.Count)); break;
+            case "Past Perfect Cont.": help_solution_text.text = past_perfect_continuous_negations.ElementAt(random.Next(past_perfect_continuous_negations.Count)); break;
+
+            case "Future Simple": help_solution_text.text = future_simple_negations.ElementAt(random.Next(future_simple_negations.Count)); break;
+            case "Future Cont.": help_solution_text.text = future_continuous_negations.ElementAt(random.Next(future_continuous_negations.Count)); break;
+            case "Future Perfect": help_solution_text.text = future_perfect_negations.ElementAt(random.Next(future_perfect_negations.Count)); break;
+            case "Future Perfect Cont.": help_solution_text.text = future_perfect_continuous_negations.ElementAt(random.Next(future_perfect_continuous_negations.Count)); break;
+            default: Debug.LogError("error on UpdateQuestionRule"); break;
+        }
+    }
+    public void CloseHelpMePanel()
+    {
+        HelpMePanel.SetActive(false);
+    }
 }
