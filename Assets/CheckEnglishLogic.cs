@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -169,6 +171,7 @@ public class CheckEnglishLogic : MonoBehaviour
         ValidatePhrase(future_perfect_continuous_questions, wordCategories);
         // other...............
     }
+    HashSet<string> bonusWordsCopy = new HashSet<string>();
     public void ValidatePhrase(HashSet<string> sentences, Dictionary<string, HashSet<string>> wordCategories)
     {
         foreach (var sentence in sentences)
@@ -193,6 +196,9 @@ public class CheckEnglishLogic : MonoBehaviour
                 {
                     Debug.LogWarning($"Word \"{word}\" is NOT valid or not found in dictionary.");
                     wordCategories["bonusWords"].Add(word.ToLower());
+                    bonusWordsCopy.Add(word.ToLower());
+                    Debug.LogWarning($"Word \"{word}\" added");
+
                 }
             }
         }
@@ -204,5 +210,66 @@ public class CheckEnglishLogic : MonoBehaviour
         string pattern = @"[^\w\s]";
         // Sostituisce i caratteri di punteggiatura con una stringa vuota
         return Regex.Replace(input, pattern, "");
+    }
+
+
+    public string selectedWordType = "Wh-Words";
+    public TMP_Text wordList;
+    public TMP_Text wordTypeTitle;
+    public GameObject wordListPanel;
+    public TMP_Dropdown wordTypeDropdown;
+    public void HandleWordType()
+    {
+        selectedWordType = wordTypeDropdown.options[wordTypeDropdown.value].text;
+        wordTypeTitle.text = selectedWordType;
+        // si deve aprire un pannello tipo dizionario dove vengono mostrate le parole di quel tipo
+    }
+
+    public void ShowWordTypeList()
+    {
+        switch (selectedWordType)
+        {
+            case "Wh-Words": ShowListForType("wh-word"); break;
+            case "Auxiliaries": ShowListForType("auxiliary"); break;
+            case "Sub/Objects": ShowListForType("subject"); break;
+            case "Verbs": ShowListForType("verb"); break;
+            case "Prepositions": ShowListForType("preposition"); break;
+            case "Adverbs": ShowListForType("averbs"); break;
+            case "Time": ShowListForType("time"); break;
+            case "Bonus Words": ShowListForType("bonusWords"); break;
+            default: Debug.Log("error on HandleWordType"); break;
+        }
+    }
+    public void ShowListForType(string key)
+    {
+        wordListPanel.SetActive(true);
+        wordList.text = "\n";
+        if("bonusWords".Equals(key))
+        {
+            foreach (var word in bonusWordsCopy)
+            {
+                //Debug.Log(word);
+                wordList.text += word + "\n";
+            }
+        }
+        if (wordCategories.ContainsKey(key.ToLower()))
+        {
+            var words = wordCategories[key.ToLower()];
+            //Debug.Log("Words for category '" + key + "':");
+            foreach (var word in words)
+            {
+                //Debug.Log(word);
+                wordList.text += word + "\n";
+            }
+        }
+        else
+        {
+            Debug.Log("No words found for category: " + key);
+        }
+    }
+
+    public void CloseWordListPanel()
+    {
+        wordListPanel.SetActive(false);
     }
 }

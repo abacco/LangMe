@@ -9,7 +9,7 @@ public class EnglishLogic : MonoBehaviour
 {
     public TMP_Dropdown tenseDropdown;
     public TMP_Dropdown phraseTypeDropdown;
-    public TMP_Dropdown wordTypeDropdown;
+    //public TMP_Dropdown wordTypeDropdown;
 
     [SerializeField] GameObject rememberPanel;
 
@@ -6637,43 +6637,55 @@ public class EnglishLogic : MonoBehaviour
     }
     #endregion
 
-    public string selectedWordType = "Wh-Words";
-    public void HandleWordType()
-    {
-        selectedWordType = wordTypeDropdown.options[wordTypeDropdown.value].text;
-        // si deve aprire un pannello tipo dizionario dove vengono mostrate le parole di quel tipo
-    }
+    //public string selectedWordType = "Wh-Words";
+    //public TMP_Text wordList;
+    //public TMP_Text wordTypeTitle;
+    //public GameObject wordListPanel;
+    //public void HandleWordType()
+    //{
+    //    selectedWordType = wordTypeDropdown.options[wordTypeDropdown.value].text;
+    //    wordTypeTitle.text = selectedWordType;
+    //    // si deve aprire un pannello tipo dizionario dove vengono mostrate le parole di quel tipo
+    //}
 
-    public void ShowWordTypeList()
-    {
-        switch (selectedWordType)
-        {
-            case "Wh-Words": aa("wh-word"); break;
-            case "Auxiliaries": aa("auxiliary"); break;
-            case "Sub/Objects": aa("subject"); break;
-            case "Verbs": aa("verb"); break;
-            case "Prepositions": aa("preposition"); break;
-            case "Adverbs": aa("averbs"); break;
-            case "Time": aa("time"); break;
-            case "Bonus Words": aa("bonusWords"); break;
-            default: Debug.Log("error on HandleWordType"); break;
-        }
-        Debug.Log("Selected Phrase Type: " + phraseTypeDropdown.options[phraseTypeDropdown.value].text);
-    }
-    public void aa(string key)
-    {
-        if (wordCategories.ContainsKey(key.ToLower()))
-        {
-            var words = wordCategories[key.ToLower()];
-            Debug.Log("Words for category '" + key + "':");
-            foreach (var word in words)
-            {
-                Debug.Log(word);
-            }
-        }
-        else
-        {
-            Debug.Log("No words found for category: " + key);
-        }
-    }
+    //public void ShowWordTypeList()
+    //{
+    //    switch (selectedWordType)
+    //    {
+    //        case "Wh-Words": ShowListForType("wh-word"); break;
+    //        case "Auxiliaries": ShowListForType("auxiliary"); break;
+    //        case "Sub/Objects": ShowListForType("subject"); break;
+    //        case "Verbs": ShowListForType("verb"); break;
+    //        case "Prepositions": ShowListForType("preposition"); break;
+    //        case "Adverbs": ShowListForType("averbs"); break;
+    //        case "Time": ShowListForType("time"); break;
+    //        case "Bonus Words": ShowListForType("bonusWords"); break;
+    //        default: Debug.Log("error on HandleWordType"); break;
+    //    }
+    //    Debug.Log("Selected Phrase Type: " + phraseTypeDropdown.options[phraseTypeDropdown.value].text);
+    //}
+    //public void ShowListForType(string key)
+    //{
+    //    wordListPanel.SetActive(true);
+    //    wordList.text = "\n";
+    //    if (wordCategories.ContainsKey(key.ToLower()))
+    //    {
+    //        var words = wordCategories[key.ToLower()];
+    //        //Debug.Log("Words for category '" + key + "':");
+    //        foreach (var word in words)
+    //        {
+    //            //Debug.Log(word);
+    //            wordList.text += word + "\n";
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("No words found for category: " + key);
+    //    }
+    //}
+
+    //public void CloseWordListPanel()
+    //{
+    //    wordListPanel.SetActive(false);
+    //}
 }
