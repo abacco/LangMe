@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +17,9 @@ public class EnglishLogic : MonoBehaviour
     public TMP_Text feedbackText;
     public TMP_Text rule_dynamic_text;
     public string selectedTense = ""; // Cambia a seconda dell'esercizio
-
+    
+    public int how_many_correct_english_phrases = 0;
+    public TMP_Text how_many_correct_english_phrases_text;
     // Fare HelpMe Button che mostra una delle frasi dopo la pubblicità
 
     #region QUESTIONS INITIALIZATION
@@ -6236,14 +6237,17 @@ public class EnglishLogic : MonoBehaviour
             case "Questions":
                 bool isAValidQuestion = MatchesBasedOnType(userInput);
                 feedbackText.text = isAValidQuestion ? "Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '?', Please Retry.";
+                if (isAValidQuestion) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             case "Affirmations":
                 bool isAValidAffirmation = MatchesBasedOnType(userInput);
                 feedbackText.text = isAValidAffirmation ? "Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '.'? Please Retry.";
+                if (isAValidAffirmation) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             case "Negations":
                 bool isAValidNegations = MatchesBasedOnType(userInput);
                 feedbackText.text = isAValidNegations ? "Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '.'? Please Retry.";
+                if (isAValidNegations) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             default: Debug.Log("error on HandlePhraseType"); break;
         }
@@ -6653,8 +6657,7 @@ public class EnglishLogic : MonoBehaviour
             default: Debug.Log("error on HandlePhraseType"); break;
         }
     }
-
-    public void HelpWithQuestions()
+    private void HelpWithQuestions()
     {
         System.Random random = new System.Random();
         switch (tenseDropdown.options[tenseDropdown.value].text)
@@ -6676,7 +6679,7 @@ public class EnglishLogic : MonoBehaviour
             default: Debug.LogError("error on UpdateQuestionRule"); break;
         }
     }
-    public void HelpWithAffirmations()
+    private void HelpWithAffirmations()
     {
         System.Random random = new System.Random();
         switch (tenseDropdown.options[tenseDropdown.value].text)
@@ -6698,7 +6701,7 @@ public class EnglishLogic : MonoBehaviour
             default: Debug.LogError("error on UpdateQuestionRule"); break;
         }
     }
-    public void HelpWithNegations()
+    private void HelpWithNegations()
     {
         System.Random random = new System.Random();
         switch (tenseDropdown.options[tenseDropdown.value].text)
