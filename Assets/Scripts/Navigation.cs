@@ -19,7 +19,8 @@ public class Navigation : MonoBehaviour
         "7 - Home",
         "8 - Exercise Scene", 
         "9 - Dictionary",
-        "10 - Progress"
+        "10 - Progress",
+        "14 - Exam Scene"
     }; 
 
     public void MoveToScene(string sceneName)
@@ -49,7 +50,6 @@ public class Navigation : MonoBehaviour
     public void YesSelected()
     {
         string s = scene_selected_text.text;
-
         foreach (string s2 in scenesName)
         {
             if (s2.ToLower().Contains(s.ToLower()))
@@ -66,6 +66,11 @@ public class Navigation : MonoBehaviour
                     {
                         warningPanelYesClick = true;
                     }
+                }
+                else if (s.Contains("Exam"))
+                {
+                    GameManager.Instance.ready_for_test = true;
+                    MoveToScene(s2);
                 }
                 else
                 {

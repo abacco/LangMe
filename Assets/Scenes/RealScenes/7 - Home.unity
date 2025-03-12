@@ -2257,7 +2257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardSlots:
   - {fileID: 1445250348}
-  - {fileID: 875411424}
   - {fileID: 2007164444}
   - {fileID: 892711384}
   - {fileID: 1204349131}
@@ -2850,7 +2849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &496790591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3484,6 +3483,7 @@ MonoBehaviour:
   username: 
   userNationality: 
   totalStarsEarned: 666
+  proficiencyTrackerIndex: 0
   LanguageDataStars:
     Difficulty:
       node:
@@ -3495,6 +3495,7 @@ MonoBehaviour:
   singleProficiencyTracker:
     key: 
     isCompleted: 0
+  ready_for_test: 0
 --- !u!4 &660940286
 Transform:
   m_ObjectHideFlags: 0
@@ -4280,7 +4281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &875411423
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5744,7 +5745,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Test
+          m_StringArgument: 14 - Exam Scene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1132354493
@@ -9158,6 +9159,8 @@ MonoBehaviour:
   - 10 - Progress
   - 11 - Fake Leaderboard
   - 12 - Language Proficiency
+  - 13 - English
+  - 14 - Exam Scene
 --- !u!4 &2093953369
 Transform:
   m_ObjectHideFlags: 0

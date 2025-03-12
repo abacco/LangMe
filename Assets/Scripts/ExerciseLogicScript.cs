@@ -30,6 +30,8 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] GameObject warning_panel;
     [SerializeField] GameObject levenshteinPanel;
     [SerializeField] GameObject refillHeartsPanel;
+
+    [SerializeField] GameObject countdownPanel;
     [SerializeField] TMP_Text wrong_text;
 
 
@@ -66,9 +68,18 @@ public class ExerciseLogicScript : MonoBehaviour
         userLifes = GameManager.Instance.userLifes;
         users_lifes_txt.text = userLifes.ToString();
         // set solutionCounter to display first Original Phrase 
-        solution_counter = GameManager.Instance.solutionCounter;
+        if(GameManager.Instance.ready_for_test)
+        {
+            solution_counter = new System.Random().Next(0, 99);
+        } else
+        {
+            solution_counter = GameManager.Instance.solutionCounter;
+        }
         // set default correct_phrase counter txt
-        correct_phrases_counter.text = "00";
+        if (correct_phrases_counter != null)
+        {
+            correct_phrases_counter.text = "00";
+        }
 
         frasi_soluzione = new List<string>();
         frasi_originali = new List<string>();
@@ -83,7 +94,13 @@ public class ExerciseLogicScript : MonoBehaviour
 
         gameData = new GameData();
         GameManager.Instance.SaveData();
-        showSolutionAd = GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>();
+        try
+        {
+            showSolutionAd = GameObject.Find("ShowSolutionAdInit").GetComponent<ShowSolutionAd>();
+        } catch (Exception ex)
+        {
+            Debug.LogWarning("No need of showSolutionAd here ex:" + ex.Message);
+        }
         UpdateVeryFirstOriginalPhrase();
     }
     void InitializeLanguageHashMap(List<string> frasiSoluzione, List<string> frasiOriginale,
@@ -139,7 +156,16 @@ public class ExerciseLogicScript : MonoBehaviour
 
     public void UpdateVeryFirstOriginalPhrase()
     {
-        int decine = GameManager.Instance.solutionCounter / 10;
+        int decine;
+        if (!GameManager.Instance.ready_for_test)
+        {
+            decine = GameManager.Instance.solutionCounter / 10;
+        }
+        else
+        {
+            decine = solution_counter / 10;
+        }
+
         Debug.Log($"Decine attuali {decine} & solutionCounter On Start: {GameManager.Instance.solutionCounter}");
 
         Dictionary<string, (Dictionary<int, Dictionary<string, string>> hashMap, Dictionary<string, string> dict)> languageDictionaries =
@@ -224,11 +250,22 @@ public class ExerciseLogicScript : MonoBehaviour
 
     private void HandleCorrectAnswers()
     {
+        if(correct_answers == 9 && GameManager.Instance.ready_for_test)
+        {
+            Debug.Log("Test Passed!"); // ok
+        }
         if (correct_answers == 9)
         {
-            next_exercise_btn.interactable = true;
-            set_completed = true;
-            ShowWellDonePanel();
+            try
+            {
+                next_exercise_btn.interactable = true;
+                set_completed = true;
+                ShowWellDonePanel();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning("HandleCorrectAnswers method" + ex);
+            }
         }
     }
 
@@ -261,7 +298,10 @@ public class ExerciseLogicScript : MonoBehaviour
             if (differences.Length > 0 && !differences[0].ToLower().Equals(solution.ToLower()))
             {
                 OpenLevenshteinPanel();
-                diffString.text = differences[0] + "\n" + solution;
+                if(diffString != null)
+                {
+                    diffString.text = differences[0] + "\n" + solution;
+                }
             }
         }
 
@@ -317,7 +357,14 @@ public class ExerciseLogicScript : MonoBehaviour
 
     private void SetCorrectPhraseCounter(string correct_answers_text)
     {
-        correct_phrases_counter.text = correct_answers < 10 ? "0" + correct_answers_text : correct_answers_text;
+        try
+        {
+            correct_phrases_counter.text = correct_answers < 10 ? "0" + correct_answers_text : correct_answers_text;
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("SetCorrectPhraseCounter method" + e);
+        }
     }
     public void NextExercise()
     {
@@ -501,17 +548,26 @@ public class ExerciseLogicScript : MonoBehaviour
 
     public void ShowRefillHeartsPanel()
     {
-        refillHeartsPanel.SetActive(true);
+        if(refillHeartsPanel != null)
+        {
+            refillHeartsPanel.SetActive(true);
+        }
     }
 
     public void CloseRefillHeartsPanel()
     {
-        refillHeartsPanel.SetActive(false);
+        if(refillHeartsPanel != null)
+        {
+            refillHeartsPanel.SetActive(false);
+        }
     }
 
     public void CloseWellDonePanel()
     {
-        well_done_panel.SetActive(false);
+        if(well_done_panel != null)
+        {
+            well_done_panel.SetActive(false);
+        }
         GameManager.Instance.solutionCounter = solution_counter;
         GameManager.Instance.SaveData(); // ?
         SceneManager.LoadScene("10 - Progress");
@@ -520,23 +576,39 @@ public class ExerciseLogicScript : MonoBehaviour
     public void CloseSolutionPanel()
     {
         StarSystemLogic(); // nello script dell'ad era un casino perchè ad esempio la seconda volta che clicco andava diretto a 3 comunque roba di ciclo di vita che non ho capito bene ancora
-        solution_panel.SetActive(false);
+        if(solution_panel != null)
+        {
+            solution_panel.SetActive(false);
+        }
     }
 
     public void OpenLevenshteinPanel()
     {
-        levenshteinPanel.SetActive(true);
+        if(levenshteinPanel != null)
+        {
+            levenshteinPanel.SetActive(true);
+        }
     }
 
     public void CloseLevenshteinPanel()
     {
-        levenshteinPanel.SetActive(false);
+        if(levenshteinPanel != null)
+        {
+            levenshteinPanel.SetActive(false);
+        }
     }
 
     public string ShowSolution()
     {
-        Debug.Log("SOLUZIONEEE: " + frasi_soluzione[solution_counter]); // funziona!!!!! METTI l'ad
-        return frasi_soluzione[solution_counter];
+        if(frasi_soluzione != null)
+        {
+            Debug.Log("SOLUZIONEEE: " + frasi_soluzione[solution_counter]); // funziona!!!!! METTI l'ad
+            return frasi_soluzione[solution_counter];
+        }
+        else
+        {
+            return "";
+        }
     }
 
     public void StarSystemLogic()
@@ -567,4 +639,61 @@ public class ExerciseLogicScript : MonoBehaviour
         // solution counter al load della exercise scene è = 10
     }
     #endregion
+
+
+    public TMP_Text timerText; // UI Text per mostrare il countdown
+    private int totalTime = 180; // Tempo iniziale in secondi (3 minuti)
+    private bool isCounting = false;
+    public GameObject testCompletedPanel;
+
+    private void Start()
+    {
+        if (GameManager.Instance.ready_for_test) // FAI PROPRIO NA SCENA CON UNA LOGICA SUA SENNò SPUTTANI TUTTO GIà HAI PROVATO FIDATI NUN PERD TIEMP
+        {
+            StartCountdown();
+            // annullare tutte le logiche dell'eserciziario normale
+            // annullare i progress
+            // se resetti il sol counter si resetta anche per le scene normali - risolto con l'old
+        }
+    }
+
+    public void StartCountdown()
+    {
+        if (!isCounting)
+        {
+            isCounting = true;
+            countdownPanel.SetActive(true);
+            StartCoroutine(UpdateCountdown());
+        }
+    }
+
+    IEnumerator UpdateCountdown()
+    {
+        while (totalTime > 0)
+        {
+            int minutes = totalTime / 60;
+            int seconds = totalTime % 60;
+            timerText.text = string.Format("{0}:{1:00}", minutes, seconds); // Formato MM:SS
+
+            if(this.solution_counter == 10)
+            {
+                testCompletedPanel.SetActive(true);
+                GameManager.Instance.userLifes = 10;
+            }
+            yield return new WaitForSeconds(1f); // Aspetta 1 secondo
+            totalTime--; // Riduci il tempo
+        }
+
+        // Quando il timer arriva a 0
+        timerText.text = "0:00";
+        isCounting = false;
+        countdownPanel.SetActive(false);
+        GameManager.Instance.ready_for_test = false;
+        GameManager.Instance.SaveData();
+    }
+
+    public void CloseTestCompletedPanel()
+    {
+        SceneManager.LoadScene("7 - Home");
+    }
 }

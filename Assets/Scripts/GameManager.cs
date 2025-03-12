@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public GameData.ProficiencyTracker[] proficiencyTracker;
     public GameData.ProficiencyTracker singleProficiencyTracker;
 
+    public bool ready_for_test = false;
+
     // Percorso del file JSON
     private string filePath;
     public string FilePath { get; set; }
