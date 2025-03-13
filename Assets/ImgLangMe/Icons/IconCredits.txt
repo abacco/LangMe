@@ -9,4 +9,4 @@
 - Russia icon: <a href="https://www.flaticon.com/free-icons/russia" title="russia icons">Russia icons created by GeekClick - Flaticon</a>
 - Heart icon: <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Kiranshastry - Flaticon</a>
 - sound; Sound Effect by Lesiakower from Pixabay
--click-sound: Sound Effect by u_8g40a9z0la from Pixabay
+- click-sound: Sound Effect by u_8g40a9z0la from Pixabay
