@@ -6,6 +6,7 @@ public class Navigation : MonoBehaviour
 {
     [SerializeField] GameObject openScenePanel;
     [SerializeField] GameObject warningOfLostProgressPanel;
+    [SerializeField] GameObject lostProgressPanel;
     [SerializeField] TMP_Text scene_selected_text;
     bool warningPanelYesClick = false;
     // forse è inutile
@@ -80,5 +81,16 @@ public class Navigation : MonoBehaviour
         }
     }
 
-    
+    public void AdviseForLostProgress()
+    {
+
+            Debug.Log("You will loose current progress are you sure?"); // ok
+            lostProgressPanel.SetActive(true);
+       
+    }
+
+    public void CloseLostProgressPanel()
+    {
+        lostProgressPanel.SetActive(false);
+    }
 }
