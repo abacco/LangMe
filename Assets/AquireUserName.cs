@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AquireUserName : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class AquireUserName : MonoBehaviour
     [SerializeField] GameObject areYouSurePanel;
     [SerializeField] GameObject insertNamePanel;
 
-    [SerializeField] TMP_Text selectedUserName_txt;
+    [SerializeField] Text selectedUserName_txt;
     public void AquireUsername()
     {
         if (inputfield != null && !"".Equals(inputfield.text)) {
