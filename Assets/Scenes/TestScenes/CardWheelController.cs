@@ -38,6 +38,12 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
 
         // Aggiorna la grafica iniziale delle carte
         UpdateCardDisplay(instant: true);
+
+        int count = cardSlots.Count;
+        for (int i = 0; i < count; i++)
+        {
+            cardSlots[i].transform.position += new Vector3(0, -160, 0);
+        }
     }
     
     private void InitializeCardPositions()
@@ -67,6 +73,11 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         Debug.Log("Scroll Left currentIndex:" + currentIndex);
         StartCoroutine(AnimateTransition(false));
     }
+
+    //List<Vector3> startPositions = new List<Vector3>();
+    //List<Vector3> targetPositions = new List<Vector3>();
+    //List<Vector3> startScales = new List<Vector3>();
+    //List<Vector3> targetScales = new List<Vector3>();
     private IEnumerator AnimateTransition(bool scrollRight)
     {
         isAnimating = true;
@@ -82,6 +93,8 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         {
             startPositions.Add(cardSlots[i].transform.position);
             targetPositions.Add(cardSlots[(i + (scrollRight ? 1 : -1) + count) % count].transform.position);
+
+            Debug.Log("startPositions of " + cardSlots[i].name + "is " + cardSlots[i].transform.position); // parte dal riferimento del canvas
 
             startScales.Add(cardSlots[i].transform.localScale);
             targetScales.Add(cardSlots[(i + (scrollRight ? 1 : -1) + count) % count].transform.localScale);
