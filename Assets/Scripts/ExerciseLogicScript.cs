@@ -31,6 +31,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] GameObject levenshteinPanel;
     [SerializeField] GameObject refillHeartsPanel;
     [SerializeField] GameObject checkHeartsPanel;
+    [SerializeField] GameObject congrats_panel;
 
     [SerializeField] GameObject countdownPanel;
     [SerializeField] TMP_Text wrong_text;
@@ -262,6 +263,7 @@ public class ExerciseLogicScript : MonoBehaviour
         if(correct_answers == 9 && GameManager.Instance.ready_for_test)
         {
             Debug.Log("Test Passed!"); // ok
+            congrats_panel.SetActive(true);
         }
         if (correct_answers == 9)
         {
@@ -353,12 +355,20 @@ public class ExerciseLogicScript : MonoBehaviour
         try
         {
             original_phrase.text = frasi_originali.ElementAt(solution_counter);
-        } catch (Exception e){ 
+        } catch (Exception e){
             // Mostra un pannello che inviti a cambiare difficoltà
+            congrats_panel.SetActive(true);
+            GameManager.Instance.solutionCounter = 0;
             Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
         } 
 
     }
+
+    public void CloseCongratsPanel()
+    {
+        congrats_panel.SetActive(false);
+    }
+
     private void ResetInputField()
     {
         inputfield.text = "";
