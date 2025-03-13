@@ -30,7 +30,19 @@ public class FakeLeaderBoardManager : MonoBehaviour
         leaderboardEntries.Clear();
         for (int i = 1; i <= 100; i++)
         {
-            leaderboardEntries.Add(new LeaderboardEntry { playerName = "Player " + i, score = Random.Range(0, 1080) });   
+            LeaderboardEntry entry = new LeaderboardEntry
+            {
+                playerName = GenerateLofiNickname(),
+                score = Random.Range(0, 1080)
+            };
+
+            // Controlla i duplicati basandoti su playerName
+            bool exists = leaderboardEntries.Exists(e => e.playerName == entry.playerName);
+
+            if (!exists)
+            {
+                leaderboardEntries.Add(entry);
+            }
         }
         leaderboardEntries.Sort((a, b) => b.score.CompareTo(a.score)); // Ordina la classifica - per forza, sennò non hai l'ultimo per fare il confronto
 
@@ -53,7 +65,8 @@ public class FakeLeaderBoardManager : MonoBehaviour
         {
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardContainer);
             
-            newEntry.GetComponent<PlayerEntryUI>().SetUsername(entry.playerName);
+            //newEntry.GetComponent<PlayerEntryUI>().SetUsername(entry.playerName);
+
             if (newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text.ToLower().Equals(GameManager.Instance.username.ToLower()))
             {
                 newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text = GameManager.Instance.username;
@@ -64,9 +77,98 @@ public class FakeLeaderBoardManager : MonoBehaviour
             }
             else
             {
-                newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text = entry.playerName;
+                newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text = newEntry.GetComponent<PlayerEntryUI>().ChopUsername(entry.playerName);//entry.playerName;
                 newEntry.transform.Find("PlayerStars").GetComponent<TMP_Text>().text = entry.score.ToString();
             }
         }
+    }
+
+    private static List<string> names = new List<string>()
+    {
+        "Alex", "James", "John", "Michael", "David", "Robert", "Daniel", "Thomas",
+        "William", "Charles", "George", "Henry", "Edward", "Anthony", "Paul",
+        "Andrew", "Peter", "Samuel", "Joseph", "Mark", "Benjamin", "Christopher",
+        "Patrick", "Richard", "Arthur", "Matthew", "Ethan", "Liam", "Jack",
+        "Ryan", "Luke", "Nathan", "Oliver", "Oscar",
+        "Marta", "Sophia", "Emma", "Olivia", "Isabella", "Ava", "Mia", "Emily",
+        "Charlotte", "Amelia", "Ella", "Grace", "Luna", "Chloe", "Victoria",
+        "Zoe", "Hannah", "Sarah", "Alice", "Evelyn", "Lucy", "Lily", "Madeline",
+        "Claire", "Eva", "Nora", "Caroline", "Leah", "Natalie", "Elena",
+        "Ruby", "Isla", "Audrey", "Savannah",
+        "Taylor", "Jordan", "Alex", "Sam", "Chris", "Jules", "Max", "Jamie",
+        "Casey", "Morgan", "Robin", "Drew", "Rowan", "Sky", "Cameron", "Kai",
+        "Reese", "Elliot", "Sasha", "Avery", "Charlie", "Quinn", "Riley", "Adrian",
+        "Peyton", "Logan", "Hayden", "Dakota", "Alexis", "Shay", "Emery"
+    };
+    private static List<string> nationalities = new List<string>()
+    {
+        "Dutch", "British", "Italian", "French", "German", "Spanish", "Portuguese",
+        "Greek", "Turkish", "Swedish", "Norwegian", "Finnish", "Danish", "Polish",
+        "Russian", "Ukrainian", "Czech", "Hungarian", "Romanian", "Bulgarian", "Swiss",
+        "Austrian", "Irish", "Scottish", "Welsh", "Canadian", "American", "Mexican",
+        "Brazilian", "Argentinian", "Chilean", "Peruvian", "Colombian", "Venezuelan",
+        "Australian", "NewZealander", "Japanese", "Chinese", "Korean", "Indian",
+        "Pakistani", "Bangladeshi", "SriLankan", "Thai", "Vietnamese", "Filipino",
+        "Indonesian", "SouthAfrican", "Egyptian", "Nigerian", "Kenyan", "Moroccan",
+        "Tunisian"
+    };
+
+    private static List<string> adjectives = new List<string>
+    {
+        "Chill", "Cozy", "Dreamy", "Soft", "Lazy", "Mellow", "Vintage",
+        "Funky", "Groovy", "Smooth", "Calm", "Cool", "Retro", "Silent",
+        "Shady", "Hidden", "Wavy", "Lo-Fi", "Quiet", "Gentle", "Tranquil",
+        "Ethereal", "Ambient", "Peaceful", "Vivid", "Breezy", "Shimmering",
+        "Silent", "Golden", "Flowing", "Lush", "Pastel", "Velvet", "Cloudy",
+        "Rainy", "Starry", "Warm", "Luminous", "Harmonic", "Balanced",
+        "Flowy", "Serene", "Bright", "Radiant", "Sublime", "Minimal", "Infinite",
+        "Majestic", "Muted", "Abstract", "Tender", "Frosty", "Glossy",
+        "Relaxed", "Ambient", "Earthy", "Melodic", "Soothing", "Weightless"
+    };
+
+    private static List<string> topics = new List<string>
+    {
+        "Dreamer", "Vibes", "Wanderer", "Soul", "Artist", "Player",
+        "Producer", "Listener", "Guru", "Guy", "Gal", "Master",
+        "Maker", "Creator", "Mixer", "Traveler", "Nomad", "Rider",
+        "Explorer", "Adventurer", "Seeker", "Visionary", "Thinker",
+        "Sage", "Scholar", "Speaker", "Doer", "Innovator", "Writer",
+        "Observer", "Storyteller", "Champion", "Designer", "Builder",
+        "Pathfinder", "Leader", "Strategist", "Inventor", "Planner",
+        "Composer", "Musician", "Friend", "Helper", "Craftsman",
+        "Tinkerer", "Curator", "Navigator", "Guardian", "Supporter",
+        "Dreamcatcher", "Challenger", "Pioneer", "Philosopher"
+    };
+
+    private static List<string> extras = new List<string>
+    {
+        "TheLofi", "InTheBasement", "OnTheMove", "FromTheClouds",
+        "OfTheNight", "FromTheWaves", "OnFire", "InTheStudio",
+        "UnderTheStars", "FromTheVoid", "WithCaffeine", "WithVinyl",
+        "TheDutch", "OnRepeat", "FromTheSunset", "ByTheFireplace",
+        "OnTheEdge", "ThroughTime", "OfTheHorizon", "InTheShadows",
+        "BeyondTheSky", "InTheRain", "ThroughTheMist", "OfTheStorm",
+        "UnderTheMoon", "FromTheMeadow", "WithHarmony", "OverTheSea",
+        "FromTheRoots", "ThroughTheGalaxy", "OnTheWaves", "UnderTheAurora",
+        "WithTheStars", "AcrossThePlains", "OnTheTrail", "ThroughTheWoods",
+        "BeyondTheStars", "OverTheHill", "InTheGlow", "ByTheWindow",
+        "UnderTheCanopy", "InTheSilence", "OfTheFields"
+    };
+
+    public static string GenerateLofiNickname()
+    {
+        System.Random random = new System.Random();
+
+        // Combinazioni casuali
+        string name = names[random.Next(names.Count)];
+        string nationality = nationalities[random.Next(nationalities.Count)];
+        string adjective = adjectives[random.Next(adjectives.Count)];
+        string topic = topics[random.Next(topics.Count)];
+        string extra = extras[random.Next(extras.Count)];
+
+        int randomNumber = random.Next(10, 999);
+
+        // Formato del nickname
+        return $"{name}{nationality}{adjective}{topic}";
     }
 }
