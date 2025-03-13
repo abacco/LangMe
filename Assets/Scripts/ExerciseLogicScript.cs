@@ -30,6 +30,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] GameObject warning_panel;
     [SerializeField] GameObject levenshteinPanel;
     [SerializeField] GameObject refillHeartsPanel;
+    [SerializeField] GameObject checkHeartsPanel;
 
     [SerializeField] GameObject countdownPanel;
     [SerializeField] TMP_Text wrong_text;
@@ -71,6 +72,10 @@ public class ExerciseLogicScript : MonoBehaviour
         if(GameManager.Instance.ready_for_test)
         {
             solution_counter = new System.Random().Next(0, 99);
+            if(userLifes == 0)
+            {
+                checkHeartsPanel.SetActive(true);
+            }
         } else
         {
             solution_counter = GameManager.Instance.solutionCounter;
@@ -215,7 +220,7 @@ public class ExerciseLogicScript : MonoBehaviour
         HandleLives();
         HandleCorrectAnswers();
 
-        if (inputfield == null) return;
+        if (inputfield == null || GameManager.Instance.userLifes <= 0) return;
 
         string phraseWithoutBlanks = NormalizeString(inputfield.text);
         string solution = NormalizeString(frasi_soluzione.ElementAt(solution_counter));
@@ -236,6 +241,10 @@ public class ExerciseLogicScript : MonoBehaviour
 
     private void HandleLives()
     {
+        if(userLifes <= 1 && GameManager.Instance.ready_for_test)
+        {
+            ShowWarningPanel();
+        }
         if (userLifes <= 1)
         {
             Debug.Log("Game Over! Refill Hearts Here!");
@@ -468,8 +477,15 @@ public class ExerciseLogicScript : MonoBehaviour
             for (float i = 1; i >= 0; i -= Time.deltaTime)
             {
                 // set color with i as alpha
-                wrong_answer_panel.GetComponent<Image>().color = new Color(1, 1, 1, i);
-                wrong_text.color = new Color(0, 0, 0, i);
+                try
+                {
+                    wrong_answer_panel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+                    wrong_text.color = new Color(0, 0, 0, i);
+
+                } catch (Exception e)
+                {
+                    Debug.LogWarning(e);
+                }
                 yield return null;
             }
         }
@@ -480,8 +496,15 @@ public class ExerciseLogicScript : MonoBehaviour
             for (float i = 0; i <= 1; i += Time.deltaTime)
             {
                 // set color with i as alpha
-                wrong_answer_panel.GetComponent<Image>().color = new Color(1, 1, 1, i);
-                wrong_text.color = new Color(1, 1, 1, i);
+                try
+                {
+                    wrong_answer_panel.GetComponent<Image>().color = new Color(1, 1, 1, i);
+                    wrong_text.color = new Color(1, 1, 1, i);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning(e);
+                }
                 yield return null;
             }
         }

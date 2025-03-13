@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
@@ -21,27 +22,37 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
 #elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
 #endif
+
         // fai refactor magari
         if (GameManager.Instance.userLifes >= 10)
         {
             GameManager.Instance.userLifes = 10;
-            exLogicScript.userLifes = 10;
+            if(exLogicScript != null)
+            {
+                exLogicScript.userLifes = 10;
+            }
             GameManager.Instance.SaveData();
             userLifesTxt.text = 10.ToString();
         }
         if (GameManager.Instance.userLifes < 0)
         {
             GameManager.Instance.userLifes = 0;
-            exLogicScript.userLifes = 0;
+            if (exLogicScript != null)
+            {
+                exLogicScript.userLifes = 0;
+            }
             GameManager.Instance.SaveData();
             userLifesTxt.text = 0.ToString();
         }
         // Disable the button until the ad is ready to show:
         _refillHeartsAdButton.interactable = false;
         //userLifesTxt.text = GameManager.Instance.userLifes.ToString();
-
         GameManager.Instance.GameManagerDebugLogData();
-        
+        if (SceneManager.GetActiveScene().name.Equals("7 - Home"))
+        {
+            _refillHeartsAdButton.interactable = true;
+            exLogicScript = new ExerciseLogicScript();
+        }
     }
 
     // Call this public method when you want to get an ad ready to show.
