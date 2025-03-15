@@ -23,21 +23,21 @@ public class ChoseLanguageManager : MonoBehaviour
         Debug.Log("I'am " + gameObject.name);
         dynamicLanguagePanel.SetActive(true);
         language_selected_text.text = buttonName;
-        GameManager.Instance.GameManagerDebugLogData();
+        //GameManager.Instance.GameManagerDebugLogData();
     }
 
     public void NoSelected() 
     {
         dynamicLanguagePanel.SetActive(false);
 
-        GameManager.Instance.GameManagerDebugLogData();
+        //GameManager.Instance.GameManagerDebugLogData();
     }
 
     public void LanguageChosen() 
     {
         GameManager.Instance.selectedLanguage = buttonName;
         GameManager.Instance.SaveData();
-        GameManager.Instance.GameManagerDebugLogData();
+        //GameManager.Instance.GameManagerDebugLogData();
 
         GameObject.FindObjectOfType<Navigation>().MoveToScene("5 - Choose Difficulty");
         dynamicLanguagePanel.SetActive(false);

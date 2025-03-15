@@ -71,7 +71,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         if (isAnimating) return;
         currentIndex = (currentIndex - 1 + cardSprites.Count) % cardSprites.Count;
         Debug.Log("Scroll Left currentIndex:" + currentIndex);
-        StartCoroutine(AnimateTransition(false));
+        //StartCoroutine(AnimateTransition(false));
     }
 
     //List<Vector3> startPositions = new List<Vector3>();

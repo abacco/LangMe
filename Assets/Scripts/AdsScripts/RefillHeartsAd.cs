@@ -47,7 +47,7 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
         // Disable the button until the ad is ready to show:
         _refillHeartsAdButton.interactable = false;
         //userLifesTxt.text = GameManager.Instance.userLifes.ToString();
-        GameManager.Instance.GameManagerDebugLogData();
+        //GameManager.Instance.GameManagerDebugLogData();
         if (SceneManager.GetActiveScene().name.Equals("7 - Home"))
         {
             _refillHeartsAdButton.interactable = true;

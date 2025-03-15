@@ -347,7 +347,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ee090ac91f9fcbb4088d0b8b25c5d869, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2354,6 +2354,7 @@ MonoBehaviour:
   startButton: {fileID: 390264358}
   creditsButton: {fileID: 1473764299}
   soundButton: {fileID: 750863261}
+  on_off_textGo: {fileID: 0}
   sound: 1
 --- !u!1 &1628525803
 GameObject:

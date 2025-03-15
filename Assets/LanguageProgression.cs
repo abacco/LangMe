@@ -78,7 +78,7 @@ public class LanguageProgression : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.LoadData();
-        GameManager.Instance.GameManagerDebugLogData();
+        //GameManager.Instance.GameManagerDebugLogData();
 
         int decine = GameManager.Instance.solutionCounter / 10;
         GameManager.Instance.decine = decine;

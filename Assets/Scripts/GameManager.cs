@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
             singleProficiencyTracker = gameData.singleProficiencyTracker;
             
             LanguageDataStars = gameData.LanguageDataStars;
-            GameManagerDebugLogData();
+            //GameManagerDebugLogData();
         }
         else
         {
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
             //proficiencyTracker[3] = new GameData.ProficiencyTracker("Dutch_B2", true); // per fa prima coi click
             //proficiencyTracker[4] = new GameData.ProficiencyTracker("Dutch_C1", true);
             //proficiencyTracker[5] = new GameData.ProficiencyTracker("Dutch_C2", true);
-            GameManagerDebugLogData();
+            //GameManagerDebugLogData();
         }
     }
 

@@ -19,7 +19,7 @@ public class AquireUserName : MonoBehaviour
             Debug.Log("UserName Saved in " + GameManager.Instance.FilePath);
             AmISure();
 
-            GameManager.Instance.GameManagerDebugLogData();
+            //GameManager.Instance.GameManagerDebugLogData();
         } else
         {
             Debug.LogWarning("Input Field ''");

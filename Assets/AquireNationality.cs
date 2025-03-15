@@ -20,7 +20,7 @@ public class AquireNationality : MonoBehaviour
             GameManager.Instance.userNationality = selectedNationality;
             nationalitySelectedText.text = selectedNationality;
             GameManager.Instance.SaveData();
-            GameManager.Instance.GameManagerDebugLogData();
+            //GameManager.Instance.GameManagerDebugLogData();
         }
     }
 

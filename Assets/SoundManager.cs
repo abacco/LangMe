@@ -41,8 +41,14 @@ public class SoundManager : MonoBehaviour
         on_off_textGo = GameObject.FindGameObjectWithTag("SoundBtnText");
         if (soundButton != null)
         {
-            soundButton.GetComponent<Button>().onClick.RemoveAllListeners();
+            //soundButton.GetComponent<Button>().onClick.RemoveAllListeners();
             soundButton.GetComponent<Button>().onClick.AddListener(() => EnableDisableSound());
+        }
+        Button[] buttons = FindObjectsOfType<Button>();
+        Debug.Log("Pulsanti trovati " + buttons.Length);
+        foreach (Button button in buttons)
+        {
+            button.onClick.AddListener(() => PlayClickSound());
         }
     }
     private void OnDestroy()
@@ -77,6 +83,7 @@ public class SoundManager : MonoBehaviour
 
         // Trova tutti i pulsanti nella scena
         Button[] buttons = FindObjectsOfType<Button>();
+        Debug.Log("Pulsanti trovati " + buttons.Length);
         foreach (Button button in buttons)
         {
             button.onClick.AddListener(() => PlayClickSound());
@@ -87,7 +94,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayClickSound()
     {
-        if (clickSound != null && !audioSource.mute) // Controlla se l'audio non è silenziato
+        if (clickSound != null /*&& !audioSource.mute*/) // Controlla se l'audio non è silenziato
         {
             audioSource.PlayOneShot(clickSound);
         }
