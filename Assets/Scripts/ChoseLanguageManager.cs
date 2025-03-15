@@ -37,8 +37,14 @@ public class ChoseLanguageManager : MonoBehaviour
         GameManager.Instance.selectedLanguage = buttonName;
         GameManager.Instance.SaveData();
         //GameManager.Instance.GameManagerDebugLogData();
-
-        GameObject.FindObjectOfType<Navigation>().MoveToScene("5 - Choose Difficulty");
+        if ("English".Equals(this.buttonName))
+        {
+            GameObject.FindObjectOfType<Navigation>().MoveToScene("13 - English");
+        }
+        else
+        {
+            GameObject.FindObjectOfType<Navigation>().MoveToScene("5 - Choose Difficulty");
+        }
         dynamicLanguagePanel.SetActive(false);
 
     }
