@@ -46,18 +46,6 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         }
     }
     
-    private void InitializeCardPositions()
-    {
-        int count = cardSlots.Count;
-        float spacing = 300f; // Distanza tra le carte, regolala secondo le esigenze
-
-        for (int i = 0; i < count; i++)
-        {
-            float offset = (i - count / 2) * spacing; // Posiziona le carte rispetto al centro
-            cardSlots[i].transform.position = new Vector3(transform.position.x + offset, transform.position.y, transform.position.z);
-        }
-    }
-
     public void ScrollRight()
     {
         if (isAnimating) return;
@@ -71,13 +59,9 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         if (isAnimating) return;
         currentIndex = (currentIndex - 1 + cardSprites.Count) % cardSprites.Count;
         Debug.Log("Scroll Left currentIndex:" + currentIndex);
-        //StartCoroutine(AnimateTransition(false));
+        StartCoroutine(AnimateTransition(true));
     }
 
-    //List<Vector3> startPositions = new List<Vector3>();
-    //List<Vector3> targetPositions = new List<Vector3>();
-    //List<Vector3> startScales = new List<Vector3>();
-    //List<Vector3> targetScales = new List<Vector3>();
     private IEnumerator AnimateTransition(bool scrollRight)
     {
         isAnimating = true;
@@ -204,6 +188,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
                 ScrollLeft();
         }
     }
+
     public void OnEndDrag(PointerEventData eventData)
     {
         if (isAnimating) return;
@@ -258,6 +243,18 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         } else
         {
             alternativeViewPanel.SetActive(true);
+        }
+    }
+
+    private void InitializeCardPositions()
+    {
+        int count = cardSlots.Count;
+        float spacing = 300f; // Distanza tra le carte, regolala secondo le esigenze
+
+        for (int i = 0; i < count; i++)
+        {
+            float offset = (i - count / 2) * spacing; // Posiziona le carte rispetto al centro
+            cardSlots[i].transform.position = new Vector3(transform.position.x + offset, transform.position.y, transform.position.z);
         }
     }
 }

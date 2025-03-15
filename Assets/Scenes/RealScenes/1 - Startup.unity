@@ -2348,7 +2348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1817a6b5eb07c408f75c60955b787b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSound: {fileID: 8300000, guid: ee090ac91f9fcbb4088d0b8b25c5d869, type: 3}
+  clickSound: {fileID: 8300000, guid: 145bdc9ff6fd4684a8a52e14e7d42723, type: 3}
   backgroundMusic: {fileID: 8300000, guid: b8e6c7a892a6b5040a6c4a00b23670d7, type: 3}
   on_off_text: {fileID: 4778370}
   startButton: {fileID: 390264358}
