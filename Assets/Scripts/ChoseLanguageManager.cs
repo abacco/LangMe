@@ -13,7 +13,7 @@ public class ChoseLanguageManager : MonoBehaviour
 
     public void SayMyName(string name)
     {
-        buttonName = name;
+        this.buttonName = name;
         SelectLanguage();
     }
 

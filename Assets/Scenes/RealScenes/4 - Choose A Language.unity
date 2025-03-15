@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 178097351}
   - component: {fileID: 178097350}
   m_Layer: 5
-  m_Name: ItalianLang
+  m_Name: 2_ItalianLang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &195595152
 RectTransform:
   m_ObjectHideFlags: 0
@@ -707,7 +707,7 @@ GameObject:
   - component: {fileID: 371959881}
   - component: {fileID: 371959880}
   m_Layer: 5
-  m_Name: DutchLang
+  m_Name: 1_DutchLang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 444118788}
   - component: {fileID: 444118787}
   m_Layer: 5
-  m_Name: FrenchLang
+  m_Name: 3_FrenchLang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1263,7 +1263,7 @@ GameObject:
   - component: {fileID: 644079513}
   - component: {fileID: 644079512}
   m_Layer: 5
-  m_Name: SpanishLang
+  m_Name: 4_SpanishLang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1474,7 +1474,7 @@ GameObject:
   - component: {fileID: 692675613}
   - component: {fileID: 692675612}
   m_Layer: 5
-  m_Name: GermanLang
+  m_Name: 5_GermanLang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1743,7 +1743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &695055742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3052,7 +3052,7 @@ GameObject:
   - component: {fileID: 1207177443}
   - component: {fileID: 1207177442}
   m_Layer: 5
-  m_Name: EnglishLang
+  m_Name: 6_EnglishLang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3690,19 +3690,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardSlots:
-  - {fileID: 371959881}
-  - {fileID: 178097351}
-  - {fileID: 444118788}
-  - {fileID: 644079513}
-  - {fileID: 692675613}
   - {fileID: 1207177443}
+  - {fileID: 692675613}
+  - {fileID: 644079513}
+  - {fileID: 444118788}
+  - {fileID: 178097351}
+  - {fileID: 371959881}
   cardSprites:
-  - {fileID: 21300000, guid: ac8bfadab85fae24d9d2079152594a40, type: 3}
-  - {fileID: 21300000, guid: 65b521d52c40c534c87f18810018e0e3, type: 3}
-  - {fileID: 21300000, guid: abf649a739128e646a98aaf9ba250f04, type: 3}
-  - {fileID: 21300000, guid: a100a74872a4428439f8a71dfa78ecba, type: 3}
-  - {fileID: 21300000, guid: ab1e3161d0f1b6445b867941d5e19176, type: 3}
   - {fileID: 21300000, guid: 34dd0d5b0dd56454cb9bf72debcd9659, type: 3}
+  - {fileID: 21300000, guid: ab1e3161d0f1b6445b867941d5e19176, type: 3}
+  - {fileID: 21300000, guid: a100a74872a4428439f8a71dfa78ecba, type: 3}
+  - {fileID: 21300000, guid: abf649a739128e646a98aaf9ba250f04, type: 3}
+  - {fileID: 21300000, guid: 65b521d52c40c534c87f18810018e0e3, type: 3}
+  - {fileID: 21300000, guid: ac8bfadab85fae24d9d2079152594a40, type: 3}
   animationSpeed: 5
   scaleFactor: 10
   dragThreshold: 50
@@ -4337,12 +4337,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 371959879}
-  - {fileID: 178097349}
-  - {fileID: 444118786}
-  - {fileID: 644079511}
-  - {fileID: 692675611}
   - {fileID: 1207177441}
+  - {fileID: 692675611}
+  - {fileID: 644079511}
+  - {fileID: 444118786}
+  - {fileID: 178097349}
+  - {fileID: 371959879}
   m_Father: {fileID: 971400097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

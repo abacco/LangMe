@@ -35,7 +35,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
 
         // ORDINA LE CARTE NELL'ORDINE CORRETTO (da A1 a C2) parte da B2 per il drag
         cardSlots = cardSlots.OrderBy(slot => slot.name).ToList();
-
+        cardSprites = cardSprites.OrderBy(slot => slot.name).ToList();
         // Aggiorna la grafica iniziale delle carte
         UpdateCardDisplay(instant: true);
 
@@ -49,7 +49,8 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
     public void ScrollRight()
     {
         if (isAnimating) return;
-        currentIndex = (currentIndex + 1) % cardSprites.Count;
+        //currentIndex = (currentIndex + 1) % cardSprites.Count;
+        currentIndex = (currentIndex - 1 + cardSprites.Count) % cardSprites.Count;
         Debug.Log("Scroll Right currentIndex:" + currentIndex);
         StartCoroutine(AnimateTransition(true));
     }
@@ -59,7 +60,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         if (isAnimating) return;
         currentIndex = (currentIndex - 1 + cardSprites.Count) % cardSprites.Count;
         Debug.Log("Scroll Left currentIndex:" + currentIndex);
-        StartCoroutine(AnimateTransition(true));
+        //StartCoroutine(AnimateTransition(true));
     }
 
     private IEnumerator AnimateTransition(bool scrollRight)
