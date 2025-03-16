@@ -34,8 +34,8 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         }
 
         // ORDINA LE CARTE NELL'ORDINE CORRETTO (da A1 a C2) parte da B2 per il drag
-        cardSlots = cardSlots.OrderBy(slot => slot.name).ToList();
-        cardSprites = cardSprites.OrderBy(slot => slot.name).ToList();
+        //cardSlots = cardSlots.OrderBy(slot => slot.name).ToList();
+        //cardSprites = cardSprites.OrderBy(slot => slot.name).ToList();
         // Aggiorna la grafica iniziale delle carte
         UpdateCardDisplay(instant: true);
 
@@ -51,7 +51,8 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         if (isAnimating) return;
         //currentIndex = (currentIndex + 1) % cardSprites.Count;
         currentIndex = (currentIndex - 1 + cardSprites.Count) % cardSprites.Count;
-        Debug.Log("Scroll Right currentIndex:" + currentIndex);
+        Debug.Log("Now Displayin: " + cardSlots[currentIndex].name);
+        //Debug.Log("Scroll Right currentIndex:" + currentIndex);
         StartCoroutine(AnimateTransition(true));
     }
 
@@ -186,7 +187,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
             if (dragDistance > 0)
                 ScrollRight();
             else
-                ScrollLeft();
+                ;//ScrollLeft();
         }
     }
 
@@ -197,7 +198,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         float dragDistance = eventData.position.x - dragStartPos.x; // Calcola la differenza
 
         if (dragDistance > minSwipeDistance)
-            ScrollLeft(); // Spostamento a destra → Mostra carta a sinistra
+            ;//ScrollLeft(); // Spostamento a destra → Mostra carta a sinistra
         else if (dragDistance < -minSwipeDistance)
             ScrollRight(); // Spostamento a sinistra → Mostra carta a destra
         else
@@ -214,11 +215,11 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
         else if (Input.GetMouseButtonUp(0))
         {
             float dragDistance = dragStartPos.x - Input.mousePosition.x;
-            
+
             if (dragDistance > minSwipeDistance)
                 ScrollRight();
             else if (dragDistance < -minSwipeDistance)
-                ScrollLeft();
+                ;//ScrollLeft();
         }
     }
 
