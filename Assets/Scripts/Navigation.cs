@@ -68,15 +68,15 @@ public class Navigation : MonoBehaviour
                         warningPanelYesClick = true;
                     }
                 }
-                else if (s.Contains("Exam"))
-                {
-                    GameManager.Instance.ready_for_test = true;
-                    MoveToScene(s2);
-                }
                 else
                 {
                     MoveToScene(s2);
                 }
+            }
+            if (s.Contains("Take"))
+            {
+                GameManager.Instance.ready_for_test = true;
+                MoveToScene("14 - Exam Scene");
             }
         }
     }

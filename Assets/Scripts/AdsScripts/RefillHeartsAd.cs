@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
@@ -8,7 +7,7 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
 {
     [SerializeField] ExerciseLogicScript exLogicScript; // to handle userLifes;
     [SerializeField] Button _refillHeartsAdButton;
-    [SerializeField] TMP_Text userLifesTxt;
+    [SerializeField] Text userLifesTxt;
 
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";

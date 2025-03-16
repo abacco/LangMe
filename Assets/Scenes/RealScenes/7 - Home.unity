@@ -6037,7 +6037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exLogicScript: {fileID: 0}
   _refillHeartsAdButton: {fileID: 1206994988}
-  userLifesTxt: {fileID: 0}
+  userLifesTxt: {fileID: 149741207}
   _androidAdUnitId: Rewarded_Android
   _iOSAdUnitId: Rewarded_iOS
 --- !u!4 &1587508658
