@@ -1,6 +1,5 @@
-using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class ChooseDifficulty : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class ChooseDifficulty : MonoBehaviour
     [SerializeField] GameObject areYouSurePanel;
     [SerializeField] GameObject proficiencyPanel;
 
-    [SerializeField] TMP_Text selectedDifficulty_txt;
+    [SerializeField] Text selectedDifficulty_txt;
     private string buttonName;
 
     public void ChooseDDifficulty(string buttonName)

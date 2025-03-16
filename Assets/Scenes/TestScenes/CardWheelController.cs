@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
@@ -32,7 +33,10 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
             Debug.LogWarning("current scene does not need this panel or it is handled by another script");
             panel = new GameObject();
         }
-
+        if(SceneManager.GetActiveScene().name.Equals("5 - Choose Difficulty"))
+        {
+            scaleFactor = 1.0f;
+        }
         // ORDINA LE CARTE NELL'ORDINE CORRETTO (da A1 a C2) parte da B2 per il drag
         //cardSlots = cardSlots.OrderBy(slot => slot.name).ToList();
         //cardSprites = cardSprites.OrderBy(slot => slot.name).ToList();
