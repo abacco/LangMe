@@ -1,13 +1,13 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Navigation : MonoBehaviour
 {
     [SerializeField] GameObject openScenePanel;
     [SerializeField] GameObject warningOfLostProgressPanel;
     [SerializeField] GameObject lostProgressPanel;
-    [SerializeField] TMP_Text scene_selected_text;
+    [SerializeField] Text scene_selected_text;
     bool warningPanelYesClick = false;
     // forse è inutile
     public string[] scenesName = {
