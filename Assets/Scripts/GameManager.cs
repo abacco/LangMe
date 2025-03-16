@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Nessun file di salvataggio trovato, usando i valori di default.");
-            selectedLanguage = "English";
+            selectedLanguage = "Dutch";
             userLifes = 10;
             selectedDifficulty = "A1";  
             username = "default username";

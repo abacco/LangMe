@@ -10,8 +10,8 @@ using UnityEngine.UI;
 public class RulesManager : MonoBehaviour
 {
     // this script is shared between the Rules Scene and the Exercise Scene (to handle the header but not LIFES!)
-    [SerializeField] TMP_Text difficultyLevel;
-    [SerializeField] TMP_Text textRules;
+    [SerializeField] Text difficultyLevel;
+    [SerializeField] Text textRules;
 
     [SerializeField] Image selectedLanguageRawImage;
 
@@ -19,8 +19,8 @@ public class RulesManager : MonoBehaviour
 
     Dictionary<string, Sprite> iconsAndLanguages = new Dictionary<string, Sprite>();
 
-    public TMP_Text rules_title_txt;
-    public TMP_Text rules_body_txt;
+    public Text rules_title_txt;
+    public Text rules_body_txt;
     public int page_counter = 0; // 10 pagine in totale, quindi da 0 a 9
     
     private void InitializeIconsAndLanguagesDictionary()
