@@ -33,7 +33,7 @@ public class CardWheelController : MonoBehaviour, IDragHandler, IEndDragHandler,
             Debug.LogWarning("current scene does not need this panel or it is handled by another script");
             panel = new GameObject();
         }
-        if(SceneManager.GetActiveScene().name.Equals("5 - Choose Difficulty"))
+        if(SceneManager.GetActiveScene().name.Equals("5 - Choose Difficulty") || SceneManager.GetActiveScene().name.Equals("7 - Home"))
         {
             scaleFactor = 1.0f;
         }
