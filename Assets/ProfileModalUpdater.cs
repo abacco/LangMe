@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ProfileModalUpdater : MonoBehaviour
 {
     [SerializeField] Image languageIcon;
-    [SerializeField] TMP_Text hearts_txt;
-    [SerializeField] TMP_Text difficulty_txt;
+    [SerializeField] Text hearts_txt;
+    [SerializeField] Text difficulty_txt;
 
     [SerializeField] Sprite[] languageIcons;
     private void Start()
