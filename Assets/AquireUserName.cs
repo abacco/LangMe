@@ -1,11 +1,10 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AquireUserName : MonoBehaviour
 {
-    [SerializeField] TMP_InputField inputfield;
+    [SerializeField] InputField inputfield;
     [SerializeField] GameObject areYouSurePanel;
     [SerializeField] GameObject insertNamePanel;
 

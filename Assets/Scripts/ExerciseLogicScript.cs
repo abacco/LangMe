@@ -16,7 +16,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] Button submit_answer_btn;
     [SerializeField] Button next_exercise_btn;
     
-    [SerializeField] TMP_InputField inputfield;
+    [SerializeField] InputField inputfield;
     [SerializeField] Text original_phrase;
     [SerializeField] Text correct_phrases_counter;
     [SerializeField] TMP_Text diffString; // for levenshteinPanel
