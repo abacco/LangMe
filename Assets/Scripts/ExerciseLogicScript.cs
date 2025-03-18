@@ -19,7 +19,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] InputField inputfield;
     [SerializeField] Text original_phrase;
     [SerializeField] Text correct_phrases_counter;
-    [SerializeField] TMP_Text diffString; // for levenshteinPanel
+    [SerializeField] Text diffString; // for levenshteinPanel
 
     public int userLifes;
     [SerializeField] Text users_lifes_txt;
@@ -395,6 +395,7 @@ public class ExerciseLogicScript : MonoBehaviour
         inputfield.text = string.Empty;
         GameManager.Instance.solutionCounter = solution_counter;
         GameManager.Instance.SaveData();
+        next_exercise_btn.interactable = false;
         UpdateMainUI(solution_counter, correct_answers.ToString());
     }
 
