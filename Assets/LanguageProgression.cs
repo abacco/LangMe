@@ -131,7 +131,7 @@ public class LanguageProgression : MonoBehaviour
             Image img = GameObject.Find($"Node_{decine}_star_{i}")?.GetComponent<Image>();
             if (img == null) continue;
 
-            img.color = (i <= starCount) ? Color.yellow : Color.white;
+            img.color = (i <= starCount) ? Color.white : Color.black;
         }
     }
 }

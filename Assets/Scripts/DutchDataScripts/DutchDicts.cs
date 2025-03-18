@@ -156,6 +156,19 @@ public class DutchDicts : MonoBehaviour
         {"9. Adjectives and Their Placement ", "Before the noun: een grote auto (a big car).\r\n\nIf the noun is \"het\" and indefinite, the adjective does not take -e: een groot huis (a big house)."},
         {"10. Useful Basic Phrases ", "Hoi / Hallo → Hi / Hello\r\n\nHoe gaat het? → How are you?\r\n\nGoed, en met jou? → Good, and you?\r\n\nDank je (wel)! → Thank you!\r\n\nAlsjeblieft / Alstublieft → Please\r\n\nIk begrijp het niet → I don’t understand\r\n\nKunt u dat herhalen? → Can you repeat that?"},
     };
+    private static readonly Dictionary<string, string> syntetic_dutch_a1_rules_titles_and_bodies = new Dictionary<string, string>
+    {
+        { "Simple Sentence Structure", "In Dutch, the basic sentence structure follows the order Subject - Verb - Object (SVO)." },
+        { "Questions", "For questions, the verb is often placed at the beginning of the sentence. With a question word, the order becomes Question Word - Verb - Subject." },
+        { "Negations", "Negation is formed using 'niet' to negate verbs or specific phrases, and 'geen' to negate nouns without an article." },
+        { "Modal Verbs", "Modal verbs (kunnen, willen, moeten) follow the order Subject - Modal Verb - Object - Main Verb." },
+        { "Adjectives", "Adjectives are placed before the noun and change depending on the use of definite articles." },
+        { "Plural", "Plurals are formed by adding '-en' or '-s' to nouns." },
+        { "Prepositions", "Common prepositions include 'in', 'op', 'bij', 'onder', and are followed by the object." },
+        { "Sentences with the Secondary Verb at the End", "In subordinate clauses, the verb is moved to the end of the sentence." },
+        { "Useful Words for A1", "Personal pronouns: ik, jij, hij, zij; Articles: de, het, een; Frequent verbs: eten, drinken, hebben, zijn." }
+    };
+
     private static readonly Dictionary<int, Dictionary<string, string>> dutchHashMap_a1 = new Dictionary<int, Dictionary<string, string>> { { 1, Frasi_originali_e_soluzioni_olandese_a1 } };
    
     // A2
@@ -790,6 +803,7 @@ public class DutchDicts : MonoBehaviour
     public static Dictionary<int, Dictionary<string, string>> DutchHashMap_a1 => dutchHashMap_a1; // dutchHasMap_a2 is the prop to get the entire dict
     public static Dictionary<string, string> Frasi_originali_e_soluzioni_olandese_a1 => frasi_originali_e_soluzioni_olandese_a1;
     public static Dictionary<string, string> Dutch_a1_rules_titles_and_bodies => dutch_a1_rules_titles_and_bodies;
+    public static Dictionary<string, string> Syntetic_Dutch_a1_rules_titles_and_bodies => syntetic_dutch_a1_rules_titles_and_bodies;
 
     // A2
     public static Dictionary<int, Dictionary<string, string>> DutchHashMap_a2 => dutchHashMap_a2; // dutchHasMap_a2 is the prop to get the entire dict
