@@ -7,7 +7,7 @@ using System.Web;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.UI;
 
 public class LanguageDictionary : MonoBehaviour
 {
@@ -20,9 +20,9 @@ public class LanguageDictionary : MonoBehaviour
     [SerializeField] GameObject dictionaryPanel;
     [SerializeField] GameObject inputVoidPanel;
     [SerializeField] TMP_Text wordList;
-    [SerializeField] TMP_Text keyFound;
-    [SerializeField] TMP_Text valueFound;
-    [SerializeField] TMP_InputField word_to_be_find;
+    [SerializeField] Text keyFound;
+    [SerializeField] Text valueFound;
+    [SerializeField] InputField word_to_be_find;
     
     private Dictionary<string, string> dutchDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
     string newDictfilePath;
@@ -107,7 +107,7 @@ public class LanguageDictionary : MonoBehaviour
     {
         foreach (var dictionary in genericDict)
         {
-            wordList.text += "-" + dictionary.Key + ": " + dictionary.Value + "\n\n";
+            wordList.text += "-" + dictionary.Key + ": " + "\n"+ dictionary.Value + "\n\n";
             //Debug.Log("DICT ENTRY: " + dictionary.Key + dictionary.Value);
         }
     }

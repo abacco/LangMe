@@ -3066,16 +3066,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2096565926}
-        m_TargetAssemblyTypeName: Navigation, Assembly-CSharp
-        m_MethodName: MoveToScene
+      - m_Target: {fileID: 203149607}
+        m_TargetAssemblyTypeName: ChoseLanguageManager, Assembly-CSharp
+        m_MethodName: SayMyName
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 13 - English
+          m_StringArgument: English
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1193060588
