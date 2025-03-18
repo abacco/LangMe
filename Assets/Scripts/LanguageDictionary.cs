@@ -94,10 +94,6 @@ public class LanguageDictionary : MonoBehaviour
                     genericDict[parolaDaTradurre] = $"{traduzioneInglese} ({tipoGrammaticale})";
                 }
             }
-            else
-            {
-                //Debug.LogWarning($"Formato non riconosciuto: {riga}");
-            }
         }
 
         Debug.Log($"Dizionario caricato con {genericDict.Count} parole!");
@@ -108,7 +104,6 @@ public class LanguageDictionary : MonoBehaviour
         foreach (var dictionary in genericDict)
         {
             wordList.text += "-" + dictionary.Key + ": " + "\n"+ dictionary.Value + "\n\n";
-            //Debug.Log("DICT ENTRY: " + dictionary.Key + dictionary.Value);
         }
     }
 

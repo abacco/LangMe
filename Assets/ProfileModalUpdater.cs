@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -13,7 +14,13 @@ public class ProfileModalUpdater : MonoBehaviour
     private void Start()
     {
         StartCoroutine(UpdateLanguageIcon());
-        difficulty_txt.text = GameManager.Instance.selectedDifficulty;
+        try
+        {
+            difficulty_txt.text = GameManager.Instance.selectedDifficulty;
+        } catch (Exception e){
+            Debug.Log("difficulty_txt not used here");
+        }
+
         if(hearts_txt != null)
         {
             hearts_txt.text = GameManager.Instance.userLifes.ToString();
