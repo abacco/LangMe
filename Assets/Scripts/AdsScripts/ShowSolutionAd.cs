@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
@@ -10,7 +9,7 @@ public class ShowSolutionAd : MonoBehaviour ,IUnityAdsLoadListener, IUnityAdsSho
     [SerializeField] Button _showSolutionAdButton; // fai la stessa logica per incrementare i cuori!!!!
     [SerializeField] ExerciseLogicScript exLogicScript;
     [SerializeField] GameObject solution_panel;
-    [SerializeField] TMP_Text realSolutionText; 
+    [SerializeField] Text realSolutionText; 
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
