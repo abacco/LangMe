@@ -17,12 +17,12 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] Button next_exercise_btn;
     
     [SerializeField] TMP_InputField inputfield;
-    [SerializeField] TMP_Text original_phrase;
+    [SerializeField] Text original_phrase;
     [SerializeField] TMP_Text correct_phrases_counter;
     [SerializeField] TMP_Text diffString; // for levenshteinPanel
 
     public int userLifes;
-    [SerializeField] TMP_Text users_lifes_txt;
+    [SerializeField] Text users_lifes_txt;
     
     [SerializeField] GameObject wrong_answer_panel;
     [SerializeField] GameObject well_done_panel;

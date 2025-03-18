@@ -42,15 +42,20 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
             }
             GameManager.Instance.SaveData();
             userLifesTxt.text = 0.ToString();
-        }
+        } 
+        //else
+        //{
+        //    userLifesTxt.text = GameManager.Instance.userLifes.ToString();
+        //}
         // Disable the button until the ad is ready to show:
         _refillHeartsAdButton.interactable = false;
-        //userLifesTxt.text = GameManager.Instance.userLifes.ToString();
+        userLifesTxt.text = GameManager.Instance.userLifes.ToString();
         //GameManager.Instance.GameManagerDebugLogData();
         if (SceneManager.GetActiveScene().name.Equals("7 - Home"))
         {
             _refillHeartsAdButton.interactable = true;
             exLogicScript = new ExerciseLogicScript();
+            exLogicScript.userLifes = GameManager.Instance.userLifes;
         }
     }
 
