@@ -532,35 +532,36 @@ public class ExerciseLogicScript : MonoBehaviour
     private void ShowWellDonePanel()
     {
         well_done_panel.SetActive(true);
-        Debug.Log("earnedStar: " + earnedStar);
+        Debug.Log("earnedStar: " + this.earnedStar);
 
         switch (earnedStar) // nella versione con UI seria, al posto di cambiare colore, appaiono semplicemente (tipo scale from 0 to 1)
         {
+            // col white si vede la stella gialla
             case 0:
-                star1_img.color = Color.white;
-                star2_img.color = Color.white;
-                star3_img.color = Color.white;
+                star1_img.color = Color.black;
+                star2_img.color = Color.black;
+                star3_img.color = Color.black;
 
                 SaveStarSystemInfo(0);
                 break;
             case 1:
-                star1_img.color = Color.yellow;
-                star2_img.color = Color.white;
-                star3_img.color = Color.white;
+                star1_img.color = Color.white;
+                star2_img.color = Color.black;
+                star3_img.color = Color.black;
 
                 SaveStarSystemInfo(1);
                 break;
             case 2:
-                star1_img.color = Color.yellow;
-                star2_img.color = Color.yellow;
-                star3_img.color = Color.white;
+                star1_img.color = Color.white;
+                star2_img.color = Color.white;
+                star3_img.color = Color.black;
 
                 SaveStarSystemInfo(2);
                 break;
             case 3:
-                star1_img.color = Color.yellow;
-                star2_img.color = Color.yellow;
-                star3_img.color = Color.yellow;
+                star1_img.color = Color.white;
+                star2_img.color = Color.white;
+                star3_img.color = Color.white;
 
                 SaveStarSystemInfo(3);
                 break;

@@ -83,10 +83,9 @@ public class Navigation : MonoBehaviour
 
     public void AdviseForLostProgress()
     {
-
-            Debug.Log("You will loose current progress are you sure?"); // ok
-            lostProgressPanel.SetActive(true);
-       
+        Debug.Log("You will loose current progress are you sure?"); // ok
+        lostProgressPanel.SetActive(true);
+        GameManager.Instance.SaveData();
     }
 
     public void CloseLostProgressPanel()

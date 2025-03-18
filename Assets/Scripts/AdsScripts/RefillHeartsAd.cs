@@ -15,14 +15,13 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
 
     void Awake()
     {
-        // Get the Ad Unit ID for the current platform:
 #if UNITY_IOS
         _adUnitId = _iOSAdUnitId;
 #elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
 #endif
-
-        // fai refactor magari
+        GameManager.Instance.LoadData();
+        GameManager.Instance.GameManagerDebugLogData();
         if (GameManager.Instance.userLifes >= 10)
         {
             GameManager.Instance.userLifes = 10;
@@ -43,14 +42,8 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
             GameManager.Instance.SaveData();
             userLifesTxt.text = 0.ToString();
         } 
-        //else
-        //{
-        //    userLifesTxt.text = GameManager.Instance.userLifes.ToString();
-        //}
-        // Disable the button until the ad is ready to show:
-        _refillHeartsAdButton.interactable = false;
+        //_refillHeartsAdButton.interactable = false;
         userLifesTxt.text = GameManager.Instance.userLifes.ToString();
-        //GameManager.Instance.GameManagerDebugLogData();
         if (SceneManager.GetActiveScene().name.Equals("7 - Home"))
         {
             _refillHeartsAdButton.interactable = true;
@@ -58,111 +51,90 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
             exLogicScript.userLifes = GameManager.Instance.userLifes;
         }
     }
-
-    // Call this public method when you want to get an ad ready to show.
     public void LoadAd()
     {
-        // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
         Debug.Log("Loading Ad: " + _adUnitId);
 #if UNITY_EDITOR             
         _adUnitId = "Rewarded_Android"; //Only for testing the functionality in the Editor
 #endif
-        //if (_adUnitId == null) { _adUnitId = "Rewarded_Android";  }
         Advertisement.Load(_adUnitId, this);
     }
-
-    // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
-        Debug.Log("Ad Loaded: " + adUnitId);
-
         if (adUnitId.Equals(_adUnitId))
         {
-            // Configure the button to call the ShowAd() method when clicked:
+            _refillHeartsAdButton.onClick.RemoveAllListeners(); // Rimuovi eventuali listener esistenti
             _refillHeartsAdButton.onClick.AddListener(ShowAd);
-            // Enable the button for users to click:
             _refillHeartsAdButton.interactable = true;
         }
     }
-
-    // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
-        // Disable the button:
-        _refillHeartsAdButton.interactable = false;
-        // Then show the ad:
+        //_refillHeartsAdButton.interactable = false;
         Advertisement.Show(_adUnitId, this);
     }
-
-    // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
+    private bool isRewardProcessed = false;
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
     {
+        if (isRewardProcessed) return; // Evita esecuzioni duplicate
+        isRewardProcessed = true;
+
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" +"exLogic.userLifes="+ exLogicScript.userLifes + "\n" +"GameManager.userLifes=" + GameManager.Instance.userLifes);
-            // Grant a reward.
-
-            // la reward è + 3 cuori!! Fai l'animazione che fa capire che te pigliat 3 cuori
-            if (exLogicScript.userLifes >= 10) {
-                
-                GameManager.Instance.userLifes = 10;
-                exLogicScript.userLifes = 10;
-                userLifesTxt.text = 10.ToString();
-                GameManager.Instance.SaveData();
-                Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
-
-            }
-            if (exLogicScript.userLifes >= 0 && exLogicScript.userLifes < 10)
+            Debug.Log("Ad completato, gestisco la ricompensa.");
+            HandleReward();
+            UpdateUIAndSave();
+            if (!SceneManager.GetActiveScene().name.Equals("7 - Home"))
             {
-                //GameManager.Instance.userLifes += 3;
-                if (GameManager.Instance.userLifes >= 10)
-                {
-                    GameManager.Instance.userLifes = 10;
-                    exLogicScript.userLifes = 10;
-                    userLifesTxt.text = 10.ToString();
-                    GameManager.Instance.SaveData();
-                    Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
-                }
-                else {
-                    exLogicScript.userLifes += 3;
-                    userLifesTxt.text = exLogicScript.userLifes.ToString();
-                    GameManager.Instance.SaveData();
-                    Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
-                }
-                //Advertisement.Load(_adUnitId, this);
+                ReloadAdIfNeeded();
             }
-            else
-            {
-                Debug.Log("Life at max!!!!!!!");
-                //Advertisement.Load(_adUnitId, this);
-            }
-            GameManager.Instance.userLifes = exLogicScript.userLifes;
-            _refillHeartsAdButton.onClick.RemoveAllListeners(); // else viene richiamato 2 volte la seconda volta che clicchi refill
-            LoadAd();
-            if (exLogicScript.userLifes >= 10)
-            {
+        }
 
-                GameManager.Instance.userLifes = 10;
-                exLogicScript.userLifes = 10;
-                userLifesTxt.text = 10.ToString();
-                GameManager.Instance.SaveData();
-                Debug.Log("REFILL HEARTS --------------- Unity Ads Rewarded Ad Completed\n" + "exLogic.userLifes=" + exLogicScript.userLifes + "\n" + "GameManager.userLifes=" + GameManager.Instance.userLifes);
-            }
-            GameManager.Instance.SaveData();
+        isRewardProcessed = false; // Resetta il flag se necessario
+    }
+    private void HandleReward()
+    {
+        const int maxLifes = 10;
+        const int reward = 3;
+
+        if (exLogicScript.userLifes >= maxLifes)
+        {
+            SetUserLifes(maxLifes);
+        }
+        else
+        {
+            int newLifes = exLogicScript.userLifes + reward;
+            SetUserLifes(newLifes > maxLifes ? maxLifes : newLifes);
         }
     }
-
-    // Implement Load and Show Listener error callbacks:
+    private void SetUserLifes(int lifes)
+    {
+        GameManager.Instance.userLifes = lifes;
+        exLogicScript.userLifes = lifes;
+        userLifesTxt.text = lifes.ToString();
+        Debug.Log($"Updated user lifes: {lifes}");
+    }
+    private void UpdateUIAndSave()
+    {
+        GameManager.Instance.SaveData();
+        if (SceneManager.GetActiveScene().name.Equals("7 - Home"))
+        {
+            SetUserLifes(GameManager.Instance.userLifes);
+        }
+    }
+    private void ReloadAdIfNeeded()
+    {
+        _refillHeartsAdButton.onClick.RemoveAllListeners();
+        LoadAd();
+    }
     public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
     {
         Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
-        // Use the error details to determine whether to try to load another ad.
     }
 
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
-        // Use the error details to determine whether to try to load another ad.
     }
 
     public void OnUnityAdsShowStart(string adUnitId) { }
@@ -170,7 +142,6 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
 
     void OnDestroy()
     {
-        // Clean up the button listeners:
         _refillHeartsAdButton.onClick.RemoveAllListeners();
     }
 }
