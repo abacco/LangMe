@@ -18,7 +18,7 @@ public class ExerciseLogicScript : MonoBehaviour
     
     [SerializeField] TMP_InputField inputfield;
     [SerializeField] Text original_phrase;
-    [SerializeField] TMP_Text correct_phrases_counter;
+    [SerializeField] Text correct_phrases_counter;
     [SerializeField] TMP_Text diffString; // for levenshteinPanel
 
     public int userLifes;
