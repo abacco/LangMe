@@ -34,7 +34,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] GameObject congrats_panel;
 
     [SerializeField] GameObject countdownPanel;
-    [SerializeField] TMP_Text wrong_text;
+    [SerializeField] Text wrong_text;
 
 
     List<string> frasi_soluzione;
