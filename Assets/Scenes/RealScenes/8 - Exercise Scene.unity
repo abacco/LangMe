@@ -3729,7 +3729,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 21300000, guid: df0fbddf82f86be42b29bb62b0d52e41, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 3551f5e8d335cff458eda7915bf26de4, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -7109,13 +7109,14 @@ MonoBehaviour:
   userNationality: 
   totalStarsEarned: 0
   proficiencyTrackerIndex: 0
+  nodeTrackerIndex: 0
   LanguageDataStars:
     Difficulty:
-      node:
-        Stars: 0
-        NodeName: 
+      nodeList: []
       DifficultyName: 
     LanguageName: 
+    Nodes: []
+  ListOfNodes: []
   proficiencyTracker: []
   singleProficiencyTracker:
     key: 

@@ -129,10 +129,6 @@ public class GameManager : MonoBehaviour
             proficiencyTrackerIndex = 0;
             ListOfNodes = new GameData.NodeData[10];
             nodeTrackerIndex = 0;
-            //for (int i = 0; i < ListOfNodes.Length; i++)
-            //{
-            //    ListOfNodes[i] = new GameData.NodeData("ProvaNodo", Random.Range(0, 4));
-            //}
             LanguageDataStars = new GameData.LanguageData(
                     "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", ListOfNodes));
 

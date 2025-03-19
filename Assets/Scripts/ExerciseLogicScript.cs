@@ -276,6 +276,7 @@ public class ExerciseLogicScript : MonoBehaviour
                 next_exercise_btn.interactable = true;
                 set_completed = true;
                 ShowWellDonePanel();
+                submit_answer_btn.interactable = false;
             }
             catch (Exception ex)
             {
@@ -356,13 +357,20 @@ public class ExerciseLogicScript : MonoBehaviour
     }
     private void SetOriginalPhrase(int solution_counter)
     {
-        try
-        {
-            original_phrase.text = frasi_originali.ElementAt(solution_counter);
+        try { 
+            if (solution_counter > frasi_originali.Count) {
+                original_phrase.text = "Exercise Is Over ATM";
+            } else
+            {
+                original_phrase.text = frasi_originali.ElementAt(solution_counter);
+            }
         } catch (Exception e){
             // Mostra un pannello che inviti a cambiare difficoltà
             congrats_panel.SetActive(true);
-            GameManager.Instance.solutionCounter = 0;
+            GameManager.Instance.solutionCounter = 100;
+            submit_answer_btn.interactable = false;
+            GameManager.Instance.SaveData();
+            original_phrase.text = "Exercises Completed";
             Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
         } 
 
@@ -403,6 +411,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
         GameManager.Instance.SaveData();
         next_exercise_btn.interactable = false;
+        submit_answer_btn.interactable = true;
         UpdateMainUI(solution_counter, correct_answers.ToString());
     }
 
@@ -582,10 +591,8 @@ public class ExerciseLogicScript : MonoBehaviour
         GameManager.Instance.totalStarsEarned += earnedStar;
 
         this.listOfNodes[GameManager.Instance.nodeTrackerIndex] = 
-        //GameManager.Instance.ListOfNodes[GameManager.Instance.nodeTrackerIndex] = 
             new GameData.NodeData(
-                //GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty + "_" + "Node_" + GameManager.Instance.nodeTrackerIndex, 
-                "Node_" + (GameManager.Instance.nodeTrackerIndex +1), // + "_star_" + earnedStar,
+                "Node_" + (GameManager.Instance.nodeTrackerIndex +1), 
                 earnedStar);
 
         GameManager.Instance.nodeTrackerIndex++;
@@ -594,11 +601,6 @@ public class ExerciseLogicScript : MonoBehaviour
         GameManager.Instance.LanguageDataStars = 
         new GameData.LanguageData(GameManager.Instance.selectedLanguage,
         new GameData.DifficultyData(GameManager.Instance.selectedDifficulty, this.listOfNodes));
-        
-        //GameManager.Instance.ListOfNodes));
-        //new GameData.NodeData("", earnedStars)));
-
-
         GameManager.Instance.LanguageDataStars = languageData;
         GameManager.Instance.SaveData();
     }

@@ -63,22 +63,15 @@ public class GameData
 
         public NodeData[] Nodes;
 
-        public LanguageData(string LanguageName, DifficultyData Difficulty/*, NodeData[] Nodes*/)
+        public LanguageData(string LanguageName, DifficultyData Difficulty)
         {
             this.LanguageName = LanguageName;
             this.Difficulty = Difficulty;
-            //this.Nodes = Nodes; // Inizializza i nodi
         }
 
         public override string ToString()
         {
-            string nodesString = "Error";
-            for (int i = 0; i < this.Nodes.Length; i++)
-            {
-                nodesString = Nodes[i] != null ? "," + Nodes[i].ToString() : "No Nodes";
-            }
-            //"TOSTRING LanguageData " + this.LanguageName + "\n" + this.Difficulty.ToString() + "\nNodes: " + nodesString;
-            return "TOSTRING LanguageData " + this.LanguageName + "\n" + this.Difficulty.ToString(); /*+ "\nNodes: " + nodesString.ToString();*/
+            return "TOSTRING LanguageData " + this.LanguageName + "\n" + this.Difficulty.ToString();
         }
     }
 
