@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FakeLeaderBoardManager : MonoBehaviour
 {
@@ -49,7 +49,7 @@ public class FakeLeaderBoardManager : MonoBehaviour
         // se l'utente ha almeno più punti dell'ultimo, deve entrare in classifica e appunto si deve riordinare
         if (GameManager.Instance.totalStarsEarned > leaderboardEntries[leaderboardEntries.Count-1].score)  
         {
-            leaderboardEntries.Add(new LeaderboardEntry { playerName = GameManager.Instance.username, score = GameManager.Instance.totalStarsEarned });
+            leaderboardEntries.Add(new LeaderboardEntry { playerName = GameManager.Instance.username.ToLower(), score = GameManager.Instance.totalStarsEarned });
             leaderboardEntries.Sort((a, b) => b.score.CompareTo(a.score)); // Ordina la classifica
         }
     }
@@ -65,20 +65,22 @@ public class FakeLeaderBoardManager : MonoBehaviour
         {
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardContainer);
             
-            //newEntry.GetComponent<PlayerEntryUI>().SetUsername(entry.playerName);
-
-            if (newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text.ToLower().Equals(GameManager.Instance.username.ToLower()))
+            if (entry.playerName.Equals(GameManager.Instance.username.ToLower()))
             {
-                newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text = GameManager.Instance.username;
-                newEntry.transform.Find("PlayerStars").GetComponent<TMP_Text>().text = GameManager.Instance.totalStarsEarned.ToString();
+                newEntry.transform.Find("PlayerName").GetComponent<Text>().text = GameManager.Instance.username;
+                newEntry.transform.Find("PlayerStars").GetComponent<Text>().text = GameManager.Instance.totalStarsEarned.ToString();
 
-                newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().color = Color.yellow;
-                newEntry.transform.Find("PlayerStars").GetComponent<TMP_Text>().color = Color.yellow;
+                Color customColor;
+                if (ColorUtility.TryParseHtmlString("#FFFF4A", out customColor))
+                {
+                    newEntry.transform.Find("PlayerName").GetComponent<Text>().color = customColor;
+                    newEntry.transform.Find("PlayerStars").GetComponent<Text>().color = customColor;
+                }
             }
             else
             {
-                newEntry.transform.Find("PlayerName").GetComponent<TMP_Text>().text = newEntry.GetComponent<PlayerEntryUI>().ChopUsername(entry.playerName);//entry.playerName;
-                newEntry.transform.Find("PlayerStars").GetComponent<TMP_Text>().text = entry.score.ToString();
+                newEntry.transform.Find("PlayerName").GetComponent<Text>().text = newEntry.GetComponent<PlayerEntryUI>().ChopUsername(entry.playerName);
+                newEntry.transform.Find("PlayerStars").GetComponent<Text>().text = entry.score.ToString();
             }
         }
     }
