@@ -267,8 +267,9 @@ public class ExerciseLogicScript : MonoBehaviour
             {
                 next_exercise_btn.interactable = true;
                 set_completed = true;
-                ShowWellDonePanel();
                 submit_answer_btn.interactable = false;
+                ShowWellDonePanel();
+
             }
             catch (Exception ex)
             {
@@ -597,17 +598,19 @@ public class ExerciseLogicScript : MonoBehaviour
         // save here max star for user
         GameManager.Instance.totalStarsEarned += earnedStar;
 
-        this.listOfNodes[GameManager.Instance.nodeTrackerIndex] = 
+        if(GameManager.Instance.nodeTrackerIndex < 10)
+        {
+            this.listOfNodes[GameManager.Instance.nodeTrackerIndex] =
             new GameData.NodeData(
-                "Node_" + (GameManager.Instance.nodeTrackerIndex +1), 
+                "Node_" + (GameManager.Instance.nodeTrackerIndex + 1),
                 earnedStar);
+            GameManager.Instance.nodeTrackerIndex++;
+        } else
+        {
+            Debug.LogWarning("Probably ArrayOutOfBoundException");
+        }
 
-        GameManager.Instance.nodeTrackerIndex++;
         GameManager.Instance.ListOfNodes = this.listOfNodes;
-        
-        GameManager.Instance.LanguageDataStars = 
-        new GameData.LanguageData(GameManager.Instance.selectedLanguage,
-        new GameData.DifficultyData(GameManager.Instance.selectedDifficulty, this.listOfNodes));
         GameManager.Instance.LanguageDataStars = languageData;
         GameManager.Instance.SaveData();
     }
