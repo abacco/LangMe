@@ -30,7 +30,7 @@ public class FakeLeaderBoardManager : MonoBehaviour
         LeaderboardEntry AlexTheFounder = new LeaderboardEntry
         {
             playerName = "AlexTheFounder",
-            score = 1080
+            score = 1079
         };
 
         // 30 stelle per Proficiency (a1,a2,b1,b2,c1,c2) per Linguaggio (5 iniziali + 1 inglese) => 30 x 6 x 6 = 1080 stars max

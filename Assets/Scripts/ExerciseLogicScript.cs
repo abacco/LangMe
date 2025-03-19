@@ -66,7 +66,6 @@ public class ExerciseLogicScript : MonoBehaviour
     // Awake just being called before Start and while loading unity player where Start is called when game is loaded. source: Unity Staff
     private void Awake()
     {
-        // load previous data from JSon
         GameManager.Instance.LoadData();
         listOfNodes = GameManager.Instance.ListOfNodes;
 
@@ -111,11 +110,15 @@ public class ExerciseLogicScript : MonoBehaviour
         {
             Debug.LogWarning("No need of showSolutionAd here ex:" + ex.Message);
         }
-        int tmp = GameManager.Instance.solutionCounter + 1;
-        if(101 >= tmp)
+
+        if (GameManager.Instance.singleProficiencyTracker.key.Equals(GameManager.Instance.selectedDifficulty) && GameManager.Instance.singleProficiencyTracker.isCompleted)
         {
-            ExercisesCompleted();
-        } else
+            //ExercisesCompleted();
+            congrats_panel.SetActive(true);
+            submit_answer_btn.interactable = false;
+            next_exercise_btn.interactable = false;
+        }
+        else
         {
             UpdateVeryFirstOriginalPhrase();
         }
@@ -382,9 +385,10 @@ public class ExerciseLogicScript : MonoBehaviour
     public void ExercisesCompleted()
     {
         congrats_panel.SetActive(true);
-        GameManager.Instance.solutionCounter = 100;
         submit_answer_btn.interactable = false;
-        GameManager.Instance.SaveData();
+        next_exercise_btn.interactable = false;
+        //GameManager.Instance.solutionCounter = 100;
+        //GameManager.Instance.SaveData();
         original_phrase.text = "Exercises Completed";
         Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
     }

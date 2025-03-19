@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class LanguageProficiencyCompleted : MonoBehaviour
 {
     [SerializeField] GameObject congratsPanel;
-    [SerializeField] TMPro.TMP_Text congrats_text;
+    [SerializeField] Text congrats_text;
     [SerializeField] Image languageIcon;
     [SerializeField] Sprite[] languageIcons;
 
@@ -82,22 +82,22 @@ public class LanguageProficiencyCompleted : MonoBehaviour
 
     void ResetColors()
     {
-        a1_img.color = Color.white;
-        a2_img.color = Color.white;
-        b1_img.color = Color.white;
-        b2_img.color = Color.white;
-        c1_img.color = Color.white;
-        c2_img.color = Color.white;
+        a1_img.color = Color.black;
+        a2_img.color = Color.black;
+        b1_img.color = Color.black;
+        b2_img.color = Color.black;
+        c1_img.color = Color.black;
+        c2_img.color = Color.black;
     }
 
     void ChangeColor(string key)
     {
-        if (key.Contains("A1")) a1_img.color = Color.yellow;
-        if (key.Contains("A2")) a2_img.color = Color.yellow;
-        if (key.Contains("B1")) b1_img.color = Color.yellow;
-        if (key.Contains("B2")) b2_img.color = Color.yellow;
-        if (key.Contains("C1")) c1_img.color = Color.yellow;
-        if (key.Contains("C2")) c2_img.color = Color.yellow;
+        if (key.Contains("A1")) a1_img.color = Color.white;
+        if (key.Contains("A2")) a2_img.color = Color.white;
+        if (key.Contains("B1")) b1_img.color = Color.white;
+        if (key.Contains("B2")) b2_img.color = Color.white;
+        if (key.Contains("C1")) c1_img.color = Color.white;
+        if (key.Contains("C2")) c2_img.color = Color.white;
     }
 
     public IEnumerator UpdateLanguageIcon()
