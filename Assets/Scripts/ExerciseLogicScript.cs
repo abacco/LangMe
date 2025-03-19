@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,6 +34,7 @@ public class ExerciseLogicScript : MonoBehaviour
     [SerializeField] GameObject congrats_panel;
 
     [SerializeField] GameObject countdownPanel;
+    [SerializeField] GameObject emptyInput;
     [SerializeField] Text wrong_text;
 
 
@@ -83,9 +83,16 @@ public class ExerciseLogicScript : MonoBehaviour
         } else
         {
             solution_counter = GameManager.Instance.solutionCounter;
+            if(solution_counter == 100)
+            {
+                congrats_panel.SetActive(true);
+                next_exercise_btn.interactable = false;
+                submit_answer_btn.interactable = false;
+                original_phrase.text = "Exercises Completed";
+            }
         }
         // set default correct_phrase counter txt
-        if (correct_phrases_counter != null)
+        if (correct_phrases_counter != null && correct_answers == 0)
         {
             correct_phrases_counter.text = "00";
         }
@@ -114,6 +121,7 @@ public class ExerciseLogicScript : MonoBehaviour
         if (GameManager.Instance.singleProficiencyTracker.key.Equals(GameManager.Instance.selectedDifficulty) && GameManager.Instance.singleProficiencyTracker.isCompleted)
         {
             //ExercisesCompleted();
+            original_phrase.text = "Exercises Completed";
             congrats_panel.SetActive(true);
             submit_answer_btn.interactable = false;
             next_exercise_btn.interactable = false;
@@ -233,9 +241,16 @@ public class ExerciseLogicScript : MonoBehaviour
     public void CheckSolution()
     {
         HandleLives();
-        HandleCorrectAnswers();
+        //HandleCorrectAnswers();
 
-        if (inputfield == null || GameManager.Instance.userLifes <= 0) return;
+        if (inputfield == null)
+        {
+            emptyInput.SetActive(true);
+        }
+        if(GameManager.Instance.userLifes <= 0)
+        {
+            refillHeartsPanel.SetActive(true);
+        }
 
         string phraseWithoutBlanks = NormalizeString(inputfield.text);
         string solution = NormalizeString(frasi_soluzione.ElementAt(solution_counter));
@@ -244,6 +259,8 @@ public class ExerciseLogicScript : MonoBehaviour
 
         if (isCorrect)
         {
+            correct_answers++;
+            HandleCorrectAnswers();
             HandleCorrectResponse(diffOutput, solution);
         }
         else
@@ -274,14 +291,14 @@ public class ExerciseLogicScript : MonoBehaviour
 
     private void HandleCorrectAnswers()
     {
-        if(correct_answers == 9 && GameManager.Instance.ready_for_test)
+        if(correct_answers == 10 && GameManager.Instance.ready_for_test)
         {
             Debug.Log("Test Passed!"); // ok
             congrats_panel.SetActive(true);
         }
-        if (correct_answers == 9)
+        if (correct_answers == 10)
         {
-            try
+            try // perchè con A2 non entra qui?
             {
                 next_exercise_btn.interactable = true;
                 set_completed = true;
@@ -303,7 +320,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
     private void HandleCorrectResponse(string diffOutput, string solution)
     {
-        correct_answers++;
+        //correct_answers++;
 
         if (correct_answers == 3 && how_many_times_solution_clicked == 3)
         {
@@ -330,7 +347,6 @@ public class ExerciseLogicScript : MonoBehaviour
                 }
             }
         }
-
         ShowSolutionAd();
     }
 
@@ -407,11 +423,24 @@ public class ExerciseLogicScript : MonoBehaviour
     {
         try
         {
-            correct_phrases_counter.text = correct_answers < 10 ? "0" + correct_answers_text : correct_answers_text;
+            if(correct_answers < 10)
+            {
+                correct_phrases_counter.text = "0" + correct_answers.ToString();
+            }
+            else
+            {
+                if ((correct_answers + 1) >= 10)
+                {
+                    correct_phrases_counter.text = "10";
+                }
+            }
+            //correct_phrases_counter.text = correct_answers < 10
+            //    ? "0" + correct_answers.ToString()
+            //    : (correct_answers + 1).ToString();
         }
         catch (Exception e)
         {
-            Debug.LogWarning("SetCorrectPhraseCounter method" + e);
+            Debug.LogWarning("SetCorrectPhraseCounter method: " + e);
         }
     }
     public void NextExercise()
@@ -449,8 +478,8 @@ public class ExerciseLogicScript : MonoBehaviour
         }
         else if (errorCount <= 2) // Permettiamo massimo 2 errori
         {
-            Debug.Log($"⚠️ Piccoli errori rilevati: {errorCount}");
-            Debug.Log("WHAAAAAAAAAAAAAT " + diffOutput);
+            //Debug.Log($"⚠️ Piccoli errori rilevati: {errorCount}");
+            //Debug.Log("WHAAAAAAAAAAAAAT " + diffOutput);
             return true; // Accettiamo comunque
         }
         else

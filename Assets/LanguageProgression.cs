@@ -11,6 +11,11 @@ public class LanguageProgression : MonoBehaviour
     [SerializeField] TMP_Text congrats_text;
     private void OnEnable()
     {
+        GameObject[] colorizedStarTOReset = GameObject.FindGameObjectsWithTag("colorized_star");
+        for(int i = 0; i < colorizedStarTOReset.Length; i++)
+        {
+            colorizedStarTOReset[i].GetComponent<Image>().color = Color.black;
+        }
         StartCoroutine(InitializeStarsWhenReady());
     }
 
@@ -34,7 +39,7 @@ public class LanguageProgression : MonoBehaviour
         {
             throw new Exception("Error On selectedDifficulty: " + GameManager.Instance.selectedDifficulty);
         }
-
+        
         while (decine > 0)
         {
             GetStarsForLanguage(decine, GameManager.Instance.selectedLanguage);
