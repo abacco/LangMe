@@ -26,6 +26,13 @@ public class FakeLeaderBoardManager : MonoBehaviour
 
     void GenerateFakeLeaderboard()
     {
+        // the master
+        LeaderboardEntry AlexTheFounder = new LeaderboardEntry
+        {
+            playerName = "AlexTheFounder",
+            score = 1080
+        };
+
         // 30 stelle per Proficiency (a1,a2,b1,b2,c1,c2) per Linguaggio (5 iniziali + 1 inglese) => 30 x 6 x 6 = 1080 stars max
         leaderboardEntries.Clear();
         for (int i = 1; i <= 100; i++)
@@ -44,6 +51,7 @@ public class FakeLeaderBoardManager : MonoBehaviour
                 leaderboardEntries.Add(entry);
             }
         }
+        leaderboardEntries.Add(AlexTheFounder);
         leaderboardEntries.Sort((a, b) => b.score.CompareTo(a.score)); // Ordina la classifica - per forza, sennò non hai l'ultimo per fare il confronto
 
         // se l'utente ha almeno più punti dell'ultimo, deve entrare in classifica e appunto si deve riordinare
@@ -64,7 +72,15 @@ public class FakeLeaderBoardManager : MonoBehaviour
         foreach (var entry in leaderboardEntries)
         {
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardContainer);
-            
+            if (entry.playerName.Equals("AlexTheFounder"))
+            {
+                Color customColor;
+                if (ColorUtility.TryParseHtmlString("#FFB500", out customColor))
+                {
+                    newEntry.transform.Find("PlayerName").GetComponent<Text>().color = customColor;
+                    newEntry.transform.Find("PlayerStars").GetComponent<Text>().color = customColor;
+                }
+            }
             if (entry.playerName.Equals(GameManager.Instance.username.ToLower()))
             {
                 newEntry.transform.Find("PlayerName").GetComponent<Text>().text = GameManager.Instance.username;
