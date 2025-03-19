@@ -83,7 +83,7 @@ public class ExerciseLogicScript : MonoBehaviour
         } else
         {
             solution_counter = GameManager.Instance.solutionCounter;
-            if(solution_counter == 100)
+            if(solution_counter >= 100)
             {
                 congrats_panel.SetActive(true);
                 next_exercise_btn.interactable = false;
@@ -118,18 +118,18 @@ public class ExerciseLogicScript : MonoBehaviour
             Debug.LogWarning("No need of showSolutionAd here ex:" + ex.Message);
         }
 
-        if (GameManager.Instance.singleProficiencyTracker.key.Equals(GameManager.Instance.selectedDifficulty) && GameManager.Instance.singleProficiencyTracker.isCompleted)
-        {
-            //ExercisesCompleted();
-            original_phrase.text = "Exercises Completed";
-            congrats_panel.SetActive(true);
-            submit_answer_btn.interactable = false;
-            next_exercise_btn.interactable = false;
-        }
-        else
-        {
+        //if (GameManager.Instance.singleProficiencyTracker.key.Equals(GameManager.Instance.selectedDifficulty) && GameManager.Instance.singleProficiencyTracker.isCompleted)
+        //{
+        //    //ExercisesCompleted();
+        //    original_phrase.text = "Exercises Completed";
+        //    congrats_panel.SetActive(true);
+        //    submit_answer_btn.interactable = false;
+        //    next_exercise_btn.interactable = false;
+        //}
+        //else
+        //{
             UpdateVeryFirstOriginalPhrase();
-        }
+        //}
     }
     void InitializeLanguageHashMap(List<string> frasiSoluzione, List<string> frasiOriginale,
                                Dictionary<int, Dictionary<string, string>> genericHashMap,
@@ -146,41 +146,6 @@ public class ExerciseLogicScript : MonoBehaviour
         }
     }
     #endregion
-
-    /*
-    in base al solution counter, al livello di difficoltà scelto e alla lingua scelta(?)
-    devo far vedere la prima frase del set di esercizi da mostrare
-    se gli esercizi sono in divisi in blocchettini da 10 frasi ed ho 20 frasi
-    -> mostra la prima frase del primo blocchettino e la prima frase del secondo blocchettino
-    per tenere traccia del blocchettino da cui devo partire, il solution counter è a multipli di 10
-    se GameManager.Instance.solution_counter == 0 -> sono nel PRIMO blocchettino del dizionario bla bla...
-    se GameManager.Instance.solution_counter == 10 -> sono nel SECONDO blocchettino del dizionario bla bla...
-
-
-    esempio:
-        base: devo far vedere la prima frase del 1 set A1 di lingua INGLESE
-        induzione: devo far vedere la prima frase del 2 set di A1 di lingua INGLESE     
-    NOTA BENE:
-    -  clicco Home || Chiudo L'app || viteEsaurite 
-        -> check se il solutionCounter è un multiplo di 0
-            -> se non lo è 
-                   -> devo trovare il modo di resettarlo all'ultimo multiplo 
-        Esempio
-            perdo le vite quando sono alla frase n. 8 -> il solutionCounter DEVE essere 0!
-            -> 8 è multiplo di 10? 
-
-            è sempre il multiplo di 10 precedente....
-            18 - la differenza tra 18 e 8
-            contare il numero di decine in 18
-            se è una decina -> allora il solution counter è 10
-            se sono due decine -> allora il solution counter è 20
-
-            come conto il numero di decine? 
-            es. ho 10
-                10 / 10 = 1
-                20 / 10 = 2
-                25 / 10 = 3.5 -> 3
-    */
 
     public void UpdateVeryFirstOriginalPhrase()
     {
@@ -298,7 +263,7 @@ public class ExerciseLogicScript : MonoBehaviour
         }
         if (correct_answers == 10)
         {
-            try // perchè con A2 non entra qui?
+            try
             {
                 next_exercise_btn.interactable = true;
                 set_completed = true;
@@ -333,6 +298,9 @@ public class ExerciseLogicScript : MonoBehaviour
         if(solution_counter == 100) {
             GameManager.Instance.singleProficiencyTracker.key = GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty;
             GameManager.Instance.singleProficiencyTracker.isCompleted = true;
+            congrats_panel.SetActive(true);
+            next_exercise_btn.interactable = false;
+            submit_answer_btn.interactable = false;
         }
 
         if (!string.IsNullOrEmpty(diffOutput))
@@ -386,14 +354,7 @@ public class ExerciseLogicScript : MonoBehaviour
         try { 
             original_phrase.text = frasi_originali.ElementAt(solution_counter);
         } catch (Exception e){
-            // Mostra un pannello che inviti a cambiare difficoltà
             ExercisesCompleted();
-            //congrats_panel.SetActive(true);
-            //GameManager.Instance.solutionCounter = 100;
-            //submit_answer_btn.interactable = false;
-            //GameManager.Instance.SaveData();
-            //original_phrase.text = "Exercises Completed";
-            //Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
         } 
 
     }

@@ -54,6 +54,7 @@ public class LanguageProficiencyCompleted : MonoBehaviour
                 proficiencyList.Add(new GameData.ProficiencyTracker(key, true));
                 GameManager.Instance.proficiencyTracker = proficiencyList.ToArray();
                 needsSave = true;
+                GameManager.Instance.SaveData();
             }
         }
 
