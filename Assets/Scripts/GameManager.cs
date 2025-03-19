@@ -15,8 +15,11 @@ public class GameManager : MonoBehaviour
     public string userNationality;
     public int totalStarsEarned;
     public int proficiencyTrackerIndex;
+    public int nodeTrackerIndex;
+
 
     public GameData.LanguageData LanguageDataStars;
+    public GameData.NodeData[] ListOfNodes;
     public GameData.ProficiencyTracker[] proficiencyTracker;
     public GameData.ProficiencyTracker singleProficiencyTracker;
 
@@ -65,6 +68,8 @@ public class GameManager : MonoBehaviour
             proficiencyTracker = proficiencyTracker,
 
             LanguageDataStars = LanguageDataStars,
+            ListOfNodes = ListOfNodes,
+            nodeTrackerIndex = nodeTrackerIndex,
         };
 
         string json = JsonUtility.ToJson(gameData, true); // `true` per formattare bene il JSON
@@ -106,6 +111,8 @@ public class GameManager : MonoBehaviour
             singleProficiencyTracker = gameData.singleProficiencyTracker;
             
             LanguageDataStars = gameData.LanguageDataStars;
+            ListOfNodes = gameData.ListOfNodes;
+            nodeTrackerIndex = gameData.nodeTrackerIndex;
             //GameManagerDebugLogData();
         }
         else
@@ -120,8 +127,14 @@ public class GameManager : MonoBehaviour
             decine = 0;
             totalStarsEarned = 0;
             proficiencyTrackerIndex = 0;
+            ListOfNodes = new GameData.NodeData[10];
+            nodeTrackerIndex = 0;
+            //for (int i = 0; i < ListOfNodes.Length; i++)
+            //{
+            //    ListOfNodes[i] = new GameData.NodeData("ProvaNodo", Random.Range(0, 4));
+            //}
             LanguageDataStars = new GameData.LanguageData(
-                    "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", new GameData.NodeData("ProvaNodo", 1)));
+                    "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", ListOfNodes));
 
             proficiencyTracker = new GameData.ProficiencyTracker[6];
             // only for test purpose
@@ -166,6 +179,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("LanguageDataStars: " + this.LanguageDataStars.ToString()); // per lo star system
         Debug.Log("proficiencyTrackerIndex: " + this.proficiencyTrackerIndex.ToString()); // per il proficiency tracker index
         Debug.Log("proficiencyTracker: " + this.proficiencyTracker.ToString()); // per il proficiency tracker index
+        Debug.Log("ListOfNodes Count: " + this.ListOfNodes.Length.ToString()); // per il proficiency tracker index
+        Debug.Log("nodeTrackerIndex: " + this.nodeTrackerIndex.ToString()); // per il proficiency tracker index
         Debug.Log("-----------------------------------------------");
     }
 

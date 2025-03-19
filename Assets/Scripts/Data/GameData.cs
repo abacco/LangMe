@@ -9,10 +9,14 @@ public class GameData
     public string userNationality;
     public int totalStarsEarned;
     public int proficiencyTrackerIndex;
+    public int nodeTrackerIndex;
 
     public int solutionCounter;
     public LanguageData LanguageDataStars;
     public ProficiencyTracker[] proficiencyTracker;
+
+    public NodeData[] ListOfNodes;
+
     public ProficiencyTracker singleProficiencyTracker;
 
     [System.Serializable]
@@ -36,19 +40,18 @@ public class GameData
     [System.Serializable]
     public class DifficultyData
     {
-        public NodeData node;
+        public NodeData[] nodeList;
         public string DifficultyName;
 
-        public DifficultyData(string DifficultyName, NodeData node)
+        public DifficultyData(string DifficultyName, NodeData[] nodeList)
         {
             this.DifficultyName = DifficultyName;
-            this.node = node; 
+            this.nodeList = nodeList; 
         }
-
 
         public override string ToString()
         {
-            return "TOSTRING DifficultyData " + this.DifficultyName + "\n" + this.node.ToString();
+            return "TOSTRING DifficultyData " + this.DifficultyName + "\n" + this.nodeList.ToString();
         }
     }
 
@@ -58,15 +61,24 @@ public class GameData
         public DifficultyData Difficulty;
         public string LanguageName;
 
-        public LanguageData(string LanguageName, DifficultyData Difficulty)
+        public NodeData[] Nodes;
+
+        public LanguageData(string LanguageName, DifficultyData Difficulty/*, NodeData[] Nodes*/)
         {
             this.LanguageName = LanguageName;
-            this.Difficulty = Difficulty;  
+            this.Difficulty = Difficulty;
+            //this.Nodes = Nodes; // Inizializza i nodi
         }
 
         public override string ToString()
         {
-            return "TOSTRING LanguageData " + this.LanguageName + "\n" +this.Difficulty.ToString();
+            string nodesString = "Error";
+            for (int i = 0; i < this.Nodes.Length; i++)
+            {
+                nodesString = Nodes[i] != null ? "," + Nodes[i].ToString() : "No Nodes";
+            }
+            //"TOSTRING LanguageData " + this.LanguageName + "\n" + this.Difficulty.ToString() + "\nNodes: " + nodesString;
+            return "TOSTRING LanguageData " + this.LanguageName + "\n" + this.Difficulty.ToString(); /*+ "\nNodes: " + nodesString.ToString();*/
         }
     }
 

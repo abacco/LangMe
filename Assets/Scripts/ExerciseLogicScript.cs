@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,6 +58,8 @@ public class ExerciseLogicScript : MonoBehaviour
     GameData gameData;
     ShowSolutionAd showSolutionAd;
     private LanguageData languageData;
+
+    GameData.NodeData[] listOfNodes;
     #endregion
 
     #region Initialization
@@ -65,7 +68,8 @@ public class ExerciseLogicScript : MonoBehaviour
     {
         // load previous data from JSon
         GameManager.Instance.LoadData();
-        
+        listOfNodes = GameManager.Instance.ListOfNodes;
+
         // set UserLifes and text update
         userLifes = GameManager.Instance.userLifes;
         users_lifes_txt.text = userLifes.ToString();
@@ -394,6 +398,9 @@ public class ExerciseLogicScript : MonoBehaviour
         correct_answers = 0;
         inputfield.text = string.Empty;
         GameManager.Instance.solutionCounter = solution_counter;
+        // Salvare il nodo completato
+
+
         GameManager.Instance.SaveData();
         next_exercise_btn.interactable = false;
         UpdateMainUI(solution_counter, correct_answers.ToString());
@@ -568,14 +575,29 @@ public class ExerciseLogicScript : MonoBehaviour
         }
     }
 
+
     public void SaveStarSystemInfo(int earnedStars)
     {
         // save here max star for user
         GameManager.Instance.totalStarsEarned += earnedStar;
-        languageData =
+
+        this.listOfNodes[GameManager.Instance.nodeTrackerIndex] = 
+        //GameManager.Instance.ListOfNodes[GameManager.Instance.nodeTrackerIndex] = 
+            new GameData.NodeData(
+                //GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty + "_" + "Node_" + GameManager.Instance.nodeTrackerIndex, 
+                "Node_" + (GameManager.Instance.nodeTrackerIndex +1), // + "_star_" + earnedStar,
+                earnedStar);
+
+        GameManager.Instance.nodeTrackerIndex++;
+        GameManager.Instance.ListOfNodes = this.listOfNodes;
+        
+        GameManager.Instance.LanguageDataStars = 
         new GameData.LanguageData(GameManager.Instance.selectedLanguage,
-        new GameData.DifficultyData(GameManager.Instance.selectedDifficulty,
-        new GameData.NodeData("", earnedStars)));
+        new GameData.DifficultyData(GameManager.Instance.selectedDifficulty, this.listOfNodes));
+        
+        //GameManager.Instance.ListOfNodes));
+        //new GameData.NodeData("", earnedStars)));
+
 
         GameManager.Instance.LanguageDataStars = languageData;
         GameManager.Instance.SaveData();
