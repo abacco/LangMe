@@ -84,7 +84,14 @@ public class Navigation : MonoBehaviour
     public void AdviseForLostProgress()
     {
         Debug.Log("You will loose current progress are you sure?"); // ok
-        lostProgressPanel.SetActive(true);
+        if(101 <= GameManager.Instance.solutionCounter)
+        {
+            lostProgressPanel.SetActive(true);
+        } else
+        {
+            SceneManager.LoadScene("7 - Home");
+        }
+        //lostProgressPanel.SetActive(true);
         GameManager.Instance.SaveData();
     }
 

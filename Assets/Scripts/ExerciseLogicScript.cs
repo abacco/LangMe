@@ -111,7 +111,14 @@ public class ExerciseLogicScript : MonoBehaviour
         {
             Debug.LogWarning("No need of showSolutionAd here ex:" + ex.Message);
         }
-        UpdateVeryFirstOriginalPhrase();
+        int tmp = GameManager.Instance.solutionCounter + 1;
+        if(101 >= tmp)
+        {
+            ExercisesCompleted();
+        } else
+        {
+            UpdateVeryFirstOriginalPhrase();
+        }
     }
     void InitializeLanguageHashMap(List<string> frasiSoluzione, List<string> frasiOriginale,
                                Dictionary<int, Dictionary<string, string>> genericHashMap,
@@ -358,22 +365,28 @@ public class ExerciseLogicScript : MonoBehaviour
     private void SetOriginalPhrase(int solution_counter)
     {
         try { 
-            if (solution_counter > frasi_originali.Count) {
-                original_phrase.text = "Exercise Is Over ATM";
-            } else
-            {
-                original_phrase.text = frasi_originali.ElementAt(solution_counter);
-            }
+            original_phrase.text = frasi_originali.ElementAt(solution_counter);
         } catch (Exception e){
             // Mostra un pannello che inviti a cambiare difficoltà
-            congrats_panel.SetActive(true);
-            GameManager.Instance.solutionCounter = 100;
-            submit_answer_btn.interactable = false;
-            GameManager.Instance.SaveData();
-            original_phrase.text = "Exercises Completed";
-            Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
+            ExercisesCompleted();
+            //congrats_panel.SetActive(true);
+            //GameManager.Instance.solutionCounter = 100;
+            //submit_answer_btn.interactable = false;
+            //GameManager.Instance.SaveData();
+            //original_phrase.text = "Exercises Completed";
+            //Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
         } 
 
+    }
+
+    public void ExercisesCompleted()
+    {
+        congrats_panel.SetActive(true);
+        GameManager.Instance.solutionCounter = 100;
+        submit_answer_btn.interactable = false;
+        GameManager.Instance.SaveData();
+        original_phrase.text = "Exercises Completed";
+        Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
     }
 
     public void CloseCongratsPanel()
