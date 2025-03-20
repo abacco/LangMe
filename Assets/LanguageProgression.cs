@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,7 @@ public class LanguageProgression : MonoBehaviour
 {
     [SerializeField] GameObject congratsPanel;
     [SerializeField] TMP_Text congrats_text;
-    private void OnEnable()
+    private void Start()
     {
         GameObject[] colorizedStarTOReset = GameObject.FindGameObjectsWithTag("colorized_star");
         for(int i = 0; i < colorizedStarTOReset.Length; i++)
@@ -51,7 +52,10 @@ public class LanguageProgression : MonoBehaviour
         switch (language)
         {
             case "Dutch":
-                foreach (GameData.NodeData node in GameManager.Instance.ListOfNodes)
+                // Seleziona solo i primi 'decine' elementi dalla lista
+                int tmpDecine = decine;
+                var filteredNodes = GameManager.Instance.ListOfNodes.Take(tmpDecine);
+                foreach (GameData.NodeData node in filteredNodes /*GameManager.Instance.ListOfNodes*/)
                 {
                     Image img1 = GameObject.Find(node.NodeName + "_star_1").GetComponent<Image>();
                     Image img2 = GameObject.Find(node.NodeName + "_star_2").GetComponent<Image>();
@@ -62,21 +66,25 @@ public class LanguageProgression : MonoBehaviour
                                 img1.color = Color.black;
                                 img2.color = Color.black;
                                 img3.color = Color.black;
-                                break;
+
+                            break;
                             case 1:
                                 img1.color = Color.white;
                                 img2.color = Color.black;
                                 img3.color = Color.black;
+
                                 break;
                             case 2:
                                 img1.color = Color.white;
                                 img2.color = Color.white;
                                 img3.color = Color.black;
+
                                 break;
                             case 3:
                                 img1.color = Color.white;
                                 img2.color = Color.white;
                                 img3.color = Color.white;
+
                                 break;
                         }
                 }
