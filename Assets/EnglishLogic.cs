@@ -12,14 +12,14 @@ public class EnglishLogic : MonoBehaviour
 
     [SerializeField] GameObject rememberPanel;
 
-    public TMP_InputField userInputField;
+    public InputField userInputField;
     public Button checkButton;
-    public TMP_Text feedbackText;
-    public TMP_Text rule_dynamic_text;
+    public Text feedbackText;
+    public Text rule_dynamic_text;
     public string selectedTense = ""; // Cambia a seconda dell'esercizio
     
     public int how_many_correct_english_phrases = 0;
-    public TMP_Text how_many_correct_english_phrases_text;
+    public Text how_many_correct_english_phrases_text;
     // Fare HelpMe Button che mostra una delle frasi dopo la pubblicità
 
 
@@ -6169,24 +6169,26 @@ public class EnglishLogic : MonoBehaviour
         { "wh-word", new HashSet<string> { "why", "when", "where", "how", "what", "which" } },
         { "auxiliary", new HashSet<string> { "does", "do", "is", "are" } },
         { "subject", new HashSet<string>
-            {   "she", "he", "it", "we", "they", "you", "I", "John", "Sarah", "David", "Emma", "Tom", "Mike", "Lily", "Alice", "James", "Jack", "my parents",
-            "the students", "her brother", "his father", "my friends", "the kids", "the birds", "the engineers", "the tourists", "my cousins", "my classmates",
-            "my neighbors", "his cousin", "her sister", "the dogs", "his boss", "my grandparents", "the nurses", "the cat", "the baby", "who", "coffee", "car",
-            "music", "emails", "ice cream", "movies", "homework", "office", "sushi", "cakes", "pictures", "glasses", "water", "bicycles", "computers", "windows",
-            "news", "bridges", "medicine", "your cat", "the workers", "her mother", "his uncle", "her boyfriend", "my teachers", "her friends", "the guests",
-            "their neighbors", "his desk", "her dog", "their room", "his house", "the train", "his bike", "the teacher", "their friends", "the cats", "the furniture",
-            "the jokes", "his scarf", "the hill", "his client", "the car", "the silverware", "the piano", "the couch", "the manager", "the garden", "the meeting",
-            "her book", "his partner", "her grandmother", "their project", "the package", "the new room", "the beach", "her dress", "his pencils", "the decorations",
-            "the lost items", "the heavy boxes", "their dance routine", "the vase", "her favorite song", "her website", "the soup", "the trip", "the budget",
-            "her future", "secrets", "his parents", "your grandparents", "the team", "the director", "her siblings", "the art gallery", "the application",
-            "his teacher", "the house", "their relatives", "the doctor", "the party", "the museum", "the concert", "the office", "the client", "the workshop",
-            "her novel", "the marathon", "the rules", "the report", "the professor", "the database", "the kitchen", "the library", "the living room", "the dishes",
-            "their house", "the chair", "your passport", "your room", "his workspace", "her pet", "her flight", "the software", "the surprise party", "her portfolio",
-            "the podcast", "the batteries", "the family", "their wedding", "the community", "the garage", "clients", "the walls", "his presentation", "her career goals",
-            "dance classes", "flowers", "groceries", "puzzles", "the pool", "artwork", "English", "the play", "the lake", "your language skills", "the countryside",
-            "business strategies", "video games", "a sandcastle", "dinner", "documentaries", "the city", "plants", "your friend", "a new apartment", "recipes",
-            "exercises", "clothes", "basketball skills", "mountains", "a job", "your siblings", "math skills", "portraits", "notes", "sketches", "tickets", "a scarf",
-            "their speech", "our house"
+            {   "she", "he", "it", "we", "they", "you", "I", "John", "Sarah", "David", "Emma", "Tom", 
+            "Mike", "Lily", "Alice", "James", "Jack", "parents", "students", "brother", "father", "friends", 
+            "kids", "birds", "engineers", "tourists", "cousins", "classmates", "neighbors", "cousin", "sister",
+            "dogs", "boss", "grandparents", "nurses", "cat", "baby", "who", "coffee", "car", "music", "emails", 
+            "ice cream", "movies", "homework", "office", "sushi", "cakes", "pictures", "glasses", "water", "bicycles", 
+            "computers", "windows", "news", "bridges", "medicine", "cat", "workers", "mother", "uncle", "boyfriend", 
+            "teachers", "friends", "guests", "neighbors", "desk", "dog", "room", "house", "train", "bike", "teacher", 
+            "friends", "cats", "furniture", "jokes", "scarf", "hill", "client", "car", "silverware", "piano", "couch", 
+            "manager", "garden", "meeting", "book", "partner", "grandmother", "project", "package", "new room", "beach",
+            "dress", "pencils", "decorations", "lost items", "heavy boxes", "dance routine", "vase", "favorite song", 
+            "website", "soup", "trip", "budget", "future", "secrets", "parents", "grandparents", "team", "director", 
+            "siblings", "art gallery", "application", "teacher", "house", "relatives", "doctor", "party", "museum",
+            "concert", "office", "client", "workshop", "novel", "marathon", "rules", "report", "professor", "database", 
+            "kitchen", "library", "living room", "dishes", "house", "chair", "passport", "room", "workspace", "pet", "flight",
+            "software", "surprise party", "portfolio", "podcast", "batteries", "family", "wedding", "community", "garage", 
+            "clients", "walls", "presentation", "career goals", "dance classes", "flowers", "groceries", "puzzles", "pool",
+            "artwork", "English", "play", "lake", "language skills", "countryside", "business strategies", "video games",
+            "sandcastle", "dinner", "documentaries", "city", "plants", "friend", "new apartment", "recipes", "exercises",
+            "clothes", "basketball skills", "mountains", "job", "siblings", "math skills", "portraits", "notes", "sketches", 
+            "tickets", "scarf", "speech", "house"
 
         } },
         { "verb", new HashSet<string>
@@ -6427,11 +6429,55 @@ public class EnglishLogic : MonoBehaviour
         }
     }
 
-    static bool IsAValidSimpleQuestion(string input, HashSet<string> possibleQuestions)
+    bool IsAValidSimpleQuestion(string input, HashSet<string> possibleQuestions)
     {
-        return possibleQuestions.Contains(input) ? true : false;
-    }
+        // mantenere questo check maaa...
+        // l'input è valido anche se l'input splittato segue la regola - fatto ziopo!
 
+        // esempio
+        // input: Does she drink my parents?
+        // regola: aux + sub/obj + sub/obj
+        string input_prova = "Does she drink my parents?";
+        List<string> result = SplitAndCleanString(input_prova.ToLower());
+        int how_many_found = 0;
+        bool rule_rispected = false;
+        // Itera sulla lista
+        foreach (string word in result)
+        {
+            bool found = false;
+            foreach (string category in wordCategories.Keys)
+            {
+                if (wordCategories[category].Contains(word))
+                {
+                    Debug.Log($"La parola '{word}' appartiene alla categoria '{category}'.");
+                    found = true;
+                    how_many_found++;
+                    if(how_many_found >= 3)
+                    {
+                        //return true;
+                        rule_rispected = true;
+                    }
+                    break;
+                }
+            }
+            if (!found)
+            {
+                Debug.Log($"La parola '{word}' non appartiene a nessuna categoria.");
+                continue;
+            }
+        }
+        return rule_rispected || possibleQuestions.Contains(input) ? true : false;
+    }
+    static List<string> SplitAndCleanString(string input)
+    {
+        // Rimuove i segni di punteggiatura dalla stringa
+        string cleanedInput = new string(input.Where(c => !char.IsPunctuation(c)).ToArray());
+
+        // Splitta la stringa in base agli spazi e crea una lista
+        List<string> words = cleanedInput.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+        return words;
+    }
     #region FILL QUESTIONS RULES
     // PRESENT TENSE
     private string Return_PresentSimple_Question_Rules()
