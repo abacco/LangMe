@@ -19,6 +19,111 @@ public class LanguageProficiencyCompleted : MonoBehaviour
     [SerializeField] Image c1_img;
     [SerializeField] Image c2_img;
 
+
+    /*
+     * completati a1,a2 prima di chiudere app:
+     JSON da salvare: -----------{
+    "selectedLanguage": "Dutch",
+    "userLifes": 10,
+    "decine": 0,
+    "selectedDifficulty": "A2",
+    "username": "as",
+    "userNationality": "English",
+    "totalStarsEarned": 60,
+    "proficiencyTrackerIndex": 0,
+    "nodeTrackerIndex": 10,
+    "solutionCounter": 0,
+    "LanguageDataStars": {
+        "Difficulty": {
+            "nodeList": [],
+            "DifficultyName": ""
+        },
+        "LanguageName": "",
+        "Nodes": []
+    },
+    "proficiencyTracker": [
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "Dutch_A1",
+            "isCompleted": true
+        },
+        {
+            "key": "Dutch_A2",
+            "isCompleted": true
+        }
+    ],
+    "ListOfNodes": [
+        {
+            "Stars": 3,
+            "NodeName": "Node_1"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_2"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_3"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_4"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_5"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_6"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_7"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_8"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_9"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_10"
+        }
+    ],
+    "singleProficiencyTracker": {
+        "key": "Dutch_A2",
+        "isCompleted": true
+    }
+}
+     
+     */
     void Start()
     {
         GameManager.Instance.LoadData();
@@ -26,6 +131,16 @@ public class LanguageProficiencyCompleted : MonoBehaviour
 
 
         GameData.ProficiencyTracker[] pr = GameManager.Instance.proficiencyTracker;
+
+        List<GameData.ProficiencyTracker> proficiencyList = pr.ToList();
+        foreach (GameData.ProficiencyTracker singlePr in proficiencyList)
+        {
+            if (singlePr.isCompleted)
+            {
+                ChangeColor(singlePr.key);
+            }
+        }
+
         if (pr == null || pr.Length == 0)
         {
             throw new Exception("Proficiency tracker array is null or empty.");
@@ -46,12 +161,14 @@ public class LanguageProficiencyCompleted : MonoBehaviour
                 // Se il nodo esiste già, aggiorna solo lo stato
                 existingNode.isCompleted = true;
                 needsSave = true;
+                Debug.Log("this node " + existingNode.key + existingNode.isCompleted + "exists");
             }
             else
             {
                 // Se non esiste, lo aggiunge all'array senza sovrascrivere vecchi dati
-                List<GameData.ProficiencyTracker> proficiencyList = pr.ToList();
+                //List<GameData.ProficiencyTracker> proficiencyList = pr.ToList();
                 proficiencyList.Add(new GameData.ProficiencyTracker(key, true));
+                Debug.Log("Added Node" + key);
                 GameManager.Instance.proficiencyTracker = proficiencyList.ToArray();
                 needsSave = true;
                 GameManager.Instance.SaveData();
