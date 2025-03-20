@@ -24,7 +24,6 @@ public class LanguageProficiencyCompleted : MonoBehaviour
         GameManager.Instance.LoadData();
         StartCoroutine(UpdateLanguageIcon());
 
-
         GameData.ProficiencyTracker[] pr = GameManager.Instance.proficiencyTracker;
         if (pr == null || pr.Length == 0)
         {

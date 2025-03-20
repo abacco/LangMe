@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class EnglishLogic : MonoBehaviour
 {
-    public TMP_Dropdown tenseDropdown;
-    public TMP_Dropdown phraseTypeDropdown;
+    public Dropdown tenseDropdown;
+    public Dropdown phraseTypeDropdown;
 
     [SerializeField] GameObject rememberPanel;
 

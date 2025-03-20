@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public class CheckEnglishLogic : MonoBehaviour
@@ -217,7 +218,7 @@ public class CheckEnglishLogic : MonoBehaviour
     public TMP_Text wordList;
     public TMP_Text wordTypeTitle;
     public GameObject wordListPanel;
-    public TMP_Dropdown wordTypeDropdown;
+    public Dropdown wordTypeDropdown;
     public void HandleWordType()
     {
         selectedWordType = wordTypeDropdown.options[wordTypeDropdown.value].text;
