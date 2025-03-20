@@ -72,8 +72,9 @@ public class ExerciseLogicScript : MonoBehaviour
         // set UserLifes and text update
         userLifes = GameManager.Instance.userLifes;
         users_lifes_txt.text = userLifes.ToString();
+
         // set solutionCounter to display first Original Phrase 
-        if(GameManager.Instance.ready_for_test)
+        if (GameManager.Instance.ready_for_test)
         {
             solution_counter = new System.Random().Next(0, 99);
             if(userLifes == 0)
@@ -88,7 +89,7 @@ public class ExerciseLogicScript : MonoBehaviour
                 congrats_panel.SetActive(true);
                 next_exercise_btn.interactable = false;
                 submit_answer_btn.interactable = false;
-                original_phrase.text = "Exercises Completed";
+                //original_phrase.text = "Exercises Completed";
             }
         }
         // set default correct_phrase counter txt
@@ -367,7 +368,7 @@ public class ExerciseLogicScript : MonoBehaviour
         next_exercise_btn.interactable = false;
         //GameManager.Instance.solutionCounter = 100;
         //GameManager.Instance.SaveData();
-        original_phrase.text = "Exercises Completed";
+        //original_phrase.text = "Exercises Completed";
         Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
     }
 

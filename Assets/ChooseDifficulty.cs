@@ -26,6 +26,8 @@ public class ChooseDifficulty : MonoBehaviour
     public void YES()
     {
         GameManager.Instance.selectedDifficulty = this.buttonName;
+        GameManager.Instance.singleProficiencyTracker = new GameData.ProficiencyTracker(GameManager.Instance.selectedDifficulty, false);
+        GameManager.Instance.solutionCounter = 0;
         GameManager.Instance.SaveData();
         //GameManager.Instance.GameManagerDebugLogData();
         GameObject.FindObjectOfType<Navigation>().MoveToScene("6 - Difficulty Rules");

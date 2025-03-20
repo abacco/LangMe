@@ -202,6 +202,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4778368}
   m_CullTransparentMesh: 1
+--- !u!1 &201411740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 201411742}
+  - component: {fileID: 201411741}
+  m_Layer: 0
+  m_Name: QuitEditor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &201411741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201411740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560e950998aac0544912542bd83cf552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &201411742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201411740}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.8881035, y: 1446.4115, z: 123.417694}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &390264358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2817,13 +2861,14 @@ MonoBehaviour:
   userNationality: 
   totalStarsEarned: 0
   proficiencyTrackerIndex: 0
+  nodeTrackerIndex: 0
   LanguageDataStars:
     Difficulty:
-      node:
-        Stars: 0
-        NodeName: 
+      nodeList: []
       DifficultyName: 
     LanguageName: 
+    Nodes: []
+  ListOfNodes: []
   proficiencyTracker: []
   singleProficiencyTracker:
     key: 
@@ -2855,3 +2900,4 @@ SceneRoots:
   - {fileID: 2115415495}
   - {fileID: 1600010629}
   - {fileID: 451943666}
+  - {fileID: 201411742}

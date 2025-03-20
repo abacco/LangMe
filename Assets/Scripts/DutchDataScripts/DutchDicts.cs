@@ -141,7 +141,7 @@ public class DutchDicts : MonoBehaviour
         { "dutchA1_98", "1"},
         { "dutchA1_99", "1"},
 
-        { "dutchA1_100", "1"}
+        { "Exercises Completed", ""}
     };
     private static readonly Dictionary<string, string> dutch_a1_rules_titles_and_bodies = new Dictionary<string, string>
     {
@@ -284,7 +284,7 @@ public class DutchDicts : MonoBehaviour
         { "dutchA2_98", "1"},
         { "dutchA2_99", "1"},
 
-        { "dutchA2_100", "1"}
+        { "Exercises Completed", ""}
     };
     private static readonly Dictionary<string, string> dutch_a2_rules_titles_and_bodies = new Dictionary<string, string>
     {
@@ -409,7 +409,7 @@ public class DutchDicts : MonoBehaviour
         { "dutchB1_98", "1"},
         { "dutchB1_99", "1"},
 
-        { "dutchB1_100", "1"}
+        { "Exercises Completed" , ""}
     };
     private static readonly Dictionary<string, string> dutch_b1_rules_titles_and_bodies = new Dictionary<string, string>
     {
@@ -534,7 +534,7 @@ public class DutchDicts : MonoBehaviour
         { "dutchB2_98", "1"},
         { "dutchB2_99", "1"},
 
-        { "dutchB2_100", "1"}
+        { "Exercises Completed" , ""}
     };
     private static readonly Dictionary<string, string> dutch_b2_rules_titles_and_bodies = new Dictionary<string, string>
     {
@@ -659,7 +659,7 @@ public class DutchDicts : MonoBehaviour
         { "dutchC1_98", "1"},
         { "dutchC1_99", "1"},
 
-        { "dutchC1_100", "1"}
+        { "Exercises Completed", ""}
     };
     private static readonly Dictionary<string, string> dutch_c1_rules_titles_and_bodies = new Dictionary<string, string>
     {
@@ -784,7 +784,7 @@ public class DutchDicts : MonoBehaviour
         { "dutchC2_98", "1"},
         { "dutchC2_99", "1"},
 
-        { "dutchC2_100", "1"}
+        { "Exercises Completed", ""}
     };
     private static readonly Dictionary<string, string> dutch_c2_rules_titles_and_bodies = new Dictionary<string, string>
     {

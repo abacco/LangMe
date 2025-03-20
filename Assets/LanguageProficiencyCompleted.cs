@@ -26,22 +26,12 @@ public class LanguageProficiencyCompleted : MonoBehaviour
 
 
         GameData.ProficiencyTracker[] pr = GameManager.Instance.proficiencyTracker;
-
-        List<GameData.ProficiencyTracker> proficiencyList = pr.ToList();
-        foreach (GameData.ProficiencyTracker singlePr in proficiencyList)
-        {
-            if (singlePr.isCompleted)
-            {
-                ChangeColor(singlePr.key);
-            }
-        }
-
         if (pr == null || pr.Length == 0)
         {
             throw new Exception("Proficiency tracker array is null or empty.");
         }
 
-        ResetColors();
+        //ResetColors();
 
         string key = GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty;
         bool needsSave = false;
@@ -61,10 +51,12 @@ public class LanguageProficiencyCompleted : MonoBehaviour
             else
             {
                 // Se non esiste, lo aggiunge all'array senza sovrascrivere vecchi dati
-                //List<GameData.ProficiencyTracker> proficiencyList = pr.ToList();
+                List<GameData.ProficiencyTracker> proficiencyList = pr.ToList();
                 proficiencyList.Add(new GameData.ProficiencyTracker(key, true));
                 Debug.Log("Added Node" + key);
                 GameManager.Instance.proficiencyTracker = proficiencyList.ToArray();
+                //GameManager.Instance.singleProficiencyTracker.isCompleted = false;
+                //GameManager.Instance.singleProficiencyTracker.key = "SingleProfTrackerReset";
                 needsSave = true;
                 GameManager.Instance.SaveData();
             }
@@ -93,14 +85,14 @@ public class LanguageProficiencyCompleted : MonoBehaviour
         }
     }
 
-    void ResetColors()
+    void ResetColors(string key)
     {
-        a1_img.color = Color.black;
-        a2_img.color = Color.black;
-        b1_img.color = Color.black;
-        b2_img.color = Color.black;
-        c1_img.color = Color.black;
-        c2_img.color = Color.black;
+        if (key.Contains("A1")) a1_img.color = Color.black;
+        if (key.Contains("A2")) a2_img.color = Color.black;
+        if (key.Contains("B1")) b1_img.color = Color.black;
+        if (key.Contains("B2")) b2_img.color = Color.black;
+        if (key.Contains("C1")) c1_img.color = Color.black;
+        if (key.Contains("C2")) c2_img.color = Color.black;
     }
 
     void ChangeColor(string key)
@@ -129,4 +121,91 @@ public class LanguageProficiencyCompleted : MonoBehaviour
     {
         congratsPanel.SetActive(false);
     }
+
+
+    /*JSON da salvare: -----------{
+  
+    "decine": 0,
+    "selectedDifficulty": "A1",
+    "proficiencyTrackerIndex": 0,
+    "nodeTrackerIndex": 10,
+    "solutionCounter": 100,
+    
+    "proficiencyTracker": [
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "",
+            "isCompleted": false
+        },
+        {
+            "key": "Dutch_A1",
+            "isCompleted": true
+        }
+    ],
+    "ListOfNodes": [
+        {
+            "Stars": 3,
+            "NodeName": "Node_1"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_2"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_3"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_4"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_5"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_6"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_7"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_8"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_9"
+        },
+        {
+            "Stars": 3,
+            "NodeName": "Node_10"
+        }
+    ],
+    "singleProficiencyTracker": {
+        "key": "Dutch_A1",
+        "isCompleted": true
+    }
+}*/
 }
