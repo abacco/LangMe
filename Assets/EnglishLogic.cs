@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6430,70 +6429,71 @@ public class EnglishLogic : MonoBehaviour
     {
         rememberPanel.SetActive(false);
     }
-    public bool ReturnQuestionsBasedOntense(string input)
-    {
-        switch (tenseDropdown.options[tenseDropdown.value].text)
-        {   // se la frase è ritenuta valida, mettila nella lista delle ultime frasi scritte da mostrare in un pannello!
-            //case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_questions);
-            //case "Present Cont.": return IsAValidSimpleQuestion(input, present_continuous_questions);
-            //case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_questions);
-            //case "Present Perfect Cont.": return IsAValidSimpleQuestion(input, present_perfect_continuous_questions);
+    #region useless - old
+    //public bool ReturnQuestionsBasedOntense(string input)
+    //{
+    //    switch (tenseDropdown.options[tenseDropdown.value].text)
+    //    {   // se la frase è ritenuta valida, mettila nella lista delle ultime frasi scritte da mostrare in un pannello!
+    //        //case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_questions);
+    //        //case "Present Cont.": return IsAValidSimpleQuestion(input, present_continuous_questions);
+    //        //case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_questions);
+    //        //case "Present Perfect Cont.": return IsAValidSimpleQuestion(input, present_perfect_continuous_questions);
 
-            //case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_questions);
-            //case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_questions);
-            //case "Past Cont.": return IsAValidSimpleQuestion(input, past_continuous_questions);
-            //case "Past Perfect Cont.": return IsAValidSimpleQuestion(input, past_perfect_continuous_questions);
+    //        //case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_questions);
+    //        //case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_questions);
+    //        //case "Past Cont.": return IsAValidSimpleQuestion(input, past_continuous_questions);
+    //        //case "Past Perfect Cont.": return IsAValidSimpleQuestion(input, past_perfect_continuous_questions);
 
-            //case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_questions);
-            //case "Future Cont.": return IsAValidSimpleQuestion(input, future_continuous_questions);
-            //case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_questions);
-            //case "Future Perfect Cont.": return IsAValidSimpleQuestion(input, future_perfect_continuous_questions);
-            default: Debug.Log("error on UpdateNegationRule"); return false;
-        }
-    }
-    public bool ReturnAffirmationsBasedOntense(string input)
-    {
-        switch (tenseDropdown.options[tenseDropdown.value].text)
-        {
-            //case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_affirmations);
-            //case "Present Cont.": return IsAValidSimpleQuestion(input, present_continuous_affirmations);
-            //case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_affirmations);
-            //case "Present Perfect Cont.": return IsAValidSimpleQuestion(input, present_perfect_continuous_affirmations);
+    //        //case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_questions);
+    //        //case "Future Cont.": return IsAValidSimpleQuestion(input, future_continuous_questions);
+    //        //case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_questions);
+    //        //case "Future Perfect Cont.": return IsAValidSimpleQuestion(input, future_perfect_continuous_questions);
+    //        default: Debug.Log("error on UpdateNegationRule"); return false;
+    //    }
+    //}
+    //public bool ReturnAffirmationsBasedOntense(string input)
+    //{
+    //    switch (tenseDropdown.options[tenseDropdown.value].text)
+    //    {
+    //        //case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_affirmations);
+    //        //case "Present Cont.": return IsAValidSimpleQuestion(input, present_continuous_affirmations);
+    //        //case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_affirmations);
+    //        //case "Present Perfect Cont.": return IsAValidSimpleQuestion(input, present_perfect_continuous_affirmations);
 
-            //case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_affirmations);
-            //case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_affirmations);
-            //case "Past Cont.": return IsAValidSimpleQuestion(input, past_continuous_affirmations);
-            //case "Past Perfect Cont.": return IsAValidSimpleQuestion(input, past_perfect_continuous_affirmations);
+    //        //case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_affirmations);
+    //        //case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_affirmations);
+    //        //case "Past Cont.": return IsAValidSimpleQuestion(input, past_continuous_affirmations);
+    //        //case "Past Perfect Cont.": return IsAValidSimpleQuestion(input, past_perfect_continuous_affirmations);
 
-            //case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_affirmations);
-            //case "Future Cont.": return IsAValidSimpleQuestion(input, future_continuous_affirmations);
-            //case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_affirmations);
-            //case "Future Perfect Cont.": return IsAValidSimpleQuestion(input, future_perfect_continuous_affirmations);
-            default: Debug.Log("error on UpdateNegationRule"); return false;
-        }
-    }
-    public bool ReturnNegationsBasedOntense(string input)
-    {
-        switch (tenseDropdown.options[tenseDropdown.value].text)
-        {
-            //case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_negations);
-            //case "Present Cont.": return IsAValidSimpleQuestion(input, present_continuous_negations);
-            //case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_negations);
-            //case "Present Perfect Cont.": return IsAValidSimpleQuestion(input, present_perfect_continuous_negations);
+    //        //case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_affirmations);
+    //        //case "Future Cont.": return IsAValidSimpleQuestion(input, future_continuous_affirmations);
+    //        //case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_affirmations);
+    //        //case "Future Perfect Cont.": return IsAValidSimpleQuestion(input, future_perfect_continuous_affirmations);
+    //        default: Debug.Log("error on UpdateNegationRule"); return false;
+    //    }
+    //}
+    //public bool ReturnNegationsBasedOntense(string input)
+    //{
+    //    switch (tenseDropdown.options[tenseDropdown.value].text)
+    //    {
+    //        //case "Present Simple": return IsAValidSimpleQuestion(input, present_simple_negations);
+    //        //case "Present Cont.": return IsAValidSimpleQuestion(input, present_continuous_negations);
+    //        //case "Present Perfect": return IsAValidSimpleQuestion(input, present_perfect_negations);
+    //        //case "Present Perfect Cont.": return IsAValidSimpleQuestion(input, present_perfect_continuous_negations);
 
-            //case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_negations);
-            //case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_negations);
-            //case "Past Cont.": return IsAValidSimpleQuestion(input, past_continuous_negations);
-            //case "Past Perfect Cont.": return IsAValidSimpleQuestion(input, past_perfect_continuous_negations);
+    //        //case "Past Simple": return IsAValidSimpleQuestion(input, past_simple_negations);
+    //        //case "Past Perfect": return IsAValidSimpleQuestion(input, past_perfect_negations);
+    //        //case "Past Cont.": return IsAValidSimpleQuestion(input, past_continuous_negations);
+    //        //case "Past Perfect Cont.": return IsAValidSimpleQuestion(input, past_perfect_continuous_negations);
 
-            //case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_negations);
-            //case "Future Cont.": return IsAValidSimpleQuestion(input, future_continuous_negations);
-            //case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_negations);
-            //case "Future Perfect Cont.": return IsAValidSimpleQuestion(input, future_perfect_continuous_negations);
-            default: Debug.Log("error on UpdateNegationRule"); return false;
-        }
-    }
-    
+    //        //case "Future Simple": return IsAValidSimpleQuestion(input, future_simple_negations);
+    //        //case "Future Cont.": return IsAValidSimpleQuestion(input, future_continuous_negations);
+    //        //case "Future Perfect": return IsAValidSimpleQuestion(input, future_perfect_negations);
+    //        //case "Future Perfect Cont.": return IsAValidSimpleQuestion(input, future_perfect_continuous_negations);
+    //        default: Debug.Log("error on UpdateNegationRule"); return false;
+    //    }
+    //}
+    #endregion
     public void TestQuestions(HashSet<string> hashset)
     {
         List<string> validQuestions = new List<string>
@@ -7455,7 +7455,7 @@ public class EnglishLogic : MonoBehaviour
     #endregion
 
     public GameObject HelpMePanel;
-    public TMP_Text help_solution_text;
+    public Text help_solution_text;
     public void HelpMeLogic()
     {
         HelpMePanel.SetActive(true);

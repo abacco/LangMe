@@ -215,19 +215,36 @@ public class CheckEnglishLogic : MonoBehaviour
 
 
     public string selectedWordType = "Wh-Words";
-    public TMP_Text wordList;
-    public TMP_Text wordTypeTitle;
+    public Text wordList;
+    public Text wordTypeTitle;
     public GameObject wordListPanel;
     public Dropdown wordTypeDropdown;
     public void HandleWordType()
     {
         selectedWordType = wordTypeDropdown.options[wordTypeDropdown.value].text;
-        wordTypeTitle.text = selectedWordType;
+        if (selectedWordType.Equals("Wh-Words"))
+        {
+            wordTypeTitle.text = selectedWordType + " + How";
+        } 
+        else if (selectedWordType.Equals("Sub/Objects"))
+        {
+            wordTypeTitle.text = "Subjects/Objects";
+        }
+        else if (selectedWordType.Equals("Time"))
+        {
+            wordTypeTitle.text = "Time Clause";
+        }
+        else
+        {
+            wordTypeTitle.text = selectedWordType;
+        }
+
         // si deve aprire un pannello tipo dizionario dove vengono mostrate le parole di quel tipo
     }
 
     public void ShowWordTypeList()
     {
+        HandleWordType();
         switch (selectedWordType)
         {
             case "Wh-Words": ShowListForType("wh-word"); break;
