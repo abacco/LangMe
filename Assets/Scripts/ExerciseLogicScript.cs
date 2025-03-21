@@ -209,7 +209,7 @@ public class ExerciseLogicScript : MonoBehaviour
         HandleLives();
         //HandleCorrectAnswers();
 
-        if (inputfield == null)
+        if (inputfield == null || inputfield.text.Equals(""))
         {
             emptyInput.SetActive(true);
         }
@@ -366,9 +366,6 @@ public class ExerciseLogicScript : MonoBehaviour
         congrats_panel.SetActive(true);
         submit_answer_btn.interactable = false;
         next_exercise_btn.interactable = false;
-        //GameManager.Instance.solutionCounter = 100;
-        //GameManager.Instance.SaveData();
-        //original_phrase.text = "Exercises Completed";
         Debug.LogError("Aumenta le frasi nel dizionario: " + GameManager.Instance.selectedLanguage + " " + GameManager.Instance.selectedDifficulty);
     }
 
@@ -397,9 +394,6 @@ public class ExerciseLogicScript : MonoBehaviour
                     correct_phrases_counter.text = "10";
                 }
             }
-            //correct_phrases_counter.text = correct_answers < 10
-            //    ? "0" + correct_answers.ToString()
-            //    : (correct_answers + 1).ToString();
         }
         catch (Exception e)
         {
@@ -712,7 +706,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
 
     public Text timerText; // UI Text per mostrare il countdown
-    private int totalTime = 180; // Tempo iniziale in secondi (3 minuti)
+    private int totalTime = 10; // Tempo iniziale in secondi (3 minuti)
     private bool isCounting = false;
     public GameObject testCompletedPanel;
 
@@ -757,7 +751,8 @@ public class ExerciseLogicScript : MonoBehaviour
         // Quando il timer arriva a 0
         timerText.text = "0:00";
         isCounting = false;
-        countdownPanel.SetActive(false);
+        refillHeartsPanel.SetActive(true);
+        //countdownPanel.SetActive(false);
         GameManager.Instance.ready_for_test = false;
         GameManager.Instance.SaveData();
     }

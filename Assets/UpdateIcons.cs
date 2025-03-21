@@ -9,8 +9,13 @@ public class UpdateIcons : MonoBehaviour
 
     [SerializeField] Sprite[] languageIcons;
 
+    [SerializeField] Text difficulty_selected;
     private void Start()
     {
+        if (difficulty_selected != null)
+        {
+            difficulty_selected.text = GameManager.Instance.selectedDifficulty.ToUpper();
+        }
         StartCoroutine(UpdateLanguageIcon());
     }
 
