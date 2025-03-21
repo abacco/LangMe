@@ -983,6 +983,58 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: congratulations!!
+--- !u!1 &452533806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452533808}
+  - component: {fileID: 452533807}
+  m_Layer: 0
+  m_Name: ADS_Initializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &452533807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452533806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f92d6dd899c7349900d3226d06b603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 5787541
+  _iOSGameId: 5787540
+  _testMode: 1
+  _showtip_ads_button: {fileID: 0}
+  _showsolution_ads_button: {fileID: 0}
+  _refillHearts_ads_button: {fileID: 1483803066}
+  _banner_ads_button: {fileID: 0}
+  interstitialAdExample: {fileID: 0}
+--- !u!4 &452533808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452533806}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &464458536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,10 +1702,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 749859216}
-        m_TargetAssemblyTypeName: Navigation, Assembly-CSharp
-        m_MethodName: MoveToScene
-        m_Mode: 5
+      - m_Target: {fileID: 1483803066}
+        m_TargetAssemblyTypeName: RefillHeartsAd, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3368,6 +3420,55 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Exam
+--- !u!1 &1483803065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1483803067}
+  - component: {fileID: 1483803066}
+  m_Layer: 0
+  m_Name: RefillHeartsAdInit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1483803066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483803065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868ae313baf052f4ca45db3868330b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exLogicScript: {fileID: 1383165614}
+  _refillHeartsAdButton: {fileID: 732076467}
+  userLifesTxt: {fileID: 202364949}
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
+--- !u!4 &1483803067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483803065}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 718.9599, y: 1226.9205, z: 8.7101345}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1498991939
 GameObject:
   m_ObjectHideFlags: 0
@@ -4530,3 +4631,5 @@ SceneRoots:
   - {fileID: 749859217}
   - {fileID: 1065655194}
   - {fileID: 528490395}
+  - {fileID: 452533808}
+  - {fileID: 1483803067}

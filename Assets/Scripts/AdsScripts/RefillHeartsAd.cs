@@ -88,7 +88,17 @@ public class RefillHeartsAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
             {
                 ReloadAdIfNeeded();
             }
+            if (SceneManager.GetActiveScene().name.Equals("14 - Exam Scene"))
+            {
+                //int seconds_added = 30 % 60;
+                exLogicScript.totalTime += 30;
+                if(exLogicScript.totalTime >= 300)
+                {
+                    exLogicScript.totalTime = 300;
+                }
+            }
         }
+
 
         isRewardProcessed = false; // Resetta il flag se necessario
     }

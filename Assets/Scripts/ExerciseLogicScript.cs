@@ -118,19 +118,7 @@ public class ExerciseLogicScript : MonoBehaviour
         {
             Debug.LogWarning("No need of showSolutionAd here ex:" + ex.Message);
         }
-
-        //if (GameManager.Instance.singleProficiencyTracker.key.Equals(GameManager.Instance.selectedDifficulty) && GameManager.Instance.singleProficiencyTracker.isCompleted)
-        //{
-        //    //ExercisesCompleted();
-        //    original_phrase.text = "Exercises Completed";
-        //    congrats_panel.SetActive(true);
-        //    submit_answer_btn.interactable = false;
-        //    next_exercise_btn.interactable = false;
-        //}
-        //else
-        //{
-            UpdateVeryFirstOriginalPhrase();
-        //}
+        UpdateVeryFirstOriginalPhrase();
     }
     void InitializeLanguageHashMap(List<string> frasiSoluzione, List<string> frasiOriginale,
                                Dictionary<int, Dictionary<string, string>> genericHashMap,
@@ -207,7 +195,6 @@ public class ExerciseLogicScript : MonoBehaviour
     public void CheckSolution()
     {
         HandleLives();
-        //HandleCorrectAnswers();
 
         if (inputfield == null || inputfield.text.Equals(""))
         {
@@ -706,7 +693,7 @@ public class ExerciseLogicScript : MonoBehaviour
 
 
     public Text timerText; // UI Text per mostrare il countdown
-    private int totalTime = 10; // Tempo iniziale in secondi (3 minuti)
+    public int totalTime = 180; // Tempo iniziale in secondi (3 minuti)
     private bool isCounting = false;
     public GameObject testCompletedPanel;
 
