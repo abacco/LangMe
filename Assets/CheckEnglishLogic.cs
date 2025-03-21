@@ -234,11 +234,14 @@ public class CheckEnglishLogic : MonoBehaviour
         {
             wordTypeTitle.text = "Time Clause";
         }
+        else if (selectedWordType.Equals("Auxiliaries"))
+        {
+            wordTypeTitle.text = "Auxiliaries + Modals";
+        }
         else
         {
             wordTypeTitle.text = selectedWordType;
         }
-
         // si deve aprire un pannello tipo dizionario dove vengono mostrate le parole di quel tipo
     }
 
