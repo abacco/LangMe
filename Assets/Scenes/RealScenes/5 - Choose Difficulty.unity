@@ -745,13 +745,14 @@ MonoBehaviour:
   userNationality: 
   totalStarsEarned: 0
   proficiencyTrackerIndex: 0
+  nodeTrackerIndex: 0
   LanguageDataStars:
     Difficulty:
-      node:
-        Stars: 0
-        NodeName: 
+      nodeList: []
       DifficultyName: 
     LanguageName: 
+    Nodes: []
+  ListOfNodes: []
   proficiencyTracker: []
   singleProficiencyTracker:
     key: 
@@ -2814,7 +2815,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: B1
+  m_Text: C1
 --- !u!222 &474986573
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4193,7 +4194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: B2
+  m_Text: C2
 --- !u!222 &806589883
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9361,7 +9362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2078502059
 RectTransform:
   m_ObjectHideFlags: 0
