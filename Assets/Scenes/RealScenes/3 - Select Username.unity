@@ -1156,17 +1156,21 @@ MonoBehaviour:
   userNationality: 
   totalStarsEarned: 0
   proficiencyTrackerIndex: 0
+  nodeTrackerIndex: 0
   LanguageDataStars:
     Difficulty:
-      node:
-        Stars: 0
-        NodeName: 
+      nodeList: []
       DifficultyName: 
     LanguageName: 
+    Nodes: []
+  ListOfNodes: []
   proficiencyTracker: []
   singleProficiencyTracker:
     key: 
     isCompleted: 0
+  profileImage:
+    imageBase64: 
+  texture: {fileID: 0}
   ready_for_test: 0
 --- !u!1 &833884031
 GameObject:

@@ -1,6 +1,8 @@
+using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameData;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class GameManager : MonoBehaviour
     public int totalStarsEarned;
     public int proficiencyTrackerIndex;
     public int nodeTrackerIndex;
+
+    public string imageSaved;
 
 
     public GameData.LanguageData LanguageDataStars;
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        
         LoadData();
     }
 
@@ -70,7 +75,10 @@ public class GameManager : MonoBehaviour
             LanguageDataStars = LanguageDataStars,
             ListOfNodes = ListOfNodes,
             nodeTrackerIndex = nodeTrackerIndex,
+
+            imageSaved = imageSaved,
         };
+
 
         string json = JsonUtility.ToJson(gameData, true); // `true` per formattare bene il JSON
 
@@ -113,7 +121,9 @@ public class GameManager : MonoBehaviour
             LanguageDataStars = gameData.LanguageDataStars;
             ListOfNodes = gameData.ListOfNodes;
             nodeTrackerIndex = gameData.nodeTrackerIndex;
-            //GameManagerDebugLogData();
+
+            imageSaved = gameData.imageSaved;
+
         }
         else
         {
@@ -133,6 +143,8 @@ public class GameManager : MonoBehaviour
                     "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", ListOfNodes));
 
             proficiencyTracker = new GameData.ProficiencyTracker[6];
+
+            imageSaved = "DefaultImageSaved";
             // only for test purpose
             //proficiencyTracker[0] = new GameData.ProficiencyTracker("Dutch_A1", true);
             //proficiencyTracker[1] = new GameData.ProficiencyTracker("Dutch_A2", true);
@@ -179,52 +191,28 @@ public class GameManager : MonoBehaviour
         Debug.Log("nodeTrackerIndex: " + this.nodeTrackerIndex.ToString()); // per il proficiency tracker index
         Debug.Log("-----------------------------------------------");
     }
+}    
 
-    // prova logica -> LanguageProgressionScript
-    // dutch, a1
-    // a1, node_1
-    // a1, node_2
-    // a1, node_3
-    // a1, .....
-    // a1, node_10
-    // dutch, a2
-    // a1, node_1
-    // a1, node_2
-    // a1, node_3
-    // a1, .....
-    // a1, node_10
-    /*
-        {
-            "dutch", 
-                    {"A1", 
-                        {
-                        "Node1", 1    
-                        },
-                        {
-                        "Node2", 3    
-                        },
-                    },
-                    {
-                    "A2",
-                        {
-                        "Node1", 1    
-                        },
-                        {
-                        "Node2", 3    
-                        },
-                    },
-                    {....},
-                    {
-                    "C2",
-                        {
-                        "Node1", 1    
-                        },
-                        {
-                        "Node2", 3    
-                        },
-                    },   
-        }  
-    */
+// https://stackoverflow.com/questions/51315918/how-to-encodetopng-compressed-textures-in-unity
+public static class ExtensionMethod
+{
+    public static Texture2D DeCompress(this Texture2D source)
+    {
+        RenderTexture renderTex = RenderTexture.GetTemporary(
+                    source.width,
+                    source.height,
+                    0,
+                    RenderTextureFormat.Default,
+                    RenderTextureReadWrite.Linear);
 
-    // node1, earnedStar
+        Graphics.Blit(source, renderTex);
+        RenderTexture previous = RenderTexture.active;
+        RenderTexture.active = renderTex;
+        Texture2D readableText = new Texture2D(source.width, source.height);
+        readableText.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
+        readableText.Apply();
+        RenderTexture.active = previous;
+        RenderTexture.ReleaseTemporary(renderTex);
+        return readableText;
+    }
 }

@@ -1,6 +1,9 @@
+using System;
+
 [System.Serializable]
 public class GameData
 {
+    public string imageSaved; // profileImage
     public string selectedLanguage;
     public int userLifes;
     public int decine; // for the star system
@@ -18,6 +21,7 @@ public class GameData
     public NodeData[] ListOfNodes;
 
     public ProficiencyTracker singleProficiencyTracker;
+
 
     [System.Serializable]
     public class NodeData
@@ -92,7 +96,6 @@ public class GameData
             return "TOSTRING ProficiencyTracker " + this.key + "\n" + this.isCompleted.ToString();
         }
     }
-
 
     public override string ToString()
     {

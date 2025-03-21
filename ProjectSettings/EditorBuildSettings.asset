@@ -53,6 +53,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealScenes/14 - Exam Scene.unity
     guid: 07e9d186a9c6d9c459d1c7b897378fbe
+  - enabled: 1
+    path: Assets/Scenes/RealScenes/15 - ProfileImage.unity
+    guid: 279a3d79debfe0343a5ee0a7978b0b41
   - enabled: 0
     path: Assets/Scenes/TestScenes/TestScroll.unity
     guid: f3628997e71e9a045bcde308df5d36bd

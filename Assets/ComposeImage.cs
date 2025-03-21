@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AdaptivePerformance.Provider;
 using UnityEngine.UI;
 
 public class ComposeImage : MonoBehaviour
@@ -90,6 +91,35 @@ public class ComposeImage : MonoBehaviour
     public GameObject confirmPanel;
     public Image chosenHead_to_show;
 
+    private void Start()
+    {
+        GameManager.Instance.LoadData();
+        // Carica tutte le Texture2D dalla cartella
+        Sprite[] textures = Resources.LoadAll<Sprite>("ProfileImages");
+
+        Debug.Log($"{textures.Length} immagini caricate dalla cartella ProfileImages.");
+        switch (GameManager.Instance.imageSaved)
+        {
+            case "1":
+                GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[0];
+                //    Sprite.Create(
+                //        textures[0],
+                //        new Rect(0, 0, textures[0].width, textures[0].height),
+                //        new Vector2(0.5f, 0.5f)
+                //);
+                break; 
+            case "2": break; 
+            case "3": break; 
+            case "4": break; 
+            case "5": break;
+            case "6": break; 
+            case "7": break; 
+            case "8": break; 
+            case "9": break; 
+            case "10": break; 
+        }
+    }
+
     public Image GetCentralHead()
     {
         float viewportCenter = scrollRect_head.viewport.position.x + (scrollRect_head.viewport.rect.width / 2);
@@ -105,6 +135,8 @@ public class ComposeImage : MonoBehaviour
                 centralElement = element;
             }
         }
+
+        GameManager.Instance.imageSaved = centralElement.gameObject.name;
 
         return centralElement.GetComponent<Image>();
     }
@@ -125,5 +157,8 @@ public class ComposeImage : MonoBehaviour
     public void ConfirmImage()
     {
         // settare l'immagine di profilo nel GameManager
+
+        GameManager.Instance.SaveData();
+        GameObject.Find("profileImage").GetComponent<Image>().sprite = chosenHead.sprite;
     }
 }
