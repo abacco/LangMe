@@ -711,7 +711,7 @@ public class ExerciseLogicScript : MonoBehaviour
     #endregion
 
 
-    public TMP_Text timerText; // UI Text per mostrare il countdown
+    public Text timerText; // UI Text per mostrare il countdown
     private int totalTime = 180; // Tempo iniziale in secondi (3 minuti)
     private bool isCounting = false;
     public GameObject testCompletedPanel;
