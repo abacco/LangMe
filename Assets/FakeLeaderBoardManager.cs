@@ -9,10 +9,14 @@ public class FakeLeaderBoardManager : MonoBehaviour
     {
         public string playerName;
         public int score;
+        //public Image randomProfileImage; - WIP
     }
 
     public Transform leaderboardContainer; // Il contenitore degli elementi della leaderboard
     public GameObject leaderboardEntryPrefab; // Il prefab per ogni entry
+
+    public List<Sprite> imageList;
+    public Image targetImage; // Immagine UI dove verrà mostrata l'immagine selezionata
 
     private List<LeaderboardEntry> leaderboardEntries = new List<LeaderboardEntry>();
 
@@ -26,12 +30,16 @@ public class FakeLeaderBoardManager : MonoBehaviour
 
     void GenerateFakeLeaderboard()
     {
+        Sprite randomSprite = imageList[Random.Range(0, imageList.Count)];
+        targetImage.sprite = randomSprite;
         // the master
         LeaderboardEntry AlexTheFounder = new LeaderboardEntry
         {
             playerName = "AlexTheFounder",
-            score = 1079
+            score = 1079,
+            //randomProfileImage = targetImage
         };
+
 
         // 30 stelle per Proficiency (a1,a2,b1,b2,c1,c2) per Linguaggio (5 iniziali + 1 inglese) => 30 x 6 x 6 = 1080 stars max
         leaderboardEntries.Clear();
@@ -40,7 +48,8 @@ public class FakeLeaderBoardManager : MonoBehaviour
             LeaderboardEntry entry = new LeaderboardEntry
             {
                 playerName = GenerateLofiNickname(),
-                score = Random.Range(0, 1080)
+                score = Random.Range(0, 1080),
+                //randomProfileImage = targetImage // wip
             };
 
             // Controlla i duplicati basandoti su playerName
@@ -85,12 +94,14 @@ public class FakeLeaderBoardManager : MonoBehaviour
             {
                 newEntry.transform.Find("PlayerName").GetComponent<Text>().text = GameManager.Instance.username;
                 newEntry.transform.Find("PlayerStars").GetComponent<Text>().text = GameManager.Instance.totalStarsEarned.ToString();
+                //newEntry.transform.Find("RandomProfileImage").GetComponent<Image>().sprite = imageList[Random.Range(0, imageList.Count)];
 
                 Color customColor;
                 if (ColorUtility.TryParseHtmlString("#FFFF4A", out customColor))
                 {
                     newEntry.transform.Find("PlayerName").GetComponent<Text>().color = customColor;
                     newEntry.transform.Find("PlayerStars").GetComponent<Text>().color = customColor;
+                    //newEntry.transform.Find("RandomProfileImage").GetComponent<Image>().sprite = imageList[Random.Range(0, imageList.Count)];
                 }
             }
             else
