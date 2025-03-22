@@ -1325,7 +1325,7 @@ GameObject:
   - component: {fileID: 1411165244}
   - component: {fileID: 1411165243}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: static_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1958,10 +1958,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3342113294273083814, guid: 00a38d29231c65449b275afa58de106b, type: 3}
-      propertyPath: m_Name
-      value: RandomProfileImage
-      objectReference: {fileID: 0}
     - target: {fileID: 6813874054151802267, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_Name
       value: PlayerEntry
@@ -1969,22 +1965,6 @@ PrefabInstance:
     - target: {fileID: 6813874054151802267, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129685141377597094, guid: 00a38d29231c65449b275afa58de106b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 70.6596
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129685141377597094, guid: 00a38d29231c65449b275afa58de106b, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 62.209
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129685141377597094, guid: 00a38d29231c65449b275afa58de106b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 289.42242
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129685141377597094, guid: 00a38d29231c65449b275afa58de106b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 8.513394
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
