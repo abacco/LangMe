@@ -287,6 +287,12 @@ public class ExerciseLogicScript : MonoBehaviour
         if(solution_counter == 100) {
             GameManager.Instance.singleProficiencyTracker.key = GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty;
             GameManager.Instance.singleProficiencyTracker.isCompleted = true;
+
+            for(int i = 0; i < GameManager.Instance.ListOfNodes.Length; i++)
+            {
+                GameManager.Instance.singleProficiencyTracker.starsGained += GameManager.Instance.ListOfNodes[i].Stars;
+            }
+
             congrats_panel.SetActive(true);
             next_exercise_btn.interactable = false;
             submit_answer_btn.interactable = false;

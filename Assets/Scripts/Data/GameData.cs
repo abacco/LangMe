@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class GameData
@@ -43,38 +44,22 @@ public class GameData
     }
 
     [System.Serializable]
-    public class DifficultyData
-    {
-        public NodeData[] nodeList;
-        public string DifficultyName;
-
-        public DifficultyData(string DifficultyName, NodeData[] nodeList)
-        {
-            this.DifficultyName = DifficultyName;
-            this.nodeList = nodeList; 
-        }
-
-        public override string ToString()
-        {
-            return "TOSTRING DifficultyData " + this.DifficultyName + "\n" + this.nodeList.ToString();
-        }
-    }
-
-    [System.Serializable]
     public class LanguageData
     {
         public bool isCompleted;
         public string LanguageName;
+        public int starsGained;
 
-        public LanguageData(string LanguageName, bool isCompleted)
+        public LanguageData(string LanguageName, bool isCompleted, int starsGained)
         {
             this.LanguageName = LanguageName;
             this.isCompleted = isCompleted;
+            this.starsGained = starsGained;
         }
 
         public override string ToString()
         {
-            return "TOSTRING LanguageData " + this.LanguageName + " isCompleted:" + this.isCompleted + "\n";
+            return "TOSTRING LanguageData " + this.LanguageName + " isCompleted:" + this.isCompleted + " starsGained: " + this.starsGained + "\n";
         }
     }
 
@@ -83,16 +68,18 @@ public class GameData
     {
         public string key;
         public bool isCompleted;
+        public int starsGained;
 
-        public ProficiencyTracker(string key, bool isCompleted)
+        public ProficiencyTracker(string key, bool isCompleted, int starsGained)
         {
             this.key = key;
             this.isCompleted = isCompleted;
+            this.starsGained = starsGained;
         }
 
         public override string ToString()
         {
-            return "TOSTRING ProficiencyTracker " + this.key + "\n" + this.isCompleted.ToString();
+            return "TOSTRING ProficiencyTracker " + this.key + "\n" + this.isCompleted.ToString() + " starsGained: " + this.starsGained + "\n";
         }
     }
 

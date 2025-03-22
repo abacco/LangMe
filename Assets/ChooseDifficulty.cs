@@ -26,7 +26,7 @@ public class ChooseDifficulty : MonoBehaviour
     public void YES()
     {
         GameManager.Instance.selectedDifficulty = this.buttonName;
-        GameManager.Instance.singleProficiencyTracker = new GameData.ProficiencyTracker(GameManager.Instance.selectedDifficulty, false);
+        GameManager.Instance.singleProficiencyTracker = new GameData.ProficiencyTracker(GameManager.Instance.selectedDifficulty, false, 0);
         GameManager.Instance.solutionCounter = 0;
         GameManager.Instance.SaveData();
         //GameManager.Instance.GameManagerDebugLogData();

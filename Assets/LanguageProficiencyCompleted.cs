@@ -34,7 +34,7 @@ public class LanguageProficiencyCompleted : MonoBehaviour
 
         string key = GameManager.Instance.selectedLanguage + "_" + GameManager.Instance.selectedDifficulty;
         bool needsSave = false;
-
+        int starGainedOfExistingNode;
         // Controlla se il nodo esiste già nell'array
         GameData.ProficiencyTracker existingNode = pr.FirstOrDefault(p => p.key == key);
 
@@ -45,13 +45,14 @@ public class LanguageProficiencyCompleted : MonoBehaviour
                 // Se il nodo esiste già, aggiorna solo lo stato
                 existingNode.isCompleted = true;
                 needsSave = true;
-                Debug.Log("this node " + existingNode.key + existingNode.isCompleted + "exists");
+                starGainedOfExistingNode = existingNode.starsGained;
+                Debug.Log("this node " + existingNode.key + existingNode.isCompleted + "exists and has stars: " + starGainedOfExistingNode);
             }
             else
             {
                 // Se non esiste, lo aggiunge all'array senza sovrascrivere vecchi dati
                 List<GameData.ProficiencyTracker> proficiencyList = pr.ToList();
-                proficiencyList.Add(new GameData.ProficiencyTracker(key, true));
+                proficiencyList.Add(new GameData.ProficiencyTracker(key, true, GameManager.Instance.singleProficiencyTracker.starsGained));
                 Debug.Log("Added Node" + key);
                 GameManager.Instance.proficiencyTracker = proficiencyList.ToArray();
                 needsSave = true;
@@ -72,7 +73,13 @@ public class LanguageProficiencyCompleted : MonoBehaviour
                     Debug.Log("you won!"); // ok - inserisci il pannello di win
                     congrats_text.text = "Congratulations On Completing " + GameManager.Instance.selectedLanguage;
                     congratsPanel.SetActive(true);
-                    GameData.LanguageData languageCompleted = new GameData.LanguageData(GameManager.Instance.selectedLanguage, true);
+                    int totalStarsForSingleLanguage = 0;
+                    for(int i = 0; i < GameManager.Instance.proficiencyTracker.Length; i++)
+                    {
+                        totalStarsForSingleLanguage += GameManager.Instance.proficiencyTracker[i].starsGained;
+                    }
+
+                    GameData.LanguageData languageCompleted = new GameData.LanguageData(GameManager.Instance.selectedLanguage, true, totalStarsForSingleLanguage);
                     GameManager.Instance.LanguageCompleted[GameManager.Instance.languagesTrackerIndex] = languageCompleted;
                     GameManager.Instance.languagesTrackerIndex++;
                     if(GameManager.Instance.languagesTrackerIndex >=5)

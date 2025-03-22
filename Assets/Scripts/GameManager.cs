@@ -143,8 +143,6 @@ public class GameManager : MonoBehaviour
             decine = 0;
             totalStarsEarned = 0;
 
-
-
             ListOfNodes = new GameData.NodeData[10];
             
             nodeTrackerIndex = 0;
@@ -155,15 +153,6 @@ public class GameManager : MonoBehaviour
 
             proficiencyTracker = new GameData.ProficiencyTracker[6];
             imageSaved = "DefaultImageSaved";
-
-            // only for test purpose
-            //proficiencyTracker[0] = new GameData.ProficiencyTracker("Dutch_A1", true);
-            //proficiencyTracker[1] = new GameData.ProficiencyTracker("Dutch_A2", true);
-            //proficiencyTracker[2] = new GameData.ProficiencyTracker("Dutch_B1", true);
-            //proficiencyTracker[3] = new GameData.ProficiencyTracker("Dutch_B2", true); // per fa prima coi click
-            //proficiencyTracker[4] = new GameData.ProficiencyTracker("Dutch_C1", true);
-            //proficiencyTracker[5] = new GameData.ProficiencyTracker("Dutch_C2", true);
-            //GameManagerDebugLogData();
         }
     }
 
