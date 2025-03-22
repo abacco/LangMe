@@ -91,32 +91,30 @@ public class ComposeImage : MonoBehaviour
     public GameObject confirmPanel;
     public Image chosenHead_to_show;
 
+    public Text total_star_earned_text;
+    public Sprite[] textures;
     private void Start()
     {
         GameManager.Instance.LoadData();
+        total_star_earned_text.text = GameManager.Instance.totalStarsEarned.ToString();
+
         // Carica tutte le Texture2D dalla cartella
-        Sprite[] textures = Resources.LoadAll<Sprite>("ProfileImages");
+        /*Sprite[] */textures = Resources.LoadAll<Sprite>("ProfileImages");
 
         Debug.Log($"{textures.Length} immagini caricate dalla cartella ProfileImages.");
         switch (GameManager.Instance.imageSaved)
         {
-            case "1":
-                GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[0];
-                //    Sprite.Create(
-                //        textures[0],
-                //        new Rect(0, 0, textures[0].width, textures[0].height),
-                //        new Vector2(0.5f, 0.5f)
-                //);
-                break; 
-            case "2": break; 
-            case "3": break; 
-            case "4": break; 
-            case "5": break;
-            case "6": break; 
-            case "7": break; 
-            case "8": break; 
-            case "9": break; 
-            case "10": break; 
+            case "1": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[0]; break; 
+            case "2": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[1]; break; 
+            case "3": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[2]; break;
+            case "4": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[3]; break;
+            case "5": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[4]; break;
+            case "6": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[5]; break;
+            case "7": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[6]; break;
+            case "8": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[7]; break;
+            case "9": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[8]; break;
+            case "10": GameObject.Find("profileImage").GetComponent<Image>().sprite = textures[9]; break;
+            default: Debug.LogError("Error while loading profile image"); break;
         }
     }
 

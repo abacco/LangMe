@@ -748,4 +748,9 @@ public class ExerciseLogicScript : MonoBehaviour
     {
         SceneManager.LoadScene("7 - Home");
     }
+
+    public void CloseEmptyInputPanel()
+    {
+        emptyInput.SetActive(false);
+    }
 }

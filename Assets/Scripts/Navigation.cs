@@ -21,7 +21,8 @@ public class Navigation : MonoBehaviour
         "8 - Exercise Scene", 
         "9 - Dictionary",
         "10 - Progress",
-        "14 - Exam Scene"
+        "14 - Exam Scene",
+        "15 - ProfileImage"
     }; 
 
     public void MoveToScene(string sceneName)

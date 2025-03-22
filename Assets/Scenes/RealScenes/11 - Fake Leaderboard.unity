@@ -1075,7 +1075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1323610151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1098,6 +1098,7 @@ MonoBehaviour:
   totalStarsEarned: 0
   proficiencyTrackerIndex: 0
   nodeTrackerIndex: 0
+  imageSaved: 
   LanguageDataStars:
     Difficulty:
       nodeList: []
@@ -1527,6 +1528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderboardContainer: {fileID: 1007871381}
   leaderboardEntryPrefab: {fileID: 6813874054151802267, guid: 00a38d29231c65449b275afa58de106b, type: 3}
+  imageList: []
+  targetImage: {fileID: 0}
+  textures: []
 --- !u!1 &1704644181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,7 +1892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1581357558909248293, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1581357558909248293, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1896,7 +1900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1581357558909248293, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1581357558909248293, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1936,11 +1940,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1581357558909248293, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 441.89786
       objectReference: {fileID: 0}
     - target: {fileID: 1581357558909248293, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -160
       objectReference: {fileID: 0}
     - target: {fileID: 1581357558909248293, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1964,7 +1968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6813874054151802267, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9129685141377597094, guid: 00a38d29231c65449b275afa58de106b, type: 3}
       propertyPath: m_SizeDelta.x

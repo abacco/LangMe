@@ -9,7 +9,7 @@ public class FakeLeaderBoardManager : MonoBehaviour
     {
         public string playerName;
         public int score;
-        //public Image randomProfileImage; - WIP
+        //public Image randomProfileImage;// - WIP
     }
 
     public Transform leaderboardContainer; // Il contenitore degli elementi della leaderboard
@@ -19,25 +19,30 @@ public class FakeLeaderBoardManager : MonoBehaviour
     public Image targetImage; // Immagine UI dove verrà mostrata l'immagine selezionata
 
     private List<LeaderboardEntry> leaderboardEntries = new List<LeaderboardEntry>();
-
+    public Sprite[] textures;
+    
     void Start()
     {
         GameManager.Instance.LoadData();
+
+        textures = Resources.LoadAll<Sprite>("ProfileImages");
         GenerateFakeLeaderboard();
         PopulateLeaderboardUI();
+
+
+        Debug.Log($"{textures.Length} immagini caricate dalla cartella ProfileImages.");
+        
     }
+
 
 
     void GenerateFakeLeaderboard()
     {
-        Sprite randomSprite = imageList[Random.Range(0, imageList.Count)];
-        targetImage.sprite = randomSprite;
         // the master
         LeaderboardEntry AlexTheFounder = new LeaderboardEntry
         {
             playerName = "AlexTheFounder",
             score = 1079,
-            //randomProfileImage = targetImage
         };
 
 
@@ -49,7 +54,6 @@ public class FakeLeaderBoardManager : MonoBehaviour
             {
                 playerName = GenerateLofiNickname(),
                 score = Random.Range(0, 1080),
-                //randomProfileImage = targetImage // wip
             };
 
             // Controlla i duplicati basandoti su playerName
@@ -83,31 +87,44 @@ public class FakeLeaderBoardManager : MonoBehaviour
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardContainer);
             if (entry.playerName.Equals("AlexTheFounder"))
             {
+                newEntry.transform.Find("PlayerName").GetComponent<Text>().text = newEntry.GetComponent<PlayerEntryUI>().ChopUsername("AlexTheFounder");
+                newEntry.transform.Find("PlayerStars").GetComponent<Text>().text = 1079.ToString();
+                newEntry.transform.Find("RandomProfileImage").GetComponent<Image>().sprite = textures[0];
                 Color customColor;
                 if (ColorUtility.TryParseHtmlString("#FFB500", out customColor))
                 {
                     newEntry.transform.Find("PlayerName").GetComponent<Text>().color = customColor;
                     newEntry.transform.Find("PlayerStars").GetComponent<Text>().color = customColor;
+
                 }
             }
-            if (entry.playerName.Equals(GameManager.Instance.username.ToLower()))
+            else if (entry.playerName.Equals(GameManager.Instance.username.ToLower()))
             {
                 newEntry.transform.Find("PlayerName").GetComponent<Text>().text = GameManager.Instance.username;
                 newEntry.transform.Find("PlayerStars").GetComponent<Text>().text = GameManager.Instance.totalStarsEarned.ToString();
-                //newEntry.transform.Find("RandomProfileImage").GetComponent<Image>().sprite = imageList[Random.Range(0, imageList.Count)];
+                int userImage = int.Parse(GameManager.Instance.imageSaved);
+                if (userImage > 0)
+                {
+                    userImage--;
+                }
+                else
+                {
+                    userImage = 0;
+                }
+                newEntry.transform.Find("RandomProfileImage").GetComponent<Image>().sprite = textures[userImage];
 
                 Color customColor;
                 if (ColorUtility.TryParseHtmlString("#FFFF4A", out customColor))
                 {
                     newEntry.transform.Find("PlayerName").GetComponent<Text>().color = customColor;
                     newEntry.transform.Find("PlayerStars").GetComponent<Text>().color = customColor;
-                    //newEntry.transform.Find("RandomProfileImage").GetComponent<Image>().sprite = imageList[Random.Range(0, imageList.Count)];
                 }
             }
-            else
+            else // real random entry
             {
                 newEntry.transform.Find("PlayerName").GetComponent<Text>().text = newEntry.GetComponent<PlayerEntryUI>().ChopUsername(entry.playerName);
                 newEntry.transform.Find("PlayerStars").GetComponent<Text>().text = entry.score.ToString();
+                newEntry.transform.Find("RandomProfileImage").GetComponent<Image>().sprite = textures[Random.Range(0, textures.Length)];
             }
         }
     }
