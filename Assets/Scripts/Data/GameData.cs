@@ -12,12 +12,13 @@ public class GameData
     public string userNationality;
     public int totalStarsEarned;
     public int proficiencyTrackerIndex;
+    public int languagesTrackerIndex;
     public int nodeTrackerIndex;
 
     public int solutionCounter;
-    public LanguageData LanguageDataStars;
-    public ProficiencyTracker[] proficiencyTracker;
+    public LanguageData[] LanguageCompleted;
 
+    public ProficiencyTracker[] proficiencyTracker;
     public NodeData[] ListOfNodes;
 
     public ProficiencyTracker singleProficiencyTracker;
@@ -62,20 +63,18 @@ public class GameData
     [System.Serializable]
     public class LanguageData
     {
-        public DifficultyData Difficulty;
+        public bool isCompleted;
         public string LanguageName;
 
-        public NodeData[] Nodes;
-
-        public LanguageData(string LanguageName, DifficultyData Difficulty)
+        public LanguageData(string LanguageName, bool isCompleted)
         {
             this.LanguageName = LanguageName;
-            this.Difficulty = Difficulty;
+            this.isCompleted = isCompleted;
         }
 
         public override string ToString()
         {
-            return "TOSTRING LanguageData " + this.LanguageName + "\n" + this.Difficulty.ToString();
+            return "TOSTRING LanguageData " + this.LanguageName + " isCompleted:" + this.isCompleted + "\n";
         }
     }
 

@@ -586,6 +586,7 @@ public class ExerciseLogicScript : MonoBehaviour
             new GameData.NodeData(
                 "Node_" + (GameManager.Instance.nodeTrackerIndex + 1),
                 earnedStar);
+            // queste earnedStar vanno nel nodo che tiene traccia della single proficiency
             GameManager.Instance.nodeTrackerIndex++;
         } else
         {
@@ -593,7 +594,6 @@ public class ExerciseLogicScript : MonoBehaviour
         }
 
         GameManager.Instance.ListOfNodes = this.listOfNodes;
-        GameManager.Instance.LanguageDataStars = languageData;
         GameManager.Instance.SaveData();
     }
 

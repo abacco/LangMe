@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameData;
@@ -17,12 +18,14 @@ public class GameManager : MonoBehaviour
     public string userNationality;
     public int totalStarsEarned;
     public int proficiencyTrackerIndex;
+    public int languagesTrackerIndex;
     public int nodeTrackerIndex;
 
     public string imageSaved;
 
 
-    public GameData.LanguageData LanguageDataStars;
+    public GameData.LanguageData[] LanguageCompleted;
+
     public GameData.NodeData[] ListOfNodes;
     public GameData.ProficiencyTracker[] proficiencyTracker;
     public GameData.ProficiencyTracker singleProficiencyTracker;
@@ -68,11 +71,12 @@ public class GameManager : MonoBehaviour
             decine = decine,
             totalStarsEarned = totalStarsEarned,
             proficiencyTrackerIndex = proficiencyTrackerIndex,
+            languagesTrackerIndex = languagesTrackerIndex,
 
             singleProficiencyTracker = singleProficiencyTracker,
             proficiencyTracker = proficiencyTracker,
 
-            LanguageDataStars = LanguageDataStars,
+            LanguageCompleted = LanguageCompleted,
             ListOfNodes = ListOfNodes,
             nodeTrackerIndex = nodeTrackerIndex,
 
@@ -110,6 +114,8 @@ public class GameManager : MonoBehaviour
             solutionCounter = (solutionCounter / 10)*10;
 
             proficiencyTrackerIndex = gameData.proficiencyTrackerIndex;
+            languagesTrackerIndex = gameData.languagesTrackerIndex;
+
             userNationality = gameData.userNationality;
             decine = gameData.decine;
             totalStarsEarned = gameData.totalStarsEarned;
@@ -117,8 +123,8 @@ public class GameManager : MonoBehaviour
 
             proficiencyTracker = gameData.proficiencyTracker;
             singleProficiencyTracker = gameData.singleProficiencyTracker;
-            
-            LanguageDataStars = gameData.LanguageDataStars;
+
+            LanguageCompleted = gameData.LanguageCompleted;
             ListOfNodes = gameData.ListOfNodes;
             nodeTrackerIndex = gameData.nodeTrackerIndex;
 
@@ -136,15 +142,20 @@ public class GameManager : MonoBehaviour
             userNationality = "English";
             decine = 0;
             totalStarsEarned = 0;
-            proficiencyTrackerIndex = 0;
+
+
+
             ListOfNodes = new GameData.NodeData[10];
+            
             nodeTrackerIndex = 0;
-            LanguageDataStars = new GameData.LanguageData(
-                    "ProvaLinguaggio", new GameData.DifficultyData("ProvaDifficoltà", ListOfNodes));
+            proficiencyTrackerIndex = 0;
+            languagesTrackerIndex = 0;
+
+            LanguageCompleted = new GameData.LanguageData[5]; // tutti i linguaggi
 
             proficiencyTracker = new GameData.ProficiencyTracker[6];
-
             imageSaved = "DefaultImageSaved";
+
             // only for test purpose
             //proficiencyTracker[0] = new GameData.ProficiencyTracker("Dutch_A1", true);
             //proficiencyTracker[1] = new GameData.ProficiencyTracker("Dutch_A2", true);
@@ -184,7 +195,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("userNationality: " + this.userNationality);
         Debug.Log("decine: " + this.decine); // per lo star system
         Debug.Log("Total Stars Earned: " + this.totalStarsEarned); // per lo star system
-        Debug.Log("LanguageDataStars: " + this.LanguageDataStars.ToString()); // per lo star system
+        Debug.Log("LanguageCompleted: " + this.LanguageCompleted.Length.ToString());
         Debug.Log("proficiencyTrackerIndex: " + this.proficiencyTrackerIndex.ToString()); // per il proficiency tracker index
         Debug.Log("proficiencyTracker: " + this.proficiencyTracker.ToString()); // per il proficiency tracker index
         Debug.Log("ListOfNodes Count: " + this.ListOfNodes.Length.ToString()); // per il proficiency tracker index

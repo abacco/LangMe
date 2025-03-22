@@ -54,8 +54,6 @@ public class LanguageProficiencyCompleted : MonoBehaviour
                 proficiencyList.Add(new GameData.ProficiencyTracker(key, true));
                 Debug.Log("Added Node" + key);
                 GameManager.Instance.proficiencyTracker = proficiencyList.ToArray();
-                //GameManager.Instance.singleProficiencyTracker.isCompleted = false;
-                //GameManager.Instance.singleProficiencyTracker.key = "SingleProfTrackerReset";
                 needsSave = true;
                 GameManager.Instance.SaveData();
             }
@@ -74,6 +72,15 @@ public class LanguageProficiencyCompleted : MonoBehaviour
                     Debug.Log("you won!"); // ok - inserisci il pannello di win
                     congrats_text.text = "Congratulations On Completing " + GameManager.Instance.selectedLanguage;
                     congratsPanel.SetActive(true);
+                    GameData.LanguageData languageCompleted = new GameData.LanguageData(GameManager.Instance.selectedLanguage, true);
+                    GameManager.Instance.LanguageCompleted[GameManager.Instance.languagesTrackerIndex] = languageCompleted;
+                    GameManager.Instance.languagesTrackerIndex++;
+                    if(GameManager.Instance.languagesTrackerIndex >=5)
+                    {
+                        GameManager.Instance.languagesTrackerIndex = 5;
+                        throw new Exception("Cannot Save this Language cause Array is full - increase its size LanguageProficiencyCompleted");
+                    }
+                    GameManager.Instance.SaveData();
                 }
             }
         }
