@@ -2817,18 +2817,16 @@ MonoBehaviour:
   userNationality: 
   totalStarsEarned: 0
   proficiencyTrackerIndex: 0
+  languagesTrackerIndex: 0
   nodeTrackerIndex: 0
-  LanguageDataStars:
-    Difficulty:
-      nodeList: []
-      DifficultyName: 
-    LanguageName: 
-    Nodes: []
+  imageSaved: 
+  LanguageCompleted: []
   ListOfNodes: []
   proficiencyTracker: []
   singleProficiencyTracker:
     key: 
     isCompleted: 0
+    starsGained: 0
   ready_for_test: 0
 --- !u!4 &2115415495
 Transform:

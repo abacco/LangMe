@@ -1075,7 +1075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1323610151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,19 +1097,16 @@ MonoBehaviour:
   userNationality: 
   totalStarsEarned: 0
   proficiencyTrackerIndex: 0
+  languagesTrackerIndex: 0
   nodeTrackerIndex: 0
   imageSaved: 
-  LanguageDataStars:
-    Difficulty:
-      nodeList: []
-      DifficultyName: 
-    LanguageName: 
-    Nodes: []
+  LanguageCompleted: []
   ListOfNodes: []
   proficiencyTracker: []
   singleProficiencyTracker:
     key: 
     isCompleted: 0
+    starsGained: 0
   ready_for_test: 0
 --- !u!4 &1323610152
 Transform:
