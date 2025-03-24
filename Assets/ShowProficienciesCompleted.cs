@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowProficienciesCompleted : MonoBehaviour
 {
-
     public void ShowProficiencies()
     {
         GameManager.Instance.LoadData();

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +26,7 @@ public class EnglishLogic : MonoBehaviour
     {
         { "wh-word", new HashSet<string> { "why", "when", "where", "how", "what", "which", "who", "whom", "whose", "whenever", "wherever", "whatever", "whichever", "whoever", "whomever" } },
         { "auxiliary", new HashSet<string>
-            {
+            {   "not",
                 "does", "does not", "doesnt", "doesn't",
                 "do", "do not", "dont", "don't",
                 "did", "did not", "didnt", "didn't",
@@ -36,17 +35,22 @@ public class EnglishLogic : MonoBehaviour
                 "was", "was not", "wasnt", "wasn't",
                 "were", "were not", "werent", "weren't",
                 "has", "has not", "hasnt", "hasn't",
+                "has been", "has not been", "hasnt been", "hasn't been",
                 "have", "have not", "havent", "haven't",
+                "have been", "have not been", "havent been", "haven't been",
                 "had", "had not", "hadnt", "hadn't",
+                "had been", "had not been", "hadnt been", "hadn't been",
                 "will", "will not", "wont", "won't",
                 "shall", "shall not", "shallnt", "shalln't",
                 "can", "can not", "cannot", "cant", "can't",
                 "could", "could not", "couldnt", "couldn't",
-                "may", "may not",
-                "might", "might not",
-                "must", "must not", "mustnt", "mustn't",
+                "may", "may not", "may be", "may not be",
+                "might", "might not", "might be",
+                "must", "must not", "mustnt", "mustn't", "must be", "must not be", "mustnt be", "mustn't be",
                 "should", "should not", "shouldnt", "shouldn't",
+                "should be", "should not be", "shouldn't be",
                 "would", "would not", "wouldnt", "wouldn't",
+                "would be", "would not be", "wouldn't be",
                 "have", "have not", "havent", "haven't"
             }},
         { "subject", new HashSet<string>
@@ -55,7 +59,7 @@ public class EnglishLogic : MonoBehaviour
             "Mike", "Lily", "Alice", "James", "Jack",
             "parents", "students", "brother", "father", "friends",
             "kids", "birds", "engineers", "tourists", "cousins", "classmates", "neighbors", "cousin", "sister",
-            "dogs", "boss", "grandparents", "nurses", "cat", "baby", "who", "coffee", "car", "music", "emails",
+            "dogs", "boss", "grandparents", "nurses", "cat", "baby", "who", "coffee", "music", "emails",
             "ice cream", "movies", "homework", "office", "sushi", "cakes", "pictures", "glasses", "water", "bicycles",
             "computers", "windows", "news", "bridges", "medicine", "cat", "workers", "mother", "uncle", "boyfriend",
             "teachers", "friends", "guests", "neighbors", "desk", "dog", "room", "house", "train", "bike", "teacher",
@@ -75,7 +79,9 @@ public class EnglishLogic : MonoBehaviour
 
         } },
         { "verb", new HashSet<string>
-            {  "drink", "visit", "drive", "enjoy", "rain", "arrive", "play", "listen", "work", "call",
+            {  
+                "get",
+                "drink", "visit", "drive", "enjoy", "rain", "arrive", "play", "listen", "work", "call",
                 "write", "like", "walk", "cook", "cost", "watch", "travel", "sleep", "have", "clean",
                 "buy", "sell", "exercise", "dance", "sing", "fix", "bake", "swim", "teach", "eat",
                 "study", "read", "prefer", "sound", "help", "bark", "go", "ride", "repair", "send",
@@ -97,6 +103,7 @@ public class EnglishLogic : MonoBehaviour
                 "upload", "respect", "aim", "launch", "thought", "replace", "install", "grow", "compete",
                 "remove", "volunteer", "focus", "fishing", "cycling", "arrange", "water", "rehearse", "fold",
                 "tidy", "memorize", "hang", "cheer", "brainstorm", "adjust", "skip", "babysit", "discover",
+                "happen", "happening", "happened", "brought", "needed", "need", "needing",
                 "reads", "swims", "sings", "plays", "travel", "discuss", "helps", "watch", "design", "bake", "clean", "studies", "organizes", "prefer", "assist", "sits", "plays", "melts", "helps", "opens", "process", "keeps", "invite", "waits", "arrives", "share", "looks", "make", "shines", "provides", "moves", "smells", "break", "return", "require", "remain", "visit", "watches", "receives", "call", "treats", "remains", "smells", "welcomes", "breaks", "allows", "need", "improve", "challenge", "serves", "improve", "tastes", "hums", "pass", "improve", "visit", "sharpen", "protects",
                 // ing
                 "drinking", "visiting", "driving", "enjoying", "raining", "arriving", "playing", "listening", "working", "calling", "writing", "liking", "walking", "cooking", "costing", "watching", "traveling", "sleeping", "having", "cleaning", "buying", "selling", "exercising", "dancing", "singing", "fixing", "baking", "swimming", "teaching", "eating", "studying", "reading", "preferring", "sounding", "helping", "barking", "going", "riding", "repairing", "sending", "tasting", "finishing", "building", "waking", "doing", "loving", "taking", "living",
@@ -120,10 +127,10 @@ public class EnglishLogic : MonoBehaviour
             "April", "May", "June", "July", "August", "September", "October",
             "November", "December", "weekday", "weekend", "holiday", "dawn",
             "dusk", "sunrise", "sunset", "day", "week", "month", "year",
-            "hour", "minute", "second", "century", "morning hours", "evening hours"
+            "hour", "minute", "second", "century", "morning hours", "evening hours", "yet"
         } },
         { "bonusWords", new HashSet<string> { // parole che stanno nelle frasi ma non qui dentro mannaggia zio
-           "my", "the", "beautiful", "strong", "happy", "sad", "brave", "quick",
+           "my", "the", "a", "beautiful", "strong", "happy", "sad", "brave", "quick",
             "slow", "bright", "dark", "sharp", "soft", "hard", "warm", "cold", "kind",
             "mean", "friendly", "unfriendly", "quiet", "loud", "tall", "short", "big", "small",
             "rich", "poor", "fast", "lazy", "early", "late", "cheerful", "calm", "angry", "worried",
@@ -149,19 +156,36 @@ public class EnglishLogic : MonoBehaviour
             "suddenly", "at", "intersection", "full", "of", "flowers", "professor", "explain", "theory", "detail", "mechanic", "repair",
             "cars", "engine", "does", "always", "drink", "coffee", "morning", "jump", "onto", "kitchen", "table", "dog", "follow", "its",
             "owner", "project", "completed", "ahead", "schedule", "workers", "fix", "broken", "pipe",
-            "land"
+            "land",    "happy", "sad", "angry", "calm", "brave", "afraid", "big", "small", "bright", "dark",
+            "beautiful", "ugly", "quick", "slow", "loud", "quiet", "strong", "weak", "rich", "poor",
+            "hot", "cold", "soft", "hard", "sharp", "blunt", "new", "old", "clean", "dirty",
+            "tall", "short", "wide", "narrow", "heavy", "light", "friendly", "mean", "kind", "cruel",
+            "funny", "serious", "intelligent", "stupid", "modern", "ancient", "smooth", "rough",
+            "happy-go-lucky", "worried", "trustworthy", "unreliable", "arrogant", "humble",
+            "optimistic", "pessimistic", "cheerful", "gloomy", "bold", "shy", "polite", "rude",
+            "helpful", "useless", "curious", "indifferent", "generous", "stingy", "graceful",
+            "awkward", "adventurous", "cautious", "creative", "dull", "motivated", "lazy",
+            "passionate", "apathetic", "confident", "nervous", "ambitious", "content",
+            "sincere", "dishonest", "loyal", "disloyal", "courageous", "cowardly", "energetic",
+            "lethargic", "charming", "boring", "affectionate", "cold-hearted", "compassionate",
+            "selfish", "hard-working", "careless", "determined", "hesitant", "playful", "serious",
+            "daring", "timid", "practical", "impractical", "reliable", "untrustworthy",
+            "patient", "impatient", "thoughtful", "thoughtless", "forgiving", "vindictive",
+            "disciplined", "chaotic", "sensible", "absurd", "realistic", "idealistic",
+            "focused", "distracted", "supportive", "critical", "open-minded", "close-minded",
+            "flexible", "stubborn", "punctual", "tardy", "respectful", "disrespectful",
+            "obedient", "rebellious", "new", "room", "brought", "showing up", "surprise", "happen", "brought", "yet", "repairs", "lost", "items", "item", "showing", "up"
         } }
     };
-
     void Start()
     {
-        //if (IsAValidNegation("The art gallery is not open this week."))
+        //if (IsAValidNegation("The lost items are not showing up."))
         //{
         //    Debug.Log("");
         //}
         //TestQuestions(null);
 
-        // ok tutte riconosciute
+        // ok tutte riconosciute - già hai testato basta
         //TestQuestions(EnglishHashSets.present_simple_questions);
         //TestQuestions(EnglishHashSets.present_continuous_questions);
         //TestQuestions(EnglishHashSets.present_perfect_questions);
@@ -177,20 +201,21 @@ public class EnglishLogic : MonoBehaviour
         //TestQuestions(EnglishHashSets.future_perfect_questions);
         //TestQuestions(EnglishHashSets.future_perfect_continuous_questions);
 
-        //TestQuestions(EnglishHashSets.present_simple_negations);
-        //TestQuestions(EnglishHashSets.present_continuous_negations);
-        //TestQuestions(EnglishHashSets.present_perfect_negations);
-        //TestQuestions(EnglishHashSets.present_perfect_continuous_negations);
+        TestNegations(EnglishHashSets.present_simple_negations);
+        TestNegations(EnglishHashSets.present_continuous_negations);
+        TestNegations(EnglishHashSets.present_perfect_negations);
+        TestNegations(EnglishHashSets.present_perfect_continuous_negations);
 
-        //TestQuestions(EnglishHashSets.past_simple_negations);
-        //TestQuestions(EnglishHashSets.past_continuous_negations);
-        //TestQuestions(EnglishHashSets.past_perfect_negations);
-        //TestQuestions(EnglishHashSets.past_perfect_continuous_negations);
+        TestNegations(EnglishHashSets.past_simple_negations);
+        TestNegations(EnglishHashSets.past_continuous_negations);
+        TestNegations(EnglishHashSets.past_perfect_negations);
+        TestNegations(EnglishHashSets.past_perfect_continuous_negations);
 
-        //TestQuestions(EnglishHashSets.future_simple_negations);
-        //TestQuestions(EnglishHashSets.future_continuous_negations);
-        //TestQuestions(EnglishHashSets.future_perfect_negations);
-        //TestQuestions(EnglishHashSets.future_perfect_continuous_negations);
+        TestNegations(EnglishHashSets.future_simple_negations);
+        TestNegations(EnglishHashSets.future_continuous_negations);
+        TestNegations(EnglishHashSets.future_perfect_negations);
+        TestNegations(EnglishHashSets.future_perfect_continuous_negations);
+        //TestNegations(null);
 
         //TestQuestions(present_simple_affirmations);
         //TestQuestions(present_continuous_affirmations);
@@ -210,6 +235,7 @@ public class EnglishLogic : MonoBehaviour
 
         //Debug.LogWarning("Show a Panel in which you say that atm no all words are recognized!");
         // in base al primo dropdown fai gli update
+
         HandlePhraseType();
         checkButton.onClick.AddListener(() => CheckUserInput(userInputField.text, selectedTense));
     }
@@ -217,7 +243,7 @@ public class EnglishLogic : MonoBehaviour
     {
         checkButton.onClick.RemoveAllListeners();
         checkButton.onClick.AddListener(() => CheckUserInput(userInputField.text, tenseDropdown.options[tenseDropdown.value].text));
-        //UpdateQuestionRule();
+        
         UpdateQuestionRule_NEW();
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
@@ -231,19 +257,16 @@ public class EnglishLogic : MonoBehaviour
         {
             case "Questions":
                 bool isAValidQuestion = MatchesBasedOnType(userInput);
-                //feedbackText.text = isAValidQuestion ? "Grammatically Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '?', Please Retry.";
                 userInputField.text = "";
                 if (isAValidQuestion) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             case "Affirmations":
                 bool isAValidAffirmation = MatchesBasedOnType(userInput);
-                //feedbackText.text = isAValidAffirmation ? "Grammatically Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '.'? Please Retry.";
                 userInputField.text = "";
                 if (isAValidAffirmation) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             case "Negations":
                 bool isAValidNegations = MatchesBasedOnType(userInput);
-                feedbackText.text = isAValidNegations ? "Grammatically Correct!" : "Incorrect structure (even punctuation matters!) Or some words not yet recognized Or did you miss the '.'? Please Retry.";
                 userInputField.text = "";
                 if (isAValidNegations) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
@@ -350,7 +373,6 @@ public class EnglishLogic : MonoBehaviour
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
             case "Questions":
-                /*UpdateQuestionRule();*/
                 UpdateQuestionRule_NEW(); break;
             case "Affirmations":
                 UpdateAffirmationsRule(); break;
@@ -364,233 +386,85 @@ public class EnglishLogic : MonoBehaviour
     {
         if ("Questions".Equals(phraseTypeDropdown.options[phraseTypeDropdown.value].text))
         {
-            return IsAValidSimpleQuestion(input); //ReturnQuestionsBasedOntense(input);
+            return IsAValidSimpleQuestion(input) || SentenceIsInQuestion(input);
         }
         else if ("Affirmations".Equals(phraseTypeDropdown.options[phraseTypeDropdown.value].text))
         {
-            return IsAValidSimpleAffirmation(input); //ReturnAffirmationsBasedOntense(input);
+            return IsAValidSimpleAffirmation(input) || SentenceIsInAffirmation(input);
         }
         else if ("Negations".Equals(phraseTypeDropdown.options[phraseTypeDropdown.value].text))
         {
-            return IsAValidNegation(input); //ReturnNegationsBasedOntense(input);
+            return IsAValidNegation(input) || SentenceIsInNegation(input);
         }
         Debug.Log("The phrase is incorrect.");
         return false;
     }
+
+    public bool SentenceIsInQuestion(string input)
+    {
+        bool inputFound =
+                EnglishHashSets.present_simple_questions.Contains(input) ||
+                EnglishHashSets.present_continuous_questions.Contains(input) ||
+                EnglishHashSets.present_perfect_questions.Contains(input) ||
+                EnglishHashSets.present_perfect_continuous_questions.Contains(input) ||
+
+                EnglishHashSets.past_simple_questions.Contains(input) ||
+                EnglishHashSets.past_continuous_questions.Contains(input) ||
+                EnglishHashSets.past_perfect_questions.Contains(input) ||
+                EnglishHashSets.past_perfect_continuous_questions.Contains(input) ||
+
+                EnglishHashSets.future_simple_questions.Contains(input) ||
+                EnglishHashSets.future_continuous_questions.Contains(input) ||
+                EnglishHashSets.future_perfect_questions.Contains(input) ||
+                EnglishHashSets.future_perfect_continuous_questions.Contains(input);
+        return inputFound;
+    }
+    public bool SentenceIsInAffirmation(string input)
+    {
+        bool inputFound =
+                EnglishHashSets.present_simple_affirmations.Contains(input) ||
+                EnglishHashSets.present_continuous_affirmations.Contains(input) ||
+                EnglishHashSets.present_perfect_affirmations.Contains(input) ||
+                EnglishHashSets.present_perfect_continuous_affirmations.Contains(input) ||
+
+                EnglishHashSets.past_simple_affirmations.Contains(input) ||
+                EnglishHashSets.past_continuous_affirmations.Contains(input) ||
+                EnglishHashSets.past_perfect_affirmations.Contains(input) ||
+                EnglishHashSets.past_perfect_continuous_affirmations.Contains(input) ||
+
+                EnglishHashSets.future_simple_affirmations.Contains(input) ||
+                EnglishHashSets.future_continuous_affirmations.Contains(input) ||
+                EnglishHashSets.future_perfect_affirmations.Contains(input) ||
+                EnglishHashSets.future_perfect_continuous_affirmations.Contains(input);
+        return inputFound;
+    }
+    public bool SentenceIsInNegation(string input)
+    {
+        bool inputFound =
+                EnglishHashSets.present_simple_negations.Contains(input) ||
+                EnglishHashSets.present_continuous_negations.Contains(input) ||
+                EnglishHashSets.present_perfect_negations.Contains(input) ||
+                EnglishHashSets.present_perfect_continuous_negations.Contains(input) ||
+
+                EnglishHashSets.past_simple_negations.Contains(input) ||
+                EnglishHashSets.past_continuous_negations.Contains(input) ||
+                EnglishHashSets.past_perfect_negations.Contains(input) ||
+                EnglishHashSets.past_perfect_continuous_negations.Contains(input) ||
+
+                EnglishHashSets.future_simple_negations.Contains(input) ||
+                EnglishHashSets.future_continuous_negations.Contains(input) ||
+                EnglishHashSets.future_perfect_negations.Contains(input) ||
+                EnglishHashSets.future_perfect_continuous_negations.Contains(input);
+        return inputFound;
+    }
+
     public void CloseRememberPanel()
     {
         rememberPanel.SetActive(false);
     }
-   
-    public void TestQuestions(HashSet<string> hashset)
-    {
-        List<string> validQuestions = new List<string>
-        {
-            "Does she drink coffee?",
-            "Do they play soccer on weekends?",
-            "Is he reading a book?",
-            "Are we going to the park?",
-            "Was she working yesterday?",
-            "Were they watching a movie?",
-            "Has he finished his homework?",
-            "Have you seen the new movie?",
-            "Had they already left the house?",
-            "Will she call him later?",
-            "Shall we start the meeting now?",
-            "Can they solve the problem?",
-            "Could she help with the project?",
-            "May I borrow your pen?",
-            "Might they visit us tomorrow?",
-            "Must we submit the form today?",
-            "Should they take the bus?",
-            "Would he like some tea?",
-            "Why is she crying?",
-            "When will they arrive?",
-            "Where are we meeting?",
-            "How does he know that?",
-            "What did she say?",
-            "Which book should I read?",
-            "Who is calling at this hour?",
-            "Whom should I ask for help?",
-            "Whose bag is this?",
-            "Whenever will it stop raining?",
-            "Wherever did they go?",
-            "Whatever can I do now?",
-            "Whichever option is better?",
-            "Who is coming to the party?",
-            "How many friends does he have?",
-            "How much time do we need?",
-            "What kind of music do they like?",
-            "Why are they laughing so loudly?",
-            "When did he start working here?",
-            "Where has she put her keys?",
-            "How do you open this box?",
-            "What time is the meeting?",
-            "Is it raining outside?",
-            "Are they going to join us later?",
-            "Was the movie interesting?",
-            "Were you listening to the teacher?",
-            "Have they been waiting long?",
-            "Has she been working hard?",
-            "Had they been driving all night?",
-            "Will it take much longer?",
-            "Shall we order some food?",
-            "Can he swim fast?",
-            "Could they be lying to us?",
-            "May I enter the room?",
-            "Might she have misunderstood?",
-            "Must we really leave now?",
-            "Should I stay or go?",
-            "Would it be okay to call later?",
-            "Why didn’t she reply?",
-            "When will you visit us?",
-            "Where are they traveling next?",
-            "How does this machine work?",
-            "What color do you prefer?",
-            "Which song do you recommend?",
-            "Who knows the answer?",
-            "Whom did you invite?",
-            "Whose idea was this?",
-            "Whenever did he decide that?",
-            "Wherever are you going now?",
-            "Whatever happened to him?",
-            "Whichever path you take, be careful.",
-            "Who is responsible for this?",
-            "How often do they meet?",
-            "How far is the station?",
-            "What sort of food does she enjoy?",
-            "Why did he leave early?",
-            "When can we meet again?",
-            "Where did you park the car?",
-            "How have they been doing?",
-            "What is she thinking about?",
-            "Is she planning to stay?",
-            "Are they already there?",
-            "Was it a good experience?",
-            "Were we supposed to bring something?",
-            "Have you ever been to Paris?",
-            "Has she already called?",
-            "Had they ever tried this before?",
-            "Will it snow tomorrow?",
-            "Shall I open the window?",
-            "Can we finish this on time?",
-            "Could it be a mistake?",
-            "May I have a moment of your time?",
-            "Might it rain later today?",
-            "Must he be so rude?",
-            "Should they reconsider their plan?",
-            "Would she agree with this?",
-            "Why didn’t they tell us earlier?",
-            "When is the next train arriving?",
-            "Where should we meet?",
-            "How can we solve this?",
-            "What should I bring?",
-            "Which way do we go?"
-        };
-        List<string> validAffirmations = new List<string>()
-        {
-            "She is reading a book.",
-            "He plays soccer every weekend.",
-            "They are watching a movie tonight.",
-            "We have completed the project.",
-            "I will call you later.",
-            "John can drive a car.",
-            "Sarah should study more often.",
-            "It was raining heavily yesterday.",
-            "You must finish your homework.",
-            "They might visit us tomorrow.",
-            "Tom enjoys cooking Italian food.",
-            "Emma likes to play the piano.",
-            "The cat is sleeping on the couch.",
-            "My parents are traveling to France.",
-            "Alice has written a beautiful poem.",
-            "James is preparing dinner right now.",
-            "The students were discussing the topic.",
-            "Lily often goes to the park.",
-            "The baby cried all night.",
-            "Jack has bought a new car.",
-            "The teacher explained the lesson clearly.",
-            "The birds are singing in the trees.",
-            "He rides his bicycle to work.",
-            "We are planning a trip to the mountains.",
-            "She cleaned her room yesterday.",
-            "The company is launching a new product.",
-            "They have been working on the presentation.",
-            "The train arrived on time.",
-            "He was fixing the broken chair.",
-            "The team will win the championship.",
-            "The dog is barking loudly outside.",
-            "She watches TV every evening.",
-            "They built a sandcastle at the beach.",
-            "The sun is shining brightly today.",
-            "The artist painted a beautiful landscape.",
-            "They were waiting for the bus.",
-            "He studies mathematics every day.",
-            "She works in an international company.",
-            "We are learning new skills online.",
-            "The flowers bloom in the spring.",
-            "They went to the cinema last night.",
-            "The chef is preparing a delicious meal.",
-            "The kids are playing in the garden.",
-            "He has traveled to many countries.",
-            "She takes good care of her plants.",
-            "They attend dance classes twice a week.",
-            "The book was written by a famous author.",
-            "She sings beautifully in the choir.",
-            "He helps his neighbors with their chores.",
-            "The scientist discovered a new species.",
-            "We are exploring the countryside.",
-            "He always arrives early at the meeting.",
-            "They enjoy hiking in the mountains.",
-            "She is designing a new website.",
-            "The city lights look amazing at night.",
-            "The baby is learning to walk.",
-            "He fixed the computer by himself.",
-            "The children are laughing and playing.",
-            "She often forgets her keys.",
-            "The workers are repairing the road.",
-            "They finished their homework before dinner.",
-            "The librarian organized the books neatly.",
-            "He rides his motorcycle every weekend.",
-            "She read an interesting article yesterday.",
-            "The car stopped suddenly at the intersection.",
-            "The garden is full of colorful flowers.",
-            "They were discussing their future plans.",
-            "She baked a cake for the party.",
-            "He speaks three different languages fluently.",
-            "The airplane landed safely on the runway.",
-            "The family went camping last weekend.",
-            "The tourists are taking photos of the monument.",
-            "She plays tennis every Saturday morning.",
-            "The professor explained the theory in detail.",
-            "They swim in the lake during summer.",
-            "The students revised for their exams.",
-            "He climbed the mountain in record time.",
-            "She received a letter from her friend.",
-            "The mechanic repaired the car's engine.",
-            "He always drinks coffee in the morning.",
-            "They drove to the countryside for a picnic.",
-            "The company has achieved great success.",
-            "She enjoys painting in her free time.",
-            "He reads historical novels regularly.",
-            "The team practiced hard for the tournament.",
-            "They are organizing a charity event.",
-            "The cat jumped onto the kitchen table.",
-            "The dog followed its owner to the park.",
-            "She wears a beautiful dress to the party.",
-            "He opened the window to let in fresh air.",
-            "The project was completed ahead of schedule.",
-            "The baby smiled at everyone in the room.",
-            "She dances gracefully on the stage.",
-            "The workers fixed the broken pipe.",
-            "He shared his lunch with his colleagues.",
-            "The artist created a masterpiece of art.",
-            "They visited the museum to learn about history.",
-            "She waters her plants every morning.",
-            "He turned off the lights before leaving.",
-            "We celebrated the festival with joy."
 
-        };
+    public void TestNegations(HashSet<string> hashset)
+    {
         List<string> validNegations = new List<string>() {
         "She haveasda not readingasdada a bookin", // this must fail
         "AHHAHAHA is not freaking a giant spiderone", // this must fail freaking is not in verbs
@@ -698,32 +572,173 @@ public class EnglishLogic : MonoBehaviour
         };
         List<string> failedPhrases = new List<string>();
 
-        //bool a = IsAValidSimpleAffirmation("The cat is sleeping on the couch.");
+        HashSet<string> NotRecognizedNegations = new HashSet<string>
+        {
+            "The car has not needed repairs yet.",
+            "The train has not stopped here today.",
+            "The hill has not looked very steep.",
+            "The car has not moved much today.",
+            "The silverware has not shined like before.",
+            "The piano has not needed tuning recently.",
+            "The garden has not needed watering today.",
+            "The beach has not looked crowded today.",
+            "The heavy boxes have not been moved.",
+            "The vase has not broken easily today.",
+            "Her favorite song has not played yet.",
+            "The soup has not tasted good today.",
+            "The director has not given any interviews.",
+            "The application has not worked properly today.",
+            "The house has not looked very big.",
+            "The museum has not opened on Mondays.",
+            "The client has not answered the emails.",
+            "The marathon has not taken place today.",
+            "The report has not been finished yet.",
+            "The professor has not explained everything clearly.",
+            "The kitchen has not been cleaned today.",
+            "The library has not opened on Sundays.",
+            "The software has not worked properly today.",
+            "The surprise party has not happened yet.",
+            "The podcast has not been recorded yet.",
+            "The family has not traveled this year.",
+            "The community has not supported the project.",
+            "The garage has not been big enough.",
+            "The countryside has not looked beautiful recently.",
+            "A sandcastle has not lasted long today.",
+            "The city has not looked crowded today.",
+            "A job has not brought happiness today."
+        };
+
         string allFail = "PORCOZIO: ";
-        //if (IsAValidNegation("The art gallery is not open this week."))
-        //{
-        //    Debug.Log("");
-        //}
-        //if (IsAValidSimpleQuestion("Am I helping you with the task?"))
-        //{
-        //    Debug.Log("");
-        //}
         foreach (string phrase in hashset)
         {
-            // ok 100%
-            //if (IsAValidSimpleQuestion(phrase))
-            //{
-            //    Debug.Log("");
-            //}
+            if (IsAValidNegation(phrase) /*|| SentenceIsInNegation(phrase)*/)
+            {
+                Debug.Log("");
+            }
+            else
+            {
+                failedPhrases.Add(phrase);
+                //hashset.Remove(phrase);
+            }
+        }
+        foreach (string phrase in failedPhrases)
+        {
+            allFail += phrase + "\n";
+        }
+        Debug.Log(allFail);
+        Debug.Log("TOTAL FAILED QUESTION: " + failedPhrases.Count);
+    }
+    public void TestQuestions(HashSet<string> hashset)
+    {
+        List<string> validQuestions = new List<string>
+        {
+            "Does she drink coffee?",
+            "Do they play soccer on weekends?",
+            "Is he reading a book?",
+            "Are we going to the park?",
+            "Was she working yesterday?",
+            "Were they watching a movie?",
+            "Has he finished his homework?",
+            "Have you seen the new movie?",
+            "Had they already left the house?",
+            "Will she call him later?",
+            "Shall we start the meeting now?",
+            "Can they solve the problem?",
+            "Could she help with the project?",
+            "May I borrow your pen?",
+            "Might they visit us tomorrow?",
+            "Must we submit the form today?",
+            "Should they take the bus?",
+            "Would he like some tea?",
+            "Why is she crying?",
+            "When will they arrive?",
+            "Where are we meeting?",
+            "How does he know that?",
+            "What did she say?",
+            "Which book should I read?",
+            "Who is calling at this hour?",
+            "Whom should I ask for help?",
+            "Whose bag is this?",
+            "Whenever will it stop raining?",
+            "Wherever did they go?",
+            "Whatever can I do now?",
+            "Whichever option is better?",
+            "Who is coming to the party?",
+            "How many friends does he have?",
+            "How much time do we need?",
+            "What kind of music do they like?",
+            "Why are they laughing so loudly?",
+            "When did he start working here?",
+            "Where has she put her keys?",
+            "How do you open this box?",
+            "What time is the meeting?",
+            "Is it raining outside?",
+            "Are they going to join us later?",
+            "Was the movie interesting?",
+            "Were you listening to the teacher?",
+            "Have they been waiting long?",
+            "Has she been working hard?",
+            "Had they been driving all night?",
+            "Will it take much longer?",
+            "Shall we order some food?",
+            "Can he swim fast?",
+            "Could they be lying to us?",
+            "May I enter the room?",
+            "Might she have misunderstood?",
+            "Must we really leave now?",
+            "Should I stay or go?",
+            "Would it be okay to call later?",
+            "Why didn’t she reply?",
+            "When will you visit us?",
+            "Where are they traveling next?",
+            "How does this machine work?",
+            "What color do you prefer?",
+            "Which song do you recommend?",
+            "Who knows the answer?",
+            "Whom did you invite?",
+            "Whose idea was this?",
+            "Whenever did he decide that?",
+            "Wherever are you going now?",
+            "Whatever happened to him?",
+            "Whichever path you take, be careful.",
+            "Who is responsible for this?",
+            "How often do they meet?",
+            "How far is the station?",
+            "What sort of food does she enjoy?",
+            "Why did he leave early?",
+            "When can we meet again?",
+            "Where did you park the car?",
+            "How have they been doing?",
+            "What is she thinking about?",
+            "Is she planning to stay?",
+            "Are they already there?",
+            "Was it a good experience?",
+            "Were we supposed to bring something?",
+            "Have you ever been to Paris?",
+            "Has she already called?",
+            "Had they ever tried this before?",
+            "Will it snow tomorrow?",
+            "Shall I open the window?",
+            "Can we finish this on time?",
+            "Could it be a mistake?",
+            "May I have a moment of your time?",
+            "Might it rain later today?",
+            "Must he be so rude?",
+            "Should they reconsider their plan?",
+            "Would she agree with this?",
+            "Why didn’t they tell us earlier?",
+            "When is the next train arriving?",
+            "Where should we meet?",
+            "How can we solve this?",
+            "What should I bring?",
+            "Which way do we go?"
+        };
+        List<string> failedPhrases = new List<string>();
 
-
-            //if (IsAValidSimpleAffirmation(phrase))
-            //{
-            //    Debug.Log("");
-            //}
-
-
-            if (IsAValidNegation(phrase))
+        string allFail = "PORCOZIO: ";
+        foreach (string phrase in hashset)
+        {
+            if (IsAValidSimpleQuestion(phrase) || SentenceIsInQuestion(phrase))
             {
                 Debug.Log("");
             }
@@ -739,7 +754,135 @@ public class EnglishLogic : MonoBehaviour
         Debug.Log(allFail);
         Debug.Log("TOTAL FAILED QUESTION: " + failedPhrases.Count);
     }
-    bool ContainsWordInCategories(List<string> result, Dictionary<string, HashSet<string>> wordCategories)
+    public void TestAffirmations(HashSet<string> hashset)
+    {
+        List<string> validAffirmations = new List<string>()
+        {
+            "She is reading a book.",
+            "He plays soccer every weekend.",
+            "They are watching a movie tonight.",
+            "We have completed the project.",
+            "I will call you later.",
+            "John can drive a car.",
+            "Sarah should study more often.",
+            "It was raining heavily yesterday.",
+            "You must finish your homework.",
+            "They might visit us tomorrow.",
+            "Tom enjoys cooking Italian food.",
+            "Emma likes to play the piano.",
+            "The cat is sleeping on the couch.",
+            "My parents are traveling to France.",
+            "Alice has written a beautiful poem.",
+            "James is preparing dinner right now.",
+            "The students were discussing the topic.",
+            "Lily often goes to the park.",
+            "The baby cried all night.",
+            "Jack has bought a new car.",
+            "The teacher explained the lesson clearly.",
+            "The birds are singing in the trees.",
+            "He rides his bicycle to work.",
+            "We are planning a trip to the mountains.",
+            "She cleaned her room yesterday.",
+            "The company is launching a new product.",
+            "They have been working on the presentation.",
+            "The train arrived on time.",
+            "He was fixing the broken chair.",
+            "The team will win the championship.",
+            "The dog is barking loudly outside.",
+            "She watches TV every evening.",
+            "They built a sandcastle at the beach.",
+            "The sun is shining brightly today.",
+            "The artist painted a beautiful landscape.",
+            "They were waiting for the bus.",
+            "He studies mathematics every day.",
+            "She works in an international company.",
+            "We are learning new skills online.",
+            "The flowers bloom in the spring.",
+            "They went to the cinema last night.",
+            "The chef is preparing a delicious meal.",
+            "The kids are playing in the garden.",
+            "He has traveled to many countries.",
+            "She takes good care of her plants.",
+            "They attend dance classes twice a week.",
+            "The book was written by a famous author.",
+            "She sings beautifully in the choir.",
+            "He helps his neighbors with their chores.",
+            "The scientist discovered a new species.",
+            "We are exploring the countryside.",
+            "He always arrives early at the meeting.",
+            "They enjoy hiking in the mountains.",
+            "She is designing a new website.",
+            "The city lights look amazing at night.",
+            "The baby is learning to walk.",
+            "He fixed the computer by himself.",
+            "The children are laughing and playing.",
+            "She often forgets her keys.",
+            "The workers are repairing the road.",
+            "They finished their homework before dinner.",
+            "The librarian organized the books neatly.",
+            "He rides his motorcycle every weekend.",
+            "She read an interesting article yesterday.",
+            "The car stopped suddenly at the intersection.",
+            "The garden is full of colorful flowers.",
+            "They were discussing their future plans.",
+            "She baked a cake for the party.",
+            "He speaks three different languages fluently.",
+            "The airplane landed safely on the runway.",
+            "The family went camping last weekend.",
+            "The tourists are taking photos of the monument.",
+            "She plays tennis every Saturday morning.",
+            "The professor explained the theory in detail.",
+            "They swim in the lake during summer.",
+            "The students revised for their exams.",
+            "He climbed the mountain in record time.",
+            "She received a letter from her friend.",
+            "The mechanic repaired the car's engine.",
+            "He always drinks coffee in the morning.",
+            "They drove to the countryside for a picnic.",
+            "The company has achieved great success.",
+            "She enjoys painting in her free time.",
+            "He reads historical novels regularly.",
+            "The team practiced hard for the tournament.",
+            "They are organizing a charity event.",
+            "The cat jumped onto the kitchen table.",
+            "The dog followed its owner to the park.",
+            "She wears a beautiful dress to the party.",
+            "He opened the window to let in fresh air.",
+            "The project was completed ahead of schedule.",
+            "The baby smiled at everyone in the room.",
+            "She dances gracefully on the stage.",
+            "The workers fixed the broken pipe.",
+            "He shared his lunch with his colleagues.",
+            "The artist created a masterpiece of art.",
+            "They visited the museum to learn about history.",
+            "She waters her plants every morning.",
+            "He turned off the lights before leaving.",
+            "We celebrated the festival with joy."
+
+        };
+        List<string> failedPhrases = new List<string>();
+
+        string allFail = "PORCOZIO: ";
+        foreach (string phrase in hashset)
+        {
+            if (IsAValidSimpleAffirmation(phrase) || SentenceIsInAffirmation(phrase))
+            {
+                Debug.Log("");
+            }
+            else
+            {
+                failedPhrases.Add(phrase);
+            }
+        }
+        foreach (string phrase in failedPhrases)
+        {
+            allFail += phrase + "\n";
+        }
+        Debug.Log(allFail);
+        Debug.Log("TOTAL FAILED QUESTION: " + failedPhrases.Count);
+    }
+
+    void ContainsWordInCategories(List<string> result, Dictionary<string, HashSet<string>> wordCategories)
     {
         foreach (string word in result) // Itera su ogni parola nella lista `result`
         {
@@ -748,24 +891,21 @@ public class EnglishLogic : MonoBehaviour
                 if (wordCategories[category].Contains(word)) // Controlla se la parola appartiene alla categoria
                 {
                     Debug.Log($"La parola '{word}' appartiene alla categoria '{category}'.");
-                    return true; // Restituisce `true` alla prima corrispondenza trovata
                 } else
                 {
-                    wordCategories["bonusWords"].Add(word);
+                    this.wordCategories["bonusWords"].Add(word);
                     Debug.Log($"La parola '{word}' ora appartiene alla categoria 'bonusWords'.");
-                    return true;
                 }
             }
         }
         Debug.Log("Nessuna parola in `result` appartiene alle categorie nel dizionario.");
-        return false; // Restituisce `false` se nessuna corrispondenza è trovata
     }
 
     bool IsAValidSimpleQuestion(string input)
     {
         // Pulisce e divide l'input in parole
         List<string> result = SplitAndCleanString(input.ToLower());
-        bool found = ContainsWordInCategories(result, wordCategories);
+        ContainsWordInCategories(result, wordCategories);
 
         bool IsInCategory(string word, string category) =>
             wordCategories[category].Contains(word) || wordCategories["bonusWords"].Contains(word);
@@ -960,7 +1100,7 @@ public class EnglishLogic : MonoBehaviour
     {
         // Pulisce e divide l'input in parole
         List<string> result = SplitAndCleanString(input.ToLower());
-        bool found = ContainsWordInCategories(result, wordCategories);
+        ContainsWordInCategories(result, wordCategories);
         if (result.Count < 2) // Lunghezza minima per un'affermazione completa
         {
             Debug.Log("Input troppo breve per essere un'affermazione valida.");
@@ -1099,7 +1239,8 @@ public class EnglishLogic : MonoBehaviour
     {
         // Pulisce e divide l'input in parole
         List<string> result = SplitAndCleanString(input.ToLower());
-        bool found = ContainsWordInCategories(result, wordCategories);
+        ContainsWordInCategories(result, wordCategories);
+        
         if (result.Count < 3) // Lunghezza minima per una negazione completa
         {
             Debug.Log("Input troppo breve per essere una negazione valida.");
@@ -1121,100 +1262,148 @@ public class EnglishLogic : MonoBehaviour
              result[0].ToLower() == "our" ||
              result[0].ToLower() == "their");
 
-        bool checkForFirstTwoWords = (FirstIsWithPossessives && IsInCategory(result[1], "subject") || IsInCategory(result[0], "subject"));
-
-        // Caso 1: Subject + Auxiliary/Modal + "not" + Verb
-        if (result.Count >= 4 &&
-            /*IsInCategory(result[0], "subject")*/  checkForFirstTwoWords  &&
-            //(IsInCategory(result[1], "auxiliary") || IsInCategory(result[1], "modal")) &&
-            wordCategories["auxiliary"].Contains(result[1]) &&
-            //result[2] == "not" &&
-            wordCategories["verb"].Contains(result[2]))
+        bool checkForFirstTwoWords = (FirstIsWithPossessives && IsInCategory(result[1], "subject")); /*|| IsInCategory(result[0], "subject")) */;
+        bool onlyFirst = IsInCategory(result[0], "subject");
+        
+        if (result.Count >= 3)
         {
-            feedbackText.text = "Input ok: subject + auxiliary/modal + not + verb.";
-            result.Clear();
-            return true;
-        }
-
-        // Caso 2: Subject + Auxiliary + "not" + Verb-ing (Present Continuous)
-        if (result.Count >= 4 &&
-             checkForFirstTwoWords &&
-            wordCategories["auxiliary"].Contains(result[1]) &&
-            //result[2] == "not" &&
-            wordCategories["verb"].Contains(result[2]))
+            if(checkForFirstTwoWords && wordCategories["verb"].Contains(result[2]))
+            {
+                feedbackText.text = "Input ok: subject + cannot + verb + (adverbs/time).";
+                result.Clear();
+                return true;
+            }
+            if(onlyFirst && wordCategories["verb"].Contains(result[1]))
+            {
+                feedbackText.text = "Input ok: subject + cannot + verb + (adverbs/time).";
+                result.Clear();
+                return true;
+            }
+        } 
+        if (result.Count >= 4 )
         {
-            feedbackText.text = "Input ok: subject + auxiliary + not + verb-ing.";
-            result.Clear();
-            return true;
+            if (checkForFirstTwoWords)
+            {
+                if (wordCategories["auxiliary"].Contains(result[2]) || IsInCategory(result[2], "subject") && 
+                    wordCategories["verb"].Contains(result[3])) {
+                    feedbackText.text = "Input ok: subject + auxiliary/modal + not + verb + (adverbs/time).";
+                    result.Clear();
+                    return true;
+                }
+            }
+            if (onlyFirst)
+            {
+                if (wordCategories["auxiliary"].Contains(result[1]) || IsInCategory(result[1], "subject") && 
+                    wordCategories["verb"].Contains(result[2]))
+                {
+                    feedbackText.text = "Input ok: subject + auxiliary/modal + not + verb + (adverbs/time).";
+                    result.Clear();
+                    return true;
+                }
+            }
         }
-
-        // Caso 3: Subject + Auxiliary + "not" + Past Participle (Passato prossimo)
-        if (result.Count >= 4 &&
-             checkForFirstTwoWords &&
-            wordCategories["auxiliary"].Contains(result[1]) &&
-            //result[2] == "not" &&
-            wordCategories["verb"].Contains(result[2]))
+        if (result.Count >= 5)
         {
-            feedbackText.text = "Input ok: subject + auxiliary + not + past participle.";
-            result.Clear();
-            return true;
+            if (checkForFirstTwoWords)
+            {
+                if( wordCategories["auxiliary"].Contains(result[2]) || IsInCategory(result[2], "subject") &&
+                    wordCategories["verb"].Contains(result[3]) &&
+                    wordCategories["averbs"].Contains(result[4]) || wordCategories["time"].Contains(result[4]))
+                {
+                    feedbackText.text = "Input ok: subject + auxiliary + not + verb + (adverbs/time).";
+                    result.Clear();
+                    return true;
+                }
+            }
+            if (onlyFirst)
+            {
+                if (wordCategories["auxiliary"].Contains(result[1]) || IsInCategory(result[1], "subject")  &&
+                    wordCategories["verb"].Contains(result[2]) &&
+                    wordCategories["averbs"].Contains(result[3]) || wordCategories["time"].Contains(result[3]))
+                {
+                    feedbackText.text = "Input ok: subject + auxiliary + not + verb + (adverbs/time).";
+                    result.Clear();
+                    return true;
+                }
+            }
         }
-
-        // Caso 4: Subject + "cannot" + Verb (Forma contratta)
-        if (result.Count >= 3 &&
-            checkForFirstTwoWords &&
-            //result[1] == "cannot" &&
-            wordCategories["verb"].Contains(result[1]))
+        if (result.Count >= 7)
         {
-            feedbackText.text = "Input ok: subject + cannot + verb.";
-            result.Clear();
-            return true;
+            if (checkForFirstTwoWords)
+            {
+                if (
+                    wordCategories["auxiliary"].Contains(result[2]) || IsInCategory(result[2], "subject") &&
+                    wordCategories["verb"].Contains(result[3]) &&
+                    IsInCategory(result[4], "subject") &&
+                    IsInCategory(result[5], "subject")
+                    )
+                {
+                    feedbackText.text = "Input ok: subject + auxiliary + not + verb + object + (adverbs/time).";
+                    result.Clear();
+                    return true;
+                }
+            }
+            if (onlyFirst || result[0].ToLower().Equals("the")) // The lost items are not showing up.
+            {
+                if (
+                    wordCategories["auxiliary"].Contains(result[1]) || IsInCategory(result[1], "subject") &&
+                    wordCategories["verb"].Contains(result[2]) || wordCategories["auxiliary"].Contains(result[2]) || IsInCategory(result[2], "subject") &&
+                    wordCategories["verb"].Contains(result[3]) || IsInCategory(result[3], "subject") &&
+                    wordCategories["verb"].Contains(result[4]) &&
+                    IsInCategory(result[5], "subject") &&
+                    IsInCategory(result[6], "subject"))
+                {
+                    feedbackText.text = "Input ok: subject + auxiliary + not + verb + object + (adverbs/time).";
+                    result.Clear();
+                    return true;
+                }
+            }
         }
-
-        // Caso 5: Subject + Auxiliary + "not" + Verb con avverbi aggiuntivi
-        if (result.Count >= 5 &&
-             checkForFirstTwoWords &&
-            wordCategories["auxiliary"].Contains(result[1]) &&
-            //result[2] == "not" &&
-            wordCategories["verb"].Contains(result[2]) &&
-            (wordCategories["averbs"].Contains(result[3]) || wordCategories["time"].Contains(result[3])))
+        if (result.Count >= 8)
         {
-            feedbackText.text = "Input ok: subject + auxiliary + not + verb + adverbs/time.";
-            result.Clear();
-            return true;
+            if (checkForFirstTwoWords)
+            {
+                if (
+                    wordCategories["auxiliary"].Contains(result[2]) || IsInCategory(result[2], "subject") &&
+                    wordCategories["verb"].Contains(result[3]) || wordCategories["auxiliary"].Contains(result[3]) &&
+                    wordCategories["verb"].Contains(result[4]) &&
+                    IsInCategory(result[5], "subject") &&
+                    IsInCategory(result[6], "subject")
+                    )
+                {
+                    feedbackText.text = "Input ok: subject + auxiliary + not + verb + object + (time)";
+                    result.Clear();
+                    return true;
+                }
+            }
+            if (onlyFirst)
+            {
+                if (wordCategories["auxiliary"].Contains(result[1]) || IsInCategory(result[1], "subject") &&
+                    wordCategories["verb"].Contains(result[2]) || wordCategories["auxiliary"].Contains(result[2]) || IsInCategory(result[2], "subject") &&
+                    wordCategories["verb"].Contains(result[3]) || wordCategories["auxiliary"].Contains(result[3]) &&
+                    wordCategories["verb"].Contains(result[4]) || IsInCategory(result[4], "subject") &&
+                    IsInCategory(result[5], "subject") &&
+                    IsInCategory(result[5], "subject")
+                    )
+                {
+                    feedbackText.text = "Input ok: subject + auxiliary + not + verb + object + (time)";
+                    result.Clear();
+                    return true;
+                }
+            }
         }
-        // Caso 7: Subject + Auxiliary + "not" + Verb + [Adverb/Time/Clause]
-        if (result.Count >= 6 &&
-            checkForFirstTwoWords &&
-            wordCategories["auxiliary"].Contains(result[1]) &&
-            wordCategories["verb"].Contains(result[2]) &&
-            // Controlla che i restanti elementi siano opzionali e validi
-            result.Skip(3).All(word => wordCategories["time"].Contains(word) ||
-                                        wordCategories["preposition"].Contains(word) ||
-                                        wordCategories["averbs"].Contains(word) ||
-                                        IsInCategory(word, "bonusWords")))
-        {
-            feedbackText.text = "Input ok: subject + auxiliary + not + verb + additional elements.";
-            result.Clear();
-            return true;
-        }
-
-        //if (result.Count >= 7)
-        //{
-        //    feedbackText.text = "Sorry. Cant Detect Sentences This Long ATM";
-        //    return false;
-        //}
-
         // Caso 6: Frasi con elementi aggiuntivi
         for (int i = 4; i < result.Count; i++)
         {
             if (!(wordCategories["time"].Contains(result[i]) ||
                   wordCategories["preposition"].Contains(result[i]) ||
                   wordCategories["averbs"].Contains(result[i]) ||
-                  IsInCategory(result[i], "bonusWords") ||
+                  IsInCategory(result[i], "subject") ||
                   wordCategories["verb"].Contains(result[i])) || result.Count >= 7)
             {
-                Debug.Log($"La parola '{result[i]}' non appartiene a nessuna categoria.");
+                //Debug.Log($"La parola '{result[i]}' non appartiene a nessuna categoria.");
+                //Debug.Log(result[i] + "\n");
+                //wordCategories["bonusWords"].Add(result[i]);
                 feedbackText.text = "Internal Error - The System Can't Detect This Type Of Input Right Now - Try Another";
                 result.Clear();
                 return false;

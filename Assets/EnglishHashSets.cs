@@ -178,8 +178,6 @@ public static class EnglishHashSets
     "Does he wipe the floor?",
     "Do we attend the seminar?"
     };
-
-
     public static HashSet<string> present_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
     "Is she reading a book?",
