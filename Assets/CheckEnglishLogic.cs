@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class CheckEnglishLogic : MonoBehaviour
 {
@@ -58,18 +55,18 @@ public class CheckEnglishLogic : MonoBehaviour
         wordCategories = englishLogic.wordCategories;
 
         // questions
-        present_simple_questions = englishLogic.present_simple_questions;
-        present_continuous_questions = englishLogic.present_continuous_questions;
-        present_perfect_questions = englishLogic.present_perfect_questions;
-        present_perfect_continuous_questions = englishLogic.present_perfect_continuous_questions;
-        past_simple_questions = englishLogic.past_simple_questions;
-        past_continuous_questions = englishLogic.past_continuous_questions;
-        past_perfect_questions = englishLogic.past_perfect_questions;
-        past_perfect_continuous_questions = englishLogic.past_perfect_continuous_questions;
-        future_simple_questions = englishLogic.future_simple_questions;
-        future_continuous_questions = englishLogic.future_continuous_questions;
-        future_perfect_questions = englishLogic.future_perfect_questions;
-        future_perfect_continuous_questions = englishLogic.future_perfect_continuous_questions;
+        present_simple_questions = EnglishHashSets.present_simple_questions;
+        present_continuous_questions = EnglishHashSets.present_continuous_questions;
+        present_perfect_questions = EnglishHashSets.present_perfect_questions;
+        present_perfect_continuous_questions = EnglishHashSets.present_perfect_continuous_questions;
+        past_simple_questions = EnglishHashSets.past_simple_questions;
+        past_continuous_questions = EnglishHashSets.past_continuous_questions;
+        past_perfect_questions = EnglishHashSets.past_perfect_questions;
+        past_perfect_continuous_questions = EnglishHashSets.past_perfect_continuous_questions;
+        future_simple_questions = EnglishHashSets.future_simple_questions;
+        future_continuous_questions = EnglishHashSets.future_continuous_questions;
+        future_perfect_questions = EnglishHashSets.future_perfect_questions;
+        future_perfect_continuous_questions = EnglishHashSets.future_perfect_continuous_questions;
 
 
         // per ogni frase nell'hashset
@@ -93,18 +90,18 @@ public class CheckEnglishLogic : MonoBehaviour
         // ---------------------------
 
         // Affirmations
-        present_simple_affirmations = englishLogic.present_simple_affirmations;
-        present_continuous_affirmations = englishLogic.present_continuous_affirmations;
-        present_perfect_affirmations = englishLogic.present_perfect_affirmations;
-        present_perfect_continuous_affirmations = englishLogic.present_perfect_continuous_affirmations;
-        past_simple_affirmations = englishLogic.past_simple_affirmations;
-        past_continuous_affirmations = englishLogic.past_continuous_affirmations;
-        past_perfect_affirmations = englishLogic.past_perfect_affirmations;
-        past_perfect_continuous_affirmations = englishLogic.past_perfect_continuous_affirmations;
-        future_simple_affirmations = englishLogic.future_simple_affirmations;
-        future_continuous_affirmations = englishLogic.future_continuous_affirmations;
-        future_perfect_affirmations = englishLogic.future_perfect_affirmations;
-        future_perfect_continuous_affirmations = englishLogic.future_perfect_continuous_affirmations;
+        present_simple_affirmations = EnglishHashSets.present_simple_affirmations;
+        present_continuous_affirmations = EnglishHashSets.present_continuous_affirmations;
+        present_perfect_affirmations = EnglishHashSets.present_perfect_affirmations;
+        present_perfect_continuous_affirmations = EnglishHashSets.present_perfect_continuous_affirmations;
+        past_simple_affirmations = EnglishHashSets.past_simple_affirmations;
+        past_continuous_affirmations = EnglishHashSets.past_continuous_affirmations;
+        past_perfect_affirmations = EnglishHashSets.past_perfect_affirmations;
+        past_perfect_continuous_affirmations = EnglishHashSets.past_perfect_continuous_affirmations;
+        future_simple_affirmations = EnglishHashSets.future_simple_affirmations;
+        future_continuous_affirmations = EnglishHashSets.future_continuous_affirmations;
+        future_perfect_affirmations = EnglishHashSets.future_perfect_affirmations;
+        future_perfect_continuous_affirmations = EnglishHashSets.future_perfect_continuous_affirmations;
 
         ValidatePhrase(present_simple_affirmations, wordCategories);
         ValidatePhrase(present_continuous_affirmations, wordCategories);
@@ -122,18 +119,18 @@ public class CheckEnglishLogic : MonoBehaviour
         // ---------------------------
 
         // Negations
-        present_simple_negations = englishLogic.present_simple_negations;
-        present_continuous_negations = englishLogic.present_continuous_negations;
-        present_perfect_negations = englishLogic.present_perfect_negations;
-        present_perfect_continuous_negations = englishLogic.present_perfect_continuous_negations;
-        past_simple_negations = englishLogic.past_simple_negations;
-        past_continuous_negations = englishLogic.past_continuous_negations;
-        past_perfect_negations = englishLogic.past_perfect_negations;
-        past_perfect_continuous_negations = englishLogic.past_perfect_continuous_negations;
-        future_simple_negations = englishLogic.future_simple_negations;
-        future_continuous_negations = englishLogic.future_continuous_negations;
-        future_perfect_negations = englishLogic.future_perfect_negations;
-        future_perfect_continuous_negations = englishLogic.future_perfect_continuous_negations;
+        present_simple_negations = EnglishHashSets.present_simple_negations;
+        present_continuous_negations = EnglishHashSets.present_continuous_negations;
+        present_perfect_negations = EnglishHashSets.present_perfect_negations;
+        present_perfect_continuous_negations = EnglishHashSets.present_perfect_continuous_negations;
+        past_simple_negations = EnglishHashSets.past_simple_negations;
+        past_continuous_negations = EnglishHashSets.past_continuous_negations;
+        past_perfect_negations = EnglishHashSets.past_perfect_negations;
+        past_perfect_continuous_negations = EnglishHashSets.past_perfect_continuous_negations;
+        future_simple_negations = EnglishHashSets.future_simple_negations;
+        future_continuous_negations = EnglishHashSets.future_continuous_negations;
+        future_perfect_negations = EnglishHashSets.future_perfect_negations;
+        future_perfect_continuous_negations = EnglishHashSets.future_perfect_continuous_negations;
 
         ValidatePhrase(present_simple_negations, wordCategories);
         ValidatePhrase(present_continuous_negations, wordCategories);
