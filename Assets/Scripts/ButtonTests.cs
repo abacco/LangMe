@@ -231,7 +231,10 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
+                        else
+                        {
+                            return false;
+                        }
                     }
                     if (words[3].Equals("a")) // a
                     {
@@ -243,8 +246,34 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (words[2].Equals("not"))
                 {
+                    if (ing_verbs.Contains(words[3])) // John is playing
+                    {
+                        if (words.Length == 4) { return true; }
+                        if ((prepositions.Contains(words[4]) && words[5].Equals("the")) || words[4].Equals("the")) // in the gardent
+                        {
+                            if (common_nouns.Contains(words[5]) || plural_nouns.Contains(words[5]))
+                            {
+                                return true;
+                            } else
+                            {
+                                return false;
+                            }
+                        }
+                        if (words[4].Equals("a")) // a
+                        {
+                            if (common_nouns.Contains(words[5])) // letter
+                            {
+                                return true;
+                            } 
+                            else { 
+                                return false; 
+                            }
+                        }
+                    }
                     if (adjectives.Contains(words[3]))
+                    {
                         return true;
+                    }
                 }
                 else
                 {
@@ -433,8 +462,27 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (words[3].Equals("not"))
                 {
+                    if (ing_verbs.Contains(words[4])) // the dogs are not playing
+                    {
+                        if (words.Length == 5) 
+                        { 
+                            return true; 
+                        }
+                        if (prepositions.Contains(words[5]) && words[6].Equals("the")) // in/on the gardent
+                        {
+                            if (common_nouns.Contains(words[7]) || plural_nouns.Contains(words[7]))
+                            {
+                                return true;
+                            }
+                            else { 
+                                return false;
+                            }
+                        }
+                    }
                     if (adjectives.Contains(words[4]))
+                    {
                         return true;
+                    }
                 }
                 else
                 {
@@ -667,6 +715,7 @@ public class ButtonTests : MonoBehaviour
             "The boy is eating sandwiches.",
             "A girl is not reading a book.",
             "The dogs are not playing in the garden.",
+
             "John is not writing a letter."
         };
 
