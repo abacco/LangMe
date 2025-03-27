@@ -8,8 +8,8 @@ public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
     static List<string> plural_subject = new List<string> { "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
-    static List<string> base_verbs = new List<string> { "visit","work","agree","drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> base_verbs = new List<string> { "bark", "visit","work","agree","drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
     static List<string> ing_verbs = new List<string> { "agreeing", "liking", "standing", "writing","playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> { "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
@@ -17,7 +17,7 @@ public class ButtonTests : MonoBehaviour
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> common_nouns = new List<string> { "task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
     static List<string> plural_nouns = new List<string> { "days","grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
     static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
@@ -60,11 +60,14 @@ public class ButtonTests : MonoBehaviour
     static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby" };
     // Avverbi di modo
     /*
-            Di solito si collocano dopo il verbo e l'oggetto (se presente).
-            Esempio: She speaks English fluently.
-            Esempio: They completed the task quickly.
-            In alcune frasi, possono apparire all'inizio o prima del verbo per maggiore enfasi.
-            Esempio: Carefully, she explained the instructions.
+            in inglese generalmente si collocano alla fine della frase
+
+            She drives the car carefully.
+            He completed the task quickly.
+
+            prima del verbo principale per dare enfasi o un tono più formale:
+            She carefully drives the car.
+            He quickly completed the task.
      */
     static List<string> mannerAdverbs = new List<string> { "quickly", "slowly", "carefully", "happily", "sadly" };
     // Altri avverbi utili
@@ -94,7 +97,7 @@ public class ButtonTests : MonoBehaviour
             words[i] = words[i].ToLower();
         }
         // avverbi di luogo alla fine della frase
-        if (placeAdverbs.Contains(words[words.Length-1]))
+        if (placeAdverbs.Contains(words[words.Length-1]) || mannerAdverbs.Contains(words[words.Length - 1]))
         {
             words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
         }
@@ -334,6 +337,21 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (words[2].Equals("not"))
                 {
+                    if (prepositions.Contains(words[3]) || words[3].Equals("the") || words[3].Equals("a")) // in the gardent
+                    {
+                        if (common_nouns.Contains(words[4]) || plural_nouns.Contains(words[4]))
+                        {
+                            return true;
+                        }
+                        if (adjectives.Contains(words[4]))
+                        {
+                            if (common_nouns.Contains(words[5]) || plural_nouns.Contains(words[5]))
+                            {
+                                return true;
+                            }
+                            return false;
+                        }
+                    }
                     if (ing_verbs.Contains(words[3])) // John is playing
                     {
                         if (words.Length == 4) { return true; }
@@ -362,6 +380,14 @@ public class ButtonTests : MonoBehaviour
                     {
                         return true;
                     }
+                }
+                if (prepositions.Contains(words[2]))
+                {
+                    if (common_nouns.Contains(words[3]) || plural_nouns.Contains(words[3]))
+                    {
+                        return true;
+                    }
+                    return false;
                 }
                 else
                 {
@@ -660,7 +686,7 @@ public class ButtonTests : MonoBehaviour
             words[i] = words[i].ToLower();
         }
         // avverbi di modo alla fine della frase
-        if (placeAdverbs.Contains(words[words.Length-1]))
+        if (placeAdverbs.Contains(words[words.Length-1]) || mannerAdverbs.Contains(words[words.Length - 1]))
         {
             words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
         }
@@ -804,6 +830,17 @@ public class ButtonTests : MonoBehaviour
                 if (adjectives.Contains(words[3]))
                 {
                     return true;
+                }
+                if (prepositions.Contains(words[3]))
+                {
+                    if (words[4].Equals("the") || objectPronouns.Contains(words[4]))
+                    {
+                        if (common_nouns.Contains(words[5]) || plural_nouns.Contains(words[5]))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             }
         }
@@ -1057,10 +1094,23 @@ public class ButtonTests : MonoBehaviour
             "Cars are big.",
             "Cars are not big.",
             "The dogs run.",
+            "The dogs run in the garden.",
             "The dogs are playing in the garden.",
 
             // others
-            "It is a sunny day."
+            "It is a sunny day.",
+            "It is not a sunny day.",
+            "he likes reading",
+
+            "Dogs bark",
+            "She is at home",
+            "She is not at home",
+
+            "She drives the car carefully.", 
+            "He completed the task quickly.",
+
+            "She carefully drives the car.",
+            "He quickly completed the task."
         };
 
         foreach (var sentence in sentences)
