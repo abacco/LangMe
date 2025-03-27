@@ -152,6 +152,7 @@ public class ButtonTests : MonoBehaviour
                 words = words.Where((value, index) => index != 1 && index != 2 && index != 3 && index != 4).ToArray(); // she the child
             }
         }
+        
         if (words[0].ToLower().Equals("the") || words[0].ToLower().Equals("a"))
         {
             bool subjectRecognized = singular_subject.Contains(words[1]);
@@ -162,7 +163,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (words[2].Equals("is"))
             {
-                if (ing_verbs.Contains(words[3]))
+                if (ing_verbs.Contains(words[3])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
                 {
                     if(words.Length == 4)
                     {
@@ -192,33 +193,24 @@ public class ButtonTests : MonoBehaviour
                         return true;
                     }
                 }
-                else
+                if (adjectives.Contains(words[3]))
                 {
-                    bool adjectiveRecognized = adjectives.Contains(words[3]);
-                    if (subjectRecognized && adjectiveRecognized)
-                        return true;
+                    return true;
                 }
             }
             if (words[2].Equals("has"))
             {
                 if (words[3].ToLower().Equals("the") || words[3].ToLower().Equals("a"))
                 {
-                    bool objectRecognized = singular_subject.Contains(words[4]);
-                    if (objectRecognized) return true;
+                    if (singular_subject.Contains(words[4])) return true;
                 }
-                else
-                {
-                    bool adjectiveRecognized = adjectives.Contains(words[3]);
-                    if (adjectiveRecognized)
-                        return true;
-                }
+                if (adjectives.Contains(words[3])) return true;
             }
             if (words[2].Equals("doesn't") && (words[3].Equals("have") || base_verbs.Contains(words[3])))
             {
                 if (words[4].ToLower().Equals("the") || words[4].ToLower().Equals("a")) // The | a
                 {
-                    subjectRecognized = singular_subject.Contains(words[5]);
-                    if (subjectRecognized) return true;
+                    if (singular_subject.Contains(words[5])) return true;
                 }
             }
             if (words[2].Equals("does") && words[3].Equals("not") && (words[4].Equals("have") || base_verbs.Contains(words[4])))
@@ -231,8 +223,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (words[5].ToLower().Equals("the") || words[5].ToLower().Equals("a")) // The | a
                 {
-                    subjectRecognized = singular_subject.Contains(words[6]);
-                    if (subjectRecognized) return true;
+                    if (singular_subject.Contains(words[6])) return true;
                 }
             }
             if (base_verbs_3rd_person.Contains(words[2])) // A/The guy drives a/the (big) car
@@ -249,7 +240,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
                     }
                     else
                     {
@@ -257,7 +247,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
                     }
                 }
                 if (prepositions.Contains(words[3]))
@@ -268,9 +257,7 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
                     }
-                    return false;
                 }
             }
             if (prepositions.Contains(words[2])) // (there is) a book on the table
@@ -283,14 +270,13 @@ public class ButtonTests : MonoBehaviour
             }
             if (prepositions.Contains(words[2])) // (there are) books on the table
             {
-                if (plural_nouns.Contains(words[3]))
-                    return true;
+                if (plural_nouns.Contains(words[3])) return true;
             }
         }
         else
         {
             bool subjectRecognized = proper_nouns.Contains(words[0]) || singular_subject.Contains(words[0]);
-            if (!subjectRecognized) { /*Debug.Log("subject not recognized " + words[0]);*/ return false; }
+            if (!subjectRecognized) { return false; }
             if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
             {
                 words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
@@ -322,10 +308,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        else
-                        {
-                            return false;
-                        }
                     }
                     if (words[3].Equals("a")) // a
                     {
@@ -349,7 +331,6 @@ public class ButtonTests : MonoBehaviour
                             {
                                 return true;
                             }
-                            return false;
                         }
                     }
                     if (ing_verbs.Contains(words[3])) // John is playing
@@ -360,9 +341,6 @@ public class ButtonTests : MonoBehaviour
                             if (common_nouns.Contains(words[5]) || plural_nouns.Contains(words[5]))
                             {
                                 return true;
-                            } else
-                            {
-                                return false;
                             }
                         }
                         if (words[4].Equals("a")) // a
@@ -371,9 +349,6 @@ public class ButtonTests : MonoBehaviour
                             {
                                 return true;
                             } 
-                            else { 
-                                return false; 
-                            }
                         }
                     }
                     if (adjectives.Contains(words[3]))
@@ -387,7 +362,6 @@ public class ButtonTests : MonoBehaviour
                     {
                         return true;
                     }
-                    return false;
                 }
                 else
                 {
@@ -405,32 +379,22 @@ public class ButtonTests : MonoBehaviour
                                 return true;
                         }
                     }
-                    bool adjectiveRecognized = adjectives.Contains(words[2]);
-                    if (adjectiveRecognized)
-                        return true;
+                    if (adjectives.Contains(words[2])) return true;
                 }
             }
             if (words[1].Equals("has"))
             {
                 if (words[2].ToLower().Equals("the") || words[2].ToLower().Equals("a"))
                 {
-                    bool objectRecognized = singular_subject.Contains(words[3]);
-                    if (objectRecognized) return true;
+                    if (singular_subject.Contains(words[3])) return true;
                 }
                 else
                 {
-                    bool adjectiveRecognized = adjectives.Contains(words[2]);
-                    if (adjectiveRecognized)
+                    if (adjectives.Contains(words[2]))
                     {
-                        bool pluralNounsRecognized = plural_nouns.Contains(words[3]); // John loves big books
-                        if (pluralNounsRecognized) return true;
+                        if (plural_nouns.Contains(words[3])) return true; // John loves big books
                     }
-                    else
-                    {
-                        bool pluralNounsRecognized = plural_nouns.Contains(words[2]); // john loves books
-                        if (adjectiveRecognized || pluralNounsRecognized)
-                            return true;
-                    }
+                    if (plural_nouns.Contains(words[2])) return true;// john loves books
                 }
             }
             if (words[1].Equals("doesn't")) // "doesn't"
@@ -443,8 +407,7 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (words[3].ToLower().Equals("the") || words[3].ToLower().Equals("a")) // The | a
                     {
-                        subjectRecognized = singular_subject.Contains(words[4]);
-                        if (subjectRecognized) return true;
+                        if (singular_subject.Contains(words[4])) return true;
                     }
                     if (prepositions.Contains(words[3]))
                     {
@@ -456,13 +419,10 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
                     }
-                    subjectRecognized = singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4]);
-                    if (subjectRecognized) return true;
+                    if (singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4])) return true;
                 }
-                subjectRecognized = singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4]);
-                if (subjectRecognized) return true;
+                if (singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4])) return true;
                 
             }
             if (words[1].Equals("does") && words[2].Equals("not") && (words[3].Equals("have") || base_verbs.Contains(words[3])))
@@ -473,17 +433,14 @@ public class ButtonTests : MonoBehaviour
                     {
                         return true;
                     }
-                    return false;
                 }
                 if (words[4].ToLower().Equals("the") || words[4].ToLower().Equals("a")) // The | a
                 {
-                    subjectRecognized = singular_subject.Contains(words[5]);
-                    if (subjectRecognized) return true;
+                    if (singular_subject.Contains(words[5])) return true;
                 }
                 else
                 {
-                    subjectRecognized = singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4]);
-                    if (subjectRecognized) return true;
+                    if (singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4])) return true;
                 }
             }
             if (base_verbs_3rd_person.Contains(words[1])) // A/The guy drives a/the (big) car
@@ -496,7 +453,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
                     }
                     else
                     {
@@ -504,7 +460,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
                     }
                 }
                 if (common_nouns.Contains(words[2]) || plural_subject.Contains(words[2]))
@@ -517,7 +472,6 @@ public class ButtonTests : MonoBehaviour
                     {
                         return true;
                     }
-                    return false;
                 }
                 if (adjectives.Contains(words[2]))
                 {
@@ -525,7 +479,6 @@ public class ButtonTests : MonoBehaviour
                     {
                         return true;
                     }
-                    return false;
                 }
                 if (ing_verbs.Contains(words[2]))
                 {
@@ -543,9 +496,7 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
                     }
-                    return false;
                 }
             }
             if(subjectRecognized && words[0].Equals("i")){
@@ -559,7 +510,6 @@ public class ButtonTests : MonoBehaviour
                             {
                                 return true;
                             }
-                            return false;
                         }
                         if (plural_nouns.Contains(words[3])) // i do like apples
                         {
@@ -569,7 +519,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return true;
                     }
                     if (frequencyAdverbs.Contains(words[3])) // messo qui altrimenti frasi come John like books schiattano
                     {
@@ -583,7 +532,6 @@ public class ButtonTests : MonoBehaviour
                             {
                                 return true;
                             }
-                            return false;
                         }
                         if (plural_nouns.Contains(words[4])) // i do not like apples
                         {
@@ -602,7 +550,6 @@ public class ButtonTests : MonoBehaviour
                             {
                                 return true;
                             }
-                            return false;
                         }
                         if (plural_nouns.Contains(words[3])) // i do like apples
                         {
@@ -624,7 +571,6 @@ public class ButtonTests : MonoBehaviour
                                 {
                                     return true;
                                 }
-                                return false;
                             }
                             if (plural_nouns.Contains(words[4])) // i do not like apples
                             {
@@ -647,7 +593,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             return true;
                         }
-                        return false;
                     }
                     if (plural_nouns.Contains(words[2])) // i like apples
                     {
@@ -665,13 +610,11 @@ public class ButtonTests : MonoBehaviour
                             {
                                 return true;
                             }
-                            return false;
                         }
                         if (plural_nouns.Contains(words[4])) // i do not like apples
                         {
                             return true;
                         }
-                        return true;
                     }
                 }
             }
