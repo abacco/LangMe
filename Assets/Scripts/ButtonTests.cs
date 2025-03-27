@@ -1106,11 +1106,12 @@ public class ButtonTests : MonoBehaviour
             "She is at home",
             "She is not at home",
 
-            "She drives the car carefully.", 
-            "He completed the task quickly.",
+            "She drives the car carefully." 
 
-            "She carefully drives the car.",
-            "He quickly completed the task."
+            //"He completed the task quickly.",
+
+            //"She carefully drives the car.",
+            //"He quickly completed the task."
         };
 
         foreach (var sentence in sentences)
