@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
@@ -119,15 +120,34 @@ public class ButtonTests : MonoBehaviour
             words = words.Where((value, index) => index != 1).ToArray();
         }
         // Phrasal Verbs
+        string tmpPhrasalVerb = "";
         string detectedPhrasalVerb = "";
         if (words.Length > 3)
         {
-            detectedPhrasalVerb = words[1] + " " + words[2];
+            tmpPhrasalVerb = words[1] + " " + words[2]; // she wakes up
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[1] + " " + words[2];
+                words = words.Where((value, index) => index != 1 && index != 2).ToArray();
+            }
         }
-        if(phrasalVerbs.Contains(detectedPhrasalVerb))
+        if (words.Length > 4)
         {
-            //Debug.Log("phrasal verb detected");
-            words = words.Where((value, index) => index != 1 && index != 2).ToArray();
+            tmpPhrasalVerb = words[2] + " " + words[3];
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[2] + " " + words[3]; // she doesn't wake up the child
+                words = words.Where((value, index) => index != 1 && index != 2 && index != 3).ToArray();
+            }
+        }
+        if (words.Length > 5)
+        {
+            tmpPhrasalVerb = words[3] + " " + words[4];
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[3] + " " + words[4]; // she does not wakes up
+                words = words.Where((value, index) => index != 1 && index != 2 && index != 3 && index != 4).ToArray(); // she the child
+            }
         }
         if (words[0].ToLower().Equals("the") || words[0].ToLower().Equals("a"))
         {
@@ -190,8 +210,22 @@ public class ButtonTests : MonoBehaviour
                         return true;
                 }
             }
-            if (words[2].Equals("doesn't") || words[2].Equals("does") && words[3].Equals("not") && (words[4].Equals("have") || base_verbs.Contains(words[4])))
+            if (words[2].Equals("doesn't") && (words[3].Equals("have") || base_verbs.Contains(words[3])))
             {
+                if (words[4].ToLower().Equals("the") || words[4].ToLower().Equals("a")) // The | a
+                {
+                    subjectRecognized = singular_subject.Contains(words[5]);
+                    if (subjectRecognized) return true;
+                }
+            }
+            if (words[2].Equals("does") && words[3].Equals("not") && (words[4].Equals("have") || base_verbs.Contains(words[4])))
+            {
+                tmpPhrasalVerb = words[1] + " " + words[2]; // she wakes up
+                if (phrasalVerbs.Contains(tmpPhrasalVerb))
+                {
+                    detectedPhrasalVerb = words[1] + " " + words[2];
+                    words = words.Where((value, index) => index != 1 && index != 2).ToArray();
+                }
                 if (words[5].ToLower().Equals("the") || words[5].ToLower().Equals("a")) // The | a
                 {
                     subjectRecognized = singular_subject.Contains(words[6]);
@@ -254,6 +288,10 @@ public class ButtonTests : MonoBehaviour
         {
             bool subjectRecognized = proper_nouns.Contains(words[0]) || singular_subject.Contains(words[0]);
             if (!subjectRecognized) { /*Debug.Log("subject not recognized " + words[0]);*/ return false; }
+            if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
+            {
+                words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+            }
             if (frequencyAdverbs.Contains(words[1]))
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
@@ -263,7 +301,7 @@ public class ButtonTests : MonoBehaviour
                 words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza - He doesn’t ALWAYS agree with me.
             }
             // she the child
-            if (words[1].Equals("the"))
+            if (words[1].Equals("the") || objectPronouns.Contains(words[1]))
             {
                 if (common_nouns.Contains(words[2]) || plural_nouns.Contains(words[2]))
                 {
@@ -635,14 +673,34 @@ public class ButtonTests : MonoBehaviour
             words = words.Skip(2).ToArray();
         }
         // Phrasal Verbs
+        string tmpPhrasalVerb = "";
         string detectedPhrasalVerb = "";
         if (words.Length > 3)
         {
-            detectedPhrasalVerb = words[1] + " " + words[2];
+            tmpPhrasalVerb = words[1] + " " + words[2]; // she wakes up
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[1] + " " + words[2];
+                words = words.Where((value, index) => index != 1 && index != 2).ToArray();
+            }
         }
-        if (phrasalVerbs.Contains(detectedPhrasalVerb))
+        if (words.Length > 4)
         {
-            words = words.Where((value, index) => index != 1 && index != 2).ToArray(); // Mangia pos 1 e 2
+            tmpPhrasalVerb = words[2] + " " + words[3];
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[2] + " " + words[3]; // she doesn't wake up
+                words = words.Where((value, index) => index != 1 && index != 2 && index != 3).ToArray();
+            }
+        }
+        if (words.Length > 5)
+        {
+            tmpPhrasalVerb = words[3] + " " + words[4];
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[3] + " " + words[4]; // she does not wakes up
+                words = words.Where((value, index) => index != 1 && index != 2 && index != 3 && index != 3 && index != 4).ToArray();
+            }
         }
         if (words[0].ToLower().Equals("the") || words[0].ToLower().Equals("a"))
         {
@@ -753,7 +811,7 @@ public class ButtonTests : MonoBehaviour
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
-            if (words[1].Equals("the"))
+            if (words[1].Equals("the") || objectPronouns.Contains(words[1]))
             {
                 if (common_nouns.Contains(words[2]) || plural_nouns.Contains(words[2]))
                 {
@@ -845,6 +903,14 @@ public class ButtonTests : MonoBehaviour
                 {
                     return true;
                 }
+                if (objectPronouns.Contains(words[2]))
+                {
+                    if (common_nouns.Contains(words[3]) || plural_subject.Contains(words[3]))
+                    {
+                        return true;
+                    }
+                    return false;
+                }
                 if (adjectives.Contains(words[2]))
                 {
                     if (common_nouns.Contains(words[3]) || plural_subject.Contains(words[3]))
@@ -926,6 +992,8 @@ public class ButtonTests : MonoBehaviour
             "A guy has the car.",
             "A guy does not have a car.",
             "A guy does not have the car.",
+            "A guy doesn't have the car.",
+            "A guy doesn't drive the car.",
             "A guy drives a car.",
             // (subject/plural subject/Proper Noun) are/are not/has/does not (have/base verb) (adjective) object 
             "cars are big",
@@ -1005,13 +1073,17 @@ public class ButtonTests : MonoBehaviour
             "He always agrees with me.",
             "They aren't usually at home.",
             "She visits her grandparents every Sunday.",
+            "She does not visit her grandparents every Sunday.",
             "I don't work at night",
             "I don't have time now.",
             "I do not work at night",
             "I do not have time now.",
-
-            "She does not visit her grandparents every Sunday."
-
+            "They visit her grandparents every Sunday.",
+            "They do not visit her grandparents every Sunday.",
+            "She does not wake up the child.",
+            "She doesn't wake up the child.",
+            "They do not wake up her grandparents every Sunday.",
+            "They don't wake up her grandparents every Sunday."
         };
 
         foreach (var sentence in sentences)
