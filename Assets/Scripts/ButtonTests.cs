@@ -169,13 +169,13 @@ public class ButtonTests : MonoBehaviour
                     {
                         return true;
                     }
-                    if (plural_nouns.Contains(words[4])) // eating sandwiches
+                    if (IsAPlural(words[4])) // eating sandwiches
                     {
                         return true;
                     }
                     if (words[4].Equals("a") || words[4].Equals("the") || prepositions.Contains(words[4])) // eating a/the sandwich
                     {
-                        if (common_nouns.Contains(words[5]))
+                        if (IsACommon(words[5]))
                         {
                             return true;
                         }
@@ -345,7 +345,7 @@ public class ButtonTests : MonoBehaviour
                         }
                         if (words[4].Equals("a")) // a
                         {
-                            if (common_nouns.Contains(words[5])) // letter
+                            if (IsACommon(words[5])) // letter
                             {
                                 return true;
                             } 
@@ -358,7 +358,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (prepositions.Contains(words[2]))
                 {
-                    if (common_nouns.Contains(words[3]) || plural_nouns.Contains(words[3]))
+                    if (IsACommon(words[3]) || IsAPlural(words[3]))
                     {
                         return true;
                     }
@@ -370,12 +370,12 @@ public class ButtonTests : MonoBehaviour
                         bool adjective = adjectives.Contains(words[3]);
                         if (adjective)
                         {
-                            if (common_nouns.Contains(words[4]))
+                            if (IsACommon(words[4]))
                                 return true;
                         }
                         else
                         {
-                            if (common_nouns.Contains(words[3]))
+                            if (IsACommon(words[3]))
                                 return true;
                         }
                     }
@@ -392,9 +392,9 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (adjectives.Contains(words[2]))
                     {
-                        if (plural_nouns.Contains(words[3])) return true; // John loves big books
+                        if (IsAPlural(words[3])) return true; // John loves big books
                     }
-                    if (plural_nouns.Contains(words[2])) return true;// john loves books
+                    if (IsAPlural(words[2])) return true;// john loves books
                 }
             }
             if (words[1].Equals("doesn't")) // "doesn't"
@@ -411,7 +411,7 @@ public class ButtonTests : MonoBehaviour
                     }
                     if (prepositions.Contains(words[3]))
                     {
-                        if (common_nouns.Contains(words[4]))
+                        if (IsACommon(words[4]))
                         {
                             return true;
                         }
@@ -420,16 +420,16 @@ public class ButtonTests : MonoBehaviour
                             return true;
                         }
                     }
-                    if (singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4])) return true;
+                    if (singular_subject.Contains(words[4]) || IsAPlural(words[4])) return true;
                 }
-                if (singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4])) return true;
+                if (singular_subject.Contains(words[4]) || IsAPlural(words[4])) return true;
                 
             }
             if (words[1].Equals("does") && words[2].Equals("not") && (words[3].Equals("have") || base_verbs.Contains(words[3])))
             {
                 if (objectPronouns.Contains(words[4])) // she does not visit her
                 {
-                    if (common_nouns.Contains(words[5]) || plural_nouns.Contains(words[5])) // grandparents....
+                    if (IsACommon(words[5]) || IsAPlural(words[5])) // grandparents....
                     {
                         return true;
                     }
@@ -449,33 +449,33 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (adjectives.Contains(words[3]))
                     {
-                        if (common_nouns.Contains(words[4]))
+                        if (IsACommon(words[4]))
                         {
                             return true;
                         }
                     }
                     else
                     {
-                        if (common_nouns.Contains(words[3]))
+                        if (IsACommon(words[3]))
                         {
                             return true;
                         }
                     }
                 }
-                if (common_nouns.Contains(words[2]) || plural_subject.Contains(words[2]))
+                if (IsACommon(words[2]) || plural_subject.Contains(words[2]))
                 {
                     return true;
                 }
-                if (common_nouns.Contains(words[2]) || plural_subject.Contains(words[2]) || objectPronouns.Contains(words[2]))
+                if (IsACommon(words[2]) || plural_subject.Contains(words[2]) || objectPronouns.Contains(words[2]))
                 {
-                    if (common_nouns.Contains(words[3]) || plural_subject.Contains(words[3]))
+                    if (IsACommon(words[3]) || IsAPlural(words[3]))
                     {
                         return true;
                     }
                 }
                 if (adjectives.Contains(words[2]))
                 {
-                    if (common_nouns.Contains(words[3]) || plural_subject.Contains(words[3]))
+                    if (IsACommon(words[3]) || IsAPlural(words[3]))
                     {
                         return true;
                     }
@@ -486,13 +486,13 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (prepositions.Contains(words[2]))
                 {
-                    if (common_nouns.Contains(words[3]) || plural_nouns.Contains(words[3]) || objectPronouns.Contains(words[3]))
+                    if (IsACommon(words[3]) || IsAPlural(words[3]) || objectPronouns.Contains(words[3]))
                     {
                         return true;
                     }
                     if (words[3].ToLower().Equals("the") || words[3].ToLower().Equals("a")) // she believes in the/a miracle
                     {
-                        if (common_nouns.Contains(words[4]) || plural_nouns.Contains(words[4]))
+                        if (IsACommon(words[4]) || IsAPlural(words[4]))
                         {
                             return true;
                         }
@@ -506,16 +506,16 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (words[3].Equals("the"))
                         {
-                            if (common_nouns.Contains(words[4])) // i do play the guitar
+                            if (IsACommon(words[4])) // i do play the guitar
                             {
                                 return true;
                             }
                         }
-                        if (plural_nouns.Contains(words[3])) // i do like apples
+                        if (IsAPlural(words[3])) // i do like apples
                         {
                             return true;
                         }
-                        if (common_nouns.Contains(words[3])) // i do not have time now
+                        if (IsACommon(words[3])) // i do not have time now
                         {
                             return true;
                         }
@@ -528,12 +528,12 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (words[4].Equals("the"))
                         {
-                            if (common_nouns.Contains(words[4])) // i do not play the guitar
+                            if (IsACommon(words[4])) // i do not play the guitar
                             {
                                 return true;
                             }
                         }
-                        if (plural_nouns.Contains(words[4])) // i do not like apples
+                        if (IsAPlural(words[4])) // i do not like apples
                         {
                             return true;
                         }
@@ -546,12 +546,12 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (words[3].Equals("the"))
                         {
-                            if (common_nouns.Contains(words[4])) // i do play the guitar
+                            if (IsACommon(words[4])) // i do play the guitar
                             {
                                 return true;
                             }
                         }
-                        if (plural_nouns.Contains(words[3])) // i do like apples
+                        if (IsAPlural(words[3])) // i do like apples
                         {
                             return true;
                         }
@@ -567,16 +567,16 @@ public class ButtonTests : MonoBehaviour
                         {
                             if (words[4].Equals("the"))
                             {
-                                if (common_nouns.Contains(words[4])) // i do not play the guitar
+                                if (IsACommon(words[4])) // i do not play the guitar
                                 {
                                     return true;
                                 }
                             }
-                            if (plural_nouns.Contains(words[4])) // i do not like apples
+                            if (IsAPlural(words[4])) // i do not like apples
                             {
                                 return true;
                             }
-                            if (common_nouns.Contains(words[4])) // i do not play the guitar
+                            if (IsACommon(words[4])) // i do not play the guitar
                             {
                                 return true;
                             }
@@ -589,12 +589,12 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (words[2].Equals("the"))
                     {
-                        if (common_nouns.Contains(words[3])) // i play the guitar
+                        if (IsACommon(words[3])) // i play the guitar
                         {
                             return true;
                         }
                     }
-                    if (plural_nouns.Contains(words[2])) // i like apples
+                    if (IsAPlural(words[2])) // i like apples
                     {
                         return true;
                     }
@@ -606,12 +606,12 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (words[4].Equals("the"))
                         {
-                            if (common_nouns.Contains(words[5])) // i do not play the guitar
+                            if (IsACommon(words[5])) // i do not play the guitar
                             {
                                 return true;
                             }
                         }
-                        if (plural_nouns.Contains(words[4])) // i do not like apples
+                        if (IsAPlural(words[4])) // i do not like apples
                         {
                             return true;
                         }
@@ -720,7 +720,7 @@ public class ButtonTests : MonoBehaviour
                     if(words.Length == 4) { return true; }
                     if (prepositions.Contains(words[4]) && words[5].Equals("the")) // in/on the gardent
                     {
-                        if (common_nouns.Contains(words[6]) || IsAPlural(words[6]))
+                        if (IsACommon(words[6]) || IsAPlural(words[6]))
                         {
                             return true;
                         }
@@ -736,7 +736,7 @@ public class ButtonTests : MonoBehaviour
                         }
                         if (prepositions.Contains(words[5]) && words[6].Equals("the")) // in/on the gardent
                         {
-                            if (common_nouns.Contains(words[7]) || IsAPlural(words[7]))
+                            if (IsACommon(words[7]) || IsAPlural(words[7]))
                             {
                                 return true;
                             }
@@ -766,10 +766,7 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (words[4].Equals("the") || objectPronouns.Contains(words[4]))
                     {
-                        if (common_nouns.Contains(words[5]) || IsAPlural(words[5]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[5]) || IsAPlural(words[5])) { return true; }
                     }
                 }
             }
@@ -784,10 +781,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (words[1].Equals("the") || objectPronouns.Contains(words[1]))
             {
-                if (common_nouns.Contains(words[2]) || IsAPlural(words[2]))
-                {
-                    return true;
-                }
+                if (IsACommon(words[2]) || IsAPlural(words[2])) { return true; } // this has to remain like this cause of phrasal verbs cause in some case we must RETURN the control
             }
             if (words[1].Equals("do") && words[2].Equals("not") && (words[3].Equals("have") || base_verbs.Contains(words[3])))
             {
@@ -832,10 +826,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (prepositions.Contains(words[2]))
                 {
-                    if (common_nouns.Contains(words[3]))
-                    {
-                        return true;
-                    }
+                    IsACommon(words[3]);
                 }
                 else
                 {
@@ -852,39 +843,24 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (adjectives.Contains(words[3]))
                     {
-                        if (common_nouns.Contains(words[4]))
-                        {
-                            return true;
-                        }
+                        IsACommon(words[4]);
                     }
                     else
                     {
-                        if (common_nouns.Contains(words[3]))
-                        {
-                            return true;
-                        }
+                        IsACommon(words[3]);
                     }
                 }
                 IsAPlural(words[2]);
-                if (common_nouns.Contains(words[2]) /*|| plural_subject.Contains(words[2])*/)
-                {
-                    return true;
-                }
+                IsACommon(words[2]);
                 if (objectPronouns.Contains(words[2]))
                 {
                     IsAPlural(words[3]);
-                    if (common_nouns.Contains(words[3]) /*|| plural_subject.Contains(words[3])*/)
-                    {
-                        return true;
-                    }
+                    IsACommon(words[3]);
                 }
                 if (adjectives.Contains(words[2]))
                 {
                     IsAPlural(words[3]);
-                    if (common_nouns.Contains(words[3]) /*|| plural_subject.Contains(words[3])*/)
-                    {
-                        return true;
-                    }
+                    IsACommon(words[3]);
                 }
             }
             if (prepositions.Contains(words[1])) // (there is) a book on the table
@@ -892,9 +868,7 @@ public class ButtonTests : MonoBehaviour
                 if (words[2].Equals("the"))
                 {
                     IsAPlural(words[3]);
-                    if (common_nouns.Contains(words[3])/* || plural_nouns.Contains(words[3])*/)
-                        return true;
-
+                    IsACommon(words[3]);
                 }
             }
             if (words[1].Equals("do"))
@@ -903,16 +877,9 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (words[3].Equals("the"))
                     {
-                        if (common_nouns.Contains(words[4])) // they do play the guitar
-                        {
-                            return true;
-                        }
+                        IsACommon(words[4]); // they do play the guitar
                     }
                     IsAPlural(words[3]); // i do like apples
-                    //if (plural_nouns.Contains(words[3])) // i do like apples
-                    //{
-                    //    return true;
-                    //}
                 }
                 if (words[2].Equals("not")) // they do not
                 {
@@ -924,10 +891,11 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (words[4].Equals("the"))
                         {
-                            if (common_nouns.Contains(words[4])) // i do not play the guitar
-                            {
-                                return true;
-                            }
+                            //if (common_nouns.Contains(words[4])) // i do not play the guitar
+                            //{
+                            //    return true;
+                            //}
+                            IsACommon(words[4]);
                         }
                         IsAPlural(words[3]); // they do not like apples
                         return true;
@@ -939,6 +907,7 @@ public class ButtonTests : MonoBehaviour
     }
 
     private static bool IsAPlural(string word) => plural_nouns.Contains(word);
+    private static bool IsACommon(string word) => common_nouns.Contains(word);
 
 
 
