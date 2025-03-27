@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,21 +6,22 @@ using UnityEngine;
 public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "i","girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
-    static List<string> plural_subject = new List<string> { "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
-    static List<string> base_verbs = new List<string> { "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "liking", "standing", "writing","playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> plural_subject = new List<string> { "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
+    static List<string> base_verbs = new List<string> { "visit","work","agree","drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> ing_verbs = new List<string> { "agreeing", "liking", "standing", "writing","playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> { "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
     static List<string> negations = new List<string> { "not", "never", "no" };
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
-    
+    static List<string> common_nouns = new List<string> { "time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
+
+    static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
     static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
-    static List<string> prepositions = new List<string> { "in", "on", "at", "to", "with", "for", "before", "after", "during", "as", "by", 
+    static List<string> prepositions = new List<string> { "with","in", "on", "at", "to", "with", "for", "before", "after", "during", "as", "by", 
                                                           "about", "over", "under", "of", "through", "between", "into", "onto", "out", 
                                                           "from", "against", "along", "around", "beneath", "beside", "beyond", "near", "off", 
                                                           "past", "since", "until", "within", "without" };
@@ -38,14 +40,38 @@ public class ButtonTests : MonoBehaviour
     };
 
     // Avverbi di frequenza
+    /*
+            Esempio: I always drink coffee in the morning.
+            Esempio (to be): She is often late for work.
+            Esempio: He doesn’t always agree with me.
+            Esempio (to be): They aren’t usually at home.
+     */
     static List<string> frequencyAdverbs = new List<string> { "always", "usually", "often", "sometimes", "rarely", "never" };
     // Avverbi di tempo
-    static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight" };
+    /*
+            Esempio: We are going to the park tomorrow.
+            Esempio: Tomorrow, we are going to the park.
+            Negazioni: La posizione rimane invariata.
+            Esempio: I don’t have time now.
+     */
+    static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight", "every", "at night" };
     // Avverbi di luogo
     static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby" };
     // Avverbi di modo
+    /*
+            Di solito si collocano dopo il verbo e l'oggetto (se presente).
+            Esempio: She speaks English fluently.
+            Esempio: They completed the task quickly.
+            In alcune frasi, possono apparire all'inizio o prima del verbo per maggiore enfasi.
+            Esempio: Carefully, she explained the instructions.
+     */
     static List<string> mannerAdverbs = new List<string> { "quickly", "slowly", "carefully", "happily", "sadly" };
     // Altri avverbi utili
+    /*
+            Vanno generalmente alla fine della frase.
+            Esempio: He is standing here.
+            Esempio: We met them there.
+     */
     static List<string> otherAdverbs = new List<string> { "almost", "definitely", "surely", "quite", "probably" };
 
     static bool IsValidSentence(string sentence)
@@ -71,6 +97,18 @@ public class ButtonTests : MonoBehaviour
         {
             words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
         }
+        if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
+        {
+            words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+        }
+        if (timeAdverbs.Contains(words[words.Length - 1]))
+        {
+            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+        }
+        if (timeAdverbs.Contains(words[0])) // avverbio di tempo all'inizio
+        {
+            words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
+        }
         if (words[0].Equals("there") && (words[1].Equals("is")))
         {
             words = words.Skip(2).ToArray();
@@ -95,7 +133,8 @@ public class ButtonTests : MonoBehaviour
         {
             bool subjectRecognized = singular_subject.Contains(words[1]);
             if (!subjectRecognized) { return false; }
-            if (frequencyAdverbs.Contains(words[2]))  {
+            if (frequencyAdverbs.Contains(words[2]))  
+            {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
             if (words[2].Equals("is"))
@@ -159,21 +198,6 @@ public class ButtonTests : MonoBehaviour
                     if (subjectRecognized) return true;
                 }
             }
-            if (words[2].Equals("are"))
-            {
-                if (words[3].Equals("not"))
-                {
-                    if (adjectives.Contains(words[4]))
-                        return true;
-
-                }
-                else
-                {
-                    bool adjectiveRecognized = adjectives.Contains(words[3]);
-                    if (adjectiveRecognized)
-                        return true;
-                }
-            }
             if (base_verbs_3rd_person.Contains(words[2])) // A/The guy drives a/the (big) car
             {
                 if (words.Length <= 3)
@@ -234,7 +258,10 @@ public class ButtonTests : MonoBehaviour
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
-
+            if (frequencyAdverbs.Contains(words[2]))
+            {
+                words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza - He doesn’t ALWAYS agree with me.
+            }
             // she the child
             if (words[1].Equals("the"))
             {
@@ -342,8 +369,48 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
+            if (words[1].Equals("doesn't")) // "doesn't"
+            {
+                if (frequencyAdverbs.Contains(words[2]))
+                {
+                    words = words.Where((value, index) => index != 1).ToArray(); // he doesn't always
+                }
+                if (words[2].Equals("have") || base_verbs.Contains(words[2]))
+                {
+                    if (words[3].ToLower().Equals("the") || words[3].ToLower().Equals("a")) // The | a
+                    {
+                        subjectRecognized = singular_subject.Contains(words[4]);
+                        if (subjectRecognized) return true;
+                    }
+                    if (prepositions.Contains(words[3]))
+                    {
+                        if (common_nouns.Contains(words[4]))
+                        {
+                            return true;
+                        }
+                        if (objectPronouns.Contains(words[4]))
+                        {
+                            return true;
+                        }
+                        return false;
+                    }
+                    subjectRecognized = singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4]);
+                    if (subjectRecognized) return true;
+                }
+                subjectRecognized = singular_subject.Contains(words[4]) || plural_nouns.Contains(words[4]);
+                if (subjectRecognized) return true;
+                
+            }
             if (words[1].Equals("does") && words[2].Equals("not") && (words[3].Equals("have") || base_verbs.Contains(words[3])))
             {
+                if (objectPronouns.Contains(words[4])) // she does not visit her
+                {
+                    if (common_nouns.Contains(words[5]) || plural_nouns.Contains(words[5])) // grandparents....
+                    {
+                        return true;
+                    }
+                    return false;
+                }
                 if (words[4].ToLower().Equals("the") || words[4].ToLower().Equals("a")) // The | a
                 {
                     subjectRecognized = singular_subject.Contains(words[5]);
@@ -380,6 +447,14 @@ public class ButtonTests : MonoBehaviour
                 {
                     return true;
                 }
+                if (common_nouns.Contains(words[2]) || plural_subject.Contains(words[2]) || objectPronouns.Contains(words[2]))
+                {
+                    if (common_nouns.Contains(words[3]) || plural_subject.Contains(words[3]))
+                    {
+                        return true;
+                    }
+                    return false;
+                }
                 if (adjectives.Contains(words[2]))
                 {
                     if (common_nouns.Contains(words[3]) || plural_subject.Contains(words[3]))
@@ -390,7 +465,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (prepositions.Contains(words[2]))
                 {
-                    if (common_nouns.Contains(words[3]) || plural_nouns.Contains(words[3]))
+                    if (common_nouns.Contains(words[3]) || plural_nouns.Contains(words[3]) || objectPronouns.Contains(words[3]))
                     {
                         return true;
                     }
@@ -406,6 +481,49 @@ public class ButtonTests : MonoBehaviour
                 }
             }
             if(subjectRecognized && words[0].Equals("i")){
+                if (words[1].Equals("don't"))
+                {
+                    if (words[2].Equals("have") || base_verbs.Contains(words[2])) // i do play
+                    {
+                        if (words[3].Equals("the"))
+                        {
+                            if (common_nouns.Contains(words[4])) // i do play the guitar
+                            {
+                                return true;
+                            }
+                            return false;
+                        }
+                        if (plural_nouns.Contains(words[3])) // i do like apples
+                        {
+                            return true;
+                        }
+                        if (common_nouns.Contains(words[3])) // i do not have time now
+                        {
+                            return true;
+                        }
+                        return true;
+                    }
+                    if (frequencyAdverbs.Contains(words[3])) // messo qui altrimenti frasi come John like books schiattano
+                    {
+                        words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
+                    }
+                    if (base_verbs.Contains(words[3])) // i do not play
+                    {
+                        if (words[4].Equals("the"))
+                        {
+                            if (common_nouns.Contains(words[4])) // i do not play the guitar
+                            {
+                                return true;
+                            }
+                            return false;
+                        }
+                        if (plural_nouns.Contains(words[4])) // i do not like apples
+                        {
+                            return true;
+                        }
+                        return true;
+                    }
+                }
                 if (words[1].Equals("do"))
                 {
                     if (base_verbs.Contains(words[2])) // i do play
@@ -430,7 +548,7 @@ public class ButtonTests : MonoBehaviour
                         {
                             words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
                         }
-                        if (base_verbs.Contains(words[3])) // i do not play
+                        if (base_verbs.Contains(words[3]) || words[3].Equals("have")) // i do not play
                         {
                             if (words[4].Equals("the"))
                             {
@@ -441,6 +559,10 @@ public class ButtonTests : MonoBehaviour
                                 return false;
                             }
                             if (plural_nouns.Contains(words[4])) // i do not like apples
+                            {
+                                return true;
+                            }
+                            if (common_nouns.Contains(words[4])) // i do not play the guitar
                             {
                                 return true;
                             }
@@ -499,6 +621,14 @@ public class ButtonTests : MonoBehaviour
         if (placeAdverbs.Contains(words[words.Length-1]))
         {
             words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
+        }
+        if (timeAdverbs.Contains(words[words.Length - 1])) // avverbio di tempo alla fine
+        {
+            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+        }
+        if (timeAdverbs.Contains(words[0])) // avverbio di tempo all'inizio
+        {
+            words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
         }
         if (words[0].Equals("there") && (words[1].Equals("are")))
         {
@@ -643,15 +773,41 @@ public class ButtonTests : MonoBehaviour
             }
             if (words[1].Equals("are") || words[1].Equals("aren't"))
             {
+                if (frequencyAdverbs.Contains(words[2]))
+                {
+                    words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
+                }
+                if (words.Length <= 2) // they are
+                {
+                    return true;
+                }
                 if (ing_verbs.Contains(words[2]))
                 {
                     return true;
                 }
                 if (words[2].Equals("not"))
                 {
-                    // continua present continuous 
-                    if (adjectives.Contains(words[3]))
+                    if(words.Length <= 3) // they are not
+                    {
                         return true;
+                    }
+                    // continua present continuous 
+                    if (ing_verbs.Contains(words[3])) // they are not standig (here)
+                    {
+                        return true;
+                    }
+                    if (adjectives.Contains(words[3]))
+                    {
+                        return true;
+                    }
+                }
+                if (prepositions.Contains(words[2]))
+                {
+                    if (common_nouns.Contains(words[3]))
+                    {
+                        return true;
+                    }
+                    return false;
                 }
                 else
                 {
@@ -838,13 +994,24 @@ public class ButtonTests : MonoBehaviour
             "I do not always drink coffee in the morning.",
             "They always drink coffee in the morning.",
             "They do not always drink coffee in the morning.",
-
             "He is not standing here.",
             "They are not standing here.",
             "They do not like pizza here",
             "They like pizza here",
             "i like pizza here",
             "i do not like pizza here",
+            "He doesn't always agree with me.",
+            "They aren't usually at home.",
+            "He always agrees with me.",
+            "They aren't usually at home.",
+            "She visits her grandparents every Sunday.",
+            "I don't work at night",
+            "I don't have time now.",
+            "I do not work at night",
+            "I do not have time now.",
+
+            "She does not visit her grandparents every Sunday."
+
         };
 
         foreach (var sentence in sentences)
