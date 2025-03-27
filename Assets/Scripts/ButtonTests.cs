@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
 {
-    static List<string> singular_subject = new List<string> { "i","girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
+    static List<string> singular_subject = new List<string> { "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
     static List<string> plural_subject = new List<string> { "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
     static List<string> base_verbs = new List<string> { "visit","work","agree","drink", "like", "love", "drive", "are", "run", "jump", "believe" };
     static List<string> base_verbs_3rd_person = new List<string> { "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
@@ -15,10 +15,10 @@ public class ButtonTests : MonoBehaviour
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
     static List<string> negations = new List<string> { "not", "never", "no" };
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
-    static List<string> adjectives = new List<string> { "cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
+    static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
+    static List<string> common_nouns = new List<string> { "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "days","grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
     static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
     static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
@@ -500,6 +500,10 @@ public class ButtonTests : MonoBehaviour
                         return true;
                     }
                     return false;
+                }
+                if (ing_verbs.Contains(words[2]))
+                {
+                    return true;
                 }
                 if (prepositions.Contains(words[2]))
                 {
@@ -1053,7 +1057,10 @@ public class ButtonTests : MonoBehaviour
             "Cars are big.",
             "Cars are not big.",
             "The dogs run.",
-            "The dogs are playing in the garden."
+            "The dogs are playing in the garden.",
+
+            // others
+            "It is a sunny day."
         };
 
         foreach (var sentence in sentences)
