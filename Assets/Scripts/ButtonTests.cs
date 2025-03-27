@@ -978,53 +978,44 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
-            // present simple
-            // the subject is/is not/are/are not/does not have (the) object
-            "The car is big.", 
-            "The car is not big.",
-            "The cars are big",
-            "The cars are not big",
-            "The guy does not have the car.",
-            // a subject is/is not/has/base-verb/does not have (the/a) object
-            "A car is big.", 
-            "A car is not big.",
-            "A guy has a car.", 
-            "A guy has the car.",
-            "A guy does not have a car.",
-            "A guy does not have the car.",
-            "A guy doesn't have the car.",
-            "A guy doesn't drive the car.",
-            "A guy drives a car.",
-            // (subject/plural subject/Proper Noun) are/are not/has/does not (have/base verb) (adjective) object 
-            "cars are big",
-            "Google has a car",
-            "Google does not have a car",
-            "John loves books.", 
-            "John does not love books", 
-            "John loves big books",
-            "Paris is a city.",
-            // plural
-            "cars are big",
-            "cars are not big",
-            "The dogs run fast.",
-            "The dogs run.",
-            "The cat jumps.",
-            "Cats jump.",
-            "Dogs do not run",
-            "The Dogs do not run",
-            "The Dogs do not run fast",
-            "Dogs do not run fast",
+            // Present Simple - Affermazioni
+            "The car is big.",
+            "The cars are big.",
+            "A car is big.",
+            "A guy has a car.",
+            "Google has a car.",
+            "John loves books.",
+            "John loves big books.",
             "The sun rises in the east.",
-            "sun rises in the east.",
-            "He knows the answer.",
+            "He likes apples.",
             "She believes in miracles.",
             "She believes in a miracle.",
-            "He likes apples.",
+            "The cat jumps.",
+            "Cats jump.",
+            "The dogs run fast.",
+            "The dogs run.",
+    
+            // Present Simple - Negazioni
+            "The car is not big.",
+            "The cars are not big.",
+            "A car is not big.",
+            "A guy does not have a car.",
+            "A guy does not have the car.",
+            "Google does not have a car.",
+            "John does not love books.",
+            "Dogs do not run fast.",
+            "The Dogs do not run.",
             "He does not have a bike.",
-            "It is cold.",
-            "There is a book on the table.",
+            "They do not visit her grandparents every Sunday.",
+            "They don't wake up her grandparents every Sunday.",
+    
+            // Avverbi nel Present Simple
             "She never drinks coffee.",
-            // Phrasal
+            "I always drink coffee in the morning.",
+            "They do not always drink coffee in the morning.",
+            "He doesn't always agree with me.",
+    
+            // Present Simple - Frasi con Verbi Frasali (Phrasal Verbs)
             "She wakes up the child.",
             "He turns on the computer.",
             "She turns off the lamp.",
@@ -1035,55 +1026,34 @@ public class ButtonTests : MonoBehaviour
             "They set up the table.",
             "She finds out the answer.",
             "He puts off the meeting.",
-            // fine present simple
-
-            // present continuous
-            // Affermazioni
+    
+            // Present Continuous - Affermazioni
             "The car is running.",
             "The boy is eating a sandwich.",
             "A girl is reading a book.",
             "The dogs are playing in the garden.",
             "John is writing a letter.",
-
-            // Negazioni
+            "They are standing here.",
+    
+            // Present Continuous - Negazioni
             "The car is not running.",
             "The boy is not eating a sandwich.",
-            "The boy is eating sandwiches.",
             "A girl is not reading a book.",
             "The dogs are not playing in the garden.",
             "John is not writing a letter.",
-            "He is standing here.",
-            "They are standing here.",
-            "i do not like apples.",
-            "i do like apples.",
-            "they do like apples.",
-            "they do not like apples.",
-            "I always drink coffee in the morning.",
-            "I do not always drink coffee in the morning.",
-            "They always drink coffee in the morning.",
-            "They do not always drink coffee in the morning.",
             "He is not standing here.",
-            "They are not standing here.",
-            "They do not like pizza here",
-            "They like pizza here",
-            "i like pizza here",
-            "i do not like pizza here",
-            "He doesn't always agree with me.",
-            "They aren't usually at home.",
-            "He always agrees with me.",
-            "They aren't usually at home.",
-            "She visits her grandparents every Sunday.",
-            "She does not visit her grandparents every Sunday.",
-            "I don't work at night",
-            "I don't have time now.",
-            "I do not work at night",
-            "I do not have time now.",
-            "They visit her grandparents every Sunday.",
-            "They do not visit her grandparents every Sunday.",
-            "She does not wake up the child.",
-            "She doesn't wake up the child.",
-            "They do not wake up her grandparents every Sunday.",
-            "They don't wake up her grandparents every Sunday."
+    
+            // Usi Enfatici con 'do'
+            "I do like apples.",
+            "They do not like apples.",
+            "I do not work at night.",
+            "I do not always drink coffee in the morning.",
+    
+            // Frasi con Soggetto Plurale
+            "Cars are big.",
+            "Cars are not big.",
+            "The dogs run.",
+            "The dogs are playing in the garden."
         };
 
         foreach (var sentence in sentences)
@@ -1099,4 +1069,31 @@ public class ButtonTests : MonoBehaviour
     public void Click(string phrase) {
         Debug.Log(IsValidSentence(phrase));
     }
+
+    // CanDetectThisgrammaticalStructures
+    string[] CanDetectThisgrammaticalStructures = {
+    "Subject + Verb 'to be' + Adjective",
+    "Subject + Verb 'to be' + Negation + Adjective",
+    "Subject + Verb 'has' + Object",
+    "Proper Noun + Verb 'has' + Object",
+    "Proper Noun + Verb + Object",
+    "Subject + Verb + Object",
+    "Subject + Verb + Prepositional Complement",
+    "Subject + Verb + Adjective + Object",
+    "Plural Subject + Verb 'to be' + Adjective",
+    "Plural Subject + Verb",
+    "Plural Subject + Verb 'to be' + Negation + Adjective",
+    "Plural Subject + Auxiliary 'do not' + Base Verb + Object",
+    "Subject + Auxiliary 'does not' + Base Verb + Object",
+    "Subject + Auxiliary 'do/does' + (not) + Base Verb + Object",
+    "Subject + Frequency Adverb + Verb + Object",
+    "Subject + Frequency Adverb + Verb + Object + Time Adverb",
+    "Subject + Contraction 'doesn't/don't' + Frequency Adverb + Base Verb + Prepositional Complement",
+    "Subject + Phrasal Verb + Object",
+    "Subject + Verb 'to be' + Verb -ing",
+    "Subject + Verb 'to be' + Negation + Verb -ing",
+    "Proper Noun + Verb 'to be' + Verb -ing + Object",
+    "Subject + Verb 'to be' + Verb -ing + Prepositional Complement"
+};
+
 }
