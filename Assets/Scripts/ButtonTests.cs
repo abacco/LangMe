@@ -93,10 +93,6 @@ public class ButtonTests : MonoBehaviour
     // Proper Noun + is/is not + big 
     public static bool SingularSubjectPresentSimple_Affirmation(string[] words)
     {
-        for (int i = 0; i < words.Length; i++)
-        {
-            words[i] = words[i].ToLower();
-        }
         // avverbi di luogo alla fine della frase
         if (placeAdverbs.Contains(words[words.Length-1]) || mannerAdverbs.Contains(words[words.Length - 1]))
         {
@@ -106,14 +102,6 @@ public class ButtonTests : MonoBehaviour
         {
             words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
         }
-        if (IsATimeAdverb(words[words.Length - 1]))
-        {
-            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
-        }
-        if (IsATimeAdverb(words[0])) // avverbio di tempo all'inizio
-        {
-            words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
-        }
         if (words[0].Equals("there") && words[1].Equals("is")) { words = words.Skip(2).ToArray(); }
         if (words[1].Equals("never") || words[1].Equals("always"))
         {
@@ -121,7 +109,7 @@ public class ButtonTests : MonoBehaviour
             words = words.Where((value, index) => index != 1).ToArray();
         }
         // Phrasal Verbs
-        words = RemovePhrasalVerbs(words);
+        words = Normalization(words);
         if (The(words[0]) || A(words[0]))
         {
             bool subjectRecognized = IsASingular(words[1]);
@@ -134,37 +122,19 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsAnIngVerbs(words[3])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
                 {
-                    if(words.Length == 4)
-                    {
-                        return true;
-                    }
-                    if (IsAPlural(words[4])) // eating sandwiches
-                    {
-                        return true;
-                    }
+                    if(IsFixedLenght(words, 4)) return true;
+                    if (IsAPlural(words[4]))    return true; // eating sandwiches
                     if (A(words[4]) || The(words[4]) || IsAPreposition(words[4])) // eating a/the sandwich
                     {
-                        if (IsACommon(words[5]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[5])) return true;
                     }
                 }
                 if (Not(words[3]))
                 {
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        return true;
-                    }
-                    if (IsAnAdjective(words[4]))
-                    {
-                        return true;
-                    }
+                    if (IsAnIngVerbs(words[4])) return true;
+                    if (IsAnAdjective(words[4])) return true;
                 }
-                if (IsAnAdjective(words[3]))
-                {
-                    return true;
-                }
+                if (IsAnAdjective(words[3])) return true;
             }
             if (words[2].Equals("has"))
             {
@@ -195,35 +165,20 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsA3rdPersonVerb(words[2])) // A/The guy drives a/the (big) car
             {
-                if (words.Length <= 3)
-                {
-                    return true; // the cat jumps}
-                }
+                if (IsFixedLenght(words, 3)) return true; // the cat jumps
                 if (The(words[3]) || A(words[3])) // The | a
                 {
                     if (IsAnAdjective(words[4]))
                     {
-                        if (IsACommon(words[5]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[5])) return true;
                     }
-                    else
-                    {
-                        if (IsACommon(words[4]))
-                        {
-                            return true;
-                        }
-                    }
+                    if (IsACommon(words[4])) return true;
                 }
                 if (IsAPreposition(words[3]))
                 {
                     if (The(words[4]))
                     {
-                        if (IsACommon(words[5]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[5])) return true;
                     }
                 }
             }
@@ -259,76 +214,49 @@ public class ButtonTests : MonoBehaviour
             // she the child
             if (The(words[1]) || IsAnObjectPronouns(words[1]))
             {
-                if (IsACommon(words[2]) || IsAPlural(words[2]))
-                {
-                    return true;
-                }
+                if (IsACommon(words[2]) || IsAPlural(words[2])) return true;
             }
             if (words[1].Equals("is"))
             {
                 if (IsAnIngVerbs(words[2])) // John is playing
                 {
-                    if (words.Length == 3) { return true; }
+                    if (words.Length == 3) return true;
                     if ((IsAPreposition(words[3]) && The(words[4])) || The(words[3])) // in the gardent
                     {
-                        if (IsACommon(words[4]) || IsAPlural(words[4]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
                     }
                     if (A(words[3])) // a
                     {
-                        if (IsACommon(words[4])) // letter
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[4])) return true; // letter
                     }
                 }
                 if (Not(words[2]))
                 {
                     if (IsAPreposition(words[3]) || The(words[3]) || words[3].Equals("a")) // in the gardent
                     {
-                        if (IsACommon(words[4]) || IsAPlural(words[4]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
                         if (IsAnAdjective(words[4]))
                         {
-                            if (IsACommon(words[5]) || IsAPlural(words[5]))
-                            {
-                                return true;
-                            }
+                            if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
                         }
                     }
                     if (IsAnIngVerbs(words[3])) // John is playing
                     {
-                        if (words.Length == 4) { return true; }
+                        if (words.Length == 4) return true;
                         if ((IsAPreposition(words[4]) && The(words[5])) || The(words[4])) // in the gardent
                         {
-                            if (IsACommon(words[5]) || IsAPlural(words[5]))
-                            {
-                                return true;
-                            }
+                            if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
                         }
                         if (A(words[4])) // a
                         {
-                            if (IsACommon(words[5])) // letter
-                            {
-                                return true;
-                            } 
+                            if (IsACommon(words[5])) return true; // letter
                         }
                     }
-                    if (IsAnAdjective(words[3]))
-                    {
-                        return true;
-                    }
+                    if (IsAnAdjective(words[3])) return true;
                 }
                 if (IsAPreposition(words[2]))
                 {
-                    if (IsACommon(words[3]) || IsAPlural(words[3]))
-                    {
-                        return true;
-                    }
+                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
                 }
                 else
                 {
@@ -336,14 +264,9 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (IsAnAdjective(words[3]))
                         {
-                            if (IsACommon(words[4]))
-                                return true;
+                            if (IsACommon(words[4])) return true;
                         }
-                        else
-                        {
-                            if (IsACommon(words[3]))
-                                return true;
-                        }
+                        if (IsACommon(words[3])) return true;
                     }
                     if (IsAnAdjective(words[2])) return true;
                 }
@@ -377,19 +300,12 @@ public class ButtonTests : MonoBehaviour
                     }
                     if (IsAPreposition(words[3]))
                     {
-                        if (IsACommon(words[4]))
-                        {
-                            return true;
-                        }
-                        if (IsAnObjectPronouns(words[4]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[4])) return true;
+                        if (IsAnObjectPronouns(words[4])) return true;
                     }
                     if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
                 }
-                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
-                
+                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;   
             }
             if (words[1].Equals("does") && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
             {
@@ -411,45 +327,24 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (IsACommon(words[4])) return true; 
                     }
-                    else
-                    {
-                        if (IsACommon(words[3])) return true; 
-                    }
+                    if (IsACommon(words[3])) return true;
                 }
-                if (IsACommon(words[2]) || IsAPluralSubject(words[2]))
-                {
-                    return true;
-                }
+                if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
                 if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
                 {
-                    if (IsACommon(words[3]) || IsAPlural(words[3]))
-                    {
-                        return true;
-                    }
+                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
                 }
                 if (IsAnAdjective(words[2]))
                 {
-                    if (IsACommon(words[3]) || IsAPlural(words[3]))
-                    {
-                        return true;
-                    }
+                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
                 }
-                if (IsAnIngVerbs(words[2]))
-                {
-                    return true;
-                }
+                if (IsAnIngVerbs(words[2])) return true;
                 if (IsAPreposition(words[2]))
                 {
-                    if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3]))
-                    {
-                        return true;
-                    }
+                    if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
                     if (The(words[3]) || A(words[3])) // she believes in the/a miracle
                     {
-                        if (IsACommon(words[4]) || IsAPlural(words[4]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
                     }
                 }
             }
@@ -460,19 +355,10 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (The(words[3]))
                         {
-                            if (IsACommon(words[4])) // i do play the guitar
-                            {
-                                return true;
-                            }
+                            if (IsACommon(words[4])) return true; // i do play the guitar
                         }
-                        if (IsAPlural(words[3])) // i do like apples
-                        {
-                            return true;
-                        }
-                        if (IsACommon(words[3])) // i do not have time now
-                        {
-                            return true;
-                        }
+                        if (IsAPlural(words[3])) return true; // i do like apples
+                        if (IsACommon(words[3])) return true;// i do not have time now
                     }
                     if (IsAFrequencyAdverb(words[3])) // messo qui altrimenti frasi come John like books schiattano
                     {
@@ -482,15 +368,9 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (The(words[4]))
                         {
-                            if (IsACommon(words[4])) // i do not play the guitar
-                            {
-                                return true;
-                            }
+                            if (IsACommon(words[4])) return true;// i do not play the guitar
                         }
-                        if (IsAPlural(words[4])) // i do not like apples
-                        {
-                            return true;
-                        }
+                        if (IsAPlural(words[4])) return true;// i do not like apples
                         return true;
                     }
                 }
@@ -500,9 +380,9 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (The(words[3]))
                         {
-                            if (IsACommon(words[4])) { return true; }// i do play the guitar
+                            if (IsACommon(words[4])) return true; // i do play the guitar
                         }
-                        if (IsAPlural(words[3])) { return true;  }// i do like apples
+                        if (IsAPlural(words[3])) return true;// i do like apples
                         return true;
                     }
                     if (Not(words[2])) // i do not
@@ -515,19 +395,10 @@ public class ButtonTests : MonoBehaviour
                         {
                             if (The(words[4]))
                             {
-                                if (IsACommon(words[4])) // i do not play the guitar
-                                {
-                                    return true;
-                                }
+                                if (IsACommon(words[4])) return true;// i do not play the guitar
                             }
-                            if (IsAPlural(words[4])) // i do not like apples
-                            {
-                                return true;
-                            }
-                            if (IsACommon(words[4])) // i do not play the guitar
-                            {
-                                return true;
-                            }
+                            if (IsAPlural(words[4])) return true; // i do not like apples
+                            if (IsACommon(words[4])) return true; // i do not play the guitar
                             return true;
                         }
                     }
@@ -537,9 +408,9 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (The(words[2]))
                     {
-                        if (IsACommon(words[3])) { return true; }// i play the guitar
+                        if (IsACommon(words[3])) return true;// i play the guitar
                     }
-                    if (IsAPlural(words[2])) { return true; } // i like apples
+                    if (IsAPlural(words[2])) return true; // i like apples
                     return true;
                 }
                 if (Not(words[2])) // i do not
@@ -548,15 +419,9 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (The(words[4]))
                         {
-                            if (IsACommon(words[5])) // i do not play the guitar
-                            {
-                                return true;
-                            }
+                            if (IsACommon(words[5])) return true; // i do not play the guitar
                         }
-                        if (IsAPlural(words[4])) // i do not like apples
-                        {
-                            return true;
-                        }
+                        if (IsAPlural(words[4])) return true; // i do not like apples
                     }
                 }
             }
@@ -565,33 +430,18 @@ public class ButtonTests : MonoBehaviour
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
     {
-        for (int i = 0; i < words.Length; i++)
-        {
-            words[i] = words[i].ToLower();
-        }
-        // avverbi di modo alla fine della frase
-        if (IsAPlaceAdverbs(words[words.Length-1]) || IsAMannerAdverbs(words[words.Length - 1]))
-        {
-            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
-        }
-        if (IsATimeAdverb(words[words.Length - 1])) // avverbio di tempo alla fine
-        {
-            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
-        }
-        if (IsATimeAdverb(words[0])) // avverbio di tempo all'inizio
-        {
-            words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
-        }
+
         if (words[0].Equals("there") && Are(words[1]))
         {
             words = words.Skip(2).ToArray();
         }
-        // Phrasal Verbs
-        words = RemovePhrasalVerbs(words);
+
+        words = Normalization(words);
+
         if (The(words[0]) || A(words[0]))
         {
             bool subjectRecognized = IsAPluralSubject(words[1]) || IsAPlural(words[1]);
-            if (!subjectRecognized) { return false; }
+            if (!subjectRecognized) return false;
             if (IsAFrequencyAdverb(words[2]))
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
@@ -674,7 +524,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsFixedLenght(words, 4)) return true;
                 if (IsAnAdjective(words[4])) return true;  // The Dogs do not run fast
             }
-            if (Are(words[1]) || words[1].Equals("aren't"))
+            if (Are(words[1]) || Arent(words[1]))
             {
                 if (IsAFrequencyAdverb(words[2]))
                 {
@@ -776,6 +626,7 @@ public class ButtonTests : MonoBehaviour
     private static bool Not(string word) { return word.ToLower().Equals("not"); }
     private static bool Are(string word) { return word.ToLower().Equals("are"); }
     private static bool Have(string word) { return word.ToLower().Equals("have"); }
+    private static bool Arent(string word) { return word.ToLower().Equals("aren't"); }
 
 
 
@@ -786,8 +637,31 @@ public class ButtonTests : MonoBehaviour
 
 
 
-    public static string[] RemovePhrasalVerbs(string[] words)
+    public static string[] Normalization(string[] words)
     {
+        for (int i = 0; i < words.Length; i++)
+        {
+            words[i] = words[i].ToLower();
+        }
+        if (IsAPlaceAdverbs(words[words.Length - 1]) || IsAMannerAdverbs(words[words.Length - 1]))
+        {
+            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
+        }
+        if (IsATimeAdverb(words[words.Length - 1])) // avverbio di tempo alla fine
+        {
+            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+        }
+        if (IsATimeAdverb(words[0])) // avverbio di tempo all'inizio
+        {
+            words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
+        }
+        
+        //if (words[0].Equals("there") && Are(words[1]))
+        //{
+        //    words = words.Skip(2).ToArray();
+        //}
+
+        // Phrasal Verbs
         string tmpPhrasalVerb = "";
         string detectedPhrasalVerb = "";
         if (words.Length > 3)
