@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
@@ -87,28 +84,13 @@ public class ButtonTests : MonoBehaviour
         return SingularSubjectPresentSimple_Affirmation(words) || PluralSubjectPresentSimple_Affirmation(words);
     }
 
-    // Article + subject + Is/Is Not + Adjective 
-    // article + sub + has/has not + article + object
-    // Article + sub + does not have + article + object
-    // Proper Noun + is/is not + big 
     public static bool SingularSubjectPresentSimple_Affirmation(string[] words)
     {
-        // avverbi di luogo alla fine della frase
-        if (placeAdverbs.Contains(words[words.Length-1]) || mannerAdverbs.Contains(words[words.Length - 1]))
-        {
-            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
-        }
         if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
         {
             words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
         }
         if (words[0].Equals("there") && words[1].Equals("is")) { words = words.Skip(2).ToArray(); }
-        if (words[1].Equals("never") || words[1].Equals("always"))
-        {
-            // Salta solo il secondo elemento (indice 1).
-            words = words.Where((value, index) => index != 1).ToArray();
-        }
-        // Phrasal Verbs
         words = Normalization(words);
         if (The(words[0]) || A(words[0]))
         {
@@ -430,12 +412,10 @@ public class ButtonTests : MonoBehaviour
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
     {
-
-        if (words[0].Equals("there") && Are(words[1]))
+        if (There(words[0]) && Are(words[1]))
         {
             words = words.Skip(2).ToArray();
         }
-
         words = Normalization(words);
 
         if (The(words[0]) || A(words[0]))
@@ -627,6 +607,7 @@ public class ButtonTests : MonoBehaviour
     private static bool Are(string word) { return word.ToLower().Equals("are"); }
     private static bool Have(string word) { return word.ToLower().Equals("have"); }
     private static bool Arent(string word) { return word.ToLower().Equals("aren't"); }
+    private static bool There(string word) { return word.ToLower().Equals("there"); }
 
 
 
@@ -655,12 +636,6 @@ public class ButtonTests : MonoBehaviour
         {
             words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
         }
-        
-        //if (words[0].Equals("there") && Are(words[1]))
-        //{
-        //    words = words.Skip(2).ToArray();
-        //}
-
         // Phrasal Verbs
         string tmpPhrasalVerb = "";
         string detectedPhrasalVerb = "";
@@ -693,12 +668,6 @@ public class ButtonTests : MonoBehaviour
         }
         return words;
     }
-
-
-
-
-
-
     private void Start()
     {
         List<string> sentences = new List<string>
