@@ -174,14 +174,14 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAnAdjective(words[3])) return true;
             }
-            if (words[2].Equals("doesn't") && (words[3].Equals("have") || IsABaseVerb(words[3])))
+            if (words[2].Equals("doesn't") && (Have(words[3]) || IsABaseVerb(words[3])))
             {
                 if (The(words[4]) || A(words[4])) // The | a
                 {
                     if (IsASingular(words[5])) return true;
                 }
             }
-            if (words[2].Equals("does") && Not(words[3]) && (words[4].Equals("have") || IsABaseVerb(words[4])))
+            if (words[2].Equals("does") && Not(words[3]) && (Have(words[4]) || IsABaseVerb(words[4])))
             {
                 string detectedPhrasalVerb = words[1] + " " + words[2]; // she wakes up
                 if (phrasalVerbs.Contains(detectedPhrasalVerb))
@@ -369,7 +369,7 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = words.Where((value, index) => index != 1).ToArray(); // he doesn't always
                 }
-                if (words[2].Equals("have") || IsABaseVerb(words[2]))
+                if (Have(words[2]) || IsABaseVerb(words[2]))
                 {
                     if (The(words[3]) || A(words[3])) // The | a
                     {
@@ -391,7 +391,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
                 
             }
-            if (words[1].Equals("does") && Not(words[2]) && (words[3].Equals("have") || IsABaseVerb(words[3])))
+            if (words[1].Equals("does") && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
             {
                 if (IsAnObjectPronouns(words[4])) // she does not visit her
                 {
@@ -456,7 +456,7 @@ public class ButtonTests : MonoBehaviour
             if (subjectRecognized && words[0].Equals("i")){
                 if (words[1].Equals("don't"))
                 {
-                    if (words[2].Equals("have") || IsABaseVerb(words[2])) // i do play
+                    if (Have(words[2]) || IsABaseVerb(words[2])) // i do play
                     {
                         if (The(words[3]))
                         {
@@ -511,7 +511,7 @@ public class ButtonTests : MonoBehaviour
                         {
                             words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
                         }
-                        if (IsABaseVerb(words[3]) || words[3].Equals("have")) // i do not play
+                        if (IsABaseVerb(words[3]) || Have(words[3])) // i do not play
                         {
                             if (The(words[4]))
                             {
@@ -596,7 +596,7 @@ public class ButtonTests : MonoBehaviour
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
-            if (words[2].Equals("have"))
+            if (Have(words[2]))
             {
                 if (Not(words[3]))
                 {
@@ -612,7 +612,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAnAdjective(words[3])) return true;
             }
-            if (Do(words[2]) && Not(words[3]) && (words[4].Equals("have") || IsABaseVerb(words[4])))
+            if (Do(words[2]) && Not(words[3]) && (Have(words[4]) || IsABaseVerb(words[4])))
             {
                 if (IsFixedLenght(words, 5)) return true; // The Dogs do not run
                 if (IsAnAdjective(words[5])) return true; // The Dogs do not run fast
@@ -642,10 +642,7 @@ public class ButtonTests : MonoBehaviour
                         return true;
                     }
                 }
-                else
-                {
-                    if (IsAnAdjective(words[3])) return true;
-                }
+                if (IsAnAdjective(words[3])) return true;
             }
             if (IsABaseVerb(words[2])) // A/The dogs run fast
             {
@@ -672,7 +669,7 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsACommon(words[2]) || IsAPlural(words[2])) return true; // this has to remain like this cause of phrasal verbs cause in some case we must RETURN the control
             }
-            if (Do(words[1]) && Not(words[2]) && (words[3].Equals("have") || IsABaseVerb(words[3])))
+            if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
             {
                 if (IsFixedLenght(words, 4)) return true;
                 if (IsAnAdjective(words[4])) return true;  // The Dogs do not run fast
@@ -778,6 +775,7 @@ public class ButtonTests : MonoBehaviour
     private static bool Do(string word) { return word.ToLower().Equals("do"); }
     private static bool Not(string word) { return word.ToLower().Equals("not"); }
     private static bool Are(string word) { return word.ToLower().Equals("are"); }
+    private static bool Have(string word) { return word.ToLower().Equals("have"); }
 
 
 
