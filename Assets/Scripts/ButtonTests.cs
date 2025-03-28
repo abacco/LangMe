@@ -114,10 +114,7 @@ public class ButtonTests : MonoBehaviour
         {
             words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
         }
-        if (words[0].Equals("there") && (words[1].Equals("is")))
-        {
-            words = words.Skip(2).ToArray();
-        }
+        if (words[0].Equals("there") && words[1].Equals("is")) { words = words.Skip(2).ToArray(); }
         if (words[1].Equals("never") || words[1].Equals("always"))
         {
             // Salta solo il secondo elemento (indice 1).
@@ -196,7 +193,7 @@ public class ButtonTests : MonoBehaviour
                     if (IsASingular(words[6])) return true;
                 }
             }
-            if (base_verbs_3rd_person.Contains(words[2])) // A/The guy drives a/the (big) car
+            if (IsA3rdPersonVerb(words[2])) // A/The guy drives a/the (big) car
             {
                 if (words.Length <= 3)
                 {
@@ -398,37 +395,25 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsAnObjectPronouns(words[4])) // she does not visit her
                 {
-                    if (IsACommon(words[5]) || IsAPlural(words[5])) // grandparents....
-                    {
-                        return true;
-                    }
+                    if (IsACommon(words[5]) || IsAPlural(words[5])) return true; // grandparents....
                 }
                 if (The(words[4]) || A(words[4])) // The | a
                 {
                     if (IsASingular(words[5])) return true;
                 }
-                else
-                {
-                    if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
-                }
+                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
             }
-            if (base_verbs_3rd_person.Contains(words[1])) // A/The guy drives a/the (big) car
+            if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
             {
                 if (The(words[2]) || A(words[2])) // The | a
                 {
                     if (IsAnAdjective(words[3]))
                     {
-                        if (IsACommon(words[4]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[4])) return true; 
                     }
                     else
                     {
-                        if (IsACommon(words[3]))
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[3])) return true; 
                     }
                 }
                 if (IsACommon(words[2]) || IsAPluralSubject(words[2]))
@@ -468,7 +453,7 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
-            if(subjectRecognized && words[0].Equals("i")){
+            if (subjectRecognized && words[0].Equals("i")){
                 if (words[1].Equals("don't"))
                 {
                     if (words[2].Equals("have") || IsABaseVerb(words[2])) // i do play
@@ -515,15 +500,9 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (The(words[3]))
                         {
-                            if (IsACommon(words[4])) // i do play the guitar
-                            {
-                                return true;
-                            }
+                            if (IsACommon(words[4])) { return true; }// i do play the guitar
                         }
-                        if (IsAPlural(words[3])) // i do like apples
-                        {
-                            return true;
-                        }
+                        if (IsAPlural(words[3])) { return true;  }// i do like apples
                         return true;
                     }
                     if (Not(words[2])) // i do not
@@ -558,15 +537,9 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (The(words[2]))
                     {
-                        if (IsACommon(words[3])) // i play the guitar
-                        {
-                            return true;
-                        }
+                        if (IsACommon(words[3])) { return true; }// i play the guitar
                     }
-                    if (IsAPlural(words[2])) // i like apples
-                    {
-                        return true;
-                    }
+                    if (IsAPlural(words[2])) { return true; } // i like apples
                     return true;
                 }
                 if (Not(words[2])) // i do not
@@ -597,7 +570,7 @@ public class ButtonTests : MonoBehaviour
             words[i] = words[i].ToLower();
         }
         // avverbi di modo alla fine della frase
-        if (placeAdverbs.Contains(words[words.Length-1]) || mannerAdverbs.Contains(words[words.Length - 1]))
+        if (IsAPlaceAdverbs(words[words.Length-1]) || IsAMannerAdverbs(words[words.Length - 1]))
         {
             words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
         }
@@ -818,7 +791,10 @@ public class ButtonTests : MonoBehaviour
     private static bool IsAnAdjective(string word) => adjectives.Contains(word);
     private static bool IsAnObjectPronouns(string word) => objectPronouns.Contains(word);
     private static bool IsAFrequencyAdverb(string word) => frequencyAdverbs.Contains(word);
+    private static bool IsAPlaceAdverbs(string word) => placeAdverbs.Contains(word);
+    private static bool IsAMannerAdverbs(string word) => placeAdverbs.Contains(word);
     private static bool IsAnIngVerbs(string word) => ing_verbs.Contains(word);
+    private static bool IsA3rdPersonVerb(string word) => base_verbs_3rd_person.Contains(word);
     private static bool IsATimeAdverb(string word) => timeAdverbs.Contains(word);
     private static bool IsAPluralSubject(string word) => plural_subject.Contains(word);
     private static bool IsASingular(string word) => singular_subject.Contains(word);
