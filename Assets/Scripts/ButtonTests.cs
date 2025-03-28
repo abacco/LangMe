@@ -124,36 +124,7 @@ public class ButtonTests : MonoBehaviour
             words = words.Where((value, index) => index != 1).ToArray();
         }
         // Phrasal Verbs
-        string tmpPhrasalVerb = "";
-        string detectedPhrasalVerb = "";
-        if (words.Length > 3)
-        {
-            tmpPhrasalVerb = words[1] + " " + words[2]; // she wakes up
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[1] + " " + words[2];
-                words = words.Where((value, index) => index != 1 && index != 2).ToArray();
-            }
-        }
-        if (words.Length > 4)
-        {
-            tmpPhrasalVerb = words[2] + " " + words[3];
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[2] + " " + words[3]; // she doesn't wake up the child
-                words = words.Where((value, index) => index != 1 && index != 2 && index != 3).ToArray();
-            }
-        }
-        if (words.Length > 5)
-        {
-            tmpPhrasalVerb = words[3] + " " + words[4];
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[3] + " " + words[4]; // she does not wakes up
-                words = words.Where((value, index) => index != 1 && index != 2 && index != 3 && index != 4).ToArray(); // she the child
-            }
-        }
-        
+        words = RemovePhrasalVerbs(words);
         if (The(words[0]) || A(words[0]))
         {
             bool subjectRecognized = IsASingular(words[1]);
@@ -215,10 +186,9 @@ public class ButtonTests : MonoBehaviour
             }
             if (words[2].Equals("does") && Not(words[3]) && (words[4].Equals("have") || IsABaseVerb(words[4])))
             {
-                tmpPhrasalVerb = words[1] + " " + words[2]; // she wakes up
-                if (phrasalVerbs.Contains(tmpPhrasalVerb))
+                string detectedPhrasalVerb = words[1] + " " + words[2]; // she wakes up
+                if (phrasalVerbs.Contains(detectedPhrasalVerb))
                 {
-                    detectedPhrasalVerb = words[1] + " " + words[2];
                     words = words.Where((value, index) => index != 1 && index != 2).ToArray();
                 }
                 if (The(words[5]) || A(words[5])) // The | a
@@ -639,40 +609,12 @@ public class ButtonTests : MonoBehaviour
         {
             words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
         }
-        if (words[0].Equals("there") && (words[1].Equals("are")))
+        if (words[0].Equals("there") && words[1].Equals("are"))
         {
             words = words.Skip(2).ToArray();
         }
         // Phrasal Verbs
-        string tmpPhrasalVerb = "";
-        string detectedPhrasalVerb = "";
-        if (words.Length > 3)
-        {
-            tmpPhrasalVerb = words[1] + " " + words[2]; // she wakes up
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[1] + " " + words[2];
-                words = words.Where((value, index) => index != 1 && index != 2).ToArray();
-            }
-        }
-        if (words.Length > 4)
-        {
-            tmpPhrasalVerb = words[2] + " " + words[3];
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[2] + " " + words[3]; // she doesn't wake up
-                words = words.Where((value, index) => index != 1 && index != 2 && index != 3).ToArray();
-            }
-        }
-        if (words.Length > 5)
-        {
-            tmpPhrasalVerb = words[3] + " " + words[4];
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[3] + " " + words[4]; // she does not wakes up
-                words = words.Where((value, index) => index != 1 && index != 2 && index != 3 && index != 3 && index != 4).ToArray();
-            }
-        }
+        words = RemovePhrasalVerbs(words);
         if (The(words[0]) || A(words[0]))
         {
             bool subjectRecognized = IsAPluralSubject(words[1]) || IsAPlural(words[1]);
@@ -894,7 +836,39 @@ public class ButtonTests : MonoBehaviour
 
 
 
-
+    public static string[] RemovePhrasalVerbs(string[] words)
+    {
+        string tmpPhrasalVerb = "";
+        string detectedPhrasalVerb = "";
+        if (words.Length > 3)
+        {
+            tmpPhrasalVerb = words[1] + " " + words[2]; // she wakes up
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[1] + " " + words[2];
+                words = words.Where((value, index) => index != 1 && index != 2).ToArray();
+            }
+        }
+        if (words.Length > 4)
+        {
+            tmpPhrasalVerb = words[2] + " " + words[3];
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[2] + " " + words[3]; // she doesn't wake up
+                words = words.Where((value, index) => index != 1 && index != 2 && index != 3).ToArray();
+            }
+        }
+        if (words.Length > 5)
+        {
+            tmpPhrasalVerb = words[3] + " " + words[4];
+            if (phrasalVerbs.Contains(tmpPhrasalVerb))
+            {
+                detectedPhrasalVerb = words[3] + " " + words[4]; // she does not wakes up
+                words = words.Where((value, index) => index != 1 && index != 2 && index != 3 && index != 3 && index != 4).ToArray();
+            }
+        }
+        return words;
+    }
 
 
 
