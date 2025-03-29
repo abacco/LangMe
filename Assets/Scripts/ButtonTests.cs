@@ -931,11 +931,35 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
-            "He completes the task quickly.",
-            "She walks slowly.",
+            // present perfect - AO VEDI CHE PUOI MIGLIORARE ANCORA LA COSA, SE TROVI "THE" OPPURE "A" li puoi togliere e ti zombi l'else!!!!!!!!!! 
+            //"The car has been repaired.",
+            //"The car has not been repaired.",
+            //"The car hasn't been repaired.",
+
+            //"A student has finished the assignment.",
+            //"A student has not finished the assignment.",
+            //"A student hasn't finished the assignment.",
+
+            //"Students have finished their assignment",
+            //"Students have not finished their assignment",
+            //"Students haven't finished their assignment",
+
+            //"Alex has finished the assignment.",
+
+
+
+
+
+
+
+
+
 
             "There is no beef in here",
+            "He completes the task quickly.",
+            "She walks slowly.",
             // tmp --------------------- ok all
+
             "The car is running.",
             "The car is not running.",
             "The car isn't running.",
@@ -955,7 +979,6 @@ public class ButtonTests : MonoBehaviour
             "There are no cars running here",
             "There aren't cars running here",
 
-            // + adj - ok all
             "The big car is running.",
             "The big car is not running.",
             "The big car isn't running.",
@@ -974,6 +997,38 @@ public class ButtonTests : MonoBehaviour
 
             "There are no big cars running here",
             "There aren't big cars running here",
+
+            "The car is big.",
+            "The car is not big.",
+            "The car isn't big.",
+
+            "A car is big.",
+            "A car is not big.",
+            "A car isn't big.",
+
+            "Cars are big",
+            "Cars are not big",
+            "Cars aren't big",
+
+            // + adj - ok all
+            //"The big car is running.",
+            //"The big car is not running.",
+            //"The big car isn't running.",
+
+            //"A big car is running.",
+            //"A big car is not running.",
+            //"A big car isn't running.",
+
+            //"The big cars are running.",
+            //"The big cars are not running.",
+            //"The big cars aren't running.",
+
+            //"There is no big car running here",
+            //"There is not a big car running here",
+            //"There isn't a big car running here",
+
+            //"There are no big cars running here",
+            //"There aren't big cars running here",
 
             "There aren't big dogs playing here",
             // ---------------------
