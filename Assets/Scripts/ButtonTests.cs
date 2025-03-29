@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
 {
-    static List<string> singular_subject = new List<string> { "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
+    static List<string> singular_subject = new List<string> { "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
     static List<string> plural_subject = new List<string> { "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
     static List<string> base_verbs = new List<string> { "bark", "visit","work","agree","drink", "like", "love", "drive", "are", "run", "jump", "believe" };
     static List<string> base_verbs_3rd_person = new List<string> { "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
@@ -15,8 +15,8 @@ public class ButtonTests : MonoBehaviour
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
+    static List<string> common_nouns = new List<string> { "dog","task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
     static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
     static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
@@ -81,21 +81,21 @@ public class ButtonTests : MonoBehaviour
         string[] words = sentence.ToLower().Replace(".", "").Replace("?", "").Split(' ');
         if (words.Length < 2) return false;
 
-        return SingularSubjectPresentSimple_Affirmation(words) || PluralSubjectPresentSimple_Affirmation(words);
+        if      (SingularSubjectPresentSimple_Affirmation(words)){ return true; }
+        else if (PluralSubjectPresentSimple_Affirmation(words))  { return true; }
+        else                                                     { return false; }
     }
 
     public static bool SingularSubjectPresentSimple_Affirmation(string[] words)
     {
-        if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
-        {
-            words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
-        }
-        if (words[0].Equals("there") && words[1].Equals("is")) { words = words.Skip(2).ToArray(); }
         words = Normalization(words);
+
+        if (IsFixedLenght(words, 1) && IsASingular(words[0])) return true; // There are dogs here becomes only "dogs" -> valid
         if (The(words[0]) || A(words[0]))
         {
             bool subjectRecognized = IsASingular(words[1]);
-            if (!subjectRecognized) { return false; }
+            if (!subjectRecognized) return false;
+            if (IsFixedLenght(words, 2)) return true; // There is a dog here -> becomes dog
             if (IsAFrequencyAdverb(words[2]))  
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
@@ -118,7 +118,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAnAdjective(words[3])) return true;
             }
-            if (words[2].Equals("has"))
+            if (Has(words[2]))
             {
                 if (The(words[3]) || A(words[3]))
                 {
@@ -179,8 +179,8 @@ public class ButtonTests : MonoBehaviour
         }
         else
         {
-            bool subjectRecognized = proper_nouns.Contains(words[0]) || IsASingular(words[0]);
-            if (!subjectRecognized) { return false; }
+            bool subjectRecognized = IsAProperNoun(words[0]) || IsASingular(words[0]);
+            if (!subjectRecognized) return false; 
             if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
             {
                 words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
@@ -253,7 +253,7 @@ public class ButtonTests : MonoBehaviour
                     if (IsAnAdjective(words[2])) return true;
                 }
             }
-            if (words[1].Equals("has"))
+            if (Has(words[1]))
             {
                 if (The(words[2]) || A(words[2]))
                 {
@@ -412,10 +412,6 @@ public class ButtonTests : MonoBehaviour
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
     {
-        if (There(words[0]) && Are(words[1]))
-        {
-            words = words.Skip(2).ToArray();
-        }
         words = Normalization(words);
 
         if (The(words[0]) || A(words[0]))
@@ -491,7 +487,10 @@ public class ButtonTests : MonoBehaviour
         {
             bool subjectRecognized =  IsAPluralSubject(words[0]) || IsAPlural(words[0]);
             if (!subjectRecognized) return false;
-            if (IsAFrequencyAdverb(words[1]))
+            if (IsFixedLenght(words, 1) && subjectRecognized) {
+                return true;
+            }
+            if (IsAFrequencyAdverb(words[1])) // there are dogs here -> dogs -> outOfBoundEx
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
@@ -600,6 +599,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsATimeAdverb(string word) => timeAdverbs.Contains(word);
     private static bool IsAPluralSubject(string word) => plural_subject.Contains(word);
     private static bool IsASingular(string word) => singular_subject.Contains(word);
+    private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
     private static bool The(string word) { return word.ToLower().Equals("the"); }
     private static bool A(string word) { return word.ToLower().Equals("a"); }
     private static bool Do(string word) { return word.ToLower().Equals("do"); }
@@ -608,6 +608,7 @@ public class ButtonTests : MonoBehaviour
     private static bool Have(string word) { return word.ToLower().Equals("have"); }
     private static bool Arent(string word) { return word.ToLower().Equals("aren't"); }
     private static bool There(string word) { return word.ToLower().Equals("there"); }
+    private static bool Has(string word) { return word.ToLower().Equals("has"); }
 
 
 
@@ -624,6 +625,15 @@ public class ButtonTests : MonoBehaviour
         {
             words[i] = words[i].ToLower();
         }
+        if (There(words[0]) && Are(words[1]))
+        {
+            words = words.Skip(2).ToArray();
+        }
+        if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
+        {
+            words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+        }
+        if (words[0].Equals("there") && (words[1].Equals("is") || words[1].Equals("are"))) { words = words.Skip(2).ToArray(); }
         if (IsAPlaceAdverbs(words[words.Length - 1]) || IsAMannerAdverbs(words[words.Length - 1]))
         {
             words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
@@ -755,13 +765,13 @@ public class ButtonTests : MonoBehaviour
             "It is a sunny day.",
             "It is not a sunny day.",
             "he likes reading",
-
             "Dogs bark",
             "She is at home",
             "She is not at home",
+            "She drives the car carefully.", 
 
-            "She drives the car carefully." 
-
+            "There are dogs here",
+            "There is a dog here"
             //"He completed the task quickly.",
 
             //"She carefully drives the car.",
