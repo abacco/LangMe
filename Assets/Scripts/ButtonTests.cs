@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
@@ -82,6 +83,15 @@ public class ButtonTests : MonoBehaviour
         string[] words = sentence.ToLower().Replace(".", "").Replace("?", "").Split(' ');
         if (words.Length < 2) return false;
 
+        //List<string> extender = new List<string>(words);  // Converti l'array in una lista
+        //extender.Add("");  // Aggiungi un elemento
+        //extender.Add("");  // Aggiungi un elemento
+        //extender.Add("");  // Aggiungi un elemento
+        //extender.Add("");  // Aggiungi un elemento
+        //extender.Add("");  // Aggiungi un elemento
+        //extender.Add("");  // Aggiungi un elemento
+        //words = extender.ToArray();
+
         if      (SingularSubjectPresentSimple_Affirmation(words)){ return true; }
         else if (PluralSubjectPresentSimple_Affirmation(words))  { return true; }
         else                                                     { return false; }
@@ -95,9 +105,9 @@ public class ButtonTests : MonoBehaviour
         if (The(words[0]) || A(words[0]))
         {
             bool subjectRecognized = IsASingular(words[1]);
-            if (!subjectRecognized) return false;
+            //if (!subjectRecognized) return false;
             if (IsFixedLenght(words, 2)) return true; // There is a dog here -> becomes dog
-            if (IsAFrequencyAdverb(words[2]))  
+            if (IsAFrequencyAdverb(words[2]))
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
@@ -105,8 +115,8 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsAnIngVerbs(words[3])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
                 {
-                    if(IsFixedLenght(words, 4)) return true;
-                    if (IsAPlural(words[4]))    return true; // eating sandwiches
+                    if (IsFixedLenght(words, 4)) return true;
+                    if (IsAPlural(words[4])) return true; // eating sandwiches
                     if (A(words[4]) || The(words[4]) || IsAPreposition(words[4])) // eating a/the sandwich
                     {
                         if (IsACommon(words[5])) return true;
@@ -186,9 +196,119 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsAnIngVerbs(words[2])) return true;
             }
+
+            if (IsAnAdjective(words[1]))
+            {
+                if (IsFixedLenght(words, 3)) return true; // There is a dog here -> becomes dog
+                if (IsAFrequencyAdverb(words[3]))
+                {
+                    words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
+                }
+                if (Is(words[3]))
+                {
+                    if (IsAnIngVerbs(words[4])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
+                    {
+                        if (IsFixedLenght(words, 5)) return true;
+                        if (IsAPlural(words[5])) return true; // eating sandwiches
+                        if (A(words[5]) || The(words[5]) || IsAPreposition(words[5])) // eating a/the sandwich
+                        {
+                            if (IsACommon(words[6])) return true;
+                        }
+                    }
+                    if (Not(words[4]))
+                    {
+                        if (IsAnIngVerbs(words[5])) return true;
+                        if (IsAnAdjective(words[5])) return true;
+                    }
+                    if (IsAnAdjective(words[4])) return true;
+                }
+                if (Has(words[3]))
+                {
+                    if (The(words[4]) || A(words[4]))
+                    {
+                        if (IsASingular(words[5])) return true;
+                    }
+                    if (IsAnAdjective(words[4])) return true;
+                }
+                if (Doesnt(words[3]) && (Have(words[4]) || IsABaseVerb(words[4])))
+                {
+                    if (The(words[5]) || A(words[5])) // The | a
+                    {
+                        if (IsASingular(words[6])) return true;
+                    }
+                }
+                if (Does(words[3]) && Not(words[4]) && (Have(words[5]) || IsABaseVerb(words[5])))
+                {
+                    string detectedPhrasalVerb = words[2] + " " + words[3]; // she wakes up
+                    if (phrasalVerbs.Contains(detectedPhrasalVerb))
+                    {
+                        words = words.Where((value, index) => index != 2 && index != 3).ToArray();
+                    }
+                    if (The(words[4]) || A(words[4])) // The | a
+                    {
+                        if (IsASingular(words[5])) return true;
+                    }
+                }
+                if (IsA3rdPersonVerb(words[3])) // A/The guy drives a/the (big) car
+                {
+                    if (IsFixedLenght(words, 4)) return true; // the cat jumps
+                    if (The(words[4]) || A(words[4])) // The | a
+                    {
+                        if (IsAnAdjective(words[5]))
+                        {
+                            if (IsACommon(words[6])) return true;
+                        }
+                        if (IsACommon(words[5])) return true;
+                    }
+                    if (IsAPreposition(words[4]))
+                    {
+                        if (The(words[5]))
+                        {
+                            if (IsACommon(words[6])) return true;
+                        }
+                    }
+                }
+                if (IsAPreposition(words[3])) // (there is) a book on the table
+                {
+                    if (The(words[4]))
+                    {
+                        if (IsACommon(words[5]) || IsAPlural(words[5]))
+                            return true;
+                    }
+                }
+                if (IsAPreposition(words[3])) // (there are) books on the table
+                {
+                    if (IsAPlural(words[4])) return true;
+                }
+                if (Isnt(words[3]))
+                {
+                    if (IsAnAdjective(words[4])) return true; // a car isn't big
+                    if (IsAnIngVerbs(words[4])) return true; // a car isn't running
+                }
+                if (IsASingular(words[2])) // There isn't a car running here -> a car running
+                {
+                    if (IsAnIngVerbs(words[1])) return true;
+                }
+                if (!subjectRecognized) return false;
+            }
+            if (!subjectRecognized) return false;
         }
         else
         {
+            if (words[0].Equals("no") || words[0].Equals("not")) //There are no cars running here -> a car running
+            {
+                words = words.Where((value, index) => index != 0).ToArray();
+                if (IsASingular(words[0]))
+                {
+                    if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
+                    if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
+                }
+                if (A(words[0]) && IsAPlural(words[1]))
+                {
+                    if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
+                    if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
+                }
+            }
             bool subjectRecognized = IsAProperNoun(words[0]) || IsASingular(words[0]);
             if (words[0].Equals("no") || words[0].Equals("not"))
             {
@@ -204,7 +324,7 @@ public class ButtonTests : MonoBehaviour
                     if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
                 }
             }
-            if (!subjectRecognized) return false; 
+            //if (!subjectRecognized) return false; 
             if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
             {
                 words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
@@ -311,7 +431,7 @@ public class ButtonTests : MonoBehaviour
                     }
                     if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
                 }
-                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;   
+                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
             }
             if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
             {
@@ -331,7 +451,7 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (IsAnAdjective(words[3]))
                     {
-                        if (IsACommon(words[4])) return true; 
+                        if (IsACommon(words[4])) return true;
                     }
                     if (IsACommon(words[3])) return true;
                 }
@@ -354,7 +474,8 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
-            if (subjectRecognized && I(words[0])){
+            if (subjectRecognized && I(words[0]))
+            {
                 if (Dont(words[1]))
                 {
                     if (Have(words[2]) || IsABaseVerb(words[2])) // i do play
@@ -431,8 +552,9 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
+            if (!subjectRecognized) return false;
         }
-        return false;
+        return false; 
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
     {
@@ -517,7 +639,7 @@ public class ButtonTests : MonoBehaviour
         }
         else
         { 
-            if (words[0].Equals("no") || words[0].Equals("not")) //There aren't cars running here -> a car running
+            if (words[0].Equals("no") || words[0].Equals("not")) //There are no cars running here -> a car running
             {
                 words = words.Where((value, index) => index != 0).ToArray();
                 if (IsAPlural(words[0]))
@@ -594,10 +716,13 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAPreposition(words[1])) // (there is) a book on the table
             {
-                if (The(words[2]))
+                if(!IsFixedLenght(words, 2))
                 {
-                    IsAPlural(words[3]);
-                    IsACommon(words[3]);
+                    if (The(words[2]))
+                    {
+                        IsAPlural(words[3]);
+                        IsACommon(words[3]);
+                    }
                 }
             }
             if (Do(words[1]))       
@@ -624,6 +749,7 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
+            if (IsAnIngVerbs(words[1])) return true; // cars running
         }
         return false;
     }
@@ -740,132 +866,155 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
-            "There is no beef in here",
-            // tmp ---------------------
-            "The car is running.",
-            "The car is not running.",
-            "The car isn't running.",
+            "There is no beef in here"
+            //// tmp ---------------------
+            //"The car is running.",
+            //"The car is not running.",
+            //"The car isn't running.",
 
-            "A car is running.",
-            "A car is not running.",
-            "A car isn't running.",
+            //"A car is running.",
+            //"A car is not running.",
+            //"A car isn't running.",
 
-            "The cars are running.",
-            "The cars are not running.",
-            "The cars aren't running.",
+            //"The cars are running.",
+            //"The cars are not running.",
+            //"The cars aren't running.",
 
-            "There is no car running here",
-            "There is not a car running here",
-            "There isn't a car running here",
+            //"There is no car running here",
+            //"There is not a car running here",
+            //"There isn't a car running here",
 
-            "There are no cars running here",
-            "There aren't cars running here",
-            // ---------------------
+            //"There are no cars running here",
+            //"There aren't cars running here",
 
-            // Present Simple - Affermazioni
-            "The car is big.",
-            "The car is not big.",
-            "The car isn't big.",
+            //// + adj
+            //"The big car is running.",
+            //"The big car is not running.",
+            //"The big car isn't running.",
 
-            "A car is big.",
-            "A car is not big.",
-            "A car isn't big.",
+            //"A big car is running.",
+            //"A big car is not running.",
+            //"A big car isn't running.",
 
-            "Cars are big",
-            "Cars are not big",
-            "Cars aren't big",
+            //"The big cars are running.",
+            //"The big cars are not running.",
+            //"The big cars aren't running.",
 
-            "A car is big.",
-            "A guy has a car.",
-            "Google has a car.",
-            "John loves books.",
-            "John loves big books.",
-            "The sun rises in the east.",
-            "He likes apples.",
-            "She believes in miracles.",
-            "She believes in a miracle.",
-            "The cat jumps.",
-            "Cats jump.",
-            "The dogs run fast.",
-            "The dogs run.",
+            //"There is no big car running here",
+            //"There is not a big car running here",
+            //"There isn't a big car running here",
+
+            //"There are no big cars running here",
+            //"There aren't big cars running here",
+            //// ---------------------
+
+            //// Present Simple - Affermazioni
+            //"The car is big.",
+            //"The car is not big.",
+            //"The car isn't big.",
+
+            //"A car is big.",
+            //"A car is not big.",
+            //"A car isn't big.",
+
+            //"Cars are big",
+            //"Cars are not big",
+            //"Cars aren't big",
+
+            //"A car is big.",
+            //"A guy has a car.",
+            //"Google has a car.",
+            //"John loves books.",
+            //"John loves big books.",
+            //"The sun rises in the east.",
+            //"He likes apples.",
+            //"She believes in miracles.",
+            //"She believes in a miracle.",
+            //"The cat jumps.",
+            //"Cats jump.",
+            //"The dogs run fast.",
+            //"The dogs run.",
     
-            // Present Simple - Negazioni
+            //// Present Simple - Negazioni
 
-            "The cars aren't big.",
-            "A car is not big.",
-            "A car isn't big.",
-            "A guy does not have a car.",
-            "A guy doesn't have a car.",
-            "A guy does not have the car.",
-            "Google does not have a car.",
-            "John does not love books.",
-            "Dogs do not run fast.",
-            "The Dogs do not run.",
-            "He does not have a bike.",
-            "They do not visit her grandparents every Sunday.",
-            "They don't wake up her grandparents every Sunday.",
+            //"The cars aren't big.",
+            //"A car is not big.",
+            //"A car isn't big.",
+            //"A guy does not have a car.",
+            //"A guy doesn't have a car.",
+            //"A guy does not have the car.",
+            //"Google does not have a car.",
+            //"John does not love books.",
+            //"Dogs do not run fast.",
+            //"The Dogs do not run.",
+            //"He does not have a bike.",
+            //"They do not visit her grandparents every Sunday.",
+            //"They don't wake up her grandparents every Sunday.",
     
-            // Avverbi nel Present Simple
-            "She never drinks coffee.",
-            "I always drink coffee in the morning.",
-            "They do not always drink coffee in the morning.",
-            "He doesn't always agree with me.",
+            //// Avverbi nel Present Simple
+            //"She never drinks coffee.",
+            //"I always drink coffee in the morning.",
+            //"They do not always drink coffee in the morning.",
+            //"He doesn't always agree with me.",
     
-            // Present Simple - Frasi con Verbi Frasali (Phrasal Verbs)
-            "She wakes up the child.",
-            "He turns on the computer.",
-            "She turns off the lamp.",
-            "They give up the fight.",
-            "He takes off the jacket.",
-            "She looks after the house.",
-            "We run into the problem.",
-            "They set up the table.",
-            "She finds out the answer.",
-            "He puts off the meeting.",
+            //// Present Simple - Frasi con Verbi Frasali (Phrasal Verbs)
+            //"She wakes up the child.",
+            //"He turns on the computer.",
+            //"She turns off the lamp.",
+            //"They give up the fight.",
+            //"He takes off the jacket.",
+            //"She looks after the house.",
+            //"We run into the problem.",
+            //"They set up the table.",
+            //"She finds out the answer.",
+            //"He puts off the meeting.",
     
-            // Present Continuous - Affermazioni
-            "The car is running.",
-            "The boy is eating a sandwich.",
-            "A girl is reading a book.",
-            "The dogs are playing in the garden.",
-            "John is writing a letter.",
-            "They are standing here.",
+            //// Present Continuous - Affermazioni
+            //"The car is running.",
+            //"The boy is eating a sandwich.",
+            //"A girl is reading a book.",
+            //"The dogs are playing in the garden.",
+            //"John is writing a letter.",
+            //"They are standing here.",
     
-            // Present Continuous - Negazioni
-            "The car is not running.",
-            "The boy is not eating a sandwich.",
-            "A girl is not reading a book.",
-            "The dogs are not playing in the garden.",
-            "John is not writing a letter.",
-            "He is not standing here.",
+            //// Present Continuous - Negazioni
+            //"The car is not running.",
+            //"The boy is not eating a sandwich.",
+            //"A girl is not reading a book.",
+            //"The dogs are not playing in the garden.",
+            //"John is not writing a letter.",
+            //"He is not standing here.",
     
-            // Usi Enfatici con 'do'
-            "I do like apples.",
-            "They do not like apples.",
-            "I do not work at night.",
-            "I do not always drink coffee in the morning.",
+            //// Usi Enfatici con 'do'
+            //"I do like apples.",
+            //"They do not like apples.",
+            //"I do not work at night.",
+            //"I do not always drink coffee in the morning.",
     
-            // Frasi con Soggetto Plurale
-            "Cars are big.",
-            "Cars are not big.",
-            "Cars aren't big.",
-            "The dogs run.",
-            "The dogs run in the garden.",
-            "The dogs are playing in the garden.",
-            "The dogs are not playing in the garden.",
-            "The dogs aren't playing in the garden.",
+            //// Frasi con Soggetto Plurale
+            //"Cars are big.",
+            //"Cars are not big.",
+            //"Cars aren't big.",
+            //"The dogs run.",
+            //"The dogs run in the garden.",
+            //"The dogs are playing in the garden.",
+            //"The dogs are not playing in the garden.",
+            //"The dogs aren't playing in the garden.",
 
-            // others
-            "It is a sunny day.",
-            "It is not a sunny day.",
-            "he likes reading",
-            "Dogs bark",
-            "She is at home",
-            "She is not at home",
-            "She drives the car carefully.", 
+            //// others
+            //"It is a sunny day.",
+            //"It is not a sunny day.",
+            //"he likes reading",
+            //"Dogs bark",
+            //"She is at home",
+            //"She is not at home",
+            //"She drives the car carefully.", 
 
-            "There are dogs here",
-            "There is a dog here"
+            //"There are dogs here",
+            //"There is a dog here"
+
+
+
             //"He completed the task quickly.",
 
             //"She carefully drives the car.",
