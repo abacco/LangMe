@@ -1,22 +1,23 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
 {
-    static List<string> singular_subject = new List<string> { "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
-    static List<string> plural_subject = new List<string> { "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
+    static List<string> singular_subject = new List<string> { "beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
+    static List<string> plural_subject = new List<string> { "beef", "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
     static List<string> base_verbs = new List<string> { "bark", "visit","work","agree","drink", "like", "love", "drive", "are", "run", "jump", "believe" };
     static List<string> base_verbs_3rd_person = new List<string> { "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "agreeing", "liking", "standing", "writing","playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> ing_verbs = new List<string> { "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> { "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
     static List<string> negations = new List<string> { "not", "never", "no" };
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "dog","task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
+    static List<string> common_nouns = new List<string> { "beef", "dog","task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
     static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
     static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
@@ -100,7 +101,7 @@ public class ButtonTests : MonoBehaviour
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
-            if (words[2].Equals("is"))
+            if (Is(words[2]))
             {
                 if (IsAnIngVerbs(words[3])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
                 {
@@ -126,14 +127,14 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAnAdjective(words[3])) return true;
             }
-            if (words[2].Equals("doesn't") && (Have(words[3]) || IsABaseVerb(words[3])))
+            if (Doesnt(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
             {
                 if (The(words[4]) || A(words[4])) // The | a
                 {
                     if (IsASingular(words[5])) return true;
                 }
             }
-            if (words[2].Equals("does") && Not(words[3]) && (Have(words[4]) || IsABaseVerb(words[4])))
+            if (Does(words[2]) && Not(words[3]) && (Have(words[4]) || IsABaseVerb(words[4])))
             {
                 string detectedPhrasalVerb = words[1] + " " + words[2]; // she wakes up
                 if (phrasalVerbs.Contains(detectedPhrasalVerb))
@@ -176,12 +177,35 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsAPlural(words[3])) return true;
             }
+            if (Isnt(words[2]))
+            {
+                if (IsAnAdjective(words[3])) return true; // a car isn't big
+                if (IsAnIngVerbs(words[3])) return true; // a car isn't running
+            }
+            if (IsASingular(words[1])) // There isn't a car running here -> a car running
+            {
+                if (IsAnIngVerbs(words[2])) return true;
+            }
         }
         else
         {
             bool subjectRecognized = IsAProperNoun(words[0]) || IsASingular(words[0]);
+            if (words[0].Equals("no") || words[0].Equals("not"))
+            {
+                words = words.Where((value, index) => index != 0).ToArray();
+                if (IsASingular(words[0]))
+                {
+                    if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
+                    if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
+                }
+                if (A(words[0]) && IsASingular(words[1]))
+                {
+                    if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
+                    if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
+                }
+            }
             if (!subjectRecognized) return false; 
-            if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
+            if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
             {
                 words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
             }
@@ -198,7 +222,7 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsACommon(words[2]) || IsAPlural(words[2])) return true;
             }
-            if (words[1].Equals("is"))
+            if (Is(words[1]))
             {
                 if (IsAnIngVerbs(words[2])) // John is playing
                 {
@@ -268,7 +292,7 @@ public class ButtonTests : MonoBehaviour
                     if (IsAPlural(words[2])) return true;// john loves books
                 }
             }
-            if (words[1].Equals("doesn't")) // "doesn't"
+            if (Doesnt(words[1])) // "doesn't"
             {
                 if (IsAFrequencyAdverb(words[2]))
                 {
@@ -289,7 +313,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsASingular(words[4]) || IsAPlural(words[4])) return true;   
             }
-            if (words[1].Equals("does") && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+            if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
             {
                 if (IsAnObjectPronouns(words[4])) // she does not visit her
                 {
@@ -330,8 +354,8 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
-            if (subjectRecognized && words[0].Equals("i")){
-                if (words[1].Equals("don't"))
+            if (subjectRecognized && I(words[0])){
+                if (Dont(words[1]))
                 {
                     if (Have(words[2]) || IsABaseVerb(words[2])) // i do play
                     {
@@ -443,7 +467,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsFixedLenght(words, 5)) return true; // The Dogs do not run
                 if (IsAnAdjective(words[5])) return true; // The Dogs do not run fast
             }
-            if (Are(words[2]))
+            if (Are(words[2]) || Arent(words[2]))
             {
                 if (IsAnIngVerbs(words[3])) // the dogs are playing
                 {
@@ -482,14 +506,34 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
+            if (Arent(words[2]))
+            {
+                if (IsAnAdjective(words[3])) return true; // the cars aren't big.
+            }
+            if (IsAPlural(words[1])) // There aren't cars running here -> a car running
+            {
+                if (IsAnIngVerbs(words[2])) return true;
+            }
         }
         else
-        {
+        { 
+            if (words[0].Equals("no") || words[0].Equals("not")) //There aren't cars running here -> a car running
+            {
+                words = words.Where((value, index) => index != 0).ToArray();
+                if (IsAPlural(words[0]))
+                {
+                    if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
+                    if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
+                }
+                if (A(words[0]) && IsAPlural(words[1]))
+                {
+                    if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
+                    if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
+                }
+            }
             bool subjectRecognized =  IsAPluralSubject(words[0]) || IsAPlural(words[0]);
             if (!subjectRecognized) return false;
-            if (IsFixedLenght(words, 1) && subjectRecognized) {
-                return true;
-            }
+            if (IsFixedLenght(words, 1) && subjectRecognized) return true;
             if (IsAFrequencyAdverb(words[1])) // there are dogs here -> dogs -> outOfBoundEx
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
@@ -609,6 +653,13 @@ public class ButtonTests : MonoBehaviour
     private static bool Arent(string word) { return word.ToLower().Equals("aren't"); }
     private static bool There(string word) { return word.ToLower().Equals("there"); }
     private static bool Has(string word) { return word.ToLower().Equals("has"); }
+    private static bool Is(string word) { return word.ToLower().Equals("is"); }
+    private static bool Isnt(string word) { return word.ToLower().Equals("isn't"); }
+    private static bool Every(string word) { return word.ToLower().Equals("every"); }
+    private static bool Doesnt(string word) { return word.ToLower().Equals("doesn't"); }
+    private static bool Dont(string word) { return word.ToLower().Equals("don't"); }
+    private static bool Does(string word) { return word.ToLower().Equals("does"); }
+    private static bool I(string word) { return word.ToLower().Equals("i"); }
 
 
 
@@ -629,11 +680,18 @@ public class ButtonTests : MonoBehaviour
         {
             words = words.Skip(2).ToArray();
         }
-        if (words[words.Length - 2].Equals("every")) // avverbio di tempo alla fine - gestire avverbi come every sunday
+        if (There(words[0]) && Arent(words[1]))
+        {
+            words = words.Skip(2).ToArray();
+        }
+        if (There(words[0]) && Is(words[1])) 
+        { words = words.Skip(2).ToArray(); }
+        if (There(words[0]) && Isnt(words[1]))
+        { words = words.Skip(2).ToArray(); }
+        if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
         {
             words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
         }
-        if (words[0].Equals("there") && (words[1].Equals("is") || words[1].Equals("are"))) { words = words.Skip(2).ToArray(); }
         if (IsAPlaceAdverbs(words[words.Length - 1]) || IsAMannerAdverbs(words[words.Length - 1]))
         {
             words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
@@ -683,9 +741,40 @@ public class ButtonTests : MonoBehaviour
         List<string> sentences = new List<string>
         {
             "There is no beef in here",
+            // tmp ---------------------
+            "The car is running.",
+            "The car is not running.",
+            "The car isn't running.",
+
+            "A car is running.",
+            "A car is not running.",
+            "A car isn't running.",
+
+            "The cars are running.",
+            "The cars are not running.",
+            "The cars aren't running.",
+
+            "There is no car running here",
+            "There is not a car running here",
+            "There isn't a car running here",
+
+            "There are no cars running here",
+            "There aren't cars running here",
+            // ---------------------
+
             // Present Simple - Affermazioni
             "The car is big.",
-            "The cars are big.",
+            "The car is not big.",
+            "The car isn't big.",
+
+            "A car is big.",
+            "A car is not big.",
+            "A car isn't big.",
+
+            "Cars are big",
+            "Cars are not big",
+            "Cars aren't big",
+
             "A car is big.",
             "A guy has a car.",
             "Google has a car.",
@@ -701,10 +790,12 @@ public class ButtonTests : MonoBehaviour
             "The dogs run.",
     
             // Present Simple - Negazioni
-            "The car is not big.",
-            "The cars are not big.",
+
+            "The cars aren't big.",
             "A car is not big.",
+            "A car isn't big.",
             "A guy does not have a car.",
+            "A guy doesn't have a car.",
             "A guy does not have the car.",
             "Google does not have a car.",
             "John does not love books.",
@@ -757,9 +848,12 @@ public class ButtonTests : MonoBehaviour
             // Frasi con Soggetto Plurale
             "Cars are big.",
             "Cars are not big.",
+            "Cars aren't big.",
             "The dogs run.",
             "The dogs run in the garden.",
             "The dogs are playing in the garden.",
+            "The dogs are not playing in the garden.",
+            "The dogs aren't playing in the garden.",
 
             // others
             "It is a sunny day.",
