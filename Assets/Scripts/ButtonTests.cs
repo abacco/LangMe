@@ -1,24 +1,22 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
 {
-    static List<string> singular_subject = new List<string> { "beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
-    static List<string> plural_subject = new List<string> { "beef", "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
+    static List<string> singular_subject = new List<string> { "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
+    static List<string> plural_subject = new List<string> { "students", "beefs", "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
     static List<string> base_verbs = new List<string> { "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
     static List<string> base_verbs_3rd_person = new List<string> { "walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
     static List<string> ing_verbs = new List<string> { "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
-    static List<string> past_participle = new List<string> { "loved", "driven" };
+    static List<string> past_participle = new List<string> { "finished", "repaired", "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
     static List<string> negations = new List<string> { "not", "never", "no" };
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "beef", "dog","task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
+    static List<string> common_nouns = new List<string> { "assignment", "student","beef", "dog","task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "assignments","beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
     static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
     static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
@@ -141,8 +139,37 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAnAdjective(words[2])) return true;
         }
+        if (Hasnt(words[1]))
+        {
+            if (Been(words[2]))
+            {
+                if (IsPastParticiple(words[3])) return true;
+            }
+        }
         if (Has(words[1]))
         {
+            if (IsPastParticiple(words[2]))
+            {
+                if (The(words[3]) || A(words[3]) || words[3].Equals("an"))
+                {
+                    if (IsACommon(words[4])) return true;
+                }
+                if (The(words[3]))
+                {
+                    if (IsAPlural(words[4])) return true;
+                }
+            }
+            if (Not(words[2]))
+            {
+                if (Been(words[3]))
+                {
+                    if (IsPastParticiple(words[4])) return true;
+                }
+            }
+            if (Been(words[2]))
+            {
+                if (IsPastParticiple(words[3])) return true;
+            }
             if (The(words[2]) || A(words[2]))
             {
                 if (IsASingular(words[3])) return true;
@@ -791,6 +818,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsAPluralSubject(string word) => plural_subject.Contains(word);
     private static bool IsASingular(string word) => singular_subject.Contains(word);
     private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
+    private static bool IsPastParticiple(string word) => past_participle.Contains(word);
     private static bool The(string word) { return word.ToLower().Equals("the"); }
     private static bool A(string word) { return word.ToLower().Equals("a"); }
     private static bool Do(string word) { return word.ToLower().Equals("do"); }
@@ -800,6 +828,7 @@ public class ButtonTests : MonoBehaviour
     private static bool Arent(string word) { return word.ToLower().Equals("aren't"); }
     private static bool There(string word) { return word.ToLower().Equals("there"); }
     private static bool Has(string word) { return word.ToLower().Equals("has"); }
+    private static bool Hasnt(string word) { return word.ToLower().Equals("hasn't"); }
     private static bool Is(string word) { return word.ToLower().Equals("is"); }
     private static bool Isnt(string word) { return word.ToLower().Equals("isn't"); }
     private static bool Every(string word) { return word.ToLower().Equals("every"); }
@@ -807,6 +836,7 @@ public class ButtonTests : MonoBehaviour
     private static bool Dont(string word) { return word.ToLower().Equals("don't"); }
     private static bool Does(string word) { return word.ToLower().Equals("does"); }
     private static bool I(string word) { return word.ToLower().Equals("i"); }
+    private static bool Been(string word) { return word.ToLower().Equals("been"); }
 
 
 
@@ -817,7 +847,7 @@ public class ButtonTests : MonoBehaviour
 
 
 
-    public static string[] Normalization(string[] words)
+    public static string[] Normalization(string[] words) // se clicchi sulla parola, la aggiungi all'array e poi vedi se la frase è corretta
     {
         for (int i = 0; i < words.Length; i++)
         {
@@ -898,11 +928,11 @@ public class ButtonTests : MonoBehaviour
         List<string> sentences = new List<string>
         {
             // present perfect - AO VEDI CHE PUOI MIGLIORARE ANCORA LA COSA, SE TROVI "THE" OPPURE "A" li puoi togliere e ti zombi l'else!!!!!!!!!! 
-            //"The car has been repaired.",
-            //"The car has not been repaired.",
-            //"The car hasn't been repaired.",
+            "The car has been repaired.",
+            "The car has not been repaired.",
+            "The car hasn't been repaired.",
 
-            //"A student has finished the assignment.",
+            "A student has finished the assignment.",
             //"A student has not finished the assignment.",
             //"A student hasn't finished the assignment.",
 
