@@ -8,9 +8,9 @@ public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
     static List<string> plural_subject = new List<string> { "beef", "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
-    static List<string> base_verbs = new List<string> { "bark", "visit","work","agree","drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> base_verbs = new List<string> { "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> ing_verbs = new List<string> { "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> { "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
     static List<string> negations = new List<string> { "not", "never", "no" };
@@ -443,59 +443,66 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
                 {
-                    if (The(words[2]) || A(words[2])) // The | a
+                    if (!IsFixedLenght(words, 2))
                     {
-                        if (IsAnAdjective(words[3]))
+                        if (The(words[2]) || A(words[2])) // The | a
                         {
-                            if (IsACommon(words[4])) return true;
+                            if (IsAnAdjective(words[3]))
+                            {
+                                if (IsACommon(words[4])) return true;
+                            }
+                            if (IsACommon(words[3])) return true;
                         }
-                        if (IsACommon(words[3])) return true;
-                    }
-                    if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
-                    if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    if (IsAnAdjective(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    if (IsAnIngVerbs(words[2])) return true;
-                    if (IsAPreposition(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
-                        if (The(words[3]) || A(words[3])) // she believes in the/a miracle
+                        if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
+                        if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
                         {
-                            if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+                            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                        }
+                        if (IsAnAdjective(words[2]))
+                        {
+                            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                        }
+                        if (IsAnIngVerbs(words[2])) return true;
+                        if (IsAPreposition(words[2]))
+                        {
+                            if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
+                            if (The(words[3]) || A(words[3])) // she believes in the/a miracle
+                            {
+                                if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+                            }
                         }
                     }
+                    return true; // she walks
                 }
                 if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
                 {
-                    if (The(words[2]) || A(words[2])) // The | a
+                    if (!IsFixedLenght(words, 2))
                     {
-                        if (IsAnAdjective(words[3]))
+                        if (The(words[2]) || A(words[2])) // The | a
                         {
-                            if (IsACommon(words[4])) return true;
+                            if (IsAnAdjective(words[3]))
+                            {
+                                if (IsACommon(words[4])) return true;
+                            }
+                            if (IsACommon(words[3])) return true;
                         }
-                        if (IsACommon(words[3])) return true;
-                    }
-                    if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
-                    if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    if (IsAnAdjective(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    if (IsAnIngVerbs(words[2])) return true;
-                    if (IsAPreposition(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
-                        if (The(words[3]) || A(words[3])) // she believes in the/a miracle
+                        if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
+                        if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
                         {
-                            if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+                            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                        }
+                        if (IsAnAdjective(words[2]))
+                        {
+                            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                        }
+                        if (IsAnIngVerbs(words[2])) return true;
+                        if (IsAPreposition(words[2]))
+                        {
+                            if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
+                            if (The(words[3]) || A(words[3])) // she believes in the/a miracle
+                            {
+                                if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+                            }
                         }
                     }
                 }
@@ -603,7 +610,6 @@ public class ButtonTests : MonoBehaviour
         if (The(words[0]) || A(words[0]))
         {
             bool subjectRecognized = IsAPluralSubject(words[1]) || IsAPlural(words[1]);
-            //if (!subjectRecognized) return false;
             if (IsAFrequencyAdverb(words[2]))
             {
                 words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
@@ -686,7 +692,6 @@ public class ButtonTests : MonoBehaviour
                     if (Arent(words[3]) && IsAnIngVerbs(words[4])) return true;
                 }
             }
-            //if (!subjectRecognized) return false;
         }
         else
         { 
@@ -705,7 +710,6 @@ public class ButtonTests : MonoBehaviour
                 }
             }
             bool subjectRecognized =  IsAPluralSubject(words[0]) || IsAPlural(words[0]);
-            //if (!subjectRecognized) return false;
             if (IsFixedLenght(words, 1) && subjectRecognized) return true;
             if (IsAFrequencyAdverb(words[1])) // there are dogs here -> dogs -> outOfBoundEx
             {
@@ -814,7 +818,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsAnObjectPronouns(string word) => objectPronouns.Contains(word);
     private static bool IsAFrequencyAdverb(string word) => frequencyAdverbs.Contains(word);
     private static bool IsAPlaceAdverbs(string word) => placeAdverbs.Contains(word);
-    private static bool IsAMannerAdverbs(string word) => placeAdverbs.Contains(word);
+    private static bool IsAMannerAdverbs(string word) => mannerAdverbs.Contains(word);
     private static bool IsAnIngVerbs(string word) => ing_verbs.Contains(word);
     private static bool IsA3rdPersonVerb(string word) => base_verbs_3rd_person.Contains(word);
     private static bool IsATimeAdverb(string word) => timeAdverbs.Contains(word);
@@ -927,8 +931,11 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
+            "He completes the task quickly.",
+            "She walks slowly.",
+
             "There is no beef in here",
-            // tmp ---------------------
+            // tmp --------------------- ok all
             "The car is running.",
             "The car is not running.",
             "The car isn't running.",
@@ -948,7 +955,7 @@ public class ButtonTests : MonoBehaviour
             "There are no cars running here",
             "There aren't cars running here",
 
-            // + adj
+            // + adj - ok all
             "The big car is running.",
             "The big car is not running.",
             "The big car isn't running.",
@@ -967,6 +974,8 @@ public class ButtonTests : MonoBehaviour
 
             "There are no big cars running here",
             "There aren't big cars running here",
+
+            "There aren't big dogs playing here",
             // ---------------------
 
             // Present Simple - Affermazioni
