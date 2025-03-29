@@ -102,9 +102,111 @@ public class ButtonTests : MonoBehaviour
         words = Normalization(words);
 
         if (IsFixedLenght(words, 1) && IsASingular(words[0])) return true; // There are dogs here becomes only "dogs" -> valid
-        if (The(words[0]) || A(words[0]))
+        if (The(words[0]) || A(words[0])) 
+        { words = words.Where((value, index) => index != 0).ToArray(); }
+        if (words[0].Equals("no") || words[0].Equals("not")) 
+        { words = words.Where((value, index) => index != 0).ToArray(); }//There are no cars running here -> a car running
+        
+        bool subjectRecognized = IsASingular(words[0]) || IsAProperNoun(words[0]);
+        if (IsFixedLenght(words, 1)) return true; // There is a dog here -> becomes dog
+        if (IsASingular(words[0]))
         {
-            bool subjectRecognized = IsASingular(words[1]);
+            if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
+            if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
+        }
+        if (A(words[0]) && IsAPlural(words[1]))
+        {
+            if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
+            if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
+        }
+        if (IsAFrequencyAdverb(words[1]))
+        {
+            words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
+        }
+        if (Is(words[1]))
+        {
+            if (IsAnIngVerbs(words[2])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
+            {
+                if (IsFixedLenght(words, 3)) return true;
+                if (IsAPlural(words[3])) return true; // eating sandwiches
+                if (A(words[3]) || The(words[3]) || IsAPreposition(words[3])) // eating a/the sandwich
+                {
+                    if (IsACommon(words[4])) return true;
+                }
+            }
+            if (Not(words[2]))
+            {
+                if (IsAnIngVerbs(words[3])) return true;
+                if (IsAnAdjective(words[3])) return true;
+            }
+            if (IsAnAdjective(words[2])) return true;
+        }
+        if (Has(words[1]))
+        {
+            if (The(words[2]) || A(words[2]))
+            {
+                if (IsASingular(words[3])) return true;
+            }
+            if (IsAnAdjective(words[2])) return true;
+        }
+        if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
+        {
+            if (The(words[3]) || A(words[3])) // The | a
+            {
+                if (IsASingular(words[4])) return true;
+            }
+        }
+        if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+        {
+            string detectedPhrasalVerb = words[0] + " " + words[1]; // she wakes up
+            if (phrasalVerbs.Contains(detectedPhrasalVerb))
+            {
+                words = words.Where((value, index) => index != 0 && index != 1).ToArray();
+            }
+            if (The(words[4]) || A(words[4])) // The | a
+            {
+                if (IsASingular(words[5])) return true;
+            }
+        }
+        if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
+        {
+            if (IsFixedLenght(words, 2)) return true; // the cat jumps
+            if (The(words[2]) || A(words[2])) // The | a
+            {
+                if (IsAnAdjective(words[3]))
+                {
+                    if (IsACommon(words[4])) return true;
+                }
+                if (IsACommon(words[3])) return true;
+            }
+            if (IsAPreposition(words[2]))
+            {
+                if (The(words[3]))
+                {
+                    if (IsACommon(words[4])) return true;
+                }
+            }
+        }
+        if (IsAPreposition(words[1])) // (there is/are) a book on the table
+        {
+            if (The(words[2]))
+            {
+                if (IsACommon(words[3]) || IsAPlural(words[3]))
+                    return true;
+            }
+            if (IsAPlural(words[2])) return true;
+        }
+        if (Isnt(words[1]))
+        {
+            if (IsAnAdjective(words[2])) return true; // a car isn't big
+            if (IsAnIngVerbs(words[2])) return true; // a car isn't running
+        }
+        if (IsASingular(words[0])) // There isn't a car running here -> a car running
+        {
+            if (IsAnIngVerbs(words[1])) return true;
+        }
+        if (IsAnAdjective(words[0]))
+        {
             if (IsFixedLenght(words, 2)) return true; // There is a dog here -> becomes dog
             if (IsAFrequencyAdverb(words[2]))
             {
@@ -150,9 +252,9 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = words.Where((value, index) => index != 1 && index != 2).ToArray();
                 }
-                if (The(words[5]) || A(words[5])) // The | a
+                if (The(words[3]) || A(words[3])) // The | a
                 {
-                    if (IsASingular(words[6])) return true;
+                    if (IsASingular(words[4])) return true;
                 }
             }
             if (IsA3rdPersonVerb(words[2])) // A/The guy drives a/the (big) car
@@ -195,411 +297,283 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsAnIngVerbs(words[2])) return true;
             }
-
-            if (IsAnAdjective(words[1]))
-            {
-                if (IsFixedLenght(words, 3)) return true; // There is a dog here -> becomes dog
-                if (IsAFrequencyAdverb(words[3]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-                }
-                if (Is(words[3]))
-                {
-                    if (IsAnIngVerbs(words[4])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
-                    {
-                        if (IsFixedLenght(words, 5)) return true;
-                        if (IsAPlural(words[5])) return true; // eating sandwiches
-                        if (A(words[5]) || The(words[5]) || IsAPreposition(words[5])) // eating a/the sandwich
-                        {
-                            if (IsACommon(words[6])) return true;
-                        }
-                    }
-                    if (Not(words[4]))
-                    {
-                        if (IsAnIngVerbs(words[5])) return true;
-                        if (IsAnAdjective(words[5])) return true;
-                    }
-                    if (IsAnAdjective(words[4])) return true;
-                }
-                if (Has(words[3]))
-                {
-                    if (The(words[4]) || A(words[4]))
-                    {
-                        if (IsASingular(words[5])) return true;
-                    }
-                    if (IsAnAdjective(words[4])) return true;
-                }
-                if (Doesnt(words[3]) && (Have(words[4]) || IsABaseVerb(words[4])))
-                {
-                    if (The(words[5]) || A(words[5])) // The | a
-                    {
-                        if (IsASingular(words[6])) return true;
-                    }
-                }
-                if (Does(words[3]) && Not(words[4]) && (Have(words[5]) || IsABaseVerb(words[5])))
-                {
-                    string detectedPhrasalVerb = words[2] + " " + words[3]; // she wakes up
-                    if (phrasalVerbs.Contains(detectedPhrasalVerb))
-                    {
-                        words = words.Where((value, index) => index != 2 && index != 3).ToArray();
-                    }
-                    if (The(words[4]) || A(words[4])) // The | a
-                    {
-                        if (IsASingular(words[5])) return true;
-                    }
-                }
-                if (IsA3rdPersonVerb(words[3])) // A/The guy drives a/the (big) car
-                {
-                    if (IsFixedLenght(words, 4)) return true; // the cat jumps
-                    if (The(words[4]) || A(words[4])) // The | a
-                    {
-                        if (IsAnAdjective(words[5]))
-                        {
-                            if (IsACommon(words[6])) return true;
-                        }
-                        if (IsACommon(words[5])) return true;
-                    }
-                    if (IsAPreposition(words[4]))
-                    {
-                        if (The(words[5]))
-                        {
-                            if (IsACommon(words[6])) return true;
-                        }
-                    }
-                }
-                if (IsAPreposition(words[3])) // (there is) a book on the table
-                {
-                    if (The(words[4]))
-                    {
-                        if (IsACommon(words[5]) || IsAPlural(words[5]))
-                            return true;
-                    }
-                }
-                if (IsAPreposition(words[3])) // (there are) books on the table
-                {
-                    if (IsAPlural(words[4])) return true;
-                }
-                if (Isnt(words[3]))
-                {
-                    if (IsAnAdjective(words[4])) return true; // a car isn't big
-                    if (IsAnIngVerbs(words[4])) return true; // a car isn't running
-                }
-                if (IsASingular(words[2])) // There isn't a car running here -> a car running
-                {
-                    if (IsAnIngVerbs(words[3])) return true;
-                }
-                if (!subjectRecognized) return false;
-            }
             if (!subjectRecognized) return false;
         }
-        else
+        if (!IsFixedLenght(words, 1))
         {
-            if (words[0].Equals("no") || words[0].Equals("not")) //There are no cars running here -> a car running
+            if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
             {
-                words = words.Where((value, index) => index != 0).ToArray();
-                if (IsASingular(words[0]))
-                {
-                    if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
-                    if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
-                }
-                if (A(words[0]) && IsAPlural(words[1]))
-                {
-                    if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
-                    if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
-                }
+                words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
             }
-            bool subjectRecognized = IsAProperNoun(words[0]) || IsASingular(words[0]);
-            if (words[0].Equals("no") || words[0].Equals("not"))
+            if (IsAFrequencyAdverb(words[1]))
             {
-                words = words.Where((value, index) => index != 0).ToArray();
-                if (IsASingular(words[0]))
-                {
-                    if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
-                    if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
-                }
-                if (A(words[0]) && IsASingular(words[1]))
-                {
-                    if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
-                    if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
-                }
+                words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
-            if(!IsFixedLenght(words, 1))
+            // she the child
+            if (The(words[1]) || IsAnObjectPronouns(words[1]))
             {
-                if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
+                if (IsACommon(words[2]) || IsAPlural(words[2])) return true;
+            }
+            if (Is(words[1]))
+            {
+                if (IsAnIngVerbs(words[2])) // John is playing
                 {
-                    words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
-                }
-                if (IsAFrequencyAdverb(words[1]))
-                {
-                    words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-                }
-                // she the child
-                if (The(words[1]) || IsAnObjectPronouns(words[1]))
-                {
-                    if (IsACommon(words[2]) || IsAPlural(words[2])) return true;
-                }
-                if (Is(words[1]))
-                {
-                    if (IsAnIngVerbs(words[2])) // John is playing
+                    if (words.Length == 3) return true;
+                    if ((IsAPreposition(words[3]) && The(words[4])) || The(words[3])) // in the gardent
                     {
-                        if (words.Length == 3) return true;
-                        if ((IsAPreposition(words[3]) && The(words[4])) || The(words[3])) // in the gardent
-                        {
-                            if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                        }
-                        if (A(words[3])) // a
-                        {
-                            if (IsACommon(words[4])) return true; // letter
-                        }
+                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
                     }
-                    if (Not(words[2]))
+                    if (A(words[3])) // a
                     {
-                        if (IsAPreposition(words[3]) || The(words[3]) || words[3].Equals("a")) // in the gardent
-                        {
-                            if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                            if (IsAnAdjective(words[4]))
-                            {
-                                if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
-                            }
-                        }
-                        if (IsAnIngVerbs(words[3])) // John is playing
-                        {
-                            if (words.Length == 4) return true;
-                            if ((IsAPreposition(words[4]) && The(words[5])) || The(words[4])) // in the gardent
-                            {
-                                if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
-                            }
-                            if (A(words[4])) // a
-                            {
-                                if (IsACommon(words[5])) return true; // letter
-                            }
-                        }
-                        if (IsAnAdjective(words[3])) return true;
-                    }
-                    if (IsAPreposition(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    else
-                    {
-                        if (A(words[2]) || The(words[2])) // Paris is a (big) city
-                        {
-                            if (IsAnAdjective(words[3]))
-                            {
-                                if (IsACommon(words[4])) return true;
-                            }
-                            if (IsACommon(words[3])) return true;
-                        }
-                        if (IsAnAdjective(words[2])) return true;
+                        if (IsACommon(words[4])) return true; // letter
                     }
                 }
-                if (Has(words[1]))
+                if (Not(words[2]))
                 {
-                    if (The(words[2]) || A(words[2]))
+                    if (IsAPreposition(words[3]) || The(words[3]) || words[3].Equals("a")) // in the gardent
                     {
-                        if (IsASingular(words[3])) return true;
-                    }
-                    else
-                    {
-                        if (IsAnAdjective(words[2]))
+                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+                        if (IsAnAdjective(words[4]))
                         {
-                            if (IsAPlural(words[3])) return true; // John loves big books
+                            if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
                         }
-                        if (IsAPlural(words[2])) return true;// john loves books
                     }
+                    if (IsAnIngVerbs(words[3])) // John is playing
+                    {
+                        if (words.Length == 4) return true;
+                        if ((IsAPreposition(words[4]) && The(words[5])) || The(words[4])) // in the gardent
+                        {
+                            if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
+                        }
+                        if (A(words[4])) // a
+                        {
+                            if (IsACommon(words[5])) return true; // letter
+                        }
+                    }
+                    if (IsAnAdjective(words[3])) return true;
                 }
-                if (Doesnt(words[1])) // "doesn't"
+                if (IsAPreposition(words[2]))
                 {
-                    if (IsAFrequencyAdverb(words[2]))
+                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                }
+                else
+                {
+                    if (A(words[2]) || The(words[2])) // Paris is a (big) city
                     {
-                        words = words.Where((value, index) => index != 1).ToArray(); // he doesn't always
-                    }
-                    if (Have(words[2]) || IsABaseVerb(words[2]))
-                    {
-                        if (The(words[3]) || A(words[3])) // The | a
-                        {
-                            if (IsASingular(words[4])) return true;
-                        }
-                        if (IsAPreposition(words[3]))
+                        if (IsAnAdjective(words[3]))
                         {
                             if (IsACommon(words[4])) return true;
-                            if (IsAnObjectPronouns(words[4])) return true;
                         }
-                        if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+                        if (IsACommon(words[3])) return true;
                     }
-                    if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
-                }
-                if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
-                {
-                    if (IsAnObjectPronouns(words[4])) // she does not visit her
-                    {
-                        if (IsACommon(words[5]) || IsAPlural(words[5])) return true; // grandparents....
-                    }
-                    if (The(words[4]) || A(words[4])) // The | a
-                    {
-                        if (IsASingular(words[5])) return true;
-                    }
-                    if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
-                }
-                if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
-                {
-                    if (!IsFixedLenght(words, 2))
-                    {
-                        if (The(words[2]) || A(words[2])) // The | a
-                        {
-                            if (IsAnAdjective(words[3]))
-                            {
-                                if (IsACommon(words[4])) return true;
-                            }
-                            if (IsACommon(words[3])) return true;
-                        }
-                        if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
-                        if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
-                        {
-                            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                        }
-                        if (IsAnAdjective(words[2]))
-                        {
-                            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                        }
-                        if (IsAnIngVerbs(words[2])) return true;
-                        if (IsAPreposition(words[2]))
-                        {
-                            if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
-                            if (The(words[3]) || A(words[3])) // she believes in the/a miracle
-                            {
-                                if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                            }
-                        }
-                    }
-                    return true; // she walks
-                }
-                if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
-                {
-                    if (!IsFixedLenght(words, 2))
-                    {
-                        if (The(words[2]) || A(words[2])) // The | a
-                        {
-                            if (IsAnAdjective(words[3]))
-                            {
-                                if (IsACommon(words[4])) return true;
-                            }
-                            if (IsACommon(words[3])) return true;
-                        }
-                        if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
-                        if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
-                        {
-                            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                        }
-                        if (IsAnAdjective(words[2]))
-                        {
-                            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                        }
-                        if (IsAnIngVerbs(words[2])) return true;
-                        if (IsAPreposition(words[2]))
-                        {
-                            if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
-                            if (The(words[3]) || A(words[3])) // she believes in the/a miracle
-                            {
-                                if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                            }
-                        }
-                    }
-                }
-                if (IsAnAdjective(words[0]))
-                {
-                    if (IsASingular(words[1]) || IsAPlural(words[1]))
-                    {
-                        if (IsAnIngVerbs(words[2])) return true;
-                    }
+                    if (IsAnAdjective(words[2])) return true;
                 }
             }
-            if(!IsFixedLenght(words, 2))
+            if (Has(words[1]))
+            {
+                if (The(words[2]) || A(words[2]))
+                {
+                    if (IsASingular(words[3])) return true;
+                }
+                else
+                {
+                    if (IsAnAdjective(words[2]))
+                    {
+                        if (IsAPlural(words[3])) return true; // John loves big books
+                    }
+                    if (IsAPlural(words[2])) return true;// john loves books
+                }
+            }
+            if (Doesnt(words[1])) // "doesn't"
             {
                 if (IsAFrequencyAdverb(words[2]))
                 {
-                    words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza - He doesn’t ALWAYS agree with me.
+                    words = words.Where((value, index) => index != 1).ToArray(); // he doesn't always
+                }
+                if (Have(words[2]) || IsABaseVerb(words[2]))
+                {
+                    if (The(words[3]) || A(words[3])) // The | a
+                    {
+                        if (IsASingular(words[4])) return true;
+                    }
+                    if (IsAPreposition(words[3]))
+                    {
+                        if (IsACommon(words[4])) return true;
+                        if (IsAnObjectPronouns(words[4])) return true;
+                    }
+                    if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+                }
+                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+            }
+            if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+            {
+                if (IsAnObjectPronouns(words[4])) // she does not visit her
+                {
+                    if (IsACommon(words[5]) || IsAPlural(words[5])) return true; // grandparents....
+                }
+                if (The(words[4]) || A(words[4])) // The | a
+                {
+                    if (IsASingular(words[5])) return true;
+                }
+                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+            }
+            if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
+            {
+                if (!IsFixedLenght(words, 2))
+                {
+                    if (The(words[2]) || A(words[2])) // The | a
+                    {
+                        if (IsAnAdjective(words[3]))
+                        {
+                            if (IsACommon(words[4])) return true;
+                        }
+                        if (IsACommon(words[3])) return true;
+                    }
+                    if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
+                    if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
+                    {
+                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                    }
+                    if (IsAnAdjective(words[2]))
+                    {
+                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                    }
+                    if (IsAnIngVerbs(words[2])) return true;
+                    if (IsAPreposition(words[2]))
+                    {
+                        if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
+                        if (The(words[3]) || A(words[3])) // she believes in the/a miracle
+                        {
+                            if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+                        }
+                    }
+                }
+                return true; // she walks
+            }
+            if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
+            {
+                if (!IsFixedLenght(words, 2))
+                {
+                    if (The(words[2]) || A(words[2])) // The | a
+                    {
+                        if (IsAnAdjective(words[3]))
+                        {
+                            if (IsACommon(words[4])) return true;
+                        }
+                        if (IsACommon(words[3])) return true;
+                    }
+                    if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
+                    if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
+                    {
+                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                    }
+                    if (IsAnAdjective(words[2]))
+                    {
+                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+                    }
+                    if (IsAnIngVerbs(words[2])) return true;
+                    if (IsAPreposition(words[2]))
+                    {
+                        if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
+                        if (The(words[3]) || A(words[3])) // she believes in the/a miracle
+                        {
+                            if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+                        }
+                    }
                 }
             }
-            if (subjectRecognized && I(words[0]))
+            if (IsAnAdjective(words[0]))
             {
-                if (Dont(words[1]))
+                if (IsASingular(words[1]) || IsAPlural(words[1]))
                 {
-                    if (Have(words[2]) || IsABaseVerb(words[2])) // i do play
+                    if (IsAnIngVerbs(words[2])) return true;
+                }
+            }
+        }
+        if (!IsFixedLenght(words, 2))
+        {
+            if (IsAFrequencyAdverb(words[2]))
+            {
+                words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza - He doesn’t ALWAYS agree with me.
+            }
+        }
+        if (I(words[0]))
+        {
+            if (Dont(words[1]))
+            {
+                if (Have(words[2]) || IsABaseVerb(words[2])) // i do play
+                {
+                    if (The(words[3]))
                     {
-                        if (The(words[3]))
-                        {
-                            if (IsACommon(words[4])) return true; // i do play the guitar
-                        }
-                        if (IsAPlural(words[3])) return true; // i do like apples
-                        if (IsACommon(words[3])) return true;// i do not have time now
+                        if (IsACommon(words[4])) return true; // i do play the guitar
                     }
+                    if (IsAPlural(words[3])) return true; // i do like apples
+                    if (IsACommon(words[3])) return true;// i do not have time now
+                }
+                if (IsAFrequencyAdverb(words[3])) // messo qui altrimenti frasi come John like books schiattano
+                {
+                    words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
+                }
+                if (IsABaseVerb(words[3])) // i do not play
+                {
+                    if (The(words[4]))
+                    {
+                        if (IsACommon(words[4])) return true;// i do not play the guitar
+                    }
+                    if (IsAPlural(words[4])) return true;// i do not like apples
+                    return true;
+                }
+            }
+            if (Do(words[1]))
+            {
+                if (IsABaseVerb(words[2])) // i do play
+                {
+                    if (The(words[3]))
+                    {
+                        if (IsACommon(words[4])) return true; // i do play the guitar
+                    }
+                    if (IsAPlural(words[3])) return true;// i do like apples
+                    return true;
+                }
+                if (Not(words[2])) // i do not
+                {
                     if (IsAFrequencyAdverb(words[3])) // messo qui altrimenti frasi come John like books schiattano
                     {
                         words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
                     }
-                    if (IsABaseVerb(words[3])) // i do not play
+                    if (IsABaseVerb(words[3]) || Have(words[3])) // i do not play
                     {
                         if (The(words[4]))
                         {
                             if (IsACommon(words[4])) return true;// i do not play the guitar
                         }
-                        if (IsAPlural(words[4])) return true;// i do not like apples
-                        return true;
-                    }
-                }
-                if (Do(words[1]))
-                {
-                    if (IsABaseVerb(words[2])) // i do play
-                    {
-                        if (The(words[3]))
-                        {
-                            if (IsACommon(words[4])) return true; // i do play the guitar
-                        }
-                        if (IsAPlural(words[3])) return true;// i do like apples
-                        return true;
-                    }
-                    if (Not(words[2])) // i do not
-                    {
-                        if (IsAFrequencyAdverb(words[3])) // messo qui altrimenti frasi come John like books schiattano
-                        {
-                            words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
-                        }
-                        if (IsABaseVerb(words[3]) || Have(words[3])) // i do not play
-                        {
-                            if (The(words[4]))
-                            {
-                                if (IsACommon(words[4])) return true;// i do not play the guitar
-                            }
-                            if (IsAPlural(words[4])) return true; // i do not like apples
-                            if (IsACommon(words[4])) return true; // i do not play the guitar
-                            return true;
-                        }
-                    }
-                }
-                // i drink coffee in the morning
-                if (IsABaseVerb(words[1])) // i play
-                {
-                    if (The(words[2]))
-                    {
-                        if (IsACommon(words[3])) return true;// i play the guitar
-                    }
-                    if (IsAPlural(words[2])) return true; // i like apples
-                    return true;
-                }
-                if (Not(words[2])) // i do not
-                {
-                    if (IsABaseVerb(words[3])) // i do not play
-                    {
-                        if (The(words[4]))
-                        {
-                            if (IsACommon(words[5])) return true; // i do not play the guitar
-                        }
                         if (IsAPlural(words[4])) return true; // i do not like apples
+                        if (IsACommon(words[4])) return true; // i do not play the guitar
+                        return true;
                     }
                 }
             }
-            if (!subjectRecognized) return false;
+            // i drink coffee in the morning
+            if (IsABaseVerb(words[1])) // i play
+            {
+                if (The(words[2]))
+                {
+                    if (IsACommon(words[3])) return true;// i play the guitar
+                }
+                if (IsAPlural(words[2])) return true; // i like apples
+                return true;
+            }
+            if (Not(words[2])) // i do not
+            {
+                if (IsABaseVerb(words[3])) // i do not play
+                {
+                    if (The(words[4]))
+                    {
+                        if (IsACommon(words[5])) return true; // i do not play the guitar
+                    }
+                    if (IsAPlural(words[4])) return true; // i do not like apples
+                }
+            }
         }
         return false; 
     }
@@ -607,205 +581,197 @@ public class ButtonTests : MonoBehaviour
     {
         words = Normalization(words);
 
-        if (The(words[0]) || A(words[0]))
+        if (The(words[0]) || A(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+        if (words[0].Equals("no") || words[0].Equals("not")) { words = words.Where((value, index) => index != 0).ToArray(); } //There are no cars running here -> a car running
+        if (IsAPlural(words[0]))
         {
-            bool subjectRecognized = IsAPluralSubject(words[1]) || IsAPlural(words[1]);
-            if (IsAFrequencyAdverb(words[2]))
+            if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
+            if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
+        }
+        if (A(words[0]) && IsAPlural(words[1]))
+        {
+            if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
+            if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
+        }
+        bool subjectRecognized = IsAPluralSubject(words[0]) || IsAPlural(words[1]);
+        if (IsAFrequencyAdverb(words[1]))
+        {
+            words = words.Where((value, index) => index != 0).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
+        }
+        if (Have(words[1]))
+        {
+            if (Not(words[2]))
             {
-                words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-            }
-            if (Have(words[2]))
-            {
-                if (Not(words[3]))
-                {
-                    if (IsAnAdjective(words[4])) return true;
-                }
-                else
-                {
-                    if (IsAnAdjective(words[2])) return true;
-                }
-                if (The(words[3]) || A(words[3]))
-                {
-                    if (IsASingular(words[4])) return true;
-                }
                 if (IsAnAdjective(words[3])) return true;
             }
-            if (Do(words[2]) && Not(words[3]) && (Have(words[4]) || IsABaseVerb(words[4])))
+            else
             {
-                if (IsFixedLenght(words, 5)) return true; // The Dogs do not run
-                if (IsAnAdjective(words[5])) return true; // The Dogs do not run fast
+                if (IsAnAdjective(words[1])) return true;
             }
-            if (Are(words[2]) || Arent(words[2]))
+            if (The(words[2]) || A(words[2]))
             {
-                if (IsAnIngVerbs(words[3])) // the dogs are playing
+                if (IsASingular(words[3])) return true;
+            }
+            if (IsAnAdjective(words[2])) return true;
+        }
+        if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+        {
+            if (IsFixedLenght(words,4)) return true; // The Dogs do not run
+            if (IsAnAdjective(words[4])) return true; // The Dogs do not run fast
+        }
+        if (Are(words[1]) || Arent(words[1]))
+        {
+            if (IsAnIngVerbs(words[2])) // the dogs are playing
+            {
+                if(IsFixedLenght(words, 3)) return true;
+                if (IsAPreposition(words[3]) && The(words[4])) // in/on the gardent
                 {
-                    if(IsFixedLenght(words, 4)) return true;
+                    if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
+                }
+            }
+            if (Not(words[2]))
+            {
+                if (IsAnIngVerbs(words[3])) // the dogs are not playing
+                {
+                    if (words.Length == 4) return true;
                     if (IsAPreposition(words[4]) && The(words[5])) // in/on the gardent
                     {
                         if (IsACommon(words[6]) || IsAPlural(words[6])) return true;
                     }
                 }
-                if (Not(words[3]))
+                if (!IsFixedLenght(words, 4))
                 {
-                    if (IsAnIngVerbs(words[4])) // the dogs are not playing
-                    {
-                        if (words.Length == 5) return true;
-                        if (IsAPreposition(words[5]) && The(words[6])) // in/on the gardent
-                        {
-                            if (IsACommon(words[7]) || IsAPlural(words[7])) return true;
-                        }
-                    }
                     if (IsAnAdjective(words[4]))
                     {
                         return true;
                     }
                 }
-                if (IsAnAdjective(words[3])) return true;
             }
-            if (IsABaseVerb(words[2])) // A/The dogs run fast
+            if (IsAnAdjective(words[2])) return true;
+        }
+        if (IsABaseVerb(words[1])) // A/The dogs run fast
+        {
+            if (IsFixedLenght(words,3)) return true; // Cat jump
+            if (IsFixedLenght(words,2)) return true; // the dogs run
+            if (IsAnAdjective(words[2])) return true;
+            if (IsAPreposition(words[2]))       
             {
-                if (IsFixedLenght(words, 3)) return true; // the dogs run
-                if (IsAnAdjective(words[3])) return true;
-                if (IsAPreposition(words[3]))       
+                if (The(words[3]) || IsAnObjectPronouns(words[3]))
                 {
-                    if (The(words[4]) || IsAnObjectPronouns(words[4]))
-                    {
-                        if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
-                    }
+                    if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
                 }
             }
-            if (Arent(words[2]))
+            if (The(words[2]) || A(words[2])) // The | a
             {
-                if (IsAnAdjective(words[3])) return true; // the cars aren't big.
+                if (IsAnAdjective(words[3])) { IsACommon(words[4]); }
+                else { IsACommon(words[3]); }
             }
+            if (IsAnObjectPronouns(words[2]))
+            {
+                IsAPlural(words[3]);
+                IsACommon(words[3]);
+            }
+            if (IsAnAdjective(words[2]))
+            {
+                IsAPlural(words[3]);
+                IsACommon(words[3]);
+            }
+            IsAPlural(words[2]);
+            IsACommon(words[2]);
+        }
+        if (Arent(words[1]))
+        {
+            if (IsAnAdjective(words[2])) return true; // the cars aren't big.
+        }
+        if (IsAPlural(words[0])) // There aren't cars running here -> a car running
+        {
+            if (IsAnIngVerbs(words[1])) return true;
+        }
+        if (IsAnAdjective(words[0]))
+        {
             if (IsAPlural(words[1])) // There aren't cars running here -> a car running
             {
                 if (IsAnIngVerbs(words[2])) return true;
-            }
-            if (IsAnAdjective(words[1]))
-            {
-                if (IsAPlural(words[2])) // There aren't cars running here -> a car running
-                {
-                    if (IsAnIngVerbs(words[3])) return true;
-                    if (Are(words[3]) && IsAnIngVerbs(words[4])) return true;
-                    if (Are(words[3]) && Not(words[4]) && IsAnIngVerbs(words[5])) return true;
-                    if (Arent(words[3]) && IsAnIngVerbs(words[4])) return true;
-                }
+                if (Are(words[2]) && IsAnIngVerbs(words[3])) return true;
+                if (Are(words[2]) && Not(words[3]) && IsAnIngVerbs(words[4])) return true;
+                if (Arent(words[2]) && IsAnIngVerbs(words[3])) return true;
             }
         }
-        else
-        { 
-            if (words[0].Equals("no") || words[0].Equals("not")) //There are no cars running here -> a car running
+        if (IsFixedLenght(words, 1) && subjectRecognized) return true;
+        if (IsAFrequencyAdverb(words[1])) // there are dogs here -> dogs -> outOfBoundEx
+        {
+            words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
+        }
+        if (The(words[1]) || IsAnObjectPronouns(words[1]))
+        {
+            if (IsACommon(words[2]) || IsAPlural(words[2])) return true; // this has to remain like this cause of phrasal verbs cause in some case we must RETURN the control
+        }
+        if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+        {
+            if (IsFixedLenght(words, 4)) return true;
+            if (IsAnAdjective(words[4])) return true;  // The Dogs do not run fast
+        }
+        if (Are(words[1]) || Arent(words[1]))
+        {
+            if (IsAFrequencyAdverb(words[2]))
             {
-                words = words.Where((value, index) => index != 0).ToArray();
-                if (IsAPlural(words[0]))
-                {
-                    if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
-                    if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
-                }
-                if (A(words[0]) && IsAPlural(words[1]))
-                {
-                    if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
-                    if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
-                }
+                words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
             }
-            bool subjectRecognized =  IsAPluralSubject(words[0]) || IsAPlural(words[0]);
-            if (IsFixedLenght(words, 1) && subjectRecognized) return true;
-            if (IsAFrequencyAdverb(words[1])) // there are dogs here -> dogs -> outOfBoundEx
+            if (IsFixedLenght(words, 2)) return true; // they are
+            if (IsAnIngVerbs(words[2])) return true;
+            if (Not(words[2]))
             {
-                words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
+                if (IsFixedLenght(words, 3)) return true;// they are not
+                                                         // continua present continuous 
+                if (IsAnIngVerbs(words[3])) return true;// they are not standig (here)
+                if (IsAnAdjective(words[3])) return true;
             }
-            if (The(words[1]) || IsAnObjectPronouns(words[1]))
+            if (IsAPreposition(words[2]))
             {
-                if (IsACommon(words[2]) || IsAPlural(words[2])) return true; // this has to remain like this cause of phrasal verbs cause in some case we must RETURN the control
+                IsACommon(words[3]);
             }
-            if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+            else
             {
-                if (IsFixedLenght(words, 4)) return true;
-                if (IsAnAdjective(words[4])) return true;  // The Dogs do not run fast
+                if (IsAnAdjective(words[2])) return true;
             }
-            if (Are(words[1]) || Arent(words[1]))
+        }
+        if (IsAPreposition(words[1])) // (there is) a book on the table
+        {
+            if (!IsFixedLenght(words, 2))
             {
-                if (IsAFrequencyAdverb(words[2]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-                }
-                if (IsFixedLenght(words, 2)) return true; // they are
-                if (IsAnIngVerbs(words[2]))  return true;
-                if (Not(words[2]))          
-                {
-                    if(IsFixedLenght(words, 3))  return true;// they are not
-                    // continua present continuous 
-                    if (IsAnIngVerbs(words[3]))  return true;// they are not standig (here)
-                    if (IsAnAdjective(words[3])) return true;
-                }
-                if (IsAPreposition(words[2]))
-                {
-                    IsACommon(words[3]);
-                }
-                else
-                {
-                    if (IsAnAdjective(words[2])) return true;
-                }
-            }
-            if (IsABaseVerb(words[1])) // A/The guy drives a/the (big) car
-            {
-                if (IsFixedLenght(words, 3)) return true; // Cat jump
-                if (The(words[2]) || A(words[2])) // The | a
-                {
-                    if (IsAnAdjective(words[3])) { IsACommon(words[4]); }
-                    else { IsACommon(words[3]); }
-                }
-                if (IsAnObjectPronouns(words[2]))
+                if (The(words[2]))
                 {
                     IsAPlural(words[3]);
                     IsACommon(words[3]);
                 }
-                if (IsAnAdjective(words[2]))
-                {
-                    IsAPlural(words[3]);
-                    IsACommon(words[3]);
-                }
-                IsAPlural(words[2]);
-                IsACommon(words[2]);
             }
-            if (IsAPreposition(words[1])) // (there is) a book on the table
-            {
-                if(!IsFixedLenght(words, 2))
-                {
-                    if (The(words[2]))
-                    {
-                        IsAPlural(words[3]);
-                        IsACommon(words[3]);
-                    }
-                }
-            }
-            if (Do(words[1]))       
-            {
-                if (IsABaseVerb(words[2])) // they do play
-                {
-                    if (The(words[3]))
-                    {
-                        IsACommon(words[4]); // they do play the guitar
-                    }
-                    IsAPlural(words[3]); // i do like apples
-                }
-                if (Not(words[2])) // they do not
-                {
-                    if (IsAFrequencyAdverb(words[3]))
-                    {
-                        words = words.Where((value, index) => index != 3).ToArray(); // I do not ALWAYS ....
-                    }
-                    if (IsABaseVerb(words[3])) // i do not play
-                    {
-                        if (The(words[4])) { IsACommon(words[4]); }// i do not play the guitar
-                        IsAPlural(words[3]); // they do not like apples
-                        return true;
-                    }
-                }
-            }
-            if (IsAnIngVerbs(words[1])) return true; // cars running
         }
+        if (Do(words[1]))
+        {
+            if (IsABaseVerb(words[2])) // they do play
+            {
+                if (The(words[3]))
+                {
+                    IsACommon(words[4]); // they do play the guitar
+                }
+                IsAPlural(words[3]); // i do like apples
+            }
+            if (Not(words[2])) // they do not
+            {
+                if (IsAFrequencyAdverb(words[3]))
+                {
+                    words = words.Where((value, index) => index != 3).ToArray(); // I do not ALWAYS ....
+                }
+                if (IsABaseVerb(words[3])) // i do not play
+                {
+                    if (The(words[4])) { IsACommon(words[4]); }// i do not play the guitar
+                    IsAPlural(words[3]); // they do not like apples
+                    return true;
+                }
+            }
+        }
+        if (IsAnIngVerbs(words[1])) return true; // cars running
+        
         return false;
     }
 
