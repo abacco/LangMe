@@ -9,13 +9,13 @@ public class ButtonTests : MonoBehaviour
     static List<string> base_verbs = new List<string> { "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
     static List<string> base_verbs_3rd_person = new List<string> { "walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
     static List<string> ing_verbs = new List<string> { "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
-    static List<string> past_participle = new List<string> { "finished", "repaired", "loved", "driven" };
+    static List<string> past_participle = new List<string> { "completed", "finished", "repaired", "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
     static List<string> negations = new List<string> { "not", "never", "no" };
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "assignment", "student","beef", "dog","task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> common_nouns = new List<string> { "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
     static List<string> plural_nouns = new List<string> { "assignments","beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
     static List<string> possessivePronouns = new List<string>{ "my", "your", "his", "her", "its", "our", "your", "their" };
@@ -156,7 +156,7 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsAPlural(words[3])) return true;
                 if (IsAnIngVerbs(words[3])) return true;
-                if (The(words[3]) || A(words[3]) || words[3].Equals("an") || IsAPossessivePronouns(words[3]))
+                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
                 {
                     if (IsACommon(words[4])) return true;
                     if (IsAPlural(words[4])) return true;
@@ -167,7 +167,7 @@ public class ButtonTests : MonoBehaviour
         {
             if (IsPastParticiple(words[2]))
             {
-                if (The(words[3]) || A(words[3]) || words[3].Equals("an") || IsAPossessivePronouns(words[3]))
+                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
                 {
                     if (IsACommon(words[4])) return true;
                     if (IsAPlural(words[4])) return true;
@@ -633,6 +633,14 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+        if (IsPastParticiple(words[1]))
+        {
+            if (The(words[2]) || A(words[2]) || An(words[2]) || IsAPossessivePronouns(words[2]))
+            {
+                if (IsACommon(words[3])) return true;
+                if (IsAPlural(words[3])) return true;
+            }
+        }
         return false; 
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
@@ -660,7 +668,7 @@ public class ButtonTests : MonoBehaviour
         {
             if (IsPastParticiple(words[2]))
             {
-                if (The(words[3]) || A(words[3]) || words[3].Equals("an") || IsAPossessivePronouns(words[3]))
+                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
                 {
                     if (IsACommon(words[4])) return true;
                 }
@@ -674,7 +682,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsAnAdjective(words[3])) return true;
                 if (IsPastParticiple(words[2]))
                 {
-                    if (The(words[3]) || A(words[3]) || words[3].Equals("an") || IsAPossessivePronouns(words[3]))
+                    if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
                     {
                         if (IsACommon(words[4])) return true;
                     }
@@ -890,7 +898,7 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true;
             if (IsPastParticiple(words[2]))
             {
-                if (The(words[2]) || A(words[2]) || words[2].Equals("an") || IsAPossessivePronouns(words[2]))
+                if (The(words[2]) || A(words[2]) || An(words[2]) || IsAPossessivePronouns(words[2]))
                 {
                     if (IsACommon(words[3])) return true;
                 }
@@ -937,6 +945,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsPastParticiple(string word) => past_participle.Contains(word);
     private static bool The(string word) { return word.ToLower().Equals("the"); }
     private static bool A(string word) { return word.ToLower().Equals("a"); }
+    private static bool An(string word) { return word.ToLower().Equals("an"); }
     private static bool Do(string word) { return word.ToLower().Equals("do"); }
     private static bool Not(string word) { return word.ToLower().Equals("not"); }
     private static bool Are(string word) { return word.ToLower().Equals("are"); }
@@ -1064,6 +1073,8 @@ public class ButtonTests : MonoBehaviour
 
             "Alex has finished the assignment.",
             "Alex has finished his assignment.",
+
+            "A guy has finished his assignment.",
 
 
 
@@ -1252,13 +1263,10 @@ public class ButtonTests : MonoBehaviour
             "She drives the car carefully.",
 
             "There are dogs here",
-            "There is a dog here"
+            "There is a dog here",
 
-
-
-            //"He completed the task quickly.",
-
-            //"She carefully drives the car.",
+            "He completed the task quickly.",
+            "She drives the car carefully ."
             //"He quickly completed the task."
         };
 
