@@ -18,6 +18,8 @@ public class ButtonTests : MonoBehaviour
     static List<string> common_nouns = new List<string> { "assignment", "student","beef", "dog","task","garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
     static List<string> plural_nouns = new List<string> { "assignments","beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
+    static List<string> possessivePronouns = new List<string>{ "my", "your", "his", "her", "its", "our", "your", "their" };
+
     static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
     static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
     static List<string> prepositions = new List<string> { "with","in", "on", "at", "to", "with", "for", "before", "after", "during", "as", "by", 
@@ -141,21 +143,33 @@ public class ButtonTests : MonoBehaviour
         }
         if (Hasnt(words[1]))
         {
+            if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
+            {
+                if (IsASingular(words[3])) return true;
+                if (IsAPlural(words[3])) return true;
+            }
             if (Been(words[2]))
             {
                 if (IsPastParticiple(words[3])) return true;
+            }
+            if (IsPastParticiple(words[2]))
+            {
+                if (IsAPlural(words[3])) return true;
+                if (IsAnIngVerbs(words[3])) return true;
+                if (The(words[3]) || A(words[3]) || words[3].Equals("an") || IsAPossessivePronouns(words[3]))
+                {
+                    if (IsACommon(words[4])) return true;
+                    if (IsAPlural(words[4])) return true;
+                }
             }
         }
         if (Has(words[1]))
         {
             if (IsPastParticiple(words[2]))
             {
-                if (The(words[3]) || A(words[3]) || words[3].Equals("an"))
+                if (The(words[3]) || A(words[3]) || words[3].Equals("an") || IsAPossessivePronouns(words[3]))
                 {
                     if (IsACommon(words[4])) return true;
-                }
-                if (The(words[3]))
-                {
                     if (IsAPlural(words[4])) return true;
                 }
             }
@@ -164,6 +178,16 @@ public class ButtonTests : MonoBehaviour
                 if (Been(words[3]))
                 {
                     if (IsPastParticiple(words[4])) return true;
+                }
+                if (IsPastParticiple(words[3]))
+                {
+                    if (IsAPlural(words[4])) return true;
+                    if (IsAnIngVerbs(words[4])) return true;
+                    if (The(words[4]) || A(words[4]))
+                    {
+                        if (IsACommon(words[5])) return true;
+                        if (IsAPlural(words[5])) return true;
+                    }
                 }
             }
             if (Been(words[2]))
@@ -175,6 +199,11 @@ public class ButtonTests : MonoBehaviour
                 if (IsASingular(words[3])) return true;
             }
             if (IsAnAdjective(words[2])) return true;
+            if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
+            {
+                if (IsASingular(words[3])) return true;
+                if (IsAPlural(words[3])) return true;
+            }
         }
         if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
         {
@@ -190,10 +219,12 @@ public class ButtonTests : MonoBehaviour
             {
                 words = words.Where((value, index) => index != 0 && index != 1).ToArray();
             }
-            if (The(words[4]) || A(words[4])) // The | a
+            if (The(words[4]) || A(words[4]) || IsAPossessivePronouns(words[4])) // The | a
             {
                 if (IsASingular(words[5])) return true;
+                if (IsAPlural(words[5])) return true;
             }
+
         }
         if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
         {
@@ -627,9 +658,45 @@ public class ButtonTests : MonoBehaviour
         }
         if (Have(words[1]))
         {
+            if (IsPastParticiple(words[2]))
+            {
+                if (The(words[3]) || A(words[3]) || words[3].Equals("an") || IsAPossessivePronouns(words[3]))
+                {
+                    if (IsACommon(words[4])) return true;
+                }
+                if (The(words[3]) || IsAPossessivePronouns(words[3]))
+                {
+                    if (IsAPlural(words[4])) return true;
+                }
+            }
             if (Not(words[2]))
             {
                 if (IsAnAdjective(words[3])) return true;
+                if (IsPastParticiple(words[2]))
+                {
+                    if (The(words[3]) || A(words[3]) || words[3].Equals("an") || IsAPossessivePronouns(words[3]))
+                    {
+                        if (IsACommon(words[4])) return true;
+                    }
+                    if (The(words[3]) || IsAPossessivePronouns(words[3]))
+                    {
+                        if (IsAPlural(words[4])) return true;
+                    }
+                }
+                if (Been(words[3]))
+                {
+                    if (IsPastParticiple(words[4])) return true;
+                }
+                if (IsPastParticiple(words[3]))
+                {
+                    if (IsAPlural(words[4])) return true;
+                    if (IsAnIngVerbs(words[4])) return true;
+                    if (The(words[4]) || A(words[4]) || IsAPossessivePronouns(words[4]))
+                    {
+                        if (IsACommon(words[5])) return true;
+                        if (IsAPlural(words[5])) return true;
+                    }
+                }
             }
             else
             {
@@ -645,6 +712,15 @@ public class ButtonTests : MonoBehaviour
         {
             if (IsFixedLenght(words,4)) return true; // The Dogs do not run
             if (IsAnAdjective(words[4])) return true; // The Dogs do not run fast
+            if (The(words[3]) || A(words[3]) || IsAPossessivePronouns(words[3])) {
+                if (IsASingular(words[4])) return true;
+                if (IsAPlural(words[4])) return true;
+                if (IsAnAdjective(words[4]))
+                {
+                    if (IsASingular(words[4])) return true;
+                    if (IsAPlural(words[4])) return true;
+                }
+            }
         }
         if (Are(words[1]) || Arent(words[1]))
         {
@@ -688,8 +764,9 @@ public class ButtonTests : MonoBehaviour
                     if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
                 }
             }
-            if (The(words[2]) || A(words[2])) // The | a
+            if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
             {
+                if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
                 if (IsAnAdjective(words[3])) { IsACommon(words[4]); }
                 else { IsACommon(words[3]); }
             }
@@ -733,10 +810,20 @@ public class ButtonTests : MonoBehaviour
         {
             if (IsACommon(words[2]) || IsAPlural(words[2])) return true; // this has to remain like this cause of phrasal verbs cause in some case we must RETURN the control
         }
-        if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+        if (Dont(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
         {
             if (IsFixedLenght(words, 4)) return true;
             if (IsAnAdjective(words[4])) return true;  // The Dogs do not run fast
+            if (The(words[3]) || A(words[3]) || IsAPossessivePronouns(words[3]))
+            {
+                if (IsASingular(words[4])) return true;
+                if (IsAPlural(words[4])) return true;
+                if (IsAnAdjective(words[4]))
+                {
+                    if (IsASingular(words[4])) return true;
+                    if (IsAPlural(words[4])) return true;
+                }
+            }
         }
         if (Are(words[1]) || Arent(words[1]))
         {
@@ -798,7 +885,35 @@ public class ButtonTests : MonoBehaviour
             }
         }
         if (IsAnIngVerbs(words[1])) return true; // cars running
-        
+        if (Havent(words[1]))
+        {
+            if (IsAnAdjective(words[2])) return true;
+            if (IsPastParticiple(words[2]))
+            {
+                if (The(words[2]) || A(words[2]) || words[2].Equals("an") || IsAPossessivePronouns(words[2]))
+                {
+                    if (IsACommon(words[3])) return true;
+                }
+                if (The(words[2]) || IsAPossessivePronouns(words[2]))
+                {
+                    if (IsAPlural(words[3])) return true;
+                }
+            }
+            if (Been(words[2]))
+            {
+                if (IsPastParticiple(words[3])) return true;
+            }
+            if (IsPastParticiple(words[2]))
+            {
+                if (IsAPlural(words[3])) return true;
+                if (IsAnIngVerbs(words[3])) return true;
+                if (The(words[3]) || A(words[3]) || IsAPossessivePronouns(words[3]))
+                {
+                    if (IsACommon(words[4])) return true;
+                    if (IsAPlural(words[4])) return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -809,6 +924,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsABaseVerb(string word) => base_verbs.Contains(word);
     private static bool IsAnAdjective(string word) => adjectives.Contains(word);
     private static bool IsAnObjectPronouns(string word) => objectPronouns.Contains(word);
+    private static bool IsAPossessivePronouns(string word) => possessivePronouns.Contains(word);
     private static bool IsAFrequencyAdverb(string word) => frequencyAdverbs.Contains(word);
     private static bool IsAPlaceAdverbs(string word) => placeAdverbs.Contains(word);
     private static bool IsAMannerAdverbs(string word) => mannerAdverbs.Contains(word);
@@ -829,6 +945,7 @@ public class ButtonTests : MonoBehaviour
     private static bool There(string word) { return word.ToLower().Equals("there"); }
     private static bool Has(string word) { return word.ToLower().Equals("has"); }
     private static bool Hasnt(string word) { return word.ToLower().Equals("hasn't"); }
+    private static bool Havent(string word) { return word.ToLower().Equals("haven't"); }
     private static bool Is(string word) { return word.ToLower().Equals("is"); }
     private static bool Isnt(string word) { return word.ToLower().Equals("isn't"); }
     private static bool Every(string word) { return word.ToLower().Equals("every"); }
@@ -927,20 +1044,26 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
-            // present perfect - AO VEDI CHE PUOI MIGLIORARE ANCORA LA COSA, SE TROVI "THE" OPPURE "A" li puoi togliere e ti zombi l'else!!!!!!!!!! 
+            //"A guy have his car", // NON DEVE ESSERE RICONOSCIUTA!!! ok
+            // present perfect - AO VEDI CHE PUOI MIGLIORARE ANCORA LA COSA, SE TROVI "THE" OPPURE "A" li puoi togliere e ti zombi l'else!!!!!!!!!! fatto
+            
+            
+            // AO VEDI CHE DEVI AGGIUNGERE IL CONTROLLO SUI PRONOMI POSSESSIVI COME THEIR, HER ETC...
+            // IsAPossessivePronouns va di fianco i nodi con The || A || ....
             "The car has been repaired.",
             "The car has not been repaired.",
             "The car hasn't been repaired.",
 
             "A student has finished the assignment.",
-            //"A student has not finished the assignment.",
-            //"A student hasn't finished the assignment.",
+            "A student has not finished the assignment.",
+            "A student hasn't finished the assignment.",
 
-            //"Students have finished their assignment",
-            //"Students have not finished their assignment",
-            //"Students haven't finished their assignment",
+            "Students have finished their assignment",
+            "Students have not finished their assignment",
+            "Students haven't finished their assignment",
 
-            //"Alex has finished the assignment.",
+            "Alex has finished the assignment.",
+            "Alex has finished his assignment.",
 
 
 
@@ -1006,26 +1129,6 @@ public class ButtonTests : MonoBehaviour
             "Cars are not big",
             "Cars aren't big",
 
-            // + adj - ok all
-            //"The big car is running.",
-            //"The big car is not running.",
-            //"The big car isn't running.",
-
-            //"A big car is running.",
-            //"A big car is not running.",
-            //"A big car isn't running.",
-
-            //"The big cars are running.",
-            //"The big cars are not running.",
-            //"The big cars aren't running.",
-
-            //"There is no big car running here",
-            //"There is not a big car running here",
-            //"There isn't a big car running here",
-
-            //"There are no big cars running here",
-            //"There aren't big cars running here",
-
             "There aren't big dogs playing here",
             // ---------------------
 
@@ -1046,6 +1149,15 @@ public class ButtonTests : MonoBehaviour
             "A guy has a car.",
             "Google has a car.",
             "John loves books.",
+            
+            "John loves his books.",
+            "John does not love his books.",
+            "John doesn't love his books.",
+
+            "Students love their books.",
+            "Students do not love their books.",
+            "Students don't love their books.",
+
             "John loves big books.",
             "The sun rises in the east.",
             "He likes apples.",
@@ -1061,7 +1173,15 @@ public class ButtonTests : MonoBehaviour
             "The cars aren't big.",
             "A car is not big.",
             "A car isn't big.",
+
+            "A guy has a car.",
+
+            "A guy has his car.",
             "A guy does not have a car.",
+            "A guy does not have his car.",
+            "A guy doesn't have his car.",
+
+            
             "A guy doesn't have a car.",
             "A guy does not have the car.",
             "Google does not have a car.",
