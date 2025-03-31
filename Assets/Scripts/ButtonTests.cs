@@ -1280,6 +1280,21 @@ public class ButtonTests : MonoBehaviour
             "The car was not always carefully repaired yesterday.",
             "The car wasn't always carefully repaired yesterday.",
 
+            // past simple all forms - plural
+            "The cars have been repaired.",
+            "The cars have always been carefully repaired.",
+            "The cars have not always been carefully repaired.",
+            "The cars haven't always been carefully repaired.",
+            "The cars have been carefully repaired yesterday.",
+            "The cars have not been carefully repaired yesterday.",
+            "The cars haven't been carefully repaired yesterday.",
+            "The cars have been repaired yesterday.",
+            "The cars have not been repaired yesterday.",
+            "The cars haven't been repaired yesterday.",
+            "The cars have always been carefully repaired yesterday.",
+            "The cars have not always been carefully repaired yesterday.",
+            "The cars haven't always been carefully repaired yesterday.",
+
 
             //"A guy have his car", // NON DEVE ESSERE RICONOSCIUTA!!! ok
             // present perfect - AO VEDI CHE PUOI MIGLIORARE ANCORA LA COSA, SE TROVI "THE" OPPURE "A" li puoi togliere e ti zombi l'else!!!!!!!!!! fatto
