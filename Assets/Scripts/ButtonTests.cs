@@ -194,6 +194,16 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (IsAnIngVerbs(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                        if (IsAnIngVerbs(words[5]))
+                        {
+                            words = RemoveAdverbs(words, 5);
+                            if (IsPastParticiple(words[6])) return true;
+                        }
+                    }
                 }
                 if (IsPastParticiple(words[3]))
                 {
@@ -210,6 +220,11 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
             if (The(words[2]) || A(words[2]))
             {
@@ -642,10 +657,7 @@ public class ButtonTests : MonoBehaviour
         }
         if (Have(words[1]))
         {
-            if (IsAFrequencyAdverb(words[2]))
-            {
-                words = words.Where((value, index) => index != 2).ToArray();
-            }
+            words = RemoveAdverbs(words, 2);
             if (IsPastParticiple(words[2]))
             {
                 if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
@@ -659,6 +671,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
+                words = RemoveAdverbs(words, 3);
                 if (IsAFrequencyAdverb(words[3]))
                 {
                     words = words.Where((value, index) => index != 3).ToArray();
@@ -677,11 +690,13 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (Been(words[3]))
                 {
-                    if (IsAMannerAdverbs(words[4]))
-                    {
-                        words = words.Where((value, index) => index != 4).ToArray();
-                    }
+                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (IsAnIngVerbs(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                    }
                 }
                 if (IsPastParticiple(words[3]))
                 {
@@ -694,10 +709,7 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                if (IsAnAdjective(words[1])) return true;
-            }
+            if (IsAnAdjective(words[2])) return true;
             if (The(words[2]) || A(words[2]))
             {
                 if (IsASingular(words[3])) return true;
@@ -705,11 +717,13 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true;
             if (Been(words[2]))
             {
-                if (IsAMannerAdverbs(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
+                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
         }
         if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
@@ -1206,43 +1220,37 @@ public class ButtonTests : MonoBehaviour
             "The cars aren't always being carefully repaired today.",
 
             // present perfect continuous - singular
-            //"The car has been being repaired.",
-            //"The car has always been being carefully repaired.",
-            //"The car has not always been being carefully repaired.",
-            //"The car hasn't always been being carefully repaired.",
-            //"The car has been being carefully repaired today.",
-            //"The car has not been being carefully repaired today.",
-            //"The car hasn't been being carefully repaired today.",
-            //"The car has been being repaired today.",
-            //"The car has not been being repaired today.",
-            //"The car hasn't been being repaired today.",
-            //"The car has always been being carefully repaired today.",
-            //"The car has not always been being carefully repaired today.",
-            //"The car hasn't always been being carefully repaired today.",
+            "The car has been being repaired.",
+            "The car has always been being carefully repaired.",
+            "The car has not always been being carefully repaired.",
+            "The car hasn't always been being carefully repaired.",
+            "The car has been being carefully repaired today.",
+            "The car has not been being carefully repaired today.",
+            "The car hasn't been being carefully repaired today.",
+            "The car has been being repaired today.",
+            "The car has not been being repaired today.",
+            "The car hasn't been being repaired today.",
+            "The car has always been being carefully repaired today.",
+            "The car has not always been being carefully repaired today.",
+            "The car hasn't always been being carefully repaired today.",
 
             "The big car hasn't always been being carefully repaired today.",
             
             // present perfect continuous - plural
-            //"The cars have been being repaired.",
-            //"The cars have always been being carefully repaired.",
-            //"The cars have not always been being carefully repaired.",
-            //"The cars haven't always been being carefully repaired.",
-            //"The cars have been being carefully repaired today.",
-            //"The cars have not been being carefully repaired today.",
-            //"The cars haven't been being carefully repaired today.",
-            //"The cars have been being repaired today.",
-            //"The cars have not been being repaired today.",
-            //"The cars haven't been being repaired today.",
-            //"The cars have always been being carefully repaired today.",
-            //"The cars have not always been being carefully repaired today.",
+            "The cars have been being repaired.",
+            "The cars have always been being carefully repaired.",
+            "The cars have not always been being carefully repaired.",
+            "The cars haven't always been being carefully repaired.",
+            "The cars have been being carefully repaired today.",
+            "The cars have not been being carefully repaired today.",
+            "The cars haven't been being carefully repaired today.",
+            "The cars have been being repaired today.",
+            "The cars have not been being repaired today.",
+            "The cars haven't been being repaired today.",
+            "The cars have always been being carefully repaired today.",
+            "The cars have not always been being carefully repaired today.",
 
             "The cars haven't always been being carefully repaired today.",
-
-
-
-
-
-
 
 
 
