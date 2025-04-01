@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
@@ -55,7 +56,7 @@ public class ButtonTests : MonoBehaviour
             Negazioni: La posizione rimane invariata.
             Esempio: I don’t have time now.
      */
-    static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight", "every", "at night" };
+    static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight", "every", "at night", "today" };
     // Avverbi di luogo
     static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby" };
     // Avverbi di modo
@@ -104,6 +105,7 @@ public class ButtonTests : MonoBehaviour
         if (IsFixedLenght(words, 1) && IsASingular(words[0])) return true; // There are dogs here becomes only "dogs" -> valid
         if (The(words[0]) || A(words[0])) 
         { words = words.Where((value, index) => index != 0).ToArray(); }
+        if (IsAnAdjective(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
         if (words[0].Equals("no") || words[0].Equals("not")) 
         { words = words.Where((value, index) => index != 0).ToArray(); }//There are no cars running here -> a car running
         bool subjectRecognized = IsASingular(words[0]) || IsAProperNoun(words[0]);
@@ -124,6 +126,7 @@ public class ButtonTests : MonoBehaviour
         }
         if (Is(words[1]))
         {
+            words = RemoveAdverbs(words, 2);
             if (IsAnIngVerbs(words[2])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
             {
                 if (IsFixedLenght(words, 3)) return true;
@@ -135,17 +138,16 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
+                words = RemoveAdverbs(words, 3);
                 if (IsAnIngVerbs(words[3])) return true;
                 if (IsAnAdjective(words[3])) return true;
             }
             if (IsAnAdjective(words[2])) return true;
+            if (IsPastParticiple(words[2])) return true;
         }
         if (Hasnt(words[1]))
         {
-            if (IsAFrequencyAdverb(words[2]))
-            {
-                words = words.Where((value, index) => index != 2).ToArray();
-            }
+            words = RemoveAdverbs(words, 2);
             if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
             {
                 if (IsASingular(words[3])) return true;
@@ -153,10 +155,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (Been(words[2]))
             {
-                if (IsAMannerAdverbs(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
+                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
             }
             if (IsPastParticiple(words[2]))
@@ -172,10 +171,7 @@ public class ButtonTests : MonoBehaviour
         }
         if (Has(words[1]))
         {
-            if (IsAFrequencyAdverb(words[2]))
-            {
-                words = words.Where((value, index) => index != 2).ToArray();
-            }  
+            words = RemoveAdverbs(words, 2);
             if (IsPastParticiple(words[2]))
             {
                 if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
@@ -186,16 +182,10 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                if (IsAFrequencyAdverb(words[3])) 
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
+                words = RemoveAdverbs(words, 3);
                 if (Been(words[3]))
                 {
-                    if (IsAMannerAdverbs(words[4]))
-                    {
-                        words = words.Where((value, index) => index != 4).ToArray();
-                    }
+                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                 }
                 if (IsPastParticiple(words[3]))
@@ -211,10 +201,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (Been(words[2]))
             {
-                if (IsAMannerAdverbs(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
+                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
             }
             if (The(words[2]) || A(words[2]))
@@ -247,7 +234,6 @@ public class ButtonTests : MonoBehaviour
                 if (IsASingular(words[5])) return true;
                 if (IsAPlural(words[5])) return true;
             }
-
         }
         if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
         {
@@ -277,108 +263,16 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAPlural(words[2])) return true;
         }
-        if (Isnt(words[1]))
+        if (Isnt(words[1])) 
         {
+            words = RemoveAdverbs(words, 2);
             if (IsAnAdjective(words[2])) return true; // a car isn't big
             if (IsAnIngVerbs(words[2])) return true; // a car isn't running
+            if (IsPastParticiple(words[2])) return true;
         }
         if (IsASingular(words[0])) // There isn't a car running here -> a car running
         {
             if (IsAnIngVerbs(words[1])) return true;
-        }
-        if (IsAnAdjective(words[0]))
-        {
-            if (IsFixedLenght(words, 2)) return true; // There is a dog here -> becomes dog
-            if (IsAFrequencyAdverb(words[2]))
-            {
-                words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-            }
-            if (Is(words[2]))
-            {
-                if (IsAnIngVerbs(words[3])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
-                {
-                    if (IsFixedLenght(words, 4)) return true;
-                    if (IsAPlural(words[4])) return true; // eating sandwiches
-                    if (A(words[4]) || The(words[4]) || IsAPreposition(words[4])) // eating a/the sandwich
-                    {
-                        if (IsACommon(words[5])) return true;
-                    }
-                }
-                if (Not(words[3]))
-                {
-                    if (IsAnIngVerbs(words[4])) return true;
-                    if (IsAnAdjective(words[4])) return true;
-                }
-                if (IsAnAdjective(words[3])) return true;
-            }
-            if (Has(words[2]))
-            {
-                if (The(words[3]) || A(words[3]))
-                {
-                    if (IsASingular(words[4])) return true;
-                }
-                if (IsAnAdjective(words[3])) return true;
-            }
-            if (Doesnt(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
-            {
-                if (The(words[4]) || A(words[4])) // The | a
-                {
-                    if (IsASingular(words[5])) return true;
-                }
-            }
-            if (Does(words[2]) && Not(words[3]) && (Have(words[4]) || IsABaseVerb(words[4])))
-            {
-                string detectedPhrasalVerb = words[1] + " " + words[2]; // she wakes up
-                if (phrasalVerbs.Contains(detectedPhrasalVerb))
-                {
-                    words = words.Where((value, index) => index != 1 && index != 2).ToArray();
-                }
-                if (The(words[3]) || A(words[3])) // The | a
-                {
-                    if (IsASingular(words[4])) return true;
-                }
-            }
-            if (IsA3rdPersonVerb(words[2])) // A/The guy drives a/the (big) car
-            {
-                if (IsFixedLenght(words, 3)) return true; // the cat jumps
-                if (The(words[3]) || A(words[3])) // The | a
-                {
-                    if (IsAnAdjective(words[4]))
-                    {
-                        if (IsACommon(words[5])) return true;
-                    }
-                    if (IsACommon(words[4])) return true;
-                }
-                if (IsAPreposition(words[3]))
-                {
-                    if (The(words[4]))
-                    {
-                        if (IsACommon(words[5])) return true;
-                    }
-                }
-            }
-            if (IsAPreposition(words[2])) // (there is) a book on the table
-            {
-                if (The(words[3]))
-                {
-                    if (IsACommon(words[4]) || IsAPlural(words[4]))
-                        return true;
-                }
-            }
-            if (IsAPreposition(words[2])) // (there are) books on the table
-            {
-                if (IsAPlural(words[3])) return true;
-            }
-            if (Isnt(words[2]))
-            {
-                if (IsAnAdjective(words[3])) return true; // a car isn't big
-                if (IsAnIngVerbs(words[3])) return true; // a car isn't running
-            }
-            if (IsASingular(words[1])) // There isn't a car running here -> a car running
-            {
-                if (IsAnIngVerbs(words[2])) return true;
-            }
-            if (!subjectRecognized) return false;
         }
         if (!IsFixedLenght(words, 1))
         {
@@ -386,10 +280,7 @@ public class ButtonTests : MonoBehaviour
             {
                 words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
             }
-            if (IsAFrequencyAdverb(words[1]))
-            {
-                words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-            }
+            words = RemoveAdverbs(words, 1);
             // she the child
             if (The(words[1]) || IsAnObjectPronouns(words[1]))
             {
@@ -400,6 +291,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsAnIngVerbs(words[2])) // John is playing
                 {
                     if (words.Length == 3) return true;
+                    words = RemoveAdverbs(words, 3);
                     if ((IsAPreposition(words[3]) && The(words[4])) || The(words[3])) // in the gardent
                     {
                         if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
@@ -411,6 +303,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (Not(words[2]))
                 {
+                    words = RemoveAdverbs(words, 3);
                     if (IsAPreposition(words[3]) || The(words[3]) || words[3].Equals("a")) // in the gardent
                     {
                         if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
@@ -422,6 +315,7 @@ public class ButtonTests : MonoBehaviour
                     if (IsAnIngVerbs(words[3])) // John is playing
                     {
                         if (words.Length == 4) return true;
+                        words = RemoveAdverbs(words, 4);
                         if ((IsAPreposition(words[4]) && The(words[5])) || The(words[4])) // in the gardent
                         {
                             if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
@@ -432,6 +326,7 @@ public class ButtonTests : MonoBehaviour
                         }
                     }
                     if (IsAnAdjective(words[3])) return true;
+                    if (IsPastParticiple(words[3])) return true;
                 }
                 if (IsAPreposition(words[2]))
                 {
@@ -452,6 +347,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (Has(words[1]))
             {
+                words = RemoveAdverbs(words, 2);
                 if (The(words[2]) || A(words[2]))
                 {
                     if (IsASingular(words[3])) return true;
@@ -716,6 +612,7 @@ public class ButtonTests : MonoBehaviour
         words = Normalization(words);
 
         if (The(words[0]) || A(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+        if (IsAnAdjective(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
         if (words[0].Equals("no") || words[0].Equals("not")) { words = words.Where((value, index) => index != 0).ToArray(); } //There are no cars running here -> a car running
         if (IsAPlural(words[0]))
         {
@@ -983,10 +880,7 @@ public class ButtonTests : MonoBehaviour
         if (IsAnIngVerbs(words[1])) return true; // cars running
         if (Havent(words[1]))
         {
-            if (IsAFrequencyAdverb(words[2]))
-            {
-                words = words.Where((value, index) => index != 2).ToArray();
-            }
+            words = RemoveAdverbs(words, 2);
             if (IsPastParticiple(words[2]))
             {
                 if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
@@ -1000,10 +894,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                if (IsAFrequencyAdverb(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
+                words = RemoveAdverbs(words, 3);
                 if (IsAnAdjective(words[3])) return true;
                 if (IsPastParticiple(words[2]))
                 {
@@ -1035,10 +926,7 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                if (IsAnAdjective(words[1])) return true;
-            }
+            if (IsAnAdjective(words[2])) return true;
             if (The(words[2]) || A(words[2]))
             {
                 if (IsASingular(words[3])) return true;
@@ -1053,42 +941,29 @@ public class ButtonTests : MonoBehaviour
                 if (IsPastParticiple(words[3])) return true;
             }
         }
-        if (Wasnt(words[1]))
+        if (Werent(words[1]))
         {
-            if (IsAFrequencyAdverb(words[2]))
-            {
-                words = words.Where((value, index) => index != 2).ToArray();
-            }
+            words = RemoveAdverbs(words, 2);
             if (IsPastParticiple(words[2])) return true;
-            else
-            {
-                if (IsAnAdjective(words[1])) return true;
-            }
+            if (IsAnAdjective(words[2])) return true;
             if (The(words[2]) || A(words[2]))
             {
                 if (IsASingular(words[3])) return true;
             }
             if (IsAnAdjective(words[2])) return true;
-            if (Been(words[2]))
-            {
-                if (IsAMannerAdverbs(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
-                if (IsPastParticiple(words[3])) return true;
-            }
         }
-        if (Was(words[1]))
+        if (Were(words[1]))
         {
             if (IsAFrequencyAdverb(words[2]))
             {
                 words = words.Where((value, index) => index != 2).ToArray();
             }
-            if (IsPastParticiple(words[2])) return true;
-            else
+            if (IsAMannerAdverbs(words[2]))
             {
-                if (IsAnAdjective(words[1])) return true;
+                words = words.Where((value, index) => index != 2).ToArray();
             }
+            if (IsPastParticiple(words[2])) return true;
+            if (IsAnAdjective(words[1])) return true;
             if (The(words[2]) || A(words[2]))
             {
                 if (IsASingular(words[3])) return true;
@@ -1096,22 +971,8 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true;
             if (Not(words[2]))
             {
-                if (IsAFrequencyAdverb(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
+                words = RemoveAdverbs(words, 3);
                 if (IsAnAdjective(words[3])) return true;
-                if (IsPastParticiple(words[2]))
-                {
-                    if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true;
-                    }
-                    if (The(words[3]) || IsAPossessivePronouns(words[3]))
-                    {
-                        if (IsAPlural(words[4])) return true;
-                    }
-                }
                 if (Been(words[3]))
                 {
                     if (IsAMannerAdverbs(words[4]))
@@ -1122,68 +983,30 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsPastParticiple(words[3])) return true;
             }
-            if (Been(words[2]))
-            {
-                if (IsAMannerAdverbs(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
-                if (IsPastParticiple(words[3])) return true;
-            }
         }
         return false;
     }
 
-    private static bool IsFixedLenght(string[] words, int lenght) { return words.Length <= lenght; }
-    private static bool IsAPlural(string word) => plural_nouns.Contains(word);
-    private static bool IsACommon(string word) => common_nouns.Contains(word);
-    private static bool IsAPreposition(string word) => prepositions.Contains(word);
-    private static bool IsABaseVerb(string word) => base_verbs.Contains(word);
-    private static bool IsAnAdjective(string word) => adjectives.Contains(word);
-    private static bool IsAnObjectPronouns(string word) => objectPronouns.Contains(word);
-    private static bool IsAPossessivePronouns(string word) => possessivePronouns.Contains(word);
-    private static bool IsAFrequencyAdverb(string word) => frequencyAdverbs.Contains(word);
-    private static bool IsAPlaceAdverbs(string word) => placeAdverbs.Contains(word);
-    private static bool IsAMannerAdverbs(string word) => mannerAdverbs.Contains(word);
-    private static bool IsAnIngVerbs(string word) => ing_verbs.Contains(word);
-    private static bool IsA3rdPersonVerb(string word) => base_verbs_3rd_person.Contains(word);
-    private static bool IsATimeAdverb(string word) => timeAdverbs.Contains(word);
-    private static bool IsAPluralSubject(string word) => plural_subject.Contains(word);
-    private static bool IsASingular(string word) => singular_subject.Contains(word);
-    private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
-    private static bool IsPastParticiple(string word) => past_participle.Contains(word);
-    private static bool The(string word) { return word.ToLower().Equals("the"); }
-    private static bool A(string word) { return word.ToLower().Equals("a"); }
-    private static bool An(string word) { return word.ToLower().Equals("an"); }
-    private static bool Do(string word) { return word.ToLower().Equals("do"); }
-    private static bool Not(string word) { return word.ToLower().Equals("not"); }
-    private static bool Are(string word) { return word.ToLower().Equals("are"); }
-    private static bool Have(string word) { return word.ToLower().Equals("have"); }
-    private static bool Arent(string word) { return word.ToLower().Equals("aren't"); }
-    private static bool There(string word) { return word.ToLower().Equals("there"); }
-    private static bool Has(string word) { return word.ToLower().Equals("has"); }
-    private static bool Hasnt(string word) { return word.ToLower().Equals("hasn't"); }
-    private static bool Havent(string word) { return word.ToLower().Equals("haven't"); }
-    private static bool Is(string word) { return word.ToLower().Equals("is"); }
-    private static bool Isnt(string word) { return word.ToLower().Equals("isn't"); }
-    private static bool Every(string word) { return word.ToLower().Equals("every"); }
-    private static bool Doesnt(string word) { return word.ToLower().Equals("doesn't"); }
-    private static bool Dont(string word) { return word.ToLower().Equals("don't"); }
-    private static bool Does(string word) { return word.ToLower().Equals("does"); }
-    private static bool I(string word) { return word.ToLower().Equals("i"); }
-    private static bool Been(string word) { return word.ToLower().Equals("been"); }
-    private static bool Was(string word) { return word.ToLower().Equals("was"); }
-    private static bool Wasnt(string word) { return word.ToLower().Equals("wasn't"); }
-
-
-
-
-
-
-
-
-
-
+    public static string[] RemoveAdverbs(string[] words, int position)
+    {
+        if (IsAFrequencyAdverb(words[position]))
+        {
+            words = words.Where((value, index) => index != position).ToArray();
+        }
+        if (IsAMannerAdverbs(words[position]))
+        {
+            words = words.Where((value, index) => index != position).ToArray();
+        }
+        position++;
+        if(IsFixedLenght(words, position))
+        {
+            if (IsAFrequencyAdverb(words[position-1]) && IsAMannerAdverbs(words[position]))
+            {
+                words = words.Where((value, index) => index != position-1 && index != position).ToArray();
+            }
+        }
+        return words;
+    }
     public static string[] Normalization(string[] words) // se clicchi sulla parola, la aggiungi all'array e poi vedi se la frase è corretta
     {
         for (int i = 0; i < words.Length; i++)
@@ -1228,6 +1051,7 @@ public class ButtonTests : MonoBehaviour
         {
             words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
         }
+        
         // Phrasal Verbs
         string tmpPhrasalVerb = "";
         string detectedPhrasalVerb = "";
@@ -1264,6 +1088,55 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
+
+            //// present simple - singular
+            "The car is repaired.",
+            "The car is always carefully repaired.",
+            "The car is not always carefully repaired.",
+            "The car isn't always carefully repaired.",
+            "The car is carefully repaired today.",
+            "The car is not carefully repaired today.",
+            "The car isn't carefully repaired today.",
+            "The car is repaired today.",
+            "The car is not repaired today.",
+            "The car isn't repaired today.",
+            
+            "The car is always carefully repaired today.",
+            "The car is not always carefully repaired today.",
+            "The car isn't always carefully repaired today.",
+
+            "The big car isn't always carefully repaired today.",
+
+            //// present simple - plural
+            //"The cars are repaired.",
+            //"The cars are always carefully repaired.",
+            //"The cars are not always carefully repaired.",
+            //"The cars aren't always carefully repaired.",
+            //"The cars are carefully repaired today.",
+            //"The cars are not carefully repaired today.",
+            //"The cars aren't carefully repaired today.",
+            //"The cars are repaired today.",
+            //"The cars are not repaired today.",
+            //"The cars aren't repaired today.",
+            //"The cars are always carefully repaired today.",
+            //"The cars are not always carefully repaired today.",
+            //"The cars aren't always carefully repaired today.",
+
+            // past simple all forms - plural
+            "The cars were repaired.",
+            "The cars were always carefully repaired.",
+            "The cars were not always carefully repaired.",
+            "The cars weren't always carefully repaired.",
+            "The cars were carefully repaired yesterday.",
+            "The cars were not carefully repaired yesterday.",
+            "The cars weren't carefully repaired yesterday.",
+            "The cars were repaired yesterday.",
+            "The cars were not repaired yesterday.",
+            "The cars weren't repaired yesterday.",
+            "The cars were always carefully repaired yesterday.",
+            "The cars were not always carefully repaired yesterday.",
+            "The cars weren't always carefully repaired yesterday.",
+
             // past simple all forms - singular
             "The car was repaired.",
             "The car was always carefully repaired.",
@@ -1275,53 +1148,28 @@ public class ButtonTests : MonoBehaviour
             "The car was repaired yesterday.",
             "The car was not repaired yesterday.",
             "The car wasn't repaired yesterday.",
-
             "The car was always carefully repaired yesterday.",
             "The car was not always carefully repaired yesterday.",
             "The car wasn't always carefully repaired yesterday.",
-
-            // past simple all forms - plural
-            "The cars have been repaired.",
-            "The cars have always been carefully repaired.",
-            "The cars have not always been carefully repaired.",
-            "The cars haven't always been carefully repaired.",
-            "The cars have been carefully repaired yesterday.",
-            "The cars have not been carefully repaired yesterday.",
-            "The cars haven't been carefully repaired yesterday.",
-            "The cars have been repaired yesterday.",
-            "The cars have not been repaired yesterday.",
-            "The cars haven't been repaired yesterday.",
-            "The cars have always been carefully repaired yesterday.",
-            "The cars have not always been carefully repaired yesterday.",
-            "The cars haven't always been carefully repaired yesterday.",
-
-
-            //"A guy have his car", // NON DEVE ESSERE RICONOSCIUTA!!! ok
-            // present perfect - AO VEDI CHE PUOI MIGLIORARE ANCORA LA COSA, SE TROVI "THE" OPPURE "A" li puoi togliere e ti zombi l'else!!!!!!!!!! fatto
             
-            // AO VEDI CHE DEVI AGGIUNGERE IL CONTROLLO SUI PRONOMI POSSESSIVI COME THEIR, HER ETC...
-            // IsAPossessivePronouns va di fianco i nodi con The || A || ....
-            
-            // all forms - singular
+            // present perfect - singular
             "The car has been repaired.",
-
             "The car has always been carefully repaired.",
             "The car has not always been carefully repaired.",
             "The car hasn't always been carefully repaired.",
-
             "The car has been carefully repaired yesterday.",
             "The car has not been carefully repaired yesterday.",
             "The car hasn't been carefully repaired yesterday.",
-
             "The car has been repaired yesterday.",
             "The car has not been repaired yesterday.",
             "The car hasn't been repaired yesterday.",
-
             "The car has always been carefully repaired yesterday.",
             "The car has not always been carefully repaired yesterday.",
             "The car hasn't always been carefully repaired yesterday.",
 
-            // al forms - plural
+            "The big car hasn't always been carefully repaired yesterday.",
+
+            // present perfect - plural
             "The cars have been repaired.",
             "The cars have always been carefully repaired.",
             "The cars have not always been carefully repaired.",
@@ -1334,7 +1182,8 @@ public class ButtonTests : MonoBehaviour
             "The cars haven't been repaired yesterday.",
             "The cars have always been carefully repaired yesterday.",
             "The cars have not always been carefully repaired yesterday.",
-            "The cars haven't always been carefully repaired yesterday.",
+
+            "The big cars haven't always been carefully repaired yesterday.",
 
 
             // others---------------------------
@@ -1353,15 +1202,6 @@ public class ButtonTests : MonoBehaviour
             "Alex has finished his assignment.",
 
             "A guy has finished his assignment.",
-
-
-
-
-
-
-
-
-
 
             "There is no beef in here",
             "He completes the task quickly.",
@@ -1588,4 +1428,47 @@ public class ButtonTests : MonoBehaviour
     "Subject + Verb 'to be' + Verb -ing + Prepositional Complement"
     };
 
+
+    private static bool IsFixedLenght(string[] words, int lenght) { return words.Length <= lenght; }
+    private static bool IsAPlural(string word) => plural_nouns.Contains(word);
+    private static bool IsACommon(string word) => common_nouns.Contains(word);
+    private static bool IsAPreposition(string word) => prepositions.Contains(word);
+    private static bool IsABaseVerb(string word) => base_verbs.Contains(word);
+    private static bool IsAnAdjective(string word) => adjectives.Contains(word);
+    private static bool IsAnObjectPronouns(string word) => objectPronouns.Contains(word);
+    private static bool IsAPossessivePronouns(string word) => possessivePronouns.Contains(word);
+    private static bool IsAFrequencyAdverb(string word) => frequencyAdverbs.Contains(word);
+    private static bool IsAPlaceAdverbs(string word) => placeAdverbs.Contains(word);
+    private static bool IsAMannerAdverbs(string word) => mannerAdverbs.Contains(word);
+    private static bool IsAnIngVerbs(string word) => ing_verbs.Contains(word);
+    private static bool IsA3rdPersonVerb(string word) => base_verbs_3rd_person.Contains(word);
+    private static bool IsATimeAdverb(string word) => timeAdverbs.Contains(word);
+    private static bool IsAPluralSubject(string word) => plural_subject.Contains(word);
+    private static bool IsASingular(string word) => singular_subject.Contains(word);
+    private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
+    private static bool IsPastParticiple(string word) => past_participle.Contains(word);
+    private static bool The(string word) { return word.ToLower().Equals("the"); }
+    private static bool A(string word) { return word.ToLower().Equals("a"); }
+    private static bool An(string word) { return word.ToLower().Equals("an"); }
+    private static bool Do(string word) { return word.ToLower().Equals("do"); }
+    private static bool Not(string word) { return word.ToLower().Equals("not"); }
+    private static bool Are(string word) { return word.ToLower().Equals("are"); }
+    private static bool Have(string word) { return word.ToLower().Equals("have"); }
+    private static bool Arent(string word) { return word.ToLower().Equals("aren't"); }
+    private static bool There(string word) { return word.ToLower().Equals("there"); }
+    private static bool Has(string word) { return word.ToLower().Equals("has"); }
+    private static bool Hasnt(string word) { return word.ToLower().Equals("hasn't"); }
+    private static bool Havent(string word) { return word.ToLower().Equals("haven't"); }
+    private static bool Is(string word) { return word.ToLower().Equals("is"); }
+    private static bool Isnt(string word) { return word.ToLower().Equals("isn't"); }
+    private static bool Every(string word) { return word.ToLower().Equals("every"); }
+    private static bool Doesnt(string word) { return word.ToLower().Equals("doesn't"); }
+    private static bool Dont(string word) { return word.ToLower().Equals("don't"); }
+    private static bool Does(string word) { return word.ToLower().Equals("does"); }
+    private static bool I(string word) { return word.ToLower().Equals("i"); }
+    private static bool Been(string word) { return word.ToLower().Equals("been"); }
+    private static bool Was(string word) { return word.ToLower().Equals("was"); }
+    private static bool Wasnt(string word) { return word.ToLower().Equals("wasn't"); }
+    private static bool Were(string word) { return word.ToLower().Equals("were"); }
+    private static bool Werent(string word) { return word.ToLower().Equals("weren't"); }
 }
