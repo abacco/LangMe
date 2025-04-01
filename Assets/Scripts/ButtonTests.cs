@@ -717,6 +717,7 @@ public class ButtonTests : MonoBehaviour
         }
         if (Are(words[1]) || Arent(words[1]))
         {
+            words = RemoveAdverbs(words, 2);
             if (IsAnIngVerbs(words[2])) // the dogs are playing
             {
                 if(IsFixedLenght(words, 3)) return true;
@@ -727,6 +728,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
+                words = RemoveAdverbs(words, 3);
                 if (IsAnIngVerbs(words[3])) // the dogs are not playing
                 {
                     if (words.Length == 4) return true;
@@ -742,8 +744,10 @@ public class ButtonTests : MonoBehaviour
                         return true;
                     }
                 }
+                if (IsPastParticiple(words[3])) return true;
             }
             if (IsAnAdjective(words[2])) return true;
+            if (IsPastParticiple(words[2])) return true;
         }
         if (IsABaseVerb(words[1])) // A/The dogs run fast
         {
@@ -1108,19 +1112,19 @@ public class ButtonTests : MonoBehaviour
             "The big car isn't always carefully repaired today.",
 
             //// present simple - plural
-            //"The cars are repaired.",
-            //"The cars are always carefully repaired.",
-            //"The cars are not always carefully repaired.",
-            //"The cars aren't always carefully repaired.",
-            //"The cars are carefully repaired today.",
-            //"The cars are not carefully repaired today.",
-            //"The cars aren't carefully repaired today.",
-            //"The cars are repaired today.",
-            //"The cars are not repaired today.",
-            //"The cars aren't repaired today.",
-            //"The cars are always carefully repaired today.",
-            //"The cars are not always carefully repaired today.",
-            //"The cars aren't always carefully repaired today.",
+            "The cars are repaired.",
+            "The cars are always carefully repaired.",
+            "The cars are not always carefully repaired.",
+            "The cars aren't always carefully repaired.",
+            "The cars are carefully repaired today.",
+            "The cars are not carefully repaired today.",
+            "The cars aren't carefully repaired today.",
+            "The cars are repaired today.",
+            "The cars are not repaired today.",
+            "The cars aren't repaired today.",
+            "The cars are always carefully repaired today.",
+            "The cars are not always carefully repaired today.",
+            "The cars aren't always carefully repaired today.",
 
             // past simple all forms - plural
             "The cars were repaired.",

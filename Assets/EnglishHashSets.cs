@@ -5,6 +5,7 @@ using UnityEngine;
 public static class EnglishHashSets
 {
     #region QUESTIONS INITIALIZATION ALL PASSED THE TEST
+    // ok
     public static HashSet<string> present_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
     "Do you like ice cream?",
@@ -336,6 +337,7 @@ public static class EnglishHashSets
     "Is the chef experimenting with new recipes?",
     "Is the librarian stacking the books?"
     };
+    // ok
     public static HashSet<string> present_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
     "Have you completed your homework?",
     "Has she read that book?",
@@ -652,6 +654,7 @@ public static class EnglishHashSets
     "Have the bakers been decorating the cakes?"
     };
 
+    // ok
     public static HashSet<string> past_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
         "Did you read that book?",
     "Did she watch the movie last night?",
