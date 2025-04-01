@@ -131,10 +131,12 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsFixedLenght(words, 3)) return true;
                 if (IsAPlural(words[3])) return true; // eating sandwiches
+                words = RemoveAdverbs(words, 3);
                 if (A(words[3]) || The(words[3]) || IsAPreposition(words[3])) // eating a/the sandwich
                 {
                     if (IsACommon(words[4])) return true;
                 }
+                if (IsPastParticiple(words[3])) return true;
             }
             if (Not(words[2]))
             {
@@ -269,6 +271,10 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true; // a car isn't big
             if (IsAnIngVerbs(words[2])) return true; // a car isn't running
             if (IsPastParticiple(words[2])) return true;
+            if (IsAnIngVerbs(words[2]))
+            {
+                if (IsPastParticiple(words[3])) return true;
+            }
         }
         if (IsASingular(words[0])) // There isn't a car running here -> a car running
         {
@@ -1189,6 +1195,45 @@ public class ButtonTests : MonoBehaviour
 
             "The big cars haven't always been carefully repaired yesterday.",
 
+            // present continuous - singular
+            "The car is being repaired.",
+            "The car is always being carefully repaired.",
+            "The car is not always being carefully repaired.",
+            "The car isn't always being carefully repaired.",
+            "The car is being carefully repaired today.",
+            "The car is not being carefully repaired today.",
+            "The car isn't being carefully repaired today.",
+            "The car is being repaired today.",
+            "The car is not being repaired today.",
+            "The car isn't being repaired today.",
+            "The car is always being carefully repaired today.",
+            "The car is not always being carefully repaired today.",
+            "The car isn't always being carefully repaired today.",
+            "The big car isn't always being carefully repaired today.",
+            
+            // present continuous - plural
+            "The cars are being repaired.",
+            "The cars are always being carefully repaired.",
+            "The cars are not always being carefully repaired.",
+            "The cars aren't always being carefully repaired.",
+            "The cars are being carefully repaired today.",
+            "The cars are not being carefully repaired today.",
+            "The cars aren't being carefully repaired today.",
+            "The cars are being repaired today.",
+            "The cars are not being repaired today.",
+            "The cars aren't being repaired today.",
+            "The cars are always being carefully repaired today.",
+            "The cars are not always being carefully repaired today.",
+            "The cars aren't always being carefully repaired today.",
+
+
+
+
+
+
+
+
+
 
             // others---------------------------
             "The car has not been repaired.",
@@ -1212,7 +1257,7 @@ public class ButtonTests : MonoBehaviour
             "She walks slowly.",
             // tmp --------------------- ok all
 
-            "The car is running.",
+            "The car is running.", // Exc
             "The car is not running.",
             "The car isn't running.",
 
