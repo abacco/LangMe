@@ -497,6 +497,7 @@ public static class EnglishHashSets
     "Have the librarians stacked the books?",
     "Have the bakers decorated the cakes?"
     };
+    // ok
     public static HashSet<string> present_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
           "Have you been reading that book?",
     "Has she been working on her project?",
@@ -814,6 +815,7 @@ public static class EnglishHashSets
     "Did the bakers decorate the cakes?",
     "Did the singer practice new songs?"
     };
+    // ok
     public static HashSet<string> past_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
             "Was she reading that book?",
     "Were they watching the movie?",
