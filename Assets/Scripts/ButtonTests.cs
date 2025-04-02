@@ -7,7 +7,7 @@ public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
     static List<string> plural_subject = new List<string> { "students", "beefs", "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
-    static List<string> base_verbs = new List<string> { "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs = new List<string> { "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
     static List<string> base_verbs_3rd_person = new List<string> { "walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
     static List<string> ing_verbs = new List<string> { "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> { "completed", "finished", "repaired", "loved", "driven" };
@@ -687,6 +687,36 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+        //"The big car won't always be carefully repaired.",
+        //"The big car will always be carefully repaired.",
+        //"The big car will not always be carefully repaired.",
+        if (Will(words[1])) 
+        {
+            words = RemoveAdverbs(words, 2);
+            if (IsABaseVerb(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+            if (Not(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
+            }
+        }
+        if (Wont(words[1]))
+        {
+            words = RemoveAdverbs(words, 2);
+            if (IsABaseVerb(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+        }
         return false; 
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
@@ -1078,6 +1108,33 @@ public class ButtonTests : MonoBehaviour
         {
             words = RemoveAdverbs(words, 2);
             if (Been(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+        }
+        if (Will(words[1]))
+        {
+            words = RemoveAdverbs(words, 2);
+            if (IsABaseVerb(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+            if (Not(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
+            }
+        }
+        if (Wont(words[1]))
+        {
+            words = RemoveAdverbs(words, 2);
+            if (IsABaseVerb(words[2]))
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
@@ -1482,6 +1539,41 @@ public class ButtonTests : MonoBehaviour
             "The big cars had not always been being carefully repaired.",
             "The big cars hadn't always been being carefully repaired.",
 
+            // future simple - singular
+            "The car will be repaired.",
+            "The car will always be carefully repaired.",
+            "The car will not always be carefully repaired.",
+            "The car won't always be carefully repaired.",
+            "The car will be carefully repaired.",
+            "The car will not be carefully repaired.",
+            "The car won't be carefully repaired.",
+            "The car will be repaired.",
+            "The car will not be repaired.",
+            "The car won't be repaired.",
+
+            "The big car won't always be carefully repaired.",
+            "The big car will always be carefully repaired.",
+            "The big car will not always be carefully repaired.",
+
+            // future simple - plural
+            "The cars will be repaired.",
+            "The cars will always be carefully repaired.",
+            "The cars will not always be carefully repaired.",
+            "The cars won't always be carefully repaired.",
+            "The cars will be carefully repaired.",
+            "The cars will not be carefully repaired.",
+            "The cars won't be carefully repaired.",
+            "The cars will be repaired.",
+            "The cars will not be repaired.",
+            "The cars won't be repaired.",
+            "The cars will always be carefully repaired.",
+            "The cars will not always be carefully repaired.",
+            "The cars won't always be carefully repaired.",
+
+            "The big cars will always be carefully repaired.",
+            "The big cars will not always be carefully repaired.",
+            "The big cars won't always be carefully repaired.",
+
 
             // others---------------------------
             "The car has not been repaired.",
@@ -1770,4 +1862,6 @@ public class ButtonTests : MonoBehaviour
     private static bool Werent(string word) { return word.ToLower().Equals("weren't"); }
     private static bool Had(string word) { return word.ToLower().Equals("had"); }
     private static bool Hadnt(string word) { return word.ToLower().Equals("hadn't"); }
+    private static bool Wont(string word) { return word.ToLower().Equals("won't"); }
+    private static bool Will(string word) { return word.ToLower().Equals("will"); }
 }

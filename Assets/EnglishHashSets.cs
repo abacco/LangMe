@@ -1345,7 +1345,7 @@ public static class EnglishHashSets
     "Had the neighbors been preparing their garden before the festival?",
     "Had the scientist been testing the equipment before the experiment?"
     };
-
+    // ok
     public static HashSet<string> future_simple_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
     "Will you read that book tomorrow?",
