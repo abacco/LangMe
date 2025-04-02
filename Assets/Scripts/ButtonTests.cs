@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using static UnityEditor.ShaderData;
 
 public class ButtonTests : MonoBehaviour
 {
@@ -29,16 +30,16 @@ public class ButtonTests : MonoBehaviour
                                                           "past", "since", "until", "within", "without" };
 
     static List<string> phrasalVerbs = new List<string>{
-                                                        "wake up", "wakes up",
-                                                        "turn on", "turns on",
-                                                        "turn off", "turns off",
-                                                        "give up", "gives up",
-                                                        "take off", "takes off",
-                                                        "look after", "looks after",
-                                                        "run into", "runs into",
-                                                        "set up", "sets up",
-                                                        "find out", "finds out",
-                                                        "put off", "puts off"
+                                                        "wake up", "wakes up", "woke up", "woken up",
+                                                        "turn on", "turns on", "turned on",
+                                                        "turn off", "turns off", "turned off",
+                                                        "give up", "gives up", "gave up", "given up",
+                                                        "take off", "takes off", "took off", "taken off",
+                                                        "look after", "looks after", "looked after",
+                                                        "run into", "runs into", "ran into",
+                                                        "set up", "sets up", "set up",
+                                                        "find out", "finds out", "found out",
+                                                        "put off", "puts off", "put off"
     };
 
     // Avverbi di frequenza
@@ -137,15 +138,27 @@ public class ButtonTests : MonoBehaviour
                     if (IsACommon(words[4])) return true;
                 }
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAPrasphalVerb(words[3], words[4])) return true;
             }
             if (Not(words[2]))
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsAnIngVerbs(words[3])) return true;
                 if (IsAnAdjective(words[3])) return true;
+                if (IsAPrasphalVerb(words[2], words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
+                if(!IsFixedLenght(words, 4))
+                {
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
             }
             if (IsAnAdjective(words[2])) return true;
             if (IsPastParticiple(words[2])) return true;
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Hasnt(words[1]))
         {
@@ -295,6 +308,7 @@ public class ButtonTests : MonoBehaviour
             {
                 if (IsPastParticiple(words[3])) return true;
             }
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (IsASingular(words[0])) // There isn't a car running here -> a car running
         {
@@ -639,7 +653,6 @@ public class ButtonTests : MonoBehaviour
                 if (IsPastParticiple(words[3])) return true;
             }
         }
-        //The big car had not always been carefully repaired.
         if (Had(words[1]))
         {
             words = RemoveAdverbs(words, 2);
@@ -687,9 +700,6 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
-        //"The big car won't always be carefully repaired.",
-        //"The big car will always be carefully repaired.",
-        //"The big car will not always be carefully repaired.",
         if (Will(words[1])) 
         {
             words = RemoveAdverbs(words, 2);
@@ -992,27 +1002,26 @@ public class ButtonTests : MonoBehaviour
         }
         if (Are(words[1]) || Arent(words[1]))
         {
-            if (IsAFrequencyAdverb(words[2]))
-            {
-                words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-            }
+            words = RemoveAdverbs(words, 2);
             if (IsFixedLenght(words, 2)) return true; // they are
             if (IsAnIngVerbs(words[2])) return true;
             if (Not(words[2]))
             {
+                words = RemoveAdverbs(words, 3);
                 if (IsFixedLenght(words, 3)) return true;// they are not
-                                                         // continua present continuous 
                 if (IsAnIngVerbs(words[3])) return true;// they are not standig (here)
                 if (IsAnAdjective(words[3])) return true;
+                if (!IsFixedLenght(words, 4))
+                {
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
             }
             if (IsAPreposition(words[2]))
             {
-                IsACommon(words[3]);
+                if (IsACommon(words[3])) return true;
             }
-            else
-            {
-                if (IsAnAdjective(words[2])) return true;
-            }
+            if (IsAnAdjective(words[2])) return true;
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (IsAPreposition(words[1])) // (there is) a book on the table
         {
@@ -1137,7 +1146,6 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
-        //The big cars had not always been carefully repaired.
         if (Had(words[1]))
         {
             if (Not(words[2]))
@@ -1170,10 +1178,6 @@ public class ButtonTests : MonoBehaviour
                 if (IsPastParticiple(words[3])) return true;
             }
         }
-
-        //"The big car won't have always been carefully repaired.",
-        //"The big car will have always been carefully repaired.",
-        //"The big car will not have always been carefully repaired.",
         if (Will(words[1]))
         {
             words = RemoveAdverbs(words, 2);
@@ -1263,10 +1267,6 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
-        //"The big cars will always be being carefully repaired.",
-        //"The big cars will not always be being carefully repaired.",
-        //"The big cars won't always be being carefully repaired.",
-
         return false;
     }
 
@@ -1372,6 +1372,7 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
+            // aggiungere il controllo sui phrasal verb 
             //// present simple - singular
             "The car is repaired.",
             "The car is always carefully repaired.",
@@ -1383,14 +1384,16 @@ public class ButtonTests : MonoBehaviour
             "The car is repaired today.",
             "The car is not repaired today.",
             "The car isn't repaired today.",
-            
             "The car is always carefully repaired today.",
             "The car is not always carefully repaired today.",
             "The car isn't always carefully repaired today.",
-
             "The big car isn't always carefully repaired today.",
             "The big car is not always carefully repaired today.",
             "The big car is always carefully repaired today.",
+
+            "The big car is always carefully turned on today.",
+            "The big car is not always carefully turned on today.",
+            "The big car isn't always carefully turned on today.",
 
             //// present simple - plural
             "The cars are repaired.",
@@ -1406,10 +1409,13 @@ public class ButtonTests : MonoBehaviour
             "The cars are always carefully repaired today.",
             "The cars are not always carefully repaired today.",
             "The cars aren't always carefully repaired today.",
-
             "The big cars are always carefully repaired today.",
             "The big cars are not always carefully repaired today.",
             "The big cars aren't always carefully repaired today.",
+
+            "The big cars are always carefully turned on today.",
+            "The big cars aren't always carefully turned on today.",
+            "The big cars are not always carefully turned on today.",
 
             // past simple - plural
             "The cars were repaired.",
@@ -1772,40 +1778,43 @@ public class ButtonTests : MonoBehaviour
             "The big cars won't have always been carefully repaired.",
 
             // future perfect continuous - singular
-            //"The car will have been being repaired.",
-            //"The car will have always been being carefully repaired.",
-            //"The car will not have always been being carefully repaired.",
-            //"The car won't have always been being carefully repaired.",
-            //"The car will have been being carefully repaired.",
-            //"The car will not have been being carefully repaired.",
-            //"The car won't have been being carefully repaired.",
-            //"The car will have been being repaired.",
-            //"The car will not have been being repaired.",
-            //"The car won't have been being repaired.",
+            "The car will have been being repaired.",
+            "The car will have always been being carefully repaired.",
+            "The car will not have always been being carefully repaired.",
+            "The car won't have always been being carefully repaired.",
+            "The car will have been being carefully repaired.",
+            "The car will not have been being carefully repaired.",
+            "The car won't have been being carefully repaired.",
+            "The car will have been being repaired.",
+            "The car will not have been being repaired.",
+            "The car won't have been being repaired.",
 
             "The big car won't have always been being carefully repaired.",
             "The big car will have always been being carefully repaired.",
             "The big car will not have always been being carefully repaired.",
 
             // future perfect continuous - plural
-            //"The cars will have been being repaired.",
-            //"The cars will have always been being carefully repaired.",
-            //"The cars will not have always been being carefully repaired.",
-            //"The cars won't have always been being carefully repaired.",
-            //"The cars will have been being carefully repaired.",
-            //"The cars will not have been being carefully repaired.",
-            //"The cars won't have been being carefully repaired.",
-            //"The cars will have been being repaired.",
-            //"The cars will not have been being repaired.",
-            //"The cars won't have been being repaired.",
-            //"The cars will have always been being carefully repaired.",
-            //"The cars will not have always been being carefully repaired.",
-            //"The cars won't have always been being carefully repaired.",
+            "The cars will have been being repaired.",
+            "The cars will have always been being carefully repaired.",
+            "The cars will not have always been being carefully repaired.",
+            "The cars won't have always been being carefully repaired.",
+            "The cars will have been being carefully repaired.",
+            "The cars will not have been being carefully repaired.",
+            "The cars won't have been being carefully repaired.",
+            "The cars will have been being repaired.",
+            "The cars will not have been being repaired.",
+            "The cars won't have been being repaired.",
+            "The cars will have always been being carefully repaired.",
+            "The cars will not have always been being carefully repaired.",
+            "The cars won't have always been being carefully repaired.",
 
             "The big cars will have always been being carefully repaired.",
             "The big cars will not have always been being carefully repaired.",
             "The big cars won't have always been being carefully repaired.",
 
+            // Past habitual
+            //"The car used to always be carefully repaired in the mornings.",
+            //"The cars used to always be carefully repaired in the mornings.",
 
             // others---------------------------
             "The car has not been repaired.",
@@ -2068,6 +2077,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsASingular(string word) => singular_subject.Contains(word);
     private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
     private static bool IsPastParticiple(string word) => past_participle.Contains(word);
+    private static bool IsAPrasphalVerb(string word1, string word2) => phrasalVerbs.Contains(word1+" "+word2);
     private static bool The(string word) { return word.ToLower().Equals("the"); }
     private static bool A(string word) { return word.ToLower().Equals("a"); }
     private static bool An(string word) { return word.ToLower().Equals("an"); }
