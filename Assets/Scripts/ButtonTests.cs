@@ -697,6 +697,11 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
             if (Not(words[2]))
             {
@@ -705,6 +710,11 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (IsAnIngVerbs(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                    }
                 }
             }
         }
@@ -715,6 +725,11 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
         }
         return false; 
@@ -1120,6 +1135,11 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
             if (Not(words[2]))
             {
@@ -1128,6 +1148,11 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (IsAnIngVerbs(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                    }
                 }
             }
         }
@@ -1138,8 +1163,17 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
         }
+        //"The big cars will always be being carefully repaired.",
+        //"The big cars will not always be being carefully repaired.",
+        //"The big cars won't always be being carefully repaired.",
+
         return false;
     }
 
@@ -1574,6 +1608,40 @@ public class ButtonTests : MonoBehaviour
             "The big cars will not always be carefully repaired.",
             "The big cars won't always be carefully repaired.",
 
+            // future continuous - singular
+            "The car will be being repaired.",
+            "The car will always be being carefully repaired.",
+            "The car will not always be being carefully repaired.",
+            "The car won't always be being carefully repaired.",
+            "The car will be being carefully repaired.",
+            "The car will not be being carefully repaired.",
+            "The car won't be being carefully repaired.",
+            "The car will be being repaired.",
+            "The car will not be being repaired.",
+            "The car won't be being repaired.",
+
+            "The big car won't always be being carefully repaired.",
+            "The big car will always be being carefully repaired.",
+            "The big car will not always be being carefully repaired.",
+
+            // future continuous - plural
+            "The cars will be being repaired.",
+            "The cars will always be being carefully repaired.",
+            "The cars will not always be being carefully repaired.",
+            "The cars won't always be being carefully repaired.",
+            "The cars will be being carefully repaired.",
+            "The cars will not be being carefully repaired.",
+            "The cars won't be being carefully repaired.",
+            "The cars will be being repaired.",
+            "The cars will not be being repaired.",
+            "The cars won't be being repaired.",
+            "The cars will always be being carefully repaired.",
+            "The cars will not always be being carefully repaired.",
+            "The cars won't always be being carefully repaired.",
+
+            "The big cars will always be being carefully repaired.",
+            "The big cars will not always be being carefully repaired.",
+            "The big cars won't always be being carefully repaired.",
 
             // others---------------------------
             "The car has not been repaired.",
