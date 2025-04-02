@@ -639,6 +639,34 @@ public class ButtonTests : MonoBehaviour
                 if (IsPastParticiple(words[3])) return true;
             }
         }
+        //The big car had not always been carefully repaired.
+        if (Had(words[1]))
+        {
+            if (Not(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (Been(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
+            }
+            words = RemoveAdverbs(words, 2);
+            if (Been(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+        }
+        if (Hadnt(words[1])) 
+        {
+            words = RemoveAdverbs(words, 2);
+            if (Been(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+        }
         return false; 
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
@@ -1002,6 +1030,34 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+        //The big cars had not always been carefully repaired.
+        if (Had(words[1]))
+        {
+            if (Not(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (Been(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
+            }
+            words = RemoveAdverbs(words, 2);
+            if (Been(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+        }
+        if (Hadnt(words[1]))
+        {
+            words = RemoveAdverbs(words, 2);
+            if (Been(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+        }
         return false;
     }
 
@@ -1107,7 +1163,6 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
-
             //// present simple - singular
             "The car is repaired.",
             "The car is always carefully repaired.",
@@ -1125,6 +1180,8 @@ public class ButtonTests : MonoBehaviour
             "The car isn't always carefully repaired today.",
 
             "The big car isn't always carefully repaired today.",
+            "The big car is not always carefully repaired today.",
+            "The big car is always carefully repaired today.",
 
             //// present simple - plural
             "The cars are repaired.",
@@ -1141,6 +1198,10 @@ public class ButtonTests : MonoBehaviour
             "The cars are not always carefully repaired today.",
             "The cars aren't always carefully repaired today.",
 
+            "The big cars are always carefully repaired today.",
+            "The big cars are not always carefully repaired today.",
+            "The big cars aren't always carefully repaired today.",
+
             // past simple - plural
             "The cars were repaired.",
             "The cars were always carefully repaired.",
@@ -1156,6 +1217,10 @@ public class ButtonTests : MonoBehaviour
             "The cars were not always carefully repaired yesterday.",
             "The cars weren't always carefully repaired yesterday.",
 
+            "The big cars were always carefully repaired yesterday.",
+            "The big cars were not always carefully repaired yesterday.",
+            "The big cars weren't always carefully repaired yesterday.",
+
             // past simple - singular
             "The car was repaired.",
             "The car was always carefully repaired.",
@@ -1170,6 +1235,10 @@ public class ButtonTests : MonoBehaviour
             "The car was always carefully repaired yesterday.",
             "The car was not always carefully repaired yesterday.",
             "The car wasn't always carefully repaired yesterday.",
+
+            "The big car was always carefully repaired yesterday.",
+            "The big car was not always carefully repaired yesterday.",
+            "The big car wasn't always carefully repaired yesterday.",
             
             // present perfect - singular
             "The car has been repaired.",
@@ -1187,6 +1256,8 @@ public class ButtonTests : MonoBehaviour
             "The car hasn't always been carefully repaired yesterday.",
 
             "The big car hasn't always been carefully repaired yesterday.",
+            "The big car has not always been carefully repaired yesterday.",
+            "The big car has always been carefully repaired yesterday.",
 
             // present perfect - plural
             "The cars have been repaired.",
@@ -1202,6 +1273,8 @@ public class ButtonTests : MonoBehaviour
             "The cars have always been carefully repaired yesterday.",
             "The cars have not always been carefully repaired yesterday.",
 
+            "The big cars have not always been carefully repaired yesterday.",
+            "The big cars have always been carefully repaired yesterday.",
             "The big cars haven't always been carefully repaired yesterday.",
 
             // present continuous - singular
@@ -1218,7 +1291,10 @@ public class ButtonTests : MonoBehaviour
             "The car is always being carefully repaired today.",
             "The car is not always being carefully repaired today.",
             "The car isn't always being carefully repaired today.",
+
             "The big car isn't always being carefully repaired today.",
+            "The big car is always being carefully repaired today.",
+            "The big car is not always being carefully repaired today.",
             
             // present continuous - plural
             "The cars are being repaired.",
@@ -1234,6 +1310,10 @@ public class ButtonTests : MonoBehaviour
             "The cars are always being carefully repaired today.",
             "The cars are not always being carefully repaired today.",
             "The cars aren't always being carefully repaired today.",
+
+            "The big cars are always being carefully repaired today.",
+            "The big cars are not always being carefully repaired today.",
+            "The big cars aren't always being carefully repaired today.",
 
             // present perfect continuous - singular
             "The car has been being repaired.",
@@ -1251,6 +1331,8 @@ public class ButtonTests : MonoBehaviour
             "The car hasn't always been being carefully repaired today.",
 
             "The big car hasn't always been being carefully repaired today.",
+            "The big car has not always been being carefully repaired today.",
+            "The big car has always been being carefully repaired today.",
             
             // present perfect continuous - plural
             "The cars have been being repaired.",
@@ -1267,6 +1349,8 @@ public class ButtonTests : MonoBehaviour
             "The cars have not always been being carefully repaired today.",
 
             "The cars haven't always been being carefully repaired today.",
+            "The cars have not always been being carefully repaired today.",
+            "The cars have always been being carefully repaired today.",
 
             // past continuous - singular
             "The car was being repaired.",
@@ -1285,21 +1369,55 @@ public class ButtonTests : MonoBehaviour
             "The big car was not always being carefully repaired today.",
 
             // past continuous - plural
-            ////"The cars were being repaired.",
-            ////"The cars were always being carefully repaired.",
-            ////"The cars were not always being carefully repaired.",
-            ////"The cars weren't always being carefully repaired.",
-            ////"The cars were being carefully repaired today.",
-            ////"The cars were not being carefully repaired today.",
-            ////"The cars weren't being carefully repaired today.",
-            ////"The cars were being repaired today.",
-            ////"The cars were not being repaired today.",
-            ////"The cars weren't being repaired today.",
-
+            "The cars were being repaired.",
+            "The cars were always being carefully repaired.",
+            "The cars were not always being carefully repaired.",
+            "The cars weren't always being carefully repaired.",
+            "The cars were being carefully repaired today.",
+            "The cars were not being carefully repaired today.",
+            "The cars weren't being carefully repaired today.",
+            "The cars were being repaired today.",
+            "The cars were not being repaired today.",
+            "The cars weren't being repaired today.",
             "The cars were always being carefully repaired today.",
             "The cars were not always being carefully repaired today.",
             "The cars weren't always being carefully repaired today.",
 
+            "The big cars were always being carefully repaired today.",
+            "The big cars were not always being carefully repaired today.",
+            "The big cars weren't always being carefully repaired today.",
+
+            // past perfect - singular
+            "The car had been repaired.",
+            "The car had always been carefully repaired.",
+            "The car had not always been carefully repaired.",
+            "The car hadn't always been carefully repaired.",
+            "The car had been carefully repaired.",
+            "The car had not been carefully repaired.",
+            "The car hadn't been carefully repaired.",
+            "The car had been repaired.",
+            "The car had not been repaired.",
+            "The car hadn't been repaired.",
+
+            "The big car hadn't always been carefully repaired.",
+            "The big car had always been carefully repaired.",
+            "The big car had not always been carefully repaired.",
+
+            // past perfect - plural
+            "The cars had been repaired.",
+            "The cars had always been carefully repaired.",
+            "The cars had not always been carefully repaired.",
+            "The cars hadn't always been carefully repaired.",
+            "The cars had been carefully repaired.",
+            "The cars had not been carefully repaired.",
+            "The cars hadn't been carefully repaired.",
+            "The cars had been repaired.",
+            "The cars had not been repaired.",
+            "The cars hadn't been repaired.",
+
+            "The cars had always been carefully repaired.",
+            "The cars had not always been carefully repaired.",
+            "The cars hadn't always been carefully repaired.",
 
             // others---------------------------
             "The car has not been repaired.",
@@ -1586,4 +1704,6 @@ public class ButtonTests : MonoBehaviour
     private static bool Wasnt(string word) { return word.ToLower().Equals("wasn't"); }
     private static bool Were(string word) { return word.ToLower().Equals("were"); }
     private static bool Werent(string word) { return word.ToLower().Equals("weren't"); }
+    private static bool Had(string word) { return word.ToLower().Equals("had"); }
+    private static bool Hadnt(string word) { return word.ToLower().Equals("hadn't"); }
 }

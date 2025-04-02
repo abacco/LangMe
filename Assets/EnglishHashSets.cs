@@ -973,6 +973,7 @@ public static class EnglishHashSets
     "Were the librarians stacking books?",
 
     };
+    
     public static HashSet<string> past_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
         "Had you finished your homework before the deadline?",
     "Had she read that book before the movie came out?",
