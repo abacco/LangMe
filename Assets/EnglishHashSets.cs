@@ -973,7 +973,7 @@ public static class EnglishHashSets
     "Were the librarians stacking books?",
 
     };
-    
+    // ok
     public static HashSet<string> past_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
         "Had you finished your homework before the deadline?",
     "Had she read that book before the movie came out?",
@@ -1129,6 +1129,7 @@ public static class EnglishHashSets
     "Had you painted the wall before decorating it?",
     "Had the chef prepared dessert before the dinner?"
     };
+    // ok
     public static HashSet<string> past_perfect_continuous_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
             "Had you been studying for the test before the class started?",
     "Had she been reading that book before the library closed?",

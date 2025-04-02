@@ -642,6 +642,7 @@ public class ButtonTests : MonoBehaviour
         //The big car had not always been carefully repaired.
         if (Had(words[1]))
         {
+            words = RemoveAdverbs(words, 2);
             if (Not(words[2]))
             {
                 words = RemoveAdverbs(words, 3);
@@ -649,13 +650,27 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (IsAnIngVerbs(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                    }
+                }
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
                 }
             }
-            words = RemoveAdverbs(words, 2);
             if (Been(words[2]))
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
         }
         if (Hadnt(words[1])) 
@@ -665,6 +680,11 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
         }
         return false; 
@@ -1037,6 +1057,11 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (Been(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
+                if (IsAnIngVerbs(words[3]))
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
@@ -1414,10 +1439,49 @@ public class ButtonTests : MonoBehaviour
             "The cars had been repaired.",
             "The cars had not been repaired.",
             "The cars hadn't been repaired.",
-
             "The cars had always been carefully repaired.",
             "The cars had not always been carefully repaired.",
             "The cars hadn't always been carefully repaired.",
+
+            "The big cars had always been carefully repaired.",
+            "The big cars had not always been carefully repaired.",
+            "The big cars hadn't always been carefully repaired.",
+
+            // past perfect continuous - singular
+            "The car had been being repaired.",
+            "The car had always been being carefully repaired.",
+            "The car had not always been being carefully repaired.",
+            "The car hadn't always been being carefully repaired.",
+            "The car had been being carefully repaired.",
+            "The car had not been being carefully repaired.",
+            "The car hadn't been being carefully repaired.",
+            "The car had been being repaired.",
+            "The car had not been being repaired.",
+            "The car hadn't been being repaired.",
+
+            "The big car hadn't always been being carefully repaired.",
+            "The big car had always been being carefully repaired.",
+            "The big car had not always been being carefully repaired.",
+
+            // past perfect continuous - plural
+            "The cars had been being repaired.",
+            "The cars had always been being carefully repaired.",
+            "The cars had not always been being carefully repaired.",
+            "The cars hadn't always been being carefully repaired.",
+            "The cars had been being carefully repaired.",
+            "The cars had not been being carefully repaired.",
+            "The cars hadn't been being carefully repaired.",
+            "The cars had been being repaired.",
+            "The cars had not been being repaired.",
+            "The cars hadn't been being repaired.",
+            "The cars had always been being carefully repaired.",
+            "The cars had not always been being carefully repaired.",
+            "The cars hadn't always been being carefully repaired.",
+
+            "The big cars had always been being carefully repaired.",
+            "The big cars had not always been being carefully repaired.",
+            "The big cars hadn't always been being carefully repaired.",
+
 
             // others---------------------------
             "The car has not been repaired.",
