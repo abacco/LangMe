@@ -615,6 +615,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsASingular(words[3])) return true;
             }
             if (IsAnAdjective(words[2])) return true;
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Was(words[1]))
         {
@@ -634,17 +635,13 @@ public class ButtonTests : MonoBehaviour
                     if (IsAnAdjective(words[4])) return true;
                     if (IsPastParticiple(words[4])) return true;
                 }
-                if (IsAFrequencyAdverb(words[3]) && IsAMannerAdverbs(words[4]))
-                {
-                    words = words.Where((value, index) => index != 3 && index != 4).ToArray();
-                }
-                if(IsAFrequencyAdverb(words[3]) || IsAMannerAdverbs(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray();
-                }
                 if (IsAnAdjective(words[3])) return true;
                 if (IsPastParticiple(words[2])) return true;
                 if (IsPastParticiple(words[3])) return true;
+                if(!IsFixedLenght(words, 4))
+                {
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
             }
             if (IsPastParticiple(words[3])) return true;
             if (IsAnIngVerbs(words[2]))
@@ -652,6 +649,7 @@ public class ButtonTests : MonoBehaviour
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
             }
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Had(words[1]))
         {
@@ -1110,12 +1108,12 @@ public class ButtonTests : MonoBehaviour
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
             }
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Were(words[1]))
         {
             words = RemoveAdverbs(words, 2);
             if (IsPastParticiple(words[2])) return true;
-            if (IsAnAdjective(words[1])) return true;
             if (The(words[2]) || A(words[2]))
             {
                 if (IsASingular(words[3])) return true;
@@ -1144,7 +1142,12 @@ public class ButtonTests : MonoBehaviour
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                 }
+                if(!IsFixedLenght(words, 4))
+                {
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
             }
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Had(words[1]))
         {
@@ -1431,10 +1434,14 @@ public class ButtonTests : MonoBehaviour
             "The cars were always carefully repaired yesterday.",
             "The cars were not always carefully repaired yesterday.",
             "The cars weren't always carefully repaired yesterday.",
-
             "The big cars were always carefully repaired yesterday.",
             "The big cars were not always carefully repaired yesterday.",
             "The big cars weren't always carefully repaired yesterday.",
+
+            "The big car was always carefully turned on today.",
+            "The big car wasn't always carefully turned on today.",
+            "The big car was not always carefully turned on today.",
+
 
             // past simple - singular
             "The car was repaired.",
@@ -1450,10 +1457,13 @@ public class ButtonTests : MonoBehaviour
             "The car was always carefully repaired yesterday.",
             "The car was not always carefully repaired yesterday.",
             "The car wasn't always carefully repaired yesterday.",
-
             "The big car was always carefully repaired yesterday.",
             "The big car was not always carefully repaired yesterday.",
             "The big car wasn't always carefully repaired yesterday.",
+
+            "The big cars were always carefully turned on today.",
+            "The big cars weren't always carefully turned on today.",
+            "The big cars were not always carefully turned on today.",
             
             // present perfect - singular
             "The car has been repaired.",
