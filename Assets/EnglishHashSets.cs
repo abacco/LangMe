@@ -1661,6 +1661,7 @@ public static class EnglishHashSets
     "Will you be painting the walls in the new house?",
     "Will the chef be preparing a special dessert for the dinner party?"
     };
+    // ok
     public static HashSet<string> future_perfect_questions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
        "Will you have finished your homework by tomorrow?",
     "Will she have read that book by the end of the week?",

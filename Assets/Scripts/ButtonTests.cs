@@ -716,6 +716,15 @@ public class ButtonTests : MonoBehaviour
                         if (IsPastParticiple(words[5])) return true;
                     }
                 }
+                if (Have(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (Been(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                    }
+                }
             }
         }
         if (Wont(words[1]))
@@ -726,6 +735,15 @@ public class ButtonTests : MonoBehaviour
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
+            }
+            if (Have(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (Been(words[3])) 
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
@@ -1128,6 +1146,10 @@ public class ButtonTests : MonoBehaviour
                 if (IsPastParticiple(words[3])) return true;
             }
         }
+
+        //"The big car won't have always been carefully repaired.",
+        //"The big car will have always been carefully repaired.",
+        //"The big car will not have always been carefully repaired.",
         if (Will(words[1]))
         {
             words = RemoveAdverbs(words, 2);
@@ -1154,6 +1176,39 @@ public class ButtonTests : MonoBehaviour
                         if (IsPastParticiple(words[5])) return true;
                     }
                 }
+                if (Have(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsABaseVerb(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                        if (IsAnIngVerbs(words[5]))
+                        {
+                            words = RemoveAdverbs(words, 6);
+                            if (IsPastParticiple(words[6])) return true;
+                        }
+                    }
+                }
+            }
+            if (Have(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                    if (IsAnIngVerbs(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                    }
+                }
+                if (Been(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                }
             }
         }
         if (Wont(words[1]))
@@ -1167,6 +1222,20 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                }
+            }
+            if (Have(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsPastParticiple(words[4])) return true;
+                    if (IsAnIngVerbs(words[4]))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsPastParticiple(words[5])) return true;
+                    }
                 }
             }
         }
@@ -1642,6 +1711,42 @@ public class ButtonTests : MonoBehaviour
             "The big cars will always be being carefully repaired.",
             "The big cars will not always be being carefully repaired.",
             "The big cars won't always be being carefully repaired.",
+
+            // future perfect - singular
+            "The car will have been repaired.",
+            "The car will have always been carefully repaired.",
+            "The car will not have always been carefully repaired.",
+            "The car won't have always been carefully repaired.",
+            "The car will have been carefully repaired.",
+            "The car will not have been carefully repaired.",
+            "The car won't have been carefully repaired.",
+            "The car will have been repaired.",
+            "The car will not have been repaired.",
+            "The car won't have been repaired.",
+
+            "The big car won't have always been carefully repaired.",
+            "The big car will have always been carefully repaired.",
+            "The big car will not have always been carefully repaired.",
+
+            // future perfect - plural
+            "The cars will have been repaired.",
+            "The cars will have always been carefully repaired.",
+            "The cars will not have always been carefully repaired.",
+            "The cars won't have always been carefully repaired.",
+            "The cars will have been carefully repaired.",
+            "The cars will not have been carefully repaired.",
+            "The cars won't have been carefully repaired.",
+            "The cars will have been repaired.",
+            "The cars will not have been repaired.",
+            "The cars won't have been repaired.",
+            "The cars will have always been carefully repaired.",
+            "The cars will not have always been carefully repaired.",
+            "The cars won't have always been carefully repaired.",
+
+            "The big cars will have always been carefully repaired.",
+            "The big cars will not have always been carefully repaired.",
+            "The big cars won't have always been carefully repaired.",
+
 
             // others---------------------------
             "The car has not been repaired.",
