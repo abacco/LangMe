@@ -163,6 +163,7 @@ public class ButtonTests : MonoBehaviour
         if (Hasnt(words[1]))
         {
             words = RemoveAdverbs(words, 2);
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
             if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
             {
                 if (IsASingular(words[3])) return true;
@@ -176,6 +177,14 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+                    }
+                }
+                if(!IsFixedLenght(words, 3))
+                {
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
             if (IsPastParticiple(words[2]))
@@ -191,7 +200,8 @@ public class ButtonTests : MonoBehaviour
         }
         if (Has(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
+            words = RemoveAdverbs(words, 2);  //         0   1   2    3
+            words = RemoveAdverbs(words, 3); // The big car has not always been being carefully turned on today.
             if (IsPastParticiple(words[2]))
             {
                 if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
@@ -202,7 +212,11 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
+                words = RemoveAdverbs(words, 3); //         0   1   2          3     4      5  
+                if (!IsFixedLenght(words, 5))
+                {
+                    words = RemoveAdverbs(words, 5); //The big car has not always been being carefully turned on today.
+                }
                 if (Been(words[3]))
                 {
                     words = RemoveAdverbs(words, 4);
@@ -211,11 +225,19 @@ public class ButtonTests : MonoBehaviour
                     {
                         words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
-                        if (IsAnIngVerbs(words[5]))
+                        //if (IsAnIngVerbs(words[5]))
+                        //{
+                        //    words = RemoveAdverbs(words, 5);
+                        //    if (IsPastParticiple(words[6])) return true;
+                        //}
+                        if (!IsFixedLenght(words, 5))
                         {
-                            words = RemoveAdverbs(words, 5);
-                            if (IsPastParticiple(words[6])) return true;
+                            if (IsAPrasphalVerb(words[5], words[6])) return true;
                         }
+                    }
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
                 if (IsPastParticiple(words[3]))
@@ -237,11 +259,15 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+                    }
                 }
-            }
-            if (The(words[2]) || A(words[2]))
-            {
-                if (IsASingular(words[3])) return true;
+                if (!IsFixedLenght(words, 3))
+                {
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
             }
             if (IsAnAdjective(words[2])) return true;
             if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
@@ -249,6 +275,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsASingular(words[3])) return true;
                 if (IsAPlural(words[3])) return true;
             }
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
         {
@@ -802,13 +829,13 @@ public class ButtonTests : MonoBehaviour
             if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
         }
         bool subjectRecognized = IsAPluralSubject(words[0]) || IsAPlural(words[1]);
-        if (IsAFrequencyAdverb(words[1]))
-        {
-            words = words.Where((value, index) => index != 0).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-        }
         if (Have(words[1]))
         {
             words = RemoveAdverbs(words, 2);
+            if (!IsFixedLenght(words, 3))
+            {
+                words = RemoveAdverbs(words, 3);
+            }
             if (IsPastParticiple(words[2]))
             {
                 if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
@@ -823,9 +850,9 @@ public class ButtonTests : MonoBehaviour
             if (Not(words[2]))
             {
                 words = RemoveAdverbs(words, 3);
-                if (IsAFrequencyAdverb(words[3]))
+                if (!IsFixedLenght(words, 4))
                 {
-                    words = words.Where((value, index) => index != 3).ToArray();
+                    words = RemoveAdverbs(words, 4);
                 }
                 if (IsAnAdjective(words[3])) return true;
                 if (IsPastParticiple(words[2]))
@@ -847,6 +874,11 @@ public class ButtonTests : MonoBehaviour
                     {
                         words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
+                        if (IsAPrasphalVerb(words[5], words[6])) return true;
+                    }
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
                 if (IsPastParticiple(words[3]))
@@ -860,7 +892,6 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
-            if (IsAnAdjective(words[2])) return true;
             if (The(words[2]) || A(words[2]))
             {
                 if (IsASingular(words[3])) return true;
@@ -869,13 +900,30 @@ public class ButtonTests : MonoBehaviour
             if (Been(words[2]))
             {
                 words = RemoveAdverbs(words, 3);
+                if (!IsFixedLenght(words, 4))
+                {
+                    words = RemoveAdverbs(words, 4);
+                }
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        words = RemoveAdverbs(words, 4);
+                    }
                     if (IsPastParticiple(words[4])) return true;
+                    if (!IsFixedLenght(words, 5))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+                    }
+                }
+                if (!IsFixedLenght(words, 3))
+                {
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
         {
@@ -1071,7 +1119,6 @@ public class ButtonTests : MonoBehaviour
                     if (IsAPlural(words[4])) return true;
                 }
             }
-            if (IsAnAdjective(words[2])) return true;
             if (The(words[2]) || A(words[2]))
             {
                 if (IsASingular(words[3])) return true;
@@ -1085,6 +1132,13 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (!IsFixedLenght(words, 4)){
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+                    }
+                }
+                if (!IsFixedLenght(words, 3))
+                {
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
             if (IsAnIngVerbs(words[2]))
@@ -1092,6 +1146,7 @@ public class ButtonTests : MonoBehaviour
                 words = RemoveAdverbs(words, 4);
                 if (IsPastParticiple(words[3])) return true;
             }
+            if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Werent(words[1]))
         {
@@ -1479,10 +1534,13 @@ public class ButtonTests : MonoBehaviour
             "The car has always been carefully repaired yesterday.",
             "The car has not always been carefully repaired yesterday.",
             "The car hasn't always been carefully repaired yesterday.",
-
             "The big car hasn't always been carefully repaired yesterday.",
             "The big car has not always been carefully repaired yesterday.",
             "The big car has always been carefully repaired yesterday.",
+
+            "The big car hasn't always been carefully turned on yesterday.",
+            "The big car has not always been carefully turned on yesterday.",
+            "The big car has always been carefully turned on yesterday.",
 
             // present perfect - plural
             "The cars have been repaired.",
@@ -1497,10 +1555,13 @@ public class ButtonTests : MonoBehaviour
             "The cars haven't been repaired yesterday.",
             "The cars have always been carefully repaired yesterday.",
             "The cars have not always been carefully repaired yesterday.",
-
             "The big cars have not always been carefully repaired yesterday.",
             "The big cars have always been carefully repaired yesterday.",
             "The big cars haven't always been carefully repaired yesterday.",
+
+            "The big cars have not always been carefully turned on yesterday.",
+            "The big cars have always been carefully turned on yesterday.",
+            "The big cars haven't always been carefully turned on yesterday.",
 
             // present continuous - singular
             "The car is being repaired.",
@@ -1516,10 +1577,13 @@ public class ButtonTests : MonoBehaviour
             "The car is always being carefully repaired today.",
             "The car is not always being carefully repaired today.",
             "The car isn't always being carefully repaired today.",
-
             "The big car isn't always being carefully repaired today.",
             "The big car is always being carefully repaired today.",
             "The big car is not always being carefully repaired today.",
+
+            "The big car isn't always being carefully turned on today.",
+            "The big car is always being carefully turned on today.",
+            "The big car is not always being carefully turned on today.",
             
             // present continuous - plural
             "The cars are being repaired.",
@@ -1535,10 +1599,13 @@ public class ButtonTests : MonoBehaviour
             "The cars are always being carefully repaired today.",
             "The cars are not always being carefully repaired today.",
             "The cars aren't always being carefully repaired today.",
-
             "The big cars are always being carefully repaired today.",
             "The big cars are not always being carefully repaired today.",
             "The big cars aren't always being carefully repaired today.",
+
+            "The big cars are always being carefully turned on today.",
+            "The big cars are not always being carefully turned on today.",
+            "The big cars aren't always being carefully turned on today.",
 
             // present perfect continuous - singular
             "The car has been being repaired.",
@@ -1554,10 +1621,13 @@ public class ButtonTests : MonoBehaviour
             "The car has always been being carefully repaired today.",
             "The car has not always been being carefully repaired today.",
             "The car hasn't always been being carefully repaired today.",
-
             "The big car hasn't always been being carefully repaired today.",
             "The big car has not always been being carefully repaired today.",
             "The big car has always been being carefully repaired today.",
+
+            "The big car hasn't always been being carefully turned on today.",
+            "The big car has not always been being carefully turned on today.",
+            "The big car has always been being carefully turned on today.",
             
             // present perfect continuous - plural
             "The cars have been being repaired.",
@@ -1572,10 +1642,14 @@ public class ButtonTests : MonoBehaviour
             "The cars haven't been being repaired today.",
             "The cars have always been being carefully repaired today.",
             "The cars have not always been being carefully repaired today.",
-
             "The cars haven't always been being carefully repaired today.",
             "The cars have not always been being carefully repaired today.",
             "The cars have always been being carefully repaired today.",
+
+            "The cars haven't always been being carefully turned on today.",
+            "The cars have not always been being carefully turned on today.",
+            "The cars have always been being carefully turned on today.",
+
 
             // past continuous - singular
             "The car was being repaired.",
