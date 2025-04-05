@@ -1242,6 +1242,11 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (!IsFixedLenght(words, 5))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+                    }
                 }
                 if (IsAnIngVerbs(words[3]))
                 {
@@ -1254,6 +1259,11 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (!IsFixedLenght(words, 4))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
             }
         }
         if (Hadnt(words[1]))
@@ -1263,7 +1273,13 @@ public class ButtonTests : MonoBehaviour
             {
                 words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
+                if (!IsFixedLenght(words, 4))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
             }
+
         }
         if (Will(words[1]))
         {
@@ -1732,10 +1748,13 @@ public class ButtonTests : MonoBehaviour
             "The car had been repaired.",
             "The car had not been repaired.",
             "The car hadn't been repaired.",
-
             "The big car hadn't always been carefully repaired.",
             "The big car had always been carefully repaired.",
             "The big car had not always been carefully repaired.",
+
+            "The big car hadn't always been carefully turned on yesterday.",
+            "The big car had always been carefully turned on yesterday.",
+            "The big car had not always been carefully turned on yesterday.",
 
             // past perfect - plural
             "The cars had been repaired.",
@@ -1751,10 +1770,13 @@ public class ButtonTests : MonoBehaviour
             "The cars had always been carefully repaired.",
             "The cars had not always been carefully repaired.",
             "The cars hadn't always been carefully repaired.",
-
             "The big cars had always been carefully repaired.",
             "The big cars had not always been carefully repaired.",
             "The big cars hadn't always been carefully repaired.",
+
+            "The big cars had always been carefully turned on yesterday.",
+            "The big cars had not always been carefully turned on yesterday.",
+            "The big cars hadn't always been carefully turned on yesterday.",
 
             // past perfect continuous - singular
             "The car had been being repaired.",
