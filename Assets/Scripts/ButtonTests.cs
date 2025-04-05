@@ -774,6 +774,11 @@ public class ButtonTests : MonoBehaviour
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                 }
+                if (!IsFixedLenght(words, 4))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+                }
             }
             if (Not(words[2]))
             {
@@ -786,6 +791,11 @@ public class ButtonTests : MonoBehaviour
                     {
                         words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
+                    }
+                    if (!IsFixedLenght(words, 5))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
                 if (Have(words[3]))
@@ -829,6 +839,11 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                }
+                if (!IsFixedLenght(words, 4))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
             if (Have(words[2]))
@@ -1855,10 +1870,13 @@ public class ButtonTests : MonoBehaviour
             "The car will be repaired.",
             "The car will not be repaired.",
             "The car won't be repaired.",
-
             "The big car won't always be carefully repaired.",
             "The big car will always be carefully repaired.",
             "The big car will not always be carefully repaired.",
+
+            "The big car won't always be carefully turned on yesterday.",
+            "The big car will always be carefully turned on yesterday.",
+            "The big car will not always be carefully turned on yesterday.",
 
             // future simple - plural
             "The cars will be repaired.",
@@ -1874,10 +1892,13 @@ public class ButtonTests : MonoBehaviour
             "The cars will always be carefully repaired.",
             "The cars will not always be carefully repaired.",
             "The cars won't always be carefully repaired.",
-
             "The big cars will always be carefully repaired.",
             "The big cars will not always be carefully repaired.",
             "The big cars won't always be carefully repaired.",
+
+            "The big cars will always be carefully turned on yesterday.",
+            "The big cars will not always be carefully turned on yesterday.",
+            "The big cars won't always be carefully turned on yesterday.",
 
             // future continuous - singular
             "The car will be being repaired.",
