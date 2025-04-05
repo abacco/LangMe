@@ -704,12 +704,22 @@ public class ButtonTests : MonoBehaviour
                     {
                         words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
+                        if (!IsFixedLenght(words, 6))
+                        {
+                            words = RemoveAdverbs(words, 6);
+                            if (IsAPrasphalVerb(words[5], words[6])) return true;
+                        }
                     }
                 }
                 if (IsAnIngVerbs(words[3]))
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (!IsFixedLenght(words, 5))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+                    }
                 }
             }
             if (Been(words[2]))
@@ -720,6 +730,11 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (!IsFixedLenght(words, 5))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+                    }
                 }
             }
         }
@@ -734,6 +749,16 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
+                    if (!IsFixedLenght(words, 5))
+                    {
+                        words = RemoveAdverbs(words, 5);
+                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+                    }
+                }
+                if (!IsFixedLenght(words, 4))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
         }
@@ -1789,10 +1814,13 @@ public class ButtonTests : MonoBehaviour
             "The car had been being repaired.",
             "The car had not been being repaired.",
             "The car hadn't been being repaired.",
-
             "The big car hadn't always been being carefully repaired.",
             "The big car had always been being carefully repaired.",
             "The big car had not always been being carefully repaired.",
+
+            "The big car hadn't always been being carefully turned on yesterday.",
+            "The big car had always been being carefully turned on yesterday.",
+            "The big car had not always been being carefully turned on yesterday.",
 
             // past perfect continuous - plural
             "The cars had been being repaired.",
@@ -1808,10 +1836,13 @@ public class ButtonTests : MonoBehaviour
             "The cars had always been being carefully repaired.",
             "The cars had not always been being carefully repaired.",
             "The cars hadn't always been being carefully repaired.",
-
             "The big cars had always been being carefully repaired.",
             "The big cars had not always been being carefully repaired.",
             "The big cars hadn't always been being carefully repaired.",
+
+            "The big cars had always been being carefully turned on yesterday.",
+            "The big cars had not always been being carefully turned on yesterday.",
+            "The big cars hadn't always been being carefully turned on yesterday.",
 
             // future simple - singular
             "The car will be repaired.",
