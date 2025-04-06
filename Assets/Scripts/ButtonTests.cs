@@ -2,24 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
-    static List<string> plural_subject = new List<string> { "students", "beefs", "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
     static List<string> base_verbs = new List<string> { "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat","be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
     static List<string> base_verbs_3rd_person = new List<string> { "smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
     static List<string> ing_verbs = new List<string> { "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> { "studied", "completed", "finished", "repaired", "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
-    static List<string> negations = new List<string> { "not", "never", "no" };
+
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
     static List<string> common_nouns = new List<string> { "basketball","football","soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "apples","assignments","beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
+    static List<string> plural_nouns = new List<string> { "students", "beefs", "grandparents", "girls", "we", "they", "you",
+                                                            "cars", "guys", "books", "dogs", "cats", "apples", "assignments",
+                                                            "days", "pizzas", "guitars", "letters", "gardens", "boys",
+                                                            "sandwiches", "problems", "meetings", "tables", "sugars", "houses",
+                                                            "jackets", "fights", "lamps", "children", "bikes", "computers",
+                                                            "cities", "games", "answers", "miracles" };
 
     static List<string> possessivePronouns = new List<string>{ "my", "your", "his", "her", "its", "our", "your", "their" };
 
@@ -106,16 +112,21 @@ public class ButtonTests : MonoBehaviour
     {
         words = Normalization(words);
 
+        if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+
         if (IsFixedLenght(words, 1) && IsASingular(words[0])) return true; // There are dogs here becomes only "dogs" -> valid
         if (The(words[0]) || A(words[0])) 
         { 
             words = words.Where((value, index) => index != 0).ToArray();
         }
-        if (IsAnAdjective(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+        if (IsAnAdjective(words[0])) { 
+            words = words.Where((value, index) => index != 0).ToArray(); 
+        }
         if (words[0].Equals("no") || words[0].Equals("not")) 
         { 
             words = words.Where((value, index) => index != 0).ToArray(); //There are no cars running here -> a car running
         }
+        
         bool subjectRecognized = IsASingular(words[0]) || IsAProperNoun(words[0]);
         if (IsFixedLenght(words, 1)) return true; // There is a dog here -> becomes dog
         if (IsASingular(words[0]))
@@ -1059,6 +1070,9 @@ public class ButtonTests : MonoBehaviour
     {
         words = Normalization(words);
 
+        if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+
+
         if (The(words[0]) || A(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
         if (IsAnAdjective(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
         if (words[0].Equals("no") || words[0].Equals("not")) { words = words.Where((value, index) => index != 0).ToArray(); } //There are no cars running here -> a car running
@@ -1072,6 +1086,7 @@ public class ButtonTests : MonoBehaviour
             if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
             if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
         }
+        
         bool subjectRecognized = IsAPluralSubject(words[0]) || IsAPlural(words[1]);
         if (Have(words[1]))
         {
@@ -1789,7 +1804,7 @@ public class ButtonTests : MonoBehaviour
             //    words = list.ToArray(); // remove middle the || a || an
             //}
         }
-        
+
         if (There(words[0]) && Are(words[1]) && Not(words[2]))
         {
             words = words.Skip(3).ToArray();
@@ -1870,6 +1885,12 @@ public class ButtonTests : MonoBehaviour
         List<string> sentences = new List<string>
         {
             //Modal constructions:
+            "My big car could always be carefully turned on tomorrow.",
+            "My big car could always be carefully repaired tomorrow.",
+
+            "My big cars could always be carefully turned on tomorrow.",
+            "My big cars could always be carefully repaired tomorrow.",
+
             "The big car could always be carefully turned on tomorrow.",
 
             "The big car could always be carefully repaired tomorrow.",
@@ -1994,6 +2015,8 @@ public class ButtonTests : MonoBehaviour
             "The big cars are always carefully turned on today.",
             "The big cars aren't always carefully turned on today.",
             "The big cars are not always carefully turned on today.",
+
+                        "My big cars are not always carefully turned on today.",
 
             // past simple - plural
             "The cars were repaired.",
@@ -2496,6 +2519,10 @@ public class ButtonTests : MonoBehaviour
             "The cars are not running.",
             "The cars aren't running.",
 
+                        "There is my car running here",
+                        "There is not my car running here",
+                        "There isn't my car running here",
+
             "There is no car running here",
             "There is not a car running here",
             "There isn't a car running here",
@@ -2503,9 +2530,15 @@ public class ButtonTests : MonoBehaviour
             "There are no cars running here",
             "There aren't cars running here",
 
+                        "There are my cars running here",
+
             "The big car is running.",
             "The big car is not running.",
             "The big car isn't running.",
+
+                        "The big car is running.",
+                        "My big car is not running.",
+                        "My big car isn't running.",
 
             "A big car is running.",
             "A big car is not running.",
@@ -2564,8 +2597,10 @@ public class ButtonTests : MonoBehaviour
             "Students don't love their books.",
 
             "John loves big books.",
+                "John loves his big books.",
             "The sun rises in the east.",
             "He likes apples.",
+                "He likes my apples.",
             "She believes in miracles.",
             "She believes in a miracle.",
             "The cat jumps.",
@@ -2661,7 +2696,6 @@ public class ButtonTests : MonoBehaviour
 
             "He completed the task quickly.",
             "She drives the car carefully ."
-            //"He quickly completed the task."
         };
 
         foreach (var sentence in sentences)
@@ -2670,7 +2704,6 @@ public class ButtonTests : MonoBehaviour
             {
                 Debug.Log(sentence);
             }
-            //Debug.Log($"'{sentence}' è grammaticalmente valido? {IsValidSentence(sentence)}");
         }
     }
 
@@ -2692,7 +2725,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsAnIngVerbs(string word) => ing_verbs.Contains(word);
     private static bool IsA3rdPersonVerb(string word) => base_verbs_3rd_person.Contains(word);
     private static bool IsATimeAdverb(string word) => timeAdverbs.Contains(word);
-    private static bool IsAPluralSubject(string word) => plural_subject.Contains(word);
+    private static bool IsAPluralSubject(string word) => plural_nouns.Contains(word); //plural_subject.Contains(word); - mergiati
     private static bool IsASingular(string word) => singular_subject.Contains(word);
     private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
     private static bool IsPastParticiple(string word) => past_participle.Contains(word);
