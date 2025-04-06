@@ -244,7 +244,6 @@ public class EnglishLogic : MonoBehaviour
         checkButton.onClick.RemoveAllListeners();
         checkButton.onClick.AddListener(() => CheckUserInput(userInputField.text, tenseDropdown.options[tenseDropdown.value].text));
         
-        UpdateQuestionRule_NEW();
         Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
     }
     public void CheckUserInput(string userInput, string tense)
@@ -256,19 +255,19 @@ public class EnglishLogic : MonoBehaviour
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
             case "Questions":
-                bool isAValidQuestion = MatchesBasedOnType(userInput);
-                userInputField.text = "";
-                if (isAValidQuestion) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
+                //bool isAValidQuestion = MatchesBasedOnType(userInput);
+                //userInputField.text = "";
+                //if (isAValidQuestion) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             case "Affirmations":
-                bool isAValidAffirmation = MatchesBasedOnType(userInput);
-                userInputField.text = "";
-                if (isAValidAffirmation) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
+                //bool isAValidAffirmation = MatchesBasedOnType(userInput);
+                //userInputField.text = "";
+                //if (isAValidAffirmation) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             case "Negations":
-                bool isAValidNegations = MatchesBasedOnType(userInput);
-                userInputField.text = "";
-                if (isAValidNegations) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
+                //bool isAValidNegations = MatchesBasedOnType(userInput);
+                //userInputField.text = "";
+                //if (isAValidNegations) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
                 break;
             default: Debug.Log("error on HandlePhraseType"); break;
         }
@@ -280,49 +279,37 @@ public class EnglishLogic : MonoBehaviour
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
             case "Questions":
-                rule_dynamic_text.text = "1.Am/Are/Is + I/you/she... + verb + sub/obj & adverb OR sub/obj...\n\n" +
-                                         "2.whose + subject + verb\n\n" +
-                                         "3.what kind of + noun + verb.\n\n" +
-                                         "4.modal + subject + verb.\n\n" +
-                                         "5.why didn’t + subject + verb.\n\n" +
-                                         "6.who/what/how + verb.\n\n" +
-                                         "7.modal + subject + optional adverb + verb.\n\n" +
-                                         "8.why didn’t + subject + verb.\n\n" +
-                                         "9.who + verb.\n\n" +
-                                         "10.how often + auxiliary + subject + verb.\n\n" +
-                                         "11.were + subject + supposed to + verb.\n\n" +
-                                         "12.which + noun + auxiliary + subject + verb.\n\n";
-                break;
+                rule_dynamic_text.text = ""; break;
             case "Affirmations":
-                                break;
+                rule_dynamic_text.text = ""; break;
             case "Negations":
-                                break;
+                rule_dynamic_text.text = ""; break;
             default: Debug.Log("error on UpdateQuestionRule"); break;
         }
     }
-    //public void UpdateQuestionRule()
-    //{
-    //    // spostare in un panel
-    //    switch (tenseDropdown.options[tenseDropdown.value].text)
-    //    {
-    //        case "Present Simple": rule_dynamic_text.text = Return_PresentSimple_Question_Rules(); break;
-    //        case "Present Cont.": rule_dynamic_text.text = Return_PresentContinuous_Question_Rules(); break;
-    //        case "Present Perfect": rule_dynamic_text.text = Return_Present_Perfect_Question_Rule(); break;
-    //        case "Present Perfect Cont.": rule_dynamic_text.text = Return_Present_Perfect_Continuous_Question_Rule(); break;
+    public void UpdateQuestionRule()
+    {
+        // spostare in un panel
+        switch (tenseDropdown.options[tenseDropdown.value].text)
+        {
+            case "Present Simple": rule_dynamic_text.text = Return_PresentSimple_Question_Rules(); break;
+            case "Present Cont.": rule_dynamic_text.text = Return_PresentContinuous_Question_Rules(); break;
+            case "Present Perfect": rule_dynamic_text.text = Return_Present_Perfect_Question_Rule(); break;
+            case "Present Perfect Cont.": rule_dynamic_text.text = Return_Present_Perfect_Continuous_Question_Rule(); break;
 
-    //        case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Question_Rules(); break;
-    //        case "Past Cont.": rule_dynamic_text.text = Return_Past_Continuous_Question_Rule(); break;
-    //        case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Question_Rule(); break;
-    //        case "Past Perfect Cont.": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Question_Rule(); break;
+            case "Past Simple": rule_dynamic_text.text = Return_Past_Simple_Question_Rules(); break;
+            case "Past Cont.": rule_dynamic_text.text = Return_Past_Continuous_Question_Rule(); break;
+            case "Past Perfect": rule_dynamic_text.text = Return_Past_Perfect_Question_Rule(); break;
+            case "Past Perfect Cont.": rule_dynamic_text.text = Return_Past_Perfect_Continuous_Question_Rule(); break;
 
-    //        case "Future Simple": rule_dynamic_text.text = Return_Future_Simple_Question_Rule(); break;
-    //        case "Future Cont.": rule_dynamic_text.text = Return_Future_Continuous_Question_Rule(); break;
-    //        case "Future Perfect": rule_dynamic_text.text = Return_Future_Perfect_Question_Rule(); break;
-    //        case "Future Perfect Cont.": rule_dynamic_text.text = Return_Future_Perfect_Continuous_Question_Rule(); break;
-    //        default: Debug.LogError("error on UpdateQuestionRule"); break;
-    //    }
-    //    Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
-    //}
+            case "Future Simple": rule_dynamic_text.text = Return_Future_Simple_Question_Rule(); break;
+            case "Future Cont.": rule_dynamic_text.text = Return_Future_Continuous_Question_Rule(); break;
+            case "Future Perfect": rule_dynamic_text.text = Return_Future_Perfect_Question_Rule(); break;
+            case "Future Perfect Cont.": rule_dynamic_text.text = Return_Future_Perfect_Continuous_Question_Rule(); break;
+            default: Debug.LogError("error on UpdateQuestionRule"); break;
+        }
+        Debug.Log("Selected Tense: " + tenseDropdown.options[tenseDropdown.value].text);
+    }
     public void UpdateAffirmationsRule()
     {
         // spostare in un panel
@@ -373,7 +360,7 @@ public class EnglishLogic : MonoBehaviour
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
             case "Questions":
-                UpdateQuestionRule_NEW(); break;
+                UpdateQuestionRule(); break;
             case "Affirmations":
                 UpdateAffirmationsRule(); break;
             case "Negations":
@@ -457,12 +444,10 @@ public class EnglishLogic : MonoBehaviour
                 EnglishHashSets.future_perfect_continuous_negations.Contains(input);
         return inputFound;
     }
-
     public void CloseRememberPanel()
     {
         rememberPanel.SetActive(false);
     }
-
     public void TestNegations(HashSet<string> hashset)
     {
         List<string> validNegations = new List<string>() {
@@ -1500,77 +1485,75 @@ public class EnglishLogic : MonoBehaviour
     #region FILL AFFIRMATION RULES
     private string Return_PresentSimple_Affirmation_Rules()
     {
-        return "1.(subject) + (base verb, 3rd person singular adds 's') + (object) + (other adverbs)." + "\nEx.She loves her family.\n\n" +
-               "2.(subject) + (frequency adverb) + (base verb) + (object) + (other adverbs)." + "\nEx.They always play football on weekends.";
+        return
+            "(article) (adjective) [subject] [to be] (frequency adverb) (modal adverb) [main/phrasal verb] (temporal adverb)" +
+            "\n\nThe big car(s) is always carefully turned on every day.";
     }
 
     private string Return_PresentContinuous_Affirmation_Rules()
     {
-        return "1.(subject) + (be verb: am/is/are) + (verb+ing) + (object) + (other adverbs)." + "\nEx.He is reading a book.\n\n" +
-               "2.(subject) + (be verb: am/is/are) + (frequency adverb) + (verb+ing) + (object) + (other adverbs)." + "\nEx.She is always studying in the library.";
+        return
+            "            \"The big car is not always being carefully turned on today.\",\r\n     ";
     }
 
     private string Return_PresentPerfect_Affirmation_Rules()
     {
-        return "1.(subject) + (have/has) + (past participle) + (object) + (other adverbs)." + "\nEx.I have visited Paris.\n\n" +
-               "2.(subject) + (frequency adverb) + (have/has) + (past participle) + (object) + (other adverbs)." + "\nEx.She has never eaten sushi.";
-
+        return
+            "            \"The big cars haven't always been carefully turned on yesterday.\",\r\n";
     }
 
     private string Return_PresentPerfectContinuous_Affirmation_Rules()
     {
-        return "1.(subject) + (have/has) + (been) + (verb+ing) + (object) + (other adverbs)." + "\nEx.They have been playing football.\n\n" +
-               "2.(subject) + (frequency adverb) + (have/has) + (been) + (verb+ing) + (object) + (other adverbs)." + "\nEx.He has always been working hard.";
+        return
+            "            \"The big car has always been being carefully turned on today.\",\r\n            ";
     }
     //  PAST TENSE
     private string Return_PastSimple_Affirmation_Rules()
     {
-        return "1.(subject) + (past tense verb) + (object) + (other adverbs)." + "\nEx.She visited her grandparents yesterday.\n\n" +
-               "2.(subject) + (frequency adverb) + (past tense verb) + (object) + (other adverbs)." + "\nEx.They often played chess after dinner.";
-
+        return
+            "            \"The big cars were not always carefully turned on today.\",\r\n            ";
     }
 
     private string Return_PastContinuous_Affirmation_Rules()
     {
-        return "1.(subject) + (was/were) + (verb+ing) + (object) + (other adverbs)." + "\nEx.He was reading a book all afternoon.\n\n" +
-               "2.(subject) + (frequency adverb) + (was/were) + (verb+ing) + (object) + (other adverbs)." + "\nEx.They were always working late.";
+        return
+            "            \"The big car was not always being carefully turned on today.\",\r\n";
     }
 
     private string Return_PastPerfect_Affirmation_Rules()
     {
-        return "1.(subject) + (had) + (past participle) + (object) + (other adverbs)." + "\nEx.She had already left when he arrived.\n\n" +
-               "2.(subject) + (frequency adverb) + (had) + (past participle) + (object) + (other adverbs)." + "\nEx.They had never seen such a beautiful sunset.";
-
+        return
+            "            \"The big car had not always been carefully turned on yesterday.\",\r\n";
     }
 
     private string Return_PastPerfectContinuous_Affirmation_Rules()
     {
-        return "1.(subject) + (had been) + (verb+ing) + (object) + (other adverbs)." + "\nEx.They had been studying for hours before the exam.\n\n" +
-               "2.(subject) + (frequency adverb) + (had been) + (verb+ing) + (object) + (other adverbs).";
+        return
+            "            \"The big car had not always been being carefully turned on yesterday.\",\r\n";
     }
     // FUTURE TENSE
     private string Return_FutureSimple_Affirmation_Rules()
     {
-        return "1.(subject) + (will) + (base verb) + (object) + (other adverbs)." + "\nEx.She will visit her grandparents tomorrow.\n\n" +
-               "2.(subject) + (frequency adverb) + (will) + (base verb) + (object) + (other adverbs)." + "\nEx.They will always remember this moment.";
+        return
+            "            \"The big car will not always be carefully turned on yesterday.\",\r\n";
     }
 
     private string Return_FutureContinuous_Affirmation_Rules()
     {
-        return "1.(subject) + (will be) + (verb+ing) + (object) + (other adverbs)." + "\nEx.She will be studying at the library this evening.\n\n" +
-               "2.(subject) + (frequency adverb) + (will be) + (verb+ing) + (object) + (other adverbs)." + "\nEx.They will always be working hard.";
+        return
+            "            \"The big car will not always be being carefully turned on yesterday.\",\r\n";
     }
 
     private string Return_FuturePerfect_Affirmation_Rules()
     {
-        return "1.(subject) + (will have) + (past participle) + (object) + (other adverbs)." + "\nEx.She will have finished her homework by 8 PM.\n\n" +
-               "2.(subject) + (frequency adverb) + (will have) + (past participle) + (object) + (other adverbs)." + "\nEx.They will always have completed their tasks on time.";
+        return
+            "            \"The big car will not have always been carefully turned on yesterday.\",\r\n";
     }
 
     private string Return_FuturePerfectContinuous_Affirmation_Rules()
     {
-        return "1.(subject) + (will have been) + (verb+ing) + (object) + (other adverbs)." + "\nEx.They will have been working on the project for three months by then.\n\n" +
-               "2.By + (time reference), (subject) + (frequency adverb) + (will have been) + (verb+ing) + (object) + (other adverbs)." + "\nEx.By next year, I will have been working here for 10 years.";
+        return
+            "            \"The big car will not have always been being carefully turned on yesterday.\",\r\n";
     }
     #endregion
 

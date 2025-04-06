@@ -1,10 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
@@ -89,7 +84,7 @@ public class ButtonTests : MonoBehaviour
      */
     static List<string> otherAdverbs = new List<string> { "almost", "definitely", "surely", "quite", "probably" };
 
-    static bool IsValidSentence(string sentence)
+    public static bool IsValidSentence(string sentence)
     {
         string[] words = sentence.ToLower().Replace(".", "").Replace("?", "").Split(' ');
         if (words.Length < 2) return false;
@@ -1994,6 +1989,8 @@ public class ButtonTests : MonoBehaviour
             "The big car is not always carefully turned on today.",
             "The big car isn't always carefully turned on today.",
 
+            "The big car isn't always carefully turned on every day.",
+
             //// present simple - plural
             "The cars are repaired.",
             "The cars are always carefully repaired.",
@@ -2697,7 +2694,6 @@ public class ButtonTests : MonoBehaviour
             "He completed the task quickly.",
             "She drives the car carefully ."
         };
-
         foreach (var sentence in sentences)
         {
             if (!IsValidSentence(sentence))
