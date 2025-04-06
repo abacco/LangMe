@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -141,6 +142,7 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (IsACommon(words[4])) return true;
                 }
+                if (IsACommon(words[3])) return true;
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAPrasphalVerb(words[3], words[4])) return true;
             }
@@ -998,6 +1000,14 @@ public class ButtonTests : MonoBehaviour
                     if (IsACommon(words[3])) return true;
                 }
                 if (IsABaseVerb(words[3])) return true;
+                if (IsAPrasphalVerb(words[2], words[3])) return true;
+                if (IsAPrasphalVerb(words[2], words[3]))
+                {
+                    if (IsAPlural(words[4])) return true;
+                    if (The(words[4]) || A(words[4]) || An(words[5])) {
+                        if (IsACommon(words[5])) return true;
+                    }  
+                }
             }
             if (Not(words[2]))
             {
@@ -1731,7 +1741,15 @@ public class ButtonTests : MonoBehaviour
         for (int i = 0; i < words.Length; i++)
         {
             words[i] = words[i].ToLower();
+            //if (i != 0 && (The(words[i]) || A(words[i]) || An(words[i])))
+            //{
+            //    List<string> list = new List<string>(words);
+            //    list.Remove(words[i]);
+            //    list.Insert(i, "");
+            //    words = list.ToArray(); // remove middle the || a || an
+            //}
         }
+        
         if (There(words[0]) && Are(words[1]) && Not(words[2]))
         {
             words = words.Skip(3).ToArray();
@@ -1812,6 +1830,10 @@ public class ButtonTests : MonoBehaviour
         List<string> sentences = new List<string>
         {
             // DID e DIDNT + phrasals
+            "I did always carefully set up the meeting yesterday.",
+            "I did always carefully set up meetings yesterday.",
+
+
             "I did always carefully play soccer yesterday.",
             "I didn't always carefully play soccer yesterday.",
             "I did not always carefully play soccer yesterday.",
@@ -2599,33 +2621,6 @@ public class ButtonTests : MonoBehaviour
     public void Click(string phrase) {
         Debug.Log(IsValidSentence(phrase));
     }
-
-    // CanDetectThisgrammaticalStructures
-    string[] CanDetectThisgrammaticalStructures = {
-    "Subject + Verb 'to be' + Adjective",
-    "Subject + Verb 'to be' + Negation + Adjective",
-    "Subject + Verb 'has' + Object",
-    "Proper Noun + Verb 'has' + Object",
-    "Proper Noun + Verb + Object",
-    "Subject + Verb + Object",
-    "Subject + Verb + Prepositional Complement",
-    "Subject + Verb + Adjective + Object",
-    "Plural Subject + Verb 'to be' + Adjective",
-    "Plural Subject + Verb",
-    "Plural Subject + Verb 'to be' + Negation + Adjective",
-    "Plural Subject + Auxiliary 'do not' + Base Verb + Object",
-    "Subject + Auxiliary 'does not' + Base Verb + Object",
-    "Subject + Auxiliary 'do/does' + (not) + Base Verb + Object",
-    "Subject + Frequency Adverb + Verb + Object",
-    "Subject + Frequency Adverb + Verb + Object + Time Adverb",
-    "Subject + Contraction 'doesn't/don't' + Frequency Adverb + Base Verb + Prepositional Complement",
-    "Subject + Phrasal Verb + Object",
-    "Subject + Verb 'to be' + Verb -ing",
-    "Subject + Verb 'to be' + Negation + Verb -ing",
-    "Proper Noun + Verb 'to be' + Verb -ing + Object",
-    "Subject + Verb 'to be' + Verb -ing + Prepositional Complement"
-    };
-
 
     private static bool IsFixedLenght(string[] words, int lenght) { return words.Length <= lenght; }
     private static bool IsAPlural(string word) => plural_nouns.Contains(word);
