@@ -918,6 +918,15 @@ public class ButtonTests : MonoBehaviour
                                 if (IsACommon(words[5])) return true;
                                 if (IsAPlural(words[5])) return true;
                             }
+                            if(!IsFixedLenght(words, 5))
+                            {
+                                if (IsAPrasphalVerb(words[4], words[5])) return true;
+                                if (IsAPrasphalVerb(words[4], words[5]))
+                                {
+                                    if (IsAPlural(words[6])) return true;
+                                    if (IsACommon(words[6])) return true;
+                                }
+                            }
                         }
                     }
                 }
@@ -1578,7 +1587,7 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
-        // going to
+        // going to - RemoveDuplication!!!!
         if (!IsFixedLenght(words, 2))
         {
             if (Am(words[1]) || Is(words[1]) || Are(words[1]))
@@ -1595,6 +1604,15 @@ public class ButtonTests : MonoBehaviour
                             {
                                 if (IsACommon(words[5])) return true;
                                 if (IsAPlural(words[5])) return true;
+                            }
+                            if (!IsFixedLenght(words, 5))
+                            {
+                                if (IsAPrasphalVerb(words[4], words[5])) return true;
+                                if (IsAPrasphalVerb(words[4], words[5]))
+                                {
+                                    if (IsAPlural(words[6])) return true;
+                                    if (IsACommon(words[6])) return true;
+                                }
                             }
                         }
                     }
@@ -1793,7 +1811,7 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
-            // DID e DIDNT
+            // DID e DIDNT + phrasals
             "I did always carefully play soccer yesterday.",
             "I didn't always carefully play soccer yesterday.",
             "I did not always carefully play soccer yesterday.",
@@ -1819,13 +1837,19 @@ public class ButtonTests : MonoBehaviour
             "He didn't use to study.",
             "We didn't use to visit that place.",
 
-            // going to
-            "I am going to eat apples.",
-            
+            // going to + phrasals
+            "I am going to wake up apples.",
+            "I am going to wake up.",
+            "I am always going to carefully wake up apples today.",
+            "She is always going to carefully wake up today.",
+            "They are always going to carefully wake up today.",
+
+
             "I am always going to carefully eat apples today.",
             "She is always going to carefully run today.",
             "They are always going to carefully study today.",
 
+            "I am going to eat apples.",
             "She is going to run.",
             "He is going to sleep.",
             "We are going to play.",
