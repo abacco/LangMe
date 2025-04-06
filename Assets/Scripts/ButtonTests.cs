@@ -1,24 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
-using static UnityEditor.ShaderData;
 
 public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
     static List<string> plural_subject = new List<string> { "students", "beefs", "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
-    static List<string> base_verbs = new List<string> { "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
-    static List<string> past_participle = new List<string> { "completed", "finished", "repaired", "loved", "driven" };
+    static List<string> base_verbs = new List<string> { "talk","swim", "play", "travel", "sleep", "study", "eat","be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> ing_verbs = new List<string> { "talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> past_participle = new List<string> { "studied", "completed", "finished", "repaired", "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
     static List<string> negations = new List<string> { "not", "never", "no" };
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "assignments","beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
+    static List<string> common_nouns = new List<string> { "apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "apples","assignments","beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
     static List<string> possessivePronouns = new List<string>{ "my", "your", "his", "her", "its", "our", "your", "their" };
 
@@ -105,10 +103,14 @@ public class ButtonTests : MonoBehaviour
 
         if (IsFixedLenght(words, 1) && IsASingular(words[0])) return true; // There are dogs here becomes only "dogs" -> valid
         if (The(words[0]) || A(words[0])) 
-        { words = words.Where((value, index) => index != 0).ToArray(); }
+        { 
+            words = words.Where((value, index) => index != 0).ToArray();
+        }
         if (IsAnAdjective(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
         if (words[0].Equals("no") || words[0].Equals("not")) 
-        { words = words.Where((value, index) => index != 0).ToArray(); }//There are no cars running here -> a car running
+        { 
+            words = words.Where((value, index) => index != 0).ToArray(); //There are no cars running here -> a car running
+        }
         bool subjectRecognized = IsASingular(words[0]) || IsAProperNoun(words[0]);
         if (IsFixedLenght(words, 1)) return true; // There is a dog here -> becomes dog
         if (IsASingular(words[0]))
@@ -160,6 +162,7 @@ public class ButtonTests : MonoBehaviour
             if (IsPastParticiple(words[2])) return true;
             if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
+        
         if (Hasnt(words[1]))
         {
             words = RemoveAdverbs(words, 2);
@@ -277,6 +280,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
+        
         if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
         {
             if (The(words[3]) || A(words[3])) // The | a
@@ -627,6 +631,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsAPlural(words[3])) return true;
             }
         }
+        
         if (Wasnt(words[1]))
         {
             words = RemoveAdverbs(words, 2);
@@ -690,6 +695,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
+        
         if (Had(words[1]))
         {
             words = RemoveAdverbs(words, 2);
@@ -762,6 +768,7 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+        
         if (Will(words[1])) 
         {
             words = RemoveAdverbs(words, 2);
@@ -888,6 +895,28 @@ public class ButtonTests : MonoBehaviour
                         words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (IsAPrasphalVerb(words[5], words[6])) return true;
+                    }
+                }
+            }
+        }
+        // going to
+        if (!IsFixedLenght(words, 2)){
+            if (Am(words[1]) || Is(words[1]) || Are(words[1]))
+            {
+                if(!IsFixedLenght(words, 3))
+                {
+                    if (GoingTo(words[2], words[3]))
+                    {
+                        words = RemoveAdverbs(words, 4);
+                        if (IsABaseVerb(words[4])) return true;
+                        if (!IsFixedLenght(words, 4))
+                        {
+                            if (IsABaseVerb(words[4]))
+                            {
+                                if (IsACommon(words[5])) return true;
+                                if (IsAPlural(words[5])) return true;
+                            }
+                        }
                     }
                 }
             }
@@ -1465,6 +1494,29 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+        // going to
+        if (!IsFixedLenght(words, 2))
+        {
+            if (Am(words[1]) || Is(words[1]) || Are(words[1]))
+            {
+                if (!IsFixedLenght(words, 3))
+                {
+                    if (GoingTo(words[2], words[3]))
+                    {
+                        words = RemoveAdverbs(words, 4);
+                        if (IsABaseVerb(words[4])) return true;
+                        if (!IsFixedLenght(words, 4))
+                        {
+                            if (IsABaseVerb(words[4]))
+                            {
+                                if (IsACommon(words[5])) return true;
+                                if (IsAPlural(words[5])) return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -1514,9 +1566,13 @@ public class ButtonTests : MonoBehaviour
             words = words.Skip(2).ToArray();
         }
         if (There(words[0]) && Is(words[1])) 
-        { words = words.Skip(2).ToArray(); }
+        { 
+            words = words.Skip(2).ToArray(); 
+        }
         if (There(words[0]) && Isnt(words[1]))
-        { words = words.Skip(2).ToArray(); }
+        { 
+            words = words.Skip(2).ToArray(); 
+        }
         if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
         {
             words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
@@ -1570,7 +1626,48 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
-            // aggiungere il controllo sui phrasal verb 
+            // USED TO
+            //"I used to read books.",
+            //"She used to sing.",
+            //"He used to dance.",
+            //"We used to play together.",
+            //"They used to travel often.",
+            //"You used to enjoy sports.",
+            //"I didn't use to like vegetables.",
+            //"She didn't use to smile much.",
+            //"He didn't use to study hard.",
+            //"We didn't use to visit that place.",
+
+            // going to
+            "I am going to eat apples.",
+            
+            "I am always going to carefully eat apples today.",
+            "She is always going to carefully run today.",
+            "They are always going to carefully study today.",
+
+            "She is going to run.",
+            "He is going to sleep.",
+            "We are going to play.",
+            "They are going to study.",
+            "You are going to talk.",
+            "I am going to walk.",
+            "She is going to swim.",
+            "He is going to work.",
+            "We are going to travel.",
+
+
+            //Modal constructions:
+            //"The car could be repaired.",
+            //"The car might be repaired.",
+            //"The car should be repaired.",
+            //"The car must be repaired.",
+            //"The car will be repaired.",
+            //"The car would be repaired.",
+            //"The car can be repaired.",
+            //"The car may be repaired.",
+            //"The car shall be repaired.",
+
+            // aggiungere il controllo sui phrasal verb - fatto
             //// present simple - singular
             "The car is repaired.",
             "The car is always carefully repaired.",
@@ -2344,12 +2441,19 @@ public class ButtonTests : MonoBehaviour
     private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
     private static bool IsPastParticiple(string word) => past_participle.Contains(word);
     private static bool IsAPrasphalVerb(string word1, string word2) => phrasalVerbs.Contains(word1+" "+word2);
+
     private static bool The(string word) { return word.ToLower().Equals("the"); }
+    private static bool GoingTo(string word1, string word2) 
+    { 
+        string goingTo = word1.ToLower() + " " + word2.ToLower();
+        return goingTo.ToLower().Equals("going to"); 
+    }
     private static bool A(string word) { return word.ToLower().Equals("a"); }
     private static bool An(string word) { return word.ToLower().Equals("an"); }
     private static bool Do(string word) { return word.ToLower().Equals("do"); }
     private static bool Not(string word) { return word.ToLower().Equals("not"); }
     private static bool Are(string word) { return word.ToLower().Equals("are"); }
+    private static bool Am(string word) { return word.ToLower().Equals("am"); }
     private static bool Have(string word) { return word.ToLower().Equals("have"); }
     private static bool Arent(string word) { return word.ToLower().Equals("aren't"); }
     private static bool There(string word) { return word.ToLower().Equals("there"); }
@@ -2372,4 +2476,6 @@ public class ButtonTests : MonoBehaviour
     private static bool Hadnt(string word) { return word.ToLower().Equals("hadn't"); }
     private static bool Wont(string word) { return word.ToLower().Equals("won't"); }
     private static bool Will(string word) { return word.ToLower().Equals("will"); }
+
+
 }

@@ -201,20 +201,20 @@ public class EnglishLogic : MonoBehaviour
         //TestQuestions(EnglishHashSets.future_perfect_questions);
         //TestQuestions(EnglishHashSets.future_perfect_continuous_questions);
 
-        TestNegations(EnglishHashSets.present_simple_negations);
-        TestNegations(EnglishHashSets.present_continuous_negations);
-        TestNegations(EnglishHashSets.present_perfect_negations);
-        TestNegations(EnglishHashSets.present_perfect_continuous_negations);
+        //TestNegations(EnglishHashSets.present_simple_negations);
+        //TestNegations(EnglishHashSets.present_continuous_negations);
+        //TestNegations(EnglishHashSets.present_perfect_negations);
+        //TestNegations(EnglishHashSets.present_perfect_continuous_negations);
 
-        TestNegations(EnglishHashSets.past_simple_negations);
-        TestNegations(EnglishHashSets.past_continuous_negations);
-        TestNegations(EnglishHashSets.past_perfect_negations);
-        TestNegations(EnglishHashSets.past_perfect_continuous_negations);
+        //TestNegations(EnglishHashSets.past_simple_negations);
+        //TestNegations(EnglishHashSets.past_continuous_negations);
+        //TestNegations(EnglishHashSets.past_perfect_negations);
+        //TestNegations(EnglishHashSets.past_perfect_continuous_negations);
 
-        TestNegations(EnglishHashSets.future_simple_negations);
-        TestNegations(EnglishHashSets.future_continuous_negations);
-        TestNegations(EnglishHashSets.future_perfect_negations);
-        TestNegations(EnglishHashSets.future_perfect_continuous_negations);
+        //TestNegations(EnglishHashSets.future_simple_negations);
+        //TestNegations(EnglishHashSets.future_continuous_negations);
+        //TestNegations(EnglishHashSets.future_perfect_negations);
+        //TestNegations(EnglishHashSets.future_perfect_continuous_negations);
         //TestNegations(null);
 
         //TestQuestions(present_simple_affirmations);
