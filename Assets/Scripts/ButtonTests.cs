@@ -24,7 +24,9 @@ public class ButtonTests : MonoBehaviour
     static List<string> possessivePronouns = new List<string>{ "my", "your", "his", "her", "its", "our", "your", "their" };
 
     static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
+
     static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
+
     static List<string> prepositions = new List<string> { "with","in", "on", "at", "to", "with", "for", "before", "after", "during", "as", "by", 
                                                           "about", "over", "under", "of", "through", "between", "into", "onto", "out", 
                                                           "from", "against", "along", "around", "beneath", "beside", "beyond", "near", "off", 
@@ -1040,6 +1042,17 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+
+        if (IsAModal(words[1]))
+        {
+            words = RemoveAdverbs(words, 2);
+            if (IsABaseVerb(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+            if (IsAPrasphalVerb(words[3], words[4])) return true;
+        }
         return false; 
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
@@ -1728,6 +1741,17 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+
+        if (IsAModal(words[1]))
+        {
+            words = RemoveAdverbs(words, 2);
+            if (IsABaseVerb(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsPastParticiple(words[3])) return true;
+            }
+            if (IsAPrasphalVerb(words[3], words[4])) return true;
+        }
         return false;
     }
 
@@ -1845,6 +1869,20 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
+            //Modal constructions:
+            "The big car could always be carefully turned on tomorrow.",
+
+            "The big car could always be carefully repaired tomorrow.",
+            "The big cars could always be carefully repaired tomorrow.",
+            "The car might be repaired.",
+            "The car should be repaired.",
+            "The car must be repaired.",
+            "The car will be repaired.",
+            "The car would be repaired.",
+            "The car can be repaired.",
+            "The car may be repaired.",
+            "The car shall be repaired.",
+
             // DID e DIDNT + phrasals
             "I did always carefully set up the meeting yesterday.",
             "I did always carefully set up meetings yesterday.",
@@ -1863,7 +1901,6 @@ public class ButtonTests : MonoBehaviour
 
             "they did not always carefully set up the meeting yesterday.",
             "they did not always carefully set up meetings yesterday.",
-
 
             "I did always carefully play soccer yesterday.",
             "I didn't always carefully play soccer yesterday.",
@@ -1912,18 +1949,6 @@ public class ButtonTests : MonoBehaviour
             "She is going to swim.",
             "He is going to work.",
             "We are going to travel.",
-
-
-            //Modal constructions:
-            //"The car could be repaired.",
-            //"The car might be repaired.",
-            //"The car should be repaired.",
-            //"The car must be repaired.",
-            //"The car will be repaired.",
-            //"The car would be repaired.",
-            //"The car can be repaired.",
-            //"The car may be repaired.",
-            //"The car shall be repaired.",
 
             // aggiungere il controllo sui phrasal verb - fatto
             //// present simple - singular
@@ -2671,6 +2696,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsASingular(string word) => singular_subject.Contains(word);
     private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
     private static bool IsPastParticiple(string word) => past_participle.Contains(word);
+    private static bool IsAModal(string word) => modal_verbs.Contains(word);
     private static bool IsAPrasphalVerb(string word1, string word2) => phrasalVerbs.Contains(word1+" "+word2);
     private static bool The(string word) { return word.ToLower().Equals("the"); }
     private static bool GoingTo(string word1, string word2) 
