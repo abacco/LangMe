@@ -1,21 +1,23 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
     static List<string> plural_subject = new List<string> { "students", "beefs", "grandparents", "girls", "we", "they", "you", "cars", "guys", "books", "dogs", "cats", "apples" };
-    static List<string> base_verbs = new List<string> { "talk","swim", "play", "travel", "sleep", "study", "eat","be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> base_verbs = new List<string> { "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat","be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> ing_verbs = new List<string> { "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> { "studied", "completed", "finished", "repaired", "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
     static List<string> negations = new List<string> { "not", "never", "no" };
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> common_nouns = new List<string> { "basketball","football","soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
     static List<string> plural_nouns = new List<string> { "apples","assignments","beefs", "dogs", "days", "grandparents", "pizzas", "guitars", "letters", "gardens", "girls", "boys","sandwiches", "problems","meetings", "tables", "sugars", "houses", "jackets", "fights", "lamps", "children","tables","bikes","apples", "cats", "apples", "books", "tables", "houses", "computers", "dogs", "cities", "cars", "games", "answers", "miracles" };
 
     static List<string> possessivePronouns = new List<string>{ "my", "your", "his", "her", "its", "our", "your", "their" };
@@ -921,6 +923,88 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+        // used to
+        if (!IsFixedLenght(words, 2))
+        {
+            if (UsedTo(words[1], words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[3])) return true;
+                if (!IsFixedLenght(words, 3))
+                {
+                    if (IsABaseVerb(words[3]))
+                    {
+                        if (IsACommon(words[4])) return true;
+                        if (IsAPlural(words[4])) return true;
+                    }
+                }
+            }
+        }
+
+        if (Didnt(words[1])) 
+        {
+            // use to
+            if (!IsFixedLenght(words, 3))
+            {
+                if (UseTo(words[2], words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        if (IsABaseVerb(words[4]))
+                        {
+                            if (!IsFixedLenght(words, 5))
+                            {
+                                if (IsACommon(words[5])) return true;
+                                if (IsAPlural(words[5])) return true;
+                            }
+                            return true;
+                        }
+                    }
+                    if (IsABaseVerb(words[4])) return true;
+                }
+            }
+            // I didn't always carefully play soccer yesterday.
+            words = RemoveAdverbs(words, 2);
+            if (!IsFixedLenght(words, 3))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[2]))
+                {
+                    if (IsAPlural(words[3])) return true;
+                    if (IsACommon(words[3])) return true;
+                }
+                if (IsABaseVerb(words[3])) return true;
+            }
+        }
+        if (Did(words[1])) 
+        {
+            words = RemoveAdverbs(words, 2);
+            if (!IsFixedLenght(words, 3))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[2]))
+                {
+                    if (IsAPlural(words[3])) return true;
+                    if (IsACommon(words[3])) return true;
+                }
+                if (IsABaseVerb(words[3])) return true;
+            }
+            if (Not(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (!IsFixedLenght(words, 4))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsABaseVerb(words[3]))
+                    {
+                        if (IsAPlural(words[4])) return true;
+                        if (IsACommon(words[4])) return true;
+                    }
+                    if (IsABaseVerb(words[4])) return true;
+                }
+            }
+        }
         return false; 
     }
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
@@ -1517,6 +1601,89 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
+        // used to
+        if (!IsFixedLenght(words, 2))
+        {
+            if (UsedTo(words[1], words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[3])) return true;
+                if (!IsFixedLenght(words, 3))
+                {
+                    if (IsABaseVerb(words[3]))
+                    {
+                        if (IsACommon(words[4])) return true;
+                        if (IsAPlural(words[4])) return true;
+                    }
+                }
+            }
+        }
+
+        if (Didnt(words[1]))
+        {
+            // use to
+            if (!IsFixedLenght(words, 3))
+            {
+                if (UseTo(words[2], words[3]))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        if (IsABaseVerb(words[4]))
+                        {
+                            if (!IsFixedLenght(words, 5))
+                            {
+                                if (IsACommon(words[5])) return true;
+                                if (IsAPlural(words[5])) return true;
+                            }
+                            return true;
+                        }
+                    }
+                    if (IsABaseVerb(words[4])) return true;
+                }
+            }
+            // They didn't always carefully play soccer yesterday.
+            words = RemoveAdverbs(words, 2);
+            if (!IsFixedLenght(words, 3))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[2]))
+                {
+                    if (IsAPlural(words[3])) return true;
+                    if (IsACommon(words[3])) return true;
+                }
+                if (IsABaseVerb(words[3])) return true;
+            }
+        }
+        if (Did(words[1]))
+        {
+            // "they did always carefully play soccer yesterday.",
+            words = RemoveAdverbs(words, 2);
+            if (!IsFixedLenght(words, 3))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (IsABaseVerb(words[2]))
+                {
+                    if (IsAPlural(words[3])) return true;
+                    if (IsACommon(words[3])) return true;
+                }
+                if (IsABaseVerb(words[3])) return true;
+            }
+            if (Not(words[2]))
+            {
+                words = RemoveAdverbs(words, 3);
+                if (!IsFixedLenght(words, 4))
+                {
+                    words = RemoveAdverbs(words, 4);
+                    if (IsABaseVerb(words[3]))
+                    {
+                        if (IsAPlural(words[4])) return true;
+                        if (IsACommon(words[4])) return true;
+                    }
+                    if (IsABaseVerb(words[4])) return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -1626,17 +1793,31 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> sentences = new List<string>
         {
+            // DID e DIDNT
+            "I did always carefully play soccer yesterday.",
+            "I didn't always carefully play soccer yesterday.",
+            "I did not always carefully play soccer yesterday.",
+
+            "They did always carefully play soccer yesterday.",
+            "They didn't always carefully play soccer yesterday.",
+            "They did not always carefully play soccer yesterday.",
+
             // USED TO
-            //"I used to read books.",
-            //"She used to sing.",
-            //"He used to dance.",
-            //"We used to play together.",
-            //"They used to travel often.",
-            //"You used to enjoy sports.",
-            //"I didn't use to like vegetables.",
-            //"She didn't use to smile much.",
-            //"He didn't use to study hard.",
-            //"We didn't use to visit that place.",
+            "I used to read books.",
+            "I always used to carefully read books today",
+
+            "She used to sing.",
+            "He used to dance.",
+            "We used to play.",
+            "They used to travel often.",
+            "You used to enjoy sports.",
+
+            "I didn't always use to carefully like vegetables today.",
+
+            "I didn't use to like vegetables.",
+            "She didn't use to smile.",
+            "He didn't use to study.",
+            "We didn't use to visit that place.",
 
             // going to
             "I am going to eat apples.",
@@ -2441,12 +2622,21 @@ public class ButtonTests : MonoBehaviour
     private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
     private static bool IsPastParticiple(string word) => past_participle.Contains(word);
     private static bool IsAPrasphalVerb(string word1, string word2) => phrasalVerbs.Contains(word1+" "+word2);
-
     private static bool The(string word) { return word.ToLower().Equals("the"); }
     private static bool GoingTo(string word1, string word2) 
     { 
         string goingTo = word1.ToLower() + " " + word2.ToLower();
         return goingTo.ToLower().Equals("going to"); 
+    }
+    private static bool UsedTo(string word1, string word2)
+    {
+        string usedTo = word1.ToLower() + " " + word2.ToLower();
+        return usedTo.ToLower().Equals("used to");
+    }
+    private static bool UseTo(string word1, string word2)
+    {
+        string usedTo = word1.ToLower() + " " + word2.ToLower();
+        return usedTo.ToLower().Equals("use to");
     }
     private static bool A(string word) { return word.ToLower().Equals("a"); }
     private static bool An(string word) { return word.ToLower().Equals("an"); }
@@ -2464,6 +2654,8 @@ public class ButtonTests : MonoBehaviour
     private static bool Isnt(string word) { return word.ToLower().Equals("isn't"); }
     private static bool Every(string word) { return word.ToLower().Equals("every"); }
     private static bool Doesnt(string word) { return word.ToLower().Equals("doesn't"); }
+    private static bool Didnt(string word) { return word.ToLower().Equals("didn't"); }
+    private static bool Did(string word) { return word.ToLower().Equals("did"); }
     private static bool Dont(string word) { return word.ToLower().Equals("don't"); }
     private static bool Does(string word) { return word.ToLower().Equals("does"); }
     private static bool I(string word) { return word.ToLower().Equals("i"); }
