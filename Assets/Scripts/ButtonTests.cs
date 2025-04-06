@@ -14,8 +14,8 @@ public class ButtonTests : MonoBehaviour
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "basketball","football","soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "students", "beefs", "grandparents", "girls", "we", "they", "you",
+    static List<string> common_nouns = new List<string> { "pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
                                                             "cars", "guys", "books", "dogs", "cats", "apples", "assignments",
                                                             "days", "pizzas", "guitars", "letters", "gardens", "boys",
                                                             "sandwiches", "problems", "meetings", "tables", "sugars", "houses",
@@ -46,42 +46,11 @@ public class ButtonTests : MonoBehaviour
                                                         "put off", "puts off", "put off"
     };
 
-    // Avverbi di frequenza
-    /*
-            Esempio: I always drink coffee in the morning.
-            Esempio (to be): She is often late for work.
-            Esempio: He doesn’t always agree with me.
-            Esempio (to be): They aren’t usually at home.
-     */
-    static List<string> frequencyAdverbs = new List<string> { "always", "usually", "often", "sometimes", "rarely", "never" };
-    // Avverbi di tempo
-    /*
-            Esempio: We are going to the park tomorrow.
-            Esempio: Tomorrow, we are going to the park.
-            Negazioni: La posizione rimane invariata.
-            Esempio: I don’t have time now.
-     */
-    static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight", "every", "at night", "today" };
-    // Avverbi di luogo
-    static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby" };
-    // Avverbi di modo
-    /*
-            in inglese generalmente si collocano alla fine della frase
-
-            She drives the car carefully.
-            He completed the task quickly.
-
-            prima del verbo principale per dare enfasi o un tono più formale:
-            She carefully drives the car.
-            He quickly completed the task.
-     */
-    static List<string> mannerAdverbs = new List<string> { "quickly", "slowly", "carefully", "happily", "sadly" };
-    // Altri avverbi utili
-    /*
-            Vanno generalmente alla fine della frase.
-            Esempio: He is standing here.
-            Esempio: We met them there.
-     */
+    static List<string> frequencyAdverbs = new List<string> { "always", "usually", "often", "sometimes", "rarely", "never", "regularly", "occasionally" };
+    static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight", "at night", "today", "currently", "immediately" };
+    static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby", "around", "inside", "outside" };
+    static List<string> mannerAdverbs = new List<string> { "really","quickly", "slowly", "carefully", "happily", "sadly", "skillfully", "neatly", "badly" };
+    
     static List<string> otherAdverbs = new List<string> { "almost", "definitely", "surely", "quite", "probably" };
 
     public static bool IsValidSentence(string sentence)
@@ -98,11 +67,73 @@ public class ButtonTests : MonoBehaviour
         //extender.Add("");  // Aggiungi un elemento
         //words = extender.ToArray();
 
-        if      (SingularSubjectPresentSimple_Affirmation(words)){ return true; }
+        if      (SingularSubjectPresentSimple_Affirmation(words) || IsAQuestion(words)){ return true; }
         else if (PluralSubjectPresentSimple_Affirmation(words))  { return true; }
         else                                                     { return false; }
     }
 
+    public static bool IsAQuestion(string[] words)
+    {
+        words = Normalization(words);
+        if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
+        {
+            if (The(words[3]) || A(words[3])) // The | a
+            {
+                if (IsASingular(words[4])) return true;
+            }
+        }
+        if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+        {
+            string detectedPhrasalVerb = words[0] + " " + words[1]; // she wakes up
+            if (phrasalVerbs.Contains(detectedPhrasalVerb))
+            {
+                words = words.Where((value, index) => index != 0 && index != 1).ToArray();
+            }
+            if (The(words[4]) || A(words[4]) || IsAPossessivePronouns(words[4])) // The | a
+            {
+                if (IsASingular(words[5])) return true;
+                if (IsAPlural(words[5])) return true;
+            }
+        }
+        if (Do(words[0]))
+        {
+            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+            {
+                words = words.Where((value, index) => index != 1).ToArray();
+                if (IsAPlural(words[1]) || words[1].Equals("you"))
+                {
+                    words = RemoveAdverbs(words, 2);
+                    if (IsABaseVerb(words[2]))
+                    {
+                        if (IsACommon(words[3])) return true;
+                    }
+                }
+            }
+            if (IsAPlural(words[1]) || words[1].Equals("you"))
+            {
+                words = RemoveAdverbs(words, 2);
+                if (IsABaseVerb(words[2]))
+                {
+                    if (IsACommon(words[3])) return true;
+                }
+            }
+        }
+        if (Does(words[0]))
+        {
+            if (IsASingular(words[1]) || IsAProperNoun(words[1]))
+            {
+                words = RemoveAdverbs(words, 2);
+                if (IsABaseVerb(words[2]))
+                {
+                    if (!IsFixedLenght(words, 3)){
+                        if (IsACommon(words[3])) return true;
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public static bool SingularSubjectPresentSimple_Affirmation(string[] words)
     {
         words = Normalization(words);
@@ -292,7 +323,7 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
-        
+
         if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
         {
             if (The(words[3]) || A(words[3])) // The | a
@@ -313,6 +344,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsAPlural(words[5])) return true;
             }
         }
+
         if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
         {
             if (IsFixedLenght(words, 2)) return true; // the cat jumps
@@ -1877,6 +1909,106 @@ public class ButtonTests : MonoBehaviour
     }
     private void Start()
     {
+        List<string> questions = new List<string>
+        {
+            //present_simple_questions
+            "Do you really like pizza here?",
+            "Do you always like pizza here?",
+
+            "Do the students study today?",
+            "Do the students really study today?",
+
+            "Does the student study today?",
+            "Does the student really study today?",
+
+            "Does John study today?",
+            "Does John really study today?",
+
+
+            //"Does she actually like pizza here?",
+            //"Does she often like pizza here?",
+
+            //"Are you quite happy here?",
+            //"Are you completely happy here now?",
+
+            //"Is she currently a teacher here?",
+            //"Is she actually a teacher here?",
+
+            //"What do you usually do every morning?",
+            //"What do you specifically do every morning?",
+            //"What does she regularly do every morning?",
+            //"What does she sometimes do every morning?",
+
+            //"Where does he exactly live?",
+            //"Where does he live nearby?",
+            //"Where do they possibly live?",
+            //"Where do they live around here?",
+
+            //"Why do they run really so fast?",
+            //"Why do they perhaps run so fast?",
+            //"Why does she run exceptionally so fast?",
+            //"Why does she usually run so fast?",
+
+            //"When does she exactly study?",
+            //"When does she regularly study?",
+            //"When do you usually study?",
+            //"When do you exactly study?",
+
+            //"How do you carefully make this cake?",
+            //"How do you exactly make this cake?",
+            //"How does she skillfully make this cake?",
+            //"How does she possibly make this cake?"
+            
+            // old ones
+            //"Do you like pizza here?",
+            //"Does she like pizza here?",
+            //"Are you happy here?",
+            //"Is she a teacher here?",
+            
+            //"What do you do every morning?",
+            //"What does she do every morning?",
+
+            //"Where does he live?",
+            //"Where do they live?",
+
+            //"Why do they run so fast?",
+            //"Why does she run so fast?",
+
+            //"When does she study?",
+            //"When do you study?",
+
+            //"How do you make this cake?",
+            //"How does she make this cake?",
+
+            //"Does she play tennis?",
+            //"Do they go to school every day?",
+            //"Does he work here?",
+            //"Do we need more time?",
+            //"Are you happy?",
+            //"Is she a teacher?",
+            //"Are they at home?",
+            //"Is he your friend?",
+            //"Are we late?",
+            //"What do you do every morning?",
+            //"Where does he live?",
+            //"Why do they run so fast?",
+            //"When does she study?",
+            //"How do you make this cake?"
+
+            //present_continuous_questions
+            //present_perfect_questions
+            //present_perfect_continuous_questions
+            //past_simple_questions
+            //past_continuous_questions
+            //past_perfect_questions
+            //past_perfect_continuous_questions
+            //future_simple_questions
+            //future_continuous_questions
+            //future_perfect_questions
+            //future_perfect_continuous_questions
+    };
+        
+        // ok everything fine with sentences (aff/neg)
         List<string> sentences = new List<string>
         {
             //Modal constructions:
@@ -2694,7 +2826,7 @@ public class ButtonTests : MonoBehaviour
             "He completed the task quickly.",
             "She drives the car carefully ."
         };
-        foreach (var sentence in sentences)
+        foreach (var sentence in questions)
         {
             if (!IsValidSentence(sentence))
             {
