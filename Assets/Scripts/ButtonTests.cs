@@ -986,6 +986,14 @@ public class ButtonTests : MonoBehaviour
                     if (IsACommon(words[3])) return true;
                 }
                 if (IsABaseVerb(words[3])) return true;
+                if (IsAPrasphalVerb(words[2], words[3]))
+                {
+                    if (IsAPlural(words[4])) return true;
+                    if (The(words[4]) || A(words[4]) || An(words[4]))
+                    {
+                        if (IsACommon(words[5])) return true;
+                    }
+                }
             }
         }
         if (Did(words[1])) 
@@ -1004,7 +1012,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsAPrasphalVerb(words[2], words[3]))
                 {
                     if (IsAPlural(words[4])) return true;
-                    if (The(words[4]) || A(words[4]) || An(words[5])) {
+                    if (The(words[4]) || A(words[4]) || An(words[4])) {
                         if (IsACommon(words[5])) return true;
                     }  
                 }
@@ -1021,6 +1029,14 @@ public class ButtonTests : MonoBehaviour
                         if (IsACommon(words[4])) return true;
                     }
                     if (IsABaseVerb(words[4])) return true;
+                    if (IsAPrasphalVerb(words[3], words[4]))
+                    {
+                        if (IsAPlural(words[5])) return true;
+                        if (The(words[5]) || A(words[5]) || An(words[5]))
+                        {
+                            if (IsACommon(words[6])) return true;
+                        }
+                    }
                 }
             }
         }
@@ -1832,6 +1848,21 @@ public class ButtonTests : MonoBehaviour
             // DID e DIDNT + phrasals
             "I did always carefully set up the meeting yesterday.",
             "I did always carefully set up meetings yesterday.",
+
+            "I didn't always carefully set up the meeting yesterday.",
+            "I didn't always carefully set up meetings yesterday.",
+
+            "I did not always carefully set up the meeting yesterday.",
+            "I did not always carefully set up meetings yesterday.",
+
+            "they did always carefully set up the meeting yesterday.",
+            "they did always carefully set up meetings yesterday.",
+
+            "they didn't always carefully set up the meeting yesterday.",
+            "they didn't always carefully set up meetings yesterday.",
+
+            "they did not always carefully set up the meeting yesterday.",
+            "they did not always carefully set up meetings yesterday.",
 
 
             "I did always carefully play soccer yesterday.",
