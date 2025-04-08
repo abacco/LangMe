@@ -95,7 +95,7 @@ public class ButtonTests : MonoBehaviour
                 if (IsAPlural(words[5])) return true;
             }
         }
-        if (Do(words[0]))
+        if (Do(words[0]) || Dont(words[0]))
         {
             if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
             {
@@ -120,8 +120,35 @@ public class ButtonTests : MonoBehaviour
                     return true;
                 }
             }
+            if (Not(words[1]))
+            {
+                if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
+                {
+                    words = words.Where((value, index) => index != 2).ToArray();
+                    if (IsAPlural(words[2]) || words[1].Equals("you"))
+                    {
+                        words = RemoveAdverbs(words, 3);
+                        if (IsABaseVerb(words[3]))
+                        {
+                            if (IsACommon(words[4])) return true;
+                        }
+                    }
+                }
+                if (IsAPlural(words[2]) || words[2].Equals("you"))
+                {
+                    words = RemoveAdverbs(words, 3);
+                    if (IsABaseVerb(words[3]))
+                    {
+                        if (!IsFixedLenght(words, 4))
+                        {
+                            if (IsACommon(words[4])) return true;
+                        }
+                        return true;
+                    }
+                }
+            }
         }
-        if (Does(words[0]))
+        if (Does(words[0]) || Doesnt(words[0]))
         {
             if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
             {
@@ -149,6 +176,37 @@ public class ButtonTests : MonoBehaviour
                         }
                     }
                     return true;
+                }
+            }
+            if (Not(words[1]))
+            {
+                if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
+                {
+                    words = words.Where((value, index) => index != 2).ToArray();
+                }
+                if (IsASingular(words[1]) || IsAProperNoun(words[2]))
+                {
+                    words = RemoveAdverbs(words, 3);
+                    if (timeAdverbs.Contains(words[3]))
+                    {
+                        words = words.Where((value, index) => index != 3).ToArray();
+                    }
+                    if (IsABaseVerb(words[3]))
+                    {
+                        if (!IsFixedLenght(words, 4))
+                        {
+                            words = RemoveAdverbs(words, 4);
+                            if (!IsFixedLenght(words, 4))
+                            {
+                                if (IsAPreposition(words[4]))
+                                {
+                                    words = words.Where((value, index) => index != 4).ToArray();
+                                }
+                                if (IsACommon(words[4])) return true;
+                            }
+                        }
+                        return true;
+                    }
                 }
             }
         }
@@ -1815,7 +1873,6 @@ public class ButtonTests : MonoBehaviour
         }
         return false;
     }
-
     public static string[] RemoveAdverbs(string[] words, int position)
     {
         if(position > words.Length) return words;
@@ -1935,30 +1992,22 @@ public class ButtonTests : MonoBehaviour
     {
         List<string> questions = new List<string>
         {
-            //present_simple_questions
+            // present_simple_questions
             "Do you really like pizza here?",
             "Do you always like pizza here?",
-
             "Do the students study today?",
             "Do the students really study today?",
-
             "Does the student study today?",
             "Does the student really study today?",
-
             "Does John study today?",
             "Does John really study today?",
-
             "Does John really study carefully today?", // ok grammar but it is more natural "every day"
             //"Does John carefully really study today?", // NOT RECOGNIZED OK!!! LOVE IT
-
-
             //"Does she actually like pizza here?", // gestiscili più in là (actually)
             "Does she often like pizza here?",
             "Does she like pizza?",
             "Does she like pizza often here?", // grammatically correct
-
             //"Are you quite happy here?", (quite)
-
             "Do you always study carefully?",
             "Does she usually cook skillfully?",
             "Do they often visit their grandparents nearby?",
@@ -1968,7 +2017,42 @@ public class ButtonTests : MonoBehaviour
             "Do you regularly go to the gym at night?",
             "Does she occasionally travel there?",
             // "Do they currently live somewhere in the city?", // in the city - not handled atm
-            "Does John immediately respond to messages neatly?", 
+
+            "Does John immediately respond to messages neatly?",
+            "Doesn't John immediately respond to messages neatly?",
+            "Does not John immediately respond to messages neatly?",
+
+            "Don't you really like pizza here?",
+            "Don't you always like pizza here?",
+            "Don't the students study today?",
+            "Don't the students really study today?",
+            "Doesn't the student study today?",
+            "Doesn't the student really study today?",
+            "Doesn't John study today?",
+            "Doesn't John really study today?",
+            "Doesn't John really study carefully today?", // Ok grammaticalmente, ma più naturale con "every day"
+            "Doesn't she often like pizza here?",
+            "Doesn't she like pizza?",
+            "Doesn't she like pizza often here?",
+            "Don't you always study carefully?",
+            "Doesn't she usually cook skillfully?",
+            "Don't they often visit their grandparents nearby?",
+            "Doesn't he sometimes write emails quickly?",
+            "Don't we rarely eat outside?",
+            "Doesn't the teacher ever explain things slowly?", // Per "never", si usa "ever" nella forma negativa
+            "Don't you regularly go to the gym at night?",
+            "Doesn't she occasionally travel there?",
+
+            // ARE IS
+            "Are you happy?", // are you adj
+            "Are they students?", // are you plural_nouns
+            "Are we late?", 
+            "Are the dogs outside?", // are subject placeAdverb
+            "Are they really good at soccer?",
+            "Are the books on the table?", 
+            "Are you sure about this?",
+            "Are the lights on?",
+            "Are they friends?",
 
             //"Are you completely happy here now?",
 
