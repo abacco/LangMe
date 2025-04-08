@@ -6,17 +6,17 @@ using UnityEngine.Windows;
 public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "teacher", "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
-    static List<string> base_verbs = new List<string> { "do", "work", "respond", "answer", "go", "explain", "write", "cook", "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "does", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "doing","working", "responding", "answering", "going", "explaining", "writing", "cooking", "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
-    static List<string> past_participle = new List<string> { "did","worked", "responded", "answered", "went ","explained", "written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" };
+    static List<string> base_verbs = new List<string> { "need", "make", "live", "do", "work", "respond", "answer", "go", "explain", "write", "cook", "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "needs","makes", "lives", "does", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> ing_verbs = new List<string> { "needing", "making", "living", "doing", "working", "responding", "answering", "going", "explaining", "writing", "cooking", "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> past_participle = new List<string> { "needed", "made", "lived", "did","worked", "responded", "answered", "went ","explained", "written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
 
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "late", "happy", "sunny", "cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "student", "friend","teacher", "thing","pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "emails", "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
+    static List<string> common_nouns = new List<string> { "time", "cake", "student", "friend","teacher", "thing","pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "times", "cakes","emails", "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
                                                             "cars", "guys", "books", "dogs", "cats", "apples", "assignments",
                                                             "days", "pizzas", "guitars", "letters", "gardens", "boys",
                                                             "sandwiches", "problems", "meetings", "tables", "sugars", "houses",
@@ -121,8 +121,13 @@ public class ButtonTests : MonoBehaviour
                 words = RemoveAdverbs(words, 2);
                 if (IsABaseVerb(words[2]))
                 {
-                    if(!IsFixedLenght(words, 3)){
+                    if(!IsFixedLenght(words, 3))
+                    {
                         if (IsACommon(words[3])) return true;
+                        if (This(words[3]) || That(words[3]))
+                        {
+                            if (IsACommon(words[4])) return true;
+                        }
                     }
                     return true;
                 }
@@ -233,6 +238,10 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAnAdjective(words[2])) return true;
                 if (IsAPluralSubject(words[2])) return true;
+                if (IsAPreposition(words[2]))
+                {
+                    if (IsACommon(words[3])) return true;
+                }
             }
         }
         if (Is(words[0]) || Isnt(words[0]))
@@ -2269,40 +2278,39 @@ public class ButtonTests : MonoBehaviour
             "Why isn't she always studying so carefully now?", // Frase già corretta e fluida
 
         // old ones
-        //"Do you like pizza here?",
-        //"Does she like pizza here?",
-        //"Are you happy here?",
-        //"Is she a teacher here?",
+        "Do you like pizza here?",
+        "Does she like pizza here?",
+        "Are you happy here?",
+        "Is she a teacher here?",
 
-        //"What do you do every morning?",
-        //"What does she do every morning?",
+        "What do you do every morning?",
+        "What does she do every morning?",
 
-        //"Where does he live?",
-        //"Where do they live?",
+        "Where does he live?",
+        "Where do they live?",
 
-        //"Why do they run so fast?",
-        //"Why does she run so fast?",
+        "Why do they run so fast?",
+        "Why does she run so fast?",
 
-        //"When does she study?",
-        //"When do you study?",
+        "When does she study?",
+        "When do you study?",
 
-        //"How do you make this cake?",
-        //"How does she make this cake?",
+        "How do you make this cake?",
+        "How does she make this cake?",
 
-        //"Does she play tennis?",
-        //"Do they go to school every day?",
-        //"Does he work here?",
-        //"Do we need more time?",
-        //"Are you happy?",
-        //"Is she a teacher?",
-        //"Are they at home?",
-        //"Is he your friend?",
-        //"Are we late?",
-        //"What do you do every morning?",
-        //"Where does he live?",
-        //"Why do they run so fast?",
-        //"When does she study?",
-        //"How do you make this cake?"
+        "Does she play tennis?",
+        "Do they go to school every day?",
+        "Does he work here?",
+        "Do we need more time?",
+        "Are you happy?",
+        "Is she a teacher?",
+        "Are they at home?",
+        "Is he your friend?",
+        "Are we late?",
+        "What do you do every morning?",
+        "Where does he live?",
+        "Why do they run so fast?",
+        "When does she study?"
 
         //present_continuous_questions
         //present_perfect_questions
@@ -3215,4 +3223,6 @@ public class ButtonTests : MonoBehaviour
     private static bool Hadnt(string word) { return word.ToLower().Equals("hadn't"); }
     private static bool Wont(string word) { return word.ToLower().Equals("won't"); }
     private static bool Will(string word) { return word.ToLower().Equals("will"); }
+    private static bool This(string word) { return word.ToLower().Equals("this"); }
+    private static bool That(string word) { return word.ToLower().Equals("that"); }
 }
