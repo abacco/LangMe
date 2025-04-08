@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ButtonTests : MonoBehaviour
 {
-    static List<string> singular_subject = new List<string> { "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
-    static List<string> base_verbs = new List<string> { "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat","be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
-    static List<string> past_participle = new List<string> { "studied", "completed", "finished", "repaired", "loved", "driven" };
+    static List<string> singular_subject = new List<string> { "teacher", "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
+    static List<string> base_verbs = new List<string> { "respond", "answer", "go", "explain", "write", "cook", "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> ing_verbs = new List<string> { "responding", "answering", "going", "explaining", "writing", "cooking", "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> past_participle = new List<string> { "responded", "answered", "went ","explained", "written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
 
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
+    static List<string> common_nouns = new List<string> { "teacher", "thing","pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
                                                             "cars", "guys", "books", "dogs", "cats", "apples", "assignments",
                                                             "days", "pizzas", "guitars", "letters", "gardens", "boys",
                                                             "sandwiches", "problems", "meetings", "tables", "sugars", "houses",
@@ -49,7 +49,7 @@ public class ButtonTests : MonoBehaviour
     static List<string> frequencyAdverbs = new List<string> { "always", "usually", "often", "sometimes", "rarely", "never", "regularly", "occasionally" };
     static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight", "at night", "today", "currently", "immediately" };
     static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby", "around", "inside", "outside" };
-    static List<string> mannerAdverbs = new List<string> { "really","quickly", "slowly", "carefully", "happily", "sadly", "skillfully", "neatly", "badly" };
+    static List<string> mannerAdverbs = new List<string> { "really", "quickly", "slowly", "carefully", "happily", "sadly", "skillfully", "neatly", "badly" };
     
     static List<string> otherAdverbs = new List<string> { "almost", "definitely", "surely", "quite", "probably" };
 
@@ -114,19 +114,39 @@ public class ButtonTests : MonoBehaviour
                 words = RemoveAdverbs(words, 2);
                 if (IsABaseVerb(words[2]))
                 {
-                    if (IsACommon(words[3])) return true;
+                    if(!IsFixedLenght(words, 3)){
+                        if (IsACommon(words[3])) return true;
+                    }
+                    return true;
                 }
             }
         }
         if (Does(words[0]))
         {
+            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+            {
+                words = words.Where((value, index) => index != 1).ToArray();
+            }
             if (IsASingular(words[1]) || IsAProperNoun(words[1]))
             {
                 words = RemoveAdverbs(words, 2);
+                if (timeAdverbs.Contains(words[2]))
+                {
+                    words = words.Where((value, index) => index != 2).ToArray();
+                }
                 if (IsABaseVerb(words[2]))
                 {
-                    if (!IsFixedLenght(words, 3)){
-                        if (IsACommon(words[3])) return true;
+                    if (!IsFixedLenght(words, 3))
+                    {
+                        words = RemoveAdverbs(words, 3);
+                        if(!IsFixedLenght(words, 3))
+                        {
+                            if (IsAPreposition(words[3]))
+                            {
+                                words = words.Where((value, index) => index != 3).ToArray();
+                            }
+                            if (IsACommon(words[3])) return true;
+                        }
                     }
                     return true;
                 }
@@ -1099,7 +1119,6 @@ public class ButtonTests : MonoBehaviour
 
         if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
 
-
         if (The(words[0]) || A(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
         if (IsAnAdjective(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
         if (words[0].Equals("no") || words[0].Equals("not")) { words = words.Where((value, index) => index != 0).ToArray(); } //There are no cars running here -> a car running
@@ -1800,6 +1819,7 @@ public class ButtonTests : MonoBehaviour
     public static string[] RemoveAdverbs(string[] words, int position)
     {
         if(position > words.Length) return words;
+        if (words.Length == 3) return words;
         if (IsAFrequencyAdverb(words[position]))
         {
             words = words.Where((value, index) => index != position).ToArray();
@@ -1809,13 +1829,17 @@ public class ButtonTests : MonoBehaviour
             words = words.Where((value, index) => index != position).ToArray();
         }
         position++;
+        if(position >= words.Length)
+        {
+            position = words.Length-1;
+        }
         if(IsFixedLenght(words, position))
         {
-            if (IsAFrequencyAdverb(words[position-1]) && IsAMannerAdverbs(words[position]))
+            if (IsAFrequencyAdverb(words[position - 1]) && IsAMannerAdverbs(words[position]))
             {
-                words = words.Where((value, index) => index != position-1 && index != position).ToArray();
+                words = words.Where((value, index) => index != position - 1 && index != position).ToArray();
             }
-        }
+        } 
         return words;
     }
     public static string[] Normalization(string[] words) // se clicchi sulla parola, la aggiungi all'array e poi vedi se la frase è corretta
@@ -1924,11 +1948,28 @@ public class ButtonTests : MonoBehaviour
             "Does John study today?",
             "Does John really study today?",
 
+            "Does John really study carefully today?", // ok grammar but it is more natural "every day"
+            //"Does John carefully really study today?", // NOT RECOGNIZED OK!!! LOVE IT
 
-            //"Does she actually like pizza here?",
-            //"Does she often like pizza here?",
 
-            //"Are you quite happy here?",
+            //"Does she actually like pizza here?", // gestiscili più in là (actually)
+            "Does she often like pizza here?",
+            "Does she like pizza?",
+            "Does she like pizza often here?", // grammatically correct
+
+            //"Are you quite happy here?", (quite)
+
+            "Do you always study carefully?",
+            "Does she usually cook skillfully?",
+            "Do they often visit their grandparents nearby?",
+            "Does he sometimes write emails quickly?",
+            "Do we rarely eat outside?",
+            "Does the teacher never explain things slowly?",
+            "Do you regularly go to the gym at night?",
+            "Does she occasionally travel there?",
+            // "Do they currently live somewhere in the city?", // in the city - not handled atm
+            "Does John immediately respond to messages neatly?", 
+
             //"Are you completely happy here now?",
 
             //"Is she currently a teacher here?",
