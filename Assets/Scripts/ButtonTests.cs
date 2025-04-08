@@ -458,6 +458,23 @@ public class ButtonTests : MonoBehaviour
                     return true;
                 }
             }
+            if (IsPastParticiple(words[1]))
+            {
+                if (!IsFixedLenght(words, 2))
+                {
+                    words = RemoveAdverbs(words, 2);
+                    if (!IsFixedLenght(words, 2))
+                    {
+                        words = RemoveAdverbs(words, 2);
+                        if (IsAPreposition(words[2]))
+                        {
+                            words = words.Where((value, index) => index != 2).ToArray();
+                        }
+                        if (IsACommon(words[2])) return true;
+                    }
+                }
+                //return true;
+            }
             if (Not(words[1]))
             {
                 if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
@@ -576,7 +593,10 @@ public class ButtonTests : MonoBehaviour
         if (Hasnt(words[1]))
         {
             words = RemoveAdverbs(words, 2);
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
+            if (!IsFixedLenght(words, 3))
+            {
+                if (IsAPrasphalVerb(words[2], words[3])) return true;
+            }
             if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
             {
                 if (IsASingular(words[3])) return true;
@@ -602,12 +622,15 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsPastParticiple(words[2]))
             {
-                if (IsAPlural(words[3])) return true;
-                if (IsAnIngVerbs(words[3])) return true;
-                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
+                if (!IsFixedLenght(words, 3))
                 {
-                    if (IsACommon(words[4])) return true;
-                    if (IsAPlural(words[4])) return true;
+                    if (IsAPlural(words[3])) return true;
+                    if (IsAnIngVerbs(words[3])) return true;
+                    if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
+                    {
+                        if (IsACommon(words[4])) return true;
+                        if (IsAPlural(words[4])) return true;
+                    }
                 }
             }
         }
@@ -863,7 +886,10 @@ public class ButtonTests : MonoBehaviour
                     }
                     if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
                 }
-                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+                if (!IsFixedLenght(words, 4))
+                {
+                    if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+                }
             }
             if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
             {
@@ -2231,6 +2257,11 @@ public class ButtonTests : MonoBehaviour
             //    words = list.ToArray(); // remove middle the || a || an
             //}
             if (words[i].Equals("so"))
+            {
+                list.Remove(words[i]);
+                words = list.ToArray();
+            }
+            if (IsAFrequencyAdverb(words[i]) || IsAMannerAdverbs(words[i]) || IsAPlaceAdverbs(words[i]) || IsATimeAdverb(words[i]))
             {
                 list.Remove(words[i]);
                 words = list.ToArray();
