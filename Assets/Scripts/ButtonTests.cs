@@ -1,21 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "teacher", "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
-    static List<string> base_verbs = new List<string> { "respond", "answer", "go", "explain", "write", "cook", "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "responding", "answering", "going", "explaining", "writing", "cooking", "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
-    static List<string> past_participle = new List<string> { "responded", "answered", "went ","explained", "written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" };
+    static List<string> base_verbs = new List<string> { "do", "work", "respond", "answer", "go", "explain", "write", "cook", "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "does", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> ing_verbs = new List<string> { "doing","working", "responding", "answering", "going", "explaining", "writing", "cooking", "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> past_participle = new List<string> { "did","worked", "responded", "answered", "went ","explained", "written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
 
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "late", "happy", "sunny", "cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
     static List<string> common_nouns = new List<string> { "student", "friend","teacher", "thing","pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
+    static List<string> plural_nouns = new List<string> { "emails", "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
                                                             "cars", "guys", "books", "dogs", "cats", "apples", "assignments",
                                                             "days", "pizzas", "guitars", "letters", "gardens", "boys",
                                                             "sandwiches", "problems", "meetings", "tables", "sugars", "houses",
@@ -49,7 +50,7 @@ public class ButtonTests : MonoBehaviour
     static List<string> frequencyAdverbs = new List<string> { "always", "usually", "often", "sometimes", "rarely", "never", "regularly", "occasionally" };
     static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight", "at night", "today", "currently", "immediately" };
     static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby", "around", "inside", "outside" };
-    static List<string> mannerAdverbs = new List<string> { "really", "quickly", "slowly", "carefully", "happily", "sadly", "skillfully", "neatly", "badly" };
+    static List<string> mannerAdverbs = new List<string> { "exactly", "really", "quickly", "slowly", "carefully", "happily", "sadly", "skillfully", "neatly", "badly" };
     
     static List<string> otherAdverbs = new List<string> { "almost", "definitely", "surely", "quite", "probably" };
 
@@ -74,7 +75,13 @@ public class ButtonTests : MonoBehaviour
 
     public static bool IsAQuestion(string[] words)
     {
+        // la lunghezza dell'array che puoi accettare è uguale alla profondità massima dell'albero (guarda la posizione) - vedi alla fine
+        // vedi se fare il check prima o dopo la normalizzazione
         words = Normalization(words);
+        if (IsAQuestionWords(words[0]))
+        {
+            words = words.Where((value, index) => index != 0 && index != 0).ToArray();
+        }
         if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
         {
             if (The(words[3]) || A(words[3])) // The | a
@@ -217,9 +224,12 @@ public class ButtonTests : MonoBehaviour
                 if(!IsFixedLenght(words, 3)){
                     words = RemoveAdverbs(words, 2);
                 }
-                if (!IsFixedLenght(words, 3))
+                if (IsAnIngVerbs(words[2]))
                 {
-                    words = RemoveAdverbs(words, 2);
+                    if (IsAnAdjective(words[3]))
+                    {
+                        return true;
+                    }
                 }
                 if (IsAnAdjective(words[2])) return true;
                 if (IsAPluralSubject(words[2])) return true;
@@ -227,22 +237,18 @@ public class ButtonTests : MonoBehaviour
         }
         if (Is(words[0]) || Isnt(words[0]))
         {
+            words = RemoveAdverbs(words, 1);
             if (IsASingular(words[1]))
             {
                 if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
                 {
                     words = words.Where((value, index) => index != 2).ToArray();
                 }
-                if (!IsFixedLenght(words, 3))
+                words = RemoveAdverbs(words, 2);
+                if (IsATimeAdverb(words[2])) // iIs she immediately responding to emails quickly?
                 {
-                    words = RemoveAdverbs(words, 2);
+                    words = words.Where((value, index) => index != 2).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
                 }
-                if (!IsFixedLenght(words, 3))
-                {
-                    words = RemoveAdverbs(words, 2);
-                }
-                if (IsAnAdjective(words[2])) return true;
-                if (IsACommon(words[2])) return true;
                 if (Not(words[2]))
                 {
                     //words = words.Where((value, index) => index != 2).ToArray(); -- Reminder for refactoring
@@ -261,6 +267,47 @@ public class ButtonTests : MonoBehaviour
                     if (IsAnAdjective(words[3])) return true;
                     if (IsACommon(words[3])) return true;
                 }
+                if (IsAnIngVerbs(words[2]))
+                {
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        words = RemoveAdverbs(words, 3);
+                        if (IsAPreposition(words[3]))
+                        {
+                            if (IsAPlural(words[4]))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                if (IsAnIngVerbs(words[2])) return true; // is she studying?
+                if (IsAnAdjective(words[2])) return true;
+                if (IsACommon(words[2])) return true;
+            }
+            if (IsAnIngVerbs(words[1]))
+            {
+                if (!IsFixedLenght(words, 3))
+                {
+                    words = RemoveAdverbs(words, 2);
+                    if (IsAPlaceAdverbs(words[2])) // out of bound in singular subject 
+                    {
+                        words = words.Where((value, index) => index != 2).ToArray();
+                    }
+                    if (IsATimeAdverb(words[2])) // out of bound in singular subject 
+                    {
+                        words = words.Where((value, index) => index != 2).ToArray();
+                    }
+                    if(!IsFixedLenght(words, 2))
+                    {
+                        if (IsAPreposition(words[2]))
+                        {
+                            if (IsAPlural(words[3])) return true;
+                        }
+                        return true;
+                    }
+                }
+                return true;
             }
         }
         return false;
@@ -308,13 +355,16 @@ public class ButtonTests : MonoBehaviour
                 if (IsFixedLenght(words, 3)) return true;
                 if (IsAPlural(words[3])) return true; // eating sandwiches
                 words = RemoveAdverbs(words, 3);
-                if (A(words[3]) || The(words[3]) || IsAPreposition(words[3])) // eating a/the sandwich
+                if(!IsFixedLenght(words, 3))
                 {
-                    if (IsACommon(words[4])) return true;
+                    if (A(words[3]) || The(words[3]) || IsAPreposition(words[3])) // eating a/the sandwich
+                    {
+                        if (IsACommon(words[4])) return true;
+                    }
+                    if (IsACommon(words[3])) return true;
+                    if (IsPastParticiple(words[3])) return true;
+                    if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
-                if (IsACommon(words[3])) return true;
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAPrasphalVerb(words[3], words[4])) return true;
             }
             if (Not(words[2]))
             {
@@ -334,7 +384,10 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAnAdjective(words[2])) return true;
             if (IsPastParticiple(words[2])) return true;
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
+            if(!IsFixedLenght(words, 3))
+            {
+                if (IsAPrasphalVerb(words[2], words[3])) return true;
+            }
         }
         
         if (Hasnt(words[1]))
@@ -1954,9 +2007,14 @@ public class ButtonTests : MonoBehaviour
     }
     public static string[] Normalization(string[] words) // se clicchi sulla parola, la aggiungi all'array e poi vedi se la frase è corretta
     {
+        List<string> list = new List<string>(words);
         for (int i = 0; i < words.Length; i++)
         {
             words[i] = words[i].ToLower();
+            if (words[words.Length - 1].Contains("?"))
+            {
+                words[words.Length - 1].TrimEnd('?');
+            }
             //if (i != 0 && (The(words[i]) || A(words[i]) || An(words[i])))
             //{
             //    List<string> list = new List<string>(words);
@@ -1964,8 +2022,12 @@ public class ButtonTests : MonoBehaviour
             //    list.Insert(i, "");
             //    words = list.ToArray(); // remove middle the || a || an
             //}
+            if (words[i].Equals("so"))
+            {
+                list.Remove(words[i]);
+                words = list.ToArray();
+            }
         }
-
         if (There(words[0]) && Are(words[1]) && Not(words[2]))
         {
             words = words.Skip(3).ToArray();
@@ -2001,9 +2063,6 @@ public class ButtonTests : MonoBehaviour
             words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
         }
         if (IsATimeAdverb(words[words.Length - 1])) // avverbio di tempo alla fine
-        {
-            words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
-        }
         if (IsATimeAdverb(words[0])) // avverbio di tempo all'inizio
         {
             words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
@@ -2096,7 +2155,7 @@ public class ButtonTests : MonoBehaviour
             "Don't you regularly go to the gym at night?",
             "Doesn't she occasionally travel there?",
 
-            // ARE IS
+            // ARE IS - present simple
             "Are you really happy today?", 
             "Are they students?", 
             "Are we late?", 
@@ -2132,38 +2191,82 @@ public class ButtonTests : MonoBehaviour
             "Is the book not on the table?",
             "Is she not a friend?",
 
+            // present continuous
+            "Is she always studying carefully now?",
+            "Is she immediately responding to emails quickly?",
+            "Is he often playing soccer nearby?",
+            "Is she never cooking skillfully at night?",
+            "Is he occasionally reading a book outside?",
 
+            "Are they usually working late tonight slowly?",
+            "Aren't they usually working late tonight slowly?",
+            //"Are we usually meeting here later?",
+            //"Are you usually practicing piano inside?",
+            //"Are they usually discussing the project carefully?",
 
-        //"Are you completely happy here now?",
-        //"Are they really good at soccer?",
+            "Is the teacher rarely explaining things slowly today?",
+            //"Is not the teacher rarely explaining things slowly today?", // IS NOT THEY____ INNATURALE
+            "Isn't the teacher rarely explaining things slowly today?",
 
-        //"Is she currently a teacher here?",
-        //"Is she actually a teacher here?",
+            // with question words -
+            "Why do you really like pizza here so much?", // Aggiunto "so much" per rafforzare il modo
+            "Why don't you really like pizza here so much?", // Aggiunto "so much" per rafforzare il modo
+            
+            "Why does the student really study carefully today?", // Naturalmente contiene già 3 avverbi
+            "Why doesn't the student really study carefully today?", // Naturalmente contiene già 3 avverbi
+            
+            "Why does she often like pizza so much here?", // Aggiunto "so much" per enfatizzare
+            "Why doesn't she often like pizza so much here?", // Aggiunto "so much" per enfatizzare
+            
+            "Why does he sometimes write emails so quickly inside?", // Aggiunto "inside" come luogo
+            "Why doesn't he sometimes write emails so quickly inside?", // Aggiunto "inside" come luogo
+            
+            "When do you always study so carefully?", // Aggiunto "so" per rendere la frase più enfatica
+            "When don't you always study so carefully?", // Aggiunto "so" per rendere la frase più enfatica
+            
+            "When don't you always study so carefully here?", // Aggiunto "here" per completare i 3 avverbi
+            "When do you always study so carefully here?", // Aggiunto "here" per completare i 3 avverbi
+            
+            "When does she exactly study?",
+            "When doesn't she exactly study?",
 
-        //"What do you usually do every morning?",
-        //"What do you specifically do every morning?",
-        //"What does she regularly do every morning?",
-        //"What does she sometimes do every morning?",
+            "How does John really study so carefully every day?", // Aggiunto "every day" per migliorare
+            "How doesn't John really study so carefully every day?", // Aggiunto "every day" per migliorare
+            
+            "How does John immediately respond to messages neatly?",
+            "How doesn't John immediately respond to messages neatly?",
 
-        //"Where does he exactly live?",
-        //"Where does he live nearby?",
-        //"Where do they possibly live?",
-        //"Where do they live around here?",
+            "How do they often visit their grandparents nearby regularly?", // Aggiunto "regularly"
+            "How don't they often visit their grandparents nearby regularly?", // Aggiunto "regularly"
+            
+            "How do you always study carefully?",
+            "How don't you always study carefully?",
+            
+            "Where doesn't she usually cook so skillfully nowadays?", // Aggiunto "nowadays" per riferirsi al tempo
+            "Where does she usually cook so skillfully nowadays?", // Aggiunto "nowadays" per riferirsi al tempo
+            
+            "Where does she occasionally travel there?",
+            "Where doesn't she occasionally travel there?",
 
-        //"Why do they run really so fast?",
-        //"Why do they perhaps run so fast?",
-        //"Why does she run exceptionally so fast?",
-        //"Why does she usually run so fast?",
+            "Who is regularly studying so carefully here?", // Uso di 'Who' per identificare chi svolge l'azione
+            "Who isn't regularly studying so carefully here?", // Uso di 'Who' per identificare chi svolge l'azione
+            "Who is always writing so quickly here today?", // Tre avverbi ben distribuiti (frequenza, modo, luogo/tempo)
+            "Who isn't always writing so quickly here today?", // Tre avverbi ben distribuiti (frequenza, modo, luogo/tempo)
 
-        //"When does she exactly study?",
-        //"When does she regularly study?",
-        //"When do you usually study?",
-        //"When do you exactly study?",
+            "What is she really doing so carefully now?", // Uso di 'What' per chiedere cosa sta facendo
+            "What isn't she really doing so carefully now?", // Uso di 'What' per chiedere cosa sta facendo
+            
+            "What do they usually enjoy so skillfully at night?", // Aggiunto "skillfully" e "at night" per i tre avverbi
+            "What don't they usually enjoy so skillfully at night?", // Aggiunto "skillfully" e "at night" per i tre avverbi
+            
+            "What do you usually do every morning?",
+            "What don't you usually do every morning?",
 
-        //"How do you carefully make this cake?",
-        //"How do you exactly make this cake?",
-        //"How does she skillfully make this cake?",
-        //"How does she possibly make this cake?"
+            "Why do they run really so fast?",
+            "Why don't they run really so fast?",
+            
+            "Why is she always studying so carefully now?", // Frase già corretta e fluida
+            "Why isn't she always studying so carefully now?", // Frase già corretta e fluida
 
         // old ones
         //"Do you like pizza here?",
@@ -3064,6 +3167,7 @@ public class ButtonTests : MonoBehaviour
     private static bool IsAProperNoun(string word) => proper_nouns.Contains(word);
     private static bool IsPastParticiple(string word) => past_participle.Contains(word);
     private static bool IsAModal(string word) => modal_verbs.Contains(word);
+    private static bool IsAQuestionWords(string word) => question_words.Contains(word);
     private static bool IsAPrasphalVerb(string word1, string word2) => phrasalVerbs.Contains(word1+" "+word2);
     private static bool The(string word) { return word.ToLower().Equals("the"); }
     private static bool GoingTo(string word1, string word2) 
@@ -3111,6 +3215,4 @@ public class ButtonTests : MonoBehaviour
     private static bool Hadnt(string word) { return word.ToLower().Equals("hadn't"); }
     private static bool Wont(string word) { return word.ToLower().Equals("won't"); }
     private static bool Will(string word) { return word.ToLower().Equals("will"); }
-
-
 }
