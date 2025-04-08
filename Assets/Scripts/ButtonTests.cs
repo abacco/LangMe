@@ -12,10 +12,10 @@ public class ButtonTests : MonoBehaviour
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
 
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
-    static List<string> adjectives = new List<string> { "sunny","cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
+    static List<string> adjectives = new List<string> { "late", "happy", "sunny", "cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "teacher", "thing","pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
+    static List<string> common_nouns = new List<string> { "student", "friend","teacher", "thing","pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
                                                             "cars", "guys", "books", "dogs", "cats", "apples", "assignments",
                                                             "days", "pizzas", "guitars", "letters", "gardens", "boys",
                                                             "sandwiches", "problems", "meetings", "tables", "sugars", "houses",
@@ -207,6 +207,59 @@ public class ButtonTests : MonoBehaviour
                         }
                         return true;
                     }
+                }
+            }
+        }
+        if (Are(words[0]) || Arent(words[0]))
+        {
+            if (IsAPluralSubject(words[1]) || words[1].Equals("you")) 
+            {
+                if(!IsFixedLenght(words, 3)){
+                    words = RemoveAdverbs(words, 2);
+                }
+                if (!IsFixedLenght(words, 3))
+                {
+                    words = RemoveAdverbs(words, 2);
+                }
+                if (IsAnAdjective(words[2])) return true;
+                if (IsAPluralSubject(words[2])) return true;
+            }
+        }
+        if (Is(words[0]) || Isnt(words[0]))
+        {
+            if (IsASingular(words[1]))
+            {
+                if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
+                {
+                    words = words.Where((value, index) => index != 2).ToArray();
+                }
+                if (!IsFixedLenght(words, 3))
+                {
+                    words = RemoveAdverbs(words, 2);
+                }
+                if (!IsFixedLenght(words, 3))
+                {
+                    words = RemoveAdverbs(words, 2);
+                }
+                if (IsAnAdjective(words[2])) return true;
+                if (IsACommon(words[2])) return true;
+                if (Not(words[2]))
+                {
+                    //words = words.Where((value, index) => index != 2).ToArray(); -- Reminder for refactoring
+                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+                    {
+                        words = words.Where((value, index) => index != 3).ToArray();
+                    }
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        words = RemoveAdverbs(words, 3);
+                    }
+                    if (!IsFixedLenght(words, 4))
+                    {
+                        words = RemoveAdverbs(words, 3);
+                    }
+                    if (IsAnAdjective(words[3])) return true;
+                    if (IsACommon(words[3])) return true;
                 }
             }
         }
@@ -2044,93 +2097,121 @@ public class ButtonTests : MonoBehaviour
             "Doesn't she occasionally travel there?",
 
             // ARE IS
-            "Are you happy?", // are you adj
-            "Are they students?", // are you plural_nouns
+            "Are you really happy today?", 
+            "Are they students?", 
             "Are we late?", 
-            "Are the dogs outside?", // are subject placeAdverb
-            "Are they really good at soccer?",
+            "Are the dogs outside?", 
             "Are the books on the table?", 
-            "Are you sure about this?",
-            "Are the lights on?",
             "Are they friends?",
 
-            //"Are you completely happy here now?",
+            "Aren't you really happy today?",
+            "Aren't they students?",
+            "Aren't we late?",
+            "Aren't the dogs outside?",
+            "Aren't the books on the table?",
+            "Aren't they friends?", // ARE NOT THEY____ INNATURALE
 
-            //"Is she currently a teacher here?",
-            //"Is she actually a teacher here?",
+            "Is she really happy today?", 
+            "Is she a student?",          
+            "Is it late?",                   
+            "Is the dog outside?",           
+            "Is the book on the table?",     
+            "Is she a friend?",
 
-            //"What do you usually do every morning?",
-            //"What do you specifically do every morning?",
-            //"What does she regularly do every morning?",
-            //"What does she sometimes do every morning?",
+            "Isn't she really happy today?",
+            "Isn't she a student?",
+            "Isn't it late?",
+            "Isn't the dog outside?",
+            "Isn't the book on the table?",
+            "Isn't she a friend?",
 
-            //"Where does he exactly live?",
-            //"Where does he live nearby?",
-            //"Where do they possibly live?",
-            //"Where do they live around here?",
+            "Is she not really happy today?",
+            "Is she not a student?",
+            "Is it not late?",
+            "Is the dog not outside?",
+            "Is the book not on the table?",
+            "Is she not a friend?",
 
-            //"Why do they run really so fast?",
-            //"Why do they perhaps run so fast?",
-            //"Why does she run exceptionally so fast?",
-            //"Why does she usually run so fast?",
 
-            //"When does she exactly study?",
-            //"When does she regularly study?",
-            //"When do you usually study?",
-            //"When do you exactly study?",
 
-            //"How do you carefully make this cake?",
-            //"How do you exactly make this cake?",
-            //"How does she skillfully make this cake?",
-            //"How does she possibly make this cake?"
-            
-            // old ones
-            //"Do you like pizza here?",
-            //"Does she like pizza here?",
-            //"Are you happy here?",
-            //"Is she a teacher here?",
-            
-            //"What do you do every morning?",
-            //"What does she do every morning?",
+        //"Are you completely happy here now?",
+        //"Are they really good at soccer?",
 
-            //"Where does he live?",
-            //"Where do they live?",
+        //"Is she currently a teacher here?",
+        //"Is she actually a teacher here?",
 
-            //"Why do they run so fast?",
-            //"Why does she run so fast?",
+        //"What do you usually do every morning?",
+        //"What do you specifically do every morning?",
+        //"What does she regularly do every morning?",
+        //"What does she sometimes do every morning?",
 
-            //"When does she study?",
-            //"When do you study?",
+        //"Where does he exactly live?",
+        //"Where does he live nearby?",
+        //"Where do they possibly live?",
+        //"Where do they live around here?",
 
-            //"How do you make this cake?",
-            //"How does she make this cake?",
+        //"Why do they run really so fast?",
+        //"Why do they perhaps run so fast?",
+        //"Why does she run exceptionally so fast?",
+        //"Why does she usually run so fast?",
 
-            //"Does she play tennis?",
-            //"Do they go to school every day?",
-            //"Does he work here?",
-            //"Do we need more time?",
-            //"Are you happy?",
-            //"Is she a teacher?",
-            //"Are they at home?",
-            //"Is he your friend?",
-            //"Are we late?",
-            //"What do you do every morning?",
-            //"Where does he live?",
-            //"Why do they run so fast?",
-            //"When does she study?",
-            //"How do you make this cake?"
+        //"When does she exactly study?",
+        //"When does she regularly study?",
+        //"When do you usually study?",
+        //"When do you exactly study?",
 
-            //present_continuous_questions
-            //present_perfect_questions
-            //present_perfect_continuous_questions
-            //past_simple_questions
-            //past_continuous_questions
-            //past_perfect_questions
-            //past_perfect_continuous_questions
-            //future_simple_questions
-            //future_continuous_questions
-            //future_perfect_questions
-            //future_perfect_continuous_questions
+        //"How do you carefully make this cake?",
+        //"How do you exactly make this cake?",
+        //"How does she skillfully make this cake?",
+        //"How does she possibly make this cake?"
+
+        // old ones
+        //"Do you like pizza here?",
+        //"Does she like pizza here?",
+        //"Are you happy here?",
+        //"Is she a teacher here?",
+
+        //"What do you do every morning?",
+        //"What does she do every morning?",
+
+        //"Where does he live?",
+        //"Where do they live?",
+
+        //"Why do they run so fast?",
+        //"Why does she run so fast?",
+
+        //"When does she study?",
+        //"When do you study?",
+
+        //"How do you make this cake?",
+        //"How does she make this cake?",
+
+        //"Does she play tennis?",
+        //"Do they go to school every day?",
+        //"Does he work here?",
+        //"Do we need more time?",
+        //"Are you happy?",
+        //"Is she a teacher?",
+        //"Are they at home?",
+        //"Is he your friend?",
+        //"Are we late?",
+        //"What do you do every morning?",
+        //"Where does he live?",
+        //"Why do they run so fast?",
+        //"When does she study?",
+        //"How do you make this cake?"
+
+        //present_continuous_questions
+        //present_perfect_questions
+        //present_perfect_continuous_questions
+        //past_simple_questions
+        //past_continuous_questions
+        //past_perfect_questions
+        //past_perfect_continuous_questions
+        //future_simple_questions
+        //future_continuous_questions
+        //future_perfect_questions
+        //future_perfect_continuous_questions
     };
         
         // ok everything fine with sentences (aff/neg)
