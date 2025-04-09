@@ -1,18 +1,16 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
+
 
 public class ButtonTests : MonoBehaviour
 {
-    static List<string> singular_subject = new List<string> { "teacher", "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
+    static List<string> singular_subject = new List<string> { "message", "gym", "morning", "teacher", "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
     static List<string> base_verbs = new List<string> { "visit", "need", "make", "live", "do", "work", "respond", "answer", "go", "explain", "write", "cook", "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "visits", "needs","makes", "lives", "does", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> base_verbs_3rd_person = new List<string> { "visits", "needs","makes", "lives", /*"does", */"works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
     static List<string> ing_verbs = new List<string> { "visiting", "needing", "making", "living", "doing", "working", "responding", "answering", "going", "explaining", "writing", "cooking", "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> {
-        "visited", "eaten",
+                                                                                "visited", "eaten",
                                                                                 "studied",
                                                                                 "run",
                                                                                 "done",
@@ -26,8 +24,8 @@ public class ButtonTests : MonoBehaviour
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
     static List<string> adjectives = new List<string> { "late", "happy", "sunny", "cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
 
-    static List<string> common_nouns = new List<string> { "time", "cake", "student", "friend","teacher", "thing","pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
-    static List<string> plural_nouns = new List<string> { "times", "cakes","emails", "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
+    static List<string> common_nouns = new List<string> { "tennis", "school", "message", "gym", "morning", "night", "time", "cake", "student", "friend","teacher", "thing","pizza", "basketball", "football", "soccer","apple", "assignment", "student","beef", "dog", "task", "garden", "day","time", "grandparent", "home", "pizza", "guitar", "letter", "garden", "girl", "boy", "sandwich", "problem", "meeting", "table", "sugar", "house", "jacket", "fight", "lamp","child", "coffee", "table", "bike", "apple", "book", "table", "house", "computer", "dog", "city", "car", "game", "east", "west", "north", "south", "answer", "miracle" };
+    static List<string> plural_nouns = new List<string> { "schools","messages", "gyms", "mornings","times", "cakes","emails", "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
                                                             "cars", "guys", "books", "dogs", "cats", "apples", "assignments",
                                                             "days", "pizzas", "guitars", "letters", "gardens", "boys",
                                                             "sandwiches", "problems", "meetings", "tables", "sugars", "houses",
@@ -59,7 +57,7 @@ public class ButtonTests : MonoBehaviour
     };
 
     static List<string> frequencyAdverbs = new List<string> { "always", "usually", "often", "sometimes", "rarely", "never", "regularly", "occasionally" };
-    static List<string> timeAdverbs = new List<string> { "now", "later", "soon", "tomorrow", "yesterday", "tonight", "at night", "today", "currently", "immediately" };
+    static List<string> timeAdverbs = new List<string> { "nowadays", "now", "later", "soon", "tomorrow", "yesterday", "tonight", "today", "currently", "immediately" };
     static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby", "around", "inside", "outside" };
     static List<string> mannerAdverbs = new List<string> { "exactly", "really", "quickly", "slowly", "carefully", "happily", "sadly", "skillfully", "neatly", "badly" };
     
@@ -86,11 +84,15 @@ public class ButtonTests : MonoBehaviour
 
     public static bool IsAQuestion(string[] words)
     {
-        // LEGGI AO
+        // LEGGI AO - SHOW WARNING -> SENTENCE SHOULD END WITH AN ADVERB
         // la lunghezza dell'array che puoi accettare è uguale alla profondità massima dell'albero (guarda la posizione) - vedi alla fine
         // vedi se fare il check prima o dopo la normalizzazione
         // SULLE FOGLIE L'ACCESSO AGLI ULTIMI NODI LO DEVI FARE SEMPRE CON words.lenght-1 e non con le posizioni fisse per smaltire <--- REFACTORRR!!!
         words = Normalization(words);
+        if (IsFixedLenght(words, 1))
+        {
+            if (words[0].Equals("error-1")) return false;
+        }
         if (IsAQuestionWords(words[0]))
         {
             words = words.Where((value, index) => index != 0 && index != 0).ToArray();
@@ -116,7 +118,7 @@ public class ButtonTests : MonoBehaviour
             }
         }
         
-        if (Do(words[0]) || Dont(words[0]))
+        if (Do(words[0]) || Dont(words[0]) || Did(words[0]) || Didnt(words[0]))
         {
             if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
             {
@@ -126,7 +128,9 @@ public class ButtonTests : MonoBehaviour
                     words = RemoveAdverbs(words, 2);
                     if (IsABaseVerb(words[2]))
                     {
-                        if (IsACommon(words[3])) return true;
+                        if (IsACommon(words[3])) { return true; }
+                        else if (IsAPlural(words[3])) { return true; }
+                        else { return false; }
                     }
                 }
             }
@@ -135,13 +139,23 @@ public class ButtonTests : MonoBehaviour
                 words = RemoveAdverbs(words, 2);
                 if (IsABaseVerb(words[2]))
                 {
-                    if(!IsFixedLenght(words, 3))
+                    words = RemoveAdverbs(words, 3);
+                    if (!IsFixedLenght(words, 3))
                     {
-                        if (IsACommon(words[3])) return true;
-                        if (This(words[3]) || That(words[3]))
+                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
                         {
-                            if (IsACommon(words[4])) return true;
+                            words = words.Where((value, index) => index != 3).ToArray();
                         }
+                        if (IsACommon(words[3])) { return true; }
+                        else if (IsAPlural(words[3])) { return true; }
+                        else { return false; }
+
+                        //if (This(words[3]) || That(words[3])) DO NOT DELETE!!
+                        //{
+                        //    if (IsACommon(words[4])) { return true; }
+                        //    else if (IsAPlural(words[4])) { return true; }
+                        //    else { return false; }
+                        //}
                     }
                     return true;
                 }
@@ -174,7 +188,7 @@ public class ButtonTests : MonoBehaviour
                 }
             }
         }
-        if (Does(words[0]) || Doesnt(words[0]))
+        if (Does(words[0]) || Doesnt(words[0]) || Did(words[0]) || Didnt(words[0]))
         {
             if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
             {
@@ -198,7 +212,9 @@ public class ButtonTests : MonoBehaviour
                             {
                                 words = words.Where((value, index) => index != 3).ToArray();
                             }
-                            if (IsACommon(words[3])) return true;
+                            if (IsACommon(words[3])) { return true; }
+                            else if (IsAPlural(words[3])) { return true; }
+                            else { return false; }
                         }
                     }
                     return true;
@@ -228,7 +244,9 @@ public class ButtonTests : MonoBehaviour
                                 {
                                     words = words.Where((value, index) => index != 4).ToArray();
                                 }
-                                if (IsACommon(words[4])) return true;
+                                if (IsACommon(words[4])) { return true; }
+                                else if (IsAPlural(words[4])) { return true; }
+                                else { return false; }
                             }
                         }
                         return true;
@@ -237,8 +255,12 @@ public class ButtonTests : MonoBehaviour
             }
         }
         
-        if (Are(words[0]) || Arent(words[0]))
+        if (Are(words[0]) || Arent(words[0]) || Were(words[0]) || Werent(words[0]))
         {
+            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+            {
+                words = words.Where((value, index) => index != 1).ToArray();
+            }
             if (IsAPluralSubject(words[1]) || words[1].Equals("you")) 
             {
                 if(!IsFixedLenght(words, 3)){
@@ -246,8 +268,28 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAnIngVerbs(words[2]))
                 {
+                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+                    {
+                        words = words.Where((value, index) => index != 3).ToArray();
+                    }
                     if (IsAnAdjective(words[3]))
                     {
+                        if (IsACommon(words[4])) 
+                        {
+                            if (IsAPlaceAdverbs(words[words.Length - 1]))
+                            {
+                                words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                            }
+                            return true;
+                        }
+                        return true;
+                    }
+                    if (IsACommon(words[3]))
+                    {
+                        if (IsAPlaceAdverbs(words[words.Length - 1]))
+                        {
+                            words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                        }
                         return true;
                     }
                 }
@@ -255,13 +297,19 @@ public class ButtonTests : MonoBehaviour
                 if (IsAPluralSubject(words[2])) return true;
                 if (IsAPreposition(words[2]))
                 {
-                    if (IsACommon(words[3])) return true;
+                    if (IsACommon(words[3])) { return true; }
+                    else if (IsAPlural(words[3])) { return true; }
+                    else { return false; }
                 }
             }
         }
-        if (Is(words[0]) || Isnt(words[0]))
+        if (Is(words[0]) || Isnt(words[0])   || Was(words[0]) || Wasnt(words[0]))
         {
             words = RemoveAdverbs(words, 1);
+            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+            {
+                words = words.Where((value, index) => index != 1).ToArray();
+            }
             if (IsASingular(words[1]))
             {
                 if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
@@ -289,7 +337,9 @@ public class ButtonTests : MonoBehaviour
                         words = RemoveAdverbs(words, 3);
                     }
                     if (IsAnAdjective(words[3])) return true;
-                    if (IsACommon(words[3])) return true;
+                    if (IsACommon(words[3])) { return true; }
+                    else if (IsAPlural(words[3])) { return true; }
+                    else { return false; }
                 }
                 if (IsAnIngVerbs(words[2]))
                 {
@@ -298,16 +348,17 @@ public class ButtonTests : MonoBehaviour
                         words = RemoveAdverbs(words, 3);
                         if (IsAPreposition(words[3]))
                         {
-                            if (IsAPlural(words[4]))
-                            {
-                                return true;
-                            }
+                            if (IsACommon(words[4])) { return true; }
+                            else if (IsAPlural(words[4])) { return true; }
+                            else { return false; }
                         }
                     }
                 }
                 if (IsAnIngVerbs(words[2])) return true; // is she studying?
                 if (IsAnAdjective(words[2])) return true;
-                if (IsACommon(words[2])) return true;
+                if (IsACommon(words[2])) { return true; }
+                else if (IsAPlural(words[2])) { return true; }
+                else { return false; }
             }
             if (IsAnIngVerbs(words[1]))
             {
@@ -328,10 +379,11 @@ public class ButtonTests : MonoBehaviour
                         {
                             if (IsAPreposition(words[2]))
                             {
-                                if (IsAPlural(words[3])) return true;
+                                if (IsACommon(words[3])) { return true; }
+                                else if (IsAPlural(words[3])) { return true; }
+                                else { return false; }
                             }
                         }
-                        
                         return true;
                     }
                 }
@@ -339,7 +391,7 @@ public class ButtonTests : MonoBehaviour
             }
         }
 
-        if (Have(words[0]) || Havent(words[0]))
+        if (Have(words[0]) || Havent(words[0]) || Had(words[0]) || Hadnt(words[0]))
         {
             if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
             {
@@ -364,11 +416,28 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (!IsFixedLenght(words, 3))
                     {
-                        if (IsACommon(words[3])) return true;
-                        if (This(words[3]) || That(words[3]))
+                        // the , a, an QUI BRO
+                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
                         {
-                            if (IsACommon(words[4])) return true;
+                            words = words.Where((value, index) => index != 3).ToArray();
                         }
+                        words = RemoveAdverbs(words, words.Length);
+                        if (!IsFixedLenght(words, 3))
+                        {
+                            if (IsACommon(words[3])) { return true; }
+                            else if (IsAPlural(words[3])) { return true; }
+                            else { return false; }
+                        }
+                        //if (This(words[3]) || That(words[3])) DO NOT DELETE!!!!!!!!!!!!!!!!!!
+                        //{
+                        //    if (IsACommon(words[4])) { return true; }
+                        //    else { return false; }
+                        //}
+                        //if (Those(words[3]))
+                        //{
+                        //    if (IsACommon(words[4])) { return true; }
+                        //    else { return false; }
+                        //}
                     }
                     return true;
                 }
@@ -376,7 +445,9 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = RemoveAdverbs(words, 2);
                     if (!IsFixedLenght(words, 3)) {
-                        if (IsACommon(words[3])) return true;
+                        if (IsACommon(words[3])) { return true; }
+                        else if (IsAPlural(words[3])) { return true; }
+                        else { return false; }
                     } 
                 }
                 if (Been(words[2]))
@@ -394,7 +465,9 @@ public class ButtonTests : MonoBehaviour
                                     {
                                         words = words.Where((value, index) => index != words.Length - 1).ToArray();
                                     }
-                                    if (IsACommon(words[words.Length - 1])) return true;
+                                    if (IsACommon(words[words.Length - 1])) { return true; }
+                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
+                                    else { return false; }
                                 }
                                 return true;
                             }
@@ -406,7 +479,9 @@ public class ButtonTests : MonoBehaviour
                                     {
                                         words = words.Where((value, index) => index != words.Length - 1).ToArray();
                                     }
-                                    if (IsACommon(words[words.Length - 1])) return true;
+                                    if (IsACommon(words[words.Length - 1])) { return true; }
+                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
+                                    else { return false; }
                                 }
                                 return true;
                             }
@@ -425,8 +500,11 @@ public class ButtonTests : MonoBehaviour
                         words = RemoveAdverbs(words, 3);
                         if (IsPastParticiple(words[3]))
                         {
-                            if (IsACommon(words[4])) return true;
+                            if (IsACommon(words[4])) { return true; }
+                            else if (IsAPlural(words[4])) { return true; }
+                            else { return false; }
                         }
+                        return true;
                     }
                     if (Been(words[2]))
                     {
@@ -443,7 +521,9 @@ public class ButtonTests : MonoBehaviour
                                         {
                                             words = words.Where((value, index) => index != words.Length - 1).ToArray();
                                         }
-                                        if (IsACommon(words[words.Length - 1])) return true;
+                                        if (IsACommon(words[words.Length - 1])) { return true; }
+                                        else if (IsAPlural(words[words.Length - 1])) { return true; }
+                                        else { return false; }
                                     }
                                     return true;
                                 }
@@ -455,7 +535,9 @@ public class ButtonTests : MonoBehaviour
                                         {
                                             words = words.Where((value, index) => index != words.Length - 1).ToArray();
                                         }
-                                        if (IsACommon(words[words.Length - 1])) return true;
+                                        if (IsACommon(words[words.Length - 1])) { return true; }
+                                        else if (IsAPlural(words[words.Length - 1])) { return true; }
+                                        else { return false; }
                                     }
                                     return true;
                                 }
@@ -470,14 +552,16 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (!IsFixedLenght(words, 4))
                         {
-                            if (IsACommon(words[4])) return true;
+                            if (IsACommon(words[4])) { return true; }
+                            else if (IsAPlural(words[4])) { return true; }
+                            else { return false; }
                         }
                         return true;
                     }
                 }
             }
         }
-        if (Has(words[0]) || Hasnt(words[0]))
+        if (Has(words[0]) || Hasnt(words[0]) || Had(words[0]) || Hadnt(words[0]))
         {
             words = RemoveAdverbs(words, 1);
             if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
@@ -502,7 +586,9 @@ public class ButtonTests : MonoBehaviour
                             {
                                 words = words.Where((value, index) => index != 3).ToArray();
                             }
-                            if (IsACommon(words[3])) return true;
+                            if (IsACommon(words[3])) { return true; }
+                            else if (IsAPlural(words[3])) { return true; }
+                            else { return false; }
                         }
                     }
                     return true;
@@ -522,7 +608,9 @@ public class ButtonTests : MonoBehaviour
                                     {
                                         words = words.Where((value, index) => index != words.Length - 1).ToArray();
                                     }
-                                    if (IsACommon(words[words.Length - 1])) return true;
+                                    if (IsACommon(words[words.Length - 1])) { return true; }
+                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
+                                    else { return false; }
                                 }
                                 return true;
                             }
@@ -534,7 +622,9 @@ public class ButtonTests : MonoBehaviour
                                     {
                                         words = words.Where((value, index) => index != words.Length - 1).ToArray();
                                     }
-                                    if (IsACommon(words[words.Length - 1])) return true;
+                                    if (IsACommon(words[words.Length - 1])) { return true; }
+                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
+                                    else { return false; }
                                 }
                                 return true;
                             }
@@ -558,7 +648,9 @@ public class ButtonTests : MonoBehaviour
                                 {
                                     words = words.Where((value, index) => index != words.Length - 1).ToArray();
                                 }
-                                if (IsACommon(words[words.Length - 1])) return true;
+                                if (IsACommon(words[words.Length - 1])) { return true; }
+                                else if (IsAPlural(words[words.Length - 1])) { return true; }
+                                else { return false; }
                             }
                             return true;
                         }
@@ -570,7 +662,9 @@ public class ButtonTests : MonoBehaviour
                                 {
                                     words = words.Where((value, index) => index != words.Length - 1).ToArray();
                                 }
-                                if (IsACommon(words[words.Length - 1])) return true;
+                                if (IsACommon(words[words.Length - 1])) { return true; }
+                                else if (IsAPlural(words[words.Length - 1])) { return true; }
+                                else { return false; }
                             }
                             return true;
                         }
@@ -594,7 +688,9 @@ public class ButtonTests : MonoBehaviour
                                 {
                                     words = words.Where((value, index) => index != 2).ToArray();
                                 }
-                                if (IsACommon(words[2])) return true;
+                                if (IsACommon(words[2])) { return true; }
+                                else if (IsAPlural(words[2])) { return true; }
+                                else { return false; }
                             }
                         }
                         return true;
@@ -611,7 +707,9 @@ public class ButtonTests : MonoBehaviour
                             {
                                 words = words.Where((value, index) => index != 3).ToArray();
                             }
-                            if (IsACommon(words[3])) return true;
+                            if (IsACommon(words[3])) { return true; }
+                            else if (IsAPlural(words[3])) { return true; }
+                            else { return false; }
                         }
                     }
                     return true;
@@ -631,8 +729,9 @@ public class ButtonTests : MonoBehaviour
                             {
                                 words = words.Where((value, index) => index != 1).ToArray();
                             }
-                            if (IsACommon(words[1])) return true;
-                            return true;
+                            if (IsACommon(words[1])) { return true; }
+                            else if (IsAPlural(words[1])) { return true; }
+                            else { return false; }
                         }
                     }
                 }
@@ -663,7 +762,9 @@ public class ButtonTests : MonoBehaviour
                                 {
                                     words = words.Where((value, index) => index != 4).ToArray();
                                 }
-                                if (IsACommon(words[4])) return true;
+                                if (IsACommon(words[4])) { return true; }
+                                else if (IsAPlural(words[4])) { return true; }
+                                else { return false; }
                             }
                         }
                         return true;
@@ -693,7 +794,11 @@ public class ButtonTests : MonoBehaviour
         }
         
         bool subjectRecognized = IsASingular(words[0]) || IsAProperNoun(words[0]);
-        if (IsFixedLenght(words, 1)) return true; // There is a dog here -> becomes dog
+        if (IsFixedLenght(words, 1)) {
+            if (words[0].Equals("error-1")) return false;
+            return true; // There is a dog here -> becomes dog
+        }
+        
         if (IsASingular(words[0]))
         {
             if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
@@ -1673,7 +1778,11 @@ public class ButtonTests : MonoBehaviour
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
     {
         words = Normalization(words);
-
+        if (IsFixedLenght(words, 1))
+        {
+            if (words[0].Equals("error-1")) return false;
+            return true; // There is a dog here -> becomes dog
+        }
         if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
 
         if (The(words[0]) || A(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
@@ -2408,6 +2517,14 @@ public class ButtonTests : MonoBehaviour
                 words = words.Where((value, index) => index != position).ToArray();
             }
         }
+        if (IsATimeAdverb(words[words.Length - 1]))
+        {
+            words = words.Where((value, index) => index != words.Length - 1).ToArray();
+        }
+        if (IsAPlaceAdverbs(words[words.Length - 1]))
+        {
+            words = words.Where((value, index) => index != words.Length - 1).ToArray();
+        }
         position++;
         if(position >= words.Length)
         {
@@ -2428,10 +2545,13 @@ public class ButtonTests : MonoBehaviour
     }
     public static string[] Normalization(string[] words) // se clicchi sulla parola, la aggiungi all'array e poi vedi se la frase è corretta
     {
+        words = CheckEachSingleWord(words);
         List<string> list = new List<string>(words);
         for (int i = 0; i < words.Length; i++)
         {
             words[i] = words[i].ToLower();
+            // check su ogni parola, se ogni parola della frase non appartiene a nessuna lista, return "error-1" 
+            
             if (words[words.Length - 1].Contains("?"))
             {
                 words[words.Length - 1].TrimEnd('?');
@@ -2443,6 +2563,12 @@ public class ButtonTests : MonoBehaviour
                 words = list.ToArray();
             }
             if (i < words.Length - 1 && words[i].Equals("so") && (IsAMannerAdverbs(words[i + 1])))
+            {
+                list.Remove(words[i]);
+                list.Remove(words[i + 1]);
+                words = list.ToArray();
+            }
+            if (i < words.Length - 1 && words[i].Equals("so") && (IsAnAdjective(words[i + 1])))
             {
                 list.Remove(words[i]);
                 list.Remove(words[i + 1]);
@@ -2475,11 +2601,17 @@ public class ButtonTests : MonoBehaviour
         { 
             words = words.Skip(2).ToArray(); 
         }
-        if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
-        {
-            words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+        if (!IsFixedLenght(words, 1)) {
+            if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
+            {
+                words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+            }
         }
-        
+        if (words[0].Equals("error-1"))
+        {
+            return words;
+        }
+
         // Phrasal Verbs
         string tmpPhrasalVerb = "";
         string detectedPhrasalVerb = "";
@@ -2512,10 +2644,57 @@ public class ButtonTests : MonoBehaviour
         }
         return words;
     }
+    static string[] CheckEachSingleWord(string[] words)
+    {
+        bool allWordsInvalid = false; // Flag per verificare se tutte le parole sono "non valide"
+        
+        for (int i = 0; i < words.Length; i++)
+        {
+            string word = words[i];
+
+            // Controllo principale che verifica se la parola appartiene a una delle categorie o a quelle specificate
+            if (IsAPlural(word) || IsACommon(word) || IsAPreposition(word) || IsABaseVerb(word) ||
+                IsAnAdjective(word) || IsAnObjectPronouns(word) || IsAPossessivePronouns(word) ||
+                IsAFrequencyAdverb(word) || IsAPlaceAdverbs(word) || IsAMannerAdverbs(word) ||
+                IsAnIngVerbs(word) || IsA3rdPersonVerb(word) || IsATimeAdverb(word) ||
+                IsAPluralSubject(word) || IsASingular(word) || IsAProperNoun(word) ||
+                IsPastParticiple(word) || IsAModal(word) || IsAQuestionWords(word) || The(word) || 
+                word.Equals("so") || word.Equals("much") || word.Equals("more") || word.Equals("tennis") || word.Equals("ever") || word.Equals("those") ||
+                A(word) || An(word) || Do(word) || Not(word) || Are(word) || Am(word) || Have(word) ||
+                Arent(word) || There(word) || Has(word) || Hasnt(word) || Havent(word) || Is(word) ||
+                Isnt(word) || Every(word) || Doesnt(word) || Didnt(word) || Did(word) || Dont(word) ||
+                Does(word) || I(word) || Been(word) || Was(word) || Wasnt(word) || Were(word) ||
+                Werent(word) || Had(word) || Hadnt(word) || Wont(word) || Will(word) || This(word) || That(word) ||
+                (i < words.Length - 1 && IsAPrasphalVerb(word, words[i + 1]))) // Verifica phrasal verbs
+            {
+                allWordsInvalid = true; // Trovata una parola valida, impostiamo il flag su "false"
+            } else
+            {
+                Debug.LogError(word + " NOT RECOGNIZED");
+                return new string[] { "Error-1" };
+            }
+        }
+
+        if (allWordsInvalid)
+        {
+            return words;
+        }
+        else
+        {
+            return new string[] { "Error-1" };
+        }
+    }
+
     private void Start()
     {
         List<string> questions = new List<string>
         {
+                        //"Does John carefully really study today?", // NOT RECOGNIZED OK!!! LOVE IT
+            //"Does she actually like pizza here?", // gestiscili più in là (actually)
+                        //"Are you quite happy here?", (quite)
+            // "Do they currently live somewhere in the city?", // in the city - not handled atm
+
+
             // present_simple_questions
             "Do you really like pizza here?",
             "Do you always like pizza here?",
@@ -2526,12 +2705,11 @@ public class ButtonTests : MonoBehaviour
             "Does John study today?",
             "Does John really study today?",
             "Does John really study carefully today?", // ok grammar but it is more natural "every day"
-            //"Does John carefully really study today?", // NOT RECOGNIZED OK!!! LOVE IT
-            //"Does she actually like pizza here?", // gestiscili più in là (actually)
+
             "Does she often like pizza here?",
             "Does she like pizza?",
             "Does she like pizza often here?", // grammatically correct
-            //"Are you quite happy here?", (quite)
+
             "Do you always study carefully?",
             "Does she usually cook skillfully?",
             "Do they often visit their grandparents nearby?",
@@ -2540,7 +2718,6 @@ public class ButtonTests : MonoBehaviour
             "Does the teacher never explain things slowly?",
             "Do you regularly go to the gym at night?",
             "Does she occasionally travel there?",
-            // "Do they currently live somewhere in the city?", // in the city - not handled atm
 
             "Does John immediately respond to messages neatly?",
             "Doesn't John immediately respond to messages neatly?",
@@ -2566,6 +2743,9 @@ public class ButtonTests : MonoBehaviour
             "Doesn't the teacher ever explain things slowly?", // Per "never", si usa "ever" nella forma negativa
             "Don't you regularly go to the gym at night?",
             "Doesn't she occasionally travel there?",
+
+            "Why Don't you regularly go to the gym at night?",
+            "Why Doesn't she occasionally travel there?",
 
             // ARE IS - present simple
             "Are you really happy today?", 
@@ -2658,7 +2838,10 @@ public class ButtonTests : MonoBehaviour
             "How doesn't John immediately respond to messages neatly?",
 
             "How do they often visit their grandparents nearby regularly?", // Aggiunto "regularly"
-            "How don't they often visit their grandparents nearby regularly?", // Aggiunto "regularly"
+            "How don't they often visit their grandparents nearby regularly?", // Aggiunto "regularly" - NON riconosciuto - Max 1 Adverb
+
+            "How do they often visit their grandparents nearby?", // Aggiunto "regularly"
+            "How don't they often visit their grandparents nearby?", // Aggiunto "regularly" - NON riconosciuto - Max 1 Adverb
             
             "How do you always study carefully?",
             "How don't you always study carefully?",
@@ -2707,7 +2890,8 @@ public class ButtonTests : MonoBehaviour
             "When does she study?",
             "When do you study?",
 
-            "How do you make this cake?",
+            //"How do you make this cake?", THIS THAT ETC...
+            "How do you make things?",
             "How does she make this cake?",
 
             "Does she play tennis?",
@@ -2772,8 +2956,14 @@ public class ButtonTests : MonoBehaviour
             "What has she really done so carefully now?",
             "What hasn't she really done so carefully now?",
 
-            "What have they usually enjoyed so skillfully at night?",
-            "What haven't they usually enjoyed so skillfully at night?",
+            "What have they usually enjoyed so skillfully at night?", // NO *-* motherF!!!
+            "What haven't they usually enjoyed so skillfully at night?", // NO *-* motherF!!!
+
+            "What have they usually enjoyed so skillfully?", // yes motherF!!!
+            "What haven't they usually enjoyed so skillfully?", // yes motherF!!!
+
+            "What have they usually enjoyed at night?", // yes motherF!!!
+            "What haven't they usually enjoyed at night?", // yes motherF!!!
 
             "What have you usually done every morning?",
             "What haven't you usually done every morning?",
@@ -2851,11 +3041,128 @@ public class ButtonTests : MonoBehaviour
             "Why hasn't she always been studying so carefully now?",
 
             "Why has the cat always been eating so carefully now?",
-            "Why hasn't the cat always been eating so carefully now?"
+            "Why hasn't the cat always been eating so carefully now?",
 
-        //past_simple_questions
-        //past_continuous_questions
-        //past_perfect_questions
+            // past_simple_questions
+            "Why Didn't you regularly go to the gym at night?",
+            "Why Did you regularly go to the gym at night?",
+
+            "Why Did she occasionally travel there?",
+            "Why Didn't she occasionally travel there?",
+
+            "Why Did they occasionally travel there?",
+            "Why Didn't they occasionally travel there?",
+
+            "Why Did the cat occasionally eat there?",
+            "Why Didn't the cat occasionally travel there?",
+
+            "Why Did cats occasionally eat there?",
+            "Why Didn't cats occasionally travel there?",
+
+            "Why Did they often visit their grandparents nearby?",
+            "Why Didn't they often visit their grandparents nearby?",
+            
+            // past_continuous_questions
+            "Was she always studying carefully now?",
+            "wasn't she always studying carefully now?",
+
+            "Was she immediately responding to emails quickly?",
+            "wasn't she immediately responding to emails quickly?",
+
+            "Was he often playing soccer nearby?",
+            "wasn't he often playing soccer nearby?",
+
+            "Was she never cooking skillfully at night?",
+            "wasn't she never cooking skillfully at night?",
+
+            "Was he occasionally reading a book outside?",
+            "wasn't he occasionally reading a book outside?",
+
+            "Was the cat occasionally eating a book outside?",
+            "wasn't the cat occasionally eating a book outside?",
+
+            "Were they usually working late tonight slowly?",
+            "Weren't they usually working late tonight slowly?",
+
+            "Were cats occasionally eating a book outside?",
+            "Weren't cats occasionally eating a book outside?",
+            "Weren't cats occasionally eating a book outside the freaking fuck?",
+
+            //past_perfect_questions
+            "Why had you really liked pizza here so much?",
+            "Why hadn't you really liked pizza here so much?",
+
+            //"Why had the student really studied carefully that day?", THAT DAY NOT VALID AT THE MOMENT
+            //"Why hadn't the student really studied carefully that day?", THAT DAY NOT VALID AT THE MOMENT
+
+            "Why had the student really studied carefully?",
+            "Why hadn't the student really studied carefully?",
+
+            "Why had she often liked pizza so much here?",
+            "Why hadn't she often liked pizza so much here?",
+
+            "Why had he sometimes written emails so quickly inside?",
+            "Why hadn't he sometimes written emails so quickly inside?",
+
+            "When had you always studied so carefully?",
+            "When hadn't you always studied so carefully?",
+
+            "When hadn't you always studied so carefully here?",
+            "When had you always studied so carefully here?",
+
+            "When had she exactly studied?",
+            "When hadn't she exactly studied?",
+
+            "How had John really studied so carefully every day?",
+            "How hadn't John really studied so carefully every day?",
+
+            "How had John immediately responded to messages neatly?",
+            "How hadn't John immediately responded to messages neatly?",
+
+            "How had they often visited their grandparents nearby regularly?",
+            "How hadn't they often visited their grandparents nearby regularly?",
+
+            "How had you always studied carefully?",
+            "How hadn't you always studied carefully?",
+
+            "Where hadn't she usually cooked so skillfully?",
+            "Where had she usually cooked so skillfully?",
+
+            "Where had she occasionally traveled?",
+            "Where hadn't she occasionally traveled?",
+
+            "Who had regularly studied so carefully here?",
+            "Who hadn't regularly studied so carefully here?",
+            //"Who had always written so quickly here that day?", THAT DAY NOT VALID ATM
+            //"Who hadn't always written so quickly here that day?", THAT DAY NOT VALID ATM
+
+            "Who had always written so quickly here?",
+            "Who hadn't always written so quickly here?",
+
+            "What had she really done so carefully?",
+            "What hadn't she really done so carefully?",
+
+            "What had they usually enjoyed so skillfully at night?",
+            "What hadn't they usually enjoyed so skillfully at night?",
+
+            "What had you usually done every morning?",
+            "What hadn't you usually done every morning?",
+
+            "Why had they really run so fast?",
+            "Why hadn't they really run so fast?",
+
+            "Why had she always studied so carefully?",
+            "Why hadn't she always studied so carefully?",
+
+            "Why had the cat always eaten so quickly?",
+            "Why hadn't the cat always eaten so quickly?",
+
+            "Why had cats always eaten so quickly?",
+            "Why hadn't cats always eaten so quickly?",
+
+            //"Why had cats always eaten so quickly those days?", THAT DAY ETC .... -> CNTRL + F and search for "DO NOT DELETE!!" there is the leaf
+            //"Why hadn't cats always eaten so quickly that day?", 
+
         //past_perfect_continuous_questions
         //future_simple_questions
         //future_continuous_questions
@@ -3024,7 +3331,6 @@ public class ButtonTests : MonoBehaviour
             "The big car wasn't always carefully turned on today.",
             "The big car was not always carefully turned on today.",
 
-
             // past simple - singular
             "The car was repaired.",
             "The car was always carefully repaired.",
@@ -3176,7 +3482,6 @@ public class ButtonTests : MonoBehaviour
             "The cars haven't always been being carefully turned on today.",
             "The cars have not always been being carefully turned on today.",
             "The cars have always been being carefully turned on today.",
-
 
             // past continuous - singular
             "The car was being repaired.",
@@ -3581,10 +3886,10 @@ public class ButtonTests : MonoBehaviour
             "Students don't love their books.",
 
             "John loves big books.",
-                "John loves his big books.",
+            "John loves his big books.",
             "The sun rises in the east.",
             "He likes apples.",
-                "He likes my apples.",
+            "He likes my apples.",
             "She believes in miracles.",
             "She believes in a miracle.",
             "The cat jumps.",
@@ -3605,7 +3910,6 @@ public class ButtonTests : MonoBehaviour
             "A guy does not have his car.",
             "A guy doesn't have his car.",
 
-            
             "A guy doesn't have a car.",
             "A guy does not have the car.",
             "Google does not have a car.",
