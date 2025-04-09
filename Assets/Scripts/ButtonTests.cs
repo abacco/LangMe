@@ -1,15 +1,18 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.Windows;
 
 public class ButtonTests : MonoBehaviour
 {
     static List<string> singular_subject = new List<string> { "teacher", "student","beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", "car", "guy", "cat", "water", "sun", "he", "she", "it" };
-    static List<string> base_verbs = new List<string> { "need", "make", "live", "do", "work", "respond", "answer", "go", "explain", "write", "cook", "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
-    static List<string> base_verbs_3rd_person = new List<string> { "needs","makes", "lives", "does", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> ing_verbs = new List<string> { "needing", "making", "living", "doing", "working", "responding", "answering", "going", "explaining", "writing", "cooking", "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
+    static List<string> base_verbs = new List<string> { "visit", "need", "make", "live", "do", "work", "respond", "answer", "go", "explain", "write", "cook", "smile", "enjoy", "dance","sing","read","talk","swim", "play", "travel", "sleep", "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" };
+    static List<string> base_verbs_3rd_person = new List<string> { "visits", "needs","makes", "lives", "does", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
+    static List<string> ing_verbs = new List<string> { "visiting", "needing", "making", "living", "doing", "working", "responding", "answering", "going", "explaining", "writing", "cooking", "smiling","enjoying","dancing","singing", "reading","talking","swimming", "playing", "traveling", "sleeping", "studying", "eating", "walking", "completing", "being","agreeing", "liking", "standing", "writing", "playing", "reading", "eating", "running", "loving", "driving", "waiting" };
     static List<string> past_participle = new List<string> {
+        "visited", "eaten",
                                                                                 "studied",
                                                                                 "run",
                                                                                 "done",
@@ -83,8 +86,10 @@ public class ButtonTests : MonoBehaviour
 
     public static bool IsAQuestion(string[] words)
     {
+        // LEGGI AO
         // la lunghezza dell'array che puoi accettare è uguale alla profondità massima dell'albero (guarda la posizione) - vedi alla fine
         // vedi se fare il check prima o dopo la normalizzazione
+        // SULLE FOGLIE L'ACCESSO AGLI ULTIMI NODI LO DEVI FARE SEMPRE CON words.lenght-1 e non con le posizioni fisse per smaltire <--- REFACTORRR!!!
         words = Normalization(words);
         if (IsAQuestionWords(words[0]))
         {
@@ -369,9 +374,45 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAnIngVerbs(words[2]))
                 {
+                    words = RemoveAdverbs(words, 2);
                     if (!IsFixedLenght(words, 3)) {
                         if (IsACommon(words[3])) return true;
                     } 
+                }
+                if (Been(words[2]))
+                {
+                    if (IsAnIngVerbs(words[3]))
+                    {
+                        words = RemoveAdverbs(words, 4);
+                        if (!IsFixedLenght(words, 4))
+                        {
+                            if (IsACommon(words[4]))
+                            {
+                                if (words.Length >= 5) // it means there are more words in the sentence
+                                {
+                                    if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
+                                    {
+                                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                                    }
+                                    if (IsACommon(words[words.Length - 1])) return true;
+                                }
+                                return true;
+                            }
+                            if (IsAPlural(words[4]))
+                            {
+                                if (words.Length >= 5) // it means there are more words in the sentence
+                                {
+                                    if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
+                                    {
+                                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                                    }
+                                    if (IsACommon(words[words.Length - 1])) return true;
+                                }
+                                return true;
+                            }
+                        }
+                        return true;
+                    }
                 }
             }
             if (Not(words[1]))
@@ -385,6 +426,40 @@ public class ButtonTests : MonoBehaviour
                         if (IsPastParticiple(words[3]))
                         {
                             if (IsACommon(words[4])) return true;
+                        }
+                    }
+                    if (Been(words[2]))
+                    {
+                        if (IsAnIngVerbs(words[3]))
+                        {
+                            words = RemoveAdverbs(words, 4);
+                            if (!IsFixedLenght(words, 4))
+                            {
+                                if (IsACommon(words[4]))
+                                {
+                                    if (words.Length >= 5) // it means there are more words in the sentence
+                                    {
+                                        if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
+                                        {
+                                            words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                                        }
+                                        if (IsACommon(words[words.Length - 1])) return true;
+                                    }
+                                    return true;
+                                }
+                                if (IsAPlural(words[4]))
+                                {
+                                    if (words.Length >= 5) // it means there are more words in the sentence
+                                    {
+                                        if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
+                                        {
+                                            words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                                        }
+                                        if (IsACommon(words[words.Length - 1])) return true;
+                                    }
+                                    return true;
+                                }
+                            }
                         }
                     }
                 }
@@ -428,6 +503,76 @@ public class ButtonTests : MonoBehaviour
                                 words = words.Where((value, index) => index != 3).ToArray();
                             }
                             if (IsACommon(words[3])) return true;
+                        }
+                    }
+                    return true;
+                }
+                if (Been(words[2]))
+                {
+                    if (IsAnIngVerbs(words[3]))
+                    {
+                        words = RemoveAdverbs(words, 4);
+                        if (!IsFixedLenght(words, 4))
+                        {
+                            if (IsACommon(words[4]))
+                            {
+                                if (words.Length >= 5) // it means there are more words in the sentence
+                                {
+                                    if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
+                                    {
+                                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                                    }
+                                    if (IsACommon(words[words.Length - 1])) return true;
+                                }
+                                return true;
+                            }
+                            if (IsAPlural(words[4]))
+                            {
+                                if (words.Length >= 5) // it means there are more words in the sentence
+                                {
+                                    if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
+                                    {
+                                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                                    }
+                                    if (IsACommon(words[words.Length - 1])) return true;
+                                }
+                                return true;
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+            if (Been(words[1])) // il soggetto è tipo Who
+            {
+                if (IsAnIngVerbs(words[2]))
+                {
+                    words = RemoveAdverbs(words, 3);
+                    if (!IsFixedLenght(words, 3))
+                    {
+                        if (IsACommon(words[3]))
+                        {
+                            if (words.Length >= 4) // it means there are more words in the sentence
+                            {
+                                if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
+                                {
+                                    words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                                }
+                                if (IsACommon(words[words.Length - 1])) return true;
+                            }
+                            return true;
+                        }
+                        if (IsAPlural(words[3]))
+                        {
+                            if (words.Length >= 4) // it means there are more words in the sentence
+                            {
+                                if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
+                                {
+                                    words = words.Where((value, index) => index != words.Length - 1).ToArray();
+                                }
+                                if (IsACommon(words[words.Length - 1])) return true;
+                            }
+                            return true;
                         }
                     }
                     return true;
@@ -493,6 +638,7 @@ public class ButtonTests : MonoBehaviour
                 }
                 return true;
             }
+            
             if (Not(words[1]))
             {
                 if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
@@ -2290,23 +2436,18 @@ public class ButtonTests : MonoBehaviour
             {
                 words[words.Length - 1].TrimEnd('?');
             }
-            //if (i != 0 && (The(words[i]) || A(words[i]) || An(words[i])))
-            //{
-            //    List<string> list = new List<string>(words);
-            //    list.Remove(words[i]);
-            //    list.Insert(i, "");
-            //    words = list.ToArray(); // remove middle the || a || an
-            //}
-            if (words[i].Equals("so"))
+            if (i < words.Length - 1 && words[i].Equals("so") && (words[i + 1].Equals("much") || words[i + 1].Equals("many")))
             {
                 list.Remove(words[i]);
+                list.Remove(words[i + 1]);
                 words = list.ToArray();
             }
-            //if (IsAFrequencyAdverb(words[i]) || IsAMannerAdverbs(words[i]) || IsAPlaceAdverbs(words[i]) || IsATimeAdverb(words[i]))
-            //{
-            //    list.Remove(words[i]);
-            //    words = list.ToArray();
-            //}
+            if (i < words.Length - 1 && words[i].Equals("so") && (IsAMannerAdverbs(words[i + 1])))
+            {
+                list.Remove(words[i]);
+                list.Remove(words[i + 1]);
+                words = list.ToArray();
+            }
         }
         if (There(words[0]) && Are(words[1]) && Not(words[2]))
         {
@@ -2338,15 +2479,6 @@ public class ButtonTests : MonoBehaviour
         {
             words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
         }
-        //if (IsAPlaceAdverbs(words[words.Length - 1]) || IsAMannerAdverbs(words[words.Length - 1]))
-        //{
-        //    words = words.Where((value, index) => index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di modo
-        //}
-        //if (IsATimeAdverb(words[words.Length - 1])) // avverbio di tempo alla fine
-        //if (IsATimeAdverb(words[0])) // avverbio di tempo all'inizio
-        //{
-        //    words = words.Where((value, index) => index != 0).ToArray(); // Mangia prima posizione per togliere l'avv di tempo
-        //}
         
         // Phrasal Verbs
         string tmpPhrasalVerb = "";
@@ -2652,6 +2784,12 @@ public class ButtonTests : MonoBehaviour
             "Why has she always studied so carefully now?",
             "Why hasn't she always studied so carefully now?",
 
+            "Why has the cat always eaten so quickly now?",
+            "Why hasn't the cat always eaten so quickly now?",
+
+            "Why have cats always eaten so quickly now?",
+            "Why haven't cats always eaten so quickly now?",
+
             //present_perfect_continuous_questions
             "Why have you really been liking pizza here so much?",
             "Why haven't you really been liking pizza here so much?",
@@ -2710,7 +2848,10 @@ public class ButtonTests : MonoBehaviour
             "Why haven't they really been running so fast?",
 
             "Why has she always been studying so carefully now?",
-            "Why hasn't she always been studying so carefully now?"
+            "Why hasn't she always been studying so carefully now?",
+
+            "Why has the cat always been eating so carefully now?",
+            "Why hasn't the cat always been eating so carefully now?"
 
         //past_simple_questions
         //past_continuous_questions
