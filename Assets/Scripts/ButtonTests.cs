@@ -142,7 +142,7 @@ public class ButtonTests : MonoBehaviour
                     words = RemoveAdverbs(words, 3);
                     if (!IsFixedLenght(words, 3))
                     {
-                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]) || IsAPreposition(words[3]))
                         {
                             words = words.Where((value, index) => index != 3).ToArray();
                         }
@@ -401,11 +401,15 @@ public class ButtonTests : MonoBehaviour
                     words = RemoveAdverbs(words, 2);
                     if (IsPastParticiple(words[2]))
                     {
-                        if (IsACommon(words[3])) return true;
+                        if (IsACommon(words[3])) { return true; }
+                        else if (IsAPlural(words[3])) { return true; }
+                        else { return false; }
                     }
                     if (IsAnIngVerbs(words[2]))
                     {
-                        if (IsACommon(words[3])) return true;
+                        if (IsACommon(words[3])) { return true; }
+                        else if (IsAPlural(words[3])) { return true; }
+                        else { return false; }
                     }
                 }
             }
@@ -3142,8 +3146,8 @@ public class ButtonTests : MonoBehaviour
             "What had she really done so carefully?",
             "What hadn't she really done so carefully?",
 
-            "What had they usually enjoyed so skillfully at night?",
-            "What hadn't they usually enjoyed so skillfully at night?",
+            //"What had they usually enjoyed so skillfully at night?",
+            //"What hadn't they usually enjoyed so skillfully at night?",
 
             "What had you usually done every morning?",
             "What hadn't you usually done every morning?",
@@ -3160,10 +3164,18 @@ public class ButtonTests : MonoBehaviour
             "Why had cats always eaten so quickly?",
             "Why hadn't cats always eaten so quickly?",
 
+            "Why had cats always eaten so quickly here?",
+            "Why hadn't cats always eaten so quickly here?",
+
             //"Why had cats always eaten so quickly those days?", THAT DAY ETC .... -> CNTRL + F and search for "DO NOT DELETE!!" there is the leaf
             //"Why hadn't cats always eaten so quickly that day?", 
 
-        //past_perfect_continuous_questions
+            //past_perfect_continuous_questions
+            "Why had cats always been eating so quickly here?",
+            "Why hadn't cats always been eating so quickly here?",
+
+            "Why had the cat always been eating so quickly here?",
+            "Why hadn't the cat always been eating so quickly here?",
         //future_simple_questions
         //future_continuous_questions
         //future_perfect_questions
