@@ -778,8 +778,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: How does the cat often visit their grandparents nearby
-            regularly today?
+          m_StringArgument: How does cats often visit nearby regularly today?
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &428332133

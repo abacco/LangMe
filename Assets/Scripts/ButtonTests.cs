@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 public class ButtonTests : MonoBehaviour
@@ -82,9 +81,10 @@ public class ButtonTests : MonoBehaviour
         //extender.Add("");  // Aggiungi un elemento
         //words = extender.ToArray();
 
-        if      (SingularSubjectPresentSimple_Affirmation(words) || IsAQuestion(words)){ return true; }
-        else if (PluralSubjectPresentSimple_Affirmation(words))  { return true; }
-        else                                                     { return false; }
+        //if      (SingularSubjectPresentSimple_Affirmation(words) || IsAQuestion(words)){ return true; }
+        //else if (PluralSubjectPresentSimple_Affirmation(words))  { return true; }
+        //else                                                     { return false; }
+        return IsAValidQuestion2(words);
     }
 
     public static bool IsAQuestion(string[] words)
@@ -94,7 +94,7 @@ public class ButtonTests : MonoBehaviour
         // vedi se fare il check prima o dopo la normalizzazione
         // SULLE FOGLIE L'ACCESSO AGLI ULTIMI NODI LO DEVI FARE SEMPRE CON words.lenght-1 e non con le posizioni fisse per smaltire <--- REFACTORRR!!!
         words = Normalization(words);
-        words = RemoveQuestionAdverbs(words);
+        //words = RemoveQuestionAdverbs(words);
         if (IsFixedLenght(words, 1))
         {
             if (words[0].Equals("error-1")) return false;
@@ -105,10 +105,8 @@ public class ButtonTests : MonoBehaviour
         }
         if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
         {
-            if (The(words[3]) || A(words[3])) // The | a
-            {
-                if (IsASingular(words[4])) return true;
-            }
+            words = RemovePrepOrPoss(words, 3);
+            if (IsASingular(words[4])) return true;
         }
         if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
         {
@@ -117,11 +115,9 @@ public class ButtonTests : MonoBehaviour
             {
                 words = words.Where((value, index) => index != 0 && index != 1).ToArray();
             }
-            if (The(words[4]) || A(words[4]) || IsAPossessivePronouns(words[4])) // The | a
-            {
-                if (IsASingular(words[5])) return true;
-                if (IsAPlural(words[5])) return true;
-            }
+            words = RemovePrepOrPoss(words, 4);
+            if (IsASingular(words[5])) return true;
+            if (IsAPlural(words[5])) return true;
         }
         
         if (Do(words[0]) || Dont(words[0]) || Did(words[0]) || Didnt(words[0]) || Will(words[0]) || Wont(words[0]))
@@ -522,6 +518,10 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (IsPastParticiple(words[2]))
                     {
+                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+                        {
+                            words = words.Where((value, index) => index != 3).ToArray();
+                        }
                         if (IsACommon(words[3])) { return true; }
                         else if (IsAPlural(words[3])) { return true; }
                         else { return false; }
@@ -2599,7 +2599,7 @@ public class ButtonTests : MonoBehaviour
         }
     }
 
-    static bool IsQuestionValid(string[] words, out List<int> foundAdverbsPosition)
+    static bool IsQuestionValid(string[] words, out List<int> foundAdverbsPosition) // hold on on this
     {
         List<string> foundAdverbs = new List<string>();
         foundAdverbsPosition = new List<int>();
@@ -2649,28 +2649,97 @@ public class ButtonTests : MonoBehaviour
         }
         return false; // No match found
     }
-
-    static string[] RemoveQuestionAdverbs(string[] words)
+    static bool IsQuestionValid2(string[] words, out List<int> foundAdverbsPosition) // hold on on this
     {
-        List<string> filteredWords = new List<string>();
+        List<string> foundAdverbs = new List<string>();
+        foundAdverbsPosition = new List<int>();
 
-        if (IsQuestionValid(words, out List<int> foundAdverbsPosition))
+        // USA QUELLI SOPRA!!!!
+        string[] interrogatives = { "how", "why", "what", "where", "when", "which", "who", "whose" };
+        string[] auxiliaryVerbs = { "does", "do", "did", "is", "are", "was", "were", "can", "could", "shall", "should", "will", "would", "have", "has", "had" };
+        string[] subjects = { "cats", "grandparents" }; // Può essere esteso
+        string[] mainVerbs = { "visit", "work", "play", "study", "run", "eat", "read" }; // Può essere esteso
+
+
+        // How does cats often visit nearby regularly today?
+        for (int i = 0; i < words.Length; i++)
         {
-            for (int i = 0; i < words.Length; i++)
+            string word = words[i];
+
+            if (interrogatives.Contains(word))
             {
-                // Keep words that are NOT in the detected adverb positions
-                if (!foundAdverbsPosition.Contains(i))
-                {
-                    filteredWords.Add(words[i]);
-                }
+                foundAdverbs.Add("Interrogative");
+                foundAdverbsPosition.Add(i);
             }
+            if (auxiliaryVerbs.Contains(word))
+            {
+                foundAdverbs.Add("Auxiliary");
+                foundAdverbsPosition.Add(i);
+            }
+            if (subjects.Contains(word))
+            {
+                foundAdverbs.Add("Subject");
+                foundAdverbsPosition.Add(i);
+            }
+            if (mainVerbs.Contains(word))
+            {
+                foundAdverbs.Add("Verb");
+                foundAdverbsPosition.Add(i);
+            }
+
+            if (frequencyAdverbs.Contains(word))
+            {
+                foundAdverbs.Add("Frequency");
+                foundAdverbsPosition.Add(i);
+            }
+            else if (mannerAdverbs.Contains(word))
+            {
+                foundAdverbs.Add("Manner");
+                foundAdverbsPosition.Add(i);
+            }
+            else if (placeAdverbs.Contains(word))
+            {
+                foundAdverbs.Add("Place");
+                foundAdverbsPosition.Add(i);
+            }
+            else if (timeAdverbs.Contains(word))
+            {
+                foundAdverbs.Add("Time");
+                foundAdverbsPosition.Add(i);
+            }
+        }
+
+        // Check if the detected sequence matches any valid rule
+        List<List<string>> validRules = new List<List<string>>
+        {
+            new List<string> { "Interrogative", "Auxiliary", "Subject", "Verb", "Frequency", "Manner", "Place", "Time" },
+            new List<string> { "Interrogative", "Auxiliary", "Frequency", "Verb", "Subject", "Place", "Frequency", "Time" },
+            new List<string> { "Interrogative", "Auxiliary", "Subject", "Frequency", "Verb", "Place", "Frequency", "Time" },
+        };
+        // How does cats often visit nearby regularly today?
+        string rule = string.Join(" ", foundAdverbs);
+        foreach (List<string> list in validRules)
+        {
+            if (foundAdverbs.SequenceEqual(list))
+            {
+                return true; // Found an exact match
+            }
+        }
+        return false; // No match found
+    }
+    static bool IsAValidQuestion2(string[] words)
+    {
+        string rule = string.Join(" ", words);
+        if (IsQuestionValid2(words, out List<int> foundAdverbsPosition))
+        {
+            Debug.Log("This is a valid question " + rule);
+            return true;
         }
         else
         {
-            return words; // If the sentence is not valid, return the original words
+            Debug.LogError("This is a valid question " + rule);
+            return false;
         }
-
-        return filteredWords.ToArray(); // Convert list to array
     }
 
     private void Start()
@@ -3648,6 +3717,14 @@ public class ButtonTests : MonoBehaviour
         Debug.Log(IsValidSentence(phrase));
     }
 
+    private static string[] RemovePrepOrPoss(string[] words, int position)
+    {
+        if (The(words[position]) || A(words[position]) || An(words[position]) || possessivePronouns.Contains(words[position]))
+        {
+            words = words.Where((value, index) => index != position).ToArray();
+        }
+        return words;
+    }
     private static bool IsFixedLenght(string[] words, int lenght) { return words.Length <= lenght; }
     private static bool IsAPlural(string word) => plural_nouns.Contains(word);
     private static bool IsACommon(string word) => common_nouns.Contains(word);
@@ -3717,4 +3794,6 @@ public class ButtonTests : MonoBehaviour
     private static bool Will(string word) { return word.ToLower().Equals("will"); }
     private static bool This(string word) { return word.ToLower().Equals("this"); }
     private static bool That(string word) { return word.ToLower().Equals("that"); }
+    
+
 }
