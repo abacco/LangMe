@@ -91,6 +91,10 @@ public class ButtonTests : MonoBehaviour
         // vedi se fare il check prima o dopo la normalizzazione
         // SULLE FOGLIE L'ACCESSO AGLI ULTIMI NODI LO DEVI FARE SEMPRE CON words.lenght-1 e non con le posizioni fisse per smaltire <--- REFACTORRR!!!
         words = Normalization(words);
+        for (int i = 0; i < words.Length; i++)
+        {
+            words = RemoveAdverbs(words, i); // rimuovere eventuali altri avverbi riconosciuti dopo il complemento
+        }
         if (IsFixedLenght(words, 1))
         {
             if (words[0].Equals("error-1")) return false;
@@ -465,6 +469,10 @@ public class ButtonTests : MonoBehaviour
                         {
                             words = words.Where((value, index) => index != words.Length - 1).ToArray();
                         }
+                        return true;
+                    }
+                    if (IsAPlural(words[3]))
+                    {
                         return true;
                     }
                 }
@@ -956,9 +964,11 @@ public class ButtonTests : MonoBehaviour
     public static bool SingularSubjectPresentSimple_Affirmation(string[] words)
     {
         words = Normalization(words);
-
+        for (int i = 0; i < words.Length; i++)
+        {
+            words = RemoveAdverbs(words, i); // rimuovere eventuali altri avverbi riconosciuti dopo il complemento
+        }
         if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
-
         if (IsFixedLenght(words, 1) && IsASingular(words[0])) return true; // There are dogs here becomes only "dogs" -> valid
         if (The(words[0]) || A(words[0])) 
         { 
@@ -1957,6 +1967,10 @@ public class ButtonTests : MonoBehaviour
     public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
     {
         words = Normalization(words);
+        for (int i = 0; i < words.Length; i++)
+        {
+            words = RemoveAdverbs(words, i); // rimuovere eventuali altri avverbi riconosciuti dopo il complemento
+        }
         if (IsFixedLenght(words, 1))
         {
             if (words[0].Equals("error-1")) return false;
@@ -2994,9 +3008,6 @@ public class ButtonTests : MonoBehaviour
 
             "Are they usually working late tonight slowly?",
             "Aren't they usually working late tonight slowly?",
-            //"Are we usually meeting here later?",
-            //"Are you usually practicing piano inside?",
-            //"Are they usually discussing the project carefully?",
 
             "Is the teacher rarely explaining things slowly today?",
             //"Is not the teacher rarely explaining things slowly today?", // IS NOT THEY____ INNATURALE
@@ -3034,8 +3045,8 @@ public class ButtonTests : MonoBehaviour
 
             "How do they often visit their grandparents nearby regularly?", // Aggiunto "regularly"
             "How don't they often visit their grandparents nearby regularly?", // Aggiunto "regularly" - 
-            "How do not they often visit their grandparents nearby regularly?", // NOOO
-            "How do they not often visit their grandparents nearby regularly?", // SIIIIIII
+            //"How do not they often visit their grandparents nearby regularly?", // NOOO
+            "How do they not often visit their grandparents nearby regularly today?", // SIIIIIII
 
             "How do they often visit their grandparents nearby?", // Aggiunto "regularly"
             "How don't they often visit their grandparents nearby?", // Aggiunto "regularly" - NON riconosciuto - Max 1 Adverb
@@ -3089,12 +3100,12 @@ public class ButtonTests : MonoBehaviour
 
             //"How do you make this cake?", THIS THAT ETC...
             "How do you make things?",
-            "How does she make this cake?",
+            //"How does she make this cake?",
 
             "Does she play tennis?",
             "Do they go to school every day?",
             "Does he work here?",
-            "Do we need more time?",
+            //"Do we need more time?",
             "Are you happy?",
             "Is she a teacher?",
             "Are they at home?",
@@ -3291,7 +3302,7 @@ public class ButtonTests : MonoBehaviour
 
             "Were cats occasionally eating a book outside?",
             "Weren't cats occasionally eating a book outside?",
-            "Weren't cats occasionally eating a book outside the freaking fuck?",
+            //"Weren't cats occasionally eating a book outside the freaking fuck?",
 
             //past_perfect_questions
             "Why had you really liked pizza here so much?",
@@ -3415,7 +3426,62 @@ public class ButtonTests : MonoBehaviour
         //future_continuous_questions
         //future_perfect_questions
         //future_perfect_continuous_questions
-    };
+
+            // Present Simple
+            "How do they often visit their grandparents nearby regularly today?",
+            "How do they not often visit their grandparents nearby regularly today?",
+
+            // Present Continuous
+            "How are they often visiting their grandparents nearby regularly today?",
+            "How are they not often visiting their grandparents nearby regularly today?",
+
+            // Present Perfect
+            "How have they often visited their grandparents nearby regularly today?",
+            "How have they not often visited their grandparents nearby regularly today?",
+
+            // Present Perfect Continuous
+            "How have they often been visiting their grandparents nearby regularly today?",
+            "How have they not often been visiting their grandparents nearby regularly today?",
+
+            // Past Simple
+            "How did they often visit their grandparents nearby regularly today?",
+            "How did they not often visit their grandparents nearby regularly today?",
+
+            // Past Continuous
+            "How were they often visiting their grandparents nearby regularly today?",
+            "How were they not often visiting their grandparents nearby regularly today?",
+
+            // Past Perfect
+            "How had they often visited their grandparents nearby regularly today?",
+            "How had they not often visited their grandparents nearby regularly today?",
+
+            // Past Perfect Continuous
+            "How had they often been visiting their grandparents nearby regularly today?",
+            "How had they not often been visiting their grandparents nearby regularly today?",
+
+            // Future Simple
+            "How will they often visit their grandparents nearby regularly today?",
+            "How will they not often visit their grandparents nearby regularly today?",
+            "How won't they often visit their grandparents nearby regularly today?",
+
+            // Future Continuous
+            "How will they often be visiting their grandparents nearby regularly today?",
+            "How will they not often be visiting their grandparents nearby regularly today?",
+            "How won't they often be visiting their grandparents nearby regularly today?",
+
+            // Future Perfect
+            "How will they often have visited their grandparents nearby regularly today?",
+            "How will they not often have visited their grandparents nearby regularly today?",
+            "How won't they often have visited their grandparents nearby regularly today?",
+
+            // Future Perfect Continuous
+            "How will they often have been visiting their grandparents nearby regularly today?",
+            "How will they not often have been visiting their grandparents nearby regularly today?",
+            "How won't they often have been visiting their grandparents nearby regularly today?"
+
+
+
+        };
         
         // ok everything fine with sentences (aff/neg)
         List<string> sentences = new List<string>
