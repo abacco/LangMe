@@ -1,8 +1,9 @@
-using System.Collections.Generic;
+Ôªøusing System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class ButtonTests : MonoBehaviour
@@ -58,6 +59,7 @@ public class ButtonTests : MonoBehaviour
                                                         "put off", "puts off", "put off"
     };
 
+    // posizione avverbio frequenza in domande: -> 
     static List<string> frequencyAdverbs = new List<string> { "always", "usually", "often", "sometimes", "rarely", "never", "regularly", "occasionally" };
     static List<string> timeAdverbs = new List<string> { "nowadays", "now", "later", "soon", "tomorrow", "yesterday", "tonight", "today", "currently", "immediately" };
     static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby", "around", "inside", "outside" };
@@ -68,6 +70,7 @@ public class ButtonTests : MonoBehaviour
     public static bool IsValidSentence(string sentence)
     {
         string[] words = sentence.ToLower().Replace(".", "").Replace("?", "").Split(' ');
+
         if (words.Length < 2) return false;
 
         //List<string> extender = new List<string>(words);  // Converti l'array in una lista
@@ -87,14 +90,11 @@ public class ButtonTests : MonoBehaviour
     public static bool IsAQuestion(string[] words)
     {
         // LEGGI AO - SHOW WARNING -> SENTENCE SHOULD END WITH AN ADVERB
-        // la lunghezza dell'array che puoi accettare Ë uguale alla profondit‡ massima dell'albero (guarda la posizione) - vedi alla fine
+        // la lunghezza dell'array che puoi accettare √® uguale alla profondit√† massima dell'albero (guarda la posizione) - vedi alla fine
         // vedi se fare il check prima o dopo la normalizzazione
         // SULLE FOGLIE L'ACCESSO AGLI ULTIMI NODI LO DEVI FARE SEMPRE CON words.lenght-1 e non con le posizioni fisse per smaltire <--- REFACTORRR!!!
         words = Normalization(words);
-        for (int i = 0; i < words.Length; i++)
-        {
-            words = RemoveAdverbs(words, i); // rimuovere eventuali altri avverbi riconosciuti dopo il complemento
-        }
+        words = RemoveQuestionAdverbs(words);
         if (IsFixedLenght(words, 1))
         {
             if (words[0].Equals("error-1")) return false;
@@ -131,12 +131,10 @@ public class ButtonTests : MonoBehaviour
                 words = words.Where((value, index) => index != 1).ToArray();
                 if (IsAPlural(words[1]) || words[1].Equals("you") || IsACommon(words[1]))
                 {
-                    words = RemoveAdverbs(words, 2);
                     if (IsABaseVerb(words[2]))
                     {
                         if (!IsFixedLenght(words, 3))
                         {
-                            words = RemoveAdverbs(words, 3);
                             if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]) || prepositions.Contains(words[3]))
                             {
                                 words = words.Where((value, index) => index != 3).ToArray();
@@ -148,11 +146,9 @@ public class ButtonTests : MonoBehaviour
                     }
                     if (Not(words[2]))
                     {
-                        words = RemoveAdverbs(words, 3);
                         if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
                         {
                             words = words.Where((value, index) => index != 3).ToArray();
-                            words = RemoveAdverbs(words, 4);
                             if (IsABaseVerb(words[4]))
                             {
                                 if (IsACommon(words[5])) { return true; }
@@ -183,10 +179,8 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAPlural(words[1]) || words[1].Equals("you") || IsACommon(words[1]))
             {
-                words = RemoveAdverbs(words, 2);
                 if (IsABaseVerb(words[2]))
                 {
-                    words = RemoveAdverbs(words, 3);
                     if (!IsFixedLenght(words, 3))
                     {
                         if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]) || IsAPreposition(words[3]))
@@ -212,11 +206,9 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (Not(words[2]))
                 {
-                    words = RemoveAdverbs(words, 3);
                     if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
                     {
                         words = words.Where((value, index) => index != 3).ToArray();
-                        words = RemoveAdverbs(words, 4);
                         if (IsABaseVerb(words[4]))
                         {
                             if (IsACommon(words[5])) { return true; }
@@ -257,7 +249,6 @@ public class ButtonTests : MonoBehaviour
                     words = words.Where((value, index) => index != 2).ToArray();
                     if (IsAPlural(words[2]) || words[2].Equals("you"))
                     {
-                        words = RemoveAdverbs(words, 3);
                         if (IsABaseVerb(words[3]))
                         {
                             if (IsACommon(words[4])) { return true; }
@@ -294,19 +285,13 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsASingular(words[1]) || IsAProperNoun(words[1]))
             {
-                words = RemoveAdverbs(words, 2);
-                if (timeAdverbs.Contains(words[2]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray();
-                }
                 if (IsABaseVerb(words[2]))
                 {
                     if (!IsFixedLenght(words, 3))
                     {
-                        words = RemoveAdverbs(words, 3);
                         if(!IsFixedLenght(words, 3))
                         {
-                            if (IsAPreposition(words[3]))
+                            if (IsAPreposition(words[3]) || The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
                             {
                                 words = words.Where((value, index) => index != 3).ToArray();
                             }
@@ -319,11 +304,9 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (Not(words[2]))
                 {
-                    words = RemoveAdverbs(words, 3);
                     if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
                     {
                         words = words.Where((value, index) => index != 3).ToArray();
-                        words = RemoveAdverbs(words, 4);
                         if (IsABaseVerb(words[4]))
                         {
                             if (IsACommon(words[5])) { return true; }
@@ -337,7 +320,6 @@ public class ButtonTests : MonoBehaviour
                             else { return false; }
                         }
                     }
-                    words = RemoveAdverbs(words, 3);
                     if (IsABaseVerb(words[4]))
                     {
                         if (IsACommon(words[5])) { return true; }
@@ -352,20 +334,6 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             if (Not(words[1]))
             {
                 if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
@@ -374,7 +342,6 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsASingular(words[1]) || IsAProperNoun(words[2]))
                 {
-                    words = RemoveAdverbs(words, 3);
                     if (timeAdverbs.Contains(words[3]))
                     {
                         words = words.Where((value, index) => index != 3).ToArray();
@@ -383,7 +350,6 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (!IsFixedLenght(words, 4))
                         {
-                            words = RemoveAdverbs(words, 4);
                             if (!IsFixedLenght(words, 4))
                             {
                                 if (IsAPreposition(words[4]))
@@ -399,11 +365,9 @@ public class ButtonTests : MonoBehaviour
                     }
                     if (Not(words[2]))
                     {
-                        words = RemoveAdverbs(words, 3);
                         if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
                         {
                             words = words.Where((value, index) => index != 3).ToArray();
-                            words = RemoveAdverbs(words, 4);
                             if (IsABaseVerb(words[4]))
                             {
                                 if (IsACommon(words[5])) { return true; }
@@ -443,7 +407,6 @@ public class ButtonTests : MonoBehaviour
             if (IsAPluralSubject(words[1]) || words[1].Equals("you")) 
             {
                 if(!IsFixedLenght(words, 3)){
-                    words = RemoveAdverbs(words, 2);
                 }
                 if (IsAnIngVerbs(words[2]))
                 {
@@ -488,7 +451,6 @@ public class ButtonTests : MonoBehaviour
         }
         if (Is(words[0]) || Isnt(words[0])   || Was(words[0]) || Wasnt(words[0]))
         {
-            words = RemoveAdverbs(words, 1);
             if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
             {
                 words = words.Where((value, index) => index != 1).ToArray();
@@ -499,25 +461,12 @@ public class ButtonTests : MonoBehaviour
                 {
                     words = words.Where((value, index) => index != 2).ToArray();
                 }
-                words = RemoveAdverbs(words, 2);
-                if (IsATimeAdverb(words[2])) // iIs she immediately responding to emails quickly?
-                {
-                    words = words.Where((value, index) => index != 2).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
-                }
                 if (Not(words[2]))
                 {
                     //words = words.Where((value, index) => index != 2).ToArray(); -- Reminder for refactoring
                     if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
                     {
                         words = words.Where((value, index) => index != 3).ToArray();
-                    }
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        words = RemoveAdverbs(words, 3);
-                    }
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        words = RemoveAdverbs(words, 3);
                     }
                     if (IsAnAdjective(words[3])) return true;
                     if (IsACommon(words[3])) { return true; }
@@ -528,7 +477,6 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (!IsFixedLenght(words, 4))
                     {
-                        words = RemoveAdverbs(words, 3);
                         if (IsAPreposition(words[3]))
                         {
                             if (IsACommon(words[4])) { return true; }
@@ -547,17 +495,8 @@ public class ButtonTests : MonoBehaviour
             {
                 if (!IsFixedLenght(words, 3))
                 {
-                    words = RemoveAdverbs(words, 2);
-                    if (IsAPlaceAdverbs(words[2])) // out of bound in singular subject 
-                    {
-                        words = words.Where((value, index) => index != 2).ToArray();
-                    }
                     if(!IsFixedLenght(words, 2))
                     {
-                        if (IsATimeAdverb(words[2])) // out of bound in singular subject 
-                        {
-                            words = words.Where((value, index) => index != 2).ToArray();
-                        }
                         if (!IsFixedLenght(words, 2))
                         {
                             if (IsAPreposition(words[2]))
@@ -581,7 +520,6 @@ public class ButtonTests : MonoBehaviour
                 words = words.Where((value, index) => index != 1).ToArray();
                 if (IsAPlural(words[1]) || words[1].Equals("you"))
                 {
-                    words = RemoveAdverbs(words, 2);
                     if (IsPastParticiple(words[2]))
                     {
                         if (IsACommon(words[3])) { return true; }
@@ -598,7 +536,6 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAPlural(words[1]) || words[1].Equals("you"))
             {
-                words = RemoveAdverbs(words, 2);
                 if (IsPastParticiple(words[2]))
                 {
                     if (!IsFixedLenght(words, 3))
@@ -608,7 +545,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             words = words.Where((value, index) => index != 3).ToArray();
                         }
-                        words = RemoveAdverbs(words, words.Length);
                         if (!IsFixedLenght(words, 3))
                         {
                             if (IsACommon(words[3])) { return true; }
@@ -630,7 +566,6 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAnIngVerbs(words[2]))
                 {
-                    words = RemoveAdverbs(words, 2);
                     if (!IsFixedLenght(words, 3)) {
                         if (IsACommon(words[3])) { return true; }
                         else if (IsAPlural(words[3])) { return true; }
@@ -641,17 +576,12 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (IsAnIngVerbs(words[3]))
                     {
-                        words = RemoveAdverbs(words, 4);
                         if (!IsFixedLenght(words, 4))
                         {
                             if (IsACommon(words[4]))
                             {
                                 if (words.Length >= 5) // it means there are more words in the sentence
                                 {
-                                    if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
-                                    {
-                                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                                    }
                                     if (IsACommon(words[words.Length - 1])) { return true; }
                                     else if (IsAPlural(words[words.Length - 1])) { return true; }
                                     else { return false; }
@@ -662,10 +592,6 @@ public class ButtonTests : MonoBehaviour
                             {
                                 if (words.Length >= 5) // it means there are more words in the sentence
                                 {
-                                    if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
-                                    {
-                                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                                    }
                                     if (IsACommon(words[words.Length - 1])) { return true; }
                                     else if (IsAPlural(words[words.Length - 1])) { return true; }
                                     else { return false; }
@@ -684,7 +610,6 @@ public class ButtonTests : MonoBehaviour
                     words = words.Where((value, index) => index != 2).ToArray();
                     if (IsAPlural(words[2]) || words[1].Equals("you"))
                     {
-                        words = RemoveAdverbs(words, 3);
                         if (IsPastParticiple(words[3]))
                         {
                             if (IsACommon(words[4])) { return true; }
@@ -697,17 +622,12 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (IsAnIngVerbs(words[3]))
                         {
-                            words = RemoveAdverbs(words, 4);
                             if (!IsFixedLenght(words, 4))
                             {
                                 if (IsACommon(words[4]))
                                 {
                                     if (words.Length >= 5) // it means there are more words in the sentence
                                     {
-                                        if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
-                                        {
-                                            words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                                        }
                                         if (IsACommon(words[words.Length - 1])) { return true; }
                                         else if (IsAPlural(words[words.Length - 1])) { return true; }
                                         else { return false; }
@@ -718,10 +638,6 @@ public class ButtonTests : MonoBehaviour
                                 {
                                     if (words.Length >= 5) // it means there are more words in the sentence
                                     {
-                                        if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
-                                        {
-                                            words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                                        }
                                         if (IsACommon(words[words.Length - 1])) { return true; }
                                         else if (IsAPlural(words[words.Length - 1])) { return true; }
                                         else { return false; }
@@ -734,7 +650,6 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsAPlural(words[2]) || words[2].Equals("you"))
                 {
-                    words = RemoveAdverbs(words, 3);
                     if (IsPastParticiple(words[3]))
                     {
                         if (!IsFixedLenght(words, 4))
@@ -750,14 +665,12 @@ public class ButtonTests : MonoBehaviour
         }
         if (Has(words[0]) || Hasnt(words[0]) || Had(words[0]) || Hadnt(words[0]))
         {
-            words = RemoveAdverbs(words, 1);
             if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
             {
                 words = words.Where((value, index) => index != 1).ToArray();
             }
             if (IsASingular(words[1]) || IsAProperNoun(words[1]))
             {
-                words = RemoveAdverbs(words, 2);
                 if (timeAdverbs.Contains(words[2]))
                 {
                     words = words.Where((value, index) => index != 2).ToArray();
@@ -766,7 +679,6 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (!IsFixedLenght(words, 3))
                     {
-                        words = RemoveAdverbs(words, 3);
                         if (!IsFixedLenght(words, 3))
                         {
                             if (IsAPreposition(words[3]))
@@ -784,17 +696,12 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (IsAnIngVerbs(words[3]))
                     {
-                        words = RemoveAdverbs(words, 4);
                         if (!IsFixedLenght(words, 4))
                         {
                             if (IsACommon(words[4]))
                             {
                                 if (words.Length >= 5) // it means there are more words in the sentence
                                 {
-                                    if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
-                                    {
-                                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                                    }
                                     if (IsACommon(words[words.Length - 1])) { return true; }
                                     else if (IsAPlural(words[words.Length - 1])) { return true; }
                                     else { return false; }
@@ -805,10 +712,6 @@ public class ButtonTests : MonoBehaviour
                             {
                                 if (words.Length >= 5) // it means there are more words in the sentence
                                 {
-                                    if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
-                                    {
-                                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                                    }
                                     if (IsACommon(words[words.Length - 1])) { return true; }
                                     else if (IsAPlural(words[words.Length - 1])) { return true; }
                                     else { return false; }
@@ -820,21 +723,16 @@ public class ButtonTests : MonoBehaviour
                     }
                 }
             }
-            if (Been(words[1])) // il soggetto Ë tipo Who
+            if (Been(words[1])) // il soggetto √® tipo Who
             {
                 if (IsAnIngVerbs(words[2]))
                 {
-                    words = RemoveAdverbs(words, 3);
                     if (!IsFixedLenght(words, 3))
                     {
                         if (IsACommon(words[3]))
                         {
                             if (words.Length >= 4) // it means there are more words in the sentence
                             {
-                                if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
-                                {
-                                    words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                                }
                                 if (IsACommon(words[words.Length - 1])) { return true; }
                                 else if (IsAPlural(words[words.Length - 1])) { return true; }
                                 else { return false; }
@@ -845,10 +743,6 @@ public class ButtonTests : MonoBehaviour
                         {
                             if (words.Length >= 4) // it means there are more words in the sentence
                             {
-                                if (IsATimeAdverb(words[words.Length - 1]) || IsAPlaceAdverbs(words[words.Length - 1]) || IsAFrequencyAdverb(words[words.Length - 1]))
-                                {
-                                    words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                                }
                                 if (IsACommon(words[words.Length - 1])) { return true; }
                                 else if (IsAPlural(words[words.Length - 1])) { return true; }
                                 else { return false; }
@@ -861,14 +755,12 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsFixedLenght(words, 3))
             {
-                words = RemoveAdverbs(words, 2);
                 if(IsFixedLenght(words, 2))
                 {
                     if (IsPastParticiple(words[1]))
                     {
                         if (!IsFixedLenght(words, 2))
                         {
-                            words = RemoveAdverbs(words, 2);
                             if (!IsFixedLenght(words, 2))
                             {
                                 if (IsAPreposition(words[2]))
@@ -887,7 +779,6 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (!IsFixedLenght(words, 3))
                     {
-                        words = RemoveAdverbs(words, 3);
                         if (!IsFixedLenght(words, 3))
                         {
                             if (IsAPreposition(words[3]))
@@ -906,10 +797,8 @@ public class ButtonTests : MonoBehaviour
             {
                 if (!IsFixedLenght(words, 2))
                 {
-                    words = RemoveAdverbs(words, 2);
                     if (!IsFixedLenght(words, 2))
                     {
-                        words = RemoveAdverbs(words, 2);
                         if (!IsFixedLenght(words, 2))
                         {
                             if (IsAPreposition(words[1]))
@@ -933,7 +822,6 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (IsASingular(words[1]) || IsAProperNoun(words[2]))
                 {
-                    words = RemoveAdverbs(words, 3);
                     if (timeAdverbs.Contains(words[3]))
                     {
                         words = words.Where((value, index) => index != 3).ToArray();
@@ -942,7 +830,6 @@ public class ButtonTests : MonoBehaviour
                     {
                         if (!IsFixedLenght(words, 4))
                         {
-                            words = RemoveAdverbs(words, 4);
                             if (!IsFixedLenght(words, 4))
                             {
                                 if (IsAPreposition(words[4]))
@@ -975,6 +862,7 @@ public class ButtonTests : MonoBehaviour
             words = words.Where((value, index) => index != 0).ToArray();
         }
         if (IsAnAdjective(words[0])) { 
+            
             words = words.Where((value, index) => index != 0).ToArray(); 
         }
         if (words[0].Equals("no") || words[0].Equals("not")) 
@@ -1004,12 +892,10 @@ public class ButtonTests : MonoBehaviour
         }
         if (Is(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsAnIngVerbs(words[2])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
             {
                 if (IsFixedLenght(words, 3)) return true;
                 if (IsAPlural(words[3])) return true; // eating sandwiches
-                words = RemoveAdverbs(words, 3);
                 if(!IsFixedLenght(words, 3))
                 {
                     if (A(words[3]) || The(words[3]) || IsAPreposition(words[3])) // eating a/the sandwich
@@ -1026,13 +912,11 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsAnIngVerbs(words[3])) return true;
                 if (IsAnAdjective(words[3])) return true;
                 if (IsAPrasphalVerb(words[2], words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
                 if(!IsFixedLenght(words, 4))
@@ -1050,7 +934,6 @@ public class ButtonTests : MonoBehaviour
         
         if (Hasnt(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (!IsFixedLenght(words, 3))
             {
                 if (IsAPrasphalVerb(words[2], words[3])) return true;
@@ -1062,11 +945,9 @@ public class ButtonTests : MonoBehaviour
             }
             if (Been(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3])) // been being carefully repaired
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (!IsFixedLenght(words, 4))
                     {
                         if (IsPastParticiple(words[4])) return true;
@@ -1104,8 +985,6 @@ public class ButtonTests : MonoBehaviour
         }
         if (Has(words[1]))
         {
-            words = RemoveAdverbs(words, 2);  //         0   1   2    3
-            words = RemoveAdverbs(words, 3); // The big car has not always been being carefully turned on today.
             if (IsPastParticiple(words[2]))
             {
                 if(!IsFixedLenght(words, 3))
@@ -1119,18 +998,11 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3); //         0   1   2          3     4      5  
-                if (!IsFixedLenght(words, 5))
-                {
-                    words = RemoveAdverbs(words, 5); //The big car has not always been being carefully turned on today.
-                }
                 if (Been(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (!IsFixedLenght(words, 5))
                         {
@@ -1155,11 +1027,9 @@ public class ButtonTests : MonoBehaviour
             }
             if (Been(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (!IsFixedLenght(words, 4))
                     {
                         if (IsPastParticiple(words[4])) return true;
@@ -1243,7 +1113,6 @@ public class ButtonTests : MonoBehaviour
         }
         if (Isnt(words[1])) 
         {
-            words = RemoveAdverbs(words, 2);
             if (IsAnAdjective(words[2])) return true; // a car isn't big
             if (IsAnIngVerbs(words[2])) return true; // a car isn't running
             if (IsPastParticiple(words[2])) return true;
@@ -1263,7 +1132,6 @@ public class ButtonTests : MonoBehaviour
             {
                 words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
             }
-            words = RemoveAdverbs(words, 1);
             // she the child
             if (The(words[1]) || IsAnObjectPronouns(words[1]))
             {
@@ -1274,7 +1142,6 @@ public class ButtonTests : MonoBehaviour
                 if (IsAnIngVerbs(words[2])) // John is playing
                 {
                     if (words.Length == 3) return true;
-                    words = RemoveAdverbs(words, 3);
                     if ((IsAPreposition(words[3]) && The(words[4])) || The(words[3])) // in the gardent
                     {
                         if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
@@ -1286,7 +1153,6 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (Not(words[2]))
                 {
-                    words = RemoveAdverbs(words, 3);
                     if (IsAPreposition(words[3]) || The(words[3]) || words[3].Equals("a")) // in the gardent
                     {
                         if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
@@ -1298,7 +1164,6 @@ public class ButtonTests : MonoBehaviour
                     if (IsAnIngVerbs(words[3])) // John is playing
                     {
                         if (words.Length == 4) return true;
-                        words = RemoveAdverbs(words, 4);
                         if ((IsAPreposition(words[4]) && The(words[5])) || The(words[4])) // in the gardent
                         {
                             if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
@@ -1330,7 +1195,6 @@ public class ButtonTests : MonoBehaviour
             }
             if (Has(words[1]))
             {
-                words = RemoveAdverbs(words, 2);
                 if (The(words[2]) || A(words[2]))
                 {
                     if (IsASingular(words[3])) return true;
@@ -1457,7 +1321,7 @@ public class ButtonTests : MonoBehaviour
         {
             if (IsAFrequencyAdverb(words[2]))
             {
-                words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza - He doesnít ALWAYS agree with me.
+                words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza - He doesn‚Äôt ALWAYS agree with me.
             }
         }
         if (I(words[0]))
@@ -1549,10 +1413,8 @@ public class ButtonTests : MonoBehaviour
         
         if (Wasnt(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsAnIngVerbs(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsAnAdjective(words[3])) return true;
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAPrasphalVerb(words[3], words[4])) return true;
@@ -1567,11 +1429,6 @@ public class ButtonTests : MonoBehaviour
         }
         if (Was(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
-            if (!IsFixedLenght(words, 4))
-            {
-                words = RemoveAdverbs(words, 4);
-            }
             if (IsPastParticiple(words[2])) return true;
             if (The(words[2]) || A(words[2]))
             {
@@ -1580,10 +1437,8 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true;
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAnAdjective(words[4])) return true;
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 4))
@@ -1596,7 +1451,6 @@ public class ButtonTests : MonoBehaviour
                 if (IsPastParticiple(words[3])) return true;
                 if(!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
 
@@ -1604,7 +1458,6 @@ public class ButtonTests : MonoBehaviour
             if (IsPastParticiple(words[3])) return true;
             if (IsAnIngVerbs(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAPrasphalVerb(words[3], words[4])) return true;
             }
@@ -1613,47 +1466,37 @@ public class ButtonTests : MonoBehaviour
         
         if (Had(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (Been(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (!IsFixedLenght(words, 6))
                         {
-                            words = RemoveAdverbs(words, 6);
                             if (IsAPrasphalVerb(words[5], words[6])) return true;
                         }
                     }
                 }
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
             }
             if (Been(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
@@ -1661,24 +1504,19 @@ public class ButtonTests : MonoBehaviour
         }
         if (Hadnt(words[1])) 
         {
-            words = RemoveAdverbs(words, 2);
             if (Been(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
@@ -1686,68 +1524,47 @@ public class ButtonTests : MonoBehaviour
         
         if (Will(words[1])) 
         {
-            words = RemoveAdverbs(words, 2);
             if (IsABaseVerb(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
-                if(!IsFixedLenght(words, 4))
-                {
-                    words = RemoveAdverbs(words, 4);
-                }
                 if (IsABaseVerb(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (!IsFixedLenght(words, 6))
                         {
-                            words = RemoveAdverbs(words, 6);
                             if (IsAPrasphalVerb(words[5], words[6])) return true;
                         }
                     }
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
                 if (Have(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        words = RemoveAdverbs(words, 5);
-                    }
                     if (Been(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (IsAnIngVerbs(words[5]))
                         {
-                            words = RemoveAdverbs(words, 6);
                             if (IsPastParticiple(words[6])) return true;
                             if (IsAPrasphalVerb(words[6], words[7])) return true;
                         }
@@ -1761,14 +1578,11 @@ public class ButtonTests : MonoBehaviour
             }
             if (Have(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (Been(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (IsAPrasphalVerb(words[5], words[6])) return true;
                     }
@@ -1777,37 +1591,29 @@ public class ButtonTests : MonoBehaviour
         }
         if (Wont(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsABaseVerb(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
             if (Have(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (Been(words[3])) 
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (IsAPrasphalVerb(words[5], words[6])) return true;
                     }
@@ -1822,7 +1628,6 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (GoingTo(words[2], words[3]))
                     {
-                        words = RemoveAdverbs(words, 4);
                         if (IsABaseVerb(words[4])) return true;
                         if (!IsFixedLenght(words, 4))
                         {
@@ -1850,7 +1655,6 @@ public class ButtonTests : MonoBehaviour
         {
             if (UsedTo(words[1], words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[3])) return true;
                 if (!IsFixedLenght(words, 3))
                 {
@@ -1870,7 +1674,6 @@ public class ButtonTests : MonoBehaviour
             {
                 if (UseTo(words[2], words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (!IsFixedLenght(words, 4))
                     {
                         if (IsABaseVerb(words[4]))
@@ -1887,10 +1690,8 @@ public class ButtonTests : MonoBehaviour
                 }
             }
             // I didn't always carefully play soccer yesterday.
-            words = RemoveAdverbs(words, 2);
             if (!IsFixedLenght(words, 3))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[2]))
                 {
                     if (IsAPlural(words[3])) return true;
@@ -1909,10 +1710,8 @@ public class ButtonTests : MonoBehaviour
         }
         if (Did(words[1])) 
         {
-            words = RemoveAdverbs(words, 2);
             if (!IsFixedLenght(words, 3))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[2]))
                 {
                     if (IsAPlural(words[3])) return true;
@@ -1930,10 +1729,8 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsABaseVerb(words[3]))
                     {
                         if (IsAPlural(words[4])) return true;
@@ -1954,10 +1751,8 @@ public class ButtonTests : MonoBehaviour
 
         if (IsAModal(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsABaseVerb(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
             }
             if (IsAPrasphalVerb(words[3], words[4])) return true;
@@ -1995,11 +1790,6 @@ public class ButtonTests : MonoBehaviour
         bool subjectRecognized = IsAPluralSubject(words[0]) || IsAPlural(words[1]);
         if (Have(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
-            if (!IsFixedLenght(words, 3))
-            {
-                words = RemoveAdverbs(words, 3);
-            }
             if (IsPastParticiple(words[2]))
             {
                 if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
@@ -2013,11 +1803,6 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
-                if (!IsFixedLenght(words, 4))
-                {
-                    words = RemoveAdverbs(words, 4);
-                }
                 if (IsAnAdjective(words[3])) return true;
                 if (IsPastParticiple(words[2]))
                 {
@@ -2032,11 +1817,9 @@ public class ButtonTests : MonoBehaviour
                 }
                 if (Been(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (IsAPrasphalVerb(words[5], words[6])) return true;
                     }
@@ -2063,22 +1846,12 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true;
             if (Been(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
-                if (!IsFixedLenght(words, 4))
-                {
-                    words = RemoveAdverbs(words, 4);
-                }
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        words = RemoveAdverbs(words, 4);
-                    }
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
@@ -2105,7 +1878,6 @@ public class ButtonTests : MonoBehaviour
         }
         if (Are(words[1]) || Arent(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsAnIngVerbs(words[2])) // the dogs are playing
             {
                 if(IsFixedLenght(words, 3)) return true;
@@ -2116,7 +1888,6 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsAnIngVerbs(words[3])) // the dogs are not playing
                 {
                     if (words.Length == 4) return true;
@@ -2212,12 +1983,10 @@ public class ButtonTests : MonoBehaviour
         }
         if (Are(words[1]) || Arent(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsFixedLenght(words, 2)) return true; // they are
             if (IsAnIngVerbs(words[2])) return true;
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsFixedLenght(words, 3)) return true;// they are not
                 if (IsAnIngVerbs(words[3])) return true;// they are not standig (here)
                 if (IsAnAdjective(words[3])) return true;
@@ -2271,7 +2040,6 @@ public class ButtonTests : MonoBehaviour
         if (IsAnIngVerbs(words[1])) return true; // cars running
         if (Havent(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsPastParticiple(words[2]))
             {
                 if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
@@ -2290,11 +2058,9 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true;
             if (Been(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 4)){
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
@@ -2307,14 +2073,12 @@ public class ButtonTests : MonoBehaviour
             }
             if (IsAnIngVerbs(words[2]))
             {
-                words = RemoveAdverbs(words, 4);
                 if (IsPastParticiple(words[3])) return true;
             }
             if (IsAPrasphalVerb(words[2], words[3])) return true;
         }
         if (Werent(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsPastParticiple(words[2])) return true;
             if (IsAnAdjective(words[2])) return true;
             if (The(words[2]) || A(words[2]))
@@ -2324,10 +2088,8 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true;
             if (IsAnIngVerbs(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
                 if (IsPastParticiple(words[3])) return true;
@@ -2337,7 +2099,6 @@ public class ButtonTests : MonoBehaviour
         }
         if (Were(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsPastParticiple(words[2])) return true;
             if (The(words[2]) || A(words[2]))
             {
@@ -2346,17 +2107,14 @@ public class ButtonTests : MonoBehaviour
             if (IsAnAdjective(words[2])) return true;
             if (IsAnIngVerbs(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
                 if (IsPastParticiple(words[3])) return true;
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsAnAdjective(words[3])) return true;
                 if (Been(words[3]))
                 {
@@ -2369,10 +2127,8 @@ public class ButtonTests : MonoBehaviour
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                     
@@ -2389,45 +2145,35 @@ public class ButtonTests : MonoBehaviour
         {
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (Been(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                 }
             }
-            words = RemoveAdverbs(words, 2);
             if (Been(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
         }
         if (Hadnt(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (Been(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsAPrasphalVerb(words[3], words[4])) return true;
                 }
             }
@@ -2435,50 +2181,39 @@ public class ButtonTests : MonoBehaviour
         }
         if (Will(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsABaseVerb(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                 }
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                     }
                 }
                 if (Have(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsABaseVerb(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                         if (IsAnIngVerbs(words[5]))
                         {
-                            words = RemoveAdverbs(words, 6);
                             if (IsPastParticiple(words[6])) return true;
                         }
                     }
                     if (Been(words[4]))
                     {
-                        words = RemoveAdverbs(words, 4);
                         if (IsPastParticiple(words[4])) return true;
                         if (!IsFixedLenght(words, 5))
                         {
-                            words = RemoveAdverbs(words, 5);
                             if (IsAPrasphalVerb(words[4], words[5])) return true;
                         }
                     }
@@ -2486,24 +2221,19 @@ public class ButtonTests : MonoBehaviour
             }
             if (Have(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                     }
                 }
                 if (Been(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (!IsFixedLenght(words, 4))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
@@ -2511,36 +2241,28 @@ public class ButtonTests : MonoBehaviour
         }
         if (Wont(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsABaseVerb(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
                 if (IsAnIngVerbs(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                 }
             }
             if (Have(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsPastParticiple(words[4])) return true;
                     if (IsAnIngVerbs(words[4]))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsPastParticiple(words[5])) return true;
                     }
                 }
                 if (Been(words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (!IsFixedLenght(words, 5))
                     {
-                        words = RemoveAdverbs(words, 5);
                         if (IsAPrasphalVerb(words[4], words[5])) return true;
                     }
                 }
@@ -2555,7 +2277,6 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (GoingTo(words[2], words[3]))
                     {
-                        words = RemoveAdverbs(words, 4);
                         if (IsABaseVerb(words[4])) return true;
                         if (!IsFixedLenght(words, 4))
                         {
@@ -2583,7 +2304,6 @@ public class ButtonTests : MonoBehaviour
         {
             if (UsedTo(words[1], words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[3])) return true;
                 if (!IsFixedLenght(words, 3))
                 {
@@ -2603,7 +2323,6 @@ public class ButtonTests : MonoBehaviour
             {
                 if (UseTo(words[2], words[3]))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (!IsFixedLenght(words, 4))
                     {
                         if (IsABaseVerb(words[4]))
@@ -2619,11 +2338,8 @@ public class ButtonTests : MonoBehaviour
                     if (IsABaseVerb(words[4])) return true;
                 }
             }
-            // They didn't always carefully play soccer yesterday.
-            words = RemoveAdverbs(words, 2);
             if (!IsFixedLenght(words, 3))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[2]))
                 {
                     if (IsAPlural(words[3])) return true;
@@ -2634,11 +2350,8 @@ public class ButtonTests : MonoBehaviour
         }
         if (Did(words[1]))
         {
-            // "they did always carefully play soccer yesterday.",
-            words = RemoveAdverbs(words, 2);
             if (!IsFixedLenght(words, 3))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsABaseVerb(words[2]))
                 {
                     if (IsAPlural(words[3])) return true;
@@ -2648,10 +2361,8 @@ public class ButtonTests : MonoBehaviour
             }
             if (Not(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (!IsFixedLenght(words, 4))
                 {
-                    words = RemoveAdverbs(words, 4);
                     if (IsABaseVerb(words[3]))
                     {
                         if (IsAPlural(words[4])) return true;
@@ -2664,16 +2375,15 @@ public class ButtonTests : MonoBehaviour
 
         if (IsAModal(words[1]))
         {
-            words = RemoveAdverbs(words, 2);
             if (IsABaseVerb(words[2]))
             {
-                words = RemoveAdverbs(words, 3);
                 if (IsPastParticiple(words[3])) return true;
             }
             if (IsAPrasphalVerb(words[3], words[4])) return true;
         }
         return false;
     }
+
     public static string[] RemoveAdverbs(string[] words, int position)
     {
         if (position >= words.Length) position = position - 1;//return words;
@@ -2747,7 +2457,7 @@ public class ButtonTests : MonoBehaviour
         } 
         return words;
     }
-    public static string[] Normalization(string[] words) // se clicchi sulla parola, la aggiungi all'array e poi vedi se la frase Ë corretta
+    public static string[] Normalization(string[] words) // se clicchi sulla parola, la aggiungi all'array e poi vedi se la frase √® corretta
     {
         words = CheckEachSingleWord(words);
         List<string> list = new List<string>(words);
@@ -2889,596 +2599,222 @@ public class ButtonTests : MonoBehaviour
         }
     }
 
+    static bool IsQuestionValid(string[] words, out List<int> foundAdverbsPosition)
+    {
+        List<string> foundAdverbs = new List<string>();
+        foundAdverbsPosition = new List<int>();
+
+        for (int i = 0; i < words.Length; i++)
+        {
+            string word = words[i];
+
+            if (frequencyAdverbs.Contains(word))
+            {
+                foundAdverbs.Add("Frequency");
+                foundAdverbsPosition.Add(i);
+            }
+            else if (mannerAdverbs.Contains(word))
+            {
+                foundAdverbs.Add("Manner");
+                foundAdverbsPosition.Add(i);
+            }
+            else if (placeAdverbs.Contains(word))
+            {
+                foundAdverbs.Add("Place");
+                foundAdverbsPosition.Add(i);
+            }
+            else if (timeAdverbs.Contains(word))
+            {
+                foundAdverbs.Add("Time");
+                foundAdverbsPosition.Add(i);
+            }
+        }
+
+        // Check if the detected sequence matches any valid rule
+        List<List<string>> validRules = new List<List<string>>
+        {
+            new List<string> { "Frequency", "Manner", "Place", "Time" },
+            new List<string> { "Manner", "Place", "Frequency", "Time" },
+            new List<string> { "Frequency", "Place", "Manner", "Time" },
+            new List<string> { "Place", "Manner", "Frequency", "Time" },
+            new List<string> { "Time", "Frequency", "Manner", "Place" },
+            new List<string> { "Frequency", "Place", "Frequency", "Time" }
+        };
+        foreach (List<string> list in validRules)
+        {
+            if (foundAdverbs.SequenceEqual(list))
+            {
+                return true; // Found an exact match
+            }
+        }
+        return false; // No match found
+    }
+
+    static string[] RemoveQuestionAdverbs(string[] words)
+    {
+        List<string> filteredWords = new List<string>();
+
+        if (IsQuestionValid(words, out List<int> foundAdverbsPosition))
+        {
+            for (int i = 0; i < words.Length; i++)
+            {
+                // Keep words that are NOT in the detected adverb positions
+                if (!foundAdverbsPosition.Contains(i))
+                {
+                    filteredWords.Add(words[i]);
+                }
+            }
+        }
+        else
+        {
+            return words; // If the sentence is not valid, return the original words
+        }
+
+        return filteredWords.ToArray(); // Convert list to array
+    }
+
     private void Start()
     {
         List<string> questions = new List<string>
         {
-            //"Does John carefully really study today?", // NOT RECOGNIZED OK!!! LOVE IT
-            //"Does she actually like pizza here?", // gestiscili pi˘ in l‡ (actually)
-            //"Are you quite happy here?", (quite)
-            // "Do they currently live somewhere in the city?", // in the city - not handled atm
+            "How does she usually work skillfully inside nowadays?",  // Frequency ‚Üí Manner ‚Üí Place ‚Üí Time
+            "Why does she skillfully work inside regularly nowadays?",  // Manner ‚Üí Place ‚Üí Frequency ‚Üí Time
+            "Where does she often work inside skillfully nowadays?",  // Frequency ‚Üí Place ‚Üí Manner ‚Üí Time
+            "Where does she inside skillfully work regularly today?",  // Place ‚Üí Manner ‚Üí Frequency ‚Üí Time
+            "When does she nowadays regularly work skillfully here?",  // Time ‚Üí Frequency ‚Üí Manner ‚Üí Place
 
+            //// solo last 3 pos can contain adverbs 
+            //// REGOLA: FREQUENZA + MODO + LUOGO + TEMPO
+            //// [Question Word] + Auxiliary Verb(if needed) +Subject + Verb + [Manner] + [Place] + [Frequency] + [Time]
+            //// Present Simple (Singolare) THE CAT
+            "How does the cat often visit their grandparents nearby regularly today?",
+            "How does the cat not often visit their grandparents nearby regularly today?",
 
-            // present_simple_questions
-            "Do you really like pizza here?",
-            "Do you always like pizza here?",
-            "Do the students study today?",
-            "Do the students really study today?",
-            "Does the student study today?",
-            "Does the student really study today?",
-            "Does John study today?",
-            "Does John really study today?",
-            "Does John really study carefully today?", // ok grammar but it is more natural "every day"
-
-            "Does she often like pizza here?",
-            "Does she like pizza?",
-            "Does she like pizza often here?", // grammatically correct
-
-            "Do you always study carefully?",
-            "Does she usually cook skillfully?",
-            "Do they often visit their grandparents nearby?",
-            "Does he sometimes write emails quickly?",
-            "Do we rarely eat outside?",
-            "Does the teacher never explain things slowly?",
-            //"Do you regularly go to the gym at night?",
-            "Do you regularly go to the gym today?",
-            "Does she occasionally travel there?",
-
-            "Does John immediately respond to messages neatly?",
-            "Doesn't John immediately respond to messages neatly?",
-            "Does not John immediately respond to messages neatly?",
-
-            "Don't you really like pizza here?",
-            "Don't you always like pizza here?",
-            "Don't the students study today?",
-            "Don't the students really study today?",
-            "Doesn't the student study today?",
-            "Doesn't the student really study today?",
-            "Doesn't John study today?",
-            "Doesn't John really study today?",
-            "Doesn't John really study carefully today?", // Ok grammaticalmente, ma pi˘ naturale con "every day"
-            "Doesn't she often like pizza here?",
-            "Doesn't she like pizza?",
-            "Doesn't she like pizza often here?",
-            "Don't you always study carefully?",
-            "Doesn't she usually cook skillfully?",
-            "Don't they often visit their grandparents nearby?",
-            "Doesn't he sometimes write emails quickly?",
-            "Don't we rarely eat outside?",
-            "Doesn't the teacher ever explain things slowly?", // Per "never", si usa "ever" nella forma negativa
-            //"Don't you regularly go to the gym at night?",
-            "Don't you regularly go to the gym today?",
-            "Doesn't she occasionally travel there?",
-
-            //"Why Don't you regularly go to the gym at night?",
-            "Why Don't you regularly go to the gym today?",
-            "Why Doesn't she occasionally travel there?",
-
-            // ARE IS - present simple
-            "Are you really happy today?", 
-            "Are they students?", 
-            "Are we late?", 
-            "Are the dogs outside?", 
-            "Are the books on the table?", 
-            "Are they friends?",
-
-            "Aren't you really happy today?",
-            "Aren't they students?",
-            "Aren't we late?",
-            "Aren't the dogs outside?",
-            "Aren't the books on the table?",
-            "Aren't they friends?", // ARE NOT THEY____ INNATURALE
-
-            "Is she really happy today?", 
-            "Is she a student?",          
-            "Is it late?",                   
-            "Is the dog outside?",           
-            "Is the book on the table?",     
-            "Is she a friend?",
-
-            "Isn't she really happy today?",
-            "Isn't she a student?",
-            "Isn't it late?",
-            "Isn't the dog outside?",
-            "Isn't the book on the table?",
-            "Isn't she a friend?",
-
-            "Is she not really happy today?",
-            "Is she not a student?",
-            "Is it not late?",
-            "Is the dog not outside?",
-            "Is the book not on the table?",
-            "Is she not a friend?",
-
-            // present continuous
-            "Is she always studying carefully now?",
-            "Isn't she always studying carefully now?",
+            "How does the cat visit their grandparents nearby regularly today?",
+            "How does the cat not visit their grandparents nearby regularly today?",
             
-            "Is she immediately responding to emails quickly?",
-            "Isn't she immediately responding to emails quickly?",
-            
-            "Is he often playing soccer nearby?",
-            "Isn't he often playing soccer nearby?",
-            
-            "Is she never cooking skillfully at night?",
-            "Isn't she never cooking skillfully at night?",
-            
-            "Is he occasionally reading a book outside?",
-            "Isn't he occasionally reading a book outside?",
-
-            "Are they usually working late tonight slowly?",
-            "Aren't they usually working late tonight slowly?",
-
-            "Is the teacher rarely explaining things slowly today?",
-            //"Is not the teacher rarely explaining things slowly today?", // IS NOT THEY____ INNATURALE
-            "Isn't the teacher rarely explaining things slowly today?",
-
-            // with question words -
-            "Why do you really like pizza here so much?", // Aggiunto "so much" per rafforzare il modo
-            "Why don't you really like pizza here so much?", // Aggiunto "so much" per rafforzare il modo
-            
-            "Why does the student really study carefully today?", // Naturalmente contiene gi‡ 3 avverbi
-            "Why doesn't the student really study carefully today?", // Naturalmente contiene gi‡ 3 avverbi
-            
-            "Why does she often like pizza so much here?", // Aggiunto "so much" per enfatizzare
-            "Why doesn't she often like pizza so much here?", // Aggiunto "so much" per enfatizzare
-            
-            "Why does he sometimes write emails so quickly inside?", // Aggiunto "inside" come luogo
-            "Why doesn't he sometimes write emails so quickly inside?", // Aggiunto "inside" come luogo
-            
-            "When do you always study so carefully?", // Aggiunto "so" per rendere la frase pi˘ enfatica
-            "When don't you always study so carefully?", // Aggiunto "so" per rendere la frase pi˘ enfatica
-            
-            "When don't you always study so carefully here?", // Aggiunto "here" per completare i 3 avverbi
-            "When do you always study so carefully here?", // Aggiunto "here" per completare i 3 avverbi
-            
-            "When does she exactly study?",
-            "When doesn't she exactly study?",
-
-            "How does John really study so carefully every day?", // Aggiunto "every day" per migliorare
-            "How doesn't John really study so carefully every day?", // Aggiunto "every day" per migliorare
-            
-            "How does John immediately respond to messages neatly?",
-            "How doesn't John immediately respond to messages neatly?",
-            "How does not John immediately respond to messages neatly?", // NOO
-            "How does John not immediately respond to messages neatly?", // SIII
-
-            "How do they often visit their grandparents nearby regularly?", // Aggiunto "regularly"
-            "How don't they often visit their grandparents nearby regularly?", // Aggiunto "regularly" - 
-            //"How do not they often visit their grandparents nearby regularly?", // NOOO
-            "How do they not often visit their grandparents nearby regularly today?", // SIIIIIII
-
-            "How do they often visit their grandparents nearby?", // Aggiunto "regularly"
-            "How don't they often visit their grandparents nearby?", // Aggiunto "regularly" - NON riconosciuto - Max 1 Adverb
-            
-            "How do you always study carefully?",
-            "How don't you always study carefully?",
-            
-            "Where doesn't she usually cook so skillfully nowadays?", // Aggiunto "nowadays" per riferirsi al tempo
-            "Where does she usually cook so skillfully nowadays?", // Aggiunto "nowadays" per riferirsi al tempo
-            
-            "Where does she occasionally travel there?",
-            "Where doesn't she occasionally travel there?",
-
-            "Who is regularly studying so carefully here?", // Uso di 'Who' per identificare chi svolge l'azione
-            "Who isn't regularly studying so carefully here?", // Uso di 'Who' per identificare chi svolge l'azione
-            "Who is always writing so quickly here today?", // Tre avverbi ben distribuiti (frequenza, modo, luogo/tempo)
-            "Who isn't always writing so quickly here today?", // Tre avverbi ben distribuiti (frequenza, modo, luogo/tempo)
-
-            "What is she really doing so carefully now?", // Uso di 'What' per chiedere cosa sta facendo
-            "What isn't she really doing so carefully now?", // Uso di 'What' per chiedere cosa sta facendo
-            
-            "What do they usually enjoy so skillfully at night?", // Aggiunto "skillfully" e "at night" per i tre avverbi
-            "What don't they usually enjoy so skillfully at night?", // Aggiunto "skillfully" e "at night" per i tre avverbi
-            
-            "What do you usually do every morning?",
-            "What don't you usually do every morning?",
-
-            "Why do they run really so fast?",
-            "Why don't they run really so fast?",
-            
-            "Why is she always studying so carefully now?", // Frase gi‡ corretta e fluida
-            "Why isn't she always studying so carefully now?", // Frase gi‡ corretta e fluida
-
-            // old ones
-            "Do you like pizza here?",
-            "Does she like pizza here?",
-            "Are you happy here?",
-            "Is she a teacher here?",
-
-            "What do you do every morning?",
-            "What does she do every morning?",
-
-            "Where does he live?",
-            "Where do they live?",
-
-            "Why do they run so fast?",
-            "Why does she run so fast?",
-
-            "When does she study?",
-            "When do you study?",
+          
+    
+            // Present Simple (Plurale)
+            "How do the cats often visit their grandparents nearby regularly today?",
+            "How do the cats not often visit their grandparents nearby regularly today?",
+            "How do cats often visit their grandparents nearby regularly today?",
+            "How do cats not often visit their grandparents nearby regularly today?",
 
-            //"How do you make this cake?", THIS THAT ETC...
-            "How do you make things?",
-            //"How does she make this cake?",
+            // Present Continuous (Singolare)
+            "How is the cat often visiting their grandparents nearby regularly today?",
 
-            "Does she play tennis?",
-            "Do they go to school every day?",
-            "Does he work here?",
-            //"Do we need more time?",
-            "Are you happy?",
-            "Is she a teacher?",
-            "Are they at home?",
-            "Is he your friend?",
-            "Are we late?",
-            "What do you do every morning?",
-            "Where does he live?",
-            "Why do they run so fast?",
-            "When does she study?",
+    
+            // Present Continuous (Plurale)
+            "How are the cats often visiting their grandparents nearby regularly today?",
+            "How are the cats not often visiting their grandparents nearby regularly today?",
 
-            //present_perfect_questions
-            "Why have you really liked pizza here so much?",
-            "Why haven't you really liked pizza here so much?",
 
-            "Why has the student really studied carefully today?",
-            "Why hasn't the student really studied carefully today?",
+            // Present Perfect (Singolare)
+            "How has the cat often visited their grandparents nearby regularly today?",
+            "How has the cat not often visited their grandparents nearby regularly today?",
 
-            "Why has she often liked pizza so much here?",
-            "Why hasn't she often liked pizza so much here?",
+    
+            // Present Perfect (Plurale)
+            "How have the cats often visited their grandparents nearby regularly today?",
+            "How have the cats not often visited their grandparents nearby regularly today?",
 
-            "Why has he sometimes written emails so quickly inside?",
-            "Why hasn't he sometimes written emails so quickly inside?",
 
-            "When have you always studied so carefully?",
-            "When haven't you always studied so carefully?",
+            // Present Perfect Continuous (Singolare)
+            "How has the cat often been visiting their grandparents nearby regularly today?",
+            "How has the cat not often been visiting their grandparents nearby regularly today?",
 
-            "When haven't you always studied so carefully here?",
-            "When have you always studied so carefully here?",
+    
+            // Present Perfect Continuous (Plurale)
+            "How have the cats often been visiting their grandparents nearby regularly today?",
+            "How have the cats not often been visiting their grandparents nearby regularly today?",
 
-            "When has she exactly studied?",
-            "When hasn't she exactly studied?",
 
-            "How has John really studied so carefully every day?",
-            "How hasn't John really studied so carefully every day?",
+            // Past Simple (Singolare)
+            "How did the cat often visit their grandparents nearby regularly today?",
+            "How did the cat not often visit their grandparents nearby regularly today?",
 
-            "How has John immediately responded to messages neatly?",
-            "How hasn't John immediately responded to messages neatly?",
+    
+            // Past Simple (Plurale)
+            "How did the cats often visit their grandparents nearby regularly today?",
+            "How did the cats not often visit their grandparents nearby regularly today?",
 
-            "How have they often visited their grandparents nearby regularly?",
-            "How haven't they often visited their grandparents nearby regularly?",
 
-            "How have you always studied carefully?",
-            "How haven't you always studied carefully?",
+            // Past Continuous (Singolare)
+            "How was the cat often visiting their grandparents nearby regularly today?",
+            "How was the cat not often visiting their grandparents nearby regularly today?",
 
-            "Where hasn't she usually cooked so skillfully nowadays?",
-            "Where has she usually cooked so skillfully nowadays?",
+    
+            // Past Continuous (Plurale)
+            "How were the cats often visiting their grandparents nearby regularly today?",
+            "How were the cats not often visiting their grandparents nearby regularly today?",
 
-            "Where has she occasionally traveled?",
-            "Where hasn't she occasionally traveled?",
 
-            "Who has regularly studied so carefully here?",
-            "Who hasn't regularly studied so carefully here?",
-            "Who has always written so quickly here today?",
-            "Who hasn't always written so quickly here today?",
+            // Past Perfect (Singolare)
+            "How had the cat often visited their grandparents nearby regularly today?",
+            "How had the cat not often visited their grandparents nearby regularly today?",
 
-            "What has she really done so carefully now?",
-            "What hasn't she really done so carefully now?",
+    
+            // Past Perfect (Plurale)
+            "How had the cats often visited their grandparents nearby regularly today?",
+            "How had the cats not often visited their grandparents nearby regularly today?",
 
-            //"What have they usually enjoyed so skillfully at night?", // NO *-* motherF!!!
-            //"What haven't they usually enjoyed so skillfully at night?", // NO *-* motherF!!!
 
-            "What have they usually enjoyed so skillfully?", // yes motherF!!!
-            "What haven't they usually enjoyed so skillfully?", // yes motherF!!!
+            // Past Perfect Continuous (Singolare)
+            "How had the cat often been visiting their grandparents nearby regularly today?",
+            "How had the cat not often been visiting their grandparents nearby regularly today?",
 
-            //"What have they usually enjoyed at night?", // no motherF!!!
-            //"What haven't they usually enjoyed at night?", // no motherF!!!
+            // Past Perfect Continuous (Plurale)
+            "How had the cats often been visiting their grandparents nearby regularly today?",
+            "How had the cats not often been visiting their grandparents nearby regularly today?",
 
-            "What have you usually done every morning?",
-            "What haven't you usually done every morning?",
 
-            "Why have they run really so fast?",
-            "Why haven't they run really so fast?",
+            // Future Simple (Singolare)
+            "How will the cat often visit their grandparents nearby regularly today?",
+            "How will the cat not often visit their grandparents nearby regularly today?",
+            "How won't the cat often visit their grandparents nearby regularly today?",
 
-            "Why has she always studied so carefully now?",
-            "Why hasn't she always studied so carefully now?",
+    
+            // Future Simple (Plurale)
+            "How will the cats often visit their grandparents nearby regularly today?",
+            "How will the cats not often visit their grandparents nearby regularly today?",
+            "How won't the cats often visit their grandparents nearby regularly today?",
 
-            "Why has the cat always eaten so quickly now?",
-            "Why hasn't the cat always eaten so quickly now?",
 
-            "Why have cats always eaten so quickly now?",
-            "Why haven't cats always eaten so quickly now?",
+            // Future Continuous (Singolare)
+            "How will the cat often be visiting their grandparents nearby regularly today?",
+            "How will the cat not often be visiting their grandparents nearby regularly today?",
+            "How won't the cat often be visiting their grandparents nearby regularly today?",
 
-            //present_perfect_continuous_questions
-            "Why have you really been liking pizza here so much?",
-            "Why haven't you really been liking pizza here so much?",
+    
+            // Future Continuous (Plurale)
+            "How will the cats often be visiting their grandparents nearby regularly today?",
+            "How will the cats not often be visiting their grandparents nearby regularly today?",
+            "How won't the cats often be visiting their grandparents nearby regularly today?",
 
-            "Why has the student really been studying carefully today?",
-            "Why hasn't the student really been studying carefully today?",
 
-            "Why has she often been liking pizza so much here?",
-            "Why hasn't she often been liking pizza so much here?",
-
-            "Why has he sometimes been writing emails so quickly inside?",
-            "Why hasn't he sometimes been writing emails so quickly inside?",
-
-            "When have you always been studying so carefully?",
-            "When haven't you always been studying so carefully?",
-
-            "When haven't you always been studying so carefully here?",
-            "When have you always been studying so carefully here?",
-
-            "When has she exactly been studying?",
-            "When hasn't she exactly been studying?",
-
-            "How has John really been studying so carefully every day?",
-            "How hasn't John really been studying so carefully every day?",
-
-            "How has John immediately been responding to messages neatly?",
-            "How hasn't John immediately been responding to messages neatly?",
-
-            "How have they often been visiting their grandparents nearby regularly?",
-            "How haven't they often been visiting their grandparents nearby regularly?",
-
-            "How have you always been studying carefully?",
-            "How haven't you always been studying carefully?",
-
-            "Where hasn't she usually been cooking so skillfully nowadays?",
-            "Where has she usually been cooking so skillfully nowadays?",
-
-            "Where has she occasionally been traveling?",
-            "Where hasn't she occasionally been traveling?",
-
-            "Who has regularly been studying so carefully here?",
-            "Who hasn't regularly been studying so carefully here?",
-            "Who has always been writing so quickly here today?",
-            "Who hasn't always been writing so quickly here today?",
-
-            "What has she really been doing so carefully now?",
-            "What hasn't she really been doing so carefully now?",
-
-            //"What have they usually been enjoying so skillfully at night?",
-            //"What haven't they usually been enjoying so skillfully at night?",
-
-            "What have they usually been enjoying so skillfully today?",
-            "What haven't they usually been enjoying so skillfully today?",
-
-            "What have you usually been doing every morning?",
-            "What haven't you usually been doing every morning?",
-
-            "Why have they really been running so fast?",
-            "Why haven't they really been running so fast?",
-
-            "Why has she always been studying so carefully now?",
-            "Why hasn't she always been studying so carefully now?",
-
-            "Why has the cat always been eating so carefully now?",
-            "Why hasn't the cat always been eating so carefully now?",
-
-            // past_simple_questions
-            //"Why Didn't you regularly go to the gym at night?",
-            //"Why Did you regularly go to the gym at night?",
-            "Why Didn't you regularly go to the gym today?",
-            "Why Did you regularly go to the gym today?",
-
-            "Why Did she occasionally travel there?",
-            "Why Didn't she occasionally travel there?",
-
-            "Why Did they occasionally travel there?",
-            "Why Didn't they occasionally travel there?",
-
-            "Why Did the cat occasionally eat there?",
-            "Why Didn't the cat occasionally travel there?",
-
-            "Why Did cats occasionally eat there?",
-            "Why Didn't cats occasionally travel there?",
-
-            "Why Did they often visit their grandparents nearby?",
-            "Why Didn't they often visit their grandparents nearby?",
-            
-            // past_continuous_questions
-            "Was she always studying carefully now?",
-            "wasn't she always studying carefully now?",
-
-            "Was she immediately responding to emails quickly?",
-            "wasn't she immediately responding to emails quickly?",
-
-            "Was he often playing soccer nearby?",
-            "wasn't he often playing soccer nearby?",
-
-            //"Was she never cooking skillfully at night?",
-            //"wasn't she never cooking skillfully at night?",
-
-            "Why Didn't you regularly go to the gym today?",
-            "Why Did you regularly go to the gym today?",
-
-            "Was he occasionally reading a book outside?",
-            "wasn't he occasionally reading a book outside?",
-
-            "Was the cat occasionally eating a book outside?",
-            "wasn't the cat occasionally eating a book outside?",
-
-            "Were they usually working late tonight slowly?",
-            "Weren't they usually working late tonight slowly?",
-
-            "Were cats occasionally eating a book outside?",
-            "Weren't cats occasionally eating a book outside?",
-            //"Weren't cats occasionally eating a book outside the freaking fuck?",
-
-            //past_perfect_questions
-            "Why had you really liked pizza here so much?",
-            "Why hadn't you really liked pizza here so much?",
-
-            //"Why had the student really studied carefully that day?", THAT DAY NOT VALID AT THE MOMENT
-            //"Why hadn't the student really studied carefully that day?", THAT DAY NOT VALID AT THE MOMENT
-
-            "Why had the student really studied carefully?",
-            "Why hadn't the student really studied carefully?",
-
-            "Why had she often liked pizza so much here?",
-            "Why hadn't she often liked pizza so much here?",
-
-            "Why had he sometimes written emails so quickly inside?",
-            "Why hadn't he sometimes written emails so quickly inside?",
-
-            "When had you always studied so carefully?",
-            "When hadn't you always studied so carefully?",
-
-            "When hadn't you always studied so carefully here?",
-            "When had you always studied so carefully here?",
-
-            "When had she exactly studied?",
-            "When hadn't she exactly studied?",
-
-            "How had John really studied so carefully every day?",
-            "How hadn't John really studied so carefully every day?",
-
-            "How had John immediately responded to messages neatly?",
-            "How hadn't John immediately responded to messages neatly?",
-
-            "How had they often visited their grandparents nearby regularly?",
-            "How hadn't they often visited their grandparents nearby regularly?",
-
-            "How had you always studied carefully?",
-            "How hadn't you always studied carefully?",
-
-            "Where hadn't she usually cooked so skillfully?",
-            "Where had she usually cooked so skillfully?",
-
-            "Where had she occasionally traveled?",
-            "Where hadn't she occasionally traveled?",
-
-            "Who had regularly studied so carefully here?",
-            "Who hadn't regularly studied so carefully here?",
-            //"Who had always written so quickly here that day?", THAT DAY NOT VALID ATM
-            //"Who hadn't always written so quickly here that day?", THAT DAY NOT VALID ATM
-
-            "Who had always written so quickly here?",
-            "Who hadn't always written so quickly here?",
-
-            "What had she really done so carefully?",
-            "What hadn't she really done so carefully?",
-
-            //"What had they usually enjoyed so skillfully at night?",
-            //"What hadn't they usually enjoyed so skillfully at night?",
-
-            "What had they usually enjoyed so skillfully today?",
-            "What hadn't they usually enjoyed so skillfully today?",
-
-            "What had you usually done every morning?",
-            "What hadn't you usually done every morning?",
-
-            "Why had they really run so fast?",
-            "Why hadn't they really run so fast?",
-
-            "Why had she always studied so carefully?",
-            "Why hadn't she always studied so carefully?",
-
-            "Why had the cat always eaten so quickly?",
-            "Why hadn't the cat always eaten so quickly?",
-
-            "Why had cats always eaten so quickly?",
-            "Why hadn't cats always eaten so quickly?",
-
-            "Why had cats always eaten so quickly here?",
-            "Why hadn't cats always eaten so quickly here?",
-
-            //"Why had cats always eaten so quickly those days?", THAT DAY ETC .... -> CNTRL + F and search for "DO NOT DELETE!!" there is the leaf
-            //"Why hadn't cats always eaten so quickly that day?", 
-
-            //past_perfect_continuous_questions
-            "Why had cats always been eating so quickly here?",
-            "Why hadn't cats always been eating so quickly here?",
-
-            "Why had the cat always been eating so quickly here?",
-            "Why hadn't the cat always been eating so quickly here?",
-            
-            //future_simple_questions
-
-            "How will they often visit their grandparents nearby regularly?",
-
-            "How will the cat often visit their grandparents nearby regularly?",
-            "How will the cat not often visit their grandparents nearby regularly?",
-            "How won't the cat often visit their grandparents nearby regularly?",
-
-            "How will cats not often visit their grandparents nearby regularly?",
-            "How won't the cats often visit their grandparents nearby regularly?",
-            "How will the cats not often visit their grandparents nearby regularly?",
-
-            "How will cats not often visit their grandparents nearby regularly?",
-            "How won't cats often visit their grandparents nearby regularly?",
-            "How will cats not often visit their grandparents nearby regularly?",
-
-            //"Why will cats always eat so quickly?", // no
-            //"Why won't cats always eat so quickly?", // no
-            "How will they often visit their grandparents nearby regularly?",
-            "How won't they often visit their grandparents nearby regularly?",
-            //"Where will she usually cook so skillfully in those days?", // no
-            //"Where won't she usually cook so skillfully in those days?", // no
-
-            "How will they not often visit their grandparents nearby regularly?",
-            "Why will cats not always eat so quickly?",
-
-            "How will they not often visit their grandparents nearby regularly?",
-            "How will they not often visit their grandparents nearby regularly?",
-            //"Where will she not usually cook so skillfully in those days?", // no
-            //"Where will she not usually cook so skillfully in those days?" // no
-
-        //future_continuous_questions
-        //future_perfect_questions
-        //future_perfect_continuous_questions
-
-            // Present Simple
-            "How do they often visit their grandparents nearby regularly today?",
-            "How do they not often visit their grandparents nearby regularly today?",
-
-            // Present Continuous
-            "How are they often visiting their grandparents nearby regularly today?",
-            "How are they not often visiting their grandparents nearby regularly today?",
-
-            // Present Perfect
-            "How have they often visited their grandparents nearby regularly today?",
-            "How have they not often visited their grandparents nearby regularly today?",
-
-            // Present Perfect Continuous
-            "How have they often been visiting their grandparents nearby regularly today?",
-            "How have they not often been visiting their grandparents nearby regularly today?",
-
-            // Past Simple
-            "How did they often visit their grandparents nearby regularly today?",
-            "How did they not often visit their grandparents nearby regularly today?",
-
-            // Past Continuous
-            "How were they often visiting their grandparents nearby regularly today?",
-            "How were they not often visiting their grandparents nearby regularly today?",
-
-            // Past Perfect
-            "How had they often visited their grandparents nearby regularly today?",
-            "How had they not often visited their grandparents nearby regularly today?",
-
-            // Past Perfect Continuous
-            "How had they often been visiting their grandparents nearby regularly today?",
-            "How had they not often been visiting their grandparents nearby regularly today?",
-
-            // Future Simple
-            "How will they often visit their grandparents nearby regularly today?",
-            "How will they not often visit their grandparents nearby regularly today?",
-            "How won't they often visit their grandparents nearby regularly today?",
-
-            // Future Continuous
-            "How will they often be visiting their grandparents nearby regularly today?",
-            "How will they not often be visiting their grandparents nearby regularly today?",
-            "How won't they often be visiting their grandparents nearby regularly today?",
-
-            // Future Perfect
-            "How will they often have visited their grandparents nearby regularly today?",
-            "How will they not often have visited their grandparents nearby regularly today?",
-            "How won't they often have visited their grandparents nearby regularly today?",
-
-            // Future Perfect Continuous
-            "How will they often have been visiting their grandparents nearby regularly today?",
-            "How will they not often have been visiting their grandparents nearby regularly today?",
-            "How won't they often have been visiting their grandparents nearby regularly today?"
-
+            // Future Perfect (Singolare)
+            "How will the cat often have visited their grandparents nearby regularly today?",
+            "How will the cat not often have visited their grandparents nearby regularly today?",
+            "How won't the cat often have visited their grandparents nearby regularly today?",
+
+    
+            // Future Perfect (Plurale)
+            "How will the cats often have visited their grandparents nearby regularly today?",
+            "How will the cats not often have visited their grandparents nearby regularly today?",
+            "How won't the cats often have visited their grandparents nearby regularly today?",
+
+
+            // Future Perfect Continuous (Singolare)
+            "How will the cat often have been visiting their grandparents nearby regularly today?",
+            "How will the cat not often have been visiting their grandparents nearby regularly today?",
+            "How won't the cat often have been visiting their grandparents nearby regularly today?",
+
+    
+            // Future Perfect Continuous (Plurale)
+            "How will the cats often have been visiting their grandparents nearby regularly today?",
+            "How will the cats not often have been visiting their grandparents nearby regularly today?",
+            "How won't the cats often have been visiting their grandparents nearby regularly today?",
 
 
         };
