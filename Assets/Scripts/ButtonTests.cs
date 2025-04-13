@@ -11,16 +11,13 @@ using UnityEngine.Windows;
 public class ButtonTests : MonoBehaviour
 {  
     static List<string> base_verbs_3rd_person = new List<string> { "visits", "needs","makes", "lives", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> past_participle = new List<string> {
-                                                                                "visited", "eaten",
-                                                                                "studied",
-                                                                                "run",
-                                                                                "done",
-                                                                                "responded",
-                                                                                "enjoyed",
-                                                                                "traveled",
-                                                                                "visited",
-                                                            "liked", "needed", "made", "lived", "did","worked", "responded", "answered", "went","explained", "written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" };
+    static List<string> past_participle = new List<string> 
+    { 
+        "visited"//, 
+        //"eaten","studied","run","done","responded","enjoyed","traveled", "liked", 
+        //"needed", "made", "lived", "did","worked", "responded", "answered", "went","explained", 
+        //"written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" 
+    };
     static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
 
     static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
@@ -2770,7 +2767,7 @@ public class ButtonTests : MonoBehaviour
                 foundAdverbs.Add("PluralSubject");
                 foundAdverbsPosition.Add(i);
             }
-            if (IsABaseVerb(word) || IsAnIngVerbs(word))
+            if (IsABaseVerb(word) || IsAnIngVerbs(word) || IsPastParticiple(word))
             {
                 foundAdverbs.Add("Verb");
                 foundAdverbsPosition.Add(i);
@@ -2997,6 +2994,84 @@ public class ButtonTests : MonoBehaviour
             "How are cats often visiting their big grandparents nearby today?",
             "How are cats visiting their big grandparents nearby regularly today?",
             // ok su
+
+            // Present Perfect - Soggetto Singolare e Oggetto Plurale
+            "How has the big cat often visited their big grandparents nearby regularly today?",
+            "How has the cat often visited their big grandparents nearby regularly today?",
+            "How has a big cat often visited their big grandparents nearby regularly today?",
+            "How has a cat often visited their big grandparents nearby regularly today?",
+            // Present Perfect - Soggetto Singolare e Oggetto Singolare
+            "How has the big cat often visited their big grandparent nearby regularly today?",
+            "How has the cat often visited their grandparent nearby regularly today?",
+            "How has a big cat often visited the big grandparent nearby regularly today?",
+            "How has a cat often visited the grandparent nearby regularly today?",
+            "How has a cat often visited a grandparent nearby regularly today?",
+            // Present Perfect - Soggetto Plurale e Oggetto Singolare
+            "How have the big cats often visited their big grandparent nearby regularly today?",
+            "How have the cats often visited their big grandparent nearby regularly today?",
+            "How have big cats often visited their big grandparent nearby regularly today?",
+            "How have cats often visited their big grandparent nearby regularly today?",
+            "How have cats often visited a big grandparent nearby regularly today?",
+            // Present Perfect - Soggetto Plurale e Oggetto Plurale
+            "How have the big cats often visited their big grandparents nearby regularly today?",
+            "How have the cats often visited their grandparents nearby regularly today?",
+            "How have big cats often visited the big grandparents nearby regularly today?",
+            "How have cats often visited the grandparents nearby regularly today?",
+
+            "How has the big cat often visited their big grandparents nearby regularly today?",
+            "How has the big cat often visited their grandparents nearby regularly today?",
+            "How has the big cat often visited their big grandparents regularly today?",
+            "How has the big cat often visited their big grandparents nearby today?",
+            "How has the big cat visited their big grandparents nearby regularly today?",
+            "How has the cat often visited their big grandparents nearby regularly today?",
+            "How has the cat often visited their grandparents nearby regularly today?",
+            "How has the cat often visited their big grandparents regularly today?",
+            "How has the cat often visited their big grandparents nearby today?",
+            "How has the cat visited their big grandparents nearby regularly today?",
+            "How has a big cat often visited their big grandparents nearby regularly today?",
+            "How has a big cat often visited their grandparents nearby regularly today?",
+            "How has a big cat often visited their big grandparents regularly today?",
+            "How has a big cat often visited their big grandparents nearby today?",
+            "How has a big cat visited their big grandparents nearby regularly today?",
+            "How has a cat often visited their big grandparents nearby regularly today?",
+            "How has a cat often visited their grandparents nearby regularly today?",
+            "How has a cat often visited their big grandparents regularly today?",
+            "How has a cat often visited their big grandparents nearby today?",
+            "How has a cat visited their big grandparents nearby regularly today?",
+            "How has the big cat often visited their big grandparent nearby regularly today?",
+            "How has the big cat often visited their grandparent nearby regularly today?",
+            "How has the big cat often visited their big grandparent regularly today?",
+            "How has the big cat often visited their big grandparent nearby today?",
+            "How has the big cat visited their big grandparent nearby regularly today?",
+            "How has the cat often visited their grandparent nearby regularly today?",
+            "How has the cat often visited their big grandparent regularly today?",
+            "How has the cat often visited their big grandparent nearby today?",
+            "How has the cat visited their big grandparent nearby regularly today?",
+            "How has a big cat often visited the big grandparent nearby regularly today?",
+            "How has a big cat often visited the grandparent nearby regularly today?",
+            "How has a big cat often visited their big grandparent regularly today?",
+            "How has a big cat often visited their big grandparent nearby today?",
+            "How has a big cat visited their big grandparent nearby regularly today?",
+            "How has a cat often visited a big grandparent nearby regularly today?",
+            "How have the big cats often visited their big grandparents nearby regularly today?",
+            "How have the big cats often visited their grandparents nearby regularly today?",
+            "How have the big cats often visited their big grandparents regularly today?",
+            "How have the big cats often visited their big grandparents nearby today?",
+            "How have the big cats visited their big grandparents nearby regularly today?",
+            "How have the cats often visited their grandparents nearby regularly today?",
+            "How have the cats often visited their big grandparents regularly today?",
+            "How have the cats often visited their big grandparents nearby today?",
+            "How have the cats visited their big grandparents nearby regularly today?",
+            "How have big cats often visited their big grandparents nearby regularly today?",
+            "How have big cats often visited the big grandparents nearby regularly today?",
+            "How have big cats often visited their big grandparents regularly today?",
+            "How have big cats often visited their big grandparents nearby today?",
+            "How have big cats visited their big grandparents nearby regularly today?",
+            "How have cats often visited their big grandparents nearby regularly today?",
+            "How have cats often visited the grandparents nearby regularly today?",
+            "How have cats often visited their big grandparents regularly today?",
+            "How have cats often visited their big grandparents nearby today?",
+            "How have cats visited their big grandparents nearby regularly today?",
 
         };
 
