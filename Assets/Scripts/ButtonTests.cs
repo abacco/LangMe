@@ -2824,7 +2824,19 @@ public class ButtonTests : MonoBehaviour
             new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Time"},
             new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject", "Time"},
             new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject"},
-            new List<string> { }
+
+            //                      "How            does        the         big         cat                 often     visit     their           big         grandparents?"
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "PluralSubject", "Frequency", "Time"},
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "PluralSubject", "Time"},
+        new List<string> { }
 
             // ------------------------------
         };
@@ -3108,6 +3120,32 @@ public class ButtonTests : MonoBehaviour
 
 
             "How does the big cat often visit their big grandparents nearby regularly today?",
+            "How does the big cat often visit their big grandparents nearby today?", 
+            "How does the big cat often visit their big grandparents today?",
+            "How does the big cat often visit their big grandparents?", 
+            "How does the big cat visit their big grandparents?", 
+            "How does the cat visit their big grandparents?",
+            "How does the cat visit their grandparents?",
+
+            "How does the cat often visit their big grandparents nearby regularly today?",
+            "How does the cat visit their big grandparents nearby regularly today?",
+            "How does the cat visit their grandparents nearby regularly today?",
+            "How does the cat visit their grandparents regularly today?",
+            "How does the cat visit their grandparents today?",
+
+            "How does the cat often visit the big grandparents nearby regularly today?",
+            "How does the cat visit the big grandparents nearby regularly today?",
+            "How does the cat visit the grandparents nearby regularly today?",
+            "How does the cat visit the grandparents regularly today?",
+            "How does the cat visit the grandparents today?",
+
+            "How does the cat often visit the big grandparents nearby regularly today?",
+            "How does the cat visit the big grandparents nearby regularly today?",
+            "How does the cat visit the grandparents nearby regularly today?",
+            "How does the cat visit the grandparents regularly today?",
+            "How does the cat visit the grandparents today?",
+
+
             "How does the big cat often visit their grandparents nearby regularly today?",
             "How does the big cat often visit their big grandparents regularly today?",
             "How does the big cat often visit their big grandparents nearby today?",
