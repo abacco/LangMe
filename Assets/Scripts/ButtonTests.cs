@@ -2615,35 +2615,8 @@ public class ButtonTests : MonoBehaviour
         }
     }
 
-    static Dictionary<int, List<List<string>>> validRulesDict = new Dictionary<int, List<List<string>>>();
 
-    //static void InitializeValidRulesDict() // it works
-    //{
-    //    foreach (List<string> list in validRules)
-    //    {
-    //        int size = list.Count;
-
-    //        if (!validRulesDict.ContainsKey(size))
-    //        {
-    //            validRulesDict[size] = new List<List<string>>();
-    //        }
-
-    //        validRulesDict[size].Add(list);
-    //    }
-
-    //    // Stampa i risultati
-    //    foreach (var kvp in validRulesDict)
-    //    {
-    //        Debug.Log($"Grandezza {kvp.Key}:");
-    //        foreach (var list in kvp.Value)
-    //        {
-    //            Debug.Log($"[{string.Join(", ", list)}]");
-    //        }
-    //    }
-
-    //}
-
-    static Dictionary<int, List<List<string>>> groupedLists = new Dictionary<int, List<List<string>>>
+    static Dictionary<int, List<List<string>>> validRulesDict = new Dictionary<int, List<List<string>>>
     {
         { 13, new List<List<string>> 
                                     {
@@ -2686,10 +2659,16 @@ public class ButtonTests : MonoBehaviour
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-                                     }
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
+                                        }
         },
         { 11, new List<List<string>>
                                     {
+                                        new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
@@ -2753,6 +2732,15 @@ public class ButtonTests : MonoBehaviour
         },
         { 10, new List<List<string>>
                                     {
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
@@ -2810,6 +2798,13 @@ public class ButtonTests : MonoBehaviour
         },
         { 9, new List<List<string>>
                                     {
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
@@ -2851,6 +2846,8 @@ public class ButtonTests : MonoBehaviour
         },
         { 8, new List<List<string>>
                                     {
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject", "Frequency", "Time"},
+                                        new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject", "Place", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Time"},
                                         new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
@@ -2932,281 +2929,7 @@ public class ButtonTests : MonoBehaviour
         },
     };
 
-    /*
-    // Check if the detected sequence matches any valid rule
-    //static List<List<string>> validRules = new List<List<string>>
-    //    {
-    //    // Present Simple
-    //    // 13
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    
-    //    // 12
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, // 12
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, // 12
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    
-    //    // 11
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    
-    //    // 10
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Article", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-
-    //    // 9
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Adjective", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Place", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Article", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Article", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "PluralSubject", "Frequency", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"},
-
-    //    // 8
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Place", "PluralSubject", "Frequency"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Adjective", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Article", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "Adjective", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Possessive", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Article", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "PluralSubject", "Time"},
-
-    //    // 7
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "PluralSubject", "Place", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Adjective", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Place", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "SingularSubject", "Verb", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Place", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "SingularSubject", "Verb", "Adjective", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Article", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "SingularSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Article", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Possessive", "PluralSubject"},
-
-    //    // 6
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "PluralSubject", "Time"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "PluralSubject", "Place"},
-    //    new List<string> {"Interrogative", "Auxiliary", "Adjective", "SingularSubject", "Verb", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Frequency", "Verb", "PluralSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "SingularSubject"},
-    //    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject"},
-
-    //    new List<string> { }
-
-    //        // ------------------------------
-    //    };
-    */
+  
     static bool IsQuestionValid2(string[] words, out List<string> rules) // hold on on this
     {
         words = CheckEachSingleWord(words);
@@ -3295,19 +3018,10 @@ public class ButtonTests : MonoBehaviour
                 foundAdverbsPosition.Add(i);
             }
         }
-
-       
         // how does the cat often visit their big grandparents nearby regularly today
         string rule = string.Join(" ", foundAdverbs);
         rules.Add(rule);
-        //foreach (List<string> list in validRules)
-        //{
-        //    if (foundAdverbs.SequenceEqual(list))
-        //    {
-        //        return true; // Found an exact match
-        //    } 
-        //}
-        List<List<string>> selectedGroup = groupedLists[foundAdverbs.Count];
+        List<List<string>> selectedGroup = validRulesDict[foundAdverbs.Count];
         for (int i = 0; i < selectedGroup.Count; i++)
         {
             if (foundAdverbs.SequenceEqual(selectedGroup[i]))
@@ -3592,8 +3306,7 @@ public class ButtonTests : MonoBehaviour
             "How does big cat visit grandparents nearby",
             "How do cats often visit grandparents",
 
-            // Frasi con 4 parole
-                        // Present Simple
+            // Present Simple
             "How do the big cats visit their nearby grandparents",
             "How do big cats visit grandparents nearby",
             "How does big cat visit grandparents nearby",
@@ -3604,6 +3317,73 @@ public class ButtonTests : MonoBehaviour
             "How does a big cat visit the grandparent",
             "How does a cat visit the grandparent",
             "How does a cat visit a grandparent",
+
+            // Present Cont.
+            "How is the big cat visiting their big grandparents nearby regularly today?",
+            "How is the big cat visiting their big grandparents regularly today?",
+            "How is the big cat visiting their big grandparents nearby today?",
+            "How is the big cat visiting their big grandparents today?",
+            "How is the big cat visiting their grandparents today?",
+            "How is the cat visiting their big grandparents nearby regularly today?",
+            "How is the cat visiting their big grandparents regularly today?",
+            "How is the cat visiting their big grandparents nearby today?",
+            "How is the cat visiting their big grandparents today?",
+            "How is the cat visiting their grandparents today?",
+            "How is a big cat visiting their big grandparents nearby regularly today?",
+            "How is a big cat visiting their big grandparents regularly today?",
+            "How is a big cat visiting their big grandparents nearby today?",
+            "How is a big cat visiting their big grandparents today?",
+            "How is a big cat visiting their grandparents today?",
+            "How is a cat visiting their big grandparents nearby regularly today?",
+            "How is a cat visiting their big grandparents regularly today?",
+            "How is a cat visiting their big grandparents nearby today?",
+            "How is a cat visiting their big grandparents today?",
+            "How is a cat visiting their grandparents today?",
+            "How are the big cats visiting their big grandparent nearby regularly today?",
+            "How are the big cats visiting their big grandparent regularly today?",
+            "How are the big cats visiting their big grandparent nearby today?",
+            "How are the big cats visiting their big grandparent today?",
+            "How are the big cats visiting their grandparent today?",
+            "How are the cats visiting their big grandparent nearby regularly today?",
+            "How are the cats visiting their big grandparent regularly today?",
+            "How are the cats visiting their big grandparent nearby today?",
+            "How are the cats visiting their big grandparent today?",
+            "How are the cats visiting their grandparent today?",
+            "How are big cats visiting their big grandparent nearby regularly today?",
+            "How are big cats visiting their big grandparent regularly today?",
+            "How are big cats visiting their big grandparent nearby today?",
+            "How are big cats visiting their big grandparent today?",
+            "How are big cats visiting their grandparent today?",
+            "How are cats visiting their big grandparent nearby regularly today?",
+            "How are cats visiting their big grandparent regularly today?",
+            "How are cats visiting their big grandparent nearby today?",
+            "How are cats visiting their big grandparent today?",
+            "How are cats visiting their grandparent today?",
+            "How are cats visiting a big grandparent nearby regularly today?",
+            "How are cats visiting a big grandparent regularly today?",
+            "How are cats visiting a big grandparent nearby today?",
+            "How are cats visiting a big grandparent today?",
+            "How are cats visiting a grandparent today?",
+            "How are the big cats visiting their big grandparents nearby regularly today?",
+            "How are the big cats visiting their big grandparents regularly today?",
+            "How are the big cats visiting their big grandparents nearby today?",
+            "How are the big cats visiting their big grandparents today?",
+            "How are the big cats visiting their grandparents today?",
+            "How are the cats visiting their grandparents nearby regularly today?",
+            "How are the cats visiting their grandparents regularly today?",
+            "How are the cats visiting their grandparents nearby today?",
+            "How are the cats visiting their grandparents today?",
+            "How are big cats visiting the big grandparents nearby regularly today?",
+            "How are big cats visiting the big grandparents regularly today?",
+            "How are big cats visiting the big grandparents nearby today?",
+            "How are big cats visiting the big grandparents today?",
+            "How are big cats visiting the grandparents today?",
+            "How are cats visiting the grandparents nearby regularly today?",
+            "How are cats visiting the grandparents regularly today?",
+            "How are cats visiting the grandparents nearby today?",
+            "How are cats visiting the grandparents today?",
+
+
 
             "How have cats been fucking their big grandparents nearby regularly today?",
         };
