@@ -332,6 +332,15 @@ public class ButtonTests : MonoBehaviour
         },
         { 15, new List<List<string>>
                                     {
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //15
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+
                 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //15
                 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //15
                 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //15
@@ -357,6 +366,36 @@ public class ButtonTests : MonoBehaviour
         },
         { 14, new List<List<string>>
                                     {
+            new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //14
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //14
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //14
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //14
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //14
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
             new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
@@ -416,6 +455,65 @@ public class ButtonTests : MonoBehaviour
         },
         { 13, new List<List<string>> 
                                     {
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //13
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+            new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //13
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //13
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //13
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //13
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
             new List<string> {"Article", "SingularSubject", "Auxiliary", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
@@ -528,8 +626,99 @@ public class ButtonTests : MonoBehaviour
         },
         { 12, new List<List<string>> 
                                     {
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Time"}, //12
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Preposition", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //12
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
 new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
-
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
 new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
 new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
@@ -742,6 +931,107 @@ new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "
         },
         { 11, new List<List<string>>
                                     {
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Time"}, //11
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Preposition", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Preposition", "Time"}, //11
+
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //11
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //11
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
             new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
 new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
 new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
@@ -1057,6 +1347,87 @@ new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "
         },
         { 10, new List<List<string>>
                                     {
+            new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "SingularSubject", "Time"}, //10
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //10
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Place", "Time"}, //10
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //10
+            new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "SingularSubject", "Preposition", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Preposition", "Time"}, //10
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //10
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Frequency", "Preposition", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Place", "Preposition", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //10
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Time"}, //10
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //10
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //10
             new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
 new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //10
 new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
@@ -1399,6 +1770,57 @@ new List<string> {"PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive",
         },
         { 9, new List<List<string>>
                                     {
+
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //9
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //9
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Place", "Time"}, //9
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //9
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Time"}, //9
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //9
+
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //9
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Preposition", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Frequency", "Preposition", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Place", "Preposition", "Time"}, //9
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Preposition", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
+            new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Been", "Ed-Verb", "Ing-Verb", "Article", "SingularSubject", "Time"}, //9
+            new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //9
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //9
+new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //9
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Place", "Time"}, //9
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Time"}, //9
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //9
             new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //9
 new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //9
 new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Time"}, //9
@@ -1731,6 +2153,26 @@ new List<string> {"PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "A
         },
         { 8, new List<List<string>>
                                     {
+
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "SingularSubject", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Time"}, //8
+            new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Verb", "Ing-Verb", "Article", "SingularSubject", "Time"}, //8
+            new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "SingularSubject", "Preposition", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Preposition", "Time"}, //8
+            new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //8
+new List<string> {"Article", "SingularSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //8
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //8
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //8
+new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Time"}, //8
+new List<string> {"Article", "PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Time"}, //8
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Place", "Time"}, //8
             new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "PluralSubject", "Time"}, //8
 new List<string> {"PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //8
 new List<string> {"PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "PluralSubject", "Place", "Time"}, //8
@@ -1983,7 +2425,9 @@ new List<string> {"PluralSubject", "Auxiliary", "Auxiliary", "Ed-Verb", "Article
 
         {
 new List<string> {"PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "PluralSubject", "Time"}, //7
-
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //7
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "SingularSubject", "Time"}, //7
+new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "PluralSubject", "Time"}, //7
             new List<string> {"PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //7
 new List<string> {"PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "SingularSubject", "Time"}, //7
 
@@ -2331,11 +2775,11 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
             List<string> words2 = foundAdverbsPosition.ElementAt(0).Split(' ').ToList();
             string formattedOutput = string.Join(", ", words2.Select(words2 => $"\"{words2}\""));
             Debug.LogError(question + "\n" + "new List<string> {" + formattedOutput + "}, // " + words2.Count);
-           
-            //string myTrick = "new List<string> {" + formattedOutput + "}, //" + words2.Count;
 
-                string myTrick = "new List<string> {" + formattedOutput + "}, //" + words2.Count;
-                allNewRules.Add(myTrick);
+            //string myTrick = "new List<string> {" + formattedOutput + "}, //" + words2.Count;
+            string myTrick = "new List<string> {" + formattedOutput + "}, //" + words2.Count;
+            allNewRules.Add(myTrick);
+
             return false;
         }
     }
@@ -4391,828 +4835,1417 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
     "Cats have not visited the grandparents nearby today.",
     "Cats have not visited the grandparents today.",
 
+    // present perfect continuous
+    "The big cat has not been visiting their big grandparents nearby regularly today.",
+    "The big cat has not been visiting their big grandparents regularly today.",
+    "The big cat has not been visiting their big grandparents nearby today.",
+    "The big cat has not been visiting their big grandparents today.",
+    "The big cat has not been visiting their grandparents today.",
+    "The cat has not been visiting their big grandparents nearby regularly today.",
+    "The cat has not been visiting their big grandparents regularly today.",
+    "The cat has not been visiting their big grandparents nearby today.",
+    "The cat has not been visiting their big grandparents today.",
+    "The cat has not been visiting their grandparents today.",
+    "A big cat has not been visiting their big grandparents nearby regularly today.",
+    "A big cat has not been visiting their big grandparents regularly today.",
+    "A big cat has not been visiting their big grandparents nearby today.",
+    "A big cat has not been visiting their big grandparents today.",
+    "A big cat has not been visiting their grandparents today.",
+    "A cat has not been visiting their big grandparents nearby regularly today.",
+    "A cat has not been visiting their big grandparents regularly today.",
+    "A cat has not been visiting their big grandparents nearby today.",
+    "A cat has not been visiting their big grandparents today.",
+    "A cat has not been visiting their grandparents today.",
+    "The big cats have not been visiting their big grandparent nearby regularly today.",
+    "The big cats have not been visiting their big grandparent regularly today.",
+    "The big cats have not been visiting their big grandparent nearby today.",
+    "The big cats have not been visiting their big grandparent today.",
+    "The big cats have not been visiting their grandparent today.",
+    "The cats have not been visiting their big grandparent nearby regularly today.",
+    "The cats have not been visiting their big grandparent regularly today.",
+    "The cats have not been visiting their big grandparent nearby today.",
+    "The cats have not been visiting their big grandparent today.",
+    "The cats have not been visiting their grandparent today.",
+    "Big cats have not been visiting their big grandparent nearby regularly today.",
+    "Big cats have not been visiting their big grandparent regularly today.",
+    "Big cats have not been visiting their big grandparent nearby today.",
+    "Big cats have not been visiting their big grandparent today.",
+    "Big cats have not been visiting their grandparent today.",
+    "Cats have not been visiting their big grandparent nearby regularly today.",
+    "Cats have not been visiting their big grandparent regularly today.",
+    "Cats have not been visiting their big grandparent nearby today.",
+    "Cats have not been visiting their big grandparent today.",
+    "Cats have not been visiting their grandparent today.",
+    "Cats have not been visiting a big grandparent nearby regularly today.",
+    "Cats have not been visiting a big grandparent regularly today.",
+    "Cats have not been visiting a big grandparent nearby today.",
+    "Cats have not been visiting a big grandparent today.",
+    "Cats have not been visiting a grandparent today.",
+    "The big cats have not been visiting their big grandparents nearby regularly today.",
+    "The big cats have not been visiting their big grandparents regularly today.",
+    "The big cats have not been visiting their big grandparents nearby today.",
+    "The big cats have not been visiting their big grandparents today.",
+    "The big cats have not been visiting their grandparents today.",
+    "The cats have not been visiting their grandparents nearby regularly today.",
+    "The cats have not been visiting their grandparents regularly today.",
+    "The cats have not been visiting their grandparents nearby today.",
+    "The cats have not been visiting their grandparents today.",
+    "Big cats have not been visiting the big grandparents nearby regularly today.",
+    "Big cats have not been visiting the big grandparents regularly today.",
+    "Big cats have not been visiting the big grandparents nearby today.",
+    "Big cats have not been visiting the big grandparents today.",
+    "Big cats have not been visiting the grandparents today.",
+    "Cats have not been visiting the grandparents nearby regularly today.",
+    "Cats have not been visiting the grandparents regularly today.",
+    "Cats have not been visiting the grandparents nearby today.",
+    "Cats have not been visiting the grandparents today.",
+
+    // past simple
+    "The big cat did not visit their big grandparents nearby regularly yesterday.",
+    "The big cat did not visit their big grandparents regularly yesterday.",
+    "The big cat did not visit their big grandparents nearby yesterday.",
+    "The big cat did not visit their big grandparents yesterday.",
+    "The big cat did not visit their grandparents yesterday.",
+    "The cat did not visit their big grandparents nearby regularly yesterday.",
+    "The cat did not visit their big grandparents regularly yesterday.",
+    "The cat did not visit their big grandparents nearby yesterday.",
+    "The cat did not visit their big grandparents yesterday.",
+    "The cat did not visit their grandparents yesterday.",
+    "A big cat did not visit their big grandparents nearby regularly yesterday.",
+    "A big cat did not visit their big grandparents regularly yesterday.",
+    "A big cat did not visit their big grandparents nearby yesterday.",
+    "A big cat did not visit their big grandparents yesterday.",
+    "A big cat did not visit their grandparents yesterday.",
+    "A cat did not visit their big grandparents nearby regularly yesterday.",
+    "A cat did not visit their big grandparents regularly yesterday.",
+    "A cat did not visit their big grandparents nearby yesterday.",
+    "A cat did not visit their big grandparents yesterday.",
+    "A cat did not visit their grandparents yesterday.",
+    "The big cats did not visit their big grandparent nearby regularly yesterday.",
+    "The big cats did not visit their big grandparent regularly yesterday.",
+    "The big cats did not visit their big grandparent nearby yesterday.",
+    "The big cats did not visit their big grandparent yesterday.",
+    "The big cats did not visit their grandparent yesterday.",
+    "The cats did not visit their big grandparent nearby regularly yesterday.",
+    "The cats did not visit their big grandparent regularly yesterday.",
+    "The cats did not visit their big grandparent nearby yesterday.",
+    "The cats did not visit their big grandparent yesterday.",
+    "The cats did not visit their grandparent yesterday.",
+    "Big cats did not visit their big grandparent nearby regularly yesterday.",
+    "Big cats did not visit their big grandparent regularly yesterday.",
+    "Big cats did not visit their big grandparent nearby yesterday.",
+    "Big cats did not visit their big grandparent yesterday.",
+    "Big cats did not visit their grandparent yesterday.",
+    "Cats did not visit their big grandparent nearby regularly yesterday.",
+    "Cats did not visit their big grandparent regularly yesterday.",
+    "Cats did not visit their big grandparent nearby yesterday.",
+    "Cats did not visit their big grandparent yesterday.",
+    "Cats did not visit their grandparent yesterday.",
+    "Cats did not visit a big grandparent nearby regularly yesterday.",
+    "Cats did not visit a big grandparent regularly yesterday.",
+    "Cats did not visit a big grandparent nearby yesterday.",
+    "Cats did not visit a big grandparent yesterday.",
+    "Cats did not visit a grandparent yesterday.",
+    "The big cats did not visit their big grandparents nearby regularly yesterday.",
+    "The big cats did not visit their big grandparents regularly yesterday.",
+    "The big cats did not visit their big grandparents nearby yesterday.",
+    "The big cats did not visit their big grandparents yesterday.",
+    "The big cats did not visit their grandparents yesterday.",
+    "The cats did not visit their grandparents nearby regularly yesterday.",
+    "The cats did not visit their grandparents regularly yesterday.",
+    "The cats did not visit their grandparents nearby yesterday.",
+    "The cats did not visit their grandparents yesterday.",
+    "Big cats did not visit the big grandparents nearby regularly yesterday.",
+    "Big cats did not visit the big grandparents regularly yesterday.",
+    "Big cats did not visit the big grandparents nearby yesterday.",
+    "Big cats did not visit the big grandparents yesterday.",
+    "Big cats did not visit the grandparents yesterday.",
+    "Cats did not visit the grandparents nearby regularly yesterday.",
+    "Cats did not visit the grandparents regularly yesterday.",
+    "Cats did not visit the grandparents nearby yesterday.",
+    "Cats did not visit the grandparents yesterday.",
+
+    // past cont
+     "The big cat was not visiting their big grandparents nearby regularly yesterday.",
+    "The big cat was not visiting their big grandparents regularly yesterday.",
+    "The big cat was not visiting their big grandparents nearby yesterday.",
+    "The big cat was not visiting their big grandparents yesterday.",
+    "The big cat was not visiting their grandparents yesterday.",
+    "The cat was not visiting their big grandparents nearby regularly yesterday.",
+    "The cat was not visiting their big grandparents regularly yesterday.",
+    "The cat was not visiting their big grandparents nearby yesterday.",
+    "The cat was not visiting their big grandparents yesterday.",
+    "The cat was not visiting their grandparents yesterday.",
+    "A big cat was not visiting their big grandparents nearby regularly yesterday.",
+    "A big cat was not visiting their big grandparents regularly yesterday.",
+    "A big cat was not visiting their big grandparents nearby yesterday.",
+    "A big cat was not visiting their big grandparents yesterday.",
+    "A big cat was not visiting their grandparents yesterday.",
+    "A cat was not visiting their big grandparents nearby regularly yesterday.",
+    "A cat was not visiting their big grandparents regularly yesterday.",
+    "A cat was not visiting their big grandparents nearby yesterday.",
+    "A cat was not visiting their big grandparents yesterday.",
+    "A cat was not visiting their grandparents yesterday.",
+    "The big cats were not visiting their big grandparent nearby regularly yesterday.",
+    "The big cats were not visiting their big grandparent regularly yesterday.",
+    "The big cats were not visiting their big grandparent nearby yesterday.",
+    "The big cats were not visiting their big grandparent yesterday.",
+    "The big cats were not visiting their grandparent yesterday.",
+    "The cats were not visiting their big grandparent nearby regularly yesterday.",
+    "The cats were not visiting their big grandparent regularly yesterday.",
+    "The cats were not visiting their big grandparent nearby yesterday.",
+    "The cats were not visiting their big grandparent yesterday.",
+    "The cats were not visiting their grandparent yesterday.",
+    "Big cats were not visiting their big grandparent nearby regularly yesterday.",
+    "Big cats were not visiting their big grandparent regularly yesterday.",
+    "Big cats were not visiting their big grandparent nearby yesterday.",
+    "Big cats were not visiting their big grandparent yesterday.",
+    "Big cats were not visiting their grandparent yesterday.",
+    "Cats were not visiting their big grandparent nearby regularly yesterday.",
+    "Cats were not visiting their big grandparent regularly yesterday.",
+    "Cats were not visiting their big grandparent nearby yesterday.",
+    "Cats were not visiting their big grandparent yesterday.",
+    "Cats were not visiting their grandparent yesterday.",
+    "Cats were not visiting a big grandparent nearby regularly yesterday.",
+    "Cats were not visiting a big grandparent regularly yesterday.",
+    "Cats were not visiting a big grandparent nearby yesterday.",
+    "Cats were not visiting a big grandparent yesterday.",
+    "Cats were not visiting a grandparent yesterday.",
+    "The big cats were not visiting their big grandparents nearby regularly yesterday.",
+    "The big cats were not visiting their big grandparents regularly yesterday.",
+    "The big cats were not visiting their big grandparents nearby yesterday.",
+    "The big cats were not visiting their big grandparents yesterday.",
+    "The big cats were not visiting their grandparents yesterday.",
+    "The cats were not visiting their grandparents nearby regularly yesterday.",
+    "The cats were not visiting their grandparents regularly yesterday.",
+    "The cats were not visiting their grandparents nearby yesterday.",
+    "The cats were not visiting their grandparents yesterday.",
+    "Big cats were not visiting the big grandparents nearby regularly yesterday.",
+    "Big cats were not visiting the big grandparents regularly yesterday.",
+    "Big cats were not visiting the big grandparents nearby yesterday.",
+    "Big cats were not visiting the big grandparents yesterday.",
+    "Big cats were not visiting the grandparents yesterday.",
+    "Cats were not visiting the grandparents nearby regularly yesterday.",
+    "Cats were not visiting the grandparents regularly yesterday.",
+    "Cats were not visiting the grandparents nearby yesterday.",
+    "Cats were not visiting the grandparents yesterday.",
+
+    // past perfect
+    "The big cat had not visited their big grandparents nearby regularly before yesterday.",
+    "The big cat had not visited their big grandparents regularly before yesterday.",
+    "The big cat had not visited their big grandparents nearby before yesterday.",
+    "The big cat had not visited their big grandparents before yesterday.",
+    "The big cat had not visited their grandparents before yesterday.",
+    "The cat had not visited their big grandparents nearby regularly before yesterday.",
+    "The cat had not visited their big grandparents regularly before yesterday.",
+    "The cat had not visited their big grandparents nearby before yesterday.",
+    "The cat had not visited their big grandparents before yesterday.",
+    "The cat had not visited their grandparents before yesterday.",
+    "A big cat had not visited their big grandparents nearby regularly before yesterday.",
+    "A big cat had not visited their big grandparents regularly before yesterday.",
+    "A big cat had not visited their big grandparents nearby before yesterday.",
+    "A big cat had not visited their big grandparents before yesterday.",
+    "A big cat had not visited their grandparents before yesterday.",
+    "A cat had not visited their big grandparents nearby regularly before yesterday.",
+    "A cat had not visited their big grandparents regularly before yesterday.",
+    "A cat had not visited their big grandparents nearby before yesterday.",
+    "A cat had not visited their big grandparents before yesterday.",
+    "A cat had not visited their grandparents before yesterday.",
+    "The big cats had not visited their big grandparent nearby regularly before yesterday.",
+    "The big cats had not visited their big grandparent regularly before yesterday.",
+    "The big cats had not visited their big grandparent nearby before yesterday.",
+    "The big cats had not visited their big grandparent before yesterday.",
+    "The big cats had not visited their grandparent before yesterday.",
+    "The cats had not visited their big grandparent nearby regularly before yesterday.",
+    "The cats had not visited their big grandparent regularly before yesterday.",
+    "The cats had not visited their big grandparent nearby before yesterday.",
+    "The cats had not visited their big grandparent before yesterday.",
+    "The cats had not visited their grandparent before yesterday.",
+    "Big cats had not visited their big grandparent nearby regularly before yesterday.",
+    "Big cats had not visited their big grandparent regularly before yesterday.",
+    "Big cats had not visited their big grandparent nearby before yesterday.",
+    "Big cats had not visited their big grandparent before yesterday.",
+    "Big cats had not visited their grandparent before yesterday.",
+    "Cats had not visited their big grandparent nearby regularly before yesterday.",
+    "Cats had not visited their big grandparent regularly before yesterday.",
+    "Cats had not visited their big grandparent nearby before yesterday.",
+    "Cats had not visited their big grandparent before yesterday.",
+    "Cats had not visited their grandparent before yesterday.",
+    "Cats had not visited a big grandparent nearby regularly before yesterday.",
+    "Cats had not visited a big grandparent regularly before yesterday.",
+    "Cats had not visited a big grandparent nearby before yesterday.",
+    "Cats had not visited a big grandparent before yesterday.",
+    "Cats had not visited a grandparent before yesterday.",
+    "The big cats had not visited their big grandparents nearby regularly before yesterday.",
+    "The big cats had not visited their big grandparents regularly before yesterday.",
+    "The big cats had not visited their big grandparents nearby before yesterday.",
+    "The big cats had not visited their big grandparents before yesterday.",
+    "The big cats had not visited their grandparents before yesterday.",
+    "The cats had not visited their grandparents nearby regularly before yesterday.",
+    "The cats had not visited their grandparents regularly before yesterday.",
+    "The cats had not visited their grandparents nearby before yesterday.",
+    "The cats had not visited their grandparents before yesterday.",
+    "Big cats had not visited the big grandparents nearby regularly before yesterday.",
+    "Big cats had not visited the big grandparents regularly before yesterday.",
+    "Big cats had not visited the big grandparents nearby before yesterday.",
+    "Big cats had not visited the big grandparents before yesterday.",
+    "Big cats had not visited the grandparents before yesterday.",
+    "Cats had not visited the grandparents nearby regularly before yesterday.",
+    "Cats had not visited the grandparents regularly before yesterday.",
+    "Cats had not visited the grandparents nearby before yesterday.",
+    "Cats had not visited the grandparents before yesterday.",
+
+
+    // past perfect continuous
+    "The big cat had not been visiting their big grandparents nearby regularly before yesterday.",
+    "The big cat had not been visiting their big grandparents regularly before yesterday.",
+    "The big cat had not been visiting their big grandparents nearby before yesterday.",
+    "The big cat had not been visiting their big grandparents before yesterday.",
+    "The big cat had not been visiting their grandparents before yesterday.",
+    "The cat had not been visiting their big grandparents nearby regularly before yesterday.",
+    "The cat had not been visiting their big grandparents regularly before yesterday.",
+    "The cat had not been visiting their big grandparents nearby before yesterday.",
+    "The cat had not been visiting their big grandparents before yesterday.",
+    "The cat had not been visiting their grandparents before yesterday.",
+    "A big cat had not been visiting their big grandparents nearby regularly before yesterday.",
+    "A big cat had not been visiting their big grandparents regularly before yesterday.",
+    "A big cat had not been visiting their big grandparents nearby before yesterday.",
+    "A big cat had not been visiting their big grandparents before yesterday.",
+    "A big cat had not been visiting their grandparents before yesterday.",
+    "A cat had not been visiting their big grandparents nearby regularly before yesterday.",
+    "A cat had not been visiting their big grandparents regularly before yesterday.",
+    "A cat had not been visiting their big grandparents nearby before yesterday.",
+    "A cat had not been visiting their big grandparents before yesterday.",
+    "A cat had not been visiting their grandparents before yesterday.",
+    "The big cats had not been visiting their big grandparent nearby regularly before yesterday.",
+    "The big cats had not been visiting their big grandparent regularly before yesterday.",
+    "The big cats had not been visiting their big grandparent nearby before yesterday.",
+    "The big cats had not been visiting their big grandparent before yesterday.",
+    "The big cats had not been visiting their grandparent before yesterday.",
+    "The cats had not been visiting their big grandparent nearby regularly before yesterday.",
+    "The cats had not been visiting their big grandparent regularly before yesterday.",
+    "The cats had not been visiting their big grandparent nearby before yesterday.",
+    "The cats had not been visiting their big grandparent before yesterday.",
+    "The cats had not been visiting their grandparent before yesterday.",
+    "Big cats had not been visiting their big grandparent nearby regularly before yesterday.",
+    "Big cats had not been visiting their big grandparent regularly before yesterday.",
+    "Big cats had not been visiting their big grandparent nearby before yesterday.",
+    "Big cats had not been visiting their big grandparent before yesterday.",
+    "Big cats had not been visiting their grandparent before yesterday.",
+    "Cats had not been visiting their big grandparent nearby regularly before yesterday.",
+    "Cats had not been visiting their big grandparent regularly before yesterday.",
+    "Cats had not been visiting their big grandparent nearby before yesterday.",
+    "Cats had not been visiting their big grandparent before yesterday.",
+    "Cats had not been visiting their grandparent before yesterday.",
+    "Cats had not been visiting a big grandparent nearby regularly before yesterday.",
+    "Cats had not been visiting a big grandparent regularly before yesterday.",
+    "Cats had not been visiting a big grandparent nearby before yesterday.",
+    "Cats had not been visiting a big grandparent before yesterday.",
+    "Cats had not been visiting a grandparent before yesterday.",
+    "The big cats had not been visiting their big grandparents nearby regularly before yesterday.",
+    "The big cats had not been visiting their big grandparents regularly before yesterday.",
+    "The big cats had not been visiting their big grandparents nearby before yesterday.",
+    "The big cats had not been visiting their big grandparents before yesterday.",
+    "The big cats had not been visiting their grandparents before yesterday.",
+    "The cats had not been visiting their grandparents nearby regularly before yesterday.",
+    "The cats had not been visiting their grandparents regularly before yesterday.",
+    "The cats had not been visiting their grandparents nearby before yesterday.",
+    "The cats had not been visiting their grandparents before yesterday.",
+    "Big cats had not been visiting the big grandparents nearby regularly before yesterday.",
+    "Big cats had not been visiting the big grandparents regularly before yesterday.",
+    "Big cats had not been visiting the big grandparents nearby before yesterday.",
+    "Big cats had not been visiting the big grandparents before yesterday.",
+    "Big cats had not been visiting the grandparents before yesterday.",
+    "Cats had not been visiting the grandparents nearby regularly before yesterday.",
+    "Cats had not been visiting the grandparents regularly before yesterday.",
+    "Cats had not been visiting the grandparents nearby before yesterday.",
+    "Cats had not been visiting the grandparents before yesterday.",
+
+    // future simple
+        "The big cat will not visit their big grandparents nearby regularly tomorrow.",
+    "The big cat will not visit their big grandparents regularly tomorrow.",
+    "The big cat will not visit their big grandparents nearby tomorrow.",
+    "The big cat will not visit their big grandparents tomorrow.",
+    "The big cat will not visit their grandparents tomorrow.",
+    "The cat will not visit their big grandparents nearby regularly tomorrow.",
+    "The cat will not visit their big grandparents regularly tomorrow.",
+    "The cat will not visit their big grandparents nearby tomorrow.",
+    "The cat will not visit their big grandparents tomorrow.",
+    "The cat will not visit their grandparents tomorrow.",
+    "A big cat will not visit their big grandparents nearby regularly tomorrow.",
+    "A big cat will not visit their big grandparents regularly tomorrow.",
+    "A big cat will not visit their big grandparents nearby tomorrow.",
+    "A big cat will not visit their big grandparents tomorrow.",
+    "A big cat will not visit their grandparents tomorrow.",
+    "A cat will not visit their big grandparents nearby regularly tomorrow.",
+    "A cat will not visit their big grandparents regularly tomorrow.",
+    "A cat will not visit their big grandparents nearby tomorrow.",
+    "A cat will not visit their big grandparents tomorrow.",
+    "A cat will not visit their grandparents tomorrow.",
+    "The big cats will not visit their big grandparent nearby regularly tomorrow.",
+    "The big cats will not visit their big grandparent regularly tomorrow.",
+    "The big cats will not visit their big grandparent nearby tomorrow.",
+    "The big cats will not visit their big grandparent tomorrow.",
+    "The big cats will not visit their grandparent tomorrow.",
+    "The cats will not visit their big grandparent nearby regularly tomorrow.",
+    "The cats will not visit their big grandparent regularly tomorrow.",
+    "The cats will not visit their big grandparent nearby tomorrow.",
+    "The cats will not visit their big grandparent tomorrow.",
+    "The cats will not visit their grandparent tomorrow.",
+    "Big cats will not visit their big grandparent nearby regularly tomorrow.",
+    "Big cats will not visit their big grandparent regularly tomorrow.",
+    "Big cats will not visit their big grandparent nearby tomorrow.",
+    "Big cats will not visit their big grandparent tomorrow.",
+    "Big cats will not visit their grandparent tomorrow.",
+    "Cats will not visit their big grandparent nearby regularly tomorrow.",
+    "Cats will not visit their big grandparent regularly tomorrow.",
+    "Cats will not visit their big grandparent nearby tomorrow.",
+    "Cats will not visit their big grandparent tomorrow.",
+    "Cats will not visit their grandparent tomorrow.",
+    "Cats will not visit a big grandparent nearby regularly tomorrow.",
+    "Cats will not visit a big grandparent regularly tomorrow.",
+    "Cats will not visit a big grandparent nearby tomorrow.",
+    "Cats will not visit a big grandparent tomorrow.",
+    "Cats will not visit a grandparent tomorrow.",
+    "The big cats will not visit their big grandparents nearby regularly tomorrow.",
+    "The big cats will not visit their big grandparents regularly tomorrow.",
+    "The big cats will not visit their big grandparents nearby tomorrow.",
+    "The big cats will not visit their big grandparents tomorrow.",
+    "The big cats will not visit their grandparents tomorrow.",
+    "The cats will not visit their grandparents nearby regularly tomorrow.",
+    "The cats will not visit their grandparents regularly tomorrow.",
+    "The cats will not visit their grandparents nearby tomorrow.",
+    "The cats will not visit their grandparents tomorrow.",
+    "Big cats will not visit the big grandparents nearby regularly tomorrow.",
+    "Big cats will not visit the big grandparents regularly tomorrow.",
+    "Big cats will not visit the big grandparents nearby tomorrow.",
+    "Big cats will not visit the big grandparents tomorrow.",
+    "Big cats will not visit the grandparents tomorrow.",
+    "Cats will not visit the grandparents nearby regularly tomorrow.",
+    "Cats will not visit the grandparents regularly tomorrow.",
+    "Cats will not visit the grandparents nearby tomorrow.",
+    "Cats will not visit the grandparents tomorrow.",
+
+    // future continous
+    "The big cat will not be visiting their big grandparents nearby regularly tomorrow.",
+    "The big cat will not be visiting their big grandparents regularly tomorrow.",
+    "The big cat will not be visiting their big grandparents nearby tomorrow.",
+    "The big cat will not be visiting their big grandparents tomorrow.",
+    "The big cat will not be visiting their grandparents tomorrow.",
+    "The cat will not be visiting their big grandparents nearby regularly tomorrow.",
+    "The cat will not be visiting their big grandparents regularly tomorrow.",
+    "The cat will not be visiting their big grandparents nearby tomorrow.",
+    "The cat will not be visiting their big grandparents tomorrow.",
+    "The cat will not be visiting their grandparents tomorrow.",
+    "A big cat will not be visiting their big grandparents nearby regularly tomorrow.",
+    "A big cat will not be visiting their big grandparents regularly tomorrow.",
+    "A big cat will not be visiting their big grandparents nearby tomorrow.",
+    "A big cat will not be visiting their big grandparents tomorrow.",
+    "A big cat will not be visiting their grandparents tomorrow.",
+    "A cat will not be visiting their big grandparents nearby regularly tomorrow.",
+    "A cat will not be visiting their big grandparents regularly tomorrow.",
+    "A cat will not be visiting their big grandparents nearby tomorrow.",
+    "A cat will not be visiting their big grandparents tomorrow.",
+    "A cat will not be visiting their grandparents tomorrow.",
+    "The big cats will not be visiting their big grandparent nearby regularly tomorrow.",
+    "The big cats will not be visiting their big grandparent regularly tomorrow.",
+    "The big cats will not be visiting their big grandparent nearby tomorrow.",
+    "The big cats will not be visiting their big grandparent tomorrow.",
+    "The big cats will not be visiting their grandparent tomorrow.",
+    "The cats will not be visiting their big grandparent nearby regularly tomorrow.",
+    "The cats will not be visiting their big grandparent regularly tomorrow.",
+    "The cats will not be visiting their big grandparent nearby tomorrow.",
+    "The cats will not be visiting their big grandparent tomorrow.",
+    "The cats will not be visiting their grandparent tomorrow.",
+    "Big cats will not be visiting their big grandparent nearby regularly tomorrow.",
+    "Big cats will not be visiting their big grandparent regularly tomorrow.",
+    "Big cats will not be visiting their big grandparent nearby tomorrow.",
+    "Big cats will not be visiting their big grandparent tomorrow.",
+    "Big cats will not be visiting their grandparent tomorrow.",
+    "Cats will not be visiting their big grandparent nearby regularly tomorrow.",
+    "Cats will not be visiting their big grandparent regularly tomorrow.",
+    "Cats will not be visiting their big grandparent nearby tomorrow.",
+    "Cats will not be visiting their big grandparent tomorrow.",
+    "Cats will not be visiting their grandparent tomorrow.",
+    "Cats will not be visiting a big grandparent nearby regularly tomorrow.",
+    "Cats will not be visiting a big grandparent regularly tomorrow.",
+    "Cats will not be visiting a big grandparent nearby tomorrow.",
+    "Cats will not be visiting a big grandparent tomorrow.",
+    "Cats will not be visiting a grandparent tomorrow.",
+    "The big cats will not be visiting their big grandparents nearby regularly tomorrow.",
+    "The big cats will not be visiting their big grandparents regularly tomorrow.",
+    "The big cats will not be visiting their big grandparents nearby tomorrow.",
+    "The big cats will not be visiting their big grandparents tomorrow.",
+    "The big cats will not be visiting their grandparents tomorrow.",
+    "The cats will not be visiting their grandparents nearby regularly tomorrow.",
+    "The cats will not be visiting their grandparents regularly tomorrow.",
+    "The cats will not be visiting their grandparents nearby tomorrow.",
+    "The cats will not be visiting their grandparents tomorrow.",
+    "Big cats will not be visiting the big grandparents nearby regularly tomorrow.",
+    "Big cats will not be visiting the big grandparents regularly tomorrow.",
+    "Big cats will not be visiting the big grandparents nearby tomorrow.",
+    "Big cats will not be visiting the big grandparents tomorrow.",
+    "Big cats will not be visiting the grandparents tomorrow.",
+    "Cats will not be visiting the grandparents nearby regularly tomorrow.",
+    "Cats will not be visiting the grandparents regularly tomorrow.",
+    "Cats will not be visiting the grandparents nearby tomorrow.",
+    "Cats will not be visiting the grandparents tomorrow.",
+
+    // future perfect
+    "The big cat will not have visited their big grandparents nearby regularly tomorrow.",
+    "The big cat will not have visited their big grandparents regularly tomorrow.",
+    "The big cat will not have visited their big grandparents nearby tomorrow.",
+    "The big cat will not have visited their big grandparents tomorrow.",
+    "The big cat will not have visited their grandparents tomorrow.",
+    "The cat will not have visited their big grandparents nearby regularly tomorrow.",
+    "The cat will not have visited their big grandparents regularly tomorrow.",
+    "The cat will not have visited their big grandparents nearby tomorrow.",
+    "The cat will not have visited their big grandparents tomorrow.",
+    "The cat will not have visited their grandparents tomorrow.",
+    "A big cat will not have visited their big grandparents nearby regularly tomorrow.",
+    "A big cat will not have visited their big grandparents regularly tomorrow.",
+    "A big cat will not have visited their big grandparents nearby tomorrow.",
+    "A big cat will not have visited their big grandparents tomorrow.",
+    "A big cat will not have visited their grandparents tomorrow.",
+    "A cat will not have visited their big grandparents nearby regularly tomorrow.",
+    "A cat will not have visited their big grandparents regularly tomorrow.",
+    "A cat will not have visited their big grandparents nearby tomorrow.",
+    "A cat will not have visited their big grandparents tomorrow.",
+    "A cat will not have visited their grandparents tomorrow.",
+    "The big cats will not have visited their big grandparent nearby regularly tomorrow.",
+    "The big cats will not have visited their big grandparent regularly tomorrow.",
+    "The big cats will not have visited their big grandparent nearby tomorrow.",
+    "The big cats will not have visited their big grandparent tomorrow.",
+    "The big cats will not have visited their grandparent tomorrow.",
+    "The cats will not have visited their big grandparent nearby regularly tomorrow.",
+    "The cats will not have visited their big grandparent regularly tomorrow.",
+    "The cats will not have visited their big grandparent nearby tomorrow.",
+    "The cats will not have visited their big grandparent tomorrow.",
+    "The cats will not have visited their grandparent tomorrow.",
+    "Big cats will not have visited their big grandparent nearby regularly tomorrow.",
+    "Big cats will not have visited their big grandparent regularly tomorrow.",
+    "Big cats will not have visited their big grandparent nearby tomorrow.",
+    "Big cats will not have visited their big grandparent tomorrow.",
+    "Big cats will not have visited their grandparent tomorrow.",
+    "Cats will not have visited their big grandparent nearby regularly tomorrow.",
+    "Cats will not have visited their big grandparent regularly tomorrow.",
+    "Cats will not have visited their big grandparent nearby tomorrow.",
+    "Cats will not have visited their big grandparent tomorrow.",
+    "Cats will not have visited their grandparent tomorrow.",
+    "Cats will not have visited a big grandparent nearby regularly tomorrow.",
+    "Cats will not have visited a big grandparent regularly tomorrow.",
+    "Cats will not have visited a big grandparent nearby tomorrow.",
+    "Cats will not have visited a big grandparent tomorrow.",
+    "Cats will not have visited a grandparent tomorrow.",
+    "The big cats will not have visited their big grandparents nearby regularly tomorrow.",
+    "The big cats will not have visited their big grandparents regularly tomorrow.",
+    "The big cats will not have visited their big grandparents nearby tomorrow.",
+    "The big cats will not have visited their big grandparents tomorrow.",
+    "The big cats will not have visited their grandparents tomorrow.",
+    "The cats will not have visited their grandparents nearby regularly tomorrow.",
+    "The cats will not have visited their grandparents regularly tomorrow.",
+    "The cats will not have visited their grandparents nearby tomorrow.",
+    "The cats will not have visited their grandparents tomorrow.",
+    "Big cats will not have visited the big grandparents nearby regularly tomorrow.",
+    "Big cats will not have visited the big grandparents regularly tomorrow.",
+    "Big cats will not have visited the big grandparents nearby tomorrow.",
+    "Big cats will not have visited the big grandparents tomorrow.",
+    "Big cats will not have visited the grandparents tomorrow.",
+    "Cats will not have visited the grandparents nearby regularly tomorrow.",
+    "Cats will not have visited the grandparents regularly tomorrow.",
+    "Cats will not have visited the grandparents nearby tomorrow.",
+    "Cats will not have visited the grandparents tomorrow.",
+
+    // future perfect continuous
+    "The big cat will not have been visiting their big grandparents nearby regularly tomorrow.",
+    "The big cat will not have been visiting their big grandparents regularly tomorrow.",
+    "The big cat will not have been visiting their big grandparents nearby tomorrow.",
+    "The big cat will not have been visiting their big grandparents tomorrow.",
+    "The big cat will not have been visiting their grandparents tomorrow.",
+    "The cat will not have been visiting their big grandparents nearby regularly tomorrow.",
+    "The cat will not have been visiting their big grandparents regularly tomorrow.",
+    "The cat will not have been visiting their big grandparents nearby tomorrow.",
+    "The cat will not have been visiting their big grandparents tomorrow.",
+    "The cat will not have been visiting their grandparents tomorrow.",
+    "A big cat will not have been visiting their big grandparents nearby regularly tomorrow.",
+    "A big cat will not have been visiting their big grandparents regularly tomorrow.",
+    "A big cat will not have been visiting their big grandparents nearby tomorrow.",
+    "A big cat will not have been visiting their big grandparents tomorrow.",
+    "A big cat will not have been visiting their grandparents tomorrow.",
+    "A cat will not have been visiting their big grandparents nearby regularly tomorrow.",
+    "A cat will not have been visiting their big grandparents regularly tomorrow.",
+    "A cat will not have been visiting their big grandparents nearby tomorrow.",
+    "A cat will not have been visiting their big grandparents tomorrow.",
+    "A cat will not have been visiting their grandparents tomorrow.",
+    "The big cats will not have been visiting their big grandparent nearby regularly tomorrow.",
+    "The big cats will not have been visiting their big grandparent regularly tomorrow.",
+    "The big cats will not have been visiting their big grandparent nearby tomorrow.",
+    "The big cats will not have been visiting their big grandparent tomorrow.",
+    "The big cats will not have been visiting their grandparent tomorrow.",
+    "The cats will not have been visiting their big grandparent nearby regularly tomorrow.",
+    "The cats will not have been visiting their big grandparent regularly tomorrow.",
+    "The cats will not have been visiting their big grandparent nearby tomorrow.",
+    "The cats will not have been visiting their big grandparent tomorrow.",
+    "The cats will not have been visiting their grandparent tomorrow.",
+    "Big cats will not have been visiting their big grandparent nearby regularly tomorrow.",
+    "Big cats will not have been visiting their big grandparent regularly tomorrow.",
+    "Big cats will not have been visiting their big grandparent nearby tomorrow.",
+    "Big cats will not have been visiting their big grandparent tomorrow.",
+    "Big cats will not have been visiting their grandparent tomorrow.",
+    "Cats will not have been visiting their big grandparent nearby regularly tomorrow.",
+    "Cats will not have been visiting their big grandparent regularly tomorrow.",
+    "Cats will not have been visiting their big grandparent nearby tomorrow.",
+    "Cats will not have been visiting their big grandparent tomorrow.",
+    "Cats will not have been visiting their grandparent tomorrow.",
+    "Cats will not have been visiting a big grandparent nearby regularly tomorrow.",
+    "Cats will not have been visiting a big grandparent regularly tomorrow.",
+    "Cats will not have been visiting a big grandparent nearby tomorrow.",
+    "Cats will not have been visiting a big grandparent tomorrow.",
+    "Cats will not have been visiting a grandparent tomorrow.",
+    "The big cats will not have been visiting their big grandparents nearby regularly tomorrow.",
+    "The big cats will not have been visiting their big grandparents regularly tomorrow.",
+    "The big cats will not have been visiting their big grandparents nearby tomorrow.",
+    "The big cats will not have been visiting their big grandparents tomorrow.",
+    "The big cats will not have been visiting their grandparents tomorrow.",
+    "The cats will not have been visiting their grandparents nearby regularly tomorrow.",
+    "The cats will not have been visiting their grandparents regularly tomorrow.",
+    "The cats will not have been visiting their grandparents nearby tomorrow.",
+    "The cats will not have been visiting their grandparents tomorrow.",
+    "Big cats will not have been visiting the big grandparents nearby regularly tomorrow.",
+    "Big cats will not have been visiting the big grandparents regularly tomorrow.",
+    "Big cats will not have been visiting the big grandparents nearby tomorrow.",
+    "Big cats will not have been visiting the big grandparents tomorrow.",
+    "Big cats will not have been visiting the grandparents tomorrow.",
+    "Cats will not have been visiting the grandparents nearby regularly tomorrow.",
+    "Cats will not have been visiting the grandparents regularly tomorrow.",
+    "Cats will not have been visiting the grandparents nearby tomorrow.",
+    "Cats will not have been visiting the grandparents tomorrow.",
+
+   
             "",
 
             //"How are cats going at visit the grandparents today?",
             //"How have cats been fucking their big grandparents nearby regularly today?",
         };
 
+        /*
         // ok everything fine with sentences (aff/neg)
-        List<string> sentences = new List<string>
-        {
-            //Modal constructions:
-            "My big car could always be carefully turned on tomorrow.",
-            "My big car could always be carefully repaired tomorrow.",
+        //List<string> sentences = new List<string>
+        //{
+        //    //Modal constructions:
+        //    "My big car could always be carefully turned on tomorrow.",
+        //    "My big car could always be carefully repaired tomorrow.",
 
-            "My big cars could always be carefully turned on tomorrow.",
-            "My big cars could always be carefully repaired tomorrow.",
+        //    "My big cars could always be carefully turned on tomorrow.",
+        //    "My big cars could always be carefully repaired tomorrow.",
 
-            "The big car could always be carefully turned on tomorrow.",
+        //    "The big car could always be carefully turned on tomorrow.",
 
-            "The big car could always be carefully repaired tomorrow.",
-            "The big cars could always be carefully repaired tomorrow.",
-            "The car might be repaired.",
-            "The car should be repaired.",
-            "The car must be repaired.",
-            "The car will be repaired.",
-            "The car would be repaired.",
-            "The car can be repaired.",
-            "The car may be repaired.",
-            "The car shall be repaired.",
+        //    "The big car could always be carefully repaired tomorrow.",
+        //    "The big cars could always be carefully repaired tomorrow.",
+        //    "The car might be repaired.",
+        //    "The car should be repaired.",
+        //    "The car must be repaired.",
+        //    "The car will be repaired.",
+        //    "The car would be repaired.",
+        //    "The car can be repaired.",
+        //    "The car may be repaired.",
+        //    "The car shall be repaired.",
 
-            // DID e DIDNT + phrasals
-            "I did always carefully set up the meeting yesterday.",
-            "I did always carefully set up meetings yesterday.",
+        //    // DID e DIDNT + phrasals
+        //    "I did always carefully set up the meeting yesterday.",
+        //    "I did always carefully set up meetings yesterday.",
 
-            "I didn't always carefully set up the meeting yesterday.",
-            "I didn't always carefully set up meetings yesterday.",
+        //    "I didn't always carefully set up the meeting yesterday.",
+        //    "I didn't always carefully set up meetings yesterday.",
 
-            "I did not always carefully set up the meeting yesterday.",
-            "I did not always carefully set up meetings yesterday.",
+        //    "I did not always carefully set up the meeting yesterday.",
+        //    "I did not always carefully set up meetings yesterday.",
 
-            "they did always carefully set up the meeting yesterday.",
-            "they did always carefully set up meetings yesterday.",
+        //    "they did always carefully set up the meeting yesterday.",
+        //    "they did always carefully set up meetings yesterday.",
 
-            "they didn't always carefully set up the meeting yesterday.",
-            "they didn't always carefully set up meetings yesterday.",
+        //    "they didn't always carefully set up the meeting yesterday.",
+        //    "they didn't always carefully set up meetings yesterday.",
 
-            "they did not always carefully set up the meeting yesterday.",
-            "they did not always carefully set up meetings yesterday.",
+        //    "they did not always carefully set up the meeting yesterday.",
+        //    "they did not always carefully set up meetings yesterday.",
 
-            "I did always carefully play soccer yesterday.",
-            "I didn't always carefully play soccer yesterday.",
-            "I did not always carefully play soccer yesterday.",
+        //    "I did always carefully play soccer yesterday.",
+        //    "I didn't always carefully play soccer yesterday.",
+        //    "I did not always carefully play soccer yesterday.",
 
-            "They did always carefully play soccer yesterday.",
-            "They didn't always carefully play soccer yesterday.",
-            "They did not always carefully play soccer yesterday.",
+        //    "They did always carefully play soccer yesterday.",
+        //    "They didn't always carefully play soccer yesterday.",
+        //    "They did not always carefully play soccer yesterday.",
 
-            // USED TO
-            "I used to read books.",
-            "I always used to carefully read books today",
+        //    // USED TO
+        //    "I used to read books.",
+        //    "I always used to carefully read books today",
 
-            "She used to sing.",
-            "He used to dance.",
-            "We used to play.",
-            "They used to travel often.",
-            "You used to enjoy sports.",
+        //    "She used to sing.",
+        //    "He used to dance.",
+        //    "We used to play.",
+        //    "They used to travel often.",
+        //    "You used to enjoy sports.",
 
-            "I didn't always use to carefully like vegetables today.",
+        //    "I didn't always use to carefully like vegetables today.",
 
-            "I didn't use to like vegetables.",
-            "She didn't use to smile.",
-            "He didn't use to study.",
-            "We didn't use to visit that place.",
+        //    "I didn't use to like vegetables.",
+        //    "She didn't use to smile.",
+        //    "He didn't use to study.",
+        //    "We didn't use to visit that place.",
 
-            // going to + phrasals
-            "I am going to wake up apples.",
-            "I am going to wake up.",
-            "I am always going to carefully wake up apples today.",
-            "She is always going to carefully wake up today.",
-            "They are always going to carefully wake up today.",
+        //    // going to + phrasals
+        //    "I am going to wake up apples.",
+        //    "I am going to wake up.",
+        //    "I am always going to carefully wake up apples today.",
+        //    "She is always going to carefully wake up today.",
+        //    "They are always going to carefully wake up today.",
 
 
-            "I am always going to carefully eat apples today.",
-            "She is always going to carefully run today.",
-            "They are always going to carefully study today.",
+        //    "I am always going to carefully eat apples today.",
+        //    "She is always going to carefully run today.",
+        //    "They are always going to carefully study today.",
 
-            "I am going to eat apples.",
-            "She is going to run.",
-            "He is going to sleep.",
-            "We are going to play.",
-            "They are going to study.",
-            "You are going to talk.",
-            "I am going to walk.",
-            "She is going to swim.",
-            "He is going to work.",
-            "We are going to travel.",
+        //    "I am going to eat apples.",
+        //    "She is going to run.",
+        //    "He is going to sleep.",
+        //    "We are going to play.",
+        //    "They are going to study.",
+        //    "You are going to talk.",
+        //    "I am going to walk.",
+        //    "She is going to swim.",
+        //    "He is going to work.",
+        //    "We are going to travel.",
 
-            // aggiungere il controllo sui phrasal verb - fatto
-            //// present simple - singular
-            "The car is repaired.",
-            "The car is always carefully repaired.",
-            "The car is not always carefully repaired.",
-            "The car isn't always carefully repaired.",
-            "The car is carefully repaired today.",
-            "The car is not carefully repaired today.",
-            "The car isn't carefully repaired today.",
-            "The car is repaired today.",
-            "The car is not repaired today.",
-            "The car isn't repaired today.",
-            "The car is always carefully repaired today.",
-            "The car is not always carefully repaired today.",
-            "The car isn't always carefully repaired today.",
-            "The big car isn't always carefully repaired today.",
-            "The big car is not always carefully repaired today.",
-            "The big car is always carefully repaired today.",
+        //    // aggiungere il controllo sui phrasal verb - fatto
+        //    //// present simple - singular
+        //    "The car is repaired.",
+        //    "The car is always carefully repaired.",
+        //    "The car is not always carefully repaired.",
+        //    "The car isn't always carefully repaired.",
+        //    "The car is carefully repaired today.",
+        //    "The car is not carefully repaired today.",
+        //    "The car isn't carefully repaired today.",
+        //    "The car is repaired today.",
+        //    "The car is not repaired today.",
+        //    "The car isn't repaired today.",
+        //    "The car is always carefully repaired today.",
+        //    "The car is not always carefully repaired today.",
+        //    "The car isn't always carefully repaired today.",
+        //    "The big car isn't always carefully repaired today.",
+        //    "The big car is not always carefully repaired today.",
+        //    "The big car is always carefully repaired today.",
 
-            "The big car is always carefully turned on today.",
-            "The big car is not always carefully turned on today.",
-            "The big car isn't always carefully turned on today.",
+        //    "The big car is always carefully turned on today.",
+        //    "The big car is not always carefully turned on today.",
+        //    "The big car isn't always carefully turned on today.",
 
-            "The big car isn't always carefully turned on every day.",
+        //    "The big car isn't always carefully turned on every day.",
 
-            //// present simple - plural
-            "The cars are repaired.",
-            "The cars are always carefully repaired.",
-            "The cars are not always carefully repaired.",
-            "The cars aren't always carefully repaired.",
-            "The cars are carefully repaired today.",
-            "The cars are not carefully repaired today.",
-            "The cars aren't carefully repaired today.",
-            "The cars are repaired today.",
-            "The cars are not repaired today.",
-            "The cars aren't repaired today.",
-            "The cars are always carefully repaired today.",
-            "The cars are not always carefully repaired today.",
-            "The cars aren't always carefully repaired today.",
-            "The big cars are always carefully repaired today.",
-            "The big cars are not always carefully repaired today.",
-            "The big cars aren't always carefully repaired today.",
+        //    //// present simple - plural
+        //    "The cars are repaired.",
+        //    "The cars are always carefully repaired.",
+        //    "The cars are not always carefully repaired.",
+        //    "The cars aren't always carefully repaired.",
+        //    "The cars are carefully repaired today.",
+        //    "The cars are not carefully repaired today.",
+        //    "The cars aren't carefully repaired today.",
+        //    "The cars are repaired today.",
+        //    "The cars are not repaired today.",
+        //    "The cars aren't repaired today.",
+        //    "The cars are always carefully repaired today.",
+        //    "The cars are not always carefully repaired today.",
+        //    "The cars aren't always carefully repaired today.",
+        //    "The big cars are always carefully repaired today.",
+        //    "The big cars are not always carefully repaired today.",
+        //    "The big cars aren't always carefully repaired today.",
 
-            "The big cars are always carefully turned on today.",
-            "The big cars aren't always carefully turned on today.",
-            "The big cars are not always carefully turned on today.",
+        //    "The big cars are always carefully turned on today.",
+        //    "The big cars aren't always carefully turned on today.",
+        //    "The big cars are not always carefully turned on today.",
 
-                        "My big cars are not always carefully turned on today.",
+        //                "My big cars are not always carefully turned on today.",
 
-            // past simple - plural
-            "The cars were repaired.",
-            "The cars were always carefully repaired.",
-            "The cars were not always carefully repaired.",
-            "The cars weren't always carefully repaired.",
-            "The cars were carefully repaired yesterday.",
-            "The cars were not carefully repaired yesterday.",
-            "The cars weren't carefully repaired yesterday.",
-            "The cars were repaired yesterday.",
-            "The cars were not repaired yesterday.",
-            "The cars weren't repaired yesterday.",
-            "The cars were always carefully repaired yesterday.",
-            "The cars were not always carefully repaired yesterday.",
-            "The cars weren't always carefully repaired yesterday.",
-            "The big cars were always carefully repaired yesterday.",
-            "The big cars were not always carefully repaired yesterday.",
-            "The big cars weren't always carefully repaired yesterday.",
+        //    // past simple - plural
+        //    "The cars were repaired.",
+        //    "The cars were always carefully repaired.",
+        //    "The cars were not always carefully repaired.",
+        //    "The cars weren't always carefully repaired.",
+        //    "The cars were carefully repaired yesterday.",
+        //    "The cars were not carefully repaired yesterday.",
+        //    "The cars weren't carefully repaired yesterday.",
+        //    "The cars were repaired yesterday.",
+        //    "The cars were not repaired yesterday.",
+        //    "The cars weren't repaired yesterday.",
+        //    "The cars were always carefully repaired yesterday.",
+        //    "The cars were not always carefully repaired yesterday.",
+        //    "The cars weren't always carefully repaired yesterday.",
+        //    "The big cars were always carefully repaired yesterday.",
+        //    "The big cars were not always carefully repaired yesterday.",
+        //    "The big cars weren't always carefully repaired yesterday.",
 
-            "The big car was always carefully turned on today.",
-            "The big car wasn't always carefully turned on today.",
-            "The big car was not always carefully turned on today.",
+        //    "The big car was always carefully turned on today.",
+        //    "The big car wasn't always carefully turned on today.",
+        //    "The big car was not always carefully turned on today.",
 
-            // past simple - singular
-            "The car was repaired.",
-            "The car was always carefully repaired.",
-            "The car was not always carefully repaired.",
-            "The car wasn't always carefully repaired.",
-            "The car was carefully repaired yesterday.",
-            "The car was not carefully repaired yesterday.",
-            "The car wasn't carefully repaired yesterday.",
-            "The car was repaired yesterday.",
-            "The car was not repaired yesterday.",
-            "The car wasn't repaired yesterday.",
-            "The car was always carefully repaired yesterday.",
-            "The car was not always carefully repaired yesterday.",
-            "The car wasn't always carefully repaired yesterday.",
-            "The big car was always carefully repaired yesterday.",
-            "The big car was not always carefully repaired yesterday.",
-            "The big car wasn't always carefully repaired yesterday.",
+        //    // past simple - singular
+        //    "The car was repaired.",
+        //    "The car was always carefully repaired.",
+        //    "The car was not always carefully repaired.",
+        //    "The car wasn't always carefully repaired.",
+        //    "The car was carefully repaired yesterday.",
+        //    "The car was not carefully repaired yesterday.",
+        //    "The car wasn't carefully repaired yesterday.",
+        //    "The car was repaired yesterday.",
+        //    "The car was not repaired yesterday.",
+        //    "The car wasn't repaired yesterday.",
+        //    "The car was always carefully repaired yesterday.",
+        //    "The car was not always carefully repaired yesterday.",
+        //    "The car wasn't always carefully repaired yesterday.",
+        //    "The big car was always carefully repaired yesterday.",
+        //    "The big car was not always carefully repaired yesterday.",
+        //    "The big car wasn't always carefully repaired yesterday.",
 
-            "The big cars were always carefully turned on today.",
-            "The big cars weren't always carefully turned on today.",
-            "The big cars were not always carefully turned on today.",
+        //    "The big cars were always carefully turned on today.",
+        //    "The big cars weren't always carefully turned on today.",
+        //    "The big cars were not always carefully turned on today.",
             
-            // present perfect - singular
-            "The car has been repaired.",
-            "The car has always been carefully repaired.",
-            "The car has not always been carefully repaired.",
-            "The car hasn't always been carefully repaired.",
-            "The car has been carefully repaired yesterday.",
-            "The car has not been carefully repaired yesterday.",
-            "The car hasn't been carefully repaired yesterday.",
-            "The car has been repaired yesterday.",
-            "The car has not been repaired yesterday.",
-            "The car hasn't been repaired yesterday.",
-            "The car has always been carefully repaired yesterday.",
-            "The car has not always been carefully repaired yesterday.",
-            "The car hasn't always been carefully repaired yesterday.",
-            "The big car hasn't always been carefully repaired yesterday.",
-            "The big car has not always been carefully repaired yesterday.",
-            "The big car has always been carefully repaired yesterday.",
+        //    // present perfect - singular
+        //    "The car has been repaired.",
+        //    "The car has always been carefully repaired.",
+        //    "The car has not always been carefully repaired.",
+        //    "The car hasn't always been carefully repaired.",
+        //    "The car has been carefully repaired yesterday.",
+        //    "The car has not been carefully repaired yesterday.",
+        //    "The car hasn't been carefully repaired yesterday.",
+        //    "The car has been repaired yesterday.",
+        //    "The car has not been repaired yesterday.",
+        //    "The car hasn't been repaired yesterday.",
+        //    "The car has always been carefully repaired yesterday.",
+        //    "The car has not always been carefully repaired yesterday.",
+        //    "The car hasn't always been carefully repaired yesterday.",
+        //    "The big car hasn't always been carefully repaired yesterday.",
+        //    "The big car has not always been carefully repaired yesterday.",
+        //    "The big car has always been carefully repaired yesterday.",
 
-            "The big car hasn't always been carefully turned on yesterday.",
-            "The big car has not always been carefully turned on yesterday.",
-            "The big car has always been carefully turned on yesterday.",
+        //    "The big car hasn't always been carefully turned on yesterday.",
+        //    "The big car has not always been carefully turned on yesterday.",
+        //    "The big car has always been carefully turned on yesterday.",
 
-            // present perfect - plural
-            "The cars have been repaired.",
-            "The cars have always been carefully repaired.",
-            "The cars have not always been carefully repaired.",
-            "The cars haven't always been carefully repaired.",
-            "The cars have been carefully repaired yesterday.",
-            "The cars have not been carefully repaired yesterday.",
-            "The cars haven't been carefully repaired yesterday.",
-            "The cars have been repaired yesterday.",
-            "The cars have not been repaired yesterday.",
-            "The cars haven't been repaired yesterday.",
-            "The cars have always been carefully repaired yesterday.",
-            "The cars have not always been carefully repaired yesterday.",
-            "The big cars have not always been carefully repaired yesterday.",
-            "The big cars have always been carefully repaired yesterday.",
-            "The big cars haven't always been carefully repaired yesterday.",
+        //    // present perfect - plural
+        //    "The cars have been repaired.",
+        //    "The cars have always been carefully repaired.",
+        //    "The cars have not always been carefully repaired.",
+        //    "The cars haven't always been carefully repaired.",
+        //    "The cars have been carefully repaired yesterday.",
+        //    "The cars have not been carefully repaired yesterday.",
+        //    "The cars haven't been carefully repaired yesterday.",
+        //    "The cars have been repaired yesterday.",
+        //    "The cars have not been repaired yesterday.",
+        //    "The cars haven't been repaired yesterday.",
+        //    "The cars have always been carefully repaired yesterday.",
+        //    "The cars have not always been carefully repaired yesterday.",
+        //    "The big cars have not always been carefully repaired yesterday.",
+        //    "The big cars have always been carefully repaired yesterday.",
+        //    "The big cars haven't always been carefully repaired yesterday.",
 
-            "The big cars have not always been carefully turned on yesterday.",
-            "The big cars have always been carefully turned on yesterday.",
-            "The big cars haven't always been carefully turned on yesterday.",
+        //    "The big cars have not always been carefully turned on yesterday.",
+        //    "The big cars have always been carefully turned on yesterday.",
+        //    "The big cars haven't always been carefully turned on yesterday.",
 
-            // present continuous - singular
-            "The car is being repaired.",
-            "The car is always being carefully repaired.",
-            "The car is not always being carefully repaired.",
-            "The car isn't always being carefully repaired.",
-            "The car is being carefully repaired today.",
-            "The car is not being carefully repaired today.",
-            "The car isn't being carefully repaired today.",
-            "The car is being repaired today.",
-            "The car is not being repaired today.",
-            "The car isn't being repaired today.",
-            "The car is always being carefully repaired today.",
-            "The car is not always being carefully repaired today.",
-            "The car isn't always being carefully repaired today.",
-            "The big car isn't always being carefully repaired today.",
-            "The big car is always being carefully repaired today.",
-            "The big car is not always being carefully repaired today.",
+        //    // present continuous - singular
+        //    "The car is being repaired.",
+        //    "The car is always being carefully repaired.",
+        //    "The car is not always being carefully repaired.",
+        //    "The car isn't always being carefully repaired.",
+        //    "The car is being carefully repaired today.",
+        //    "The car is not being carefully repaired today.",
+        //    "The car isn't being carefully repaired today.",
+        //    "The car is being repaired today.",
+        //    "The car is not being repaired today.",
+        //    "The car isn't being repaired today.",
+        //    "The car is always being carefully repaired today.",
+        //    "The car is not always being carefully repaired today.",
+        //    "The car isn't always being carefully repaired today.",
+        //    "The big car isn't always being carefully repaired today.",
+        //    "The big car is always being carefully repaired today.",
+        //    "The big car is not always being carefully repaired today.",
 
-            "The big car isn't always being carefully turned on today.",
-            "The big car is always being carefully turned on today.",
-            "The big car is not always being carefully turned on today.",
+        //    "The big car isn't always being carefully turned on today.",
+        //    "The big car is always being carefully turned on today.",
+        //    "The big car is not always being carefully turned on today.",
             
-            // present continuous - plural
-            "The cars are being repaired.",
-            "The cars are always being carefully repaired.",
-            "The cars are not always being carefully repaired.",
-            "The cars aren't always being carefully repaired.",
-            "The cars are being carefully repaired today.",
-            "The cars are not being carefully repaired today.",
-            "The cars aren't being carefully repaired today.",
-            "The cars are being repaired today.",
-            "The cars are not being repaired today.",
-            "The cars aren't being repaired today.",
-            "The cars are always being carefully repaired today.",
-            "The cars are not always being carefully repaired today.",
-            "The cars aren't always being carefully repaired today.",
-            "The big cars are always being carefully repaired today.",
-            "The big cars are not always being carefully repaired today.",
-            "The big cars aren't always being carefully repaired today.",
+        //    // present continuous - plural
+        //    "The cars are being repaired.",
+        //    "The cars are always being carefully repaired.",
+        //    "The cars are not always being carefully repaired.",
+        //    "The cars aren't always being carefully repaired.",
+        //    "The cars are being carefully repaired today.",
+        //    "The cars are not being carefully repaired today.",
+        //    "The cars aren't being carefully repaired today.",
+        //    "The cars are being repaired today.",
+        //    "The cars are not being repaired today.",
+        //    "The cars aren't being repaired today.",
+        //    "The cars are always being carefully repaired today.",
+        //    "The cars are not always being carefully repaired today.",
+        //    "The cars aren't always being carefully repaired today.",
+        //    "The big cars are always being carefully repaired today.",
+        //    "The big cars are not always being carefully repaired today.",
+        //    "The big cars aren't always being carefully repaired today.",
 
-            "The big cars are always being carefully turned on today.",
-            "The big cars are not always being carefully turned on today.",
-            "The big cars aren't always being carefully turned on today.",
+        //    "The big cars are always being carefully turned on today.",
+        //    "The big cars are not always being carefully turned on today.",
+        //    "The big cars aren't always being carefully turned on today.",
 
-            // present perfect continuous - singular
-            "The car has been being repaired.",
-            "The car has always been being carefully repaired.",
-            "The car has not always been being carefully repaired.",
-            "The car hasn't always been being carefully repaired.",
-            "The car has been being carefully repaired today.",
-            "The car has not been being carefully repaired today.",
-            "The car hasn't been being carefully repaired today.",
-            "The car has been being repaired today.",
-            "The car has not been being repaired today.",
-            "The car hasn't been being repaired today.",
-            "The car has always been being carefully repaired today.",
-            "The car has not always been being carefully repaired today.",
-            "The car hasn't always been being carefully repaired today.",
-            "The big car hasn't always been being carefully repaired today.",
-            "The big car has not always been being carefully repaired today.",
-            "The big car has always been being carefully repaired today.",
+        //    // present perfect continuous - singular
+        //    "The car has been being repaired.",
+        //    "The car has always been being carefully repaired.",
+        //    "The car has not always been being carefully repaired.",
+        //    "The car hasn't always been being carefully repaired.",
+        //    "The car has been being carefully repaired today.",
+        //    "The car has not been being carefully repaired today.",
+        //    "The car hasn't been being carefully repaired today.",
+        //    "The car has been being repaired today.",
+        //    "The car has not been being repaired today.",
+        //    "The car hasn't been being repaired today.",
+        //    "The car has always been being carefully repaired today.",
+        //    "The car has not always been being carefully repaired today.",
+        //    "The car hasn't always been being carefully repaired today.",
+        //    "The big car hasn't always been being carefully repaired today.",
+        //    "The big car has not always been being carefully repaired today.",
+        //    "The big car has always been being carefully repaired today.",
 
-            "The big car hasn't always been being carefully turned on today.",
-            "The big car has not always been being carefully turned on today.",
-            "The big car has always been being carefully turned on today.",
+        //    "The big car hasn't always been being carefully turned on today.",
+        //    "The big car has not always been being carefully turned on today.",
+        //    "The big car has always been being carefully turned on today.",
             
-            // present perfect continuous - plural
-            "The cars have been being repaired.",
-            "The cars have always been being carefully repaired.",
-            "The cars have not always been being carefully repaired.",
-            "The cars haven't always been being carefully repaired.",
-            "The cars have been being carefully repaired today.",
-            "The cars have not been being carefully repaired today.",
-            "The cars haven't been being carefully repaired today.",
-            "The cars have been being repaired today.",
-            "The cars have not been being repaired today.",
-            "The cars haven't been being repaired today.",
-            "The cars have always been being carefully repaired today.",
-            "The cars have not always been being carefully repaired today.",
-            "The cars haven't always been being carefully repaired today.",
-            "The cars have not always been being carefully repaired today.",
-            "The cars have always been being carefully repaired today.",
+        //    // present perfect continuous - plural
+        //    "The cars have been being repaired.",
+        //    "The cars have always been being carefully repaired.",
+        //    "The cars have not always been being carefully repaired.",
+        //    "The cars haven't always been being carefully repaired.",
+        //    "The cars have been being carefully repaired today.",
+        //    "The cars have not been being carefully repaired today.",
+        //    "The cars haven't been being carefully repaired today.",
+        //    "The cars have been being repaired today.",
+        //    "The cars have not been being repaired today.",
+        //    "The cars haven't been being repaired today.",
+        //    "The cars have always been being carefully repaired today.",
+        //    "The cars have not always been being carefully repaired today.",
+        //    "The cars haven't always been being carefully repaired today.",
+        //    "The cars have not always been being carefully repaired today.",
+        //    "The cars have always been being carefully repaired today.",
 
-            "The cars haven't always been being carefully turned on today.",
-            "The cars have not always been being carefully turned on today.",
-            "The cars have always been being carefully turned on today.",
+        //    "The cars haven't always been being carefully turned on today.",
+        //    "The cars have not always been being carefully turned on today.",
+        //    "The cars have always been being carefully turned on today.",
 
-            // past continuous - singular
-            "The car was being repaired.",
-            "The car was always being carefully repaired.",
-            "The car was not always being carefully repaired.",
-            "The car wasn't always being carefully repaired.",
-            "The car was being carefully repaired today.",
-            "The car was not being carefully repaired today.",
-            "The car wasn't being carefully repaired today.",
-            "The car was being repaired today.",
-            "The car was not being repaired today.",
-            "The car wasn't being repaired today.",
-            "The big car wasn't always being carefully repaired today.",
-            "The big car was always being carefully repaired today.",
-            "The big car was not always being carefully repaired today.",
+        //    // past continuous - singular
+        //    "The car was being repaired.",
+        //    "The car was always being carefully repaired.",
+        //    "The car was not always being carefully repaired.",
+        //    "The car wasn't always being carefully repaired.",
+        //    "The car was being carefully repaired today.",
+        //    "The car was not being carefully repaired today.",
+        //    "The car wasn't being carefully repaired today.",
+        //    "The car was being repaired today.",
+        //    "The car was not being repaired today.",
+        //    "The car wasn't being repaired today.",
+        //    "The big car wasn't always being carefully repaired today.",
+        //    "The big car was always being carefully repaired today.",
+        //    "The big car was not always being carefully repaired today.",
 
-            "The big car wasn't always being carefully turned on today.",
-            "The big car was always being carefully turned on today.",
-            "The big car was not always being carefully turned on today.",
+        //    "The big car wasn't always being carefully turned on today.",
+        //    "The big car was always being carefully turned on today.",
+        //    "The big car was not always being carefully turned on today.",
 
-            // past continuous - plural
-            "The cars were being repaired.",
-            "The cars were always being carefully repaired.",
-            "The cars were not always being carefully repaired.",
-            "The cars weren't always being carefully repaired.",
-            "The cars were being carefully repaired today.",
-            "The cars were not being carefully repaired today.",
-            "The cars weren't being carefully repaired today.",
-            "The cars were being repaired today.",
-            "The cars were not being repaired today.",
-            "The cars weren't being repaired today.",
-            "The cars were always being carefully repaired today.",
-            "The cars were not always being carefully repaired today.",
-            "The cars weren't always being carefully repaired today.",
-            "The big cars were always being carefully repaired today.",
-            "The big cars were not always being carefully repaired today.",
-            "The big cars weren't always being carefully repaired today.",
+        //    // past continuous - plural
+        //    "The cars were being repaired.",
+        //    "The cars were always being carefully repaired.",
+        //    "The cars were not always being carefully repaired.",
+        //    "The cars weren't always being carefully repaired.",
+        //    "The cars were being carefully repaired today.",
+        //    "The cars were not being carefully repaired today.",
+        //    "The cars weren't being carefully repaired today.",
+        //    "The cars were being repaired today.",
+        //    "The cars were not being repaired today.",
+        //    "The cars weren't being repaired today.",
+        //    "The cars were always being carefully repaired today.",
+        //    "The cars were not always being carefully repaired today.",
+        //    "The cars weren't always being carefully repaired today.",
+        //    "The big cars were always being carefully repaired today.",
+        //    "The big cars were not always being carefully repaired today.",
+        //    "The big cars weren't always being carefully repaired today.",
 
-            "The big cars were always being carefully turned on today.",
-            "The big cars were not always being carefully turned on today.",
-            "The big cars weren't always being carefully turned on today.",
+        //    "The big cars were always being carefully turned on today.",
+        //    "The big cars were not always being carefully turned on today.",
+        //    "The big cars weren't always being carefully turned on today.",
 
-            // past perfect - singular
-            "The car had been repaired.",
-            "The car had always been carefully repaired.",
-            "The car had not always been carefully repaired.",
-            "The car hadn't always been carefully repaired.",
-            "The car had been carefully repaired.",
-            "The car had not been carefully repaired.",
-            "The car hadn't been carefully repaired.",
-            "The car had been repaired.",
-            "The car had not been repaired.",
-            "The car hadn't been repaired.",
-            "The big car hadn't always been carefully repaired.",
-            "The big car had always been carefully repaired.",
-            "The big car had not always been carefully repaired.",
+        //    // past perfect - singular
+        //    "The car had been repaired.",
+        //    "The car had always been carefully repaired.",
+        //    "The car had not always been carefully repaired.",
+        //    "The car hadn't always been carefully repaired.",
+        //    "The car had been carefully repaired.",
+        //    "The car had not been carefully repaired.",
+        //    "The car hadn't been carefully repaired.",
+        //    "The car had been repaired.",
+        //    "The car had not been repaired.",
+        //    "The car hadn't been repaired.",
+        //    "The big car hadn't always been carefully repaired.",
+        //    "The big car had always been carefully repaired.",
+        //    "The big car had not always been carefully repaired.",
 
-            "The big car hadn't always been carefully turned on yesterday.",
-            "The big car had always been carefully turned on yesterday.",
-            "The big car had not always been carefully turned on yesterday.",
+        //    "The big car hadn't always been carefully turned on yesterday.",
+        //    "The big car had always been carefully turned on yesterday.",
+        //    "The big car had not always been carefully turned on yesterday.",
 
-            // past perfect - plural
-            "The cars had been repaired.",
-            "The cars had always been carefully repaired.",
-            "The cars had not always been carefully repaired.",
-            "The cars hadn't always been carefully repaired.",
-            "The cars had been carefully repaired.",
-            "The cars had not been carefully repaired.",
-            "The cars hadn't been carefully repaired.",
-            "The cars had been repaired.",
-            "The cars had not been repaired.",
-            "The cars hadn't been repaired.",
-            "The cars had always been carefully repaired.",
-            "The cars had not always been carefully repaired.",
-            "The cars hadn't always been carefully repaired.",
-            "The big cars had always been carefully repaired.",
-            "The big cars had not always been carefully repaired.",
-            "The big cars hadn't always been carefully repaired.",
+        //    // past perfect - plural
+        //    "The cars had been repaired.",
+        //    "The cars had always been carefully repaired.",
+        //    "The cars had not always been carefully repaired.",
+        //    "The cars hadn't always been carefully repaired.",
+        //    "The cars had been carefully repaired.",
+        //    "The cars had not been carefully repaired.",
+        //    "The cars hadn't been carefully repaired.",
+        //    "The cars had been repaired.",
+        //    "The cars had not been repaired.",
+        //    "The cars hadn't been repaired.",
+        //    "The cars had always been carefully repaired.",
+        //    "The cars had not always been carefully repaired.",
+        //    "The cars hadn't always been carefully repaired.",
+        //    "The big cars had always been carefully repaired.",
+        //    "The big cars had not always been carefully repaired.",
+        //    "The big cars hadn't always been carefully repaired.",
 
-            "The big cars had always been carefully turned on yesterday.",
-            "The big cars had not always been carefully turned on yesterday.",
-            "The big cars hadn't always been carefully turned on yesterday.",
+        //    "The big cars had always been carefully turned on yesterday.",
+        //    "The big cars had not always been carefully turned on yesterday.",
+        //    "The big cars hadn't always been carefully turned on yesterday.",
 
-            // past perfect continuous - singular
-            "The car had been being repaired.",
-            "The car had always been being carefully repaired.",
-            "The car had not always been being carefully repaired.",
-            "The car hadn't always been being carefully repaired.",
-            "The car had been being carefully repaired.",
-            "The car had not been being carefully repaired.",
-            "The car hadn't been being carefully repaired.",
-            "The car had been being repaired.",
-            "The car had not been being repaired.",
-            "The car hadn't been being repaired.",
-            "The big car hadn't always been being carefully repaired.",
-            "The big car had always been being carefully repaired.",
-            "The big car had not always been being carefully repaired.",
+        //    // past perfect continuous - singular
+        //    "The car had been being repaired.",
+        //    "The car had always been being carefully repaired.",
+        //    "The car had not always been being carefully repaired.",
+        //    "The car hadn't always been being carefully repaired.",
+        //    "The car had been being carefully repaired.",
+        //    "The car had not been being carefully repaired.",
+        //    "The car hadn't been being carefully repaired.",
+        //    "The car had been being repaired.",
+        //    "The car had not been being repaired.",
+        //    "The car hadn't been being repaired.",
+        //    "The big car hadn't always been being carefully repaired.",
+        //    "The big car had always been being carefully repaired.",
+        //    "The big car had not always been being carefully repaired.",
 
-            "The big car hadn't always been being carefully turned on yesterday.",
-            "The big car had always been being carefully turned on yesterday.",
-            "The big car had not always been being carefully turned on yesterday.",
+        //    "The big car hadn't always been being carefully turned on yesterday.",
+        //    "The big car had always been being carefully turned on yesterday.",
+        //    "The big car had not always been being carefully turned on yesterday.",
 
-            // past perfect continuous - plural
-            "The cars had been being repaired.",
-            "The cars had always been being carefully repaired.",
-            "The cars had not always been being carefully repaired.",
-            "The cars hadn't always been being carefully repaired.",
-            "The cars had been being carefully repaired.",
-            "The cars had not been being carefully repaired.",
-            "The cars hadn't been being carefully repaired.",
-            "The cars had been being repaired.",
-            "The cars had not been being repaired.",
-            "The cars hadn't been being repaired.",
-            "The cars had always been being carefully repaired.",
-            "The cars had not always been being carefully repaired.",
-            "The cars hadn't always been being carefully repaired.",
-            "The big cars had always been being carefully repaired.",
-            "The big cars had not always been being carefully repaired.",
-            "The big cars hadn't always been being carefully repaired.",
+        //    // past perfect continuous - plural
+        //    "The cars had been being repaired.",
+        //    "The cars had always been being carefully repaired.",
+        //    "The cars had not always been being carefully repaired.",
+        //    "The cars hadn't always been being carefully repaired.",
+        //    "The cars had been being carefully repaired.",
+        //    "The cars had not been being carefully repaired.",
+        //    "The cars hadn't been being carefully repaired.",
+        //    "The cars had been being repaired.",
+        //    "The cars had not been being repaired.",
+        //    "The cars hadn't been being repaired.",
+        //    "The cars had always been being carefully repaired.",
+        //    "The cars had not always been being carefully repaired.",
+        //    "The cars hadn't always been being carefully repaired.",
+        //    "The big cars had always been being carefully repaired.",
+        //    "The big cars had not always been being carefully repaired.",
+        //    "The big cars hadn't always been being carefully repaired.",
 
-            "The big cars had always been being carefully turned on yesterday.",
-            "The big cars had not always been being carefully turned on yesterday.",
-            "The big cars hadn't always been being carefully turned on yesterday.",
+        //    "The big cars had always been being carefully turned on yesterday.",
+        //    "The big cars had not always been being carefully turned on yesterday.",
+        //    "The big cars hadn't always been being carefully turned on yesterday.",
 
-            // future simple - singular
-            "The car will be repaired.",
-            "The car will always be carefully repaired.",
-            "The car will not always be carefully repaired.",
-            "The car won't always be carefully repaired.",
-            "The car will be carefully repaired.",
-            "The car will not be carefully repaired.",
-            "The car won't be carefully repaired.",
-            "The car will be repaired.",
-            "The car will not be repaired.",
-            "The car won't be repaired.",
-            "The big car won't always be carefully repaired.",
-            "The big car will always be carefully repaired.",
-            "The big car will not always be carefully repaired.",
+        //    // future simple - singular
+        //    "The car will be repaired.",
+        //    "The car will always be carefully repaired.",
+        //    "The car will not always be carefully repaired.",
+        //    "The car won't always be carefully repaired.",
+        //    "The car will be carefully repaired.",
+        //    "The car will not be carefully repaired.",
+        //    "The car won't be carefully repaired.",
+        //    "The car will be repaired.",
+        //    "The car will not be repaired.",
+        //    "The car won't be repaired.",
+        //    "The big car won't always be carefully repaired.",
+        //    "The big car will always be carefully repaired.",
+        //    "The big car will not always be carefully repaired.",
 
-            "The big car won't always be carefully turned on yesterday.",
-            "The big car will always be carefully turned on yesterday.",
-            "The big car will not always be carefully turned on yesterday.",
+        //    "The big car won't always be carefully turned on yesterday.",
+        //    "The big car will always be carefully turned on yesterday.",
+        //    "The big car will not always be carefully turned on yesterday.",
 
-            // future simple - plural
-            "The cars will be repaired.",
-            "The cars will always be carefully repaired.",
-            "The cars will not always be carefully repaired.",
-            "The cars won't always be carefully repaired.",
-            "The cars will be carefully repaired.",
-            "The cars will not be carefully repaired.",
-            "The cars won't be carefully repaired.",
-            "The cars will be repaired.",
-            "The cars will not be repaired.",
-            "The cars won't be repaired.",
-            "The cars will always be carefully repaired.",
-            "The cars will not always be carefully repaired.",
-            "The cars won't always be carefully repaired.",
-            "The big cars will always be carefully repaired.",
-            "The big cars will not always be carefully repaired.",
-            "The big cars won't always be carefully repaired.",
+        //    // future simple - plural
+        //    "The cars will be repaired.",
+        //    "The cars will always be carefully repaired.",
+        //    "The cars will not always be carefully repaired.",
+        //    "The cars won't always be carefully repaired.",
+        //    "The cars will be carefully repaired.",
+        //    "The cars will not be carefully repaired.",
+        //    "The cars won't be carefully repaired.",
+        //    "The cars will be repaired.",
+        //    "The cars will not be repaired.",
+        //    "The cars won't be repaired.",
+        //    "The cars will always be carefully repaired.",
+        //    "The cars will not always be carefully repaired.",
+        //    "The cars won't always be carefully repaired.",
+        //    "The big cars will always be carefully repaired.",
+        //    "The big cars will not always be carefully repaired.",
+        //    "The big cars won't always be carefully repaired.",
 
-            "The big cars will always be carefully turned on yesterday.",
-            "The big cars will not always be carefully turned on yesterday.",
-            "The big cars won't always be carefully turned on yesterday.",
+        //    "The big cars will always be carefully turned on yesterday.",
+        //    "The big cars will not always be carefully turned on yesterday.",
+        //    "The big cars won't always be carefully turned on yesterday.",
 
-            // future continuous - singular
-            "The car will be being repaired.",
-            "The car will always be being carefully repaired.",
-            "The car will not always be being carefully repaired.",
-            "The car won't always be being carefully repaired.",
-            "The car will be being carefully repaired.",
-            "The car will not be being carefully repaired.",
-            "The car won't be being carefully repaired.",
-            "The car will be being repaired.",
-            "The car will not be being repaired.",
-            "The car won't be being repaired.",
-            "The big car won't always be being carefully repaired.",
-            "The big car will always be being carefully repaired.",
-            "The big car will not always be being carefully repaired.",
+        //    // future continuous - singular
+        //    "The car will be being repaired.",
+        //    "The car will always be being carefully repaired.",
+        //    "The car will not always be being carefully repaired.",
+        //    "The car won't always be being carefully repaired.",
+        //    "The car will be being carefully repaired.",
+        //    "The car will not be being carefully repaired.",
+        //    "The car won't be being carefully repaired.",
+        //    "The car will be being repaired.",
+        //    "The car will not be being repaired.",
+        //    "The car won't be being repaired.",
+        //    "The big car won't always be being carefully repaired.",
+        //    "The big car will always be being carefully repaired.",
+        //    "The big car will not always be being carefully repaired.",
 
-            "The big car won't always be being carefully turned on yesterday.",
-            "The big car will always be being carefully turned on yesterday.",
-            "The big car will not always be being carefully turned on yesterday.",
+        //    "The big car won't always be being carefully turned on yesterday.",
+        //    "The big car will always be being carefully turned on yesterday.",
+        //    "The big car will not always be being carefully turned on yesterday.",
 
-            // future continuous - plural
-            "The cars will be being repaired.",
-            "The cars will always be being carefully repaired.",
-            "The cars will not always be being carefully repaired.",
-            "The cars won't always be being carefully repaired.",
-            "The cars will be being carefully repaired.",
-            "The cars will not be being carefully repaired.",
-            "The cars won't be being carefully repaired.",
-            "The cars will be being repaired.",
-            "The cars will not be being repaired.",
-            "The cars won't be being repaired.",
-            "The cars will always be being carefully repaired.",
-            "The cars will not always be being carefully repaired.",
-            "The cars won't always be being carefully repaired.",
-            "The big cars will always be being carefully repaired.",
-            "The big cars will not always be being carefully repaired.",
-            "The big cars won't always be being carefully repaired.",
+        //    // future continuous - plural
+        //    "The cars will be being repaired.",
+        //    "The cars will always be being carefully repaired.",
+        //    "The cars will not always be being carefully repaired.",
+        //    "The cars won't always be being carefully repaired.",
+        //    "The cars will be being carefully repaired.",
+        //    "The cars will not be being carefully repaired.",
+        //    "The cars won't be being carefully repaired.",
+        //    "The cars will be being repaired.",
+        //    "The cars will not be being repaired.",
+        //    "The cars won't be being repaired.",
+        //    "The cars will always be being carefully repaired.",
+        //    "The cars will not always be being carefully repaired.",
+        //    "The cars won't always be being carefully repaired.",
+        //    "The big cars will always be being carefully repaired.",
+        //    "The big cars will not always be being carefully repaired.",
+        //    "The big cars won't always be being carefully repaired.",
 
-            "The big cars will always be being carefully turned on yesterday.",
-            "The big cars will not always be being carefully turned on yesterday.",
-            "The big cars won't always be being carefully turned on yesterday.",
+        //    "The big cars will always be being carefully turned on yesterday.",
+        //    "The big cars will not always be being carefully turned on yesterday.",
+        //    "The big cars won't always be being carefully turned on yesterday.",
 
-            // future perfect - singular
-            "The car will have been repaired.",
-            "The car will have always been carefully repaired.",
-            "The car will not have always been carefully repaired.",
-            "The car won't have always been carefully repaired.",
-            "The car will have been carefully repaired.",
-            "The car will not have been carefully repaired.",
-            "The car won't have been carefully repaired.",
-            "The car will have been repaired.",
-            "The car will not have been repaired.",
-            "The car won't have been repaired.",
-            "The big car won't have always been carefully repaired.",
-            "The big car will have always been carefully repaired.",
-            "The big car will not have always been carefully repaired.",
+        //    // future perfect - singular
+        //    "The car will have been repaired.",
+        //    "The car will have always been carefully repaired.",
+        //    "The car will not have always been carefully repaired.",
+        //    "The car won't have always been carefully repaired.",
+        //    "The car will have been carefully repaired.",
+        //    "The car will not have been carefully repaired.",
+        //    "The car won't have been carefully repaired.",
+        //    "The car will have been repaired.",
+        //    "The car will not have been repaired.",
+        //    "The car won't have been repaired.",
+        //    "The big car won't have always been carefully repaired.",
+        //    "The big car will have always been carefully repaired.",
+        //    "The big car will not have always been carefully repaired.",
 
-            "The big car won't have always been carefully turned on yesterday.",
-            "The big car will have always been carefully turned on yesterday.",
-            "The big car will not have always been carefully turned on yesterday.",
+        //    "The big car won't have always been carefully turned on yesterday.",
+        //    "The big car will have always been carefully turned on yesterday.",
+        //    "The big car will not have always been carefully turned on yesterday.",
 
-            // future perfect - plural
-            "The cars will have been repaired.",
-            "The cars will have always been carefully repaired.",
-            "The cars will not have always been carefully repaired.",
-            "The cars won't have always been carefully repaired.",
-            "The cars will have been carefully repaired.",
-            "The cars will not have been carefully repaired.",
-            "The cars won't have been carefully repaired.",
-            "The cars will have been repaired.",
-            "The cars will not have been repaired.",
-            "The cars won't have been repaired.",
-            "The cars will have always been carefully repaired.",
-            "The cars will not have always been carefully repaired.",
-            "The cars won't have always been carefully repaired.",
-            "The big cars will have always been carefully repaired.",
-            "The big cars will not have always been carefully repaired.",
-            "The big cars won't have always been carefully repaired.",
+        //    // future perfect - plural
+        //    "The cars will have been repaired.",
+        //    "The cars will have always been carefully repaired.",
+        //    "The cars will not have always been carefully repaired.",
+        //    "The cars won't have always been carefully repaired.",
+        //    "The cars will have been carefully repaired.",
+        //    "The cars will not have been carefully repaired.",
+        //    "The cars won't have been carefully repaired.",
+        //    "The cars will have been repaired.",
+        //    "The cars will not have been repaired.",
+        //    "The cars won't have been repaired.",
+        //    "The cars will have always been carefully repaired.",
+        //    "The cars will not have always been carefully repaired.",
+        //    "The cars won't have always been carefully repaired.",
+        //    "The big cars will have always been carefully repaired.",
+        //    "The big cars will not have always been carefully repaired.",
+        //    "The big cars won't have always been carefully repaired.",
 
-            "The big cars will have always been carefully turned on yesterday.",
-            "The big cars will not have always been carefully turned on yesterday.",
-            "The big cars won't have always been carefully turned on yesterday.",
+        //    "The big cars will have always been carefully turned on yesterday.",
+        //    "The big cars will not have always been carefully turned on yesterday.",
+        //    "The big cars won't have always been carefully turned on yesterday.",
 
-            // future perfect continuous - singular
-            "The car will have been being repaired.",
-            "The car will have always been being carefully repaired.",
-            "The car will not have always been being carefully repaired.",
-            "The car won't have always been being carefully repaired.",
-            "The car will have been being carefully repaired.",
-            "The car will not have been being carefully repaired.",
-            "The car won't have been being carefully repaired.",
-            "The car will have been being repaired.",
-            "The car will not have been being repaired.",
-            "The car won't have been being repaired.",
-            "The big car won't have always been being carefully repaired.",
-            "The big car will have always been being carefully repaired.",
-            "The big car will not have always been being carefully repaired.",
+        //    // future perfect continuous - singular
+        //    "The car will have been being repaired.",
+        //    "The car will have always been being carefully repaired.",
+        //    "The car will not have always been being carefully repaired.",
+        //    "The car won't have always been being carefully repaired.",
+        //    "The car will have been being carefully repaired.",
+        //    "The car will not have been being carefully repaired.",
+        //    "The car won't have been being carefully repaired.",
+        //    "The car will have been being repaired.",
+        //    "The car will not have been being repaired.",
+        //    "The car won't have been being repaired.",
+        //    "The big car won't have always been being carefully repaired.",
+        //    "The big car will have always been being carefully repaired.",
+        //    "The big car will not have always been being carefully repaired.",
 
-            "The big car won't have always been being carefully turned on yesterday.",
-            "The big car will have always been being carefully turned on yesterday.",
-            "The big car will not have always been being carefully turned on yesterday.",
+        //    "The big car won't have always been being carefully turned on yesterday.",
+        //    "The big car will have always been being carefully turned on yesterday.",
+        //    "The big car will not have always been being carefully turned on yesterday.",
 
-            // future perfect continuous - plural
-            "The cars will have been being repaired.",
-            "The cars will have always been being carefully repaired.",
-            "The cars will not have always been being carefully repaired.",
-            "The cars won't have always been being carefully repaired.",
-            "The cars will have been being carefully repaired.",
-            "The cars will not have been being carefully repaired.",
-            "The cars won't have been being carefully repaired.",
-            "The cars will have been being repaired.",
-            "The cars will not have been being repaired.",
-            "The cars won't have been being repaired.",
-            "The cars will have always been being carefully repaired.",
-            "The cars will not have always been being carefully repaired.",
-            "The cars won't have always been being carefully repaired.",
-            "The big cars will have always been being carefully repaired.",
-            "The big cars will not have always been being carefully repaired.",
-            "The big cars won't have always been being carefully repaired.",
+        //    // future perfect continuous - plural
+        //    "The cars will have been being repaired.",
+        //    "The cars will have always been being carefully repaired.",
+        //    "The cars will not have always been being carefully repaired.",
+        //    "The cars won't have always been being carefully repaired.",
+        //    "The cars will have been being carefully repaired.",
+        //    "The cars will not have been being carefully repaired.",
+        //    "The cars won't have been being carefully repaired.",
+        //    "The cars will have been being repaired.",
+        //    "The cars will not have been being repaired.",
+        //    "The cars won't have been being repaired.",
+        //    "The cars will have always been being carefully repaired.",
+        //    "The cars will not have always been being carefully repaired.",
+        //    "The cars won't have always been being carefully repaired.",
+        //    "The big cars will have always been being carefully repaired.",
+        //    "The big cars will not have always been being carefully repaired.",
+        //    "The big cars won't have always been being carefully repaired.",
 
-            "The big cars will have always been being carefully turned on yesterday.",
-            "The big cars will not have always been being carefully turned on yesterday.",
-            "The big cars won't have always been being carefully turned on yesterday.",
+        //    "The big cars will have always been being carefully turned on yesterday.",
+        //    "The big cars will not have always been being carefully turned on yesterday.",
+        //    "The big cars won't have always been being carefully turned on yesterday.",
 
-            // Past habitual
-            //"The car used to always be carefully repaired in the mornings.",
-            //"The cars used to always be carefully repaired in the mornings.",
+        //    // Past habitual
+        //    //"The car used to always be carefully repaired in the mornings.",
+        //    //"The cars used to always be carefully repaired in the mornings.",
 
-            // others---------------------------
-            "The car has not been repaired.",
-            "The car hasn't been repaired.",
+        //    // others---------------------------
+        //    "The car has not been repaired.",
+        //    "The car hasn't been repaired.",
 
-            "A student has finished the assignment.",
-            "A student has not finished the assignment.",
-            "A student hasn't finished the assignment.",
+        //    "A student has finished the assignment.",
+        //    "A student has not finished the assignment.",
+        //    "A student hasn't finished the assignment.",
 
-            "Students have finished their assignment",
-            "Students have not finished their assignment",
-            "Students haven't finished their assignment",
+        //    "Students have finished their assignment",
+        //    "Students have not finished their assignment",
+        //    "Students haven't finished their assignment",
 
-            "Alex has finished the assignment.",
-            "Alex has finished his assignment.",
+        //    "Alex has finished the assignment.",
+        //    "Alex has finished his assignment.",
 
-            "A guy has finished his assignment.",
+        //    "A guy has finished his assignment.",
 
-            "There is no beef in here",
-            "He completes the task quickly.",
-            "She walks slowly.",
-            // tmp --------------------- ok all
+        //    "There is no beef in here",
+        //    "He completes the task quickly.",
+        //    "She walks slowly.",
+        //    // tmp --------------------- ok all
 
-            "The car is running.", // Exc
-            "The car is not running.",
-            "The car isn't running.",
+        //    "The car is running.", // Exc
+        //    "The car is not running.",
+        //    "The car isn't running.",
 
-            "A car is running.",
-            "A car is not running.",
-            "A car isn't running.",
+        //    "A car is running.",
+        //    "A car is not running.",
+        //    "A car isn't running.",
 
-            "The cars are running.",
-            "The cars are not running.",
-            "The cars aren't running.",
+        //    "The cars are running.",
+        //    "The cars are not running.",
+        //    "The cars aren't running.",
 
-                        "There is my car running here",
-                        "There is not my car running here",
-                        "There isn't my car running here",
+        //                "There is my car running here",
+        //                "There is not my car running here",
+        //                "There isn't my car running here",
 
-            "There is no car running here",
-            "There is not a car running here",
-            "There isn't a car running here",
+        //    "There is no car running here",
+        //    "There is not a car running here",
+        //    "There isn't a car running here",
 
-            "There are no cars running here",
-            "There aren't cars running here",
+        //    "There are no cars running here",
+        //    "There aren't cars running here",
 
-                        "There are my cars running here",
+        //                "There are my cars running here",
 
-            "The big car is running.",
-            "The big car is not running.",
-            "The big car isn't running.",
+        //    "The big car is running.",
+        //    "The big car is not running.",
+        //    "The big car isn't running.",
 
-                        "The big car is running.",
-                        "My big car is not running.",
-                        "My big car isn't running.",
+        //                "The big car is running.",
+        //                "My big car is not running.",
+        //                "My big car isn't running.",
 
-            "A big car is running.",
-            "A big car is not running.",
-            "A big car isn't running.",
+        //    "A big car is running.",
+        //    "A big car is not running.",
+        //    "A big car isn't running.",
 
-            "The big cars are running.",
-            "The big cars are not running.",
-            "The big cars aren't running.",
+        //    "The big cars are running.",
+        //    "The big cars are not running.",
+        //    "The big cars aren't running.",
 
-            "There is no big car running here",
-            "There is not a big car running here",
-            "There isn't a big car running here",
+        //    "There is no big car running here",
+        //    "There is not a big car running here",
+        //    "There isn't a big car running here",
 
-            "There are no big cars running here",
-            "There aren't big cars running here",
+        //    "There are no big cars running here",
+        //    "There aren't big cars running here",
 
-            "The car is big.",
-            "The car is not big.",
-            "The car isn't big.",
+        //    "The car is big.",
+        //    "The car is not big.",
+        //    "The car isn't big.",
 
-            "A car is big.",
-            "A car is not big.",
-            "A car isn't big.",
+        //    "A car is big.",
+        //    "A car is not big.",
+        //    "A car isn't big.",
 
-            "Cars are big",
-            "Cars are not big",
-            "Cars aren't big",
+        //    "Cars are big",
+        //    "Cars are not big",
+        //    "Cars aren't big",
 
-            "There aren't big dogs playing here",
-            // ---------------------
+        //    "There aren't big dogs playing here",
+        //    // ---------------------
 
-            // Present Simple - Affermazioni
-            "The car is big.",
-            "The car is not big.",
-            "The car isn't big.",
+        //    // Present Simple - Affermazioni
+        //    "The car is big.",
+        //    "The car is not big.",
+        //    "The car isn't big.",
 
-            "A car is big.",
-            "A car is not big.",
-            "A car isn't big.",
+        //    "A car is big.",
+        //    "A car is not big.",
+        //    "A car isn't big.",
 
-            "Cars are big",
-            "Cars are not big",
-            "Cars aren't big",
+        //    "Cars are big",
+        //    "Cars are not big",
+        //    "Cars aren't big",
 
-            "A car is big.",
-            "A guy has a car.",
-            "Google has a car.",
-            "John loves books.",
+        //    "A car is big.",
+        //    "A guy has a car.",
+        //    "Google has a car.",
+        //    "John loves books.",
             
-            "John loves his books.",
-            "John does not love his books.",
-            "John doesn't love his books.",
+        //    "John loves his books.",
+        //    "John does not love his books.",
+        //    "John doesn't love his books.",
 
-            "Students love their books.",
-            "Students do not love their books.",
-            "Students don't love their books.",
+        //    "Students love their books.",
+        //    "Students do not love their books.",
+        //    "Students don't love their books.",
 
-            "John loves big books.",
-            "John loves his big books.",
-            "The sun rises in the east.",
-            "He likes apples.",
-            "He likes my apples.",
-            "She believes in miracles.",
-            "She believes in a miracle.",
-            "The cat jumps.",
-            "Cats jump.",
-            "The dogs run fast.",
-            "The dogs run.",
+        //    "John loves big books.",
+        //    "John loves his big books.",
+        //    "The sun rises in the east.",
+        //    "He likes apples.",
+        //    "He likes my apples.",
+        //    "She believes in miracles.",
+        //    "She believes in a miracle.",
+        //    "The cat jumps.",
+        //    "Cats jump.",
+        //    "The dogs run fast.",
+        //    "The dogs run.",
     
-            // Present Simple - Negazioni
+        //    // Present Simple - Negazioni
 
-            "The cars aren't big.",
-            "A car is not big.",
-            "A car isn't big.",
+        //    "The cars aren't big.",
+        //    "A car is not big.",
+        //    "A car isn't big.",
 
-            "A guy has a car.",
+        //    "A guy has a car.",
 
-            "A guy has his car.",
-            "A guy does not have a car.",
-            "A guy does not have his car.",
-            "A guy doesn't have his car.",
+        //    "A guy has his car.",
+        //    "A guy does not have a car.",
+        //    "A guy does not have his car.",
+        //    "A guy doesn't have his car.",
 
-            "A guy doesn't have a car.",
-            "A guy does not have the car.",
-            "Google does not have a car.",
-            "John does not love books.",
-            "Dogs do not run fast.",
-            "The Dogs do not run.",
-            "He does not have a bike.",
-            "They do not visit her grandparents every Sunday.",
-            "They don't wake up her grandparents every Sunday.",
+        //    "A guy doesn't have a car.",
+        //    "A guy does not have the car.",
+        //    "Google does not have a car.",
+        //    "John does not love books.",
+        //    "Dogs do not run fast.",
+        //    "The Dogs do not run.",
+        //    "He does not have a bike.",
+        //    "They do not visit her grandparents every Sunday.",
+        //    "They don't wake up her grandparents every Sunday.",
     
-            // Avverbi nel Present Simple
-            "She never drinks coffee.",
-            "I always drink coffee in the morning.",
-            "They do not always drink coffee in the morning.",
-            "He doesn't always agree with me.",
+        //    // Avverbi nel Present Simple
+        //    "She never drinks coffee.",
+        //    "I always drink coffee in the morning.",
+        //    "They do not always drink coffee in the morning.",
+        //    "He doesn't always agree with me.",
     
-            // Present Simple - Frasi con Verbi Frasali (Phrasal Verbs)
-            "She wakes up the child.",
-            "He turns on the computer.",
-            "She turns off the lamp.",
-            "They give up the fight.",
-            "He takes off the jacket.",
-            "She looks after the house.",
-            "We run into the problem.",
-            "They set up the table.",
-            "She finds out the answer.",
-            "He puts off the meeting.",
+        //    // Present Simple - Frasi con Verbi Frasali (Phrasal Verbs)
+        //    "She wakes up the child.",
+        //    "He turns on the computer.",
+        //    "She turns off the lamp.",
+        //    "They give up the fight.",
+        //    "He takes off the jacket.",
+        //    "She looks after the house.",
+        //    "We run into the problem.",
+        //    "They set up the table.",
+        //    "She finds out the answer.",
+        //    "He puts off the meeting.",
     
-            // Present Continuous - Affermazioni
-            "The car is running.",
-            "The boy is eating a sandwich.",
-            "A girl is reading a book.",
-            "The dogs are playing in the garden.",
-            "John is writing a letter.",
-            "They are standing here.",
+        //    // Present Continuous - Affermazioni
+        //    "The car is running.",
+        //    "The boy is eating a sandwich.",
+        //    "A girl is reading a book.",
+        //    "The dogs are playing in the garden.",
+        //    "John is writing a letter.",
+        //    "They are standing here.",
     
-            // Present Continuous - Negazioni
-            "The car is not running.",
-            "The boy is not eating a sandwich.",
-            "A girl is not reading a book.",
-            "The dogs are not playing in the garden.",
-            "John is not writing a letter.",
-            "He is not standing here.",
+        //    // Present Continuous - Negazioni
+        //    "The car is not running.",
+        //    "The boy is not eating a sandwich.",
+        //    "A girl is not reading a book.",
+        //    "The dogs are not playing in the garden.",
+        //    "John is not writing a letter.",
+        //    "He is not standing here.",
     
-            // Usi Enfatici con 'do'
-            "I do like apples.",
-            "They do not like apples.",
-            //"I do not work at night.",
-            "I do not work today.",
-            "I do not always drink coffee in the morning.",
+        //    // Usi Enfatici con 'do'
+        //    "I do like apples.",
+        //    "They do not like apples.",
+        //    //"I do not work at night.",
+        //    "I do not work today.",
+        //    "I do not always drink coffee in the morning.",
     
-            // Frasi con Soggetto Plurale
-            "Cars are big.",
-            "Cars are not big.",
-            "Cars aren't big.",
-            "The dogs run.",
-            "The dogs run in the garden.",
-            "The dogs are playing in the garden.",
-            "The dogs are not playing in the garden.",
-            "The dogs aren't playing in the garden.",
+        //    // Frasi con Soggetto Plurale
+        //    "Cars are big.",
+        //    "Cars are not big.",
+        //    "Cars aren't big.",
+        //    "The dogs run.",
+        //    "The dogs run in the garden.",
+        //    "The dogs are playing in the garden.",
+        //    "The dogs are not playing in the garden.",
+        //    "The dogs aren't playing in the garden.",
 
-            // others
-            "It is a sunny day.",
-            "It is not a sunny day.",
-            "he likes reading",
-            "Dogs bark",
-            "She is at home",
-            "She is not at home",
-            "She drives the car carefully.",
+        //    // others
+        //    "It is a sunny day.",
+        //    "It is not a sunny day.",
+        //    "he likes reading",
+        //    "Dogs bark",
+        //    "She is at home",
+        //    "She is not at home",
+        //    "She drives the car carefully.",
 
-            "There are dogs here",
-            "There is a dog here",
+        //    "There are dogs here",
+        //    "There is a dog here",
 
-            "He completed the task quickly.",
-            "She drives the car carefully ."
-        };
+        //    "He completed the task quickly.",
+        //    "She drives the car carefully ."
+        //};
+        */
         foreach (var sentence in questions)
         {
             if (!IsValidSentence(sentence))
