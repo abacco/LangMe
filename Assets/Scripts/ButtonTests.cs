@@ -13,7 +13,7 @@ public class ButtonTests : MonoBehaviour
     static List<string> base_verbs_3rd_person = new List<string> { "visits", "needs","makes", "lives", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
     static List<string> past_participle = new List<string> 
     { 
-        "visited"//, 
+        "visited", "been"//, 
         //"eaten","studied","run","done","responded","enjoyed","traveled", "liked", 
         //"needed", "made", "lived", "did","worked", "responded", "answered", "went","explained", 
         //"written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" 
@@ -25,7 +25,7 @@ public class ButtonTests : MonoBehaviour
 
     static List<string> singular_subjects = new List<string> 
     {
-            "grandparent","cat" //, 
+            "grandparent", "cat" //, 
             //"message", "gym", "morning", "teacher", "student", "beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", 
             //"car", "guy", "water", "sun", "he", "she", "it", "tennis", "school", "night", "time", "cake", "friend", "thing", "pizza", "basketball", 
             //"football", "soccer", "apple", "assignment", "task", "garden", "day", "grandparent", "home", "guitar", "letter", "sandwich", "problem", "meeting", 
@@ -103,2302 +103,7 @@ public class ButtonTests : MonoBehaviour
         return IsAValidQuestion2(words);
     }
 
-    public static bool IsAQuestion(string[] words)
-    {
-        // LEGGI AO - SHOW WARNING -> SENTENCE SHOULD END WITH AN ADVERB
-        // la lunghezza dell'array che puoi accettare è uguale alla profondità massima dell'albero (guarda la posizione) - vedi alla fine
-        // vedi se fare il check prima o dopo la normalizzazione
-        // SULLE FOGLIE L'ACCESSO AGLI ULTIMI NODI LO DEVI FARE SEMPRE CON words.lenght-1 e non con le posizioni fisse per smaltire <--- REFACTORRR!!!
-        words = Normalization(words);
-        //words = RemoveQuestionAdverbs(words);
-        if (IsFixedLenght(words, 1))
-        {
-            if (words[0].Equals("error-1")) return false;
-        }
-        if (IsAQuestionWords(words[0]))
-        {
-            words = words.Where((value, index) => index != 0 && index != 0).ToArray();
-        }
-        if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
-        {
-            words = RemovePrepOrPoss(words, 3);
-            if (IsASingular(words[4])) return true;
-        }
-        if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
-        {
-            string detectedPhrasalVerb = words[0] + " " + words[1]; // she wakes up
-            if (phrasalVerbs.Contains(detectedPhrasalVerb))
-            {
-                words = words.Where((value, index) => index != 0 && index != 1).ToArray();
-            }
-            words = RemovePrepOrPoss(words, 4);
-            if (IsASingular(words[5])) return true;
-            if (IsAPlural(words[5])) return true;
-        }
-        
-        if (Do(words[0]) || Dont(words[0]) || Did(words[0]) || Didnt(words[0]) || Will(words[0]) || Wont(words[0]))
-        {
-            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
-            {
-                words = words.Where((value, index) => index != 1).ToArray();
-                if (IsAPlural(words[1]) || words[1].Equals("you") || IsACommon(words[1]))
-                {
-                    if (IsABaseVerb(words[2]))
-                    {
-                        if (!IsFixedLenght(words, 3))
-                        {
-                            if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]) || prepositions.Contains(words[3]))
-                            {
-                                words = words.Where((value, index) => index != 3).ToArray();
-                            }
-                            if (IsACommon(words[3])) { return true; }
-                            else if (IsAPlural(words[3])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                    if (Not(words[2]))
-                    {
-                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                        {
-                            words = words.Where((value, index) => index != 3).ToArray();
-                            if (IsABaseVerb(words[4]))
-                            {
-                                if (IsACommon(words[5])) { return true; }
-                                else if (IsAPlural(words[5])) { return true; }
-                                else { return false; }
-                            }
-                            if (!IsFixedLenght(words, 5))
-                            {
-                                if (IsACommon(words[5])) { return true; }
-                                else if (IsAPlural(words[5])) { return true; }
-                                else { return false; }
-                            }
-                        }
-                        if (IsABaseVerb(words[4]))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                        if (!IsFixedLenght(words, 5))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                }
-            }
-            if (IsAPlural(words[1]) || words[1].Equals("you") || IsACommon(words[1]))
-            {
-                if (IsABaseVerb(words[2]))
-                {
-                    if (!IsFixedLenght(words, 3))
-                    {
-                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]) || IsAPreposition(words[3]))
-                        {
-                            words = words.Where((value, index) => index != 3).ToArray();
-                            if (The(words[3]))
-                            {
-                                words = words.Where((value, index) => index != 3).ToArray();
-                            }
-                        }
-                        if (IsACommon(words[3])) { return true; }
-                        else if (IsAPlural(words[3])) { return true; }
-                        else { return false; }
 
-                        //if (This(words[3]) || That(words[3])) DO NOT DELETE!!
-                        //{
-                        //    if (IsACommon(words[4])) { return true; }
-                        //    else if (IsAPlural(words[4])) { return true; }
-                        //    else { return false; }
-                        //}
-                    }
-                    return true;
-                }
-                if (Not(words[2]))
-                {
-                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                    {
-                        words = words.Where((value, index) => index != 3).ToArray();
-                        if (IsABaseVerb(words[4]))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                        if (!IsFixedLenght(words, 5))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                    if(!IsFixedLenght(words, 4))
-                    {
-                        if (IsABaseVerb(words[4]))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                    } else
-                    {
-                        if (IsABaseVerb(words[3])) { return true; }
-                    }
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsACommon(words[5])) { return true; }
-                        else if (IsAPlural(words[5])) { return true; }
-                        else { return false; }
-                    }
-                }
-            }
-            if (Not(words[1]))
-            {
-                if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray();
-                    if (IsAPlural(words[2]) || words[2].Equals("you"))
-                    {
-                        if (IsABaseVerb(words[3]))
-                        {
-                            if (IsACommon(words[4])) { return true; }
-                            else if (IsAPlural(words[4])) { return true; }
-                            else { return false; }
-                        }
-                        if (!IsFixedLenght(words, 4))
-                        {
-                            if (IsACommon(words[4])) { return true; }
-                            else if (IsAPlural(words[4])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                }
-                //if (IsAPlural(words[2]) || words[2].Equals("you"))
-                //{
-                //    words = RemoveAdverbs(words, 3);
-                //    if (IsABaseVerb(words[3]))
-                //    {
-                //        if (!IsFixedLenght(words, 4))
-                //        {
-                //            if (IsACommon(words[4])) return true;
-                //        }
-                //        return true;
-                //    }
-                //}
-            }
-        }
-        if (Does(words[0]) || Doesnt(words[0]) || Did(words[0]) || Didnt(words[0]) || Will(words[0]) || Wont(words[0]))
-        {
-            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
-            {
-                words = words.Where((value, index) => index != 1).ToArray();
-            }
-            if (IsASingular(words[1]) || IsAProperNoun(words[1]))
-            {
-                if (IsABaseVerb(words[2]))
-                {
-                    if (!IsFixedLenght(words, 3))
-                    {
-                        if(!IsFixedLenght(words, 3))
-                        {
-                            if (IsAPreposition(words[3]) || The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                            {
-                                words = words.Where((value, index) => index != 3).ToArray();
-                            }
-                            if (IsACommon(words[3])) { return true; }
-                            else if (IsAPlural(words[3])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                    return true;
-                }
-                if (Not(words[2]))
-                {
-                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                    {
-                        words = words.Where((value, index) => index != 3).ToArray();
-                        if (IsABaseVerb(words[4]))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                        if (!IsFixedLenght(words, 5))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                    if (IsABaseVerb(words[4]))
-                    {
-                        if (IsACommon(words[5])) { return true; }
-                        else if (IsAPlural(words[5])) { return true; }
-                        else { return false; }
-                    }
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsACommon(words[5])) { return true; }
-                        else if (IsAPlural(words[5])) { return true; }
-                        else { return false; }
-                    }
-                }
-            }
-            if (Not(words[1]))
-            {
-                if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray();
-                }
-                if (IsASingular(words[1]) || IsAProperNoun(words[2]))
-                {
-                    if (timeAdverbs.Contains(words[3]))
-                    {
-                        words = words.Where((value, index) => index != 3).ToArray();
-                    }
-                    if (IsABaseVerb(words[3]))
-                    {
-                        if (!IsFixedLenght(words, 4))
-                        {
-                            if (!IsFixedLenght(words, 4))
-                            {
-                                if (IsAPreposition(words[4]))
-                                {
-                                    words = words.Where((value, index) => index != 4).ToArray();
-                                }
-                                if (IsACommon(words[4])) { return true; }
-                                else if (IsAPlural(words[4])) { return true; }
-                                else { return false; }
-                            }
-                        }
-                        return true;
-                    }
-                    if (Not(words[2]))
-                    {
-                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                        {
-                            words = words.Where((value, index) => index != 3).ToArray();
-                            if (IsABaseVerb(words[4]))
-                            {
-                                if (IsACommon(words[5])) { return true; }
-                                else if (IsAPlural(words[5])) { return true; }
-                                else { return false; }
-                            }
-                            if (!IsFixedLenght(words, 5))
-                            {
-                                if (IsACommon(words[5])) { return true; }
-                                else if (IsAPlural(words[5])) { return true; }
-                                else { return false; }
-                            }
-                        }
-                        if (IsABaseVerb(words[4]))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                        if (!IsFixedLenght(words, 5))
-                        {
-                            if (IsACommon(words[5])) { return true; }
-                            else if (IsAPlural(words[5])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                }
-            }
-        }
-        
-        if (Are(words[0]) || Arent(words[0]) || Were(words[0]) || Werent(words[0]))
-        {
-            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
-            {
-                words = words.Where((value, index) => index != 1).ToArray();
-            }
-            if (IsAPluralSubject(words[1]) || words[1].Equals("you")) 
-            {
-                if(!IsFixedLenght(words, 3)){
-                }
-                if (IsAnIngVerbs(words[2]))
-                {
-                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                    {
-                        words = words.Where((value, index) => index != 3).ToArray();
-                    }
-                    if (IsAnAdjective(words[3]))
-                    {
-                        if (IsACommon(words[4])) 
-                        {
-                            if (IsAPlaceAdverbs(words[words.Length - 1]))
-                            {
-                                words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                            }
-                            return true;
-                        }
-                        return true;
-                    }
-                    if (IsACommon(words[3]))
-                    {
-                        if (IsAPlaceAdverbs(words[words.Length - 1]))
-                        {
-                            words = words.Where((value, index) => index != words.Length - 1).ToArray();
-                        }
-                        return true;
-                    }
-                    if (IsAPlural(words[3]))
-                    {
-                        return true;
-                    }
-                }
-                if (IsAnAdjective(words[2])) return true;
-                if (IsAPluralSubject(words[2])) return true;
-                if (IsAPreposition(words[2]))
-                {
-                    if (IsACommon(words[3])) { return true; }
-                    else if (IsAPlural(words[3])) { return true; }
-                    else { return false; }
-                }
-            }
-        }
-        if (Is(words[0]) || Isnt(words[0])   || Was(words[0]) || Wasnt(words[0]))
-        {
-            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
-            {
-                words = words.Where((value, index) => index != 1).ToArray();
-            }
-            if (IsASingular(words[1]))
-            {
-                if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray();
-                }
-                if (Not(words[2]))
-                {
-                    //words = words.Where((value, index) => index != 2).ToArray(); -- Reminder for refactoring
-                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                    {
-                        words = words.Where((value, index) => index != 3).ToArray();
-                    }
-                    if (IsAnAdjective(words[3])) return true;
-                    if (IsACommon(words[3])) { return true; }
-                    else if (IsAPlural(words[3])) { return true; }
-                    else { return false; }
-                }
-                if (IsAnIngVerbs(words[2]))
-                {
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsAPreposition(words[3]))
-                        {
-                            if (IsACommon(words[4])) { return true; }
-                            else if (IsAPlural(words[4])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                }
-                if (IsAnIngVerbs(words[2])) return true; // is she studying?
-                if (IsAnAdjective(words[2])) return true;
-                if (IsACommon(words[2])) { return true; }
-                else if (IsAPlural(words[2])) { return true; }
-                else { return false; }
-            }
-            if (IsAnIngVerbs(words[1]))
-            {
-                if (!IsFixedLenght(words, 3))
-                {
-                    if(!IsFixedLenght(words, 2))
-                    {
-                        if (!IsFixedLenght(words, 2))
-                        {
-                            if (IsAPreposition(words[2]))
-                            {
-                                if (IsACommon(words[3])) { return true; }
-                                else if (IsAPlural(words[3])) { return true; }
-                                else { return false; }
-                            }
-                        }
-                        return true;
-                    }
-                }
-                return true;
-            }
-        }
-
-        if (Have(words[0]) || Havent(words[0]) || Had(words[0]) || Hadnt(words[0]))
-        {
-            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
-            {
-                words = words.Where((value, index) => index != 1).ToArray();
-                if (IsAPlural(words[1]) || words[1].Equals("you"))
-                {
-                    if (IsPastParticiple(words[2]))
-                    {
-                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                        {
-                            words = words.Where((value, index) => index != 3).ToArray();
-                        }
-                        if (IsACommon(words[3])) { return true; }
-                        else if (IsAPlural(words[3])) { return true; }
-                        else { return false; }
-                    }
-                    if (IsAnIngVerbs(words[2]))
-                    {
-                        if (IsACommon(words[3])) { return true; }
-                        else if (IsAPlural(words[3])) { return true; }
-                        else { return false; }
-                    }
-                }
-            }
-            if (IsAPlural(words[1]) || words[1].Equals("you"))
-            {
-                if (IsPastParticiple(words[2]))
-                {
-                    if (!IsFixedLenght(words, 3))
-                    {
-                        // the , a, an QUI BRO
-                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
-                        {
-                            words = words.Where((value, index) => index != 3).ToArray();
-                        }
-                        if (!IsFixedLenght(words, 3))
-                        {
-                            if (IsACommon(words[3])) { return true; }
-                            else if (IsAPlural(words[3])) { return true; }
-                            else { return false; }
-                        }
-                        //if (This(words[3]) || That(words[3])) DO NOT DELETE!!!!!!!!!!!!!!!!!!
-                        //{
-                        //    if (IsACommon(words[4])) { return true; }
-                        //    else { return false; }
-                        //}
-                        //if (Those(words[3]))
-                        //{
-                        //    if (IsACommon(words[4])) { return true; }
-                        //    else { return false; }
-                        //}
-                    }
-                    return true;
-                }
-                if (IsAnIngVerbs(words[2]))
-                {
-                    if (!IsFixedLenght(words, 3)) {
-                        if (IsACommon(words[3])) { return true; }
-                        else if (IsAPlural(words[3])) { return true; }
-                        else { return false; }
-                    } 
-                }
-                if (Been(words[2]))
-                {
-                    if (IsAnIngVerbs(words[3]))
-                    {
-                        if (!IsFixedLenght(words, 4))
-                        {
-                            if (IsACommon(words[4]))
-                            {
-                                if (words.Length >= 5) // it means there are more words in the sentence
-                                {
-                                    if (IsACommon(words[words.Length - 1])) { return true; }
-                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
-                                    else { return false; }
-                                }
-                                return true;
-                            }
-                            if (IsAPlural(words[4]))
-                            {
-                                if (words.Length >= 5) // it means there are more words in the sentence
-                                {
-                                    if (IsACommon(words[words.Length - 1])) { return true; }
-                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
-                                    else { return false; }
-                                }
-                                return true;
-                            }
-                        }
-                        return true;
-                    }
-                }
-            }
-            if (Not(words[1]))
-            {
-                if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray();
-                    if (IsAPlural(words[2]) || words[1].Equals("you"))
-                    {
-                        if (IsPastParticiple(words[3]))
-                        {
-                            if (IsACommon(words[4])) { return true; }
-                            else if (IsAPlural(words[4])) { return true; }
-                            else { return false; }
-                        }
-                        return true;
-                    }
-                    if (Been(words[2]))
-                    {
-                        if (IsAnIngVerbs(words[3]))
-                        {
-                            if (!IsFixedLenght(words, 4))
-                            {
-                                if (IsACommon(words[4]))
-                                {
-                                    if (words.Length >= 5) // it means there are more words in the sentence
-                                    {
-                                        if (IsACommon(words[words.Length - 1])) { return true; }
-                                        else if (IsAPlural(words[words.Length - 1])) { return true; }
-                                        else { return false; }
-                                    }
-                                    return true;
-                                }
-                                if (IsAPlural(words[4]))
-                                {
-                                    if (words.Length >= 5) // it means there are more words in the sentence
-                                    {
-                                        if (IsACommon(words[words.Length - 1])) { return true; }
-                                        else if (IsAPlural(words[words.Length - 1])) { return true; }
-                                        else { return false; }
-                                    }
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (IsAPlural(words[2]) || words[2].Equals("you"))
-                {
-                    if (IsPastParticiple(words[3]))
-                    {
-                        if (!IsFixedLenght(words, 4))
-                        {
-                            if (IsACommon(words[4])) { return true; }
-                            else if (IsAPlural(words[4])) { return true; }
-                            else { return false; }
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
-        if (Has(words[0]) || Hasnt(words[0]) || Had(words[0]) || Hadnt(words[0]))
-        {
-            if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
-            {
-                words = words.Where((value, index) => index != 1).ToArray();
-            }
-            if (IsASingular(words[1]) || IsAProperNoun(words[1]))
-            {
-                if (timeAdverbs.Contains(words[2]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray();
-                }
-                if (IsPastParticiple(words[2]))
-                {
-                    if (!IsFixedLenght(words, 3))
-                    {
-                        if (!IsFixedLenght(words, 3))
-                        {
-                            if (IsAPreposition(words[3]))
-                            {
-                                words = words.Where((value, index) => index != 3).ToArray();
-                            }
-                            if (IsACommon(words[3])) { return true; }
-                            else if (IsAPlural(words[3])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                    return true;
-                }
-                if (Been(words[2]))
-                {
-                    if (IsAnIngVerbs(words[3]))
-                    {
-                        if (!IsFixedLenght(words, 4))
-                        {
-                            if (IsACommon(words[4]))
-                            {
-                                if (words.Length >= 5) // it means there are more words in the sentence
-                                {
-                                    if (IsACommon(words[words.Length - 1])) { return true; }
-                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
-                                    else { return false; }
-                                }
-                                return true;
-                            }
-                            if (IsAPlural(words[4]))
-                            {
-                                if (words.Length >= 5) // it means there are more words in the sentence
-                                {
-                                    if (IsACommon(words[words.Length - 1])) { return true; }
-                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
-                                    else { return false; }
-                                }
-                                return true;
-                            }
-                        }
-                        return true;
-                    }
-                }
-            }
-            if (Been(words[1])) // il soggetto è tipo Who
-            {
-                if (IsAnIngVerbs(words[2]))
-                {
-                    if (!IsFixedLenght(words, 3))
-                    {
-                        if (IsACommon(words[3]))
-                        {
-                            if (words.Length >= 4) // it means there are more words in the sentence
-                            {
-                                if (IsACommon(words[words.Length - 1])) { return true; }
-                                else if (IsAPlural(words[words.Length - 1])) { return true; }
-                                else { return false; }
-                            }
-                            return true;
-                        }
-                        if (IsAPlural(words[3]))
-                        {
-                            if (words.Length >= 4) // it means there are more words in the sentence
-                            {
-                                if (IsACommon(words[words.Length - 1])) { return true; }
-                                else if (IsAPlural(words[words.Length - 1])) { return true; }
-                                else { return false; }
-                            }
-                            return true;
-                        }
-                    }
-                    return true;
-                }
-            }
-            if (IsFixedLenght(words, 3))
-            {
-                if(IsFixedLenght(words, 2))
-                {
-                    if (IsPastParticiple(words[1]))
-                    {
-                        if (!IsFixedLenght(words, 2))
-                        {
-                            if (!IsFixedLenght(words, 2))
-                            {
-                                if (IsAPreposition(words[2]))
-                                {
-                                    words = words.Where((value, index) => index != 2).ToArray();
-                                }
-                                if (IsACommon(words[2])) { return true; }
-                                else if (IsAPlural(words[2])) { return true; }
-                                else { return false; }
-                            }
-                        }
-                        return true;
-                    }
-                }
-                if (IsPastParticiple(words[2]))
-                {
-                    if (!IsFixedLenght(words, 3))
-                    {
-                        if (!IsFixedLenght(words, 3))
-                        {
-                            if (IsAPreposition(words[3]))
-                            {
-                                words = words.Where((value, index) => index != 3).ToArray();
-                            }
-                            if (IsACommon(words[3])) { return true; }
-                            else if (IsAPlural(words[3])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                    return true;
-                }
-            }
-            if (IsPastParticiple(words[1]))
-            {
-                if (!IsFixedLenght(words, 2))
-                {
-                    if (!IsFixedLenght(words, 2))
-                    {
-                        if (!IsFixedLenght(words, 2))
-                        {
-                            if (IsAPreposition(words[1]))
-                            {
-                                words = words.Where((value, index) => index != 1).ToArray();
-                            }
-                            if (IsACommon(words[1])) { return true; }
-                            else if (IsAPlural(words[1])) { return true; }
-                            else { return false; }
-                        }
-                    }
-                }
-                return true;
-            }
-            
-            if (Not(words[1]))
-            {
-                if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
-                {
-                    words = words.Where((value, index) => index != 2).ToArray();
-                }
-                if (IsASingular(words[1]) || IsAProperNoun(words[2]))
-                {
-                    if (timeAdverbs.Contains(words[3]))
-                    {
-                        words = words.Where((value, index) => index != 3).ToArray();
-                    }
-                    if (IsPastParticiple(words[3]))
-                    {
-                        if (!IsFixedLenght(words, 4))
-                        {
-                            if (!IsFixedLenght(words, 4))
-                            {
-                                if (IsAPreposition(words[4]))
-                                {
-                                    words = words.Where((value, index) => index != 4).ToArray();
-                                }
-                                if (IsACommon(words[4])) { return true; }
-                                else if (IsAPlural(words[4])) { return true; }
-                                else { return false; }
-                            }
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    public static bool SingularSubjectPresentSimple_Affirmation(string[] words)
-    {
-        words = Normalization(words);
-        for (int i = 0; i < words.Length; i++)
-        {
-            words = RemoveAdverbs(words, i); // rimuovere eventuali altri avverbi riconosciuti dopo il complemento
-        }
-        if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
-        if (IsFixedLenght(words, 1) && IsASingular(words[0])) return true; // There are dogs here becomes only "dogs" -> valid
-        if (The(words[0]) || A(words[0])) 
-        { 
-            words = words.Where((value, index) => index != 0).ToArray();
-        }
-        if (IsAnAdjective(words[0])) { 
-            
-            words = words.Where((value, index) => index != 0).ToArray(); 
-        }
-        if (words[0].Equals("no") || words[0].Equals("not")) 
-        { 
-            words = words.Where((value, index) => index != 0).ToArray(); //There are no cars running here -> a car running
-        }
-        
-        bool subjectRecognized = IsASingular(words[0]) || IsAProperNoun(words[0]);
-        if (IsFixedLenght(words, 1)) {
-            if (words[0].Equals("error-1")) return false;
-            return true; // There is a dog here -> becomes dog
-        }
-        
-        if (IsASingular(words[0]))
-        {
-            if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
-            if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
-        }
-        if (A(words[0]) && IsAPlural(words[1]))
-        {
-            if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
-            if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
-        }
-        if (IsAFrequencyAdverb(words[1]))
-        {
-            words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-        }
-        if (Is(words[1]))
-        {
-            if (IsAnIngVerbs(words[2])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
-            {
-                if (IsFixedLenght(words, 3)) return true;
-                if (IsAPlural(words[3])) return true; // eating sandwiches
-                if(!IsFixedLenght(words, 3))
-                {
-                    if (A(words[3]) || The(words[3]) || IsAPreposition(words[3])) // eating a/the sandwich
-                    {
-                        if (IsACommon(words[4])) return true;
-                    }
-                    if (IsACommon(words[3])) return true;
-                    if (IsPastParticiple(words[3])) return true;
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsAPrasphalVerb(words[3], words[4])) return true;
-                    }
-                }
-            }
-            if (Not(words[2]))
-            {
-                if (IsAnIngVerbs(words[3])) return true;
-                if (IsAnAdjective(words[3])) return true;
-                if (IsAPrasphalVerb(words[2], words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-                if(!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (IsPastParticiple(words[2])) return true;
-            if(!IsFixedLenght(words, 3))
-            {
-                if (IsAPrasphalVerb(words[2], words[3])) return true;
-            }
-        }
-        
-        if (Hasnt(words[1]))
-        {
-            if (!IsFixedLenght(words, 3))
-            {
-                if (IsAPrasphalVerb(words[2], words[3])) return true;
-            }
-            if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
-            {
-                if (IsASingular(words[3])) return true;
-                if (IsAPlural(words[3])) return true;
-            }
-            if (Been(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3])) // been being carefully repaired
-                {
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsPastParticiple(words[4])) return true;
-                        if(!IsFixedLenght(words, 5))
-                        {
-                            if (IsAPrasphalVerb(words[4], words[5])) return true;
-                        }
-                    }
-                }
-                if(!IsFixedLenght(words, 3))
-                {
-                    try
-                    {
-                        if (IsAPrasphalVerb(words[3], words[4])) return true;
-                    }
-                    catch (System.Exception e)
-                    {
-                        if (IsAPrasphalVerb(words[2], words[3])) return true;
-                    }
-                }
-            }
-            if (IsPastParticiple(words[2]))
-            {
-                if (!IsFixedLenght(words, 3))
-                {
-                    if (IsAPlural(words[3])) return true;
-                    if (IsAnIngVerbs(words[3])) return true;
-                    if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true;
-                        if (IsAPlural(words[4])) return true;
-                    }
-                }
-            }
-        }
-        if (Has(words[1]))
-        {
-            if (IsPastParticiple(words[2]))
-            {
-                if(!IsFixedLenght(words, 3))
-                {
-                    if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true;
-                        if (IsAPlural(words[4])) return true;
-                    }
-                }
-            }
-            if (Not(words[2]))
-            {
-                if (Been(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                        if (!IsFixedLenght(words, 5))
-                        {
-                            if (IsAPrasphalVerb(words[5], words[6])) return true;
-                        }
-                    }
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (IsPastParticiple(words[3]))
-                {
-                    if (IsAPlural(words[4])) return true;
-                    if (IsAnIngVerbs(words[4])) return true;
-                    if (The(words[4]) || A(words[4]))
-                    {
-                        if (IsACommon(words[5])) return true;
-                        if (IsAPlural(words[5])) return true;
-                    }
-                }
-            }
-            if (Been(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsPastParticiple(words[4])) return true;
-                        if (!IsFixedLenght(words, 5)) {
-
-                            if (IsAPrasphalVerb(words[4], words[5])) return true;
-                        }
-                    }
-                }
-                if (!IsFixedLenght(words, 3))
-                {
-                    try
-                    {
-                        if (IsAPrasphalVerb(words[3], words[4])) return true;
-                    } catch(System.Exception e)
-                    {
-                        if (IsAPrasphalVerb(words[2], words[3])) return true;
-                    }
-                }
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
-            {
-                if (IsASingular(words[3])) return true;
-                if (IsAPlural(words[3])) return true;
-            }
-            if(!IsFixedLenght(words, 3))
-            {
-                if (IsAPrasphalVerb(words[2], words[3])) return true;
-            }
-        }
-
-        if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
-        {
-            if (The(words[3]) || A(words[3])) // The | a
-            {
-                if (IsASingular(words[4])) return true;
-            }
-        }
-        if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
-        {
-            string detectedPhrasalVerb = words[0] + " " + words[1]; // she wakes up
-            if (phrasalVerbs.Contains(detectedPhrasalVerb))
-            {
-                words = words.Where((value, index) => index != 0 && index != 1).ToArray();
-            }
-            if (The(words[4]) || A(words[4]) || IsAPossessivePronouns(words[4])) // The | a
-            {
-                if (IsASingular(words[5])) return true;
-                if (IsAPlural(words[5])) return true;
-            }
-        }
-
-        if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
-        {
-            if (IsFixedLenght(words, 2)) return true; // the cat jumps
-            if (The(words[2]) || A(words[2])) // The | a
-            {
-                if (IsAnAdjective(words[3]))
-                {
-                    if (IsACommon(words[4])) return true;
-                }
-                if (IsACommon(words[3])) return true;
-            }
-            if (IsAPreposition(words[2]))
-            {
-                if (The(words[3]))
-                {
-                    if (IsACommon(words[4])) return true;
-                }
-            }
-        }
-        if (IsAPreposition(words[1])) // (there is/are) a book on the table
-        {
-            if (The(words[2]))
-            {
-                if (IsACommon(words[3]) || IsAPlural(words[3]))
-                    return true;
-            }
-            if (IsAPlural(words[2])) return true;
-        }
-        if (Isnt(words[1])) 
-        {
-            if (IsAnAdjective(words[2])) return true; // a car isn't big
-            if (IsAnIngVerbs(words[2])) return true; // a car isn't running
-            if (IsPastParticiple(words[2])) return true;
-            if (IsAnIngVerbs(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-            }
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
-        }
-        if (IsASingular(words[0])) // There isn't a car running here -> a car running
-        {
-            if (IsAnIngVerbs(words[1])) return true;
-        }
-        if (!IsFixedLenght(words, 1))
-        {
-            if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
-            {
-                words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
-            }
-            // she the child
-            if (The(words[1]) || IsAnObjectPronouns(words[1]))
-            {
-                if (IsACommon(words[2]) || IsAPlural(words[2])) return true;
-            }
-            if (Is(words[1]))
-            {
-                if (IsAnIngVerbs(words[2])) // John is playing
-                {
-                    if (words.Length == 3) return true;
-                    if ((IsAPreposition(words[3]) && The(words[4])) || The(words[3])) // in the gardent
-                    {
-                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                    }
-                    if (A(words[3])) // a
-                    {
-                        if (IsACommon(words[4])) return true; // letter
-                    }
-                }
-                if (Not(words[2]))
-                {
-                    if (IsAPreposition(words[3]) || The(words[3]) || words[3].Equals("a")) // in the gardent
-                    {
-                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                        if (IsAnAdjective(words[4]))
-                        {
-                            if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
-                        }
-                    }
-                    if (IsAnIngVerbs(words[3])) // John is playing
-                    {
-                        if (words.Length == 4) return true;
-                        if ((IsAPreposition(words[4]) && The(words[5])) || The(words[4])) // in the gardent
-                        {
-                            if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
-                        }
-                        if (A(words[4])) // a
-                        {
-                            if (IsACommon(words[5])) return true; // letter
-                        }
-                    }
-                    if (IsAnAdjective(words[3])) return true;
-                    if (IsPastParticiple(words[3])) return true;
-                }
-                if (IsAPreposition(words[2]))
-                {
-                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                }
-                else
-                {
-                    if (A(words[2]) || The(words[2])) // Paris is a (big) city
-                    {
-                        if (IsAnAdjective(words[3]))
-                        {
-                            if (IsACommon(words[4])) return true;
-                        }
-                        if (IsACommon(words[3])) return true;
-                    }
-                    if (IsAnAdjective(words[2])) return true;
-                }
-            }
-            if (Has(words[1]))
-            {
-                if (The(words[2]) || A(words[2]))
-                {
-                    if (IsASingular(words[3])) return true;
-                }
-                else
-                {
-                    if (IsAnAdjective(words[2]))
-                    {
-                        if (IsAPlural(words[3])) return true; // John loves big books
-                    }
-                    if (IsAPlural(words[2])) return true;// john loves books
-                }
-            }
-            if (Doesnt(words[1])) // "doesn't"
-            {
-                if (IsAFrequencyAdverb(words[2]))
-                {
-                    words = words.Where((value, index) => index != 1).ToArray(); // he doesn't always
-                }
-                if (Have(words[2]) || IsABaseVerb(words[2]))
-                {
-                    if (The(words[3]) || A(words[3])) // The | a
-                    {
-                        if (IsASingular(words[4])) return true;
-                    }
-                    if (IsAPreposition(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true;
-                        if (IsAnObjectPronouns(words[4])) return true;
-                    }
-                    if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
-                }
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
-                }
-            }
-            if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
-            {
-                if (IsAnObjectPronouns(words[4])) // she does not visit her
-                {
-                    if (IsACommon(words[5]) || IsAPlural(words[5])) return true; // grandparents....
-                }
-                if (The(words[4]) || A(words[4])) // The | a
-                {
-                    if (IsASingular(words[5])) return true;
-                }
-                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
-            }
-            if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
-            {
-                if (!IsFixedLenght(words, 2))
-                {
-                    if (The(words[2]) || A(words[2])) // The | a
-                    {
-                        if (IsAnAdjective(words[3]))
-                        {
-                            if (IsACommon(words[4])) return true;
-                        }
-                        if (IsACommon(words[3])) return true;
-                    }
-                    if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
-                    if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    if (IsAnAdjective(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    if (IsAnIngVerbs(words[2])) return true;
-                    if (IsAPreposition(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
-                        if (The(words[3]) || A(words[3])) // she believes in the/a miracle
-                        {
-                            if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                        }
-                    }
-                }
-                return true; // she walks
-            }
-            if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
-            {
-                if (!IsFixedLenght(words, 2))
-                {
-                    if (The(words[2]) || A(words[2])) // The | a
-                    {
-                        if (IsAnAdjective(words[3]))
-                        {
-                            if (IsACommon(words[4])) return true;
-                        }
-                        if (IsACommon(words[3])) return true;
-                    }
-                    if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
-                    if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    if (IsAnAdjective(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                    }
-                    if (IsAnIngVerbs(words[2])) return true;
-                    if (IsAPreposition(words[2]))
-                    {
-                        if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
-                        if (The(words[3]) || A(words[3])) // she believes in the/a miracle
-                        {
-                            if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                        }
-                    }
-                }
-            }
-            if (IsAnAdjective(words[0]))
-            {
-                if (IsASingular(words[1]) || IsAPlural(words[1]))
-                {
-                    if (IsAnIngVerbs(words[2])) return true;
-                }
-            }
-        }
-        if (!IsFixedLenght(words, 2))
-        {
-            if (IsAFrequencyAdverb(words[2]))
-            {
-                words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza - He doesn’t ALWAYS agree with me.
-            }
-        }
-        if (I(words[0]))
-        {
-            if (Dont(words[1]))
-            {
-                if (Have(words[2]) || IsABaseVerb(words[2])) // i do play
-                {
-                    if (The(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true; // i do play the guitar
-                    }
-                    if (IsAPlural(words[3])) return true; // i do like apples
-                    if (IsACommon(words[3])) return true;// i do not have time now
-                }
-                if (IsAFrequencyAdverb(words[3])) // messo qui altrimenti frasi come John like books schiattano
-                {
-                    words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
-                }
-                if (IsABaseVerb(words[3])) // i do not play
-                {
-                    if (The(words[4]))
-                    {
-                        if (IsACommon(words[4])) return true;// i do not play the guitar
-                    }
-                    if (IsAPlural(words[4])) return true;// i do not like apples
-                    return true;
-                }
-            }
-            if (Do(words[1]))
-            {
-                if (IsABaseVerb(words[2])) // i do play
-                {
-                    if (The(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true; // i do play the guitar
-                    }
-                    if (IsAPlural(words[3])) return true;// i do like apples
-                    return true;
-                }
-                if (Not(words[2])) // i do not
-                {
-                    if (IsAFrequencyAdverb(words[3])) // messo qui altrimenti frasi come John like books schiattano
-                    {
-                        words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
-                    }
-                    if (IsABaseVerb(words[3]) || Have(words[3])) // i do not play
-                    {
-                        if (The(words[4]))
-                        {
-                            if (IsACommon(words[4])) return true;// i do not play the guitar
-                        }
-                        if (IsAPlural(words[4])) return true; // i do not like apples
-                        if (IsACommon(words[4])) return true; // i do not play the guitar
-                        return true;
-                    }
-                }
-            }
-            // i drink coffee in the morning
-            if (IsABaseVerb(words[1])) // i play
-            {
-                if (The(words[2]))
-                {
-                    if (IsACommon(words[3])) return true;// i play the guitar
-                }
-                if (IsAPlural(words[2])) return true; // i like apples
-                return true;
-            }
-            if (Not(words[2])) // i do not
-            {
-                if (IsABaseVerb(words[3])) // i do not play
-                {
-                    if (The(words[4]))
-                    {
-                        if (IsACommon(words[5])) return true; // i do not play the guitar
-                    }
-                    if (IsAPlural(words[4])) return true; // i do not like apples
-                }
-            }
-        }
-        if (IsPastParticiple(words[1]))
-        {
-            if (The(words[2]) || A(words[2]) || An(words[2]) || IsAPossessivePronouns(words[2]))
-            {
-                if (IsACommon(words[3])) return true;
-                if (IsAPlural(words[3])) return true;
-            }
-        }
-        
-        if (Wasnt(words[1]))
-        {
-            if (IsAnIngVerbs(words[2]))
-            {
-                if (IsAnAdjective(words[3])) return true;
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAPrasphalVerb(words[3], words[4])) return true;
-            }
-            if (IsPastParticiple(words[2])) return true;
-            if (The(words[2]) || A(words[2]))
-            {
-                if (IsASingular(words[3])) return true;
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
-        }
-        if (Was(words[1]))
-        {
-            if (IsPastParticiple(words[2])) return true;
-            if (The(words[2]) || A(words[2]))
-            {
-                if (IsASingular(words[3])) return true;
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (Not(words[2]))
-            {
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsAnAdjective(words[4])) return true;
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (IsAnAdjective(words[3])) return true;
-                if (IsPastParticiple(words[2])) return true;
-                if (IsPastParticiple(words[3])) return true;
-                if(!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-
-            }
-            if (IsPastParticiple(words[3])) return true;
-            if (IsAnIngVerbs(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAPrasphalVerb(words[3], words[4])) return true;
-            }
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
-        }
-        
-        if (Had(words[1]))
-        {
-            if (Not(words[2]))
-            {
-                if (Been(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                        if (!IsFixedLenght(words, 6))
-                        {
-                            if (IsAPrasphalVerb(words[5], words[6])) return true;
-                        }
-                    }
-                }
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-            }
-            if (Been(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-            }
-        }
-        if (Hadnt(words[1])) 
-        {
-            if (Been(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-        }
-        
-        if (Will(words[1])) 
-        {
-            if (IsABaseVerb(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-            if (Not(words[2]))
-            {
-                if (IsABaseVerb(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                        if (!IsFixedLenght(words, 6))
-                        {
-                            if (IsAPrasphalVerb(words[5], words[6])) return true;
-                        }
-                    }
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (Have(words[3]))
-                {
-                    if (Been(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                        if (IsAnIngVerbs(words[5]))
-                        {
-                            if (IsPastParticiple(words[6])) return true;
-                            if (IsAPrasphalVerb(words[6], words[7])) return true;
-                        }
-                        if (!IsFixedLenght(words, 6))
-                        {
-                            if (IsAPrasphalVerb(words[5], words[6])) return true;
-                        }
-                    }
-                }
-                if (IsAPrasphalVerb(words[3], words[4])) return true;
-            }
-            if (Have(words[2]))
-            {
-                if (Been(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                        if (IsAPrasphalVerb(words[5], words[6])) return true;
-                    }
-                }
-            }
-        }
-        if (Wont(words[1]))
-        {
-            if (IsABaseVerb(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-            if (Have(words[2]))
-            {
-                if (Been(words[3])) 
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                        if (IsAPrasphalVerb(words[5], words[6])) return true;
-                    }
-                }
-            }
-        }
-        // going to
-        if (!IsFixedLenght(words, 2)){
-            if (Am(words[1]) || Is(words[1]) || Are(words[1]))
-            {
-                if(!IsFixedLenght(words, 3))
-                {
-                    if (GoingTo(words[2], words[3]))
-                    {
-                        if (IsABaseVerb(words[4])) return true;
-                        if (!IsFixedLenght(words, 4))
-                        {
-                            if (IsABaseVerb(words[4]))
-                            {
-                                if (IsACommon(words[5])) return true;
-                                if (IsAPlural(words[5])) return true;
-                            }
-                            if(!IsFixedLenght(words, 5))
-                            {
-                                if (IsAPrasphalVerb(words[4], words[5])) return true;
-                                if (IsAPrasphalVerb(words[4], words[5]))
-                                {
-                                    if (IsAPlural(words[6])) return true;
-                                    if (IsACommon(words[6])) return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        // used to
-        if (!IsFixedLenght(words, 2))
-        {
-            if (UsedTo(words[1], words[2]))
-            {
-                if (IsABaseVerb(words[3])) return true;
-                if (!IsFixedLenght(words, 3))
-                {
-                    if (IsABaseVerb(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true;
-                        if (IsAPlural(words[4])) return true;
-                    }
-                }
-            }
-        }
-
-        if (Didnt(words[1])) 
-        {
-            // use to
-            if (!IsFixedLenght(words, 3))
-            {
-                if (UseTo(words[2], words[3]))
-                {
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsABaseVerb(words[4]))
-                        {
-                            if (!IsFixedLenght(words, 5))
-                            {
-                                if (IsACommon(words[5])) return true;
-                                if (IsAPlural(words[5])) return true;
-                            }
-                            return true;
-                        }
-                    }
-                    if (IsABaseVerb(words[4])) return true;
-                }
-            }
-            // I didn't always carefully play soccer yesterday.
-            if (!IsFixedLenght(words, 3))
-            {
-                if (IsABaseVerb(words[2]))
-                {
-                    if (IsAPlural(words[3])) return true;
-                    if (IsACommon(words[3])) return true;
-                }
-                if (IsABaseVerb(words[3])) return true;
-                if (IsAPrasphalVerb(words[2], words[3]))
-                {
-                    if (IsAPlural(words[4])) return true;
-                    if (The(words[4]) || A(words[4]) || An(words[4]))
-                    {
-                        if (IsACommon(words[5])) return true;
-                    }
-                }
-            }
-        }
-        if (Did(words[1])) 
-        {
-            if (!IsFixedLenght(words, 3))
-            {
-                if (IsABaseVerb(words[2]))
-                {
-                    if (IsAPlural(words[3])) return true;
-                    if (IsACommon(words[3])) return true;
-                }
-                if (IsABaseVerb(words[3])) return true;
-                if (IsAPrasphalVerb(words[2], words[3])) return true;
-                if (IsAPrasphalVerb(words[2], words[3]))
-                {
-                    if (IsAPlural(words[4])) return true;
-                    if (The(words[4]) || A(words[4]) || An(words[4])) {
-                        if (IsACommon(words[5])) return true;
-                    }  
-                }
-            }
-            if (Not(words[2]))
-            {
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsABaseVerb(words[3]))
-                    {
-                        if (IsAPlural(words[4])) return true;
-                        if (IsACommon(words[4])) return true;
-                    }
-                    if (IsABaseVerb(words[4])) return true;
-                    if (IsAPrasphalVerb(words[3], words[4]))
-                    {
-                        if (IsAPlural(words[5])) return true;
-                        if (The(words[5]) || A(words[5]) || An(words[5]))
-                        {
-                            if (IsACommon(words[6])) return true;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (IsAModal(words[1]))
-        {
-            if (IsABaseVerb(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-            }
-            if (IsAPrasphalVerb(words[3], words[4])) return true;
-        }
-        return false; 
-    }
-    public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
-    {
-        words = Normalization(words);
-        for (int i = 0; i < words.Length; i++)
-        {
-            words = RemoveAdverbs(words, i); // rimuovere eventuali altri avverbi riconosciuti dopo il complemento
-        }
-        if (IsFixedLenght(words, 1))
-        {
-            if (words[0].Equals("error-1")) return false;
-            return true; // There is a dog here -> becomes dog
-        }
-        if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
-
-        if (The(words[0]) || A(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
-        if (IsAnAdjective(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
-        if (words[0].Equals("no") || words[0].Equals("not")) { words = words.Where((value, index) => index != 0).ToArray(); } //There are no cars running here -> a car running
-        if (IsAPlural(words[0]))
-        {
-            if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
-            if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
-        }
-        if (A(words[0]) && IsAPlural(words[1]))
-        {
-            if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
-            if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
-        }
-        
-        bool subjectRecognized = IsAPluralSubject(words[0]) || IsAPlural(words[1]);
-        if (Have(words[1]))
-        {
-            if (IsPastParticiple(words[2]))
-            {
-                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
-                {
-                    if (IsACommon(words[4])) return true;
-                }
-                if (The(words[3]) || IsAPossessivePronouns(words[3]))
-                {
-                    if (IsAPlural(words[4])) return true;
-                }
-            }
-            if (Not(words[2]))
-            {
-                if (IsAnAdjective(words[3])) return true;
-                if (IsPastParticiple(words[2]))
-                {
-                    if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true;
-                    }
-                    if (The(words[3]) || IsAPossessivePronouns(words[3]))
-                    {
-                        if (IsAPlural(words[4])) return true;
-                    }
-                }
-                if (Been(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                        if (IsAPrasphalVerb(words[5], words[6])) return true;
-                    }
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (IsPastParticiple(words[3]))
-                {
-                    if (IsAPlural(words[4])) return true;
-                    if (IsAnIngVerbs(words[4])) return true;
-                    if (The(words[4]) || A(words[4]) || IsAPossessivePronouns(words[4]))
-                    {
-                        if (IsACommon(words[5])) return true;
-                        if (IsAPlural(words[5])) return true;
-                    }
-                }
-            }
-            if (The(words[2]) || A(words[2]))
-            {
-                if (IsASingular(words[3])) return true;
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (Been(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (!IsFixedLenght(words, 3))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
-        }
-        if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
-        {
-            if (IsFixedLenght(words,4)) return true; // The Dogs do not run
-            if (IsAnAdjective(words[4])) return true; // The Dogs do not run fast
-            if (The(words[3]) || A(words[3]) || IsAPossessivePronouns(words[3])) {
-                if (IsASingular(words[4])) return true;
-                if (IsAPlural(words[4])) return true;
-                if (IsAnAdjective(words[4]))
-                {
-                    if (IsASingular(words[4])) return true;
-                    if (IsAPlural(words[4])) return true;
-                }
-            }
-        }
-        if (Are(words[1]) || Arent(words[1]))
-        {
-            if (IsAnIngVerbs(words[2])) // the dogs are playing
-            {
-                if(IsFixedLenght(words, 3)) return true;
-                if (IsAPreposition(words[3]) && The(words[4])) // in/on the gardent
-                {
-                    if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
-                }
-            }
-            if (Not(words[2]))
-            {
-                if (IsAnIngVerbs(words[3])) // the dogs are not playing
-                {
-                    if (words.Length == 4) return true;
-                    if (IsAPreposition(words[4]) && The(words[5])) // in/on the gardent
-                    {
-                        if (IsACommon(words[6]) || IsAPlural(words[6])) return true;
-                    }
-                }
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAnAdjective(words[4]))
-                    {
-                        return true;
-                    }
-                }
-                if (IsPastParticiple(words[3])) return true;
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (IsPastParticiple(words[2])) return true;
-        }
-        if (IsABaseVerb(words[1])) // A/The dogs run fast
-        {
-            if (IsFixedLenght(words, 2)) return true; // the dogs run
-            if (IsFixedLenght(words,3)) return true; // Cat jump
-            if (IsAnAdjective(words[2])) return true;
-            if (IsAPreposition(words[2]))       
-            {
-                if (The(words[3]) || IsAnObjectPronouns(words[3]))
-                {
-                    if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
-                }
-            }
-            if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
-            {
-                if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
-                if (IsAnAdjective(words[3])) { IsACommon(words[4]); }
-                else { IsACommon(words[3]); }
-            }
-            if (IsAnObjectPronouns(words[2]))
-            {
-                IsAPlural(words[3]);
-                IsACommon(words[3]);
-            }
-            if (IsAnAdjective(words[2]))
-            {
-                IsAPlural(words[3]);
-                IsACommon(words[3]);
-            }
-            IsAPlural(words[2]);
-            IsACommon(words[2]);
-        }
-        if (Arent(words[1]))
-        {
-            if (IsAnAdjective(words[2])) return true; // the cars aren't big.
-        }
-        if (IsAPlural(words[0])) // There aren't cars running here -> a car running
-        {
-            if (IsAnIngVerbs(words[1])) return true;
-        }
-        if (IsAnAdjective(words[0]))
-        {
-            if (IsAPlural(words[1])) // There aren't cars running here -> a car running
-            {
-                if (IsAnIngVerbs(words[2])) return true;
-                if (Are(words[2]) && IsAnIngVerbs(words[3])) return true;
-                if (Are(words[2]) && Not(words[3]) && IsAnIngVerbs(words[4])) return true;
-                if (Arent(words[2]) && IsAnIngVerbs(words[3])) return true;
-            }
-        }
-        if (IsFixedLenght(words, 1) && subjectRecognized) return true;
-        if (IsAFrequencyAdverb(words[1])) // there are dogs here -> dogs -> outOfBoundEx
-        {
-            words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
-        }
-        if (The(words[1]) || IsAnObjectPronouns(words[1]))
-        {
-            if (IsACommon(words[2]) || IsAPlural(words[2])) return true; // this has to remain like this cause of phrasal verbs cause in some case we must RETURN the control
-        }
-        if (Dont(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
-        {
-            if (IsFixedLenght(words, 4)) return true;
-            if (IsAnAdjective(words[4])) return true;  // The Dogs do not run fast
-            if (The(words[3]) || A(words[3]) || IsAPossessivePronouns(words[3]))
-            {
-                if (IsASingular(words[4])) return true;
-                if (IsAPlural(words[4])) return true;
-                if (IsAnAdjective(words[4]))
-                {
-                    if (IsASingular(words[4])) return true;
-                    if (IsAPlural(words[4])) return true;
-                }
-            }
-        }
-        if (Are(words[1]) || Arent(words[1]))
-        {
-            if (IsFixedLenght(words, 2)) return true; // they are
-            if (IsAnIngVerbs(words[2])) return true;
-            if (Not(words[2]))
-            {
-                if (IsFixedLenght(words, 3)) return true;// they are not
-                if (IsAnIngVerbs(words[3])) return true;// they are not standig (here)
-                if (IsAnAdjective(words[3])) return true;
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-            if (IsAPreposition(words[2]))
-            {
-                if (IsACommon(words[3])) return true;
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
-        }
-        if (IsAPreposition(words[1])) // (there is) a book on the table
-        {
-            if (!IsFixedLenght(words, 2))
-            {
-                if (The(words[2]))
-                {
-                    IsAPlural(words[3]);
-                    IsACommon(words[3]);
-                }
-            }
-        }
-        if (Do(words[1]))
-        {
-            if (IsABaseVerb(words[2])) // they do play
-            {
-                if (The(words[3]))
-                {
-                    IsACommon(words[4]); // they do play the guitar
-                }
-                IsAPlural(words[3]); // i do like apples
-            }
-            if (Not(words[2])) // they do not
-            {
-                if (IsAFrequencyAdverb(words[3]))
-                {
-                    words = words.Where((value, index) => index != 3).ToArray(); // I do not ALWAYS ....
-                }
-                if (IsABaseVerb(words[3])) // i do not play
-                {
-                    if (The(words[4])) { IsACommon(words[4]); }// i do not play the guitar
-                    IsAPlural(words[3]); // they do not like apples
-                    return true;
-                }
-            }
-        }
-        if (IsAnIngVerbs(words[1])) return true; // cars running
-        if (Havent(words[1]))
-        {
-            if (IsPastParticiple(words[2]))
-            {
-                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
-                {
-                    if (IsACommon(words[4])) return true;
-                }
-                if (The(words[3]) || IsAPossessivePronouns(words[3]))
-                {
-                    if (IsAPlural(words[4])) return true;
-                }
-            }
-            if (The(words[2]) || A(words[2]))
-            {
-                if (IsASingular(words[3])) return true;
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (Been(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 4)){
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (!IsFixedLenght(words, 3))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-            if (IsAnIngVerbs(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-            }
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
-        }
-        if (Werent(words[1]))
-        {
-            if (IsPastParticiple(words[2])) return true;
-            if (IsAnAdjective(words[2])) return true;
-            if (The(words[2]) || A(words[2]))
-            {
-                if (IsASingular(words[3])) return true;
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (IsAnIngVerbs(words[2]))
-            {
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-                if (IsPastParticiple(words[3])) return true;
-            }
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
-
-        }
-        if (Were(words[1]))
-        {
-            if (IsPastParticiple(words[2])) return true;
-            if (The(words[2]) || A(words[2]))
-            {
-                if (IsASingular(words[3])) return true;
-            }
-            if (IsAnAdjective(words[2])) return true;
-            if (IsAnIngVerbs(words[2]))
-            {
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-                if (IsPastParticiple(words[3])) return true;
-            }
-            if (Not(words[2]))
-            {
-                if (IsAnAdjective(words[3])) return true;
-                if (Been(words[3]))
-                {
-                    if (IsAMannerAdverbs(words[4]))
-                    {
-                        words = words.Where((value, index) => index != 4).ToArray();
-                    }
-                    if (IsPastParticiple(words[4])) return true;
-                }
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                    
-                    if (IsPastParticiple(words[4])) return true;
-                }
-                if(!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-            if (IsAPrasphalVerb(words[2], words[3])) return true;
-        }
-        if (Had(words[1]))
-        {
-            if (Not(words[2]))
-            {
-                if (Been(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                }
-            }
-            if (Been(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-        }
-        if (Hadnt(words[1]))
-        {
-            if (Been(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsAPrasphalVerb(words[3], words[4])) return true;
-                }
-            }
-
-        }
-        if (Will(words[1]))
-        {
-            if (IsABaseVerb(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                }
-            }
-            if (Not(words[2]))
-            {
-                if (IsABaseVerb(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                    }
-                }
-                if (Have(words[3]))
-                {
-                    if (IsABaseVerb(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                        if (IsAnIngVerbs(words[5]))
-                        {
-                            if (IsPastParticiple(words[6])) return true;
-                        }
-                    }
-                    if (Been(words[4]))
-                    {
-                        if (IsPastParticiple(words[4])) return true;
-                        if (!IsFixedLenght(words, 5))
-                        {
-                            if (IsAPrasphalVerb(words[4], words[5])) return true;
-                        }
-                    }
-                }
-            }
-            if (Have(words[2]))
-            {
-                if (IsABaseVerb(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                    }
-                }
-                if (Been(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-            }
-        }
-        if (Wont(words[1]))
-        {
-            if (IsABaseVerb(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-                if (IsAnIngVerbs(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                }
-            }
-            if (Have(words[2]))
-            {
-                if (IsABaseVerb(words[3]))
-                {
-                    if (IsPastParticiple(words[4])) return true;
-                    if (IsAnIngVerbs(words[4]))
-                    {
-                        if (IsPastParticiple(words[5])) return true;
-                    }
-                }
-                if (Been(words[3]))
-                {
-                    if (!IsFixedLenght(words, 5))
-                    {
-                        if (IsAPrasphalVerb(words[4], words[5])) return true;
-                    }
-                }
-            }
-        }
-        // going to - RemoveDuplication!!!!
-        if (!IsFixedLenght(words, 2))
-        {
-            if (Am(words[1]) || Is(words[1]) || Are(words[1]))
-            {
-                if (!IsFixedLenght(words, 3))
-                {
-                    if (GoingTo(words[2], words[3]))
-                    {
-                        if (IsABaseVerb(words[4])) return true;
-                        if (!IsFixedLenght(words, 4))
-                        {
-                            if (IsABaseVerb(words[4]))
-                            {
-                                if (IsACommon(words[5])) return true;
-                                if (IsAPlural(words[5])) return true;
-                            }
-                            if (!IsFixedLenght(words, 5))
-                            {
-                                if (IsAPrasphalVerb(words[4], words[5])) return true;
-                                if (IsAPrasphalVerb(words[4], words[5]))
-                                {
-                                    if (IsAPlural(words[6])) return true;
-                                    if (IsACommon(words[6])) return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        // used to
-        if (!IsFixedLenght(words, 2))
-        {
-            if (UsedTo(words[1], words[2]))
-            {
-                if (IsABaseVerb(words[3])) return true;
-                if (!IsFixedLenght(words, 3))
-                {
-                    if (IsABaseVerb(words[3]))
-                    {
-                        if (IsACommon(words[4])) return true;
-                        if (IsAPlural(words[4])) return true;
-                    }
-                }
-            }
-        }
-
-        if (Didnt(words[1]))
-        {
-            // use to
-            if (!IsFixedLenght(words, 3))
-            {
-                if (UseTo(words[2], words[3]))
-                {
-                    if (!IsFixedLenght(words, 4))
-                    {
-                        if (IsABaseVerb(words[4]))
-                        {
-                            if (!IsFixedLenght(words, 5))
-                            {
-                                if (IsACommon(words[5])) return true;
-                                if (IsAPlural(words[5])) return true;
-                            }
-                            return true;
-                        }
-                    }
-                    if (IsABaseVerb(words[4])) return true;
-                }
-            }
-            if (!IsFixedLenght(words, 3))
-            {
-                if (IsABaseVerb(words[2]))
-                {
-                    if (IsAPlural(words[3])) return true;
-                    if (IsACommon(words[3])) return true;
-                }
-                if (IsABaseVerb(words[3])) return true;
-            }
-        }
-        if (Did(words[1]))
-        {
-            if (!IsFixedLenght(words, 3))
-            {
-                if (IsABaseVerb(words[2]))
-                {
-                    if (IsAPlural(words[3])) return true;
-                    if (IsACommon(words[3])) return true;
-                }
-                if (IsABaseVerb(words[3])) return true;
-            }
-            if (Not(words[2]))
-            {
-                if (!IsFixedLenght(words, 4))
-                {
-                    if (IsABaseVerb(words[3]))
-                    {
-                        if (IsAPlural(words[4])) return true;
-                        if (IsACommon(words[4])) return true;
-                    }
-                    if (IsABaseVerb(words[4])) return true;
-                }
-            }
-        }
-
-        if (IsAModal(words[1]))
-        {
-            if (IsABaseVerb(words[2]))
-            {
-                if (IsPastParticiple(words[3])) return true;
-            }
-            if (IsAPrasphalVerb(words[3], words[4])) return true;
-        }
-        return false;
-    }
     public static string[] RemoveAdverbs(string[] words, int position)
     {
         if (position >= words.Length) position = position - 1;//return words;
@@ -2648,6 +353,14 @@ public class ButtonTests : MonoBehaviour
         },
         { 14, new List<List<string>>
                                     {
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //14
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
@@ -2679,6 +392,36 @@ public class ButtonTests : MonoBehaviour
         },
         { 13, new List<List<string>> 
                                     {
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "PluralSubject", "Time"}, //13
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "PluralSubject", "Time"}, //13
@@ -2738,6 +481,61 @@ public class ButtonTests : MonoBehaviour
         },
         { 12, new List<List<string>> 
                                     {
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "PluralSubject", "Time"}, //12
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "PluralSubject", "Time"}, //12
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "SingularSubject", "Time"}, //12
@@ -2846,6 +644,85 @@ public class ButtonTests : MonoBehaviour
         },
         { 11, new List<List<string>>
                                     {
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Place", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //11
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Place", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Frequency", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Preposition", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Time"}, //11
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //11
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Going", "To", "Verb", "Preposition", "Verb", "Article", "SingularSubject", "Time"}, //11
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Going", "To", "Verb", "Preposition", "Verb", "Possessive", "SingularSubject", "Time"}, //11
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Going", "To", "Verb", "Preposition", "Verb", "Article", "PluralSubject", "Time"}, //11
@@ -2989,6 +866,99 @@ public class ButtonTests : MonoBehaviour
         },
         { 10, new List<List<string>>
                                     {
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Place", "Preposition", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Place", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Verb", "Verb", "Article", "PluralSubject", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "PluralSubject", "Frequency", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "PluralSubject", "Place", "Preposition", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //10
+                                    new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //10
+                                    new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+                                    new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //10
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //10
@@ -3113,6 +1083,102 @@ public class ButtonTests : MonoBehaviour
         },
         { 9, new List<List<string>>
                                     {
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Frequency", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Place", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Frequency", "Preposition", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Place", "Preposition", "Time"}, //9
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Time"}, //9
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "SingularSubject", "Time"}, //9
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "PluralSubject", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "PluralSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Verb", "Article", "SingularSubject", "Preposition", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+                                    new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+                                    new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //9
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //9
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //9
                                     new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //9
@@ -3194,6 +1260,83 @@ public class ButtonTests : MonoBehaviour
         },
         { 8, new List<List<string>>
                                     {
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "SingularSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Frequency", "Preposition", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Place", "Preposition", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "SingularSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "Adjective", "SingularSubject", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "PluralSubject", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "SingularSubject", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Article", "Adjective", "PluralSubject", "Time"}, //8
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Frequency", "Time"}, //8
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Place", "Time"}, //8
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //8
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //8
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject", "Preposition", "Time"}, //8
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "SingularSubject", "Preposition", "Time"}, //8
@@ -3241,6 +1384,54 @@ public class ButtonTests : MonoBehaviour
         },
         { 7, new List<List<string>>
                                     {
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "SingularSubject", "Preposition", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Preposition", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Possessive", "SingularSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "SingularSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Verb", "Article", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //7
+                                    new List<string> {"Article", "Adjective", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //7
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Place", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "SingularSubject", "Time"}, //7
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Possessive", "SingularSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "Adjective", "SingularSubject", "Time"}, //7
+                                    new List<string> {"Article", "PluralSubject", "Auxiliary", "Verb", "Possessive", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Frequency", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Place", "Time"}, //7
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //7
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "Adjective", "SingularSubject", "Time"}, //7
+                                    new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Frequency", "Time"}, //7
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Place", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "SingularSubject", "Time"}, //7
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Frequency", "Time"}, //7
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Place", "Time"}, //7
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Time"},
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "PluralSubject", "Place", "Time"},
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Adjective", "PluralSubject", "Time"},
@@ -3270,6 +1461,27 @@ public class ButtonTests : MonoBehaviour
         },
         { 6, new List<List<string>>
                                     {
+                                    new List<string> {"PluralSubject", "Verb", "Article", "PluralSubject", "Frequency", "Time"}, //6
+                                    new List<string> {"PluralSubject", "Verb", "Article", "PluralSubject", "Place", "Time"}, //6
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Article", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "SingularSubject", "Verb", "Possessive", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"}, //6
+                                    new List<string> {"Adjective", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"}, //6
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Possessive", "SingularSubject", "Time"}, //6
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "SingularSubject", "Time"}, //6
+                                    new List<string> {"PluralSubject", "Auxiliary", "Verb", "Article", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Time"}, //6
+                                    new List<string> {"PluralSubject", "Verb", "Article", "Adjective", "SingularSubject", "Time"}, //6
+                                    new List<string> {"PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //6
+                                    new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "PluralSubject", "Time"}, //6
+                                    new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "SingularSubject", "Article", "Adjective", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "SingularSubject", "Article", "Adjective", "SingularSubject", "Time"}, //6
+                                    new List<string> {"Article", "Adjective", "SingularSubject", "Possessive", "PluralSubject", "Time"}, //6
+                                    new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Time"}, //6
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "PluralSubject", "Time"},
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "PluralSubject"},
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "PluralSubject", "Place"},
@@ -3282,6 +1494,11 @@ public class ButtonTests : MonoBehaviour
         },
         { 5, new List<List<string>>
                                     {
+                                    new List<string> {"PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"}, //5
+                                    new List<string> {"PluralSubject", "Verb", "Article", "SingularSubject", "Time"}, //5
+                                    new List<string> {"Article", "SingularSubject", "Possessive", "PluralSubject", "Time"}, //5
+                                    new List<string> {"PluralSubject", "Verb", "Article", "PluralSubject", "Time"}, //5
+                                    new List<string> {"Article", "SingularSubject", "Possessive", "PluralSubject", "Time"}, //5
                                     }
         },
         { 0, new List<List<string>>
@@ -3393,7 +1610,7 @@ public class ButtonTests : MonoBehaviour
                 foundAdverbsPosition.Add(i);
             }
         }
-        // how does the cat often visit their big grandparents nearby regularly today
+        // cats had been visiting the grandparents before yesterday
         string rule = string.Join(" ", foundAdverbs);
         rules.Add(rule);
         List<List<string>> selectedGroup = validRulesDict[foundAdverbs.Count];
@@ -4475,7 +2692,7 @@ public class ButtonTests : MonoBehaviour
             "How are cats going to visit the grandparents today?",
             // FINE DOMANDE ----------------------------------------------------------------
 
-            // AFFERMAZIONI 
+            // AFFERMAZIONI - Present Simple
             "The big cat often visits their big grandparents nearby regularly today.",
             "The big cat often visits their big grandparents regularly today.",
             "The big cat often visits their big grandparents nearby today.",
@@ -4567,6 +2784,460 @@ public class ButtonTests : MonoBehaviour
             "A cat often visits their grandparents today.",
             "A cat visits their grandparents today.",
 
+            // Present Continuous
+            "The big cat is visiting their big grandparents nearby regularly today.",
+            "The big cat is visiting their big grandparents regularly today.",
+            "The big cat is visiting their big grandparents nearby today.",
+            "The big cat is visiting their big grandparents today.",
+            "The big cat is visiting their grandparents today.",
+            "The cat is visiting their big grandparents nearby regularly today.",
+            "The cat is visiting their big grandparents regularly today.",
+            "The cat is visiting their big grandparents nearby today.",
+            "The cat is visiting their big grandparents today.",
+            "The cat is visiting their grandparents today.",
+            "A big cat is visiting their big grandparents nearby regularly today.",
+            "A big cat is visiting their big grandparents regularly today.",
+            "A big cat is visiting their big grandparents nearby today.",
+            "A big cat is visiting their big grandparents today.",
+            "A big cat is visiting their grandparents today.",
+            "A cat is visiting their big grandparents nearby regularly today.",
+            "A cat is visiting their big grandparents regularly today.",
+            "A cat is visiting their big grandparents nearby today.",
+            "A cat is visiting their big grandparents today.",
+            "A cat is visiting their grandparents today.",
+            "The big cats are visiting their big grandparent nearby regularly today.",
+            "The big cats are visiting their big grandparent regularly today.",
+            "The big cats are visiting their big grandparent nearby today.",
+            "The big cats are visiting their big grandparent today.",
+            "The big cats are visiting their grandparent today.",
+            "The cats are visiting their big grandparent nearby regularly today.",
+            "The cats are visiting their big grandparent regularly today.",
+            "The cats are visiting their big grandparent nearby today.",
+            "The cats are visiting their big grandparent today.",
+            "The cats are visiting their grandparent today.",
+            "Big cats are visiting their big grandparent nearby regularly today.",
+            "Big cats are visiting their big grandparent regularly today.",
+            "Big cats are visiting their big grandparent nearby today.",
+            "Big cats are visiting their big grandparent today.",
+            "Big cats are visiting their grandparent today.",
+            "Cats are visiting their big grandparent nearby regularly today.",
+            "Cats are visiting their big grandparent regularly today.",
+            "Cats are visiting their big grandparent nearby today.",
+            "Cats are visiting their big grandparent today.",
+            "Cats are visiting their grandparent today.",
+            "Cats are visiting a big grandparent nearby regularly today.",
+            "Cats are visiting a big grandparent regularly today.",
+            "Cats are visiting a big grandparent nearby today.",
+            "Cats are visiting a big grandparent today.",
+            "Cats are visiting a grandparent today.",
+            "The big cats are visiting their big grandparents nearby regularly today.",
+            "The big cats are visiting their big grandparents regularly today.",
+            "The big cats are visiting their big grandparents nearby today.",
+            "The big cats are visiting their big grandparents today.",
+            "The big cats are visiting their grandparents today.",
+            "The cats are visiting their grandparents nearby regularly today.",
+            "The cats are visiting their grandparents regularly today.",
+            "The cats are visiting their grandparents nearby today.",
+            "The cats are visiting their grandparents today.",
+            "Big cats are visiting the big grandparents nearby regularly today.",
+            "Big cats are visiting the big grandparents regularly today.",
+            "Big cats are visiting the big grandparents nearby today.",
+            "Big cats are visiting the big grandparents today.",
+            "Big cats are visiting the grandparents today.",
+            "Cats are visiting the grandparents nearby regularly today.",
+            "Cats are visiting the grandparents regularly today.",
+            "Cats are visiting the grandparents nearby today.",
+            "Cats are visiting the grandparents today.",
+
+            // Present Perfect
+            "The big cat has visited their big grandparents nearby regularly today.",
+            "The big cat has visited their big grandparents regularly today.",
+            "The big cat has visited their big grandparents nearby today.",
+            "The big cat has visited their big grandparents today.",
+            "The big cat has visited their grandparents today.",
+            "The cat has visited their big grandparents nearby regularly today.",
+            "The cat has visited their big grandparents regularly today.",
+            "The cat has visited their big grandparents nearby today.",
+            "The cat has visited their big grandparents today.",
+            "The cat has visited their grandparents today.",
+            "A big cat has visited their big grandparents nearby regularly today.",
+            "A big cat has visited their big grandparents regularly today.",
+            "A big cat has visited their big grandparents nearby today.",
+            "A big cat has visited their big grandparents today.",
+            "A big cat has visited their grandparents today.",
+            "A cat has visited their big grandparents nearby regularly today.",
+            "A cat has visited their big grandparents regularly today.",
+            "A cat has visited their big grandparents nearby today.",
+            "A cat has visited their big grandparents today.",
+            "A cat has visited their grandparents today.",
+            "The big cats have visited their big grandparent nearby regularly today.",
+            "The big cats have visited their big grandparent regularly today.",
+            "The big cats have visited their big grandparent nearby today.",
+            "The big cats have visited their big grandparent today.",
+            "The big cats have visited their grandparent today.",
+            "The cats have visited their big grandparent nearby regularly today.",
+            "The cats have visited their big grandparent regularly today.",
+            "The cats have visited their big grandparent nearby today.",
+            "The cats have visited their big grandparent today.",
+            "The cats have visited their grandparent today.",
+            "Big cats have visited their big grandparent nearby regularly today.",
+            "Big cats have visited their big grandparent regularly today.",
+            "Big cats have visited their big grandparent nearby today.",
+            "Big cats have visited their big grandparent today.",
+            "Big cats have visited their grandparent today.",
+            "Cats have visited their big grandparent nearby regularly today.",
+            "Cats have visited their big grandparent regularly today.",
+            "Cats have visited their big grandparent nearby today.",
+            "Cats have visited their big grandparent today.",
+            "Cats have visited their grandparent today.",
+            "Cats have visited a big grandparent nearby regularly today.",
+            "Cats have visited a big grandparent regularly today.",
+            "Cats have visited a big grandparent nearby today.",
+            "Cats have visited a big grandparent today.",
+            "Cats have visited a grandparent today.",
+            "The big cats have visited their big grandparents nearby regularly today.",
+            "The big cats have visited their big grandparents regularly today.",
+            "The big cats have visited their big grandparents nearby today.",
+            "The big cats have visited their big grandparents today.",
+            "The big cats have visited their grandparents today.",
+            "The cats have visited their grandparents nearby regularly today.",
+            "The cats have visited their grandparents regularly today.",
+            "The cats have visited their grandparents nearby today.",
+            "The cats have visited their grandparents today.",
+            "Big cats have visited the big grandparents nearby regularly today.",
+            "Big cats have visited the big grandparents regularly today.",
+            "Big cats have visited the big grandparents nearby today.",
+            "Big cats have visited the big grandparents today.",
+            "Big cats have visited the grandparents today.",
+            "Cats have visited the grandparents nearby regularly today.",
+            "Cats have visited the grandparents regularly today.",
+            "Cats have visited the grandparents nearby today.",
+            "Cats have visited the grandparents today.",
+
+            // Present Perfect Continous
+            "The big cat has been visiting their big grandparents nearby regularly today.",
+            "The big cat has been visiting their big grandparents regularly today.",
+            "The big cat has been visiting their big grandparents nearby today.",
+            "The big cat has been visiting their big grandparents today.",
+            "The big cat has been visiting their grandparents today.",
+            "The cat has been visiting their big grandparents nearby regularly today.",
+            "The cat has been visiting their big grandparents regularly today.",
+            "The cat has been visiting their big grandparents nearby today.",
+            "The cat has been visiting their big grandparents today.",
+            "The cat has been visiting their grandparents today.",
+            "A big cat has been visiting their big grandparents nearby regularly today.",
+            "A big cat has been visiting their big grandparents regularly today.",
+            "A big cat has been visiting their big grandparents nearby today.",
+            "A big cat has been visiting their big grandparents today.",
+            "A big cat has been visiting their grandparents today.",
+            "A cat has been visiting their big grandparents nearby regularly today.",
+            "A cat has been visiting their big grandparents regularly today.",
+            "A cat has been visiting their big grandparents nearby today.",
+            "A cat has been visiting their big grandparents today.",
+            "A cat has been visiting their grandparents today.",
+            "The big cats have been visiting their big grandparent nearby regularly today.",
+            "The big cats have been visiting their big grandparent regularly today.",
+            "The big cats have been visiting their big grandparent nearby today.",
+            "The big cats have been visiting their big grandparent today.",
+            "The big cats have been visiting their grandparent today.",
+            "The cats have been visiting their big grandparent nearby regularly today.",
+            "The cats have been visiting their big grandparent regularly today.",
+            "The cats have been visiting their big grandparent nearby today.",
+            "The cats have been visiting their big grandparent today.",
+            "The cats have been visiting their grandparent today.",
+            "Big cats have been visiting their big grandparent nearby regularly today.",
+            "Big cats have been visiting their big grandparent regularly today.",
+            "Big cats have been visiting their big grandparent nearby today.",
+            "Big cats have been visiting their big grandparent today.",
+            "Big cats have been visiting their grandparent today.",
+            "Cats have been visiting their big grandparent nearby regularly today.",
+            "Cats have been visiting their big grandparent regularly today.",
+            "Cats have been visiting their big grandparent nearby today.",
+            "Cats have been visiting their big grandparent today.",
+            "Cats have been visiting their grandparent today.",
+            "Cats have been visiting a big grandparent nearby regularly today.",
+            "Cats have been visiting a big grandparent regularly today.",
+            "Cats have been visiting a big grandparent nearby today.",
+            "Cats have been visiting a big grandparent today.",
+            "Cats have been visiting a grandparent today.",
+            "The big cats have been visiting their big grandparents nearby regularly today.",
+            "The big cats have been visiting their big grandparents regularly today.",
+            "The big cats have been visiting their big grandparents nearby today.",
+            "The big cats have been visiting their big grandparents today.",
+            "The big cats have been visiting their grandparents today.",
+            "The cats have been visiting their grandparents nearby regularly today.",
+            "The cats have been visiting their grandparents regularly today.",
+            "The cats have been visiting their grandparents nearby today.",
+            "The cats have been visiting their grandparents today.",
+            "Big cats have been visiting the big grandparents nearby regularly today.",
+            "Big cats have been visiting the big grandparents regularly today.",
+            "Big cats have been visiting the big grandparents nearby today.",
+            "Big cats have been visiting the big grandparents today.",
+            "Big cats have been visiting the grandparents today.",
+            "Cats have been visiting the grandparents nearby regularly today.",
+            "Cats have been visiting the grandparents regularly today.",
+            "Cats have been visiting the grandparents nearby today.",
+            "Cats have been visiting the grandparents today.",
+
+            // past simple
+            "The big cat visited their big grandparents nearby regularly yesterday.",
+            "The big cat visited their big grandparents regularly yesterday.",
+            "The big cat visited their big grandparents nearby yesterday.",
+            "The big cat visited their big grandparents yesterday.",
+            "The big cat visited their grandparents yesterday.",
+            "The cat visited their big grandparents nearby regularly yesterday.",
+            "The cat visited their big grandparents regularly yesterday.",
+            "The cat visited their big grandparents nearby yesterday.",
+            "The cat visited their big grandparents yesterday.",
+            "The cat visited their grandparents yesterday.",
+            "A big cat visited their big grandparents nearby regularly yesterday.",
+            "A big cat visited their big grandparents regularly yesterday.",
+            "A big cat visited their big grandparents nearby yesterday.",
+            "A big cat visited their big grandparents yesterday.",
+            "A big cat visited their grandparents yesterday.",
+            "A cat visited their big grandparents nearby regularly yesterday.",
+            "A cat visited their big grandparents regularly yesterday.",
+            "A cat visited their big grandparents nearby yesterday.",
+            "A cat visited their big grandparents yesterday.",
+            "A cat visited their grandparents yesterday.",
+            "The big cats visited their big grandparent nearby regularly yesterday.",
+            "The big cats visited their big grandparent regularly yesterday.",
+            "The big cats visited their big grandparent nearby yesterday.",
+            "The big cats visited their big grandparent yesterday.",
+            "The big cats visited their grandparent yesterday.",
+            "The cats visited their big grandparent nearby regularly yesterday.",
+            "The cats visited their big grandparent regularly yesterday.",
+            "The cats visited their big grandparent nearby yesterday.",
+            "The cats visited their big grandparent yesterday.",
+            "The cats visited their grandparent yesterday.",
+            "Big cats visited their big grandparent nearby regularly yesterday.",
+            "Big cats visited their big grandparent regularly yesterday.",
+            "Big cats visited their big grandparent nearby yesterday.",
+            "Big cats visited their big grandparent yesterday.",
+            "Big cats visited their grandparent yesterday.",
+            "Cats visited their big grandparent nearby regularly yesterday.",
+            "Cats visited their big grandparent regularly yesterday.",
+            "Cats visited their big grandparent nearby yesterday.",
+            "Cats visited their big grandparent yesterday.",
+            "Cats visited their grandparent yesterday.",
+            "Cats visited a big grandparent nearby regularly yesterday.",
+            "Cats visited a big grandparent regularly yesterday.",
+            "Cats visited a big grandparent nearby yesterday.",
+            "Cats visited a big grandparent yesterday.",
+            "Cats visited a grandparent yesterday.",
+            "The big cats visited their big grandparents nearby regularly yesterday.",
+            "The big cats visited their big grandparents regularly yesterday.",
+            "The big cats visited their big grandparents nearby yesterday.",
+            "The big cats visited their big grandparents yesterday.",
+            "The big cats visited their grandparents yesterday.",
+            "The cats visited their grandparents nearby regularly yesterday.",
+            "The cats visited their grandparents regularly yesterday.",
+            "The cats visited their grandparents nearby yesterday.",
+            "The cats visited their grandparents yesterday.",
+            "Big cats visited the big grandparents nearby regularly yesterday.",
+            "Big cats visited the big grandparents regularly yesterday.",
+            "Big cats visited the big grandparents nearby yesterday.",
+            "Big cats visited the big grandparents yesterday.",
+            "Big cats visited the grandparents yesterday.",
+            "Cats visited the grandparents nearby regularly yesterday.",
+            "Cats visited the grandparents regularly yesterday.",
+            "Cats visited the grandparents nearby yesterday.",
+            "Cats visited the grandparents yesterday.",
+
+            // Past Continuous
+            "The big cat was visiting their big grandparents nearby regularly yesterday.",
+            "The big cat was visiting their big grandparents regularly yesterday.",
+            "The big cat was visiting their big grandparents nearby yesterday.",
+            "The big cat was visiting their big grandparents yesterday.",
+            "The big cat was visiting their grandparents yesterday.",
+            "The cat was visiting their big grandparents nearby regularly yesterday.",
+            "The cat was visiting their big grandparents regularly yesterday.",
+            "The cat was visiting their big grandparents nearby yesterday.",
+            "The cat was visiting their big grandparents yesterday.",
+            "The cat was visiting their grandparents yesterday.",
+            "A big cat was visiting their big grandparents nearby regularly yesterday.",
+            "A big cat was visiting their big grandparents regularly yesterday.",
+            "A big cat was visiting their big grandparents nearby yesterday.",
+            "A big cat was visiting their big grandparents yesterday.",
+            "A big cat was visiting their grandparents yesterday.",
+            "A cat was visiting their big grandparents nearby regularly yesterday.",
+            "A cat was visiting their big grandparents regularly yesterday.",
+            "A cat was visiting their big grandparents nearby yesterday.",
+            "A cat was visiting their big grandparents yesterday.",
+            "A cat was visiting their grandparents yesterday.",
+            "The big cats were visiting their big grandparent nearby regularly yesterday.",
+            "The big cats were visiting their big grandparent regularly yesterday.",
+            "The big cats were visiting their big grandparent nearby yesterday.",
+            "The big cats were visiting their big grandparent yesterday.",
+            "The big cats were visiting their grandparent yesterday.",
+            "The cats were visiting their big grandparent nearby regularly yesterday.",
+            "The cats were visiting their big grandparent regularly yesterday.",
+            "The cats were visiting their big grandparent nearby yesterday.",
+            "The cats were visiting their big grandparent yesterday.",
+            "The cats were visiting their grandparent yesterday.",
+            "Big cats were visiting their big grandparent nearby regularly yesterday.",
+            "Big cats were visiting their big grandparent regularly yesterday.",
+            "Big cats were visiting their big grandparent nearby yesterday.",
+            "Big cats were visiting their big grandparent yesterday.",
+            "Big cats were visiting their grandparent yesterday.",
+            "Cats were visiting their big grandparent nearby regularly yesterday.",
+            "Cats were visiting their big grandparent regularly yesterday.",
+            "Cats were visiting their big grandparent nearby yesterday.",
+            "Cats were visiting their big grandparent yesterday.",
+            "Cats were visiting their grandparent yesterday.",
+            "Cats were visiting a big grandparent nearby regularly yesterday.",
+            "Cats were visiting a big grandparent regularly yesterday.",
+            "Cats were visiting a big grandparent nearby yesterday.",
+            "Cats were visiting a big grandparent yesterday.",
+            "Cats were visiting a grandparent yesterday.",
+            "The big cats were visiting their big grandparents nearby regularly yesterday.",
+            "The big cats were visiting their big grandparents regularly yesterday.",
+            "The big cats were visiting their big grandparents nearby yesterday.",
+            "The big cats were visiting their big grandparents yesterday.",
+            "The big cats were visiting their grandparents yesterday.",
+            "The cats were visiting their grandparents nearby regularly yesterday.",
+            "The cats were visiting their grandparents regularly yesterday.",
+            "The cats were visiting their grandparents nearby yesterday.",
+            "The cats were visiting their grandparents yesterday.",
+            "Big cats were visiting the big grandparents nearby regularly yesterday.",
+            "Big cats were visiting the big grandparents regularly yesterday.",
+            "Big cats were visiting the big grandparents nearby yesterday.",
+            "Big cats were visiting the big grandparents yesterday.",
+            "Big cats were visiting the grandparents yesterday.",
+            "Cats were visiting the grandparents nearby regularly yesterday.",
+            "Cats were visiting the grandparents regularly yesterday.",
+            "Cats were visiting the grandparents nearby yesterday.",
+            "Cats were visiting the grandparents yesterday.",
+
+            // Past Perfect
+            "The big cat had visited their big grandparents nearby regularly before yesterday.",
+            "The big cat had visited their big grandparents regularly before yesterday.",
+            "The big cat had visited their big grandparents nearby before yesterday.",
+            "The big cat had visited their big grandparents before yesterday.",
+            "The big cat had visited their grandparents before yesterday.",
+            "The cat had visited their big grandparents nearby regularly before yesterday.",
+            "The cat had visited their big grandparents regularly before yesterday.",
+            "The cat had visited their big grandparents nearby before yesterday.",
+            "The cat had visited their big grandparents before yesterday.",
+            "The cat had visited their grandparents before yesterday.",
+            "A big cat had visited their big grandparents nearby regularly before yesterday.",
+            "A big cat had visited their big grandparents regularly before yesterday.",
+            "A big cat had visited their big grandparents nearby before yesterday.",
+            "A big cat had visited their big grandparents before yesterday.",
+            "A big cat had visited their grandparents before yesterday.",
+            "A cat had visited their big grandparents nearby regularly before yesterday.",
+            "A cat had visited their big grandparents regularly before yesterday.",
+            "A cat had visited their big grandparents nearby before yesterday.",
+            "A cat had visited their big grandparents before yesterday.",
+            "A cat had visited their grandparents before yesterday.",
+            "The big cats had visited their big grandparent nearby regularly before yesterday.",
+            "The big cats had visited their big grandparent regularly before yesterday.",
+            "The big cats had visited their big grandparent nearby before yesterday.",
+            "The big cats had visited their big grandparent before yesterday.",
+            "The big cats had visited their grandparent before yesterday.",
+            "The cats had visited their big grandparent nearby regularly before yesterday.",
+            "The cats had visited their big grandparent regularly before yesterday.",
+            "The cats had visited their big grandparent nearby before yesterday.",
+            "The cats had visited their big grandparent before yesterday.",
+            "The cats had visited their grandparent before yesterday.",
+            "Big cats had visited their big grandparent nearby regularly before yesterday.",
+            "Big cats had visited their big grandparent regularly before yesterday.",
+            "Big cats had visited their big grandparent nearby before yesterday.",
+            "Big cats had visited their big grandparent before yesterday.",
+            "Big cats had visited their grandparent before yesterday.",
+            "Cats had visited their big grandparent nearby regularly before yesterday.",
+            "Cats had visited their big grandparent regularly before yesterday.",
+            "Cats had visited their big grandparent nearby before yesterday.",
+            "Cats had visited their big grandparent before yesterday.",
+            "Cats had visited their grandparent before yesterday.",
+            "Cats had visited a big grandparent nearby regularly before yesterday.",
+            "Cats had visited a big grandparent regularly before yesterday.",
+            "Cats had visited a big grandparent nearby before yesterday.",
+            "Cats had visited a big grandparent before yesterday.",
+            "Cats had visited a grandparent before yesterday.",
+            "The big cats had visited their big grandparents nearby regularly before yesterday.",
+            "The big cats had visited their big grandparents regularly before yesterday.",
+            "The big cats had visited their big grandparents nearby before yesterday.",
+            "The big cats had visited their big grandparents before yesterday.",
+            "The big cats had visited their grandparents before yesterday.",
+            "The cats had visited their grandparents nearby regularly before yesterday.",
+            "The cats had visited their grandparents regularly before yesterday.",
+            "The cats had visited their grandparents nearby before yesterday.",
+            "The cats had visited their grandparents before yesterday.",
+            "Big cats had visited the big grandparents nearby regularly before yesterday.",
+            "Big cats had visited the big grandparents regularly before yesterday.",
+            "Big cats had visited the big grandparents nearby before yesterday.",
+            "Big cats had visited the big grandparents before yesterday.",
+            "Big cats had visited the grandparents before yesterday.",
+            "Cats had visited the grandparents nearby regularly before yesterday.",
+            "Cats had visited the grandparents regularly before yesterday.",
+            "Cats had visited the grandparents nearby before yesterday.",
+            "Cats had visited the grandparents before yesterday.",
+            
+            // Past Perfect Continuous
+            "The big cat had been visiting their big grandparents nearby regularly before yesterday.",
+            "The big cat had been visiting their big grandparents regularly before yesterday.",
+            "The big cat had been visiting their big grandparents nearby before yesterday.",
+            "The big cat had been visiting their big grandparents before yesterday.",
+            "The big cat had been visiting their grandparents before yesterday.",
+            "The cat had been visiting their big grandparents nearby regularly before yesterday.",
+            "The cat had been visiting their big grandparents regularly before yesterday.",
+            "The cat had been visiting their big grandparents nearby before yesterday.",
+            "The cat had been visiting their big grandparents before yesterday.",
+            "The cat had been visiting their grandparents before yesterday.",
+            "A big cat had been visiting their big grandparents nearby regularly before yesterday.",
+            "A big cat had been visiting their big grandparents regularly before yesterday.",
+            "A big cat had been visiting their big grandparents nearby before yesterday.",
+            "A big cat had been visiting their big grandparents before yesterday.",
+            "A big cat had been visiting their grandparents before yesterday.",
+            "A cat had been visiting their big grandparents nearby regularly before yesterday.",
+            "A cat had been visiting their big grandparents regularly before yesterday.",
+            "A cat had been visiting their big grandparents nearby before yesterday.",
+            "A cat had been visiting their big grandparents before yesterday.",
+            "A cat had been visiting their grandparents before yesterday.",
+            "The big cats had been visiting their big grandparent nearby regularly before yesterday.",
+            "The big cats had been visiting their big grandparent regularly before yesterday.",
+            "The big cats had been visiting their big grandparent nearby before yesterday.",
+            "The big cats had been visiting their big grandparent before yesterday.",
+            "The big cats had been visiting their grandparent before yesterday.",
+            "The cats had been visiting their big grandparent nearby regularly before yesterday.",
+            "The cats had been visiting their big grandparent regularly before yesterday.",
+            "The cats had been visiting their big grandparent nearby before yesterday.",
+            "The cats had been visiting their big grandparent before yesterday.",
+            "The cats had been visiting their grandparent before yesterday.",
+            "Big cats had been visiting their big grandparent nearby regularly before yesterday.",
+            "Big cats had been visiting their big grandparent regularly before yesterday.",
+            "Big cats had been visiting their big grandparent nearby before yesterday.",
+            "Big cats had been visiting their big grandparent before yesterday.",
+            "Big cats had been visiting their grandparent before yesterday.",
+            "Cats had been visiting their big grandparent nearby regularly before yesterday.",
+            "Cats had been visiting their big grandparent regularly before yesterday.",
+            "Cats had been visiting their big grandparent nearby before yesterday.",
+            "Cats had been visiting their big grandparent before yesterday.",
+            "Cats had been visiting their grandparent before yesterday.",
+            "Cats had been visiting a big grandparent nearby regularly before yesterday.",
+            "Cats had been visiting a big grandparent regularly before yesterday.",
+            "Cats had been visiting a big grandparent nearby before yesterday.",
+            "Cats had been visiting a big grandparent before yesterday.",
+            "Cats had been visiting a grandparent before yesterday.",
+            "The big cats had been visiting their big grandparents nearby regularly before yesterday.",
+            "The big cats had been visiting their big grandparents regularly before yesterday.",
+            "The big cats had been visiting their big grandparents nearby before yesterday.",
+            "The big cats had been visiting their big grandparents before yesterday.",
+            "The big cats had been visiting their grandparents before yesterday.",
+            "The cats had been visiting their grandparents nearby regularly before yesterday.",
+            "The cats had been visiting their grandparents regularly before yesterday.",
+            "The cats had been visiting their grandparents nearby before yesterday.",
+            "The cats had been visiting their grandparents before yesterday.",
+            "Big cats had been visiting the big grandparents nearby regularly before yesterday.",
+            "Big cats had been visiting the big grandparents regularly before yesterday.",
+            "Big cats had been visiting the big grandparents nearby before yesterday.",
+            "Big cats had been visiting the big grandparents before yesterday.",
+            "Big cats had been visiting the grandparents before yesterday.",
+            "Cats had been visiting the grandparents nearby regularly before yesterday.",
+            "Cats had been visiting the grandparents regularly before yesterday.",
+            "Cats had been visiting the grandparents nearby before yesterday.",
+            "Cats had been visiting the grandparents before yesterday.",
 
             "",
 
@@ -5485,6 +4156,2316 @@ public class ButtonTests : MonoBehaviour
     private static bool Will(string word) { return word.ToLower().Equals("will"); }
     private static bool This(string word) { return word.ToLower().Equals("this"); }
     private static bool That(string word) { return word.ToLower().Equals("that"); }
-    
 
+    #region OLD
+
+    //public static bool IsAQuestion(string[] words)
+    //{
+    //    // LEGGI AO - SHOW WARNING -> SENTENCE SHOULD END WITH AN ADVERB
+    //    // la lunghezza dell'array che puoi accettare è uguale alla profondità massima dell'albero (guarda la posizione) - vedi alla fine
+    //    // vedi se fare il check prima o dopo la normalizzazione
+    //    // SULLE FOGLIE L'ACCESSO AGLI ULTIMI NODI LO DEVI FARE SEMPRE CON words.lenght-1 e non con le posizioni fisse per smaltire <--- REFACTORRR!!!
+    //    words = Normalization(words);
+    //    //words = RemoveQuestionAdverbs(words);
+    //    if (IsFixedLenght(words, 1))
+    //    {
+    //        if (words[0].Equals("error-1")) return false;
+    //    }
+    //    if (IsAQuestionWords(words[0]))
+    //    {
+    //        words = words.Where((value, index) => index != 0 && index != 0).ToArray();
+    //    }
+    //    if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
+    //    {
+    //        words = RemovePrepOrPoss(words, 3);
+    //        if (IsASingular(words[4])) return true;
+    //    }
+    //    if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+    //    {
+    //        string detectedPhrasalVerb = words[0] + " " + words[1]; // she wakes up
+    //        if (phrasalVerbs.Contains(detectedPhrasalVerb))
+    //        {
+    //            words = words.Where((value, index) => index != 0 && index != 1).ToArray();
+    //        }
+    //        words = RemovePrepOrPoss(words, 4);
+    //        if (IsASingular(words[5])) return true;
+    //        if (IsAPlural(words[5])) return true;
+    //    }
+
+    //    if (Do(words[0]) || Dont(words[0]) || Did(words[0]) || Didnt(words[0]) || Will(words[0]) || Wont(words[0]))
+    //    {
+    //        if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+    //        {
+    //            words = words.Where((value, index) => index != 1).ToArray();
+    //            if (IsAPlural(words[1]) || words[1].Equals("you") || IsACommon(words[1]))
+    //            {
+    //                if (IsABaseVerb(words[2]))
+    //                {
+    //                    if (!IsFixedLenght(words, 3))
+    //                    {
+    //                        if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]) || prepositions.Contains(words[3]))
+    //                        {
+    //                            words = words.Where((value, index) => index != 3).ToArray();
+    //                        }
+    //                        if (IsACommon(words[3])) { return true; }
+    //                        else if (IsAPlural(words[3])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //                if (Not(words[2]))
+    //                {
+    //                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                    {
+    //                        words = words.Where((value, index) => index != 3).ToArray();
+    //                        if (IsABaseVerb(words[4]))
+    //                        {
+    //                            if (IsACommon(words[5])) { return true; }
+    //                            else if (IsAPlural(words[5])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                        if (!IsFixedLenght(words, 5))
+    //                        {
+    //                            if (IsACommon(words[5])) { return true; }
+    //                            else if (IsAPlural(words[5])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                    }
+    //                    if (IsABaseVerb(words[4]))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                    if (!IsFixedLenght(words, 5))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        if (IsAPlural(words[1]) || words[1].Equals("you") || IsACommon(words[1]))
+    //        {
+    //            if (IsABaseVerb(words[2]))
+    //            {
+    //                if (!IsFixedLenght(words, 3))
+    //                {
+    //                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]) || IsAPreposition(words[3]))
+    //                    {
+    //                        words = words.Where((value, index) => index != 3).ToArray();
+    //                        if (The(words[3]))
+    //                        {
+    //                            words = words.Where((value, index) => index != 3).ToArray();
+    //                        }
+    //                    }
+    //                    if (IsACommon(words[3])) { return true; }
+    //                    else if (IsAPlural(words[3])) { return true; }
+    //                    else { return false; }
+
+    //                    //if (This(words[3]) || That(words[3])) DO NOT DELETE!!
+    //                    //{
+    //                    //    if (IsACommon(words[4])) { return true; }
+    //                    //    else if (IsAPlural(words[4])) { return true; }
+    //                    //    else { return false; }
+    //                    //}
+    //                }
+    //                return true;
+    //            }
+    //            if (Not(words[2]))
+    //            {
+    //                if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                {
+    //                    words = words.Where((value, index) => index != 3).ToArray();
+    //                    if (IsABaseVerb(words[4]))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                    if (!IsFixedLenght(words, 5))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsABaseVerb(words[4]))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    if (IsABaseVerb(words[3])) { return true; }
+    //                }
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsACommon(words[5])) { return true; }
+    //                    else if (IsAPlural(words[5])) { return true; }
+    //                    else { return false; }
+    //                }
+    //            }
+    //        }
+    //        if (Not(words[1]))
+    //        {
+    //            if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
+    //            {
+    //                words = words.Where((value, index) => index != 2).ToArray();
+    //                if (IsAPlural(words[2]) || words[2].Equals("you"))
+    //                {
+    //                    if (IsABaseVerb(words[3]))
+    //                    {
+    //                        if (IsACommon(words[4])) { return true; }
+    //                        else if (IsAPlural(words[4])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                    if (!IsFixedLenght(words, 4))
+    //                    {
+    //                        if (IsACommon(words[4])) { return true; }
+    //                        else if (IsAPlural(words[4])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //            }
+    //            //if (IsAPlural(words[2]) || words[2].Equals("you"))
+    //            //{
+    //            //    words = RemoveAdverbs(words, 3);
+    //            //    if (IsABaseVerb(words[3]))
+    //            //    {
+    //            //        if (!IsFixedLenght(words, 4))
+    //            //        {
+    //            //            if (IsACommon(words[4])) return true;
+    //            //        }
+    //            //        return true;
+    //            //    }
+    //            //}
+    //        }
+    //    }
+    //    if (Does(words[0]) || Doesnt(words[0]) || Did(words[0]) || Didnt(words[0]) || Will(words[0]) || Wont(words[0]))
+    //    {
+    //        if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+    //        {
+    //            words = words.Where((value, index) => index != 1).ToArray();
+    //        }
+    //        if (IsASingular(words[1]) || IsAProperNoun(words[1]))
+    //        {
+    //            if (IsABaseVerb(words[2]))
+    //            {
+    //                if (!IsFixedLenght(words, 3))
+    //                {
+    //                    if (!IsFixedLenght(words, 3))
+    //                    {
+    //                        if (IsAPreposition(words[3]) || The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                        {
+    //                            words = words.Where((value, index) => index != 3).ToArray();
+    //                        }
+    //                        if (IsACommon(words[3])) { return true; }
+    //                        else if (IsAPlural(words[3])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //                return true;
+    //            }
+    //            if (Not(words[2]))
+    //            {
+    //                if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                {
+    //                    words = words.Where((value, index) => index != 3).ToArray();
+    //                    if (IsABaseVerb(words[4]))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                    if (!IsFixedLenght(words, 5))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //                if (IsABaseVerb(words[4]))
+    //                {
+    //                    if (IsACommon(words[5])) { return true; }
+    //                    else if (IsAPlural(words[5])) { return true; }
+    //                    else { return false; }
+    //                }
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsACommon(words[5])) { return true; }
+    //                    else if (IsAPlural(words[5])) { return true; }
+    //                    else { return false; }
+    //                }
+    //            }
+    //        }
+    //        if (Not(words[1]))
+    //        {
+    //            if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
+    //            {
+    //                words = words.Where((value, index) => index != 2).ToArray();
+    //            }
+    //            if (IsASingular(words[1]) || IsAProperNoun(words[2]))
+    //            {
+    //                if (timeAdverbs.Contains(words[3]))
+    //                {
+    //                    words = words.Where((value, index) => index != 3).ToArray();
+    //                }
+    //                if (IsABaseVerb(words[3]))
+    //                {
+    //                    if (!IsFixedLenght(words, 4))
+    //                    {
+    //                        if (!IsFixedLenght(words, 4))
+    //                        {
+    //                            if (IsAPreposition(words[4]))
+    //                            {
+    //                                words = words.Where((value, index) => index != 4).ToArray();
+    //                            }
+    //                            if (IsACommon(words[4])) { return true; }
+    //                            else if (IsAPlural(words[4])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                    }
+    //                    return true;
+    //                }
+    //                if (Not(words[2]))
+    //                {
+    //                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                    {
+    //                        words = words.Where((value, index) => index != 3).ToArray();
+    //                        if (IsABaseVerb(words[4]))
+    //                        {
+    //                            if (IsACommon(words[5])) { return true; }
+    //                            else if (IsAPlural(words[5])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                        if (!IsFixedLenght(words, 5))
+    //                        {
+    //                            if (IsACommon(words[5])) { return true; }
+    //                            else if (IsAPlural(words[5])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                    }
+    //                    if (IsABaseVerb(words[4]))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                    if (!IsFixedLenght(words, 5))
+    //                    {
+    //                        if (IsACommon(words[5])) { return true; }
+    //                        else if (IsAPlural(words[5])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //    if (Are(words[0]) || Arent(words[0]) || Were(words[0]) || Werent(words[0]))
+    //    {
+    //        if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+    //        {
+    //            words = words.Where((value, index) => index != 1).ToArray();
+    //        }
+    //        if (IsAPluralSubject(words[1]) || words[1].Equals("you"))
+    //        {
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //            }
+    //            if (IsAnIngVerbs(words[2]))
+    //            {
+    //                if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                {
+    //                    words = words.Where((value, index) => index != 3).ToArray();
+    //                }
+    //                if (IsAnAdjective(words[3]))
+    //                {
+    //                    if (IsACommon(words[4]))
+    //                    {
+    //                        if (IsAPlaceAdverbs(words[words.Length - 1]))
+    //                        {
+    //                            words = words.Where((value, index) => index != words.Length - 1).ToArray();
+    //                        }
+    //                        return true;
+    //                    }
+    //                    return true;
+    //                }
+    //                if (IsACommon(words[3]))
+    //                {
+    //                    if (IsAPlaceAdverbs(words[words.Length - 1]))
+    //                    {
+    //                        words = words.Where((value, index) => index != words.Length - 1).ToArray();
+    //                    }
+    //                    return true;
+    //                }
+    //                if (IsAPlural(words[3]))
+    //                {
+    //                    return true;
+    //                }
+    //            }
+    //            if (IsAnAdjective(words[2])) return true;
+    //            if (IsAPluralSubject(words[2])) return true;
+    //            if (IsAPreposition(words[2]))
+    //            {
+    //                if (IsACommon(words[3])) { return true; }
+    //                else if (IsAPlural(words[3])) { return true; }
+    //                else { return false; }
+    //            }
+    //        }
+    //    }
+    //    if (Is(words[0]) || Isnt(words[0]) || Was(words[0]) || Wasnt(words[0]))
+    //    {
+    //        if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+    //        {
+    //            words = words.Where((value, index) => index != 1).ToArray();
+    //        }
+    //        if (IsASingular(words[1]))
+    //        {
+    //            if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
+    //            {
+    //                words = words.Where((value, index) => index != 2).ToArray();
+    //            }
+    //            if (Not(words[2]))
+    //            {
+    //                //words = words.Where((value, index) => index != 2).ToArray(); -- Reminder for refactoring
+    //                if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                {
+    //                    words = words.Where((value, index) => index != 3).ToArray();
+    //                }
+    //                if (IsAnAdjective(words[3])) return true;
+    //                if (IsACommon(words[3])) { return true; }
+    //                else if (IsAPlural(words[3])) { return true; }
+    //                else { return false; }
+    //            }
+    //            if (IsAnIngVerbs(words[2]))
+    //            {
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsAPreposition(words[3]))
+    //                    {
+    //                        if (IsACommon(words[4])) { return true; }
+    //                        else if (IsAPlural(words[4])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //            }
+    //            if (IsAnIngVerbs(words[2])) return true; // is she studying?
+    //            if (IsAnAdjective(words[2])) return true;
+    //            if (IsACommon(words[2])) { return true; }
+    //            else if (IsAPlural(words[2])) { return true; }
+    //            else { return false; }
+    //        }
+    //        if (IsAnIngVerbs(words[1]))
+    //        {
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (!IsFixedLenght(words, 2))
+    //                {
+    //                    if (!IsFixedLenght(words, 2))
+    //                    {
+    //                        if (IsAPreposition(words[2]))
+    //                        {
+    //                            if (IsACommon(words[3])) { return true; }
+    //                            else if (IsAPlural(words[3])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                    }
+    //                    return true;
+    //                }
+    //            }
+    //            return true;
+    //        }
+    //    }
+
+    //    if (Have(words[0]) || Havent(words[0]) || Had(words[0]) || Hadnt(words[0]))
+    //    {
+    //        if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+    //        {
+    //            words = words.Where((value, index) => index != 1).ToArray();
+    //            if (IsAPlural(words[1]) || words[1].Equals("you"))
+    //            {
+    //                if (IsPastParticiple(words[2]))
+    //                {
+    //                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                    {
+    //                        words = words.Where((value, index) => index != 3).ToArray();
+    //                    }
+    //                    if (IsACommon(words[3])) { return true; }
+    //                    else if (IsAPlural(words[3])) { return true; }
+    //                    else { return false; }
+    //                }
+    //                if (IsAnIngVerbs(words[2]))
+    //                {
+    //                    if (IsACommon(words[3])) { return true; }
+    //                    else if (IsAPlural(words[3])) { return true; }
+    //                    else { return false; }
+    //                }
+    //            }
+    //        }
+    //        if (IsAPlural(words[1]) || words[1].Equals("you"))
+    //        {
+    //            if (IsPastParticiple(words[2]))
+    //            {
+    //                if (!IsFixedLenght(words, 3))
+    //                {
+    //                    // the , a, an QUI BRO
+    //                    if (The(words[3]) || A(words[3]) || An(words[3]) || possessivePronouns.Contains(words[3]))
+    //                    {
+    //                        words = words.Where((value, index) => index != 3).ToArray();
+    //                    }
+    //                    if (!IsFixedLenght(words, 3))
+    //                    {
+    //                        if (IsACommon(words[3])) { return true; }
+    //                        else if (IsAPlural(words[3])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                    //if (This(words[3]) || That(words[3])) DO NOT DELETE!!!!!!!!!!!!!!!!!!
+    //                    //{
+    //                    //    if (IsACommon(words[4])) { return true; }
+    //                    //    else { return false; }
+    //                    //}
+    //                    //if (Those(words[3]))
+    //                    //{
+    //                    //    if (IsACommon(words[4])) { return true; }
+    //                    //    else { return false; }
+    //                    //}
+    //                }
+    //                return true;
+    //            }
+    //            if (IsAnIngVerbs(words[2]))
+    //            {
+    //                if (!IsFixedLenght(words, 3))
+    //                {
+    //                    if (IsACommon(words[3])) { return true; }
+    //                    else if (IsAPlural(words[3])) { return true; }
+    //                    else { return false; }
+    //                }
+    //            }
+    //            if (Been(words[2]))
+    //            {
+    //                if (IsAnIngVerbs(words[3]))
+    //                {
+    //                    if (!IsFixedLenght(words, 4))
+    //                    {
+    //                        if (IsACommon(words[4]))
+    //                        {
+    //                            if (words.Length >= 5) // it means there are more words in the sentence
+    //                            {
+    //                                if (IsACommon(words[words.Length - 1])) { return true; }
+    //                                else if (IsAPlural(words[words.Length - 1])) { return true; }
+    //                                else { return false; }
+    //                            }
+    //                            return true;
+    //                        }
+    //                        if (IsAPlural(words[4]))
+    //                        {
+    //                            if (words.Length >= 5) // it means there are more words in the sentence
+    //                            {
+    //                                if (IsACommon(words[words.Length - 1])) { return true; }
+    //                                else if (IsAPlural(words[words.Length - 1])) { return true; }
+    //                                else { return false; }
+    //                            }
+    //                            return true;
+    //                        }
+    //                    }
+    //                    return true;
+    //                }
+    //            }
+    //        }
+    //        if (Not(words[1]))
+    //        {
+    //            if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
+    //            {
+    //                words = words.Where((value, index) => index != 2).ToArray();
+    //                if (IsAPlural(words[2]) || words[1].Equals("you"))
+    //                {
+    //                    if (IsPastParticiple(words[3]))
+    //                    {
+    //                        if (IsACommon(words[4])) { return true; }
+    //                        else if (IsAPlural(words[4])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                    return true;
+    //                }
+    //                if (Been(words[2]))
+    //                {
+    //                    if (IsAnIngVerbs(words[3]))
+    //                    {
+    //                        if (!IsFixedLenght(words, 4))
+    //                        {
+    //                            if (IsACommon(words[4]))
+    //                            {
+    //                                if (words.Length >= 5) // it means there are more words in the sentence
+    //                                {
+    //                                    if (IsACommon(words[words.Length - 1])) { return true; }
+    //                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
+    //                                    else { return false; }
+    //                                }
+    //                                return true;
+    //                            }
+    //                            if (IsAPlural(words[4]))
+    //                            {
+    //                                if (words.Length >= 5) // it means there are more words in the sentence
+    //                                {
+    //                                    if (IsACommon(words[words.Length - 1])) { return true; }
+    //                                    else if (IsAPlural(words[words.Length - 1])) { return true; }
+    //                                    else { return false; }
+    //                                }
+    //                                return true;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            if (IsAPlural(words[2]) || words[2].Equals("you"))
+    //            {
+    //                if (IsPastParticiple(words[3]))
+    //                {
+    //                    if (!IsFixedLenght(words, 4))
+    //                    {
+    //                        if (IsACommon(words[4])) { return true; }
+    //                        else if (IsAPlural(words[4])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                    return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    if (Has(words[0]) || Hasnt(words[0]) || Had(words[0]) || Hadnt(words[0]))
+    //    {
+    //        if (The(words[1]) || A(words[1]) || An(words[1]) || possessivePronouns.Contains(words[1]))
+    //        {
+    //            words = words.Where((value, index) => index != 1).ToArray();
+    //        }
+    //        if (IsASingular(words[1]) || IsAProperNoun(words[1]))
+    //        {
+    //            if (timeAdverbs.Contains(words[2]))
+    //            {
+    //                words = words.Where((value, index) => index != 2).ToArray();
+    //            }
+    //            if (IsPastParticiple(words[2]))
+    //            {
+    //                if (!IsFixedLenght(words, 3))
+    //                {
+    //                    if (!IsFixedLenght(words, 3))
+    //                    {
+    //                        if (IsAPreposition(words[3]))
+    //                        {
+    //                            words = words.Where((value, index) => index != 3).ToArray();
+    //                        }
+    //                        if (IsACommon(words[3])) { return true; }
+    //                        else if (IsAPlural(words[3])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //                return true;
+    //            }
+    //            if (Been(words[2]))
+    //            {
+    //                if (IsAnIngVerbs(words[3]))
+    //                {
+    //                    if (!IsFixedLenght(words, 4))
+    //                    {
+    //                        if (IsACommon(words[4]))
+    //                        {
+    //                            if (words.Length >= 5) // it means there are more words in the sentence
+    //                            {
+    //                                if (IsACommon(words[words.Length - 1])) { return true; }
+    //                                else if (IsAPlural(words[words.Length - 1])) { return true; }
+    //                                else { return false; }
+    //                            }
+    //                            return true;
+    //                        }
+    //                        if (IsAPlural(words[4]))
+    //                        {
+    //                            if (words.Length >= 5) // it means there are more words in the sentence
+    //                            {
+    //                                if (IsACommon(words[words.Length - 1])) { return true; }
+    //                                else if (IsAPlural(words[words.Length - 1])) { return true; }
+    //                                else { return false; }
+    //                            }
+    //                            return true;
+    //                        }
+    //                    }
+    //                    return true;
+    //                }
+    //            }
+    //        }
+    //        if (Been(words[1])) // il soggetto è tipo Who
+    //        {
+    //            if (IsAnIngVerbs(words[2]))
+    //            {
+    //                if (!IsFixedLenght(words, 3))
+    //                {
+    //                    if (IsACommon(words[3]))
+    //                    {
+    //                        if (words.Length >= 4) // it means there are more words in the sentence
+    //                        {
+    //                            if (IsACommon(words[words.Length - 1])) { return true; }
+    //                            else if (IsAPlural(words[words.Length - 1])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                        return true;
+    //                    }
+    //                    if (IsAPlural(words[3]))
+    //                    {
+    //                        if (words.Length >= 4) // it means there are more words in the sentence
+    //                        {
+    //                            if (IsACommon(words[words.Length - 1])) { return true; }
+    //                            else if (IsAPlural(words[words.Length - 1])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                        return true;
+    //                    }
+    //                }
+    //                return true;
+    //            }
+    //        }
+    //        if (IsFixedLenght(words, 3))
+    //        {
+    //            if (IsFixedLenght(words, 2))
+    //            {
+    //                if (IsPastParticiple(words[1]))
+    //                {
+    //                    if (!IsFixedLenght(words, 2))
+    //                    {
+    //                        if (!IsFixedLenght(words, 2))
+    //                        {
+    //                            if (IsAPreposition(words[2]))
+    //                            {
+    //                                words = words.Where((value, index) => index != 2).ToArray();
+    //                            }
+    //                            if (IsACommon(words[2])) { return true; }
+    //                            else if (IsAPlural(words[2])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                    }
+    //                    return true;
+    //                }
+    //            }
+    //            if (IsPastParticiple(words[2]))
+    //            {
+    //                if (!IsFixedLenght(words, 3))
+    //                {
+    //                    if (!IsFixedLenght(words, 3))
+    //                    {
+    //                        if (IsAPreposition(words[3]))
+    //                        {
+    //                            words = words.Where((value, index) => index != 3).ToArray();
+    //                        }
+    //                        if (IsACommon(words[3])) { return true; }
+    //                        else if (IsAPlural(words[3])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //                return true;
+    //            }
+    //        }
+    //        if (IsPastParticiple(words[1]))
+    //        {
+    //            if (!IsFixedLenght(words, 2))
+    //            {
+    //                if (!IsFixedLenght(words, 2))
+    //                {
+    //                    if (!IsFixedLenght(words, 2))
+    //                    {
+    //                        if (IsAPreposition(words[1]))
+    //                        {
+    //                            words = words.Where((value, index) => index != 1).ToArray();
+    //                        }
+    //                        if (IsACommon(words[1])) { return true; }
+    //                        else if (IsAPlural(words[1])) { return true; }
+    //                        else { return false; }
+    //                    }
+    //                }
+    //            }
+    //            return true;
+    //        }
+
+    //        if (Not(words[1]))
+    //        {
+    //            if (The(words[2]) || A(words[2]) || An(words[2]) || possessivePronouns.Contains(words[2]))
+    //            {
+    //                words = words.Where((value, index) => index != 2).ToArray();
+    //            }
+    //            if (IsASingular(words[1]) || IsAProperNoun(words[2]))
+    //            {
+    //                if (timeAdverbs.Contains(words[3]))
+    //                {
+    //                    words = words.Where((value, index) => index != 3).ToArray();
+    //                }
+    //                if (IsPastParticiple(words[3]))
+    //                {
+    //                    if (!IsFixedLenght(words, 4))
+    //                    {
+    //                        if (!IsFixedLenght(words, 4))
+    //                        {
+    //                            if (IsAPreposition(words[4]))
+    //                            {
+    //                                words = words.Where((value, index) => index != 4).ToArray();
+    //                            }
+    //                            if (IsACommon(words[4])) { return true; }
+    //                            else if (IsAPlural(words[4])) { return true; }
+    //                            else { return false; }
+    //                        }
+    //                    }
+    //                    return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    return false;
+    //}
+    //public static bool SingularSubjectPresentSimple_Affirmation(string[] words)
+    //{
+    //    words = Normalization(words);
+    //    for (int i = 0; i < words.Length; i++)
+    //    {
+    //        words = RemoveAdverbs(words, i); // rimuovere eventuali altri avverbi riconosciuti dopo il complemento
+    //    }
+    //    if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+    //    if (IsFixedLenght(words, 1) && IsASingular(words[0])) return true; // There are dogs here becomes only "dogs" -> valid
+    //    if (The(words[0]) || A(words[0]))
+    //    {
+    //        words = words.Where((value, index) => index != 0).ToArray();
+    //    }
+    //    if (IsAnAdjective(words[0]))
+    //    {
+
+    //        words = words.Where((value, index) => index != 0).ToArray();
+    //    }
+    //    if (words[0].Equals("no") || words[0].Equals("not"))
+    //    {
+    //        words = words.Where((value, index) => index != 0).ToArray(); //There are no cars running here -> a car running
+    //    }
+
+    //    bool subjectRecognized = IsASingular(words[0]) || IsAProperNoun(words[0]);
+    //    if (IsFixedLenght(words, 1))
+    //    {
+    //        if (words[0].Equals("error-1")) return false;
+    //        return true; // There is a dog here -> becomes dog
+    //    }
+
+    //    if (IsASingular(words[0]))
+    //    {
+    //        if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
+    //        if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
+    //    }
+    //    if (A(words[0]) && IsAPlural(words[1]))
+    //    {
+    //        if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
+    //        if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
+    //    }
+    //    if (IsAFrequencyAdverb(words[1]))
+    //    {
+    //        words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
+    //    }
+    //    if (Is(words[1]))
+    //    {
+    //        if (IsAnIngVerbs(words[2])) // contains ing_verbs OR plurals OR ARTICLE_PREPOSITION 
+    //        {
+    //            if (IsFixedLenght(words, 3)) return true;
+    //            if (IsAPlural(words[3])) return true; // eating sandwiches
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (A(words[3]) || The(words[3]) || IsAPreposition(words[3])) // eating a/the sandwich
+    //                {
+    //                    if (IsACommon(words[4])) return true;
+    //                }
+    //                if (IsACommon(words[3])) return true;
+    //                if (IsPastParticiple(words[3])) return true;
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //                }
+    //            }
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (IsAnIngVerbs(words[3])) return true;
+    //            if (IsAnAdjective(words[3])) return true;
+    //            if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (IsPastParticiple(words[2])) return true;
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //        }
+    //    }
+
+    //    if (Hasnt(words[1]))
+    //    {
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //        }
+    //        if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
+    //        {
+    //            if (IsASingular(words[3])) return true;
+    //            if (IsAPlural(words[3])) return true;
+    //        }
+    //        if (Been(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3])) // been being carefully repaired
+    //            {
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsPastParticiple(words[4])) return true;
+    //                    if (!IsFixedLenght(words, 5))
+    //                    {
+    //                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                    }
+    //                }
+    //            }
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                try
+    //                {
+    //                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //                }
+    //                catch (System.Exception e)
+    //                {
+    //                    if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //                }
+    //            }
+    //        }
+    //        if (IsPastParticiple(words[2]))
+    //        {
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (IsAPlural(words[3])) return true;
+    //                if (IsAnIngVerbs(words[3])) return true;
+    //                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
+    //                {
+    //                    if (IsACommon(words[4])) return true;
+    //                    if (IsAPlural(words[4])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    if (Has(words[1]))
+    //    {
+    //        if (IsPastParticiple(words[2]))
+    //        {
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
+    //                {
+    //                    if (IsACommon(words[4])) return true;
+    //                    if (IsAPlural(words[4])) return true;
+    //                }
+    //            }
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (Been(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                    if (!IsFixedLenght(words, 5))
+    //                    {
+    //                        if (IsAPrasphalVerb(words[5], words[6])) return true;
+    //                    }
+    //                }
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (IsPastParticiple(words[3]))
+    //            {
+    //                if (IsAPlural(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4])) return true;
+    //                if (The(words[4]) || A(words[4]))
+    //                {
+    //                    if (IsACommon(words[5])) return true;
+    //                    if (IsAPlural(words[5])) return true;
+    //                }
+    //            }
+    //        }
+    //        if (Been(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsPastParticiple(words[4])) return true;
+    //                    if (!IsFixedLenght(words, 5))
+    //                    {
+
+    //                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                    }
+    //                }
+    //            }
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                try
+    //                {
+    //                    if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //                }
+    //                catch (System.Exception e)
+    //                {
+    //                    if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //                }
+    //            }
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
+    //        {
+    //            if (IsASingular(words[3])) return true;
+    //            if (IsAPlural(words[3])) return true;
+    //        }
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //        }
+    //    }
+
+    //    if (Doesnt(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
+    //    {
+    //        if (The(words[3]) || A(words[3])) // The | a
+    //        {
+    //            if (IsASingular(words[4])) return true;
+    //        }
+    //    }
+    //    if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+    //    {
+    //        string detectedPhrasalVerb = words[0] + " " + words[1]; // she wakes up
+    //        if (phrasalVerbs.Contains(detectedPhrasalVerb))
+    //        {
+    //            words = words.Where((value, index) => index != 0 && index != 1).ToArray();
+    //        }
+    //        if (The(words[4]) || A(words[4]) || IsAPossessivePronouns(words[4])) // The | a
+    //        {
+    //            if (IsASingular(words[5])) return true;
+    //            if (IsAPlural(words[5])) return true;
+    //        }
+    //    }
+
+    //    if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
+    //    {
+    //        if (IsFixedLenght(words, 2)) return true; // the cat jumps
+    //        if (The(words[2]) || A(words[2])) // The | a
+    //        {
+    //            if (IsAnAdjective(words[3]))
+    //            {
+    //                if (IsACommon(words[4])) return true;
+    //            }
+    //            if (IsACommon(words[3])) return true;
+    //        }
+    //        if (IsAPreposition(words[2]))
+    //        {
+    //            if (The(words[3]))
+    //            {
+    //                if (IsACommon(words[4])) return true;
+    //            }
+    //        }
+    //    }
+    //    if (IsAPreposition(words[1])) // (there is/are) a book on the table
+    //    {
+    //        if (The(words[2]))
+    //        {
+    //            if (IsACommon(words[3]) || IsAPlural(words[3]))
+    //                return true;
+    //        }
+    //        if (IsAPlural(words[2])) return true;
+    //    }
+    //    if (Isnt(words[1]))
+    //    {
+    //        if (IsAnAdjective(words[2])) return true; // a car isn't big
+    //        if (IsAnIngVerbs(words[2])) return true; // a car isn't running
+    //        if (IsPastParticiple(words[2])) return true;
+    //        if (IsAnIngVerbs(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //        }
+    //        if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //    }
+    //    if (IsASingular(words[0])) // There isn't a car running here -> a car running
+    //    {
+    //        if (IsAnIngVerbs(words[1])) return true;
+    //    }
+    //    if (!IsFixedLenght(words, 1))
+    //    {
+    //        if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
+    //        {
+    //            words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
+    //        }
+    //        // she the child
+    //        if (The(words[1]) || IsAnObjectPronouns(words[1]))
+    //        {
+    //            if (IsACommon(words[2]) || IsAPlural(words[2])) return true;
+    //        }
+    //        if (Is(words[1]))
+    //        {
+    //            if (IsAnIngVerbs(words[2])) // John is playing
+    //            {
+    //                if (words.Length == 3) return true;
+    //                if ((IsAPreposition(words[3]) && The(words[4])) || The(words[3])) // in the gardent
+    //                {
+    //                    if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+    //                }
+    //                if (A(words[3])) // a
+    //                {
+    //                    if (IsACommon(words[4])) return true; // letter
+    //                }
+    //            }
+    //            if (Not(words[2]))
+    //            {
+    //                if (IsAPreposition(words[3]) || The(words[3]) || words[3].Equals("a")) // in the gardent
+    //                {
+    //                    if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+    //                    if (IsAnAdjective(words[4]))
+    //                    {
+    //                        if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
+    //                    }
+    //                }
+    //                if (IsAnIngVerbs(words[3])) // John is playing
+    //                {
+    //                    if (words.Length == 4) return true;
+    //                    if ((IsAPreposition(words[4]) && The(words[5])) || The(words[4])) // in the gardent
+    //                    {
+    //                        if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
+    //                    }
+    //                    if (A(words[4])) // a
+    //                    {
+    //                        if (IsACommon(words[5])) return true; // letter
+    //                    }
+    //                }
+    //                if (IsAnAdjective(words[3])) return true;
+    //                if (IsPastParticiple(words[3])) return true;
+    //            }
+    //            if (IsAPreposition(words[2]))
+    //            {
+    //                if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+    //            }
+    //            else
+    //            {
+    //                if (A(words[2]) || The(words[2])) // Paris is a (big) city
+    //                {
+    //                    if (IsAnAdjective(words[3]))
+    //                    {
+    //                        if (IsACommon(words[4])) return true;
+    //                    }
+    //                    if (IsACommon(words[3])) return true;
+    //                }
+    //                if (IsAnAdjective(words[2])) return true;
+    //            }
+    //        }
+    //        if (Has(words[1]))
+    //        {
+    //            if (The(words[2]) || A(words[2]))
+    //            {
+    //                if (IsASingular(words[3])) return true;
+    //            }
+    //            else
+    //            {
+    //                if (IsAnAdjective(words[2]))
+    //                {
+    //                    if (IsAPlural(words[3])) return true; // John loves big books
+    //                }
+    //                if (IsAPlural(words[2])) return true;// john loves books
+    //            }
+    //        }
+    //        if (Doesnt(words[1])) // "doesn't"
+    //        {
+    //            if (IsAFrequencyAdverb(words[2]))
+    //            {
+    //                words = words.Where((value, index) => index != 1).ToArray(); // he doesn't always
+    //            }
+    //            if (Have(words[2]) || IsABaseVerb(words[2]))
+    //            {
+    //                if (The(words[3]) || A(words[3])) // The | a
+    //                {
+    //                    if (IsASingular(words[4])) return true;
+    //                }
+    //                if (IsAPreposition(words[3]))
+    //                {
+    //                    if (IsACommon(words[4])) return true;
+    //                    if (IsAnObjectPronouns(words[4])) return true;
+    //                }
+    //                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+    //            }
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+    //            }
+    //        }
+    //        if (Does(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+    //        {
+    //            if (IsAnObjectPronouns(words[4])) // she does not visit her
+    //            {
+    //                if (IsACommon(words[5]) || IsAPlural(words[5])) return true; // grandparents....
+    //            }
+    //            if (The(words[4]) || A(words[4])) // The | a
+    //            {
+    //                if (IsASingular(words[5])) return true;
+    //            }
+    //            if (IsASingular(words[4]) || IsAPlural(words[4])) return true;
+    //        }
+    //        if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
+    //        {
+    //            if (!IsFixedLenght(words, 2))
+    //            {
+    //                if (The(words[2]) || A(words[2])) // The | a
+    //                {
+    //                    if (IsAnAdjective(words[3]))
+    //                    {
+    //                        if (IsACommon(words[4])) return true;
+    //                    }
+    //                    if (IsACommon(words[3])) return true;
+    //                }
+    //                if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
+    //                if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
+    //                {
+    //                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+    //                }
+    //                if (IsAnAdjective(words[2]))
+    //                {
+    //                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+    //                }
+    //                if (IsAnIngVerbs(words[2])) return true;
+    //                if (IsAPreposition(words[2]))
+    //                {
+    //                    if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
+    //                    if (The(words[3]) || A(words[3])) // she believes in the/a miracle
+    //                    {
+    //                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+    //                    }
+    //                }
+    //            }
+    //            return true; // she walks
+    //        }
+    //        if (IsA3rdPersonVerb(words[1])) // A/The guy drives a/the (big) car
+    //        {
+    //            if (!IsFixedLenght(words, 2))
+    //            {
+    //                if (The(words[2]) || A(words[2])) // The | a
+    //                {
+    //                    if (IsAnAdjective(words[3]))
+    //                    {
+    //                        if (IsACommon(words[4])) return true;
+    //                    }
+    //                    if (IsACommon(words[3])) return true;
+    //                }
+    //                if (IsACommon(words[2]) || IsAPluralSubject(words[2])) return true;
+    //                if (IsACommon(words[2]) || IsAPluralSubject(words[2]) || IsAnObjectPronouns(words[2]))
+    //                {
+    //                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+    //                }
+    //                if (IsAnAdjective(words[2]))
+    //                {
+    //                    if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+    //                }
+    //                if (IsAnIngVerbs(words[2])) return true;
+    //                if (IsAPreposition(words[2]))
+    //                {
+    //                    if (IsACommon(words[3]) || IsAPlural(words[3]) || IsAnObjectPronouns(words[3])) return true;
+    //                    if (The(words[3]) || A(words[3])) // she believes in the/a miracle
+    //                    {
+    //                        if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        if (IsAnAdjective(words[0]))
+    //        {
+    //            if (IsASingular(words[1]) || IsAPlural(words[1]))
+    //            {
+    //                if (IsAnIngVerbs(words[2])) return true;
+    //            }
+    //        }
+    //    }
+    //    if (!IsFixedLenght(words, 2))
+    //    {
+    //        if (IsAFrequencyAdverb(words[2]))
+    //        {
+    //            words = words.Where((value, index) => index != 2).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza - He doesn’t ALWAYS agree with me.
+    //        }
+    //    }
+    //    if (I(words[0]))
+    //    {
+    //        if (Dont(words[1]))
+    //        {
+    //            if (Have(words[2]) || IsABaseVerb(words[2])) // i do play
+    //            {
+    //                if (The(words[3]))
+    //                {
+    //                    if (IsACommon(words[4])) return true; // i do play the guitar
+    //                }
+    //                if (IsAPlural(words[3])) return true; // i do like apples
+    //                if (IsACommon(words[3])) return true;// i do not have time now
+    //            }
+    //            if (IsAFrequencyAdverb(words[3])) // messo qui altrimenti frasi come John like books schiattano
+    //            {
+    //                words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
+    //            }
+    //            if (IsABaseVerb(words[3])) // i do not play
+    //            {
+    //                if (The(words[4]))
+    //                {
+    //                    if (IsACommon(words[4])) return true;// i do not play the guitar
+    //                }
+    //                if (IsAPlural(words[4])) return true;// i do not like apples
+    //                return true;
+    //            }
+    //        }
+    //        if (Do(words[1]))
+    //        {
+    //            if (IsABaseVerb(words[2])) // i do play
+    //            {
+    //                if (The(words[3]))
+    //                {
+    //                    if (IsACommon(words[4])) return true; // i do play the guitar
+    //                }
+    //                if (IsAPlural(words[3])) return true;// i do like apples
+    //                return true;
+    //            }
+    //            if (Not(words[2])) // i do not
+    //            {
+    //                if (IsAFrequencyAdverb(words[3])) // messo qui altrimenti frasi come John like books schiattano
+    //                {
+    //                    words = words.Where((value, index) => index != 2).ToArray(); // I do not ALWAYS ....
+    //                }
+    //                if (IsABaseVerb(words[3]) || Have(words[3])) // i do not play
+    //                {
+    //                    if (The(words[4]))
+    //                    {
+    //                        if (IsACommon(words[4])) return true;// i do not play the guitar
+    //                    }
+    //                    if (IsAPlural(words[4])) return true; // i do not like apples
+    //                    if (IsACommon(words[4])) return true; // i do not play the guitar
+    //                    return true;
+    //                }
+    //            }
+    //        }
+    //        // i drink coffee in the morning
+    //        if (IsABaseVerb(words[1])) // i play
+    //        {
+    //            if (The(words[2]))
+    //            {
+    //                if (IsACommon(words[3])) return true;// i play the guitar
+    //            }
+    //            if (IsAPlural(words[2])) return true; // i like apples
+    //            return true;
+    //        }
+    //        if (Not(words[2])) // i do not
+    //        {
+    //            if (IsABaseVerb(words[3])) // i do not play
+    //            {
+    //                if (The(words[4]))
+    //                {
+    //                    if (IsACommon(words[5])) return true; // i do not play the guitar
+    //                }
+    //                if (IsAPlural(words[4])) return true; // i do not like apples
+    //            }
+    //        }
+    //    }
+    //    if (IsPastParticiple(words[1]))
+    //    {
+    //        if (The(words[2]) || A(words[2]) || An(words[2]) || IsAPossessivePronouns(words[2]))
+    //        {
+    //            if (IsACommon(words[3])) return true;
+    //            if (IsAPlural(words[3])) return true;
+    //        }
+    //    }
+
+    //    if (Wasnt(words[1]))
+    //    {
+    //        if (IsAnIngVerbs(words[2]))
+    //        {
+    //            if (IsAnAdjective(words[3])) return true;
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //        }
+    //        if (IsPastParticiple(words[2])) return true;
+    //        if (The(words[2]) || A(words[2]))
+    //        {
+    //            if (IsASingular(words[3])) return true;
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //    }
+    //    if (Was(words[1]))
+    //    {
+    //        if (IsPastParticiple(words[2])) return true;
+    //        if (The(words[2]) || A(words[2]))
+    //        {
+    //            if (IsASingular(words[3])) return true;
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (Not(words[2]))
+    //        {
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsAnAdjective(words[4])) return true;
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (IsAnAdjective(words[3])) return true;
+    //            if (IsPastParticiple(words[2])) return true;
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+
+    //        }
+    //        if (IsPastParticiple(words[3])) return true;
+    //        if (IsAnIngVerbs(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //        }
+    //        if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //    }
+
+    //    if (Had(words[1]))
+    //    {
+    //        if (Not(words[2]))
+    //        {
+    //            if (Been(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                    if (!IsFixedLenght(words, 6))
+    //                    {
+    //                        if (IsAPrasphalVerb(words[5], words[6])) return true;
+    //                    }
+    //                }
+    //            }
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //        }
+    //        if (Been(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    if (Hadnt(words[1]))
+    //    {
+    //        if (Been(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //    }
+
+    //    if (Will(words[1]))
+    //    {
+    //        if (IsABaseVerb(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (IsABaseVerb(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                    if (!IsFixedLenght(words, 6))
+    //                    {
+    //                        if (IsAPrasphalVerb(words[5], words[6])) return true;
+    //                    }
+    //                }
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (Have(words[3]))
+    //            {
+    //                if (Been(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                    if (IsAnIngVerbs(words[5]))
+    //                    {
+    //                        if (IsPastParticiple(words[6])) return true;
+    //                        if (IsAPrasphalVerb(words[6], words[7])) return true;
+    //                    }
+    //                    if (!IsFixedLenght(words, 6))
+    //                    {
+    //                        if (IsAPrasphalVerb(words[5], words[6])) return true;
+    //                    }
+    //                }
+    //            }
+    //            if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //        }
+    //        if (Have(words[2]))
+    //        {
+    //            if (Been(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                    if (IsAPrasphalVerb(words[5], words[6])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    if (Wont(words[1]))
+    //    {
+    //        if (IsABaseVerb(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //        if (Have(words[2]))
+    //        {
+    //            if (Been(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                    if (IsAPrasphalVerb(words[5], words[6])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    // going to
+    //    if (!IsFixedLenght(words, 2))
+    //    {
+    //        if (Am(words[1]) || Is(words[1]) || Are(words[1]))
+    //        {
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (GoingTo(words[2], words[3]))
+    //                {
+    //                    if (IsABaseVerb(words[4])) return true;
+    //                    if (!IsFixedLenght(words, 4))
+    //                    {
+    //                        if (IsABaseVerb(words[4]))
+    //                        {
+    //                            if (IsACommon(words[5])) return true;
+    //                            if (IsAPlural(words[5])) return true;
+    //                        }
+    //                        if (!IsFixedLenght(words, 5))
+    //                        {
+    //                            if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                            if (IsAPrasphalVerb(words[4], words[5]))
+    //                            {
+    //                                if (IsAPlural(words[6])) return true;
+    //                                if (IsACommon(words[6])) return true;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //    // used to
+    //    if (!IsFixedLenght(words, 2))
+    //    {
+    //        if (UsedTo(words[1], words[2]))
+    //        {
+    //            if (IsABaseVerb(words[3])) return true;
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (IsABaseVerb(words[3]))
+    //                {
+    //                    if (IsACommon(words[4])) return true;
+    //                    if (IsAPlural(words[4])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //    if (Didnt(words[1]))
+    //    {
+    //        // use to
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (UseTo(words[2], words[3]))
+    //            {
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsABaseVerb(words[4]))
+    //                    {
+    //                        if (!IsFixedLenght(words, 5))
+    //                        {
+    //                            if (IsACommon(words[5])) return true;
+    //                            if (IsAPlural(words[5])) return true;
+    //                        }
+    //                        return true;
+    //                    }
+    //                }
+    //                if (IsABaseVerb(words[4])) return true;
+    //            }
+    //        }
+    //        // I didn't always carefully play soccer yesterday.
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (IsABaseVerb(words[2]))
+    //            {
+    //                if (IsAPlural(words[3])) return true;
+    //                if (IsACommon(words[3])) return true;
+    //            }
+    //            if (IsABaseVerb(words[3])) return true;
+    //            if (IsAPrasphalVerb(words[2], words[3]))
+    //            {
+    //                if (IsAPlural(words[4])) return true;
+    //                if (The(words[4]) || A(words[4]) || An(words[4]))
+    //                {
+    //                    if (IsACommon(words[5])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    if (Did(words[1]))
+    //    {
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (IsABaseVerb(words[2]))
+    //            {
+    //                if (IsAPlural(words[3])) return true;
+    //                if (IsACommon(words[3])) return true;
+    //            }
+    //            if (IsABaseVerb(words[3])) return true;
+    //            if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //            if (IsAPrasphalVerb(words[2], words[3]))
+    //            {
+    //                if (IsAPlural(words[4])) return true;
+    //                if (The(words[4]) || A(words[4]) || An(words[4]))
+    //                {
+    //                    if (IsACommon(words[5])) return true;
+    //                }
+    //            }
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsABaseVerb(words[3]))
+    //                {
+    //                    if (IsAPlural(words[4])) return true;
+    //                    if (IsACommon(words[4])) return true;
+    //                }
+    //                if (IsABaseVerb(words[4])) return true;
+    //                if (IsAPrasphalVerb(words[3], words[4]))
+    //                {
+    //                    if (IsAPlural(words[5])) return true;
+    //                    if (The(words[5]) || A(words[5]) || An(words[5]))
+    //                    {
+    //                        if (IsACommon(words[6])) return true;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //    if (IsAModal(words[1]))
+    //    {
+    //        if (IsABaseVerb(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //        }
+    //        if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //    }
+    //    return false;
+    //}
+    //public static bool PluralSubjectPresentSimple_Affirmation(string[] words)
+    //{
+    //    words = Normalization(words);
+    //    for (int i = 0; i < words.Length; i++)
+    //    {
+    //        words = RemoveAdverbs(words, i); // rimuovere eventuali altri avverbi riconosciuti dopo il complemento
+    //    }
+    //    if (IsFixedLenght(words, 1))
+    //    {
+    //        if (words[0].Equals("error-1")) return false;
+    //        return true; // There is a dog here -> becomes dog
+    //    }
+    //    if (possessivePronouns.Contains(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+
+    //    if (The(words[0]) || A(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+    //    if (IsAnAdjective(words[0])) { words = words.Where((value, index) => index != 0).ToArray(); }
+    //    if (words[0].Equals("no") || words[0].Equals("not")) { words = words.Where((value, index) => index != 0).ToArray(); } //There are no cars running here -> a car running
+    //    if (IsAPlural(words[0]))
+    //    {
+    //        if (IsAPreposition(words[1])) return true; // There is no beef in here -> no beef in
+    //        if (IsAnIngVerbs(words[1])) return true; // There is no beef in here -> no beef in
+    //    }
+    //    if (A(words[0]) && IsAPlural(words[1]))
+    //    {
+    //        if (IsAPreposition(words[2])) return true; // There is no beef in here -> no beef in
+    //        if (IsAnIngVerbs(words[2])) return true; // There is no beef in here -> no beef in
+    //    }
+
+    //    bool subjectRecognized = IsAPluralSubject(words[0]) || IsAPlural(words[1]);
+    //    if (Have(words[1]))
+    //    {
+    //        if (IsPastParticiple(words[2]))
+    //        {
+    //            if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
+    //            {
+    //                if (IsACommon(words[4])) return true;
+    //            }
+    //            if (The(words[3]) || IsAPossessivePronouns(words[3]))
+    //            {
+    //                if (IsAPlural(words[4])) return true;
+    //            }
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (IsAnAdjective(words[3])) return true;
+    //            if (IsPastParticiple(words[2]))
+    //            {
+    //                if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
+    //                {
+    //                    if (IsACommon(words[4])) return true;
+    //                }
+    //                if (The(words[3]) || IsAPossessivePronouns(words[3]))
+    //                {
+    //                    if (IsAPlural(words[4])) return true;
+    //                }
+    //            }
+    //            if (Been(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                    if (IsAPrasphalVerb(words[5], words[6])) return true;
+    //                }
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (IsPastParticiple(words[3]))
+    //            {
+    //                if (IsAPlural(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4])) return true;
+    //                if (The(words[4]) || A(words[4]) || IsAPossessivePronouns(words[4]))
+    //                {
+    //                    if (IsACommon(words[5])) return true;
+    //                    if (IsAPlural(words[5])) return true;
+    //                }
+    //            }
+    //        }
+    //        if (The(words[2]) || A(words[2]))
+    //        {
+    //            if (IsASingular(words[3])) return true;
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (Been(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //        if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //    }
+    //    if (Do(words[1]) && Not(words[2]) && (Have(words[3]) || IsABaseVerb(words[3])))
+    //    {
+    //        if (IsFixedLenght(words, 4)) return true; // The Dogs do not run
+    //        if (IsAnAdjective(words[4])) return true; // The Dogs do not run fast
+    //        if (The(words[3]) || A(words[3]) || IsAPossessivePronouns(words[3]))
+    //        {
+    //            if (IsASingular(words[4])) return true;
+    //            if (IsAPlural(words[4])) return true;
+    //            if (IsAnAdjective(words[4]))
+    //            {
+    //                if (IsASingular(words[4])) return true;
+    //                if (IsAPlural(words[4])) return true;
+    //            }
+    //        }
+    //    }
+    //    if (Are(words[1]) || Arent(words[1]))
+    //    {
+    //        if (IsAnIngVerbs(words[2])) // the dogs are playing
+    //        {
+    //            if (IsFixedLenght(words, 3)) return true;
+    //            if (IsAPreposition(words[3]) && The(words[4])) // in/on the gardent
+    //            {
+    //                if (IsACommon(words[5]) || IsAPlural(words[5])) return true;
+    //            }
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (IsAnIngVerbs(words[3])) // the dogs are not playing
+    //            {
+    //                if (words.Length == 4) return true;
+    //                if (IsAPreposition(words[4]) && The(words[5])) // in/on the gardent
+    //                {
+    //                    if (IsACommon(words[6]) || IsAPlural(words[6])) return true;
+    //                }
+    //            }
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAnAdjective(words[4]))
+    //                {
+    //                    return true;
+    //                }
+    //            }
+    //            if (IsPastParticiple(words[3])) return true;
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (IsPastParticiple(words[2])) return true;
+    //    }
+    //    if (IsABaseVerb(words[1])) // A/The dogs run fast
+    //    {
+    //        if (IsFixedLenght(words, 2)) return true; // the dogs run
+    //        if (IsFixedLenght(words, 3)) return true; // Cat jump
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (IsAPreposition(words[2]))
+    //        {
+    //            if (The(words[3]) || IsAnObjectPronouns(words[3]))
+    //            {
+    //                if (IsACommon(words[4]) || IsAPlural(words[4])) return true;
+    //            }
+    //        }
+    //        if (The(words[2]) || A(words[2]) || IsAPossessivePronouns(words[2])) // The | a
+    //        {
+    //            if (IsACommon(words[3]) || IsAPlural(words[3])) return true;
+    //            if (IsAnAdjective(words[3])) { IsACommon(words[4]); }
+    //            else { IsACommon(words[3]); }
+    //        }
+    //        if (IsAnObjectPronouns(words[2]))
+    //        {
+    //            IsAPlural(words[3]);
+    //            IsACommon(words[3]);
+    //        }
+    //        if (IsAnAdjective(words[2]))
+    //        {
+    //            IsAPlural(words[3]);
+    //            IsACommon(words[3]);
+    //        }
+    //        IsAPlural(words[2]);
+    //        IsACommon(words[2]);
+    //    }
+    //    if (Arent(words[1]))
+    //    {
+    //        if (IsAnAdjective(words[2])) return true; // the cars aren't big.
+    //    }
+    //    if (IsAPlural(words[0])) // There aren't cars running here -> a car running
+    //    {
+    //        if (IsAnIngVerbs(words[1])) return true;
+    //    }
+    //    if (IsAnAdjective(words[0]))
+    //    {
+    //        if (IsAPlural(words[1])) // There aren't cars running here -> a car running
+    //        {
+    //            if (IsAnIngVerbs(words[2])) return true;
+    //            if (Are(words[2]) && IsAnIngVerbs(words[3])) return true;
+    //            if (Are(words[2]) && Not(words[3]) && IsAnIngVerbs(words[4])) return true;
+    //            if (Arent(words[2]) && IsAnIngVerbs(words[3])) return true;
+    //        }
+    //    }
+    //    if (IsFixedLenght(words, 1) && subjectRecognized) return true;
+    //    if (IsAFrequencyAdverb(words[1])) // there are dogs here -> dogs -> outOfBoundEx
+    //    {
+    //        words = words.Where((value, index) => index != 1).ToArray(); // Mangia seconda posizione per togliere l'avv di frequenza
+    //    }
+    //    if (The(words[1]) || IsAnObjectPronouns(words[1]))
+    //    {
+    //        if (IsACommon(words[2]) || IsAPlural(words[2])) return true; // this has to remain like this cause of phrasal verbs cause in some case we must RETURN the control
+    //    }
+    //    if (Dont(words[1]) && (Have(words[2]) || IsABaseVerb(words[2])))
+    //    {
+    //        if (IsFixedLenght(words, 4)) return true;
+    //        if (IsAnAdjective(words[4])) return true;  // The Dogs do not run fast
+    //        if (The(words[3]) || A(words[3]) || IsAPossessivePronouns(words[3]))
+    //        {
+    //            if (IsASingular(words[4])) return true;
+    //            if (IsAPlural(words[4])) return true;
+    //            if (IsAnAdjective(words[4]))
+    //            {
+    //                if (IsASingular(words[4])) return true;
+    //                if (IsAPlural(words[4])) return true;
+    //            }
+    //        }
+    //    }
+    //    if (Are(words[1]) || Arent(words[1]))
+    //    {
+    //        if (IsFixedLenght(words, 2)) return true; // they are
+    //        if (IsAnIngVerbs(words[2])) return true;
+    //        if (Not(words[2]))
+    //        {
+    //            if (IsFixedLenght(words, 3)) return true;// they are not
+    //            if (IsAnIngVerbs(words[3])) return true;// they are not standig (here)
+    //            if (IsAnAdjective(words[3])) return true;
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //        if (IsAPreposition(words[2]))
+    //        {
+    //            if (IsACommon(words[3])) return true;
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //    }
+    //    if (IsAPreposition(words[1])) // (there is) a book on the table
+    //    {
+    //        if (!IsFixedLenght(words, 2))
+    //        {
+    //            if (The(words[2]))
+    //            {
+    //                IsAPlural(words[3]);
+    //                IsACommon(words[3]);
+    //            }
+    //        }
+    //    }
+    //    if (Do(words[1]))
+    //    {
+    //        if (IsABaseVerb(words[2])) // they do play
+    //        {
+    //            if (The(words[3]))
+    //            {
+    //                IsACommon(words[4]); // they do play the guitar
+    //            }
+    //            IsAPlural(words[3]); // i do like apples
+    //        }
+    //        if (Not(words[2])) // they do not
+    //        {
+    //            if (IsAFrequencyAdverb(words[3]))
+    //            {
+    //                words = words.Where((value, index) => index != 3).ToArray(); // I do not ALWAYS ....
+    //            }
+    //            if (IsABaseVerb(words[3])) // i do not play
+    //            {
+    //                if (The(words[4])) { IsACommon(words[4]); }// i do not play the guitar
+    //                IsAPlural(words[3]); // they do not like apples
+    //                return true;
+    //            }
+    //        }
+    //    }
+    //    if (IsAnIngVerbs(words[1])) return true; // cars running
+    //    if (Havent(words[1]))
+    //    {
+    //        if (IsPastParticiple(words[2]))
+    //        {
+    //            if (The(words[3]) || A(words[3]) || An(words[3]) || IsAPossessivePronouns(words[3]))
+    //            {
+    //                if (IsACommon(words[4])) return true;
+    //            }
+    //            if (The(words[3]) || IsAPossessivePronouns(words[3]))
+    //            {
+    //                if (IsAPlural(words[4])) return true;
+    //            }
+    //        }
+    //        if (The(words[2]) || A(words[2]))
+    //        {
+    //            if (IsASingular(words[3])) return true;
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (Been(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //        if (IsAnIngVerbs(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //        }
+    //        if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //    }
+    //    if (Werent(words[1]))
+    //    {
+    //        if (IsPastParticiple(words[2])) return true;
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (The(words[2]) || A(words[2]))
+    //        {
+    //            if (IsASingular(words[3])) return true;
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (IsAnIngVerbs(words[2]))
+    //        {
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //            if (IsPastParticiple(words[3])) return true;
+    //        }
+    //        if (IsAPrasphalVerb(words[2], words[3])) return true;
+
+    //    }
+    //    if (Were(words[1]))
+    //    {
+    //        if (IsPastParticiple(words[2])) return true;
+    //        if (The(words[2]) || A(words[2]))
+    //        {
+    //            if (IsASingular(words[3])) return true;
+    //        }
+    //        if (IsAnAdjective(words[2])) return true;
+    //        if (IsAnIngVerbs(words[2]))
+    //        {
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //            if (IsPastParticiple(words[3])) return true;
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (IsAnAdjective(words[3])) return true;
+    //            if (Been(words[3]))
+    //            {
+    //                if (IsAMannerAdverbs(words[4]))
+    //                {
+    //                    words = words.Where((value, index) => index != 4).ToArray();
+    //                }
+    //                if (IsPastParticiple(words[4])) return true;
+    //            }
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+
+    //                if (IsPastParticiple(words[4])) return true;
+    //            }
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //        if (IsAPrasphalVerb(words[2], words[3])) return true;
+    //    }
+    //    if (Had(words[1]))
+    //    {
+    //        if (Not(words[2]))
+    //        {
+    //            if (Been(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //            }
+    //        }
+    //        if (Been(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+    //    }
+    //    if (Hadnt(words[1]))
+    //    {
+    //        if (Been(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //            }
+    //        }
+
+    //    }
+    //    if (Will(words[1]))
+    //    {
+    //        if (IsABaseVerb(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //            }
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (IsABaseVerb(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                }
+    //            }
+    //            if (Have(words[3]))
+    //            {
+    //                if (IsABaseVerb(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                    if (IsAnIngVerbs(words[5]))
+    //                    {
+    //                        if (IsPastParticiple(words[6])) return true;
+    //                    }
+    //                }
+    //                if (Been(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[4])) return true;
+    //                    if (!IsFixedLenght(words, 5))
+    //                    {
+    //                        if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        if (Have(words[2]))
+    //        {
+    //            if (IsABaseVerb(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                }
+    //            }
+    //            if (Been(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    if (Wont(words[1]))
+    //    {
+    //        if (IsABaseVerb(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //            if (IsAnIngVerbs(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //            }
+    //        }
+    //        if (Have(words[2]))
+    //        {
+    //            if (IsABaseVerb(words[3]))
+    //            {
+    //                if (IsPastParticiple(words[4])) return true;
+    //                if (IsAnIngVerbs(words[4]))
+    //                {
+    //                    if (IsPastParticiple(words[5])) return true;
+    //                }
+    //            }
+    //            if (Been(words[3]))
+    //            {
+    //                if (!IsFixedLenght(words, 5))
+    //                {
+    //                    if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    // going to - RemoveDuplication!!!!
+    //    if (!IsFixedLenght(words, 2))
+    //    {
+    //        if (Am(words[1]) || Is(words[1]) || Are(words[1]))
+    //        {
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (GoingTo(words[2], words[3]))
+    //                {
+    //                    if (IsABaseVerb(words[4])) return true;
+    //                    if (!IsFixedLenght(words, 4))
+    //                    {
+    //                        if (IsABaseVerb(words[4]))
+    //                        {
+    //                            if (IsACommon(words[5])) return true;
+    //                            if (IsAPlural(words[5])) return true;
+    //                        }
+    //                        if (!IsFixedLenght(words, 5))
+    //                        {
+    //                            if (IsAPrasphalVerb(words[4], words[5])) return true;
+    //                            if (IsAPrasphalVerb(words[4], words[5]))
+    //                            {
+    //                                if (IsAPlural(words[6])) return true;
+    //                                if (IsACommon(words[6])) return true;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //    // used to
+    //    if (!IsFixedLenght(words, 2))
+    //    {
+    //        if (UsedTo(words[1], words[2]))
+    //        {
+    //            if (IsABaseVerb(words[3])) return true;
+    //            if (!IsFixedLenght(words, 3))
+    //            {
+    //                if (IsABaseVerb(words[3]))
+    //                {
+    //                    if (IsACommon(words[4])) return true;
+    //                    if (IsAPlural(words[4])) return true;
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //    if (Didnt(words[1]))
+    //    {
+    //        // use to
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (UseTo(words[2], words[3]))
+    //            {
+    //                if (!IsFixedLenght(words, 4))
+    //                {
+    //                    if (IsABaseVerb(words[4]))
+    //                    {
+    //                        if (!IsFixedLenght(words, 5))
+    //                        {
+    //                            if (IsACommon(words[5])) return true;
+    //                            if (IsAPlural(words[5])) return true;
+    //                        }
+    //                        return true;
+    //                    }
+    //                }
+    //                if (IsABaseVerb(words[4])) return true;
+    //            }
+    //        }
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (IsABaseVerb(words[2]))
+    //            {
+    //                if (IsAPlural(words[3])) return true;
+    //                if (IsACommon(words[3])) return true;
+    //            }
+    //            if (IsABaseVerb(words[3])) return true;
+    //        }
+    //    }
+    //    if (Did(words[1]))
+    //    {
+    //        if (!IsFixedLenght(words, 3))
+    //        {
+    //            if (IsABaseVerb(words[2]))
+    //            {
+    //                if (IsAPlural(words[3])) return true;
+    //                if (IsACommon(words[3])) return true;
+    //            }
+    //            if (IsABaseVerb(words[3])) return true;
+    //        }
+    //        if (Not(words[2]))
+    //        {
+    //            if (!IsFixedLenght(words, 4))
+    //            {
+    //                if (IsABaseVerb(words[3]))
+    //                {
+    //                    if (IsAPlural(words[4])) return true;
+    //                    if (IsACommon(words[4])) return true;
+    //                }
+    //                if (IsABaseVerb(words[4])) return true;
+    //            }
+    //        }
+    //    }
+
+    //    if (IsAModal(words[1]))
+    //    {
+    //        if (IsABaseVerb(words[2]))
+    //        {
+    //            if (IsPastParticiple(words[3])) return true;
+    //        }
+    //        if (IsAPrasphalVerb(words[3], words[4])) return true;
+    //    }
+    //    return false;
+    //}
+
+    #endregion
 }
