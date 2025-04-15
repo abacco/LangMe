@@ -2399,7 +2399,6 @@ public class ButtonTests : MonoBehaviour
         }
         return false;
     }
-
     public static string[] RemoveAdverbs(string[] words, int position)
     {
         if (position >= words.Length) position = position - 1;//return words;
@@ -3279,6 +3278,10 @@ public class ButtonTests : MonoBehaviour
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "SingularSubject"},
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "SingularSubject"},
                                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject"},
+                                    }
+        },
+        { 5, new List<List<string>>
+                                    {
                                     }
         },
         { 0, new List<List<string>>
@@ -4470,11 +4473,106 @@ public class ButtonTests : MonoBehaviour
             "How are cats going to visit the grandparents regularly today?",
             "How are cats going to visit the grandparents nearby today?",
             "How are cats going to visit the grandparents today?",
+            // FINE DOMANDE ----------------------------------------------------------------
+
+            // AFFERMAZIONI 
+            "The big cat often visits their big grandparents nearby regularly today.",
+            "The big cat often visits their big grandparents regularly today.",
+            "The big cat often visits their big grandparents nearby today.",
+            "The big cat often visits their big grandparents today.",
+            "The big cat visits their big grandparents today.",
+            "The cat often visits their big grandparents nearby regularly today.",
+            "The cat often visits their big grandparents regularly today.",
+            "The cat often visits their big grandparents nearby today.",
+            "The cat often visits their big grandparents today.",
+            "The cat visits their big grandparents today.",
+            "A big cat often visits their big grandparents nearby regularly today.",
+            "A big cat often visits their big grandparents regularly today.",
+            "A big cat often visits their big grandparents nearby today.",
+            "A big cat often visits their big grandparents today.",
+            "A big cat visits their big grandparents today.",
+            "A cat often visits their big grandparents nearby regularly today.",
+            "A cat often visits their big grandparents regularly today.",
+            "A cat often visits their big grandparents nearby today.",
+            "A cat often visits their big grandparents today.",
+            "A cat visits their big grandparents today.",
+            "The big cats often visit their big grandparent nearby regularly today.",
+            "The big cats often visit their big grandparent regularly today.",
+            "The big cats often visit their big grandparent nearby today.",
+            "The big cats often visit their big grandparent today.",
+            "The big cats visit their big grandparent today.",
+            "The cats often visit their big grandparent nearby regularly today.",
+            "The cats often visit their big grandparent regularly today.",
+            "The cats often visit their big grandparent nearby today.",
+            "The cats often visit their big grandparent today.",
+            "The cats visit their big grandparent today.",
+            "Big cats often visit their big grandparent nearby regularly today.",
+            "Big cats often visit their big grandparent regularly today.",
+            "Big cats often visit their big grandparent nearby today.",
+            "Big cats often visit their big grandparent today.",
+            "Big cats visit their big grandparent today.",
+            "Cats often visit their big grandparent nearby regularly today.",
+            "Cats often visit their big grandparent regularly today.",
+            "Cats often visit their big grandparent nearby today.",
+            "Cats often visit their big grandparent today.",
+            "Cats visit their big grandparent today.",
+            "Cats often visit a big grandparent nearby regularly today.",
+            "Cats often visit a big grandparent regularly today.",
+            "Cats often visit a big grandparent nearby today.",
+            "Cats often visit a big grandparent today.",
+            "Cats visit a big grandparent today.",
+            "The big cats often visit their big grandparents nearby regularly today.",
+            "The big cats often visit their big grandparents regularly today.",
+            "The big cats often visit their big grandparents nearby today.",
+            "The big cats often visit their big grandparents today.",
+            "The big cats visit their big grandparents today.",
+            "The cats often visit their grandparents nearby regularly today.",
+            "The cats often visit their grandparents regularly today.",
+            "The cats often visit their grandparents nearby today.",
+            "The cats often visit their grandparents today.",
+            "The cats visit their grandparents today.",
+            "Big cats often visit the big grandparents nearby regularly today.",
+            "Big cats often visit the big grandparents regularly today.",
+            "Big cats often visit the big grandparents nearby today.",
+            "Big cats often visit the big grandparents today.",
+            "Big cats visit the big grandparents today.",
+            "Cats often visit the grandparents nearby regularly today.",
+            "Cats often visit the grandparents regularly today.",
+            "Cats often visit the grandparents nearby today.",
+            "Cats often visit the grandparents today.",
+            "Cats visit the grandparents today.",
+            "The cat visits their big grandparents nearby regularly today.",
+            "The cat visits their big grandparents regularly today.",
+            "The cat visits their big grandparents nearby today.",
+            "The cat visits their big grandparents today.",
+            "The cat visits their grandparents today.",
+            "The cat often visits the big grandparents nearby regularly today.",
+            "The cat often visits the big grandparents regularly today.",
+            "The cat often visits the big grandparents nearby today.",
+            "The cat often visits the big grandparents today.",
+            "The cat visits the big grandparents today.",
+            "A cat often visits a big grandparent nearby regularly today.",
+            "A cat often visits a big grandparent regularly today.",
+            "A cat often visits a big grandparent nearby today.",
+            "A cat often visits a big grandparent today.",
+            "A cat visits a big grandparent today.",
+            "A big cat often visits their grandparents nearby regularly today.",
+            "A big cat often visits their grandparents regularly today.",
+            "A big cat often visits their grandparents nearby today.",
+            "A big cat often visits their grandparents today.",
+            "A big cat visits their grandparents today.",
+            "A cat often visits their grandparents nearby regularly today.",
+            "A cat often visits their grandparents regularly today.",
+            "A cat often visits their grandparents nearby today.",
+            "A cat often visits their grandparents today.",
+            "A cat visits their grandparents today.",
+
+
             "",
 
-            "How are cats going at visit the grandparents today?",
+            //"How are cats going at visit the grandparents today?",
 
-            "How have cats been fucking their big grandparents nearby regularly today?",
+            //"How have cats been fucking their big grandparents nearby regularly today?",
         };
 
         // ok everything fine with sentences (aff/neg)
