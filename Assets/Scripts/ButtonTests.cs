@@ -103,181 +103,6 @@ public class ButtonTests : MonoBehaviour
         return IsAValidQuestion2(words);
     }
 
-
-    public static string[] RemoveAdverbs(string[] words, int position)
-    {
-        if (position >= words.Length) position = position - 1;//return words;
-        if (words.Length == 3)
-        {
-            if (IsAMannerAdverbs(words[position]))
-            {
-                words = words.Where((value, index) => index != position).ToArray();
-            }
-            if (IsAPlaceAdverbs(words[position]))
-            {
-                words = words.Where((value, index) => index != position).ToArray();
-            }
-            if (!IsFixedLenght(words, 2))
-            {
-                if (IsAFrequencyAdverb(words[position]))
-                {
-                    words = words.Where((value, index) => index != position).ToArray();
-                }
-            }
-            return words;
-        }
-        if (!IsFixedLenght(words, position))
-        {
-            if (IsAMannerAdverbs(words[position]))
-            {
-                words = words.Where((value, index) => index != position).ToArray();
-            }
-        }
-        if (!IsFixedLenght(words, position))
-        {
-            if (IsAFrequencyAdverb(words[position]))
-            {
-                words = words.Where((value, index) => index != position).ToArray();
-            }
-        }
-        if (!IsFixedLenght(words, position))
-        {
-            if (IsATimeAdverb(words[position]))
-            {
-                words = words.Where((value, index) => index != position).ToArray();
-            }
-        }
-        if (IsATimeAdverb(words[words.Length - 1]))
-        {
-            words = words.Where((value, index) => index != words.Length - 1).ToArray();
-        }
-        if (IsAPlaceAdverbs(words[words.Length - 1]))
-        {
-            words = words.Where((value, index) => index != words.Length - 1).ToArray();
-        }
-        position++;
-        if(position >= words.Length)
-        {
-            position = words.Length-1;
-        }
-        if(IsFixedLenght(words, position))
-        {
-            if (IsAFrequencyAdverb(words[position - 1]) && IsAMannerAdverbs(words[position]))
-            {
-                words = words.Where((value, index) => index != position - 1 && index != position).ToArray();
-            }
-            if (IsAMannerAdverbs(words[position]))
-            {
-                words = words.Where((value, index) => index != position).ToArray();
-            }
-            if (IsATimeAdverb(words[position]))
-            {
-                words = words.Where((value, index) => index != position).ToArray();
-            }
-        } 
-        return words;
-    }
-    public static string[] Normalization(string[] words) // se clicchi sulla parola, la aggiungi all'array e poi vedi se la frase è corretta
-    {
-        words = CheckEachSingleWord(words);
-        List<string> list = new List<string>(words);
-        for (int i = 0; i < words.Length; i++)
-        {
-            words[i] = words[i].ToLower();
-            // check su ogni parola, se ogni parola della frase non appartiene a nessuna lista, return "error-1" 
-            
-            if (words[words.Length - 1].Contains("?"))
-            {
-                words[words.Length - 1].TrimEnd('?');
-            }
-            if (i < words.Length - 1 && words[i].Equals("so") && (words[i + 1].Equals("much") || words[i + 1].Equals("many")))
-            {
-                list.Remove(words[i]);
-                list.Remove(words[i + 1]);
-                words = list.ToArray();
-            }
-            if (i < words.Length - 1 && words[i].Equals("so") && (IsAMannerAdverbs(words[i + 1])))
-            {
-                list.Remove(words[i]);
-                list.Remove(words[i + 1]);
-                words = list.ToArray();
-            }
-            if (i < words.Length - 1 && words[i].Equals("so") && (IsAnAdjective(words[i + 1])))
-            {
-                list.Remove(words[i]);
-                list.Remove(words[i + 1]);
-                words = list.ToArray();
-            }
-        }
-        if (There(words[0]) && Are(words[1]) && Not(words[2]))
-        {
-            words = words.Skip(3).ToArray();
-        }
-        if (There(words[0]) && Arent(words[1]) && Not(words[2]))
-        {
-            words = words.Skip(2).ToArray();
-        }
-        if (There(words[0]) && Is(words[1]) && Not(words[2])) { words = words.Skip(3).ToArray(); }
-        if (There(words[0]) && Isnt(words[1]) && Not(words[2])) { words = words.Skip(3).ToArray(); }
-        if (There(words[0]) && Are(words[1]))
-        {
-            words = words.Skip(2).ToArray();
-        }
-        if (There(words[0]) && Arent(words[1]))
-        {
-            words = words.Skip(2).ToArray();
-        }
-        if (There(words[0]) && Is(words[1])) 
-        { 
-            words = words.Skip(2).ToArray(); 
-        }
-        if (There(words[0]) && Isnt(words[1]))
-        { 
-            words = words.Skip(2).ToArray(); 
-        }
-        if (!IsFixedLenght(words, 1)) {
-            if (Every(words[words.Length - 2])) // avverbio di tempo alla fine - gestire avverbi come every sunday
-            {
-                words = words.Where((value, index) => index != words.Length - 2 && index != words.Length - 1).ToArray(); // Mangia ultima posizione per togliere l'avv di tempo
-            }
-        }
-        if (words[0].Equals("error-1"))
-        {
-            return words;
-        }
-
-        // Phrasal Verbs
-        string tmpPhrasalVerb = "";
-        string detectedPhrasalVerb = "";
-        if (words.Length > 3)
-        {
-            tmpPhrasalVerb = words[1] + " " + words[2]; // she wakes up
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[1] + " " + words[2];
-                words = words.Where((value, index) => index != 1 && index != 2).ToArray();
-            }
-        }
-        if (words.Length > 4)
-        {
-            tmpPhrasalVerb = words[2] + " " + words[3];
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[2] + " " + words[3]; // she doesn't wake up
-                words = words.Where((value, index) => index != 1 && index != 2 && index != 3).ToArray();
-            }
-        }
-        if (words.Length > 5)
-        {
-            tmpPhrasalVerb = words[3] + " " + words[4];
-            if (phrasalVerbs.Contains(tmpPhrasalVerb))
-            {
-                detectedPhrasalVerb = words[3] + " " + words[4]; // she does not wakes up
-                words = words.Where((value, index) => index != 1 && index != 2 && index != 3 && index != 3 && index != 4).ToArray();
-            }
-        }
-        return words;
-    }
     static string[] CheckEachSingleWord(string[] words)
     {
         bool allWordsInvalid = false; // Flag per verificare se tutte le parole sono "non valide"
@@ -332,6 +157,10 @@ new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralS
         },
         { 20, new List<List<string>>
                     {
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //20
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //20
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //20
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //20
             new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //20
 new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //20
 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //20
@@ -357,6 +186,19 @@ new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "Singula
         },
         { 19, new List<List<string>>
                     {
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //19
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //19
             new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //19
 new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //19
 new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //19
@@ -408,6 +250,27 @@ new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralS
         },
         { 18, new List<List<string>>
                     {
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //18
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //18
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //18
             new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //18
 new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //18
 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //18
@@ -479,6 +342,35 @@ new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "N
         },
         { 17, new List<List<string>>
                     {
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Place", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //17
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //17
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //17
             new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //17
 new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "PluralSubject", "Preposition", "Time"}, //17
 new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //17
@@ -563,6 +455,33 @@ new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", 
         },
         { 16, new List<List<string>>
                     {
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "Adjective", "SingularSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Place", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //16
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Place", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Frequency", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Place", "Time"}, //16
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //16
             new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //16
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Article", "SingularSubject", "Preposition", "Time"}, //16
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Article", "PluralSubject", "Preposition", "Time"}, //16
@@ -661,6 +580,25 @@ new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "N
         },
         { 15, new List<List<string>>
                     {
+            new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "SingularSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Been", "Ed-Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //15
+            new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Frequency", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "Adjective", "PluralSubject", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Place", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //15
             new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Possessive", "SingularSubject", "Preposition", "Time"}, //15
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Article", "SingularSubject", "Preposition", "Time"}, //15
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Article", "PluralSubject", "Preposition", "Time"}, //15
@@ -789,6 +727,17 @@ new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", 
         },
         { 14, new List<List<string>>
                     {
+            new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "PluralSubject", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "Adjective", "SingularSubject", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Place", "Time"}, //14
+
                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Article", "PluralSubject", "Time"}, //14
                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Possessive", "SingularSubject", "Time"}, //14
                     new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Article", "SingularSubject", "Time"}, //14
@@ -991,6 +940,9 @@ new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", 
         },
         { 13, new List<List<string>> 
                                     {
+            new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //13
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "SingularSubject", "Time"}, //13
+new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Time"}, //13
                 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //13
                 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Article", "PluralSubject", "Time"}, //13
                 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Article", "SingularSubject", "Time"}, //13
@@ -3623,6 +3575,11 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
                 foundAdverbs.Add("Not");
                 foundAdverbsPosition.Add(i);
             }
+            if(phrasalVerbs.Contains(words[i] + " " + words[i + 1]) && i + 1 < words.Length)
+            {
+                foundAdverbs.Add("Phrasal");
+                foundAdverbsPosition.Add(i);
+            }
             if ("going".Equals(word))
             {
                 if (i + 1 < words.Length && "to".Equals(words[i + 1]))
@@ -3749,6 +3706,8 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
         //InitializeValidRulesDict();
         List<string> questions = new List<string>
         {
+            // phrasals - aff 
+
             // going to - domande negative
             // present simple
             "How is the big cat not going to visit their big grandparents nearby regularly today?",
@@ -4268,6 +4227,266 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
     "How had cats not been going to be visiting the grandparents regularly before yesterday?",
     "How had cats not been going to be visiting the grandparents nearby before yesterday?",
     "How had cats not been going to be visiting the grandparents before yesterday?",
+
+    // future simple
+    "How is the big cat not going to visit their big grandparents nearby regularly tomorrow?",
+    "How is the big cat not going to visit their big grandparents regularly tomorrow?",
+    "How is the big cat not going to visit their big grandparents nearby tomorrow?",
+    "How is the big cat not going to visit their big grandparents tomorrow?",
+    "How is the big cat not going to visit their grandparents tomorrow?",
+    "How is the cat not going to visit their big grandparents nearby regularly tomorrow?",
+    "How is the cat not going to visit their big grandparents regularly tomorrow?",
+    "How is the cat not going to visit their big grandparents nearby tomorrow?",
+    "How is the cat not going to visit their big grandparents tomorrow?",
+    "How is the cat not going to visit their grandparents tomorrow?",
+    "How is a big cat not going to visit their big grandparents nearby regularly tomorrow?",
+    "How is a big cat not going to visit their big grandparents regularly tomorrow?",
+    "How is a big cat not going to visit their big grandparents nearby tomorrow?",
+    "How is a big cat not going to visit their big grandparents tomorrow?",
+    "How is a big cat not going to visit their grandparents tomorrow?",
+    "How is a cat not going to visit their big grandparents nearby regularly tomorrow?",
+    "How is a cat not going to visit their big grandparents regularly tomorrow?",
+    "How is a cat not going to visit their big grandparents nearby tomorrow?",
+    "How is a cat not going to visit their big grandparents tomorrow?",
+    "How is a cat not going to visit their grandparents tomorrow?",
+    "How are the big cats not going to visit their big grandparent nearby regularly tomorrow?",
+    "How are the big cats not going to visit their big grandparent regularly tomorrow?",
+    "How are the big cats not going to visit their big grandparent nearby tomorrow?",
+    "How are the big cats not going to visit their big grandparent tomorrow?",
+    "How are the big cats not going to visit their grandparent tomorrow?",
+    "How are the cats not going to visit their big grandparent nearby regularly tomorrow?",
+    "How are the cats not going to visit their big grandparent regularly tomorrow?",
+    "How are the cats not going to visit their big grandparent nearby tomorrow?",
+    "How are the cats not going to visit their big grandparent tomorrow?",
+    "How are the cats not going to visit their grandparent tomorrow?",
+    "How are big cats not going to visit their big grandparent nearby regularly tomorrow?",
+    "How are big cats not going to visit their big grandparent regularly tomorrow?",
+    "How are big cats not going to visit their big grandparent nearby tomorrow?",
+    "How are big cats not going to visit their big grandparent tomorrow?",
+    "How are big cats not going to visit their grandparent tomorrow?",
+    "How are cats not going to visit their big grandparent nearby regularly tomorrow?",
+    "How are cats not going to visit their big grandparent regularly tomorrow?",
+    "How are cats not going to visit their big grandparent nearby tomorrow?",
+    "How are cats not going to visit their big grandparent tomorrow?",
+    "How are cats not going to visit their grandparent tomorrow?",
+    "How are cats not going to visit a big grandparent nearby regularly tomorrow?",
+    "How are cats not going to visit a big grandparent regularly tomorrow?",
+    "How are cats not going to visit a big grandparent nearby tomorrow?",
+    "How are cats not going to visit a big grandparent tomorrow?",
+    "How are cats not going to visit a grandparent tomorrow?",
+    "How are the big cats not going to visit their big grandparents nearby regularly tomorrow?",
+    "How are the big cats not going to visit their big grandparents regularly tomorrow?",
+    "How are the big cats not going to visit their big grandparents nearby tomorrow?",
+    "How are the big cats not going to visit their big grandparents tomorrow?",
+    "How are the big cats not going to visit their grandparents tomorrow?",
+    "How are the cats not going to visit their grandparents nearby regularly tomorrow?",
+    "How are the cats not going to visit their grandparents regularly tomorrow?",
+    "How are the cats not going to visit their grandparents nearby tomorrow?",
+    "How are the cats not going to visit their grandparents tomorrow?",
+    "How are big cats not going to visit the big grandparents nearby regularly tomorrow?",
+    "How are big cats not going to visit the big grandparents regularly tomorrow?",
+    "How are big cats not going to visit the big grandparents nearby tomorrow?",
+    "How are big cats not going to visit the big grandparents tomorrow?",
+    "How are big cats not going to visit the grandparents tomorrow?",
+    "How are cats not going to visit the grandparents nearby regularly tomorrow?",
+    "How are cats not going to visit the grandparents regularly tomorrow?",
+    "How are cats not going to visit the grandparents nearby tomorrow?",
+    "How are cats not going to visit the grandparents tomorrow?",
+
+    // future continuous
+    "How is the big cat not going to be visiting their big grandparents nearby regularly tomorrow?",
+    "How is the big cat not going to be visiting their big grandparents regularly tomorrow?",
+    "How is the big cat not going to be visiting their big grandparents nearby tomorrow?",
+    "How is the big cat not going to be visiting their big grandparents tomorrow?",
+    "How is the big cat not going to be visiting their grandparents tomorrow?",
+    "How is the cat not going to be visiting their big grandparents nearby regularly tomorrow?",
+    "How is the cat not going to be visiting their big grandparents regularly tomorrow?",
+    "How is the cat not going to be visiting their big grandparents nearby tomorrow?",
+    "How is the cat not going to be visiting their big grandparents tomorrow?",
+    "How is the cat not going to be visiting their grandparents tomorrow?",
+    "How is a big cat not going to be visiting their big grandparents nearby regularly tomorrow?",
+    "How is a big cat not going to be visiting their big grandparents regularly tomorrow?",
+    "How is a big cat not going to be visiting their big grandparents nearby tomorrow?",
+    "How is a big cat not going to be visiting their big grandparents tomorrow?",
+    "How is a big cat not going to be visiting their grandparents tomorrow?",
+    "How is a cat not going to be visiting their big grandparents nearby regularly tomorrow?",
+    "How is a cat not going to be visiting their big grandparents regularly tomorrow?",
+    "How is a cat not going to be visiting their big grandparents nearby tomorrow?",
+    "How is a cat not going to be visiting their big grandparents tomorrow?",
+    "How is a cat not going to be visiting their grandparents tomorrow?",
+    "How are the big cats not going to be visiting their big grandparent nearby regularly tomorrow?",
+    "How are the big cats not going to be visiting their big grandparent regularly tomorrow?",
+    "How are the big cats not going to be visiting their big grandparent nearby tomorrow?",
+    "How are the big cats not going to be visiting their big grandparent tomorrow?",
+    "How are the big cats not going to be visiting their grandparent tomorrow?",
+    "How are the cats not going to be visiting their big grandparent nearby regularly tomorrow?",
+    "How are the cats not going to be visiting their big grandparent regularly tomorrow?",
+    "How are the cats not going to be visiting their big grandparent nearby tomorrow?",
+    "How are the cats not going to be visiting their big grandparent tomorrow?",
+    "How are the cats not going to be visiting their grandparent tomorrow?",
+    "How are big cats not going to be visiting their big grandparent nearby regularly tomorrow?",
+    "How are big cats not going to be visiting their big grandparent regularly tomorrow?",
+    "How are big cats not going to be visiting their big grandparent nearby tomorrow?",
+    "How are big cats not going to be visiting their big grandparent tomorrow?",
+    "How are big cats not going to be visiting their grandparent tomorrow?",
+    "How are cats not going to be visiting their big grandparent nearby regularly tomorrow?",
+    "How are cats not going to be visiting their big grandparent regularly tomorrow?",
+    "How are cats not going to be visiting their big grandparent nearby tomorrow?",
+    "How are cats not going to be visiting their big grandparent tomorrow?",
+    "How are cats not going to be visiting their grandparent tomorrow?",
+    "How are cats not going to be visiting a big grandparent nearby regularly tomorrow?",
+    "How are cats not going to be visiting a big grandparent regularly tomorrow?",
+    "How are cats not going to be visiting a big grandparent nearby tomorrow?",
+    "How are cats not going to be visiting a big grandparent tomorrow?",
+    "How are cats not going to be visiting a grandparent tomorrow?",
+    "How are the big cats not going to be visiting their big grandparents nearby regularly tomorrow?",
+    "How are the big cats not going to be visiting their big grandparents regularly tomorrow?",
+    "How are the big cats not going to be visiting their big grandparents nearby tomorrow?",
+    "How are the big cats not going to be visiting their big grandparents tomorrow?",
+    "How are the big cats not going to be visiting their grandparents tomorrow?",
+    "How are the cats not going to be visiting their grandparents nearby regularly tomorrow?",
+    "How are the cats not going to be visiting their grandparents regularly tomorrow?",
+    "How are the cats not going to be visiting their grandparents nearby tomorrow?",
+    "How are the cats not going to be visiting their grandparents tomorrow?",
+    "How are big cats not going to be visiting the big grandparents nearby regularly tomorrow?",
+    "How are big cats not going to be visiting the big grandparents regularly tomorrow?",
+    "How are big cats not going to be visiting the big grandparents nearby tomorrow?",
+    "How are big cats not going to be visiting the big grandparents tomorrow?",
+    "How are big cats not going to be visiting the grandparents tomorrow?",
+    "How are cats not going to be visiting the grandparents nearby regularly tomorrow?",
+    "How are cats not going to be visiting the grandparents regularly tomorrow?",
+    "How are cats not going to be visiting the grandparents nearby tomorrow?",
+    "How are cats not going to be visiting the grandparents tomorrow?",
+
+    // future perfect
+    "How is the big cat not going to have visited their big grandparents nearby regularly tomorrow?",
+    "How is the big cat not going to have visited their big grandparents regularly tomorrow?",
+    "How is the big cat not going to have visited their big grandparents nearby tomorrow?",
+    "How is the big cat not going to have visited their big grandparents tomorrow?",
+    "How is the big cat not going to have visited their grandparents tomorrow?",
+    "How is the cat not going to have visited their big grandparents nearby regularly tomorrow?",
+    "How is the cat not going to have visited their big grandparents regularly tomorrow?",
+    "How is the cat not going to have visited their big grandparents nearby tomorrow?",
+    "How is the cat not going to have visited their big grandparents tomorrow?",
+    "How is the cat not going to have visited their grandparents tomorrow?",
+    "How is a big cat not going to have visited their big grandparents nearby regularly tomorrow?",
+    "How is a big cat not going to have visited their big grandparents regularly tomorrow?",
+    "How is a big cat not going to have visited their big grandparents nearby tomorrow?",
+    "How is a big cat not going to have visited their big grandparents tomorrow?",
+    "How is a big cat not going to have visited their grandparents tomorrow?",
+    "How is a cat not going to have visited their big grandparents nearby regularly tomorrow?",
+    "How is a cat not going to have visited their big grandparents regularly tomorrow?",
+    "How is a cat not going to have visited their big grandparents nearby tomorrow?",
+    "How is a cat not going to have visited their big grandparents tomorrow?",
+    "How is a cat not going to have visited their grandparents tomorrow?",
+    "How are the big cats not going to have visited their big grandparent nearby regularly tomorrow?",
+    "How are the big cats not going to have visited their big grandparent regularly tomorrow?",
+    "How are the big cats not going to have visited their big grandparent nearby tomorrow?",
+    "How are the big cats not going to have visited their big grandparent tomorrow?",
+    "How are the big cats not going to have visited their grandparent tomorrow?",
+    "How are the cats not going to have visited their big grandparent nearby regularly tomorrow?",
+    "How are the cats not going to have visited their big grandparent regularly tomorrow?",
+    "How are the cats not going to have visited their big grandparent nearby tomorrow?",
+    "How are the cats not going to have visited their big grandparent tomorrow?",
+    "How are the cats not going to have visited their grandparent tomorrow?",
+    "How are big cats not going to have visited their big grandparent nearby regularly tomorrow?",
+    "How are big cats not going to have visited their big grandparent regularly tomorrow?",
+    "How are big cats not going to have visited their big grandparent nearby tomorrow?",
+    "How are big cats not going to have visited their big grandparent tomorrow?",
+    "How are big cats not going to have visited their grandparent tomorrow?",
+    "How are cats not going to have visited their big grandparent nearby regularly tomorrow?",
+    "How are cats not going to have visited their big grandparent regularly tomorrow?",
+    "How are cats not going to have visited their big grandparent nearby tomorrow?",
+    "How are cats not going to have visited their big grandparent tomorrow?",
+    "How are cats not going to have visited their grandparent tomorrow?",
+    "How are cats not going to have visited a big grandparent nearby regularly tomorrow?",
+    "How are cats not going to have visited a big grandparent regularly tomorrow?",
+    "How are cats not going to have visited a big grandparent nearby tomorrow?",
+    "How are cats not going to have visited a big grandparent tomorrow?",
+    "How are cats not going to have visited a grandparent tomorrow?",
+    "How are the big cats not going to have visited their big grandparents nearby regularly tomorrow?",
+    "How are the big cats not going to have visited their big grandparents regularly tomorrow?",
+    "How are the big cats not going to have visited their big grandparents nearby tomorrow?",
+    "How are the big cats not going to have visited their big grandparents tomorrow?",
+    "How are the big cats not going to have visited their grandparents tomorrow?",
+    "How are the cats not going to have visited their grandparents nearby regularly tomorrow?",
+    "How are the cats not going to have visited their grandparents regularly tomorrow?",
+    "How are the cats not going to have visited their grandparents nearby tomorrow?",
+    "How are the cats not going to have visited their grandparents tomorrow?",
+    "How are big cats not going to have visited the big grandparents nearby regularly tomorrow?",
+    "How are big cats not going to have visited the big grandparents regularly tomorrow?",
+    "How are big cats not going to have visited the big grandparents nearby tomorrow?",
+    "How are big cats not going to have visited the big grandparents tomorrow?",
+    "How are big cats not going to have visited the grandparents tomorrow?",
+    "How are cats not going to have visited the grandparents nearby regularly tomorrow?",
+    "How are cats not going to have visited the grandparents regularly tomorrow?",
+    "How are cats not going to have visited the grandparents nearby tomorrow?",
+    "How are cats not going to have visited the grandparents tomorrow?",
+
+    // future perfect continous
+    "How is the big cat not going to have been visiting their big grandparents nearby regularly tomorrow?",
+    "How is the big cat not going to have been visiting their big grandparents regularly tomorrow?",
+    "How is the big cat not going to have been visiting their big grandparents nearby tomorrow?",
+    "How is the big cat not going to have been visiting their big grandparents tomorrow?",
+    "How is the big cat not going to have been visiting their grandparents tomorrow?",
+    "How is the cat not going to have been visiting their big grandparents nearby regularly tomorrow?",
+    "How is the cat not going to have been visiting their big grandparents regularly tomorrow?",
+    "How is the cat not going to have been visiting their big grandparents nearby tomorrow?",
+    "How is the cat not going to have been visiting their big grandparents tomorrow?",
+    "How is the cat not going to have been visiting their grandparents tomorrow?",
+    "How is a big cat not going to have been visiting their big grandparents nearby regularly tomorrow?",
+    "How is a big cat not going to have been visiting their big grandparents regularly tomorrow?",
+    "How is a big cat not going to have been visiting their big grandparents nearby tomorrow?",
+    "How is a big cat not going to have been visiting their big grandparents tomorrow?",
+    "How is a big cat not going to have been visiting their grandparents tomorrow?",
+    "How is a cat not going to have been visiting their big grandparents nearby regularly tomorrow?",
+    "How is a cat not going to have been visiting their big grandparents regularly tomorrow?",
+    "How is a cat not going to have been visiting their big grandparents nearby tomorrow?",
+    "How is a cat not going to have been visiting their big grandparents tomorrow?",
+    "How is a cat not going to have been visiting their grandparents tomorrow?",
+    "How are the big cats not going to have been visiting their big grandparent nearby regularly tomorrow?",
+    "How are the big cats not going to have been visiting their big grandparent regularly tomorrow?",
+    "How are the big cats not going to have been visiting their big grandparent nearby tomorrow?",
+    "How are the big cats not going to have been visiting their big grandparent tomorrow?",
+    "How are the big cats not going to have been visiting their grandparent tomorrow?",
+    "How are the cats not going to have been visiting their big grandparent nearby regularly tomorrow?",
+    "How are the cats not going to have been visiting their big grandparent regularly tomorrow?",
+    "How are the cats not going to have been visiting their big grandparent nearby tomorrow?",
+    "How are the cats not going to have been visiting their big grandparent tomorrow?",
+    "How are the cats not going to have been visiting their grandparent tomorrow?",
+    "How are big cats not going to have been visiting their big grandparent nearby regularly tomorrow?",
+    "How are big cats not going to have been visiting their big grandparent regularly tomorrow?",
+    "How are big cats not going to have been visiting their big grandparent nearby tomorrow?",
+    "How are big cats not going to have been visiting their big grandparent tomorrow?",
+    "How are big cats not going to have been visiting their grandparent tomorrow?",
+    "How are cats not going to have been visiting their big grandparent nearby regularly tomorrow?",
+    "How are cats not going to have been visiting their big grandparent regularly tomorrow?",
+    "How are cats not going to have been visiting their big grandparent nearby tomorrow?",
+    "How are cats not going to have been visiting their big grandparent tomorrow?",
+    "How are cats not going to have been visiting their grandparent tomorrow?",
+    "How are cats not going to have been visiting a big grandparent nearby regularly tomorrow?",
+    "How are cats not going to have been visiting a big grandparent regularly tomorrow?",
+    "How are cats not going to have been visiting a big grandparent nearby tomorrow?",
+    "How are cats not going to have been visiting a big grandparent tomorrow?",
+    "How are cats not going to have been visiting a grandparent tomorrow?",
+    "How are the big cats not going to have been visiting their big grandparents nearby regularly tomorrow?",
+    "How are the big cats not going to have been visiting their big grandparents regularly tomorrow?",
+    "How are the big cats not going to have been visiting their big grandparents nearby tomorrow?",
+    "How are the big cats not going to have been visiting their big grandparents tomorrow?",
+    "How are the big cats not going to have been visiting their grandparents tomorrow?",
+    "How are the cats not going to have been visiting their grandparents nearby regularly tomorrow?",
+    "How are the cats not going to have been visiting their grandparents regularly tomorrow?",
+    "How are the cats not going to have been visiting their grandparents nearby tomorrow?",
+    "How are the cats not going to have been visiting their grandparents tomorrow?",
+    "How are big cats not going to have been visiting the big grandparents nearby regularly tomorrow?",
+    "How are big cats not going to have been visiting the big grandparents regularly tomorrow?",
+    "How are big cats not going to have been visiting the big grandparents nearby tomorrow?",
+    "How are big cats not going to have been visiting the big grandparents tomorrow?",
+    "How are big cats not going to have been visiting the grandparents tomorrow?",
+    "How are cats not going to have been visiting the grandparents nearby regularly tomorrow?",
+    "How are cats not going to have been visiting the grandparents regularly tomorrow?",
+    "How are cats not going to have been visiting the grandparents nearby tomorrow?",
+    "How are cats not going to have been visiting the grandparents tomorrow?",
 
 
 
