@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -255,19 +256,31 @@ public class EnglishLogic : MonoBehaviour
         switch (phraseTypeDropdown.options[phraseTypeDropdown.value].text)
         {
             case "Questions":
-                //bool isAValidQuestion = MatchesBasedOnType(userInput);
-                //userInputField.text = "";
-                //if (isAValidQuestion) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
+                if (userInput.Contains("?"))
+                {
+                    bool isAValidQuestion = ButtonTests.IsValidSentence(userInput);
+                    if (isAValidQuestion) { feedbackText.text = "Correct!"; how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString();}
+                } 
+                else
+                {
+                    feedbackText.text = "Not A Valid Question";
+                }
+                userInputField.text = "";
                 break;
             case "Affirmations":
-                //bool isAValidAffirmation = MatchesBasedOnType(userInput);
-                //userInputField.text = "";
-                //if (isAValidAffirmation) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
+                bool isAValidAffirmation = ButtonTests.IsValidSentence(userInput);
+                if (isAValidAffirmation) { feedbackText.text = "Correct!"; how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
+                else { feedbackText.text = "Not A Valid Affirmation"; }
+                userInputField.text = "";
                 break;
             case "Negations":
-                //bool isAValidNegations = MatchesBasedOnType(userInput);
-                //userInputField.text = "";
-                //if (isAValidNegations) { how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
+                if (userInput.Contains("'t") || userInput.Contains("not"))
+                {
+                    bool isAValidNegations = ButtonTests.IsValidSentence(userInput);
+                    if (isAValidNegations) { feedbackText.text = "Correct!"; how_many_correct_english_phrases++; how_many_correct_english_phrases_text.text = how_many_correct_english_phrases.ToString(); }
+                }
+                else { feedbackText.text = "Not A Valid Negations"; }
+                userInputField.text = ""; 
                 break;
             default: Debug.Log("error on HandlePhraseType"); break;
         }
