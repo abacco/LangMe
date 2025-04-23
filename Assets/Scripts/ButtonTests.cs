@@ -393,6 +393,12 @@ new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not",
         },
         { 17, new List<List<string>>
                     {
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //17
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //17
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //17
+            new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //17
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //17
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //17
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //17
 new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //17
 new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //17
@@ -594,6 +600,29 @@ new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not",
         },
         { 16, new List<List<string>>
                     {
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //16
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //16
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //16
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //16
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //16
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //16
 new List<string> {"Article", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //16
 new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //16
@@ -878,6 +907,51 @@ new List<string> {"Article", "Adjective", "PluralSubject", "Auxiliary", "Not", "
         },
         { 15, new List<List<string>>
                     {
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //15
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //15
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //15
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //15
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //15
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //15
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //15
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //15
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //15
             new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //15
 new List<string> {"Article", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //15
 new List<string> {"Article", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //15
@@ -1239,6 +1313,75 @@ new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Not",
         },
         { 14, new List<List<string>>
                     {
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //14
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //14
+            new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //14
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //14
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //14
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
+
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //14
 new List<string> {"Article", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //14
 new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //14
@@ -1673,6 +1816,78 @@ new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going",
         },
         { 13, new List<List<string>> 
                                     {
+            new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //13
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //13
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Preposition", "Time"}, //13
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //13
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //13
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //13
             new List<string> {"Article", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //13
 new List<string> {"Article", "PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //13
 new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //13
@@ -2164,6 +2379,62 @@ new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Phras
         },
         { 12, new List<List<string>> 
                                     {
+            new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //12
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //12
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Preposition", "Time"}, //12
+            new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Frequency", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Preposition", "Time"}, //12
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //12
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //12
             new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //12
 new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //12
             new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //12
@@ -2712,6 +2983,37 @@ new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Frequen
         },
         { 11, new List<List<string>>
                                     {
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Time"}, //11
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Preposition", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Preposition", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Preposition", "Time"}, //11
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Preposition", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Preposition", "Time"}, //11
+            new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //11
+            new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Place", "Time"}, //11
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Frequency", "Time"}, //11
             new List<string> {"Article", "PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
 new List<string> {"Article", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
 new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
@@ -3281,6 +3583,18 @@ new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Frequen
         },
         { 10, new List<List<string>>
                                     {
+            new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //10
+            new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //10
+            new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Preposition", "Time"}, //10
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Preposition", "Time"}, //10
+            new List<string> {"Auxiliary", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //10
+new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //10
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Time"}, //10
+new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //10
             new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //10
 new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //10
             new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //10
@@ -3782,6 +4096,8 @@ new List<string> {"PluralSubject", "Auxiliary", "Not", "Frequency", "Phrasal", "
         },
         { 9, new List<List<string>>
                                     {
+            new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //9
+new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //9
             new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //9
 new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //9
             new List<string> {"Article", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //9
@@ -4841,6 +5157,572 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
         {
             //"How does the big cat not often fuck up their big grandparents nearby regularly today?",
             //"How does the big cat not often wake into their big grandparents nearby regularly today?" // NON RICONOSCIUTA - TOP
+
+            // phrasals - domande - affermazioni
+            // present simple
+            "Does the big cat often wake up their big grandparents nearby regularly today?",
+    "Does the big cat often wake up their big grandparents regularly today?",
+    "Does the big cat often wake up their big grandparents nearby today?",
+    "Does the big cat often wake up their big grandparents today?",
+    "Does the big cat often wake up their grandparents today?",
+    "Does the cat often wake up their big grandparents nearby regularly today?",
+    "Does the cat often wake up their big grandparents regularly today?",
+    "Does the cat often wake up their big grandparents nearby today?",
+    "Does the cat often wake up their big grandparents today?",
+    "Does the cat often wake up their grandparents today?",
+    "Does a big cat often wake up their big grandparents nearby regularly today?",
+    "Does a big cat often wake up their big grandparents regularly today?",
+    "Does a big cat often wake up their big grandparents nearby today?",
+    "Does a big cat often wake up their big grandparents today?",
+    "Does a big cat often wake up their grandparents today?",
+    "Does a cat often wake up their big grandparents nearby regularly today?",
+    "Does a cat often wake up their big grandparents regularly today?",
+    "Does a cat often wake up their big grandparents nearby today?",
+    "Does a cat often wake up their big grandparents today?",
+    "Does a cat often wake up their grandparents today?",
+    "Do the big cats often wake up their big grandparent nearby regularly today?",
+    "Do the big cats often wake up their big grandparent regularly today?",
+    "Do the big cats often wake up their big grandparent nearby today?",
+    "Do the big cats often wake up their big grandparent today?",
+    "Do the big cats often wake up their grandparent today?",
+    "Do the cats often wake up their big grandparent nearby regularly today?",
+    "Do the cats often wake up their big grandparent regularly today?",
+    "Do the cats often wake up their big grandparent nearby today?",
+    "Do the cats often wake up their big grandparent today?",
+    "Do the cats often wake up their grandparent today?",
+    "Do big cats often wake up their big grandparent nearby regularly today?",
+    "Do big cats often wake up their big grandparent regularly today?",
+    "Do big cats often wake up their big grandparent nearby today?",
+    "Do big cats often wake up their big grandparent today?",
+    "Do big cats often wake up their grandparent today?",
+    "Do cats often wake up their big grandparent nearby regularly today?",
+    "Do cats often wake up their big grandparent regularly today?",
+    "Do cats often wake up their big grandparent nearby today?",
+    "Do cats often wake up their big grandparent today?",
+    "Do cats often wake up their grandparent today?",
+    "Do cats often wake up a big grandparent nearby regularly today?",
+    "Do cats often wake up a big grandparent regularly today?",
+    "Do cats often wake up a big grandparent nearby today?",
+    "Do cats often wake up a big grandparent today?",
+    "Do cats often wake up a grandparent today?",
+
+    // pres. cont
+    "Is the big cat often waking up their big grandparents nearby regularly today?",
+    "Is the big cat often waking up their big grandparents regularly today?",
+    "Is the big cat often waking up their big grandparents nearby today?",
+    "Is the big cat often waking up their big grandparents today?",
+    "Is the big cat often waking up their grandparents today?",
+    "Is the cat often waking up their big grandparents nearby regularly today?",
+    "Is the cat often waking up their big grandparents regularly today?",
+    "Is the cat often waking up their big grandparents nearby today?",
+    "Is the cat often waking up their big grandparents today?",
+    "Is the cat often waking up their grandparents today?",
+    "Is a big cat often waking up their big grandparents nearby regularly today?",
+    "Is a big cat often waking up their big grandparents regularly today?",
+    "Is a big cat often waking up their big grandparents nearby today?",
+    "Is a big cat often waking up their big grandparents today?",
+    "Is a big cat often waking up their grandparents today?",
+    "Is a cat often waking up their big grandparents nearby regularly today?",
+    "Is a cat often waking up their big grandparents regularly today?",
+    "Is a cat often waking up their big grandparents nearby today?",
+    "Is a cat often waking up their big grandparents today?",
+    "Is a cat often waking up their grandparents today?",
+    "Are the big cats often waking up their big grandparent nearby regularly today?",
+    "Are the big cats often waking up their big grandparent regularly today?",
+    "Are the big cats often waking up their big grandparent nearby today?",
+    "Are the big cats often waking up their big grandparent today?",
+    "Are the big cats often waking up their grandparent today?",
+    "Are the cats often waking up their big grandparent nearby regularly today?",
+    "Are the cats often waking up their big grandparent regularly today?",
+    "Are the cats often waking up their big grandparent nearby today?",
+    "Are the cats often waking up their big grandparent today?",
+    "Are the cats often waking up their grandparent today?",
+    "Are big cats often waking up their big grandparent nearby regularly today?",
+    "Are big cats often waking up their big grandparent regularly today?",
+    "Are big cats often waking up their big grandparent nearby today?",
+    "Are big cats often waking up their big grandparent today?",
+    "Are big cats often waking up their grandparent today?",
+    "Are cats often waking up their big grandparent nearby regularly today?",
+    "Are cats often waking up their big grandparent regularly today?",
+    "Are cats often waking up their big grandparent nearby today?",
+    "Are cats often waking up their big grandparent today?",
+    "Are cats often waking up their grandparent today?",
+    "Are cats often waking up a big grandparent nearby regularly today?",
+    "Are cats often waking up a big grandparent regularly today?",
+    "Are cats often waking up a big grandparent nearby today?",
+    "Are cats often waking up a big grandparent today?",
+    "Are cats often waking up a grandparent today?",
+
+    // pres. perf
+    "Has the big cat often woken up their big grandparents nearby regularly today?",
+    "Has the big cat often woken up their big grandparents regularly today?",
+    "Has the big cat often woken up their big grandparents nearby today?",
+    "Has the big cat often woken up their big grandparents today?",
+    "Has the big cat often woken up their grandparents today?",
+    "Has the cat often woken up their big grandparents nearby regularly today?",
+    "Has the cat often woken up their big grandparents regularly today?",
+    "Has the cat often woken up their big grandparents nearby today?",
+    "Has the cat often woken up their big grandparents today?",
+    "Has the cat often woken up their grandparents today?",
+    "Has a big cat often woken up their big grandparents nearby regularly today?",
+    "Has a big cat often woken up their big grandparents regularly today?",
+    "Has a big cat often woken up their big grandparents nearby today?",
+    "Has a big cat often woken up their big grandparents today?",
+    "Has a big cat often woken up their grandparents today?",
+    "Has a cat often woken up their big grandparents nearby regularly today?",
+    "Has a cat often woken up their big grandparents regularly today?",
+    "Has a cat often woken up their big grandparents nearby today?",
+    "Has a cat often woken up their big grandparents today?",
+    "Has a cat often woken up their grandparents today?",
+    "Have the big cats often woken up their big grandparent nearby regularly today?",
+    "Have the big cats often woken up their big grandparent regularly today?",
+    "Have the big cats often woken up their big grandparent nearby today?",
+    "Have the big cats often woken up their big grandparent today?",
+    "Have the big cats often woken up their grandparent today?",
+    "Have the cats often woken up their big grandparent nearby regularly today?",
+    "Have the cats often woken up their big grandparent regularly today?",
+    "Have the cats often woken up their big grandparent nearby today?",
+    "Have the cats often woken up their big grandparent today?",
+    "Have the cats often woken up their grandparent today?",
+    "Have big cats often woken up their big grandparent nearby regularly today?",
+    "Have big cats often woken up their big grandparent regularly today?",
+    "Have big cats often woken up their big grandparent nearby today?",
+    "Have big cats often woken up their big grandparent today?",
+    "Have big cats often woken up their grandparent today?",
+    "Have cats often woken up their big grandparent nearby regularly today?",
+    "Have cats often woken up their big grandparent regularly today?",
+    "Have cats often woken up their big grandparent nearby today?",
+    "Have cats often woken up their big grandparent today?",
+    "Have cats often woken up their grandparent today?",
+    "Have cats often woken up a big grandparent nearby regularly today?",
+    "Have cats often woken up a big grandparent regularly today?",
+    "Have cats often woken up a big grandparent nearby today?",
+    "Have cats often woken up a big grandparent today?",
+    "Have cats often woken up a grandparent today?",
+
+    // present perfect cont
+    "Has the big cat often been waking up their big grandparents nearby regularly today?",
+    "Has the big cat often been waking up their big grandparents regularly today?",
+    "Has the big cat often been waking up their big grandparents nearby today?",
+    "Has the big cat often been waking up their big grandparents today?",
+    "Has the big cat often been waking up their grandparents today?",
+    "Has the cat often been waking up their big grandparents nearby regularly today?",
+    "Has the cat often been waking up their big grandparents regularly today?",
+    "Has the cat often been waking up their big grandparents nearby today?",
+    "Has the cat often been waking up their big grandparents today?",
+    "Has the cat often been waking up their grandparents today?",
+    "Has a big cat often been waking up their big grandparents nearby regularly today?",
+    "Has a big cat often been waking up their big grandparents regularly today?",
+    "Has a big cat often been waking up their big grandparents nearby today?",
+    "Has a big cat often been waking up their big grandparents today?",
+    "Has a big cat often been waking up their grandparents today?",
+    "Has a cat often been waking up their big grandparents nearby regularly today?",
+    "Has a cat often been waking up their big grandparents regularly today?",
+    "Has a cat often been waking up their big grandparents nearby today?",
+    "Has a cat often been waking up their big grandparents today?",
+    "Has a cat often been waking up their grandparents today?",
+    "Have the big cats often been waking up their big grandparent nearby regularly today?",
+    "Have the big cats often been waking up their big grandparent regularly today?",
+    "Have the big cats often been waking up their big grandparent nearby today?",
+    "Have the big cats often been waking up their big grandparent today?",
+    "Have the big cats often been waking up their grandparent today?",
+    "Have the cats often been waking up their big grandparent nearby regularly today?",
+    "Have the cats often been waking up their big grandparent regularly today?",
+    "Have the cats often been waking up their big grandparent nearby today?",
+    "Have the cats often been waking up their big grandparent today?",
+    "Have the cats often been waking up their grandparent today?",
+    "Have big cats often been waking up their big grandparent nearby regularly today?",
+    "Have big cats often been waking up their big grandparent regularly today?",
+    "Have big cats often been waking up their big grandparent nearby today?",
+    "Have big cats often been waking up their big grandparent today?",
+    "Have big cats often been waking up their grandparent today?",
+    "Have cats often been waking up their big grandparent nearby regularly today?",
+    "Have cats often been waking up their big grandparent regularly today?",
+    "Have cats often been waking up their big grandparent nearby today?",
+    "Have cats often been waking up their big grandparent today?",
+    "Have cats often been waking up their grandparent today?",
+    "Have cats often been waking up a big grandparent nearby regularly today?",
+    "Have cats often been waking up a big grandparent regularly today?",
+    "Have cats often been waking up a big grandparent nearby today?",
+    "Have cats often been waking up a big grandparent today?",
+    "Have cats often been waking up a grandparent today?",
+
+    // past simple
+    "Did the big cat often wake up their big grandparents nearby regularly yesterday?",
+    "Did the big cat often wake up their big grandparents regularly yesterday?",
+    "Did the big cat often wake up their big grandparents nearby yesterday?",
+    "Did the big cat often wake up their big grandparents yesterday?",
+    "Did the big cat often wake up their grandparents yesterday?",
+    "Did the cat often wake up their big grandparents nearby regularly yesterday?",
+    "Did the cat often wake up their big grandparents regularly yesterday?",
+    "Did the cat often wake up their big grandparents nearby yesterday?",
+    "Did the cat often wake up their big grandparents yesterday?",
+    "Did the cat often wake up their grandparents yesterday?",
+    "Did a big cat often wake up their big grandparents nearby regularly yesterday?",
+    "Did a big cat often wake up their big grandparents regularly yesterday?",
+    "Did a big cat often wake up their big grandparents nearby yesterday?",
+    "Did a big cat often wake up their big grandparents yesterday?",
+    "Did a big cat often wake up their grandparents yesterday?",
+    "Did a cat often wake up their big grandparents nearby regularly yesterday?",
+    "Did a cat often wake up their big grandparents regularly yesterday?",
+    "Did a cat often wake up their big grandparents nearby yesterday?",
+    "Did a cat often wake up their big grandparents yesterday?",
+    "Did a cat often wake up their grandparents yesterday?",
+    "Did the big cats often wake up their big grandparent nearby regularly yesterday?",
+    "Did the big cats often wake up their big grandparent regularly yesterday?",
+    "Did the big cats often wake up their big grandparent nearby yesterday?",
+    "Did the big cats often wake up their big grandparent yesterday?",
+    "Did the big cats often wake up their grandparent yesterday?",
+    "Did the cats often wake up their big grandparent nearby regularly yesterday?",
+    "Did the cats often wake up their big grandparent regularly yesterday?",
+    "Did the cats often wake up their big grandparent nearby yesterday?",
+    "Did the cats often wake up their big grandparent yesterday?",
+    "Did the cats often wake up their grandparent yesterday?",
+    "Did big cats often wake up their big grandparent nearby regularly yesterday?",
+    "Did big cats often wake up their big grandparent regularly yesterday?",
+    "Did big cats often wake up their big grandparent nearby yesterday?",
+    "Did big cats often wake up their big grandparent yesterday?",
+    "Did big cats often wake up their grandparent yesterday?",
+    "Did cats often wake up their big grandparent nearby regularly yesterday?",
+    "Did cats often wake up their big grandparent regularly yesterday?",
+    "Did cats often wake up their big grandparent nearby yesterday?",
+    "Did cats often wake up their big grandparent yesterday?",
+    "Did cats often wake up their grandparent yesterday?",
+    "Did cats often wake up a big grandparent nearby regularly yesterday?",
+    "Did cats often wake up a big grandparent regularly yesterday?",
+    "Did cats often wake up a big grandparent nearby yesterday?",
+    "Did cats often wake up a big grandparent yesterday?",
+    "Did cats often wake up a grandparent yesterday?",
+
+    // past continuous
+    "Was the big cat often waking up their big grandparents nearby regularly yesterday?",
+    "Was the big cat often waking up their big grandparents regularly yesterday?",
+    "Was the big cat often waking up their big grandparents nearby yesterday?",
+    "Was the big cat often waking up their big grandparents yesterday?",
+    "Was the big cat often waking up their grandparents yesterday?",
+    "Was the cat often waking up their big grandparents nearby regularly yesterday?",
+    "Was the cat often waking up their big grandparents regularly yesterday?",
+    "Was the cat often waking up their big grandparents nearby yesterday?",
+    "Was the cat often waking up their big grandparents yesterday?",
+    "Was the cat often waking up their grandparents yesterday?",
+    "Was a big cat often waking up their big grandparents nearby regularly yesterday?",
+    "Was a big cat often waking up their big grandparents regularly yesterday?",
+    "Was a big cat often waking up their big grandparents nearby yesterday?",
+    "Was a big cat often waking up their big grandparents yesterday?",
+    "Was a big cat often waking up their grandparents yesterday?",
+    "Was a cat often waking up their big grandparents nearby regularly yesterday?",
+    "Was a cat often waking up their big grandparents regularly yesterday?",
+    "Was a cat often waking up their big grandparents nearby yesterday?",
+    "Was a cat often waking up their big grandparents yesterday?",
+    "Was a cat often waking up their grandparents yesterday?",
+    "Were the big cats often waking up their big grandparent nearby regularly yesterday?",
+    "Were the big cats often waking up their big grandparent regularly yesterday?",
+    "Were the big cats often waking up their big grandparent nearby yesterday?",
+    "Were the big cats often waking up their big grandparent yesterday?",
+    "Were the big cats often waking up their grandparent yesterday?",
+    "Were the cats often waking up their big grandparent nearby regularly yesterday?",
+    "Were the cats often waking up their big grandparent regularly yesterday?",
+    "Were the cats often waking up their big grandparent nearby yesterday?",
+    "Were the cats often waking up their big grandparent yesterday?",
+    "Were the cats often waking up their grandparent yesterday?",
+    "Were big cats often waking up their big grandparent nearby regularly yesterday?",
+    "Were big cats often waking up their big grandparent regularly yesterday?",
+    "Were big cats often waking up their big grandparent nearby yesterday?",
+    "Were big cats often waking up their big grandparent yesterday?",
+    "Were big cats often waking up their grandparent yesterday?",
+    "Were cats often waking up their big grandparent nearby regularly yesterday?",
+    "Were cats often waking up their big grandparent regularly yesterday?",
+    "Were cats often waking up their big grandparent nearby yesterday?",
+    "Were cats often waking up their big grandparent yesterday?",
+    "Were cats often waking up their grandparent yesterday?",
+    "Were cats often waking up a big grandparent nearby regularly yesterday?",
+    "Were cats often waking up a big grandparent regularly yesterday?",
+    "Were cats often waking up a big grandparent nearby yesterday?",
+    "Were cats often waking up a big grandparent yesterday?",
+    "Were cats often waking up a grandparent yesterday?",
+
+    // past perfect
+    "Had the big cat often woken up their big grandparents nearby regularly before yesterday?",
+    "Had the big cat often woken up their big grandparents regularly before yesterday?",
+    "Had the big cat often woken up their big grandparents nearby before yesterday?",
+    "Had the big cat often woken up their big grandparents before yesterday?",
+    "Had the big cat often woken up their grandparents before yesterday?",
+    "Had the cat often woken up their big grandparents nearby regularly before yesterday?",
+    "Had the cat often woken up their big grandparents regularly before yesterday?",
+    "Had the cat often woken up their big grandparents nearby before yesterday?",
+    "Had the cat often woken up their big grandparents before yesterday?",
+    "Had the cat often woken up their grandparents before yesterday?",
+    "Had a big cat often woken up their big grandparents nearby regularly before yesterday?",
+    "Had a big cat often woken up their big grandparents regularly before yesterday?",
+    "Had a big cat often woken up their big grandparents nearby before yesterday?",
+    "Had a big cat often woken up their big grandparents before yesterday?",
+    "Had a big cat often woken up their grandparents before yesterday?",
+    "Had a cat often woken up their big grandparents nearby regularly before yesterday?",
+    "Had a cat often woken up their big grandparents regularly before yesterday?",
+    "Had a cat often woken up their big grandparents nearby before yesterday?",
+    "Had a cat often woken up their big grandparents before yesterday?",
+    "Had a cat often woken up their grandparents before yesterday?",
+    "Had the big cats often woken up their big grandparent nearby regularly before yesterday?",
+    "Had the big cats often woken up their big grandparent regularly before yesterday?",
+    "Had the big cats often woken up their big grandparent nearby before yesterday?",
+    "Had the big cats often woken up their big grandparent before yesterday?",
+    "Had the big cats often woken up their grandparent before yesterday?",
+    "Had the cats often woken up their big grandparent nearby regularly before yesterday?",
+    "Had the cats often woken up their big grandparent regularly before yesterday?",
+    "Had the cats often woken up their big grandparent nearby before yesterday?",
+    "Had the cats often woken up their big grandparent before yesterday?",
+    "Had the cats often woken up their grandparent before yesterday?",
+    "Had big cats often woken up their big grandparent nearby regularly before yesterday?",
+    "Had big cats often woken up their big grandparent regularly before yesterday?",
+    "Had big cats often woken up their big grandparent nearby before yesterday?",
+    "Had big cats often woken up their big grandparent before yesterday?",
+    "Had big cats often woken up their grandparent before yesterday?",
+    "Had cats often woken up their big grandparent nearby regularly before yesterday?",
+    "Had cats often woken up their big grandparent regularly before yesterday?",
+    "Had cats often woken up their big grandparent nearby before yesterday?",
+    "Had cats often woken up their big grandparent before yesterday?",
+    "Had cats often woken up their grandparent before yesterday?",
+    "Had cats often woken up a big grandparent nearby regularly before yesterday?",
+    "Had cats often woken up a big grandparent regularly before yesterday?",
+    "Had cats often woken up a big grandparent nearby before yesterday?",
+    "Had cats often woken up a big grandparent before yesterday?",
+    "Had cats often woken up a grandparent before yesterday?",
+
+    // past perfect cont
+    "Had the big cat often been waking up their big grandparents nearby regularly before yesterday?",
+    "Had the big cat often been waking up their big grandparents regularly before yesterday?",
+    "Had the big cat often been waking up their big grandparents nearby before yesterday?",
+    "Had the big cat often been waking up their big grandparents before yesterday?",
+    "Had the big cat often been waking up their grandparents before yesterday?",
+    "Had the cat often been waking up their big grandparents nearby regularly before yesterday?",
+    "Had the cat often been waking up their big grandparents regularly before yesterday?",
+    "Had the cat often been waking up their big grandparents nearby before yesterday?",
+    "Had the cat often been waking up their big grandparents before yesterday?",
+    "Had the cat often been waking up their grandparents before yesterday?",
+    "Had a big cat often been waking up their big grandparents nearby regularly before yesterday?",
+    "Had a big cat often been waking up their big grandparents regularly before yesterday?",
+    "Had a big cat often been waking up their big grandparents nearby before yesterday?",
+    "Had a big cat often been waking up their big grandparents before yesterday?",
+    "Had a big cat often been waking up their grandparents before yesterday?",
+    "Had a cat often been waking up their big grandparents nearby regularly before yesterday?",
+    "Had a cat often been waking up their big grandparents regularly before yesterday?",
+    "Had a cat often been waking up their big grandparents nearby before yesterday?",
+    "Had a cat often been waking up their big grandparents before yesterday?",
+    "Had a cat often been waking up their grandparents before yesterday?",
+    "Had the big cats often been waking up their big grandparent nearby regularly before yesterday?",
+    "Had the big cats often been waking up their big grandparent regularly before yesterday?",
+    "Had the big cats often been waking up their big grandparent nearby before yesterday?",
+    "Had the big cats often been waking up their big grandparent before yesterday?",
+    "Had the big cats often been waking up their grandparent before yesterday?",
+    "Had the cats often been waking up their big grandparent nearby regularly before yesterday?",
+    "Had the cats often been waking up their big grandparent regularly before yesterday?",
+    "Had the cats often been waking up their big grandparent nearby before yesterday?",
+    "Had the cats often been waking up their big grandparent before yesterday?",
+    "Had the cats often been waking up their grandparent before yesterday?",
+    "Had big cats often been waking up their big grandparent nearby regularly before yesterday?",
+    "Had big cats often been waking up their big grandparent regularly before yesterday?",
+    "Had big cats often been waking up their big grandparent nearby before yesterday?",
+    "Had big cats often been waking up their big grandparent before yesterday?",
+    "Had big cats often been waking up their grandparent before yesterday?",
+    "Had cats often been waking up their big grandparent nearby regularly before yesterday?",
+    "Had cats often been waking up their big grandparent regularly before yesterday?",
+    "Had cats often been waking up their big grandparent nearby before yesterday?",
+    "Had cats often been waking up their big grandparent before yesterday?",
+    "Had cats often been waking up their grandparent before yesterday?",
+    "Had cats often been waking up a big grandparent nearby regularly before yesterday?",
+    "Had cats often been waking up a big grandparent regularly before yesterday?",
+    "Had cats often been waking up a big grandparent nearby before yesterday?",
+    "Had cats often been waking up a big grandparent before yesterday?",
+    "Had cats often been waking up a grandparent before yesterday?",
+
+    // future simple
+    "Will the big cat often wake up their big grandparents nearby regularly tomorrow?",
+    "Will the big cat often wake up their big grandparents regularly tomorrow?",
+    "Will the big cat often wake up their big grandparents nearby tomorrow?",
+    "Will the big cat often wake up their big grandparents tomorrow?",
+    "Will the big cat often wake up their grandparents tomorrow?",
+    "Will the cat often wake up their big grandparents nearby regularly tomorrow?",
+    "Will the cat often wake up their big grandparents regularly tomorrow?",
+    "Will the cat often wake up their big grandparents nearby tomorrow?",
+    "Will the cat often wake up their big grandparents tomorrow?",
+    "Will the cat often wake up their grandparents tomorrow?",
+    "Will a big cat often wake up their big grandparents nearby regularly tomorrow?",
+    "Will a big cat often wake up their big grandparents regularly tomorrow?",
+    "Will a big cat often wake up their big grandparents nearby tomorrow?",
+    "Will a big cat often wake up their big grandparents tomorrow?",
+    "Will a big cat often wake up their grandparents tomorrow?",
+    "Will a cat often wake up their big grandparents nearby regularly tomorrow?",
+    "Will a cat often wake up their big grandparents regularly tomorrow?",
+    "Will a cat often wake up their big grandparents nearby tomorrow?",
+    "Will a cat often wake up their big grandparents tomorrow?",
+    "Will a cat often wake up their grandparents tomorrow?",
+    "Will the big cats often wake up their big grandparent nearby regularly tomorrow?",
+    "Will the big cats often wake up their big grandparent regularly tomorrow?",
+    "Will the big cats often wake up their big grandparent nearby tomorrow?",
+    "Will the big cats often wake up their big grandparent tomorrow?",
+    "Will the big cats often wake up their grandparent tomorrow?",
+    "Will the cats often wake up their big grandparent nearby regularly tomorrow?",
+    "Will the cats often wake up their big grandparent regularly tomorrow?",
+    "Will the cats often wake up their big grandparent nearby tomorrow?",
+    "Will the cats often wake up their big grandparent tomorrow?",
+    "Will the cats often wake up their grandparent tomorrow?",
+    "Will big cats often wake up their big grandparent nearby regularly tomorrow?",
+    "Will big cats often wake up their big grandparent regularly tomorrow?",
+    "Will big cats often wake up their big grandparent nearby tomorrow?",
+    "Will big cats often wake up their big grandparent tomorrow?",
+    "Will big cats often wake up their grandparent tomorrow?",
+    "Will cats often wake up their big grandparent nearby regularly tomorrow?",
+    "Will cats often wake up their big grandparent regularly tomorrow?",
+    "Will cats often wake up their big grandparent nearby tomorrow?",
+    "Will cats often wake up their big grandparent tomorrow?",
+    "Will cats often wake up their grandparent tomorrow?",
+    "Will cats often wake up a big grandparent nearby regularly tomorrow?",
+    "Will cats often wake up a big grandparent regularly tomorrow?",
+    "Will cats often wake up a big grandparent nearby tomorrow?",
+    "Will cats often wake up a big grandparent tomorrow?",
+    "Will cats often wake up a grandparent tomorrow?",
+
+    // future continuous
+    "Will the big cat often be waking up their big grandparents nearby regularly tomorrow?",
+    "Will the big cat often be waking up their big grandparents regularly tomorrow?",
+    "Will the big cat often be waking up their big grandparents nearby tomorrow?",
+    "Will the big cat often be waking up their big grandparents tomorrow?",
+    "Will the big cat often be waking up their grandparents tomorrow?",
+    "Will the cat often be waking up their big grandparents nearby regularly tomorrow?",
+    "Will the cat often be waking up their big grandparents regularly tomorrow?",
+    "Will the cat often be waking up their big grandparents nearby tomorrow?",
+    "Will the cat often be waking up their big grandparents tomorrow?",
+    "Will the cat often be waking up their grandparents tomorrow?",
+    "Will a big cat often be waking up their big grandparents nearby regularly tomorrow?",
+    "Will a big cat often be waking up their big grandparents regularly tomorrow?",
+    "Will a big cat often be waking up their big grandparents nearby tomorrow?",
+    "Will a big cat often be waking up their big grandparents tomorrow?",
+    "Will a big cat often be waking up their grandparents tomorrow?",
+    "Will a cat often be waking up their big grandparents nearby regularly tomorrow?",
+    "Will a cat often be waking up their big grandparents regularly tomorrow?",
+    "Will a cat often be waking up their big grandparents nearby tomorrow?",
+    "Will a cat often be waking up their big grandparents tomorrow?",
+    "Will a cat often be waking up their grandparents tomorrow?",
+    "Will the big cats often be waking up their big grandparent nearby regularly tomorrow?",
+    "Will the big cats often be waking up their big grandparent regularly tomorrow?",
+    "Will the big cats often be waking up their big grandparent nearby tomorrow?",
+    "Will the big cats often be waking up their big grandparent tomorrow?",
+    "Will the big cats often be waking up their grandparent tomorrow?",
+    "Will the cats often be waking up their big grandparent nearby regularly tomorrow?",
+    "Will the cats often be waking up their big grandparent regularly tomorrow?",
+    "Will the cats often be waking up their big grandparent nearby tomorrow?",
+    "Will the cats often be waking up their big grandparent tomorrow?",
+    "Will the cats often be waking up their grandparent tomorrow?",
+    "Will big cats often be waking up their big grandparent nearby regularly tomorrow?",
+    "Will big cats often be waking up their big grandparent regularly tomorrow?",
+    "Will big cats often be waking up their big grandparent nearby tomorrow?",
+    "Will big cats often be waking up their big grandparent tomorrow?",
+    "Will big cats often be waking up their grandparent tomorrow?",
+    "Will cats often be waking up their big grandparent nearby regularly tomorrow?",
+    "Will cats often be waking up their big grandparent regularly tomorrow?",
+    "Will cats often be waking up their big grandparent nearby tomorrow?",
+    "Will cats often be waking up their big grandparent tomorrow?",
+    "Will cats often be waking up their grandparent tomorrow?",
+    "Will cats often be waking up a big grandparent nearby regularly tomorrow?",
+    "Will cats often be waking up a big grandparent regularly tomorrow?",
+    "Will cats often be waking up a big grandparent nearby tomorrow?",
+    "Will cats often be waking up a big grandparent tomorrow?",
+    "Will cats often be waking up a grandparent tomorrow?",
+
+    // future perfect
+    "Will the big cat often have woken up their big grandparents nearby regularly tomorrow?",
+    "Will the big cat often have woken up their big grandparents regularly tomorrow?",
+    "Will the big cat often have woken up their big grandparents nearby tomorrow?",
+    "Will the big cat often have woken up their big grandparents tomorrow?",
+    "Will the big cat often have woken up their grandparents tomorrow?",
+    "Will the cat often have woken up their big grandparents nearby regularly tomorrow?",
+    "Will the cat often have woken up their big grandparents regularly tomorrow?",
+    "Will the cat often have woken up their big grandparents nearby tomorrow?",
+    "Will the cat often have woken up their big grandparents tomorrow?",
+    "Will the cat often have woken up their grandparents tomorrow?",
+    "Will a big cat often have woken up their big grandparents nearby regularly tomorrow?",
+    "Will a big cat often have woken up their big grandparents regularly tomorrow?",
+    "Will a big cat often have woken up their big grandparents nearby tomorrow?",
+    "Will a big cat often have woken up their big grandparents tomorrow?",
+    "Will a big cat often have woken up their grandparents tomorrow?",
+    "Will a cat often have woken up their big grandparents nearby regularly tomorrow?",
+    "Will a cat often have woken up their big grandparents regularly tomorrow?",
+    "Will a cat often have woken up their big grandparents nearby tomorrow?",
+    "Will a cat often have woken up their big grandparents tomorrow?",
+    "Will a cat often have woken up their grandparents tomorrow?",
+    "Will the big cats often have woken up their big grandparent nearby regularly tomorrow?",
+    "Will the big cats often have woken up their big grandparent regularly tomorrow?",
+    "Will the big cats often have woken up their big grandparent nearby tomorrow?",
+    "Will the big cats often have woken up their big grandparent tomorrow?",
+    "Will the big cats often have woken up their grandparent tomorrow?",
+    "Will the cats often have woken up their big grandparent nearby regularly tomorrow?",
+    "Will the cats often have woken up their big grandparent regularly tomorrow?",
+    "Will the cats often have woken up their big grandparent nearby tomorrow?",
+    "Will the cats often have woken up their big grandparent tomorrow?",
+    "Will the cats often have woken up their grandparent tomorrow?",
+    "Will big cats often have woken up their big grandparent nearby regularly tomorrow?",
+    "Will big cats often have woken up their big grandparent regularly tomorrow?",
+    "Will big cats often have woken up their big grandparent nearby tomorrow?",
+    "Will big cats often have woken up their big grandparent tomorrow?",
+    "Will big cats often have woken up their grandparent tomorrow?",
+    "Will cats often have woken up their big grandparent nearby regularly tomorrow?",
+    "Will cats often have woken up their big grandparent regularly tomorrow?",
+    "Will cats often have woken up their big grandparent nearby tomorrow?",
+    "Will cats often have woken up their big grandparent tomorrow?",
+    "Will cats often have woken up their grandparent tomorrow?",
+    "Will cats often have woken up a big grandparent nearby regularly tomorrow?",
+    "Will cats often have woken up a big grandparent regularly tomorrow?",
+    "Will cats often have woken up a big grandparent nearby tomorrow?",
+    "Will cats often have woken up a big grandparent tomorrow?",
+    "Will cats often have woken up a grandparent tomorrow?",
+
+    // future perfect cont.
+    "Will the big cat often have been waking up their big grandparents nearby regularly tomorrow?",
+    "Will the big cat often have been waking up their big grandparents regularly tomorrow?",
+    "Will the big cat often have been waking up their big grandparents nearby tomorrow?",
+    "Will the big cat often have been waking up their big grandparents tomorrow?",
+    "Will the big cat often have been waking up their grandparents tomorrow?",
+    "Will the cat often have been waking up their big grandparents nearby regularly tomorrow?",
+    "Will the cat often have been waking up their big grandparents regularly tomorrow?",
+    "Will the cat often have been waking up their big grandparents nearby tomorrow?",
+    "Will the cat often have been waking up their big grandparents tomorrow?",
+    "Will the cat often have been waking up their grandparents tomorrow?",
+    "Will a big cat often have been waking up their big grandparents nearby regularly tomorrow?",
+    "Will a big cat often have been waking up their big grandparents regularly tomorrow?",
+    "Will a big cat often have been waking up their big grandparents nearby tomorrow?",
+    "Will a big cat often have been waking up their big grandparents tomorrow?",
+    "Will a big cat often have been waking up their grandparents tomorrow?",
+    "Will a cat often have been waking up their big grandparents nearby regularly tomorrow?",
+    "Will a cat often have been waking up their big grandparents regularly tomorrow?",
+    "Will a cat often have been waking up their big grandparents nearby tomorrow?",
+    "Will a cat often have been waking up their big grandparents tomorrow?",
+    "Will a cat often have been waking up their grandparents tomorrow?",
+    "Will the big cats often have been waking up their big grandparent nearby regularly tomorrow?",
+    "Will the big cats often have been waking up their big grandparent regularly tomorrow?",
+    "Will the big cats often have been waking up their big grandparent nearby tomorrow?",
+    "Will the big cats often have been waking up their big grandparent tomorrow?",
+    "Will the big cats often have been waking up their grandparent tomorrow?",
+    "Will the cats often have been waking up their big grandparent nearby regularly tomorrow?",
+    "Will the cats often have been waking up their big grandparent regularly tomorrow?",
+    "Will the cats often have been waking up their big grandparent nearby tomorrow?",
+    "Will the cats often have been waking up their big grandparent tomorrow?",
+    "Will the cats often have been waking up their grandparent tomorrow?",
+    "Will big cats often have been waking up their big grandparent nearby regularly tomorrow?",
+    "Will big cats often have been waking up their big grandparent regularly tomorrow?",
+    "Will big cats often have been waking up their big grandparent nearby tomorrow?",
+    "Will big cats often have been waking up their big grandparent tomorrow?",
+    "Will big cats often have been waking up their grandparent tomorrow?",
+    "Will cats often have been waking up their big grandparent nearby regularly tomorrow?",
+    "Will cats often have been waking up their big grandparent regularly tomorrow?",
+    "Will cats often have been waking up their big grandparent nearby tomorrow?",
+    "Will cats often have been waking up their big grandparent tomorrow?",
+    "Will cats often have been waking up their grandparent tomorrow?",
+    "Will cats often have been waking up a big grandparent nearby regularly tomorrow?",
+    "Will cats often have been waking up a big grandparent regularly tomorrow?",
+    "Will cats often have been waking up a big grandparent nearby tomorrow?",
+    "Will cats often have been waking up a big grandparent tomorrow?",
+    "Will cats often have been waking up a grandparent tomorrow?",
+
 
 
             // phrasals - domande - negazioni
