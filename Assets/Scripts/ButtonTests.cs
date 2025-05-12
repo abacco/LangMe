@@ -9,67 +9,95 @@ using UnityEngine.Windows;
 
 
 public class ButtonTests : MonoBehaviour
-{  
-    static List<string> base_verbs_3rd_person = new List<string> { "visits", "needs","makes", "lives", "works", "responds", "answers", "goes", "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", "visits", "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", "believes", "likes", "drinks" };
-    static List<string> past_participle = new List<string> 
-    { 
-        "visited", "been"//, 
-        //"eaten","studied","run","done","responded","enjoyed","traveled", "liked", 
-        //"needed", "made", "lived", "did","worked", "responded", "answered", "went","explained", 
-        //"written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven" 
-    };
-    static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
-
-    static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
-    static List<string> adjectives = new List<string> { "late", "happy", "sunny", "cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
-
-    static List<string> singular_subjects = new List<string> 
+{
+    public static List<string> singular_subjects = new List<string>
     {
-            "grandparent", "cat" //, 
-            //"message", "gym", "morning", "teacher", "student", "beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike", 
-            //"car", "guy", "water", "sun", "he", "she", "it", "tennis", "school", "night", "time", "cake", "friend", "thing", "pizza", "basketball", 
-            //"football", "soccer", "apple", "assignment", "task", "garden", "day", "grandparent", "home", "guitar", "letter", "sandwich", "problem", "meeting", 
-            //"sugar", "house", "jacket", "fight", "lamp", "child", "computer", "city", "game", "east", "west", "north", "south", "answer", "miracle" 
+            "grandparent", "cat", "fox", "tree", "bird", "deer", "cow", "rabbit", "horse", "puppy", "lion", "owner",
+            "message", "gym", "morning", "teacher", "student", "beef", "dog", "i", "girl", "boy", "coffee", "book", "table", "bike",
+            "car", "guy", "water", "sun", "he", "she", "it", "tennis", "school", "night", "time", "cake", "friend", "thing", "pizza", "basketball",
+            "football", "soccer", "apple", "assignment", "task", "garden", "day", "grandparent", "home", "guitar", "letter", "sandwich", "problem", "meeting",
+            "sugar", "house", "jacket", "fight", "lamp", "child", "computer", "city", "game", "east", "west", "north", "south", "answer", "miracle", "kingdom"
     };
-    static List<string> plural_subjects = new List<string> 
+    public static List<string> plural_subjects = new List<string>
     {
-            "grandparents", "cats"//, 
-            //"schools", "schools",
-            //"messages", "gyms", "mornings","times", "cakes", "emails", "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you",
-            //"cars", "guys", "books", "dogs", "cats", "apples", "assignments",
-            //"days", "pizzas", "guitars", "letters", "gardens", "boys",
-            //"sandwiches", "problems", "meetings", "tables", "sugars", "houses",
-            //"jackets", "fights", "lamps", "children", "bikes", "computers",
-            //"cities", "games", "answers", "miracles" 
+            "grandparents", "cats", "foxes", "trees", "birds", "deers", "cows", "rabbits", "horses", "puppies", "lions",
+            "schools", "schools", "owners",
+            "messages", "gyms", "mornings","times", "cakes", "emails", "students", "friends", "teachers", "things","pizzas", "students", "beefs", "grandparents", "girls", "we", "they", "you", "kingdoms",
+            "cars", "guys", "books", "dogs", "cats", "apples", "assignments",
+            "days", "pizzas", "guitars", "letters", "gardens", "boys",
+            "sandwiches", "problems", "meetings", "tables", "sugars", "houses",
+            "jackets", "fights", "lamps", "children", "bikes", "computers",
+            "cities", "games", "answers", "miracles"
     };
-    static List<string> base_verbs = new List<string> 
+    public static List<string> base_verbs_3rd_person = new List<string> { 
+        "visits", "needs","makes", "lives", "works", "responds", "answers", "goes", 
+        "explains", "writes", "cooks","smiles","enjoys","dances","sings","reads","talks", 
+        "swims", "plays", "travels", "sleeps", "studies","eats","walks", "completes", "barks", 
+        "agrees", "likes","loves", "drives", "runs", "jumps", "boils", "rises", "knows", 
+        "believes", "likes", "drinks", "falls", "does", "writes",
+        "watches",
+        "grazes",
+        "hops",
+        "trots",
+        "roars", "flies"
+
+    };
+    public static List<string> past_participle = new List<string> 
     { 
-            "visit", "be"//, 
-            //"need", "make", "live", "do", "work", "respond", "answer", "go", "explain", "write", 
-            //"cook", "smile", "enjoy", "dance", "sing", "read", "talk", "swim", "play", "travel", "sleep", 
-            //"study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe" 
+        "visited", "been", "fallen", "done", "written",
+        "eaten","studied","run","done","responded","enjoyed","traveled", "liked",
+        "needed", "made", "lived", "did","worked", "responded", "answered", "went","explained",
+        "written", "cooked", "studied", "completed", "finished", "repaired", "loved", "driven",
+        "watched",
+        "grazed",
+        "hopped",
+        "trotted",
+        "roared"
+
     };
-    static List<string> ing_verbs = new List<string> 
+    public static List<string> base_verbs = new List<string> 
     { 
-        "visiting", "going"//, 
-        //"needing", "making", "living", "doing", "working", "responding", "answering", "going", 
-        //"explaining", "writing", "cooking", "smiling", "enjoying", "dancing", "singing", 
-        //"reading", "talking", "swimming", "playing", "traveling", "sleeping", "studying", 
-        //"eating", "walking", "completing", "being", "agreeing", "liking", "standing", "writing", 
-        //"playing", "reading", "eating", "running", "loving", "driving", "waiting" 
+            "visit", "be", "fall", "write",
+            "need", "make", "live", "do", "work", "respond", "answer", "go", "explain", "write",
+            "cook", "smile", "enjoy", "dance", "sing", "read", "talk", "swim", "play", "travel", "sleep",
+            "study", "eat", "be", "walk", "complete", "bark", "visit", "work", "agree", "drink", "like", "love", "drive", "are", "run", "jump", "believe", "do",
+            "watch",
+            "graze",
+            "hop",
+            "trot",
+            "roar"
+
     };
+    public static List<string> ing_verbs = new List<string> 
+    { 
+        "visiting", "going", "falling", "doing", "writing",
+        "needing", "making", "living", "doing", "working", "responding", "answering", "going",
+        "explaining", "writing", "cooking", "smiling", "enjoying", "dancing", "singing",
+        "reading", "talking", "swimming", "playing", "traveling", "sleeping", "studying",
+        "eating", "walking", "completing", "being", "agreeing", "liking", "standing", "writing",
+        "playing", "reading", "eating", "running", "loving", "driving", "waiting", "watching", "grazing",
+        "hopping", "trotting", "roaring"
 
-    static List<string> possessivePronouns = new List<string>{ "my", "your", "his", "her", "its", "our", "your", "their" };
-
-    static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
-
-    static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
-
+    };
+    public static List<string> adjectives = new List<string> { "vast","tiny", "clever", "quick", "energetic", "colorful", "wild", "friendly", "playful", "young", "late", "happy", "sunny", "cold", "big", "small", "tall", "short", "bright", "dark", "beautiful", "ugly", "fast" };
     static List<string> prepositions = new List<string> { "with","in", "on", "at", "to", "with", "for", "before", "after", "during", "as", "by", "up",
-                                                          "about", "over", "under", "of", "through", "between", "into", "onto", "out", 
-                                                          "from", "against", "along", "around", "beneath", "beside", "beyond", "near", "off", 
+                                                          "about", "over", "under", "of", "through", "between", "into", "onto", "out",
+                                                          "from", "against", "along", "around", "beneath", "beside", "beyond", "near", "off",
                                                           "past", "since", "until", "within", "without" };
+    
+    public static List<string> frequencyAdverbs = new List<string> { "frequently", "always", "usually", "often", "sometimes", "rarely", "never", "regularly", "occasionally" };
+    public static List<string> timeAdverbs = new List<string> { "nowadays", "now", "later", "soon", "tomorrow", "yesterday", "tonight", "today", "currently", "immediately" };
+    public static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby", "around", "inside", "outside" };
+    public static List<string> mannerAdverbs = new List<string> { "loudly", "exactly", "really", "quickly", "slowly", "carefully", "happily", "sadly", "skillfully", "neatly", "badly", "gracefully", "joyfully", "smoothly", "proudly", "excitedly" };
 
+
+    public static List<string> modal_verbs = new List<string> { "can", "could", "shall", "should", "will", "would", "may", "might", "must" };
+    static List<string> question_words = new List<string> { "who", "what", "where", "when", "why", "how", "which", "whose" };
+    static List<string> possessivePronouns = new List<string>{ "my", "your", "his", "her", "its", "our", "your", "their" };
+    static List<string> objectPronouns = new List<string>{ "me", "you", "him", "her", "it", "us", "them" };
+    public static List<string> proper_nouns = new List<string> { "john", "sarah", "london", "paris", "microsoft", "google" };
+
+        
     static List<string> phrasalVerbs = new List<string>{
                                                         "wake up", "wakes up", "woke up", "woken up", "waking up",
                                                         "turn on", "turns on", "turned on",
@@ -83,12 +111,6 @@ public class ButtonTests : MonoBehaviour
                                                         "put off", "puts off", "put off"
     };
 
-    // posizione avverbio frequenza in domande: -> 
-    static List<string> frequencyAdverbs = new List<string> { "always", "usually", "often", "sometimes", "rarely", "never", "regularly", "occasionally" };
-    static List<string> timeAdverbs = new List<string> { "nowadays", "now", "later", "soon", "tomorrow", "yesterday", "tonight", "today", "currently", "immediately" };
-    static List<string> placeAdverbs = new List<string> { "here", "there", "everywhere", "somewhere", "nearby", "around", "inside", "outside" };
-    static List<string> mannerAdverbs = new List<string> { "exactly", "really", "quickly", "slowly", "carefully", "happily", "sadly", "skillfully", "neatly", "badly" };
-    
     static List<string> otherAdverbs = new List<string> { "almost", "definitely", "surely", "quite", "probably" };
 
     public static bool IsValidSentence(string sentence)
@@ -137,10 +159,12 @@ public class ButtonTests : MonoBehaviour
                 {
                     if (singlePiece.Contains(word)) { allWordsInvalid = true; continue; }
                 }
-                Debug.LogError(word + " NOT RECOGNIZED"); 
+                Debug.LogError(word + " NOT RECOGNIZED");
+                allNewWords.Add(word + "\n");
             }
         }
-
+        string result = string.Join(" ", allNewWords);
+        Debug.Log("NEW WORDS HERE: " + result + "\n");
         if (allWordsInvalid)
         {
             return words;
@@ -181,7 +205,7 @@ new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "N
 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Preposition", "Time"}, //20
 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Preposition", "Time"}, //20
 new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Article", "Adjective", "PluralSubject", "Place", "Frequency", "Preposition", "Time"}, //20
-        new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //20
+new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //20
 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "SingularSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //20
 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //20
 new List<string> {"Interrogative", "Auxiliary", "Article", "Adjective", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Ing-Verb", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //20
@@ -1381,7 +1405,6 @@ new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Been", "Ed-Verb", 
 new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
 new List<string> {"Auxiliary", "Article", "Adjective", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "SingularSubject", "Place", "Frequency", "Time"}, //14
 new List<string> {"Auxiliary", "Article", "Adjective", "SingularSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //14
-
 new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //14
 new List<string> {"Article", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "Adjective", "PluralSubject", "Time"}, //14
 new List<string> {"Article", "Adjective", "SingularSubject", "Auxiliary", "Frequency", "Auxiliary", "Been", "Ed-Verb", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //14
@@ -1613,7 +1636,6 @@ new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going",
 new List<string> {"Interrogative", "Auxiliary", "Adjective", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Time"}, //14
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Frequency", "Time"}, //14
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Going", "To", "Ing-Verb", "Preposition", "Auxiliary", "Ed-Verb", "Article", "PluralSubject", "Place", "Time"}, //14
-
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Article", "PluralSubject", "Time"}, //14
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Possessive", "SingularSubject", "Time"}, //14
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Not", "Been", "Ed-Verb", "Going", "To", "Ing-Verb", "Preposition", "Verb", "Article", "SingularSubject", "Time"}, //14
@@ -2983,6 +3005,8 @@ new List<string> {"Interrogative", "Auxiliary", "Article", "SingularSubject", "N
         },
         { 11, new List<List<string>>
                                     {
+            new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
+new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //11
 new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
 new List<string> {"Auxiliary", "Article", "SingularSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "PluralSubject", "Time"}, //11
 new List<string> {"Auxiliary", "Article", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //11
@@ -3583,6 +3607,11 @@ new List<string> {"Adjective", "PluralSubject", "Auxiliary", "Auxiliary", "Ed-Ve
         },
         { 10, new List<List<string>>
                                     {
+            new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //10
+new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //10
+new List<string> {"Article", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Frequency", "Time"}, //10
 new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //10
 new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Auxiliary", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //10
 new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Verb", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //10
@@ -4096,6 +4125,11 @@ new List<string> {"Interrogative", "Auxiliary", "Article", "PluralSubject", "Not
         },
         { 9, new List<List<string>>
                                     {
+            new List<string> {"Article", "Adjective", "SingularSubject", "S-Verb", "Manner", "Preposition", "Article", "Adjective", "SingularSubject"}, // 9
+            new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //9
+new List<string> {"Article", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //9
+new List<string> {"Article", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //9
 new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //9
 new List<string> {"Auxiliary", "PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //9
 new List<string> {"PluralSubject", "Auxiliary", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //9
@@ -4502,6 +4536,9 @@ new List<string> {"PluralSubject", "Auxiliary", "Auxiliary", "Ed-Verb", "Article
         },
         { 8, new List<List<string>>
                                     {
+            new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "PluralSubject", "Time"}, //8
+new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "S-Verb", "Possessive", "PluralSubject", "Time"}, //8
+new List<string> {"Article", "SingularSubject", "Frequency", "S-Verb", "Possessive", "Adjective", "PluralSubject", "Time"}, //8
 new List<string> {"PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Possessive", "SingularSubject", "Time"}, //8
 new List<string> {"PluralSubject", "Frequency", "Phrasal", "Verb", "Preposition", "Article", "SingularSubject", "Time"}, //8
 new List<string> {"PluralSubject", "Auxiliary", "Not", "Auxiliary", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //8
@@ -4772,6 +4809,8 @@ new List<string> {"PluralSubject", "Auxiliary", "Auxiliary", "Ed-Verb", "Article
         },
         { 7, new List<List<string>>
         {
+            new List<string> {"Article", "SingularSubject", "Frequency", "S-Verb", "Possessive", "PluralSubject", "Time"}, //7
+new List<string> {"Adjective", "PluralSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Time"}, //7
 new List<string> {"PluralSubject", "Auxiliary", "Not", "Ing-Verb", "Article", "PluralSubject", "Time"}, //7
 new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Possessive", "SingularSubject", "Time"}, //7
 new List<string> {"PluralSubject", "Auxiliary", "Not", "Ed-Verb", "Article", "SingularSubject", "Time"}, //7
@@ -4826,10 +4865,6 @@ new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Ing-Verb", "Ar
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "SingularSubject", "Time"}, //7
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "SingularSubject", "Time"}, //7
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject", "Time"}, //7
-new List<string> {"Article", "Adjective", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
-new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
-new List<string> {"Article", "Adjective", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
-new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "Adjective", "PluralSubject", "Time"}, //7
 new List<string> {"Article", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //7
 new List<string> {"Adjective", "PluralSubject", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //7
 new List<string> {"PluralSubject", "Frequency", "Verb", "Possessive", "Adjective", "SingularSubject", "Time"}, //7
@@ -4838,13 +4873,6 @@ new List<string> {"Article", "PluralSubject", "Frequency", "Verb", "Possessive",
 new List<string> {"Adjective", "PluralSubject", "Verb", "Article", "Adjective", "PluralSubject", "Time"}, //7
 new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Frequency", "Time"}, //7
 new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "PluralSubject", "Place", "Time"}, //7
-new List<string> {"Article", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Frequency", "Time"}, //7
-new List<string> {"Article", "SingularSubject", "Possessive", "Adjective", "PluralSubject", "Place", "Time"}, //7
-new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "PluralSubject", "Time"}, //7
-new List<string> {"Article", "SingularSubject", "Frequency", "Article", "Adjective", "SingularSubject", "Time"}, //7
-new List<string> {"Article", "Adjective", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Time"}, //7
-new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Frequency", "Time"}, //7
-new List<string> {"Article", "SingularSubject", "Frequency", "Possessive", "PluralSubject", "Place", "Time"}, //7
 new List<string> {"Article", "SingularSubject", "Auxiliary", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //7
 new List<string> {"Article", "SingularSubject", "Auxiliary", "Ing-Verb", "Possessive", "PluralSubject", "Time"}, //7
 new List<string> {"Article", "PluralSubject", "Auxiliary", "Ing-Verb", "Possessive", "SingularSubject", "Time"}, //7
@@ -4914,6 +4942,8 @@ new List<string> {"PluralSubject", "Auxiliary", "Auxiliary", "Ed-Verb", "Article
         },
         { 6, new List<List<string>>
                                     {
+            new List<string> {"PluralSubject", "Frequency", "Verb", "Possessive", "SingularSubject", "Time"}, //6
+new List<string> {"PluralSubject", "Frequency", "Verb", "Article", "SingularSubject", "Time"}, //6
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Article", "PluralSubject"}, //6
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "PluralSubject", "Time"}, //6
 new List<string> {"Interrogative", "Auxiliary", "PluralSubject", "Verb", "Possessive", "SingularSubject"}, //6
@@ -4964,6 +4994,16 @@ new List<string> {"PluralSubject", "Ed-Verb", "Possessive", "SingularSubject", "
 new List<string> {"PluralSubject", "Ed-Verb", "Article", "SingularSubject", "Time"}, //5
 new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"}, //5
                                     }
+        },
+        { 4, new List<List<string>>
+                        {
+
+                        }
+        },
+        { 3, new List<List<string>>
+                        {
+
+                        }
         },
         { 0, new List<List<string>>
             {
@@ -5085,6 +5125,11 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
                 foundAdverbs.Add("Ed-Verb");
                 foundAdverbsPosition.Add(i);
             }
+            if (IsA3rdPersonVerb(word))
+            {
+                foundAdverbs.Add("S-Verb");
+                foundAdverbsPosition.Add(i);
+            }
             if (frequencyAdverbs.Contains(word))
             {
                 foundAdverbs.Add("Frequency");
@@ -5125,6 +5170,7 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
         return false;
     }
     private static List<string> allNewRules = new List<string>();
+    private static List<string> allNewWords = new List<string>();
     static bool IsAValidQuestion2(string[] words)
     {
         string question = string.Join(" ", words);
@@ -12665,7 +12711,102 @@ new List<string> {"PluralSubject", "Ed-Verb", "Article", "PluralSubject", "Time"
         */
         #endregion
         
-        List<string> questions = new List<string>();
+        List<string> questions = new List<string>() 
+        {
+    "The big cat often visits their big grandparents nearby regularly today.",
+    "A big cat often visits their big grandparents nearby regularly today.",
+    "The cat often visits their big grandparents nearby regularly today.",
+    "Big cats often visit their big grandparent nearby regularly today.",
+    "Cats often visit their big grandparent nearby regularly today.",
+    "A big cat often visits their big grandparents regularly today.",
+
+    //"The clever fox jumps gracefully over the fallen tree.",
+    //"The quick bird flies smoothly above the colorful nest.",
+    //"A curious rabbit hops quietly into the cozy burrow.",
+    //"The energetic deer grazes peacefully in the wild meadow.",
+    //"The friendly horse trots proudly across the lush field.",
+    //"The playful puppy loves chasing toys excitedly.",
+    //"The young lion roars loudly in the vast kingdom.",
+    //"Grandparents visit the garden frequently during the sunny mornings.",
+    //"The cat sleeps quietly on the small table beside the lamp.",
+    //"Students study carefully for the upcoming assignments in the gym."
+    //"The small dog always watches their tiny owners nearby happily now.",
+    //"A small dog always watches their tiny owners nearby happily now.",
+    //"The dog always watches their tiny owners nearby happily now.",
+    //"Small dogs always watch their tiny owner nearby happily now.",
+    //"Dogs always watch their tiny owner nearby happily now.",
+    //"A small dog always watches their tiny owners happily now.",
+    //"The clever fox frequently jumps over the fallen tree nearby gracefully today.",
+    //"A clever fox frequently jumps over the fallen tree nearby gracefully today.",
+    //"The fox frequently jumps over the fallen tree nearby gracefully today.",
+    //"Clever foxes frequently jump over the fallen trees gracefully today.",
+    //"Foxes frequently jump over the fallen trees gracefully today.",
+    //"A clever fox frequently jumps over the fallen tree gracefully today.",
+    //"The quick bird sometimes flies above their colorful nest nearby smoothly today.",
+    //"A quick bird sometimes flies above their colorful nest nearby smoothly today.",
+    //"The bird sometimes flies above their colorful nest nearby smoothly today.",
+    //"Quick birds sometimes fly above their colorful nests smoothly today.",
+    //"Birds sometimes fly above their colorful nests smoothly today.",
+    //"A quick bird sometimes flies above their colorful nest smoothly today.",
+    //"The energetic deer occasionally runs across their wild meadow nearby joyfully today.",
+    //"An energetic deer occasionally runs across their wild meadow nearby joyfully today.",
+    //"The deer occasionally runs across their wild meadow nearby joyfully today.",
+    //"Energetic deer occasionally run across their wild meadows joyfully today.",
+    //"Deer occasionally run across their wild meadows joyfully today.",
+    //"An energetic deer occasionally runs across their wild meadow joyfully today.",
+    //"The big cow always grazes in their green pasture nearby peacefully now.",
+    //"A big cow always grazes in their green pasture nearby peacefully now.",
+    //"The cow always grazes in their green pasture nearby peacefully now.",
+    //"Big cows always graze in their green pastures peacefully now.",
+    //"Cows always graze in their green pastures peacefully now.",
+    //"A big cow always grazes in their green pasture peacefully now.",
+    //"The curious rabbit rarely hops into their cozy burrow nearby quietly today.",
+    //"A curious rabbit rarely hops into their cozy burrow nearby quietly today.",
+    //"The rabbit rarely hops into their cozy burrow nearby quietly today.",
+    //"Curious rabbits rarely hop into their cozy burrows quietly today.",
+    //"Rabbits rarely hop into their cozy burrows quietly today.",
+    //"A curious rabbit rarely hops into their cozy burrow quietly today.",
+    //"The friendly horse often trots around their lush field nearby proudly today.",
+    //"A friendly horse often trots around their lush field nearby proudly today.",
+    //"The horse often trots around their lush field nearby proudly today.",
+    //"Friendly horses often trot around their lush fields proudly today.",
+    //"Horses often trot around their lush fields proudly today.",
+    //"A friendly horse often trots around their lush field proudly today.",
+    //"The playful puppy never runs towards their lovely home nearby excitedly now.",
+    //"A playful puppy never runs towards their lovely home nearby excitedly now.",
+    //"The puppy never runs towards their lovely home nearby excitedly now.",
+    //"Playful puppies never run towards their lovely homes excitedly now.",
+    //"Puppies never run towards their lovely homes excitedly now.",
+    //"A playful puppy never runs towards their lovely home excitedly now.",
+    //"The young lion typically roars within their vast kingdom nearby proudly today.",
+    //"A young lion typically roars within their vast kingdom nearby proudly today.",
+
+    //"A big cat often visits their big grandparents nearby today.",
+    //"A big cat often visits their big grandparents today.",
+    //"A big cat often visits their grandparents today.",
+    //"The big cat often visits their big grandparents regularly today.",
+    //"The big cat often visits their big grandparents nearby today.",
+    //"The big cat often visits their big grandparents today.",
+    //"The big cat often visits their grandparents today.",
+    //"The cat often visits their big grandparents regularly today.",
+    //"The cat often visits their big grandparents nearby today.",
+    //"The cat often visits their big grandparents today.",
+    //"The cat often visits their grandparents today.",
+    //"Big cats often visit their big grandparent regularly today.",
+    //"Big cats often visit their big grandparent nearby today.",
+    //"Big cats often visit their big grandparent today.",
+    //"Big cats often visit their grandparent today.",
+    //"Cats often visit their big grandparent regularly today.",
+    //"Cats often visit their big grandparent nearby today.",
+    //"Cats often visit their big grandparent today.",
+    //"Cats often visit their grandparent today.",
+    //"Cats often visit a big grandparent nearby regularly today.",
+    //"Cats often visit a big grandparent regularly today.",
+    //"Cats often visit a big grandparent nearby today.",
+    //"Cats often visit a big grandparent today.",
+    //"Cats often visit a grandparent today."
+
+        };
         foreach (var sentence in questions)
         {
             if (!IsValidSentence(sentence))

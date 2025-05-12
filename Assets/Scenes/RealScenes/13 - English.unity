@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4335,7 +4335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6876,17 +6876,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Auxiliaries
       m_Image: {fileID: 0}
+    - m_Text: Articles
+      m_Image: {fileID: 0}
+    - m_Text: Pronouns
+      m_Image: {fileID: 0}
     - m_Text: Sub/Objects
       m_Image: {fileID: 0}
     - m_Text: Verbs
       m_Image: {fileID: 0}
     - m_Text: Prepositions
       m_Image: {fileID: 0}
+    - m_Text: Adjectives
+      m_Image: {fileID: 0}
     - m_Text: Adverbs
-      m_Image: {fileID: 0}
-    - m_Text: Time
-      m_Image: {fileID: 0}
-    - m_Text: Bonus Words
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
